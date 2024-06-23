@@ -1,0 +1,119 @@
+#+title: Weblab notes: React hooks
+#+date: <2024-06-23 18:21>
+#+description: This is a personal note for the [[https://docs.google.com/presentation/d/1n5RlpgBtXQ1OHvutx9TRLotWizyg2BPKv_780DD4-90/edit#slide=id.gb2bbafee77_1_66][web.lab lectures]].
+#+filetags: study:web-development:react lecture:mit
+
+* What is a React hook
+- Special functions to access parts of the component lifestyle.
+- e.g., ~useState~
+
+** ~useState~ is not enough
+#+begin_src js -n
+const [persons, setPersons] = useState([]);
+
+testingStuff = () => {
+    /* assume persons is empty before */
+    setPersons([...persons, "me"]);
+}
+console.log(persons);
+#+end_src
+
+- The output of src_js[:exports code]{console.log} is ~[]~ instead of ~["me"]~ because setting a state is **async**!
+- To do something immediately after a state is changed, use ~useEffect~ hook!
+
+** ~useEffect~ runs after specific variable change
+#+begin_src js -n :results silent
+useEffect(() => {
+    console.log(persons);
+}, [persons]);
+#+end_src
+
+#+begin_src js -n :results silent
+useEffect(() => {
+/* do something, e.g., interact with an external service */
+
+return () => {
+/* cleanup function on dismount, e.g., disconnect from external service */
+}
+}, [/*dependencies */])
+#+end_src
+
+- src_js[:exports code]{useEffect(myFunction, [var1, var2])} calls ~myFunction~ everytime when ~var1~ or ~var2~ changes
+- src_js[:exports code]{useEffect(myFunction, []])} calls only once when the component is rendered for the first time (on mount)
+- src_js[:exports code]{useEffect(myFunction)} calls at every render
+
+
+* React hook patterns
+** Fetch and send data
+
+#+begin_src js -n
+/* fetch data on mount */
+useEffect(() => {
+    get("/api/packages").then((packageList) => {
+        setPackages(packageList);
+    });
+}, []);
+#+end_src
+
+#+begin_src js -n
+/* send data then toggle admin state */
+const handleToggleAdmin = () => {
+    // .then(), do something once the promise is fulfilled
+    post("/api/user/admin", { admin: !admin }).then(() => {
+        setAdmin(!admin);
+    });
+};
+/* <Button onClick={handleToggleAdmin} */
+#+end_src
+** Conditional rendering
+#+begin_src js -n
+// JSX is a way of writing HTML in js
+let content = loading ? <p>Loading...</p> : <p>Loaded</p>;
+return (
+    <div>
+        <h1>Title</h1>
+        {content}
+    </div>
+);
+#+end_src
+** Render an array of Data
+#+begin_src js -n
+const data = [
+    { id: 0, text: "Text 1" },
+    { id: 1, text: "Text 2" },
+];
+// render a component for each data item
+return data.map((item) => (
+    <ItemComponent key={item.id}>{item.text}</ItemComponent>
+));
+#+end_src
+- ~key~ is a special prop in React; it is used identify which item has changed efficiently
+
+* Example: Stopwatch
+#+begin_src js -n
+const Stopwatch = () => {
+    const [time, setTimer] = useState(0);
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            // setTimer accepts either a new state value,
+            // or a function that takes the previous state (oldTime) as an argument and returns the new state
+            setTime((oldTime) => oldTime + 1);
+        }, 1000);
+        // if not properly cleanup after unmounting
+        // the timer will continue to run even the state no longer exists
+        return () => clearInterval(timer);
+    }, []);
+    return <>TIme: {time}</>;
+};
+#+end_src
+
+* DOM and component mounting
+- DOM (Document Object Model): a programming interface for web documents; represents the structure of a document, e.g., HTML, as a tree of objects, where each object corresponds to a part of the document; it dynamically updates the document contents
+  - React is a framework that manipulates DOM
+- A React component is unmounted when:
+  - conditional rendering
+  - routing; navigating from one route to another
+  - its parent component is unmounted
+
+#  LocalWords:  Lifcycle
