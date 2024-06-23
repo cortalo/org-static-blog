@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+<title><![CDATA[org-static-blog]]></title>
+<description><![CDATA[org-static-blog]]></description>
+<link>https://chenyo-17.github.io/org-static-blog</link>
+<lastBuildDate>Sun, 23 Jun 2024 18:06:20 +0200</lastBuildDate>
+<item>
+  <title><![CDATA[Hello world]]></title>
+  <description><![CDATA[
+<nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org17d1320">1. Hallo!</a></li>
+</ul>
+</div>
+</nav>
+<div id="outline-container-org17d1320" class="outline-2">
+<h2 id="org17d1320"><span class="section-number-2">1.</span> Hallo!</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+This is the first blog with org-static-blog!
+</p>
+</div>
+</div>
+<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-personal.html">personal</a> </div>]]></description>
+  <category><![CDATA[personal]]></category>
+  <link>https://chenyo-17.github.io/org-static-blog/2024-06-23-hello-world.html</link>
+  <guid>https://chenyo-17.github.io/org-static-blog/2024-06-23-hello-world.html</guid>
+  <pubDate>Sun, 23 Jun 2024 18:04:00 +0200</pubDate>
+</item>
+</channel>
+</rss>

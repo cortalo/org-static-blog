@@ -1,0 +1,7 @@
+#+title: Hello world
+#+date: <2024-06-23 18:04>
+#+description: This is a very first org static blog
+#+filetags: personal
+
+* Hallo!
+This is the first blog with org-static-blog!
