@@ -1,0 +1,57 @@
+#+title: Weblab notes: React route
+#+date: <2024-06-23 18:38>
+#+description: This is a personal note for the [[https://docs.google.com/presentation/d/1hrTjcB8GU4hWPHzS5lI17WALogP4biZ1UAtyxXfafkI/edit#slide=id.p][web.lab lectures]].
+#+filetags: study:web-development:react lecture:mit
+
+* Router
+- use the Reach [[https://reach.tech/router/][Reach Router]] library
+- URL -> Router -> render different components
+#+begin_src js -n
+<App>
+  // conditional rendering based on curren url
+  <Router>
+    <Home path="/" /> // root path
+    <Dashboard path="dashboard" /> // relative to the current URL
+    <Team path="/team" /> // absolute path: root path + "/team"
+    <NotFound default />
+  </Router>
+</App>;
+#+end_src
+
+* Link
+- relative: src_js[:exports code]{<Link to="newpage">Click me</Link>}
+- absolute: src_js[:exports code]{<Link to="/newpage">Click me</Link>}
+
+* Workshop 3
+** Structure
+#+CAPTION: The Catbook structure in workshop 3
+#+ATTR_HTML: :align center
+#+ATTR_HTML: :width 600px
+[[./images/workshop-3-structure.png]]
+
+** States
+|------+-----------------------------------------------|
+| <c>  | <l>                                           |
+| name | states                                        |
+|------+-----------------------------------------------|
+|  /   | <                                             |
+| Feed | ~stories~: a list of stories                  |
+| Card | ~comments~: a list of comments for a story id |
+|------+-----------------------------------------------|
+
+** Props
+|-------+---------------------------------------------------------------------------------|
+|  <c>  | <l>                                                                             |
+| index | props                                                                           |
+|-------+---------------------------------------------------------------------------------|
+|   /   | <                                                                               |
+|   1   | a function to update ~stories~                                                  |
+|   2   | all attributes in a story                                                       |
+|   3   | the attributes used to display a story                                          |
+|   4   | a story id; a list of comments under the story; a function to update ~comments~ |
+|   5   | all attributes in a comment                                                     |
+|   6   | a comment id; the function to update ~comments~                                 |
+|-------+---------------------------------------------------------------------------------|
+
+** Why passing down the update function in props 1, 4, 6?
+- To share the parent states, i.e., ~stories~ and ~comments~ to child component. Since the post action happens in the child component, we need a way to automatically update the states to see new contents immediately.

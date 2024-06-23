@@ -4,21 +4,210 @@
 <title><![CDATA[org-static-blog]]></title>
 <description><![CDATA[org-static-blog]]></description>
 <link>https://chenyo-17.github.io/org-static-blog</link>
-<lastBuildDate>Sun, 23 Jun 2024 18:24:21 +0200</lastBuildDate>
+<lastBuildDate>Sun, 23 Jun 2024 18:43:16 +0200</lastBuildDate>
+<item>
+  <title><![CDATA[Weblab notes: React route]]></title>
+  <description><![CDATA[
+<nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org2b4bda1">1. Router</a></li>
+<li><a href="#org925ffea">2. Link</a></li>
+<li><a href="#orgcf69883">3. Workshop 3</a>
+<ul>
+<li><a href="#orge0c0317">3.1. Structure</a></li>
+<li><a href="#org47226b5">3.2. States</a></li>
+<li><a href="#org6b0352a">3.3. Props</a></li>
+<li><a href="#orgb958ae3">3.4. Why passing down the update function in props 1, 4, 6?</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+<div id="outline-container-org2b4bda1" class="outline-2">
+<h2 id="org2b4bda1"><span class="section-number-2">1.</span> Router</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>use the Reach <a href="https://reach.tech/router/">Reach Router</a> library</li>
+<li>URL -&gt; Router -&gt; render different components</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-js"><span class="linenr">1: </span>&lt;App&gt;
+<span class="linenr">2: </span>  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">conditional rendering based on curren url</span>
+<span class="linenr">3: </span>  &lt;Router&gt;
+<span class="linenr">4: </span>    &lt;Home path=<span style="color: #98be65;">"/"</span> /&gt; <span style="color: #5B6268;">// </span><span style="color: #5B6268;">root path</span>
+<span class="linenr">5: </span>    &lt;Dashboard path=<span style="color: #98be65;">"dashboard"</span> /&gt; <span style="color: #5B6268;">// </span><span style="color: #5B6268;">relative to the current URL</span>
+<span class="linenr">6: </span>    &lt;Team path=<span style="color: #98be65;">"/team"</span> /&gt; <span style="color: #5B6268;">// </span><span style="color: #5B6268;">absolute path: root path + "/team"</span>
+<span class="linenr">7: </span>    &lt;NotFound <span style="color: #51afef;">default</span> /&gt;
+<span class="linenr">8: </span>  &lt;/Router&gt;
+<span class="linenr">9: </span>&lt;/App&gt;;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org925ffea" class="outline-2">
+<h2 id="org925ffea"><span class="section-number-2">2.</span> Link</h2>
+<div class="outline-text-2" id="text-2">
+<ul class="org-ul">
+<li>relative: <code class="src src-js">&lt;Link to=<span style="color: #98be65;">"newpage"</span>&gt;Click me&lt;/Link&gt;</code></li>
+<li>absolute: <code class="src src-js">&lt;Link to=<span style="color: #98be65;">"/newpage"</span>&gt;Click me&lt;/Link&gt;</code></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgcf69883" class="outline-2">
+<h2 id="orgcf69883"><span class="section-number-2">3.</span> Workshop 3</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-orge0c0317" class="outline-3">
+<h3 id="orge0c0317"><span class="section-number-3">3.1.</span> Structure</h3>
+<div class="outline-text-3" id="text-3-1">
+
+<figure id="org0ac6b29">
+<img src="./images/workshop-3-structure.png" alt="workshop-3-structure.png" align="center" width="600px">
+
+<figcaption><span class="figure-number">Figure 1: </span>The Catbook structure in workshop 3</figcaption>
+</figure>
+</div>
+</div>
+<div id="outline-container-org47226b5" class="outline-3">
+<h3 id="org47226b5"><span class="section-number-3">3.2.</span> States</h3>
+<div class="outline-text-3" id="text-3-2">
+<table>
+
+
+<colgroup>
+<col  class="org-center">
+</colgroup>
+
+<colgroup>
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-center">name</th>
+<th scope="col" class="org-left">states</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-center">Feed</td>
+<td class="org-left"><code>stories</code>: a list of stories</td>
+</tr>
+
+<tr>
+<td class="org-center">Card</td>
+<td class="org-left"><code>comments</code>: a list of comments for a story id</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org6b0352a" class="outline-3">
+<h3 id="org6b0352a"><span class="section-number-3">3.3.</span> Props</h3>
+<div class="outline-text-3" id="text-3-3">
+<table>
+
+
+<colgroup>
+<col  class="org-center">
+</colgroup>
+
+<colgroup>
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-center">index</th>
+<th scope="col" class="org-left">props</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-center">1</td>
+<td class="org-left">a function to update <code>stories</code></td>
+</tr>
+
+<tr>
+<td class="org-center">2</td>
+<td class="org-left">all attributes in a story</td>
+</tr>
+
+<tr>
+<td class="org-center">3</td>
+<td class="org-left">the attributes used to display a story</td>
+</tr>
+
+<tr>
+<td class="org-center">4</td>
+<td class="org-left">a story id; a list of comments under the story; a function to update <code>comments</code></td>
+</tr>
+
+<tr>
+<td class="org-center">5</td>
+<td class="org-left">all attributes in a comment</td>
+</tr>
+
+<tr>
+<td class="org-center">6</td>
+<td class="org-left">a comment id; the function to update <code>comments</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-orgb958ae3" class="outline-3">
+<h3 id="orgb958ae3"><span class="section-number-3">3.4.</span> Why passing down the update function in props 1, 4, 6?</h3>
+<div class="outline-text-3" id="text-3-4">
+<ul class="org-ul">
+<li>To share the parent states, i.e., <code>stories</code> and <code>comments</code> to child component. Since the post action happens in the child component, we need a way to automatically update the states to see new contents immediately.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-study:web-development:react.html">study:web-development:react</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-lecture:mit.html">lecture:mit</a> </div>]]></description>
+  <category><![CDATA[study:web-development:react]]></category>
+  <category><![CDATA[lecture:mit]]></category>
+  <link>https://chenyo-17.github.io/org-static-blog/2024-06-23-weblab-notes:-react-route.html</link>
+  <guid>https://chenyo-17.github.io/org-static-blog/2024-06-23-weblab-notes:-react-route.html</guid>
+  <pubDate>Sun, 23 Jun 2024 18:38:00 +0200</pubDate>
+</item>
 <item>
   <title><![CDATA[Weblab notes: React hooks]]></title>
   <description><![CDATA[
-<div id="outline-container-org5e3c5a2" class="outline-2">
-<h2 id="org5e3c5a2">What is a React hook</h2>
-<div class="outline-text-2" id="text-org5e3c5a2">
+<nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org61baadb">1. What is a React hook</a>
+<ul>
+<li><a href="#orgaa58121">1.1. <code>useState</code> is not enough</a></li>
+<li><a href="#orgfe59130">1.2. <code>useEffect</code> runs after specific variable change</a></li>
+</ul>
+</li>
+<li><a href="#org5b4861c">2. React hook patterns</a>
+<ul>
+<li><a href="#org5ea1ad6">2.1. Fetch and send data</a></li>
+<li><a href="#orgd865c45">2.2. Conditional rendering</a></li>
+<li><a href="#org83769b8">2.3. Render an array of Data</a></li>
+</ul>
+</li>
+<li><a href="#org1c43da2">3. Example: Stopwatch</a></li>
+<li><a href="#org399e039">4. DOM and component mounting</a></li>
+</ul>
+</div>
+</nav>
+<div id="outline-container-org61baadb" class="outline-2">
+<h2 id="org61baadb"><span class="section-number-2">1.</span> What is a React hook</h2>
+<div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Special functions to access parts of the component lifestyle.</li>
 <li>e.g., <code>useState</code></li>
 </ul>
 </div>
-<div id="outline-container-org4b98662" class="outline-3">
-<h3 id="org4b98662"><code>useState</code> is not enough</h3>
-<div class="outline-text-3" id="text-org4b98662">
+<div id="outline-container-orgaa58121" class="outline-3">
+<h3 id="orgaa58121"><span class="section-number-3">1.1.</span> <code>useState</code> is not enough</h3>
+<div class="outline-text-3" id="text-1-1">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr">1: </span><span style="color: #51afef;">const</span> [<span style="color: #dcaeea;">persons</span>, <span style="color: #dcaeea;">setPersons</span>] = useState([]);
 <span class="linenr">2: </span>
@@ -36,9 +225,9 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org4d99269" class="outline-3">
-<h3 id="org4d99269"><code>useEffect</code> runs after specific variable change</h3>
-<div class="outline-text-3" id="text-org4d99269">
+<div id="outline-container-orgfe59130" class="outline-3">
+<h3 id="orgfe59130"><span class="section-number-3">1.2.</span> <code>useEffect</code> runs after specific variable change</h3>
+<div class="outline-text-3" id="text-1-2">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr">1: </span>useEffect(() =&gt; {
 <span class="linenr">2: </span>    console.log(persons);
@@ -65,13 +254,13 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org586a8bc" class="outline-2">
-<h2 id="org586a8bc">React hook patterns</h2>
-<div class="outline-text-2" id="text-org586a8bc">
+<div id="outline-container-org5b4861c" class="outline-2">
+<h2 id="org5b4861c"><span class="section-number-2">2.</span> React hook patterns</h2>
+<div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-orgf269a0d" class="outline-3">
-<h3 id="orgf269a0d">Fetch and send data</h3>
-<div class="outline-text-3" id="text-orgf269a0d">
+<div id="outline-container-org5ea1ad6" class="outline-3">
+<h3 id="org5ea1ad6"><span class="section-number-3">2.1.</span> Fetch and send data</h3>
+<div class="outline-text-3" id="text-2-1">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr">1: </span><span style="color: #5B6268;">/* </span><span style="color: #5B6268;">fetch data on mount</span><span style="color: #5B6268;"> */</span>
 <span class="linenr">2: </span>useEffect(() =&gt; {
@@ -95,9 +284,9 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org988e3b6" class="outline-3">
-<h3 id="org988e3b6">Conditional rendering</h3>
-<div class="outline-text-3" id="text-org988e3b6">
+<div id="outline-container-orgd865c45" class="outline-3">
+<h3 id="orgd865c45"><span class="section-number-3">2.2.</span> Conditional rendering</h3>
+<div class="outline-text-3" id="text-2-2">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr">1: </span><span style="color: #5B6268;">// </span><span style="color: #5B6268;">JSX is a way of writing HTML in js</span>
 <span class="linenr">2: </span><span style="color: #51afef;">let</span> <span style="color: #dcaeea;">content</span> = loading ? &lt;p&gt;Loading...&lt;/p&gt; : &lt;p&gt;Loaded&lt;/p&gt;;
@@ -111,9 +300,9 @@
 </div>
 </div>
 </div>
-<div id="outline-container-orgcb9a197" class="outline-3">
-<h3 id="orgcb9a197">Render an array of Data</h3>
-<div class="outline-text-3" id="text-orgcb9a197">
+<div id="outline-container-org83769b8" class="outline-3">
+<h3 id="org83769b8"><span class="section-number-3">2.3.</span> Render an array of Data</h3>
+<div class="outline-text-3" id="text-2-3">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr">1: </span><span style="color: #51afef;">const</span> <span style="color: #dcaeea;">data</span> = [
 <span class="linenr">2: </span>    { id: <span style="color: #da8548; font-weight: bold;">0</span>, text: <span style="color: #98be65;">"Text 1"</span> },
@@ -131,9 +320,9 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org40d6f29" class="outline-2">
-<h2 id="org40d6f29">Example: Stopwatch</h2>
-<div class="outline-text-2" id="text-org40d6f29">
+<div id="outline-container-org1c43da2" class="outline-2">
+<h2 id="org1c43da2"><span class="section-number-2">3.</span> Example: Stopwatch</h2>
+<div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr"> 1: </span><span style="color: #51afef;">const</span> <span style="color: #dcaeea;">Stopwatch</span> = () =&gt; {
 <span class="linenr"> 2: </span>    <span style="color: #51afef;">const</span> [<span style="color: #dcaeea;">time</span>, <span style="color: #dcaeea;">setTimer</span>] = useState(<span style="color: #da8548; font-weight: bold;">0</span>);
@@ -154,9 +343,9 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org8473a49" class="outline-2">
-<h2 id="org8473a49">DOM and component mounting</h2>
-<div class="outline-text-2" id="text-org8473a49">
+<div id="outline-container-org399e039" class="outline-2">
+<h2 id="org399e039"><span class="section-number-2">4.</span> DOM and component mounting</h2>
+<div class="outline-text-2" id="text-4">
 <ul class="org-ul">
 <li>DOM (Document Object Model): a programming interface for web documents; represents the structure of a document, e.g., HTML, as a tree of objects, where each object corresponds to a part of the document; it dynamically updates the document contents
 <ul class="org-ul">
@@ -181,9 +370,17 @@
 <item>
   <title><![CDATA[Hello world]]></title>
   <description><![CDATA[
-<div id="outline-container-org488c2c1" class="outline-2">
-<h2 id="org488c2c1">Hallo!</h2>
-<div class="outline-text-2" id="text-org488c2c1">
+<nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org4f41171">1. Hallo!</a></li>
+</ul>
+</div>
+</nav>
+<div id="outline-container-org4f41171" class="outline-2">
+<h2 id="org4f41171"><span class="section-number-2">1.</span> Hallo!</h2>
+<div class="outline-text-2" id="text-1">
 <p>
 This is the first blog with org-static-blog!
 </p>

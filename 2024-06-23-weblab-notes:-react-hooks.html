@@ -13,17 +13,39 @@
 <div id="preamble" class="status"></div>
 <div id="content">
 <div class="post-date">23 Jun 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-06-23-weblab-notes:-react-hooks.html">Weblab notes: React hooks</a></h1>
-<div id="outline-container-org5e3c5a2" class="outline-2">
-<h2 id="org5e3c5a2">What is a React hook</h2>
-<div class="outline-text-2" id="text-org5e3c5a2">
+<nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org61baadb">1. What is a React hook</a>
+<ul>
+<li><a href="#orgaa58121">1.1. <code>useState</code> is not enough</a></li>
+<li><a href="#orgfe59130">1.2. <code>useEffect</code> runs after specific variable change</a></li>
+</ul>
+</li>
+<li><a href="#org5b4861c">2. React hook patterns</a>
+<ul>
+<li><a href="#org5ea1ad6">2.1. Fetch and send data</a></li>
+<li><a href="#orgd865c45">2.2. Conditional rendering</a></li>
+<li><a href="#org83769b8">2.3. Render an array of Data</a></li>
+</ul>
+</li>
+<li><a href="#org1c43da2">3. Example: Stopwatch</a></li>
+<li><a href="#org399e039">4. DOM and component mounting</a></li>
+</ul>
+</div>
+</nav>
+<div id="outline-container-org61baadb" class="outline-2">
+<h2 id="org61baadb"><span class="section-number-2">1.</span> What is a React hook</h2>
+<div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Special functions to access parts of the component lifestyle.</li>
 <li>e.g., <code>useState</code></li>
 </ul>
 </div>
-<div id="outline-container-org4b98662" class="outline-3">
-<h3 id="org4b98662"><code>useState</code> is not enough</h3>
-<div class="outline-text-3" id="text-org4b98662">
+<div id="outline-container-orgaa58121" class="outline-3">
+<h3 id="orgaa58121"><span class="section-number-3">1.1.</span> <code>useState</code> is not enough</h3>
+<div class="outline-text-3" id="text-1-1">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr">1: </span><span style="color: #51afef;">const</span> [<span style="color: #dcaeea;">persons</span>, <span style="color: #dcaeea;">setPersons</span>] = useState([]);
 <span class="linenr">2: </span>
@@ -41,9 +63,9 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org4d99269" class="outline-3">
-<h3 id="org4d99269"><code>useEffect</code> runs after specific variable change</h3>
-<div class="outline-text-3" id="text-org4d99269">
+<div id="outline-container-orgfe59130" class="outline-3">
+<h3 id="orgfe59130"><span class="section-number-3">1.2.</span> <code>useEffect</code> runs after specific variable change</h3>
+<div class="outline-text-3" id="text-1-2">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr">1: </span>useEffect(() =&gt; {
 <span class="linenr">2: </span>    console.log(persons);
@@ -70,13 +92,13 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org586a8bc" class="outline-2">
-<h2 id="org586a8bc">React hook patterns</h2>
-<div class="outline-text-2" id="text-org586a8bc">
+<div id="outline-container-org5b4861c" class="outline-2">
+<h2 id="org5b4861c"><span class="section-number-2">2.</span> React hook patterns</h2>
+<div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-orgf269a0d" class="outline-3">
-<h3 id="orgf269a0d">Fetch and send data</h3>
-<div class="outline-text-3" id="text-orgf269a0d">
+<div id="outline-container-org5ea1ad6" class="outline-3">
+<h3 id="org5ea1ad6"><span class="section-number-3">2.1.</span> Fetch and send data</h3>
+<div class="outline-text-3" id="text-2-1">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr">1: </span><span style="color: #5B6268;">/* </span><span style="color: #5B6268;">fetch data on mount</span><span style="color: #5B6268;"> */</span>
 <span class="linenr">2: </span>useEffect(() =&gt; {
@@ -100,9 +122,9 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org988e3b6" class="outline-3">
-<h3 id="org988e3b6">Conditional rendering</h3>
-<div class="outline-text-3" id="text-org988e3b6">
+<div id="outline-container-orgd865c45" class="outline-3">
+<h3 id="orgd865c45"><span class="section-number-3">2.2.</span> Conditional rendering</h3>
+<div class="outline-text-3" id="text-2-2">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr">1: </span><span style="color: #5B6268;">// </span><span style="color: #5B6268;">JSX is a way of writing HTML in js</span>
 <span class="linenr">2: </span><span style="color: #51afef;">let</span> <span style="color: #dcaeea;">content</span> = loading ? &lt;p&gt;Loading...&lt;/p&gt; : &lt;p&gt;Loaded&lt;/p&gt;;
@@ -116,9 +138,9 @@
 </div>
 </div>
 </div>
-<div id="outline-container-orgcb9a197" class="outline-3">
-<h3 id="orgcb9a197">Render an array of Data</h3>
-<div class="outline-text-3" id="text-orgcb9a197">
+<div id="outline-container-org83769b8" class="outline-3">
+<h3 id="org83769b8"><span class="section-number-3">2.3.</span> Render an array of Data</h3>
+<div class="outline-text-3" id="text-2-3">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr">1: </span><span style="color: #51afef;">const</span> <span style="color: #dcaeea;">data</span> = [
 <span class="linenr">2: </span>    { id: <span style="color: #da8548; font-weight: bold;">0</span>, text: <span style="color: #98be65;">"Text 1"</span> },
@@ -136,9 +158,9 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org40d6f29" class="outline-2">
-<h2 id="org40d6f29">Example: Stopwatch</h2>
-<div class="outline-text-2" id="text-org40d6f29">
+<div id="outline-container-org1c43da2" class="outline-2">
+<h2 id="org1c43da2"><span class="section-number-2">3.</span> Example: Stopwatch</h2>
+<div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr"> 1: </span><span style="color: #51afef;">const</span> <span style="color: #dcaeea;">Stopwatch</span> = () =&gt; {
 <span class="linenr"> 2: </span>    <span style="color: #51afef;">const</span> [<span style="color: #dcaeea;">time</span>, <span style="color: #dcaeea;">setTimer</span>] = useState(<span style="color: #da8548; font-weight: bold;">0</span>);
@@ -159,9 +181,9 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org8473a49" class="outline-2">
-<h2 id="org8473a49">DOM and component mounting</h2>
-<div class="outline-text-2" id="text-org8473a49">
+<div id="outline-container-org399e039" class="outline-2">
+<h2 id="org399e039"><span class="section-number-2">4.</span> DOM and component mounting</h2>
+<div class="outline-text-2" id="text-4">
 <ul class="org-ul">
 <li>DOM (Document Object Model): a programming interface for web documents; represents the structure of a document, e.g., HTML, as a tree of objects, where each object corresponds to a part of the document; it dynamically updates the document contents
 <ul class="org-ul">
