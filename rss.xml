@@ -4,7 +4,7 @@
 <title><![CDATA[org-static-blog]]></title>
 <description><![CDATA[org-static-blog]]></description>
 <link>https://chenyo-17.github.io/org-static-blog</link>
-<lastBuildDate>Sun, 23 Jun 2024 18:43:16 +0200</lastBuildDate>
+<lastBuildDate>Sun, 23 Jun 2024 19:04:11 +0200</lastBuildDate>
 <item>
   <title><![CDATA[Weblab notes: React route]]></title>
   <description><![CDATA[
@@ -12,21 +12,21 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org2b4bda1">1. Router</a></li>
-<li><a href="#org925ffea">2. Link</a></li>
-<li><a href="#orgcf69883">3. Workshop 3</a>
+<li><a href="#orgb99e571">1. Router</a></li>
+<li><a href="#org969f609">2. Link</a></li>
+<li><a href="#orge15879f">3. Workshop 3</a>
 <ul>
-<li><a href="#orge0c0317">3.1. Structure</a></li>
-<li><a href="#org47226b5">3.2. States</a></li>
-<li><a href="#org6b0352a">3.3. Props</a></li>
-<li><a href="#orgb958ae3">3.4. Why passing down the update function in props 1, 4, 6?</a></li>
+<li><a href="#org8897e96">3.1. Structure</a></li>
+<li><a href="#org2cfdc7d">3.2. States</a></li>
+<li><a href="#orgd12543a">3.3. Props</a></li>
+<li><a href="#org40d784e">3.4. Why passing down the update function in props 1, 4, 6?</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org2b4bda1" class="outline-2">
-<h2 id="org2b4bda1"><span class="section-number-2">1.</span> Router</h2>
+<div id="outline-container-orgb99e571" class="outline-2">
+<h2 id="orgb99e571"><span class="section-number-2">1.</span> Router</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>use the Reach <a href="https://reach.tech/router/">Reach Router</a> library</li>
@@ -46,8 +46,8 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org925ffea" class="outline-2">
-<h2 id="org925ffea"><span class="section-number-2">2.</span> Link</h2>
+<div id="outline-container-org969f609" class="outline-2">
+<h2 id="org969f609"><span class="section-number-2">2.</span> Link</h2>
 <div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li>relative: <code class="src src-js">&lt;Link to=<span style="color: #98be65;">"newpage"</span>&gt;Click me&lt;/Link&gt;</code></li>
@@ -55,23 +55,23 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-orgcf69883" class="outline-2">
-<h2 id="orgcf69883"><span class="section-number-2">3.</span> Workshop 3</h2>
+<div id="outline-container-orge15879f" class="outline-2">
+<h2 id="orge15879f"><span class="section-number-2">3.</span> Workshop 3</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-orge0c0317" class="outline-3">
-<h3 id="orge0c0317"><span class="section-number-3">3.1.</span> Structure</h3>
+<div id="outline-container-org8897e96" class="outline-3">
+<h3 id="org8897e96"><span class="section-number-3">3.1.</span> Structure</h3>
 <div class="outline-text-3" id="text-3-1">
 
-<figure id="org0ac6b29">
-<img src="./images/workshop-3-structure.png" alt="workshop-3-structure.png" align="center" width="600px">
+<figure id="org2e27230">
+<img src="./static/workshop-3-structure.png" alt="workshop-3-structure.png" align="center" width="600px">
 
 <figcaption><span class="figure-number">Figure 1: </span>The Catbook structure in workshop 3</figcaption>
 </figure>
 </div>
 </div>
-<div id="outline-container-org47226b5" class="outline-3">
-<h3 id="org47226b5"><span class="section-number-3">3.2.</span> States</h3>
+<div id="outline-container-org2cfdc7d" class="outline-3">
+<h3 id="org2cfdc7d"><span class="section-number-3">3.2.</span> States</h3>
 <div class="outline-text-3" id="text-3-2">
 <table>
 
@@ -103,8 +103,8 @@
 </table>
 </div>
 </div>
-<div id="outline-container-org6b0352a" class="outline-3">
-<h3 id="org6b0352a"><span class="section-number-3">3.3.</span> Props</h3>
+<div id="outline-container-orgd12543a" class="outline-3">
+<h3 id="orgd12543a"><span class="section-number-3">3.3.</span> Props</h3>
 <div class="outline-text-3" id="text-3-3">
 <table>
 
@@ -156,8 +156,8 @@
 </table>
 </div>
 </div>
-<div id="outline-container-orgb958ae3" class="outline-3">
-<h3 id="orgb958ae3"><span class="section-number-3">3.4.</span> Why passing down the update function in props 1, 4, 6?</h3>
+<div id="outline-container-org40d784e" class="outline-3">
+<h3 id="org40d784e"><span class="section-number-3">3.4.</span> Why passing down the update function in props 1, 4, 6?</h3>
 <div class="outline-text-3" id="text-3-4">
 <ul class="org-ul">
 <li>To share the parent states, i.e., <code>stories</code> and <code>comments</code> to child component. Since the post action happens in the child component, we need a way to automatically update the states to see new contents immediately.</li>
