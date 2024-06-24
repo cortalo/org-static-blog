@@ -1,0 +1,9 @@
+#+title: Linux use tips
+#+date: <2024-06-24 09:17>
+#+description: This post records some linux use tips
+#+filetags: tools:linux:arch tools:linux:i3
+
+* i3
+** move specific workspaces between different monitors [[https://i3wm.org/docs/user-contributed/swapping-workspaces.html][(ref)]]
+1. adjust the monitor relative positions
+2. use src_bash[:exports code]{i3-msg -- move workspace to output right} to move the **current** workspace to the monitor on the right

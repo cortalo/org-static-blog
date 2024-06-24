@@ -1,0 +1,41 @@
+#+title: A stupid debugging experience
+#+date: <2024-06-24 15:06>
+#+description: This post records how I debug a docker issue
+#+filetags: tools:docker lang:go tools:linux:apline
+
+* What happended
+- Servers SA and SB have the same docker installation, and the same running container CA and CB.
+- A Go file G can be built on CA, but on CB it reports this error:
+  #+begin_quote
+  runtime: failed to create new OS thread (have 2 already; errno=11)
+  runtime: may need to increase max user processes (ulimit -u)
+  fatal error: newosproc"
+  #+end_quote
+
+* What did I do
+1. I compared any related configurations between SA and SB. and between CA and CB, e.g., src_bash[:exports code]{ulimit -a}, src_bash[:exports code]{/etc/security/limits.conf}. They all look the same.
+2. I created a new container CN on SA with the same docker image, CN can compile G.
+3. I looked into the (complex) ~docker run~ script for CA/CB and figured out it was due to a resource constraint ~--pids-limit 100~.
+   - Increasing this limit to 200 seems resolve the issue, but I had no idea why the Go compiler needed so many resources (perhaps due to package I imported).
+4. **Until this point**, I realized, since the container did not support the compilation, why not just only transfer the compiled binary!
+   - How silly that I didn't even try this in the beginning!
+5. Since the program imports the ~net~ package, and there is a [[https://www.reddit.com/r/golang/comments/pi97sp/what_is_the_consequence_of_using_cgo_enabled0/][known issue]] of Alpine image running a Go binary file, I followed the post and disabled ~CGO~ on SA, then ~docker cp~ the binary to CA, and it worked.
+
+* Another issue of running RPC in docker
+- The other day, I also spent hours debugging a ~route unreachable~ error when I want to send a request from CA to SA.
+- The CA is using the ~bridge~ network, so it should talk to SA via SA's interface ~docker0~ within the subnet ~172.17.0.0/16~.
+- However, in my case, the docker by default rejects packages from any container as shown in SA's ~tcpdump~ result:
+  #+begin_quote
+  172.17.0.1->172.17.0.3 ICMP host unreachable- admin prohibited, length 68
+  #+end_quote
+
+- By checking SA's iptables, I found this rule:
+  #+begin_src bash
+  -A INPUT -j REJECT --reject-with icmp-host-prohibited
+  #+end_src
+  - Strangely, the ~ping~ still works with this rule.
+
+- In the end, I need to append a new rule to make the RPC work.
+  #+begin_src bash
+  iptables -I INPUT 1 -i docker0 -p tcp --dport <port> -s 172.17.0.0/16 -j ACCEPT
+  #+end_src
