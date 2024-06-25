@@ -1,0 +1,144 @@
+#+title: Go patterns
+#+date: <2024-06-25 21:25>
+#+description: This a personal note for the [[https://www.youtube.com/watch?v=IdCbMO0Ey9I][Go lecture]].
+#+filetags: lang:go design-patterns
+
+* Concurrency vs Parallelism
+- Concurrency: write a program to handle lot of things at once
+  - not necessarily faster
+- Parallelism: the program itself can do a lot of computations at once
+
+* Use goroutines for states
+
+** Matching a regex
+- return if a given string matches a regex: start with ~"~, contains arbitrary escape sequence and ends with ~*~
+- unclear logic: store states in the data
+  #+begin_src go -n
+state := 0
+for {
+	c := read()
+	switch state {
+	case 0:
+		// first char must be "
+		if c != '"' {
+			return false
+		}
+		state = 1 // match the next char
+	case 1:
+		// ending with " matches
+		if c == '"' {
+			return true
+		}
+		if c == '\\' {
+			state = 2
+		} else {
+			// transition to state 1 to match next char
+			state = 1
+		}
+	case 2:
+		// read the char, discard it and
+		state = 1
+	}
+}
+  #+end_src
+- clear logic: store states in the code
+  #+begin_src go -n
+// no variable to store state
+if read() != '"' {
+	return false
+}
+var c rune // c is a Unicode, alas to int32
+for c != '"' {
+	c = read()
+	if c == '\\' {
+		read()  // skip the next char
+	}
+}
+return true
+  #+end_src
+
+** When the state variable cannot be avoided
+- the function needs to return the state
+  #+begin_src go
+type quoter struct {
+	state int
+}
+
+func (q *quoter) Init() {
+	r.state = 0
+}
+// proess each char based on current state
+func (q *quoter) Write(c rune) Status {
+	switch q.state {
+	case 0:
+		if c != '"' {
+			return BadInput
+		}
+		q.state = 1
+	case 1:
+		if c == '"' {
+			return Success
+		}
+		if c == '\\' {
+			q.state = 2
+		} else {
+			q.state = 1
+		}
+	case 2:
+		q.state = 1
+	}
+	return NeedMoreInput
+}
+#+end_src
+- use additional goroutines to hold states
+  #+begin_src go
+type quoter struct {
+	char chan rune
+	status chan Status
+}
+func (q *quoter) Init() {
+	q.char = make(chan rune)
+	q.status = make(chan Status)
+	// need to make sure why and when the goroutine will exit
+	go q.parse()
+	// blocks until it receives an initial status from parse()
+	// to ensure that parse() is ready, i.e., q.status = NeedMoreInput
+	// before Write() is called
+	<-q.status
+}
+// Write sends the next char to q.char, which will be receivecd by parse()
+// the status is a public state accessible by the user
+func (q *quoter) Write(r rune) Status {
+	q.char <- c
+	// wait for the result
+	return <-q.status
+}
+func (q *quoteReader) parse() {
+	if q.read() != '"' {
+		q.status <- SyntaxError
+		return
+	}
+	var c rune
+	for c!= '"' {
+		c = q.read()
+		if c == '\\' {
+			q.read()
+		}
+	}
+	q.status <- Done
+}
+// a helper function used in parse() to return the next char in q.char
+func (q *quoter) read() int {
+	q.status <- NeedMoreInput
+	return <- q.char
+}
+func main() {
+	q := &quoter{}
+	q.Init()
+
+	input := `"Hello, \"World\""`
+	for _, c := range input {
+		status := q.Write(c)
+	}
+}
+  #+end_src

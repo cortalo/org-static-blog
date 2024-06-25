@@ -6,11 +6,11 @@
 * What happended
 - Servers SA and SB have the same docker installation, and the same running container CA and CB.
 - A Go file G can be built on CA, but on CB it reports this error:
-  #+begin_quote
+  #+begin_verse
   runtime: failed to create new OS thread (have 2 already; errno=11)
   runtime: may need to increase max user processes (ulimit -u)
-  fatal error: newosproc"
-  #+end_quote
+  fatal error: newosproc
+  #+end_verse
 
 * What did I do
 1. I compared any related configurations between SA and SB. and between CA and CB, e.g., src_bash[:exports code]{ulimit -a}, src_bash[:exports code]{/etc/security/limits.conf}. They all look the same.
@@ -25,9 +25,9 @@
 - The other day, I also spent hours debugging a ~route unreachable~ error when I want to send a request from CA to SA.
 - The CA is using the ~bridge~ network, so it should talk to SA via SA's interface ~docker0~ within the subnet ~172.17.0.0/16~.
 - However, in my case, the docker by default rejects packages from any container as shown in SA's ~tcpdump~ result:
-  #+begin_quote
+  #+begin_verse
   172.17.0.1->172.17.0.3 ICMP host unreachable- admin prohibited, length 68
-  #+end_quote
+  #+end_verse
 
 - By checking SA's iptables, I found this rule:
   #+begin_src bash

@@ -12,37 +12,223 @@
 <div id="preamble" class="status"></div>
 <div id="content">
 
+<div class="post-date">25 Jun 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-06-25-go-patterns.html">Go patterns</a></h1>
+<nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org22d49b8">1. Concurrency vs Parallelism</a></li>
+<li><a href="#orgdcb5074">2. Use goroutines for states</a>
+<ul>
+<li><a href="#orgb3aef5e">2.1. Matching a regex</a></li>
+<li><a href="#org2f1ba4e">2.2. When the state variable cannot be avoided</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+<div id="outline-container-org22d49b8" class="outline-2">
+<h2 id="org22d49b8"><span class="section-number-2">1.</span> Concurrency vs Parallelism</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>Concurrency: write a program to handle lot of things at once
+<ul class="org-ul">
+<li>not necessarily faster</li>
+</ul></li>
+<li>Parallelism: the program itself can do a lot of computations at once</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgdcb5074" class="outline-2">
+<h2 id="orgdcb5074"><span class="section-number-2">2.</span> Use goroutines for states</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-orgb3aef5e" class="outline-3">
+<h3 id="orgb3aef5e"><span class="section-number-3">2.1.</span> Matching a regex</h3>
+<div class="outline-text-3" id="text-2-1">
+<ul class="org-ul">
+<li>return if a given string matches a regex: start with <code>"</code>, contains arbitrary escape sequence and ends with <code>*</code></li>
+<li><p>
+unclear logic: store states in the data
+</p>
+<div class="org-src-container">
+<pre class="src src-go"><span class="linenr"> 1: </span><span style="color: #dcaeea;">state</span> := <span style="color: #da8548; font-weight: bold;">0</span>
+<span class="linenr"> 2: </span><span style="color: #51afef;">for</span> {
+<span class="linenr"> 3: </span>    <span style="color: #dcaeea;">c</span> := <span style="color: #c678dd;">read</span>()
+<span class="linenr"> 4: </span>    <span style="color: #51afef;">switch</span> state {
+<span class="linenr"> 5: </span>    <span style="color: #51afef;">case</span> <span style="color: #da8548; font-weight: bold;">0</span>:
+<span class="linenr"> 6: </span>        <span style="color: #5B6268;">// </span><span style="color: #5B6268;">first char must be "</span>
+<span class="linenr"> 7: </span>        <span style="color: #51afef;">if</span> c != <span style="color: #98be65;">'"'</span> {
+<span class="linenr"> 8: </span>            <span style="color: #51afef;">return</span> <span style="color: #a9a1e1;">false</span>
+<span class="linenr"> 9: </span>        }
+<span class="linenr">10: </span>        state = <span style="color: #da8548; font-weight: bold;">1</span> <span style="color: #5B6268;">// </span><span style="color: #5B6268;">match the next char</span>
+<span class="linenr">11: </span>    <span style="color: #51afef;">case</span> <span style="color: #da8548; font-weight: bold;">1</span>:
+<span class="linenr">12: </span>        <span style="color: #5B6268;">// </span><span style="color: #5B6268;">ending with " matches</span>
+<span class="linenr">13: </span>        <span style="color: #51afef;">if</span> c == <span style="color: #98be65;">'"'</span> {
+<span class="linenr">14: </span>            <span style="color: #51afef;">return</span> <span style="color: #a9a1e1;">true</span>
+<span class="linenr">15: </span>        }
+<span class="linenr">16: </span>        <span style="color: #51afef;">if</span> c == <span style="color: #98be65;">'\\'</span> {
+<span class="linenr">17: </span>            state = <span style="color: #da8548; font-weight: bold;">2</span>
+<span class="linenr">18: </span>        } <span style="color: #51afef;">else</span> {
+<span class="linenr">19: </span>            <span style="color: #5B6268;">// </span><span style="color: #5B6268;">transition to state 1 to match next char</span>
+<span class="linenr">20: </span>            state = <span style="color: #da8548; font-weight: bold;">1</span>
+<span class="linenr">21: </span>        }
+<span class="linenr">22: </span>    <span style="color: #51afef;">case</span> <span style="color: #da8548; font-weight: bold;">2</span>:
+<span class="linenr">23: </span>        <span style="color: #5B6268;">// </span><span style="color: #5B6268;">read the char, discard it and</span>
+<span class="linenr">24: </span>        state = <span style="color: #da8548; font-weight: bold;">1</span>
+<span class="linenr">25: </span>    }
+<span class="linenr">26: </span>}
+</pre>
+</div></li>
+<li><p>
+clear logic: store states in the code
+</p>
+<div class="org-src-container">
+<pre class="src src-go"><span class="linenr"> 1: </span><span style="color: #5B6268;">// </span><span style="color: #5B6268;">no variable to store state</span>
+<span class="linenr"> 2: </span><span style="color: #51afef;">if</span> <span style="color: #c678dd;">read</span>() != <span style="color: #98be65;">'"'</span> {
+<span class="linenr"> 3: </span>    <span style="color: #51afef;">return</span> <span style="color: #a9a1e1;">false</span>
+<span class="linenr"> 4: </span>}
+<span class="linenr"> 5: </span><span style="color: #51afef;">var</span> <span style="color: #dcaeea;">c</span> <span style="color: #ECBE7B;">rune</span> <span style="color: #5B6268;">// </span><span style="color: #5B6268;">c is a Unicode, alas to int32</span>
+<span class="linenr"> 6: </span><span style="color: #51afef;">for</span> c != <span style="color: #98be65;">'"'</span> {
+<span class="linenr"> 7: </span>    c = <span style="color: #c678dd;">read</span>()
+<span class="linenr"> 8: </span>    <span style="color: #51afef;">if</span> c == <span style="color: #98be65;">'\\'</span> {
+<span class="linenr"> 9: </span>        <span style="color: #c678dd;">read</span>()  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">skip the next char</span>
+<span class="linenr">10: </span>    }
+<span class="linenr">11: </span>}
+<span class="linenr">12: </span><span style="color: #51afef;">return</span> <span style="color: #a9a1e1;">true</span>
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org2f1ba4e" class="outline-3">
+<h3 id="org2f1ba4e"><span class="section-number-3">2.2.</span> When the state variable cannot be avoided</h3>
+<div class="outline-text-3" id="text-2-2">
+<ul class="org-ul">
+<li><p>
+the function needs to return the state
+</p>
+<div class="org-src-container">
+<pre class="src src-go"><span style="color: #51afef;">type</span> <span style="color: #ECBE7B;">quoter</span> <span style="color: #51afef;">struct</span> {
+    state <span style="color: #ECBE7B;">int</span>
+}
+
+<span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">q</span> *<span style="color: #ECBE7B;">quoter</span>) <span style="color: #c678dd;">Init</span>() {
+    r.state = <span style="color: #da8548; font-weight: bold;">0</span>
+}
+<span style="color: #5B6268;">// </span><span style="color: #5B6268;">proess each char based on current state</span>
+<span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">q</span> *<span style="color: #ECBE7B;">quoter</span>) <span style="color: #c678dd;">Write</span>(<span style="color: #dcaeea;">c</span> <span style="color: #ECBE7B;">rune</span>) <span style="color: #ECBE7B;">Status</span> {
+    <span style="color: #51afef;">switch</span> q.state {
+    <span style="color: #51afef;">case</span> <span style="color: #da8548; font-weight: bold;">0</span>:
+        <span style="color: #51afef;">if</span> c != <span style="color: #98be65;">'"'</span> {
+            <span style="color: #51afef;">return</span> BadInput
+        }
+        q.state = <span style="color: #da8548; font-weight: bold;">1</span>
+    <span style="color: #51afef;">case</span> <span style="color: #da8548; font-weight: bold;">1</span>:
+        <span style="color: #51afef;">if</span> c == <span style="color: #98be65;">'"'</span> {
+            <span style="color: #51afef;">return</span> Success
+        }
+        <span style="color: #51afef;">if</span> c == <span style="color: #98be65;">'\\'</span> {
+            q.state = <span style="color: #da8548; font-weight: bold;">2</span>
+        } <span style="color: #51afef;">else</span> {
+            q.state = <span style="color: #da8548; font-weight: bold;">1</span>
+        }
+    <span style="color: #51afef;">case</span> <span style="color: #da8548; font-weight: bold;">2</span>:
+        q.state = <span style="color: #da8548; font-weight: bold;">1</span>
+    }
+    <span style="color: #51afef;">return</span> NeedMoreInput
+}
+</pre>
+</div></li>
+<li><p>
+use additional goroutines to hold states
+</p>
+<div class="org-src-container">
+<pre class="src src-go"><span style="color: #51afef;">type</span> <span style="color: #ECBE7B;">quoter</span> <span style="color: #51afef;">struct</span> {
+    char <span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">rune</span>
+    status <span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">Status</span>
+}
+<span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">q</span> *<span style="color: #ECBE7B;">quoter</span>) <span style="color: #c678dd;">Init</span>() {
+    q.char = <span style="color: #c678dd;">make</span>(<span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">rune</span>)
+    q.status = <span style="color: #c678dd;">make</span>(<span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">Status</span>)
+    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">need to make sure why and when the goroutine will exit</span>
+    <span style="color: #51afef;">go</span> q.<span style="color: #c678dd;">parse</span>()
+    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">blocks until it receives an initial status from parse()</span>
+    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">to ensure that parse() is ready, i.e., q.status = NeedMoreInput</span>
+    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">before Write() is called</span>
+    &lt;-q.status
+}
+<span style="color: #5B6268;">// </span><span style="color: #5B6268;">Write sends the next char to q.char, which will be receivecd by parse()</span>
+<span style="color: #5B6268;">// </span><span style="color: #5B6268;">the status is a public state accessible by the user</span>
+<span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">q</span> *<span style="color: #ECBE7B;">quoter</span>) <span style="color: #c678dd;">Write</span>(<span style="color: #dcaeea;">r</span> <span style="color: #ECBE7B;">rune</span>) <span style="color: #ECBE7B;">Status</span> {
+    q.char &lt;- c
+    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">wait for the result</span>
+    <span style="color: #51afef;">return</span> &lt;-q.status
+}
+<span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">q</span> *<span style="color: #ECBE7B;">quoteReader</span>) <span style="color: #c678dd;">parse</span>() {
+    <span style="color: #51afef;">if</span> q.<span style="color: #c678dd;">read</span>() != <span style="color: #98be65;">'"'</span> {
+        q.status &lt;- SyntaxError
+        <span style="color: #51afef;">return</span>
+    }
+    <span style="color: #51afef;">var</span> <span style="color: #dcaeea;">c</span> <span style="color: #ECBE7B;">rune</span>
+    <span style="color: #51afef;">for</span> c!= <span style="color: #98be65;">'"'</span> {
+        c = q.<span style="color: #c678dd;">read</span>()
+        <span style="color: #51afef;">if</span> c == <span style="color: #98be65;">'\\'</span> {
+            q.<span style="color: #c678dd;">read</span>()
+        }
+    }
+    q.status &lt;- Done
+}
+<span style="color: #5B6268;">// </span><span style="color: #5B6268;">a helper function used in parse() to return the next char in q.char</span>
+<span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">q</span> *<span style="color: #ECBE7B;">quoter</span>) <span style="color: #c678dd;">read</span>() <span style="color: #ECBE7B;">int</span> {
+    q.status &lt;- NeedMoreInput
+    <span style="color: #51afef;">return</span> &lt;- q.char
+}
+<span style="color: #51afef;">func</span> <span style="color: #c678dd;">main</span>() {
+    <span style="color: #dcaeea;">q</span> := &amp;<span style="color: #ECBE7B;">quoter</span>{}
+    q.<span style="color: #c678dd;">Init</span>()
+
+    <span style="color: #dcaeea;">input</span> := <span style="color: #98be65;">`"Hello, \"World\""`</span>
+    <span style="color: #51afef;">for</span> <span style="color: #dcaeea;">_</span>, <span style="color: #dcaeea;">c</span> := <span style="color: #51afef;">range</span> input {
+        <span style="color: #dcaeea;">status</span> := q.<span style="color: #c678dd;">Write</span>(c)
+    }
+}
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-lang:go.html">lang:go</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-design-patterns.html">design-patterns</a> </div>
 <div class="post-date">24 Jun 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-06-24-a-stupid-debugging-experience.html">A stupid debugging experience</a></h1>
 <nav id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org71b402b">1. What happended</a></li>
-<li><a href="#org167d225">2. What did I do</a></li>
-<li><a href="#org2edeff6">3. Another issue of running RPC in docker</a></li>
+<li><a href="#org8a31202">1. What happended</a></li>
+<li><a href="#org834453b">2. What did I do</a></li>
+<li><a href="#orgd08e1bf">3. Another issue of running RPC in docker</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org71b402b" class="outline-2">
-<h2 id="org71b402b"><span class="section-number-2">1.</span> What happended</h2>
+<div id="outline-container-org8a31202" class="outline-2">
+<h2 id="org8a31202"><span class="section-number-2">1.</span> What happended</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Servers SA and SB have the same docker installation, and the same running container CA and CB.</li>
 <li><p>
 A Go file G can be built on CA, but on CB it reports this error:
 </p>
-<blockquote>
-<p>
-runtime: failed to create new OS thread (have 2 already; errno=11)
-runtime: may need to increase max user processes (ulimit -u)
-fatal error: newosproc"
-</p>
-</blockquote></li>
+<p class="verse">
+runtime: failed to create new OS thread (have 2 already; errno=11)<br>
+runtime: may need to increase max user processes (ulimit -u)<br>
+fatal error: newosproc<br>
+</p></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org167d225" class="outline-2">
-<h2 id="org167d225"><span class="section-number-2">2.</span> What did I do</h2>
+<div id="outline-container-org834453b" class="outline-2">
+<h2 id="org834453b"><span class="section-number-2">2.</span> What did I do</h2>
 <div class="outline-text-2" id="text-2">
 <ol class="org-ol">
 <li>I compared any related configurations between SA and SB. and between CA and CB, e.g., <code class="src src-bash"><span style="color: #c678dd;">ulimit</span> -a</code>, <code class="src src-bash">/etc/security/limits.conf</code>. They all look the same.</li>
@@ -59,8 +245,8 @@ fatal error: newosproc"
 </ol>
 </div>
 </div>
-<div id="outline-container-org2edeff6" class="outline-2">
-<h2 id="org2edeff6"><span class="section-number-2">3.</span> Another issue of running RPC in docker</h2>
+<div id="outline-container-orgd08e1bf" class="outline-2">
+<h2 id="orgd08e1bf"><span class="section-number-2">3.</span> Another issue of running RPC in docker</h2>
 <div class="outline-text-2" id="text-3">
 <ul class="org-ul">
 <li>The other day, I also spent hours debugging a <code>route unreachable</code> error when I want to send a request from CA to SA.</li>
@@ -68,11 +254,9 @@ fatal error: newosproc"
 <li><p>
 However, in my case, the docker by default rejects packages from any container as shown in SA&rsquo;s <code>tcpdump</code> result:
 </p>
-<blockquote>
-<p>
-172.17.0.1-&gt;172.17.0.3 ICMP host unreachable- admin prohibited, length 68
-</p>
-</blockquote></li>
+<p class="verse">
+172.17.0.1-&gt;172.17.0.3 ICMP host unreachable- admin prohibited, length 68<br>
+</p></li>
 
 <li><p>
 By checking SA&rsquo;s iptables, I found this rule:
@@ -101,20 +285,20 @@ In the end, I need to append a new rule to make the RPC work.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgc8c691f">1. i3</a>
+<li><a href="#orgc7afab2">1. i3</a>
 <ul>
-<li><a href="#orgba542b4">1.1. move specific workspaces between different monitors (ref)</a></li>
+<li><a href="#orgf00d718">1.1. move specific workspaces between different monitors (ref)</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-orgc8c691f" class="outline-2">
-<h2 id="orgc8c691f"><span class="section-number-2">1.</span> i3</h2>
+<div id="outline-container-orgc7afab2" class="outline-2">
+<h2 id="orgc7afab2"><span class="section-number-2">1.</span> i3</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orgba542b4" class="outline-3">
-<h3 id="orgba542b4"><span class="section-number-3">1.1.</span> move specific workspaces between different monitors <a href="https://i3wm.org/docs/user-contributed/swapping-workspaces.html">(ref)</a></h3>
+<div id="outline-container-orgf00d718" class="outline-3">
+<h3 id="orgf00d718"><span class="section-number-3">1.1.</span> move specific workspaces between different monitors <a href="https://i3wm.org/docs/user-contributed/swapping-workspaces.html">(ref)</a></h3>
 <div class="outline-text-3" id="text-1-1">
 <ol class="org-ol">
 <li>adjust the monitor relative positions</li>
@@ -288,34 +472,34 @@ In the end, I need to append a new rule to make the RPC work.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org61baadb">1. What is a React hook</a>
+<li><a href="#orgc77c8bc">1. What is a React hook</a>
 <ul>
-<li><a href="#orgaa58121">1.1. <code>useState</code> is not enough</a></li>
-<li><a href="#orgfe59130">1.2. <code>useEffect</code> runs after specific variable change</a></li>
+<li><a href="#org5c35c65">1.1. <code>useState</code> is not enough</a></li>
+<li><a href="#org1aeaa89">1.2. <code>useEffect</code> runs after specific variable change</a></li>
 </ul>
 </li>
-<li><a href="#org5b4861c">2. React hook patterns</a>
+<li><a href="#org604cd32">2. React hook patterns</a>
 <ul>
-<li><a href="#org5ea1ad6">2.1. Fetch and send data</a></li>
-<li><a href="#orgd865c45">2.2. Conditional rendering</a></li>
-<li><a href="#org83769b8">2.3. Render an array of Data</a></li>
+<li><a href="#orge78ebd5">2.1. Fetch and send data</a></li>
+<li><a href="#org8b5de1f">2.2. Conditional rendering</a></li>
+<li><a href="#org716fd17">2.3. Render an array of Data</a></li>
 </ul>
 </li>
-<li><a href="#org1c43da2">3. Example: Stopwatch</a></li>
-<li><a href="#org399e039">4. DOM and component mounting</a></li>
+<li><a href="#orgaa3adae">3. Example: Stopwatch</a></li>
+<li><a href="#orgcd78dfa">4. DOM and component mounting</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org61baadb" class="outline-2">
-<h2 id="org61baadb"><span class="section-number-2">1.</span> What is a React hook</h2>
+<div id="outline-container-orgc77c8bc" class="outline-2">
+<h2 id="orgc77c8bc"><span class="section-number-2">1.</span> What is a React hook</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Special functions to access parts of the component lifestyle.</li>
 <li>e.g., <code>useState</code></li>
 </ul>
 </div>
-<div id="outline-container-orgaa58121" class="outline-3">
-<h3 id="orgaa58121"><span class="section-number-3">1.1.</span> <code>useState</code> is not enough</h3>
+<div id="outline-container-org5c35c65" class="outline-3">
+<h3 id="org5c35c65"><span class="section-number-3">1.1.</span> <code>useState</code> is not enough</h3>
 <div class="outline-text-3" id="text-1-1">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr">1: </span><span style="color: #51afef;">const</span> [<span style="color: #dcaeea;">persons</span>, <span style="color: #dcaeea;">setPersons</span>] = useState([]);
@@ -334,8 +518,8 @@ In the end, I need to append a new rule to make the RPC work.
 </ul>
 </div>
 </div>
-<div id="outline-container-orgfe59130" class="outline-3">
-<h3 id="orgfe59130"><span class="section-number-3">1.2.</span> <code>useEffect</code> runs after specific variable change</h3>
+<div id="outline-container-org1aeaa89" class="outline-3">
+<h3 id="org1aeaa89"><span class="section-number-3">1.2.</span> <code>useEffect</code> runs after specific variable change</h3>
 <div class="outline-text-3" id="text-1-2">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr">1: </span>useEffect(() =&gt; {
@@ -363,12 +547,12 @@ In the end, I need to append a new rule to make the RPC work.
 </div>
 </div>
 </div>
-<div id="outline-container-org5b4861c" class="outline-2">
-<h2 id="org5b4861c"><span class="section-number-2">2.</span> React hook patterns</h2>
+<div id="outline-container-org604cd32" class="outline-2">
+<h2 id="org604cd32"><span class="section-number-2">2.</span> React hook patterns</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org5ea1ad6" class="outline-3">
-<h3 id="org5ea1ad6"><span class="section-number-3">2.1.</span> Fetch and send data</h3>
+<div id="outline-container-orge78ebd5" class="outline-3">
+<h3 id="orge78ebd5"><span class="section-number-3">2.1.</span> Fetch and send data</h3>
 <div class="outline-text-3" id="text-2-1">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr">1: </span><span style="color: #5B6268;">/* </span><span style="color: #5B6268;">fetch data on mount</span><span style="color: #5B6268;"> */</span>
@@ -393,8 +577,8 @@ In the end, I need to append a new rule to make the RPC work.
 </div>
 </div>
 </div>
-<div id="outline-container-orgd865c45" class="outline-3">
-<h3 id="orgd865c45"><span class="section-number-3">2.2.</span> Conditional rendering</h3>
+<div id="outline-container-org8b5de1f" class="outline-3">
+<h3 id="org8b5de1f"><span class="section-number-3">2.2.</span> Conditional rendering</h3>
 <div class="outline-text-3" id="text-2-2">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr">1: </span><span style="color: #5B6268;">// </span><span style="color: #5B6268;">JSX is a way of writing HTML in js</span>
@@ -409,8 +593,8 @@ In the end, I need to append a new rule to make the RPC work.
 </div>
 </div>
 </div>
-<div id="outline-container-org83769b8" class="outline-3">
-<h3 id="org83769b8"><span class="section-number-3">2.3.</span> Render an array of Data</h3>
+<div id="outline-container-org716fd17" class="outline-3">
+<h3 id="org716fd17"><span class="section-number-3">2.3.</span> Render an array of Data</h3>
 <div class="outline-text-3" id="text-2-3">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr">1: </span><span style="color: #51afef;">const</span> <span style="color: #dcaeea;">data</span> = [
@@ -429,8 +613,8 @@ In the end, I need to append a new rule to make the RPC work.
 </div>
 </div>
 </div>
-<div id="outline-container-org1c43da2" class="outline-2">
-<h2 id="org1c43da2"><span class="section-number-2">3.</span> Example: Stopwatch</h2>
+<div id="outline-container-orgaa3adae" class="outline-2">
+<h2 id="orgaa3adae"><span class="section-number-2">3.</span> Example: Stopwatch</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr"> 1: </span><span style="color: #51afef;">const</span> <span style="color: #dcaeea;">Stopwatch</span> = () =&gt; {
@@ -440,20 +624,19 @@ In the end, I need to append a new rule to make the RPC work.
 <span class="linenr"> 5: </span>        <span style="color: #51afef;">const</span> <span style="color: #dcaeea;">timer</span> = setInterval(() =&gt; {
 <span class="linenr"> 6: </span>            <span style="color: #5B6268;">// </span><span style="color: #5B6268;">setTimer accepts either a new state value,</span>
 <span class="linenr"> 7: </span>            <span style="color: #5B6268;">// </span><span style="color: #5B6268;">or a function that takes the previous state (oldTime) as an argument and returns the new state</span>
-<span class="linenr"> 8: </span>            setTime((oldTime) =&gt; oldTime + <span style="color: #da8548; font-weight: bold;">1</span>);
-<span class="linenr"> 9: </span>        }, <span style="color: #da8548; font-weight: bold;">1000</span>);
-<span class="linenr">10: </span>        <span style="color: #5B6268;">// </span><span style="color: #5B6268;">if not properly cleanup after unmounting</span>
-<span class="linenr">11: </span>        <span style="color: #5B6268;">// </span><span style="color: #5B6268;">the timer will continue to run even the state no longer exists</span>
-<span class="linenr">12: </span>        <span style="color: #51afef;">return</span> () =&gt; clearInterval(timer);
-<span class="linenr">13: </span>    }, []);
-<span class="linenr">14: </span>    <span style="color: #51afef;">return</span> &lt;&gt;TIme: {time}&lt;/&gt;;
-<span class="linenr">15: </span>};
+<span class="linenr"> 8: </span>            setTime((oldTime) =&gt; oldTime + <span style="color: #da8548; font-weight: bold;">1</span>);}, <span style="color: #da8548; font-weight: bold;">1000</span>);
+<span class="linenr"> 9: </span>        <span style="color: #5B6268;">// </span><span style="color: #5B6268;">if not properly cleanup after unmounting</span>
+<span class="linenr">10: </span>        <span style="color: #5B6268;">// </span><span style="color: #5B6268;">the timer will continue to run even the state no longer exists</span>
+<span class="linenr">11: </span>        <span style="color: #51afef;">return</span> () =&gt; clearInterval(timer);
+<span class="linenr">12: </span>    }, []);
+<span class="linenr">13: </span>    <span style="color: #51afef;">return</span> &lt;&gt;TIme: {time}&lt;/&gt;;
+<span class="linenr">14: </span>};
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org399e039" class="outline-2">
-<h2 id="org399e039"><span class="section-number-2">4.</span> DOM and component mounting</h2>
+<div id="outline-container-orgcd78dfa" class="outline-2">
+<h2 id="orgcd78dfa"><span class="section-number-2">4.</span> DOM and component mounting</h2>
 <div class="outline-text-2" id="text-4">
 <ul class="org-ul">
 <li>DOM (Document Object Model): a programming interface for web documents; represents the structure of a document, e.g., HTML, as a tree of objects, where each object corresponds to a part of the document; it dynamically updates the document contents
@@ -469,25 +652,7 @@ In the end, I need to append a new rule to make the RPC work.
 </ul>
 </div>
 </div>
-<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-study:web-development:react.html">study:web-development:react</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-lecture:mit.html">lecture:mit</a> </div>
-<div class="post-date">23 Jun 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-06-23-hello-world.html">Hello world</a></h1>
-<nav id="table-of-contents" role="doc-toc">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents" role="doc-toc">
-<ul>
-<li><a href="#org4f41171">1. Hallo!</a></li>
-</ul>
-</div>
-</nav>
-<div id="outline-container-org4f41171" class="outline-2">
-<h2 id="org4f41171"><span class="section-number-2">1.</span> Hallo!</h2>
-<div class="outline-text-2" id="text-1">
-<p>
-This is the first blog with org-static-blog!
-</p>
-</div>
-</div>
-<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-personal.html">personal</a> </div><div id="archive">
+<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-study:web-development:react.html">study:web-development:react</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-lecture:mit.html">lecture:mit</a> </div><div id="archive">
 <a href="https://chenyo-17.github.io/org-static-blog/archive.html">Other posts</a>
 </div>
 </div>

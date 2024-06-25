@@ -98,8 +98,7 @@ const Stopwatch = () => {
         const timer = setInterval(() => {
             // setTimer accepts either a new state value,
             // or a function that takes the previous state (oldTime) as an argument and returns the new state
-            setTime((oldTime) => oldTime + 1);
-        }, 1000);
+            setTime((oldTime) => oldTime + 1);}, 1000);
         // if not properly cleanup after unmounting
         // the timer will continue to run even the state no longer exists
         return () => clearInterval(timer);
