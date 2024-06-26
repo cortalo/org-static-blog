@@ -59,7 +59,7 @@ return true
 
 ** When the state variable cannot be avoided
 - the function needs to return the state
-  #+begin_src go
+  #+begin_src go -n
 type quoter struct {
 	state int
 }
@@ -91,7 +91,7 @@ func (q *quoter) Write(c rune) Status {
 }
 #+end_src
 - use additional goroutines to hold states
-  #+begin_src go
+  #+begin_src go -n
 type quoter struct {
 	char chan rune
 	status chan Status

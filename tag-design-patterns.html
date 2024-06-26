@@ -17,18 +17,18 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org22d49b8">1. Concurrency vs Parallelism</a></li>
-<li><a href="#orgdcb5074">2. Use goroutines for states</a>
+<li><a href="#org6dd2340">1. Concurrency vs Parallelism</a></li>
+<li><a href="#orga0d598b">2. Use goroutines for states</a>
 <ul>
-<li><a href="#orgb3aef5e">2.1. Matching a regex</a></li>
-<li><a href="#org2f1ba4e">2.2. When the state variable cannot be avoided</a></li>
+<li><a href="#orgdf76508">2.1. Matching a regex</a></li>
+<li><a href="#orge490178">2.2. When the state variable cannot be avoided</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org22d49b8" class="outline-2">
-<h2 id="org22d49b8"><span class="section-number-2">1.</span> Concurrency vs Parallelism</h2>
+<div id="outline-container-org6dd2340" class="outline-2">
+<h2 id="org6dd2340"><span class="section-number-2">1.</span> Concurrency vs Parallelism</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Concurrency: write a program to handle lot of things at once
@@ -39,12 +39,12 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-orgdcb5074" class="outline-2">
-<h2 id="orgdcb5074"><span class="section-number-2">2.</span> Use goroutines for states</h2>
+<div id="outline-container-orga0d598b" class="outline-2">
+<h2 id="orga0d598b"><span class="section-number-2">2.</span> Use goroutines for states</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-orgb3aef5e" class="outline-3">
-<h3 id="orgb3aef5e"><span class="section-number-3">2.1.</span> Matching a regex</h3>
+<div id="outline-container-orgdf76508" class="outline-3">
+<h3 id="orgdf76508"><span class="section-number-3">2.1.</span> Matching a regex</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>return if a given string matches a regex: start with <code>"</code>, contains arbitrary escape sequence and ends with <code>*</code></li>
@@ -101,98 +101,98 @@ clear logic: store states in the code
 </ul>
 </div>
 </div>
-<div id="outline-container-org2f1ba4e" class="outline-3">
-<h3 id="org2f1ba4e"><span class="section-number-3">2.2.</span> When the state variable cannot be avoided</h3>
+<div id="outline-container-orge490178" class="outline-3">
+<h3 id="orge490178"><span class="section-number-3">2.2.</span> When the state variable cannot be avoided</h3>
 <div class="outline-text-3" id="text-2-2">
 <ul class="org-ul">
 <li><p>
 the function needs to return the state
 </p>
 <div class="org-src-container">
-<pre class="src src-go"><span style="color: #51afef;">type</span> <span style="color: #ECBE7B;">quoter</span> <span style="color: #51afef;">struct</span> {
-    state <span style="color: #ECBE7B;">int</span>
-}
-
-<span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">q</span> *<span style="color: #ECBE7B;">quoter</span>) <span style="color: #c678dd;">Init</span>() {
-    r.state = <span style="color: #da8548; font-weight: bold;">0</span>
-}
-<span style="color: #5B6268;">// </span><span style="color: #5B6268;">proess each char based on current state</span>
-<span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">q</span> *<span style="color: #ECBE7B;">quoter</span>) <span style="color: #c678dd;">Write</span>(<span style="color: #dcaeea;">c</span> <span style="color: #ECBE7B;">rune</span>) <span style="color: #ECBE7B;">Status</span> {
-    <span style="color: #51afef;">switch</span> q.state {
-    <span style="color: #51afef;">case</span> <span style="color: #da8548; font-weight: bold;">0</span>:
-        <span style="color: #51afef;">if</span> c != <span style="color: #98be65;">'"'</span> {
-            <span style="color: #51afef;">return</span> BadInput
-        }
-        q.state = <span style="color: #da8548; font-weight: bold;">1</span>
-    <span style="color: #51afef;">case</span> <span style="color: #da8548; font-weight: bold;">1</span>:
-        <span style="color: #51afef;">if</span> c == <span style="color: #98be65;">'"'</span> {
-            <span style="color: #51afef;">return</span> Success
-        }
-        <span style="color: #51afef;">if</span> c == <span style="color: #98be65;">'\\'</span> {
-            q.state = <span style="color: #da8548; font-weight: bold;">2</span>
-        } <span style="color: #51afef;">else</span> {
-            q.state = <span style="color: #da8548; font-weight: bold;">1</span>
-        }
-    <span style="color: #51afef;">case</span> <span style="color: #da8548; font-weight: bold;">2</span>:
-        q.state = <span style="color: #da8548; font-weight: bold;">1</span>
-    }
-    <span style="color: #51afef;">return</span> NeedMoreInput
-}
+<pre class="src src-go"><span class="linenr"> 1: </span><span style="color: #51afef;">type</span> <span style="color: #ECBE7B;">quoter</span> <span style="color: #51afef;">struct</span> {
+<span class="linenr"> 2: </span>    state <span style="color: #ECBE7B;">int</span>
+<span class="linenr"> 3: </span>}
+<span class="linenr"> 4: </span>
+<span class="linenr"> 5: </span><span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">q</span> *<span style="color: #ECBE7B;">quoter</span>) <span style="color: #c678dd;">Init</span>() {
+<span class="linenr"> 6: </span>    r.state = <span style="color: #da8548; font-weight: bold;">0</span>
+<span class="linenr"> 7: </span>}
+<span class="linenr"> 8: </span><span style="color: #5B6268;">// </span><span style="color: #5B6268;">proess each char based on current state</span>
+<span class="linenr"> 9: </span><span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">q</span> *<span style="color: #ECBE7B;">quoter</span>) <span style="color: #c678dd;">Write</span>(<span style="color: #dcaeea;">c</span> <span style="color: #ECBE7B;">rune</span>) <span style="color: #ECBE7B;">Status</span> {
+<span class="linenr">10: </span>    <span style="color: #51afef;">switch</span> q.state {
+<span class="linenr">11: </span>    <span style="color: #51afef;">case</span> <span style="color: #da8548; font-weight: bold;">0</span>:
+<span class="linenr">12: </span>        <span style="color: #51afef;">if</span> c != <span style="color: #98be65;">'"'</span> {
+<span class="linenr">13: </span>            <span style="color: #51afef;">return</span> BadInput
+<span class="linenr">14: </span>        }
+<span class="linenr">15: </span>        q.state = <span style="color: #da8548; font-weight: bold;">1</span>
+<span class="linenr">16: </span>    <span style="color: #51afef;">case</span> <span style="color: #da8548; font-weight: bold;">1</span>:
+<span class="linenr">17: </span>        <span style="color: #51afef;">if</span> c == <span style="color: #98be65;">'"'</span> {
+<span class="linenr">18: </span>            <span style="color: #51afef;">return</span> Success
+<span class="linenr">19: </span>        }
+<span class="linenr">20: </span>        <span style="color: #51afef;">if</span> c == <span style="color: #98be65;">'\\'</span> {
+<span class="linenr">21: </span>            q.state = <span style="color: #da8548; font-weight: bold;">2</span>
+<span class="linenr">22: </span>        } <span style="color: #51afef;">else</span> {
+<span class="linenr">23: </span>            q.state = <span style="color: #da8548; font-weight: bold;">1</span>
+<span class="linenr">24: </span>        }
+<span class="linenr">25: </span>    <span style="color: #51afef;">case</span> <span style="color: #da8548; font-weight: bold;">2</span>:
+<span class="linenr">26: </span>        q.state = <span style="color: #da8548; font-weight: bold;">1</span>
+<span class="linenr">27: </span>    }
+<span class="linenr">28: </span>    <span style="color: #51afef;">return</span> NeedMoreInput
+<span class="linenr">29: </span>}
 </pre>
 </div></li>
 <li><p>
 use additional goroutines to hold states
 </p>
 <div class="org-src-container">
-<pre class="src src-go"><span style="color: #51afef;">type</span> <span style="color: #ECBE7B;">quoter</span> <span style="color: #51afef;">struct</span> {
-    char <span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">rune</span>
-    status <span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">Status</span>
-}
-<span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">q</span> *<span style="color: #ECBE7B;">quoter</span>) <span style="color: #c678dd;">Init</span>() {
-    q.char = <span style="color: #c678dd;">make</span>(<span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">rune</span>)
-    q.status = <span style="color: #c678dd;">make</span>(<span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">Status</span>)
-    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">need to make sure why and when the goroutine will exit</span>
-    <span style="color: #51afef;">go</span> q.<span style="color: #c678dd;">parse</span>()
-    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">blocks until it receives an initial status from parse()</span>
-    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">to ensure that parse() is ready, i.e., q.status = NeedMoreInput</span>
-    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">before Write() is called</span>
-    &lt;-q.status
-}
-<span style="color: #5B6268;">// </span><span style="color: #5B6268;">Write sends the next char to q.char, which will be receivecd by parse()</span>
-<span style="color: #5B6268;">// </span><span style="color: #5B6268;">the status is a public state accessible by the user</span>
-<span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">q</span> *<span style="color: #ECBE7B;">quoter</span>) <span style="color: #c678dd;">Write</span>(<span style="color: #dcaeea;">r</span> <span style="color: #ECBE7B;">rune</span>) <span style="color: #ECBE7B;">Status</span> {
-    q.char &lt;- c
-    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">wait for the result</span>
-    <span style="color: #51afef;">return</span> &lt;-q.status
-}
-<span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">q</span> *<span style="color: #ECBE7B;">quoteReader</span>) <span style="color: #c678dd;">parse</span>() {
-    <span style="color: #51afef;">if</span> q.<span style="color: #c678dd;">read</span>() != <span style="color: #98be65;">'"'</span> {
-        q.status &lt;- SyntaxError
-        <span style="color: #51afef;">return</span>
-    }
-    <span style="color: #51afef;">var</span> <span style="color: #dcaeea;">c</span> <span style="color: #ECBE7B;">rune</span>
-    <span style="color: #51afef;">for</span> c!= <span style="color: #98be65;">'"'</span> {
-        c = q.<span style="color: #c678dd;">read</span>()
-        <span style="color: #51afef;">if</span> c == <span style="color: #98be65;">'\\'</span> {
-            q.<span style="color: #c678dd;">read</span>()
-        }
-    }
-    q.status &lt;- Done
-}
-<span style="color: #5B6268;">// </span><span style="color: #5B6268;">a helper function used in parse() to return the next char in q.char</span>
-<span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">q</span> *<span style="color: #ECBE7B;">quoter</span>) <span style="color: #c678dd;">read</span>() <span style="color: #ECBE7B;">int</span> {
-    q.status &lt;- NeedMoreInput
-    <span style="color: #51afef;">return</span> &lt;- q.char
-}
-<span style="color: #51afef;">func</span> <span style="color: #c678dd;">main</span>() {
-    <span style="color: #dcaeea;">q</span> := &amp;<span style="color: #ECBE7B;">quoter</span>{}
-    q.<span style="color: #c678dd;">Init</span>()
-
-    <span style="color: #dcaeea;">input</span> := <span style="color: #98be65;">`"Hello, \"World\""`</span>
-    <span style="color: #51afef;">for</span> <span style="color: #dcaeea;">_</span>, <span style="color: #dcaeea;">c</span> := <span style="color: #51afef;">range</span> input {
-        <span style="color: #dcaeea;">status</span> := q.<span style="color: #c678dd;">Write</span>(c)
-    }
-}
+<pre class="src src-go"><span class="linenr"> 1: </span><span style="color: #51afef;">type</span> <span style="color: #ECBE7B;">quoter</span> <span style="color: #51afef;">struct</span> {
+<span class="linenr"> 2: </span>    char <span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">rune</span>
+<span class="linenr"> 3: </span>    status <span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">Status</span>
+<span class="linenr"> 4: </span>}
+<span class="linenr"> 5: </span><span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">q</span> *<span style="color: #ECBE7B;">quoter</span>) <span style="color: #c678dd;">Init</span>() {
+<span class="linenr"> 6: </span>    q.char = <span style="color: #c678dd;">make</span>(<span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">rune</span>)
+<span class="linenr"> 7: </span>    q.status = <span style="color: #c678dd;">make</span>(<span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">Status</span>)
+<span class="linenr"> 8: </span>    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">need to make sure why and when the goroutine will exit</span>
+<span class="linenr"> 9: </span>    <span style="color: #51afef;">go</span> q.<span style="color: #c678dd;">parse</span>()
+<span class="linenr">10: </span>    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">blocks until it receives an initial status from parse()</span>
+<span class="linenr">11: </span>    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">to ensure that parse() is ready, i.e., q.status = NeedMoreInput</span>
+<span class="linenr">12: </span>    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">before Write() is called</span>
+<span class="linenr">13: </span>    &lt;-q.status
+<span class="linenr">14: </span>}
+<span class="linenr">15: </span><span style="color: #5B6268;">// </span><span style="color: #5B6268;">Write sends the next char to q.char, which will be receivecd by parse()</span>
+<span class="linenr">16: </span><span style="color: #5B6268;">// </span><span style="color: #5B6268;">the status is a public state accessible by the user</span>
+<span class="linenr">17: </span><span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">q</span> *<span style="color: #ECBE7B;">quoter</span>) <span style="color: #c678dd;">Write</span>(<span style="color: #dcaeea;">r</span> <span style="color: #ECBE7B;">rune</span>) <span style="color: #ECBE7B;">Status</span> {
+<span class="linenr">18: </span>    q.char &lt;- c
+<span class="linenr">19: </span>    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">wait for the result</span>
+<span class="linenr">20: </span>    <span style="color: #51afef;">return</span> &lt;-q.status
+<span class="linenr">21: </span>}
+<span class="linenr">22: </span><span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">q</span> *<span style="color: #ECBE7B;">quoteReader</span>) <span style="color: #c678dd;">parse</span>() {
+<span class="linenr">23: </span>    <span style="color: #51afef;">if</span> q.<span style="color: #c678dd;">read</span>() != <span style="color: #98be65;">'"'</span> {
+<span class="linenr">24: </span>        q.status &lt;- SyntaxError
+<span class="linenr">25: </span>        <span style="color: #51afef;">return</span>
+<span class="linenr">26: </span>    }
+<span class="linenr">27: </span>    <span style="color: #51afef;">var</span> <span style="color: #dcaeea;">c</span> <span style="color: #ECBE7B;">rune</span>
+<span class="linenr">28: </span>    <span style="color: #51afef;">for</span> c!= <span style="color: #98be65;">'"'</span> {
+<span class="linenr">29: </span>        c = q.<span style="color: #c678dd;">read</span>()
+<span class="linenr">30: </span>        <span style="color: #51afef;">if</span> c == <span style="color: #98be65;">'\\'</span> {
+<span class="linenr">31: </span>            q.<span style="color: #c678dd;">read</span>()
+<span class="linenr">32: </span>        }
+<span class="linenr">33: </span>    }
+<span class="linenr">34: </span>    q.status &lt;- Done
+<span class="linenr">35: </span>}
+<span class="linenr">36: </span><span style="color: #5B6268;">// </span><span style="color: #5B6268;">a helper function used in parse() to return the next char in q.char</span>
+<span class="linenr">37: </span><span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">q</span> *<span style="color: #ECBE7B;">quoter</span>) <span style="color: #c678dd;">read</span>() <span style="color: #ECBE7B;">int</span> {
+<span class="linenr">38: </span>    q.status &lt;- NeedMoreInput
+<span class="linenr">39: </span>    <span style="color: #51afef;">return</span> &lt;- q.char
+<span class="linenr">40: </span>}
+<span class="linenr">41: </span><span style="color: #51afef;">func</span> <span style="color: #c678dd;">main</span>() {
+<span class="linenr">42: </span>    <span style="color: #dcaeea;">q</span> := &amp;<span style="color: #ECBE7B;">quoter</span>{}
+<span class="linenr">43: </span>    q.<span style="color: #c678dd;">Init</span>()
+<span class="linenr">44: </span>
+<span class="linenr">45: </span>    <span style="color: #dcaeea;">input</span> := <span style="color: #98be65;">`"Hello, \"World\""`</span>
+<span class="linenr">46: </span>    <span style="color: #51afef;">for</span> <span style="color: #dcaeea;">_</span>, <span style="color: #dcaeea;">c</span> := <span style="color: #51afef;">range</span> input {
+<span class="linenr">47: </span>        <span style="color: #dcaeea;">status</span> := q.<span style="color: #c678dd;">Write</span>(c)
+<span class="linenr">48: </span>    }
+<span class="linenr">49: </span>}
 </pre>
 </div></li>
 </ul>

@@ -6,7 +6,7 @@
 * Router
 - use the Reach [[https://reach.tech/router/][Reach Router]] library
 - URL -> Router -> render different components
-#+begin_src js -n
+  #+begin_src js -n
 <App>
   // conditional rendering based on curren url
   <Router>
@@ -16,7 +16,7 @@
     <NotFound default />
   </Router>
 </App>;
-#+end_src
+  #+end_src
 
 * Link
 - relative: src_js[:exports code]{<Link to="newpage">Click me</Link>}

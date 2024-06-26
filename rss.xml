@@ -4,7 +4,87 @@
 <title><![CDATA[org-static-blog]]></title>
 <description><![CDATA[org-static-blog]]></description>
 <link>https://chenyo-17.github.io/org-static-blog</link>
-<lastBuildDate>Tue, 25 Jun 2024 23:27:50 +0200</lastBuildDate>
+<lastBuildDate>Wed, 26 Jun 2024 22:45:53 +0200</lastBuildDate>
+<item>
+  <title><![CDATA[Watched: Argo (2012)]]></title>
+  <description><![CDATA[
+<nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org9f9987e">1. Why did I watch it</a></li>
+<li><a href="#org04d2aca">2. What is it about</a></li>
+<li><a href="#orgf75f771">3. Did I like it</a></li>
+</ul>
+</div>
+</nav>
+
+<figure id="org01a338e">
+<img src="https://miro.medium.com/v2/resize:fit:1100/format:webp/1*IFB2V5vjsVKtHcxBdCfQSQ.jpeg" alt="1*IFB2V5vjsVKtHcxBdCfQSQ.jpeg" align="center" width="300px">
+
+<figcaption><span class="figure-number">Figure 1: </span>Argo poster</figcaption>
+</figure>
+<div id="outline-container-org9f9987e" class="outline-2">
+<h2 id="org9f9987e"><span class="section-number-2">1.</span> Why did I watch it</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+This week, I found myself craving a movie with a &ldquo;Homeland&rdquo; theme.
+Then the name of Argo came to me.
+I saw its name a decade ago (I am too old!) on some movie magazine cover.
+</p>
+</div>
+</div>
+<div id="outline-container-org04d2aca" class="outline-2">
+<h2 id="org04d2aca"><span class="section-number-2">2.</span> What is it about</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+It has little thing to do with &ldquo;Homeland&rdquo;.
+Instead, it blends action, comedy and drama based on a true story, although non of any dramatic conflicts really happened in history afak.
+It is about how a selfless agent, backed by an entire intelligence system which behaved incredibly efficient, and an alliance which also behaved incredibly generous, escaped a group of compatriots, who also behaved incredibly brave, from a dangerous place.
+My boyfriend said it is quite &ldquo;Hitchcock&rdquo;.
+Every tension resolves safely in the end: the phone will be picked up at the last second, the plane will take off at the last second, even the plane tickets will magically show up at the last second (Swissair yeah!).
+</p>
+</div>
+</div>
+<div id="outline-container-orgf75f771" class="outline-2">
+<h2 id="orgf75f771"><span class="section-number-2">3.</span> Did I like it</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+I guess?
+The filming is good, as well as the narration and the performance.
+There were some moments where I was not fully convinced, but I accept them if that was the history
+What really amazed me was when I found the actor of Tony was also the director, and also wrote &ldquo;Good Will Hunting (1997)&rdquo;, what a genius!
+But I guessed I preferred &ldquo;Civil war (2024)&rdquo; (my last movie) to this one.
+The reason?
+</p>
+
+
+<figure id="orgd60b618">
+<img src="https://m.media-amazon.com/images/M/MV5BOTI0MzcxMTYtZDVkMy00NjY1LTgyMTYtZmUxN2M3NmQ2NWJhXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg" alt="MV5BOTI0MzcxMTYtZDVkMy00NjY1LTgyMTYtZmUxN2M3NmQ2NWJhXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg" align="center" width="300px">
+
+<figcaption><span class="figure-number">Figure 2: </span>Good Will Hunting poster</figcaption>
+</figure>
+
+
+
+<figure id="orgbe56d28">
+<img src="https://posterspy.com/wp-content/uploads/2024/04/Civil-War-Kirsten.jpg" alt="Civil-War-Kirsten.jpg" align="center" width="300px">
+
+<figcaption><span class="figure-number">Figure 3: </span>Civil War</figcaption>
+</figure>
+
+
+<p>
+I felt &ldquo;Argo&rdquo; could have delved deeper into the absurdities of war rather than solely focusing on a heroic narrative.
+</p>
+</div>
+</div>
+<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-movie-review.html">movie-review</a> </div>]]></description>
+  <category><![CDATA[movie-review]]></category>
+  <link>https://chenyo-17.github.io/org-static-blog/2024-06-26-watched:-argo.html</link>
+  <guid>https://chenyo-17.github.io/org-static-blog/2024-06-26-watched:-argo.html</guid>
+  <pubDate>Wed, 26 Jun 2024 21:37:00 +0200</pubDate>
+</item>
 <item>
   <title><![CDATA[Go patterns]]></title>
   <description><![CDATA[
@@ -12,18 +92,18 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org22d49b8">1. Concurrency vs Parallelism</a></li>
-<li><a href="#orgdcb5074">2. Use goroutines for states</a>
+<li><a href="#org6dd2340">1. Concurrency vs Parallelism</a></li>
+<li><a href="#orga0d598b">2. Use goroutines for states</a>
 <ul>
-<li><a href="#orgb3aef5e">2.1. Matching a regex</a></li>
-<li><a href="#org2f1ba4e">2.2. When the state variable cannot be avoided</a></li>
+<li><a href="#orgdf76508">2.1. Matching a regex</a></li>
+<li><a href="#orge490178">2.2. When the state variable cannot be avoided</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org22d49b8" class="outline-2">
-<h2 id="org22d49b8"><span class="section-number-2">1.</span> Concurrency vs Parallelism</h2>
+<div id="outline-container-org6dd2340" class="outline-2">
+<h2 id="org6dd2340"><span class="section-number-2">1.</span> Concurrency vs Parallelism</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Concurrency: write a program to handle lot of things at once
@@ -34,12 +114,12 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-orgdcb5074" class="outline-2">
-<h2 id="orgdcb5074"><span class="section-number-2">2.</span> Use goroutines for states</h2>
+<div id="outline-container-orga0d598b" class="outline-2">
+<h2 id="orga0d598b"><span class="section-number-2">2.</span> Use goroutines for states</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-orgb3aef5e" class="outline-3">
-<h3 id="orgb3aef5e"><span class="section-number-3">2.1.</span> Matching a regex</h3>
+<div id="outline-container-orgdf76508" class="outline-3">
+<h3 id="orgdf76508"><span class="section-number-3">2.1.</span> Matching a regex</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>return if a given string matches a regex: start with <code>"</code>, contains arbitrary escape sequence and ends with <code>*</code></li>
@@ -96,98 +176,98 @@ clear logic: store states in the code
 </ul>
 </div>
 </div>
-<div id="outline-container-org2f1ba4e" class="outline-3">
-<h3 id="org2f1ba4e"><span class="section-number-3">2.2.</span> When the state variable cannot be avoided</h3>
+<div id="outline-container-orge490178" class="outline-3">
+<h3 id="orge490178"><span class="section-number-3">2.2.</span> When the state variable cannot be avoided</h3>
 <div class="outline-text-3" id="text-2-2">
 <ul class="org-ul">
 <li><p>
 the function needs to return the state
 </p>
 <div class="org-src-container">
-<pre class="src src-go"><span style="color: #51afef;">type</span> <span style="color: #ECBE7B;">quoter</span> <span style="color: #51afef;">struct</span> {
-    state <span style="color: #ECBE7B;">int</span>
-}
-
-<span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">q</span> *<span style="color: #ECBE7B;">quoter</span>) <span style="color: #c678dd;">Init</span>() {
-    r.state = <span style="color: #da8548; font-weight: bold;">0</span>
-}
-<span style="color: #5B6268;">// </span><span style="color: #5B6268;">proess each char based on current state</span>
-<span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">q</span> *<span style="color: #ECBE7B;">quoter</span>) <span style="color: #c678dd;">Write</span>(<span style="color: #dcaeea;">c</span> <span style="color: #ECBE7B;">rune</span>) <span style="color: #ECBE7B;">Status</span> {
-    <span style="color: #51afef;">switch</span> q.state {
-    <span style="color: #51afef;">case</span> <span style="color: #da8548; font-weight: bold;">0</span>:
-        <span style="color: #51afef;">if</span> c != <span style="color: #98be65;">'"'</span> {
-            <span style="color: #51afef;">return</span> BadInput
-        }
-        q.state = <span style="color: #da8548; font-weight: bold;">1</span>
-    <span style="color: #51afef;">case</span> <span style="color: #da8548; font-weight: bold;">1</span>:
-        <span style="color: #51afef;">if</span> c == <span style="color: #98be65;">'"'</span> {
-            <span style="color: #51afef;">return</span> Success
-        }
-        <span style="color: #51afef;">if</span> c == <span style="color: #98be65;">'\\'</span> {
-            q.state = <span style="color: #da8548; font-weight: bold;">2</span>
-        } <span style="color: #51afef;">else</span> {
-            q.state = <span style="color: #da8548; font-weight: bold;">1</span>
-        }
-    <span style="color: #51afef;">case</span> <span style="color: #da8548; font-weight: bold;">2</span>:
-        q.state = <span style="color: #da8548; font-weight: bold;">1</span>
-    }
-    <span style="color: #51afef;">return</span> NeedMoreInput
-}
+<pre class="src src-go"><span class="linenr"> 1: </span><span style="color: #51afef;">type</span> <span style="color: #ECBE7B;">quoter</span> <span style="color: #51afef;">struct</span> {
+<span class="linenr"> 2: </span>    state <span style="color: #ECBE7B;">int</span>
+<span class="linenr"> 3: </span>}
+<span class="linenr"> 4: </span>
+<span class="linenr"> 5: </span><span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">q</span> *<span style="color: #ECBE7B;">quoter</span>) <span style="color: #c678dd;">Init</span>() {
+<span class="linenr"> 6: </span>    r.state = <span style="color: #da8548; font-weight: bold;">0</span>
+<span class="linenr"> 7: </span>}
+<span class="linenr"> 8: </span><span style="color: #5B6268;">// </span><span style="color: #5B6268;">proess each char based on current state</span>
+<span class="linenr"> 9: </span><span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">q</span> *<span style="color: #ECBE7B;">quoter</span>) <span style="color: #c678dd;">Write</span>(<span style="color: #dcaeea;">c</span> <span style="color: #ECBE7B;">rune</span>) <span style="color: #ECBE7B;">Status</span> {
+<span class="linenr">10: </span>    <span style="color: #51afef;">switch</span> q.state {
+<span class="linenr">11: </span>    <span style="color: #51afef;">case</span> <span style="color: #da8548; font-weight: bold;">0</span>:
+<span class="linenr">12: </span>        <span style="color: #51afef;">if</span> c != <span style="color: #98be65;">'"'</span> {
+<span class="linenr">13: </span>            <span style="color: #51afef;">return</span> BadInput
+<span class="linenr">14: </span>        }
+<span class="linenr">15: </span>        q.state = <span style="color: #da8548; font-weight: bold;">1</span>
+<span class="linenr">16: </span>    <span style="color: #51afef;">case</span> <span style="color: #da8548; font-weight: bold;">1</span>:
+<span class="linenr">17: </span>        <span style="color: #51afef;">if</span> c == <span style="color: #98be65;">'"'</span> {
+<span class="linenr">18: </span>            <span style="color: #51afef;">return</span> Success
+<span class="linenr">19: </span>        }
+<span class="linenr">20: </span>        <span style="color: #51afef;">if</span> c == <span style="color: #98be65;">'\\'</span> {
+<span class="linenr">21: </span>            q.state = <span style="color: #da8548; font-weight: bold;">2</span>
+<span class="linenr">22: </span>        } <span style="color: #51afef;">else</span> {
+<span class="linenr">23: </span>            q.state = <span style="color: #da8548; font-weight: bold;">1</span>
+<span class="linenr">24: </span>        }
+<span class="linenr">25: </span>    <span style="color: #51afef;">case</span> <span style="color: #da8548; font-weight: bold;">2</span>:
+<span class="linenr">26: </span>        q.state = <span style="color: #da8548; font-weight: bold;">1</span>
+<span class="linenr">27: </span>    }
+<span class="linenr">28: </span>    <span style="color: #51afef;">return</span> NeedMoreInput
+<span class="linenr">29: </span>}
 </pre>
 </div></li>
 <li><p>
 use additional goroutines to hold states
 </p>
 <div class="org-src-container">
-<pre class="src src-go"><span style="color: #51afef;">type</span> <span style="color: #ECBE7B;">quoter</span> <span style="color: #51afef;">struct</span> {
-    char <span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">rune</span>
-    status <span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">Status</span>
-}
-<span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">q</span> *<span style="color: #ECBE7B;">quoter</span>) <span style="color: #c678dd;">Init</span>() {
-    q.char = <span style="color: #c678dd;">make</span>(<span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">rune</span>)
-    q.status = <span style="color: #c678dd;">make</span>(<span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">Status</span>)
-    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">need to make sure why and when the goroutine will exit</span>
-    <span style="color: #51afef;">go</span> q.<span style="color: #c678dd;">parse</span>()
-    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">blocks until it receives an initial status from parse()</span>
-    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">to ensure that parse() is ready, i.e., q.status = NeedMoreInput</span>
-    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">before Write() is called</span>
-    &lt;-q.status
-}
-<span style="color: #5B6268;">// </span><span style="color: #5B6268;">Write sends the next char to q.char, which will be receivecd by parse()</span>
-<span style="color: #5B6268;">// </span><span style="color: #5B6268;">the status is a public state accessible by the user</span>
-<span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">q</span> *<span style="color: #ECBE7B;">quoter</span>) <span style="color: #c678dd;">Write</span>(<span style="color: #dcaeea;">r</span> <span style="color: #ECBE7B;">rune</span>) <span style="color: #ECBE7B;">Status</span> {
-    q.char &lt;- c
-    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">wait for the result</span>
-    <span style="color: #51afef;">return</span> &lt;-q.status
-}
-<span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">q</span> *<span style="color: #ECBE7B;">quoteReader</span>) <span style="color: #c678dd;">parse</span>() {
-    <span style="color: #51afef;">if</span> q.<span style="color: #c678dd;">read</span>() != <span style="color: #98be65;">'"'</span> {
-        q.status &lt;- SyntaxError
-        <span style="color: #51afef;">return</span>
-    }
-    <span style="color: #51afef;">var</span> <span style="color: #dcaeea;">c</span> <span style="color: #ECBE7B;">rune</span>
-    <span style="color: #51afef;">for</span> c!= <span style="color: #98be65;">'"'</span> {
-        c = q.<span style="color: #c678dd;">read</span>()
-        <span style="color: #51afef;">if</span> c == <span style="color: #98be65;">'\\'</span> {
-            q.<span style="color: #c678dd;">read</span>()
-        }
-    }
-    q.status &lt;- Done
-}
-<span style="color: #5B6268;">// </span><span style="color: #5B6268;">a helper function used in parse() to return the next char in q.char</span>
-<span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">q</span> *<span style="color: #ECBE7B;">quoter</span>) <span style="color: #c678dd;">read</span>() <span style="color: #ECBE7B;">int</span> {
-    q.status &lt;- NeedMoreInput
-    <span style="color: #51afef;">return</span> &lt;- q.char
-}
-<span style="color: #51afef;">func</span> <span style="color: #c678dd;">main</span>() {
-    <span style="color: #dcaeea;">q</span> := &amp;<span style="color: #ECBE7B;">quoter</span>{}
-    q.<span style="color: #c678dd;">Init</span>()
-
-    <span style="color: #dcaeea;">input</span> := <span style="color: #98be65;">`"Hello, \"World\""`</span>
-    <span style="color: #51afef;">for</span> <span style="color: #dcaeea;">_</span>, <span style="color: #dcaeea;">c</span> := <span style="color: #51afef;">range</span> input {
-        <span style="color: #dcaeea;">status</span> := q.<span style="color: #c678dd;">Write</span>(c)
-    }
-}
+<pre class="src src-go"><span class="linenr"> 1: </span><span style="color: #51afef;">type</span> <span style="color: #ECBE7B;">quoter</span> <span style="color: #51afef;">struct</span> {
+<span class="linenr"> 2: </span>    char <span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">rune</span>
+<span class="linenr"> 3: </span>    status <span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">Status</span>
+<span class="linenr"> 4: </span>}
+<span class="linenr"> 5: </span><span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">q</span> *<span style="color: #ECBE7B;">quoter</span>) <span style="color: #c678dd;">Init</span>() {
+<span class="linenr"> 6: </span>    q.char = <span style="color: #c678dd;">make</span>(<span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">rune</span>)
+<span class="linenr"> 7: </span>    q.status = <span style="color: #c678dd;">make</span>(<span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">Status</span>)
+<span class="linenr"> 8: </span>    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">need to make sure why and when the goroutine will exit</span>
+<span class="linenr"> 9: </span>    <span style="color: #51afef;">go</span> q.<span style="color: #c678dd;">parse</span>()
+<span class="linenr">10: </span>    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">blocks until it receives an initial status from parse()</span>
+<span class="linenr">11: </span>    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">to ensure that parse() is ready, i.e., q.status = NeedMoreInput</span>
+<span class="linenr">12: </span>    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">before Write() is called</span>
+<span class="linenr">13: </span>    &lt;-q.status
+<span class="linenr">14: </span>}
+<span class="linenr">15: </span><span style="color: #5B6268;">// </span><span style="color: #5B6268;">Write sends the next char to q.char, which will be receivecd by parse()</span>
+<span class="linenr">16: </span><span style="color: #5B6268;">// </span><span style="color: #5B6268;">the status is a public state accessible by the user</span>
+<span class="linenr">17: </span><span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">q</span> *<span style="color: #ECBE7B;">quoter</span>) <span style="color: #c678dd;">Write</span>(<span style="color: #dcaeea;">r</span> <span style="color: #ECBE7B;">rune</span>) <span style="color: #ECBE7B;">Status</span> {
+<span class="linenr">18: </span>    q.char &lt;- c
+<span class="linenr">19: </span>    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">wait for the result</span>
+<span class="linenr">20: </span>    <span style="color: #51afef;">return</span> &lt;-q.status
+<span class="linenr">21: </span>}
+<span class="linenr">22: </span><span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">q</span> *<span style="color: #ECBE7B;">quoteReader</span>) <span style="color: #c678dd;">parse</span>() {
+<span class="linenr">23: </span>    <span style="color: #51afef;">if</span> q.<span style="color: #c678dd;">read</span>() != <span style="color: #98be65;">'"'</span> {
+<span class="linenr">24: </span>        q.status &lt;- SyntaxError
+<span class="linenr">25: </span>        <span style="color: #51afef;">return</span>
+<span class="linenr">26: </span>    }
+<span class="linenr">27: </span>    <span style="color: #51afef;">var</span> <span style="color: #dcaeea;">c</span> <span style="color: #ECBE7B;">rune</span>
+<span class="linenr">28: </span>    <span style="color: #51afef;">for</span> c!= <span style="color: #98be65;">'"'</span> {
+<span class="linenr">29: </span>        c = q.<span style="color: #c678dd;">read</span>()
+<span class="linenr">30: </span>        <span style="color: #51afef;">if</span> c == <span style="color: #98be65;">'\\'</span> {
+<span class="linenr">31: </span>            q.<span style="color: #c678dd;">read</span>()
+<span class="linenr">32: </span>        }
+<span class="linenr">33: </span>    }
+<span class="linenr">34: </span>    q.status &lt;- Done
+<span class="linenr">35: </span>}
+<span class="linenr">36: </span><span style="color: #5B6268;">// </span><span style="color: #5B6268;">a helper function used in parse() to return the next char in q.char</span>
+<span class="linenr">37: </span><span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">q</span> *<span style="color: #ECBE7B;">quoter</span>) <span style="color: #c678dd;">read</span>() <span style="color: #ECBE7B;">int</span> {
+<span class="linenr">38: </span>    q.status &lt;- NeedMoreInput
+<span class="linenr">39: </span>    <span style="color: #51afef;">return</span> &lt;- q.char
+<span class="linenr">40: </span>}
+<span class="linenr">41: </span><span style="color: #51afef;">func</span> <span style="color: #c678dd;">main</span>() {
+<span class="linenr">42: </span>    <span style="color: #dcaeea;">q</span> := &amp;<span style="color: #ECBE7B;">quoter</span>{}
+<span class="linenr">43: </span>    q.<span style="color: #c678dd;">Init</span>()
+<span class="linenr">44: </span>
+<span class="linenr">45: </span>    <span style="color: #dcaeea;">input</span> := <span style="color: #98be65;">`"Hello, \"World\""`</span>
+<span class="linenr">46: </span>    <span style="color: #51afef;">for</span> <span style="color: #dcaeea;">_</span>, <span style="color: #dcaeea;">c</span> := <span style="color: #51afef;">range</span> input {
+<span class="linenr">47: </span>        <span style="color: #dcaeea;">status</span> := q.<span style="color: #c678dd;">Write</span>(c)
+<span class="linenr">48: </span>    }
+<span class="linenr">49: </span>}
 </pre>
 </div></li>
 </ul>
@@ -333,26 +413,27 @@ In the end, I need to append a new rule to make the RPC work.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgb99e571">1. Router</a></li>
-<li><a href="#org969f609">2. Link</a></li>
-<li><a href="#orge15879f">3. Workshop 3</a>
+<li><a href="#org8f180b9">1. Router</a></li>
+<li><a href="#org95e4243">2. Link</a></li>
+<li><a href="#org2dca446">3. Workshop 3</a>
 <ul>
-<li><a href="#org8897e96">3.1. Structure</a></li>
-<li><a href="#org2cfdc7d">3.2. States</a></li>
-<li><a href="#orgd12543a">3.3. Props</a></li>
-<li><a href="#org40d784e">3.4. Why passing down the update function in props 1, 4, 6?</a></li>
+<li><a href="#orgd8dfa4e">3.1. Structure</a></li>
+<li><a href="#org0c491fd">3.2. States</a></li>
+<li><a href="#orgd4e189a">3.3. Props</a></li>
+<li><a href="#org77e32c7">3.4. Why passing down the update function in props 1, 4, 6?</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-orgb99e571" class="outline-2">
-<h2 id="orgb99e571"><span class="section-number-2">1.</span> Router</h2>
+<div id="outline-container-org8f180b9" class="outline-2">
+<h2 id="org8f180b9"><span class="section-number-2">1.</span> Router</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>use the Reach <a href="https://reach.tech/router/">Reach Router</a> library</li>
-<li>URL -&gt; Router -&gt; render different components</li>
-</ul>
+<li><p>
+URL -&gt; Router -&gt; render different components
+</p>
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr">1: </span>&lt;App&gt;
 <span class="linenr">2: </span>  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">conditional rendering based on curren url</span>
@@ -364,11 +445,12 @@ In the end, I need to append a new rule to make the RPC work.
 <span class="linenr">8: </span>  &lt;/Router&gt;
 <span class="linenr">9: </span>&lt;/App&gt;;
 </pre>
+</div></li>
+</ul>
 </div>
 </div>
-</div>
-<div id="outline-container-org969f609" class="outline-2">
-<h2 id="org969f609"><span class="section-number-2">2.</span> Link</h2>
+<div id="outline-container-org95e4243" class="outline-2">
+<h2 id="org95e4243"><span class="section-number-2">2.</span> Link</h2>
 <div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li>relative: <code class="src src-js">&lt;Link to=<span style="color: #98be65;">"newpage"</span>&gt;Click me&lt;/Link&gt;</code></li>
@@ -376,23 +458,23 @@ In the end, I need to append a new rule to make the RPC work.
 </ul>
 </div>
 </div>
-<div id="outline-container-orge15879f" class="outline-2">
-<h2 id="orge15879f"><span class="section-number-2">3.</span> Workshop 3</h2>
+<div id="outline-container-org2dca446" class="outline-2">
+<h2 id="org2dca446"><span class="section-number-2">3.</span> Workshop 3</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org8897e96" class="outline-3">
-<h3 id="org8897e96"><span class="section-number-3">3.1.</span> Structure</h3>
+<div id="outline-container-orgd8dfa4e" class="outline-3">
+<h3 id="orgd8dfa4e"><span class="section-number-3">3.1.</span> Structure</h3>
 <div class="outline-text-3" id="text-3-1">
 
-<figure id="org2e27230">
+<figure id="org859473f">
 <img src="./static/workshop-3-structure.png" alt="workshop-3-structure.png" align="center" width="600px">
 
 <figcaption><span class="figure-number">Figure 1: </span>The Catbook structure in workshop 3</figcaption>
 </figure>
 </div>
 </div>
-<div id="outline-container-org2cfdc7d" class="outline-3">
-<h3 id="org2cfdc7d"><span class="section-number-3">3.2.</span> States</h3>
+<div id="outline-container-org0c491fd" class="outline-3">
+<h3 id="org0c491fd"><span class="section-number-3">3.2.</span> States</h3>
 <div class="outline-text-3" id="text-3-2">
 <table>
 
@@ -424,8 +506,8 @@ In the end, I need to append a new rule to make the RPC work.
 </table>
 </div>
 </div>
-<div id="outline-container-orgd12543a" class="outline-3">
-<h3 id="orgd12543a"><span class="section-number-3">3.3.</span> Props</h3>
+<div id="outline-container-orgd4e189a" class="outline-3">
+<h3 id="orgd4e189a"><span class="section-number-3">3.3.</span> Props</h3>
 <div class="outline-text-3" id="text-3-3">
 <table>
 
@@ -477,8 +559,8 @@ In the end, I need to append a new rule to make the RPC work.
 </table>
 </div>
 </div>
-<div id="outline-container-org40d784e" class="outline-3">
-<h3 id="org40d784e"><span class="section-number-3">3.4.</span> Why passing down the update function in props 1, 4, 6?</h3>
+<div id="outline-container-org77e32c7" class="outline-3">
+<h3 id="org77e32c7"><span class="section-number-3">3.4.</span> Why passing down the update function in props 1, 4, 6?</h3>
 <div class="outline-text-3" id="text-3-4">
 <ul class="org-ul">
 <li>To share the parent states, i.e., <code>stories</code> and <code>comments</code> to child component. Since the post action happens in the child component, we need a way to automatically update the states to see new contents immediately.</li>
