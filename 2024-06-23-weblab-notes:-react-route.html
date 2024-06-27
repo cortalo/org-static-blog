@@ -17,21 +17,21 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org8f180b9">1. Router</a></li>
-<li><a href="#org95e4243">2. Link</a></li>
-<li><a href="#org2dca446">3. Workshop 3</a>
+<li><a href="#orgc75ded8">1. Router</a></li>
+<li><a href="#org7e1c17e">2. Link</a></li>
+<li><a href="#orgd178392">3. Workshop 3</a>
 <ul>
-<li><a href="#orgd8dfa4e">3.1. Structure</a></li>
-<li><a href="#org0c491fd">3.2. States</a></li>
-<li><a href="#orgd4e189a">3.3. Props</a></li>
-<li><a href="#org77e32c7">3.4. Why passing down the update function in props 1, 4, 6?</a></li>
+<li><a href="#orga56a2a6">3.1. Structure</a></li>
+<li><a href="#org1155164">3.2. States</a></li>
+<li><a href="#org65b4752">3.3. Props</a></li>
+<li><a href="#org41099cf">3.4. Why passing down the update function in props 1, 4, 6?</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org8f180b9" class="outline-2">
-<h2 id="org8f180b9"><span class="section-number-2">1.</span> Router</h2>
+<div id="outline-container-orgc75ded8" class="outline-2">
+<h2 id="orgc75ded8"><span class="section-number-2">1.</span> Router</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>use the Reach <a href="https://reach.tech/router/">Reach Router</a> library</li>
@@ -53,8 +53,8 @@ URL -&gt; Router -&gt; render different components
 </ul>
 </div>
 </div>
-<div id="outline-container-org95e4243" class="outline-2">
-<h2 id="org95e4243"><span class="section-number-2">2.</span> Link</h2>
+<div id="outline-container-org7e1c17e" class="outline-2">
+<h2 id="org7e1c17e"><span class="section-number-2">2.</span> Link</h2>
 <div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li>relative: <code class="src src-js">&lt;Link to=<span style="color: #98be65;">"newpage"</span>&gt;Click me&lt;/Link&gt;</code></li>
@@ -62,23 +62,23 @@ URL -&gt; Router -&gt; render different components
 </ul>
 </div>
 </div>
-<div id="outline-container-org2dca446" class="outline-2">
-<h2 id="org2dca446"><span class="section-number-2">3.</span> Workshop 3</h2>
+<div id="outline-container-orgd178392" class="outline-2">
+<h2 id="orgd178392"><span class="section-number-2">3.</span> Workshop 3</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-orgd8dfa4e" class="outline-3">
-<h3 id="orgd8dfa4e"><span class="section-number-3">3.1.</span> Structure</h3>
+<div id="outline-container-orga56a2a6" class="outline-3">
+<h3 id="orga56a2a6"><span class="section-number-3">3.1.</span> Structure</h3>
 <div class="outline-text-3" id="text-3-1">
 
-<figure id="org859473f">
+<figure id="org9a1427d">
 <img src="./static/workshop-3-structure.png" alt="workshop-3-structure.png" align="center" width="600px">
 
 <figcaption><span class="figure-number">Figure 1: </span>The Catbook structure in workshop 3</figcaption>
 </figure>
 </div>
 </div>
-<div id="outline-container-org0c491fd" class="outline-3">
-<h3 id="org0c491fd"><span class="section-number-3">3.2.</span> States</h3>
+<div id="outline-container-org1155164" class="outline-3">
+<h3 id="org1155164"><span class="section-number-3">3.2.</span> States</h3>
 <div class="outline-text-3" id="text-3-2">
 <table>
 
@@ -110,8 +110,8 @@ URL -&gt; Router -&gt; render different components
 </table>
 </div>
 </div>
-<div id="outline-container-orgd4e189a" class="outline-3">
-<h3 id="orgd4e189a"><span class="section-number-3">3.3.</span> Props</h3>
+<div id="outline-container-org65b4752" class="outline-3">
+<h3 id="org65b4752"><span class="section-number-3">3.3.</span> Props</h3>
 <div class="outline-text-3" id="text-3-3">
 <table>
 
@@ -163,8 +163,8 @@ URL -&gt; Router -&gt; render different components
 </table>
 </div>
 </div>
-<div id="outline-container-org77e32c7" class="outline-3">
-<h3 id="org77e32c7"><span class="section-number-3">3.4.</span> Why passing down the update function in props 1, 4, 6?</h3>
+<div id="outline-container-org41099cf" class="outline-3">
+<h3 id="org41099cf"><span class="section-number-3">3.4.</span> Why passing down the update function in props 1, 4, 6?</h3>
 <div class="outline-text-3" id="text-3-4">
 <ul class="org-ul">
 <li>To share the parent states, i.e., <code>stories</code> and <code>comments</code> to child component. Since the post action happens in the child component, we need a way to automatically update the states to see new contents immediately.</li>
