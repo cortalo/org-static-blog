@@ -30,6 +30,7 @@ There were some moments where I was not fully convinced, but I accept them if th
 What really amazed me was when I found the actor of Tony was also the director, and also wrote "Good Will Hunting (1997)", what a genius!
 But I guessed I preferred "Civil war (2024)" (my last movie) to this one.
 The reason?
+I felt "Argo" could have delved deeper into the absurdities of war rather than solely focusing on a heroic narrative.
 
 #+CAPTION: Good Will Hunting poster
 #+ATTR_HTML: :align center
@@ -37,10 +38,9 @@ The reason?
 [[https://m.media-amazon.com/images/M/MV5BOTI0MzcxMTYtZDVkMy00NjY1LTgyMTYtZmUxN2M3NmQ2NWJhXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg]]
 
 
-#+CAPTION: Civil War
+#+CAPTION: Civil War poster
 #+ATTR_HTML: :align center
 #+ATTR_HTML: :width 300px
 [[https://posterspy.com/wp-content/uploads/2024/04/Civil-War-Kirsten.jpg]]
 
 
-I felt "Argo" could have delved deeper into the absurdities of war rather than solely focusing on a heroic narrative.

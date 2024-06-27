@@ -142,3 +142,154 @@ func main() {
 	}
 }
   #+end_src
+- check goroutine blockage
+  - ~Ctrl-\~ sends ~SIGQUIT~
+  - use the HTTP server's ~/debug/pprof/goroutine~ if importing ~net/http~
+
+
+* Pattern 1: publish/subscribe server
+- the information goes one way: server -> client
+- close a channel to signal no new values will be sent
+- prefer ~defer~ when unlocking the mutex
+  #+begin_src go -n
+type Server struct {
+	mu  sync.Mutex // protect sub
+	sub map[chan<- Event]bool  // whether a channel should be closed
+}
+func (s *Server) Init() {
+	s.sub = make(map[chan<- Event]bool)
+}
+// publish an event to all subscribed channel
+func (s *Server) Publish(e Event) {
+	s.mu.Lock()  // each method could be called many clients
+	defer s.mu.Unlock()
+	for c := range s.sub {
+		// if a goroutine consumes the channel events too slow
+		// then a new event publish has to wait before it can send to the channel
+		// can add channel buffer
+		c <- e
+	}
+}
+// a channel starts to subscribe
+func (s *Server) Subscribe(c chan<- Event) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	if s.sub[c] {
+		panic("pubsub: already subscribed") // the mutex wil also be unlocked with defer
+	}
+	s.sub[c] = true
+}
+// a channel cancels the subscription
+func (s *Server) Cancel(c chan<- Event) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	if !s.sub[c] {
+		panic("pubsub: not subscribed")
+	}
+	close(c)
+	delete(s.sub, c)
+}
+  #+end_src
+
+** Options for slow goroutines
+- slow down event generation
+- drop events if it cannot be sent, e.g., ~os/signal~, ~runtime/pprof~
+- queue events, e.g., add a ~helper~ between the server and each client, which also separates the concerns
+  #+begin_src go -n
+func helper(in <-chan Event, out chan<- Event) {
+	var q []Event
+	// if the in is closed, flash out the pending events in q
+	// and close out
+	for in != nil || len(q) > 0 {
+		// decide whether and what to send
+		var sendOut chan<- Event
+		var next Event
+		if len(q) > 0 {
+			sendOut = out
+			next = q[0]
+		}
+		select {
+		case e, ok := <-in: // never reaches here after in = nil
+			// ok tells whether in is closed
+			if !ok {
+				in = nil
+				break
+			}
+			q = append(q, e)
+		case sendOut <- next: // if len(q) == 0, sendOut = nil
+			q = q[1:]
+		}
+	}
+	close(out)
+}
+  #+end_src
+- convert mutexes into goroutines, not suitable for Raft where state transition is complex
+ #+begin_src go -n
+type Server struct {
+	publish   chan Event
+	subscribe chan subReq
+	cancel    chan subReq
+}
+type subReq struct {
+	c  chan<- Event
+	// a signal of whether an operation succeeds
+	ok chan bool
+}
+
+func (s *Server) Init() {
+	s.publish = make(chan Event)
+	s.subscribe = make(chan subReq)
+	s.cancel = make(chan subReq)
+	go s.loop()
+}
+func (s *Server) Publish(e Event) {
+	s.publish <- e
+}
+func (s *Server) Subscribe(c chan<- Event) {
+	r := subReq{c: c, ok: make(chan bool)}
+	s.subscribe <- r
+	if !<-r.ok {
+		panic("pubsub: already subscribed")
+	}
+}
+func (s *Server) Cancel(c chan<- Event) {
+	r := subReq{c: c, ok: make(chan bool)}
+	s.cancel <- r
+	if !<-r.ok {
+		panic("pubusb: not subscribed")
+	}
+}
+func (s *Server) loop() {
+	// now sub is a local variable, no lock is needed
+	// sub maps from a subscribed channel to a helper channel
+	sub := make(map[chan<- Event]chan<- Event)
+	for {
+		select {
+		case e := <-s.publish:
+			for _, h := range sub {
+				// the event is published to a helper channel
+				h <- e
+			}
+		case r := <-s.subscribe:
+			// the helper channel exists
+			if sub[r.c] != nil {
+				r.ok <- false
+				break
+			}
+			h = make(chan Event)
+			go helper(h, r.c)
+			sub[r.c] = h
+			r.ok <- true
+		case c := <-s.cancel:
+			if !sub[r.c] == nil{
+				r.ok <- false
+				break
+			}
+			// close the helper channel
+			close(sub[r.c])
+			delete(sub, r.c)
+			r.ok <- true
+		}
+	}
+}
+ #+end_src

@@ -17,18 +17,23 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org6dd2340">1. Concurrency vs Parallelism</a></li>
-<li><a href="#orga0d598b">2. Use goroutines for states</a>
+<li><a href="#org7a6a38c">1. Concurrency vs Parallelism</a></li>
+<li><a href="#org02820c9">2. Use goroutines for states</a>
 <ul>
-<li><a href="#orgdf76508">2.1. Matching a regex</a></li>
-<li><a href="#orge490178">2.2. When the state variable cannot be avoided</a></li>
+<li><a href="#org9b5e287">2.1. Matching a regex</a></li>
+<li><a href="#org900ec61">2.2. When the state variable cannot be avoided</a></li>
+</ul>
+</li>
+<li><a href="#orgf2735c2">3. Pattern 1: publish/subscribe server</a>
+<ul>
+<li><a href="#orgfe8d2e6">3.1. Options for slow goroutines</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org6dd2340" class="outline-2">
-<h2 id="org6dd2340"><span class="section-number-2">1.</span> Concurrency vs Parallelism</h2>
+<div id="outline-container-org7a6a38c" class="outline-2">
+<h2 id="org7a6a38c"><span class="section-number-2">1.</span> Concurrency vs Parallelism</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Concurrency: write a program to handle lot of things at once
@@ -39,12 +44,12 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-orga0d598b" class="outline-2">
-<h2 id="orga0d598b"><span class="section-number-2">2.</span> Use goroutines for states</h2>
+<div id="outline-container-org02820c9" class="outline-2">
+<h2 id="org02820c9"><span class="section-number-2">2.</span> Use goroutines for states</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-orgdf76508" class="outline-3">
-<h3 id="orgdf76508"><span class="section-number-3">2.1.</span> Matching a regex</h3>
+<div id="outline-container-org9b5e287" class="outline-3">
+<h3 id="org9b5e287"><span class="section-number-3">2.1.</span> Matching a regex</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>return if a given string matches a regex: start with <code>"</code>, contains arbitrary escape sequence and ends with <code>*</code></li>
@@ -101,8 +106,8 @@ clear logic: store states in the code
 </ul>
 </div>
 </div>
-<div id="outline-container-orge490178" class="outline-3">
-<h3 id="orge490178"><span class="section-number-3">2.2.</span> When the state variable cannot be avoided</h3>
+<div id="outline-container-org900ec61" class="outline-3">
+<h3 id="org900ec61"><span class="section-number-3">2.2.</span> When the state variable cannot be avoided</h3>
 <div class="outline-text-3" id="text-2-2">
 <ul class="org-ul">
 <li><p>
@@ -193,6 +198,177 @@ use additional goroutines to hold states
 <span class="linenr">47: </span>        <span style="color: #dcaeea;">status</span> := q.<span style="color: #c678dd;">Write</span>(c)
 <span class="linenr">48: </span>    }
 <span class="linenr">49: </span>}
+</pre>
+</div></li>
+<li>check goroutine blockage
+<ul class="org-ul">
+<li><code>Ctrl-\</code> sends <code>SIGQUIT</code></li>
+<li>use the HTTP server&rsquo;s <code>/debug/pprof/goroutine</code> if importing <code>net/http</code></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf2735c2" class="outline-2">
+<h2 id="orgf2735c2"><span class="section-number-2">3.</span> Pattern 1: publish/subscribe server</h2>
+<div class="outline-text-2" id="text-3">
+<ul class="org-ul">
+<li>the information goes one way: server -&gt; client</li>
+<li>close a channel to signal no new values will be sent</li>
+<li><p>
+prefer <code>defer</code> when unlocking the mutex
+</p>
+<div class="org-src-container">
+<pre class="src src-go"><span class="linenr"> 1: </span><span style="color: #51afef;">type</span> <span style="color: #ECBE7B;">Server</span> <span style="color: #51afef;">struct</span> {
+<span class="linenr"> 2: </span>    mu  <span style="color: #ECBE7B;">sync.Mutex</span> <span style="color: #5B6268;">// </span><span style="color: #5B6268;">protect sub</span>
+<span class="linenr"> 3: </span>    sub <span style="color: #51afef;">map</span>[<span style="color: #51afef;">chan</span>&lt;- <span style="color: #ECBE7B;">Event</span>]<span style="color: #ECBE7B;">bool</span>  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">whether a channel should be closed</span>
+<span class="linenr"> 4: </span>}
+<span class="linenr"> 5: </span><span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">s</span> *<span style="color: #ECBE7B;">Server</span>) <span style="color: #c678dd;">Init</span>() {
+<span class="linenr"> 6: </span>    s.sub = <span style="color: #c678dd;">make</span>(<span style="color: #51afef;">map</span>[<span style="color: #51afef;">chan</span>&lt;- <span style="color: #ECBE7B;">Event</span>]<span style="color: #ECBE7B;">bool</span>)
+<span class="linenr"> 7: </span>}
+<span class="linenr"> 8: </span><span style="color: #5B6268;">// </span><span style="color: #5B6268;">publish an event to all subscribed channel</span>
+<span class="linenr"> 9: </span><span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">s</span> *<span style="color: #ECBE7B;">Server</span>) <span style="color: #c678dd;">Publish</span>(<span style="color: #dcaeea;">e</span> <span style="color: #ECBE7B;">Event</span>) {
+<span class="linenr">10: </span>    s.mu.<span style="color: #c678dd;">Lock</span>()  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">each method could be called many clients</span>
+<span class="linenr">11: </span>    <span style="color: #51afef;">defer</span> s.mu.<span style="color: #c678dd;">Unlock</span>()
+<span class="linenr">12: </span>    <span style="color: #51afef;">for</span> <span style="color: #dcaeea;">c</span> := <span style="color: #51afef;">range</span> s.sub {
+<span class="linenr">13: </span>        <span style="color: #5B6268;">// </span><span style="color: #5B6268;">if a goroutine consumes the channel events too slow</span>
+<span class="linenr">14: </span>        <span style="color: #5B6268;">// </span><span style="color: #5B6268;">then a new event publish has to wait before it can send to the channel</span>
+<span class="linenr">15: </span>        <span style="color: #5B6268;">// </span><span style="color: #5B6268;">can add channel buffer</span>
+<span class="linenr">16: </span>        c &lt;- e
+<span class="linenr">17: </span>    }
+<span class="linenr">18: </span>}
+<span class="linenr">19: </span><span style="color: #5B6268;">// </span><span style="color: #5B6268;">a channel starts to subscribe</span>
+<span class="linenr">20: </span><span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">s</span> *<span style="color: #ECBE7B;">Server</span>) <span style="color: #c678dd;">Subscribe</span>(<span style="color: #dcaeea;">c</span> <span style="color: #51afef;">chan</span>&lt;- <span style="color: #ECBE7B;">Event</span>) {
+<span class="linenr">21: </span>    s.mu.<span style="color: #c678dd;">Lock</span>()
+<span class="linenr">22: </span>    <span style="color: #51afef;">defer</span> s.mu.<span style="color: #c678dd;">Unlock</span>()
+<span class="linenr">23: </span>    <span style="color: #51afef;">if</span> s.sub[c] {
+<span class="linenr">24: </span>        <span style="color: #c678dd;">panic</span>(<span style="color: #98be65;">"pubsub: already subscribed"</span>) <span style="color: #5B6268;">// </span><span style="color: #5B6268;">the mutex wil also be unlocked with defer</span>
+<span class="linenr">25: </span>    }
+<span class="linenr">26: </span>    s.sub[c] = <span style="color: #a9a1e1;">true</span>
+<span class="linenr">27: </span>}
+<span class="linenr">28: </span><span style="color: #5B6268;">// </span><span style="color: #5B6268;">a channel cancels the subscription</span>
+<span class="linenr">29: </span><span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">s</span> *<span style="color: #ECBE7B;">Server</span>) <span style="color: #c678dd;">Cancel</span>(<span style="color: #dcaeea;">c</span> <span style="color: #51afef;">chan</span>&lt;- <span style="color: #ECBE7B;">Event</span>) {
+<span class="linenr">30: </span>    s.mu.<span style="color: #c678dd;">Lock</span>()
+<span class="linenr">31: </span>    <span style="color: #51afef;">defer</span> s.mu.<span style="color: #c678dd;">Unlock</span>()
+<span class="linenr">32: </span>    <span style="color: #51afef;">if</span> <span style="color: #51afef; font-weight: bold;">!</span>s.sub[c] {
+<span class="linenr">33: </span>        <span style="color: #c678dd;">panic</span>(<span style="color: #98be65;">"pubsub: not subscribed"</span>)
+<span class="linenr">34: </span>    }
+<span class="linenr">35: </span>    <span style="color: #c678dd;">close</span>(c)
+<span class="linenr">36: </span>    <span style="color: #c678dd;">delete</span>(s.sub, c)
+<span class="linenr">37: </span>}
+</pre>
+</div></li>
+</ul>
+</div>
+<div id="outline-container-orgfe8d2e6" class="outline-3">
+<h3 id="orgfe8d2e6"><span class="section-number-3">3.1.</span> Options for slow goroutines</h3>
+<div class="outline-text-3" id="text-3-1">
+<ul class="org-ul">
+<li>slow down event generation</li>
+<li>drop events if it cannot be sent, e.g., <code>os/signal</code>, <code>runtime/pprof</code></li>
+<li><p>
+queue events, e.g., add a <code>helper</code> between the server and each client, which also separates the concerns
+</p>
+<div class="org-src-container">
+<pre class="src src-go"><span class="linenr"> 1: </span><span style="color: #51afef;">func</span> <span style="color: #c678dd;">helper</span>(<span style="color: #dcaeea;">in</span> &lt;-<span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">Event</span>, <span style="color: #dcaeea;">out</span> <span style="color: #51afef;">chan</span>&lt;- <span style="color: #ECBE7B;">Event</span>) {
+<span class="linenr"> 2: </span>    <span style="color: #51afef;">var</span> <span style="color: #dcaeea;">q</span> []<span style="color: #ECBE7B;">Event</span>
+<span class="linenr"> 3: </span>    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">if the in is closed, flash out the pending events in q</span>
+<span class="linenr"> 4: </span>    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">and close out</span>
+<span class="linenr"> 5: </span>    <span style="color: #51afef;">for</span> in != <span style="color: #a9a1e1;">nil</span> || <span style="color: #c678dd;">len</span>(q) &gt; <span style="color: #da8548; font-weight: bold;">0</span> {
+<span class="linenr"> 6: </span>        <span style="color: #5B6268;">// </span><span style="color: #5B6268;">decide whether and what to send</span>
+<span class="linenr"> 7: </span>        <span style="color: #51afef;">var</span> <span style="color: #dcaeea;">sendOut</span> <span style="color: #51afef;">chan</span>&lt;- <span style="color: #dcaeea;">Event</span>
+<span class="linenr"> 8: </span>        <span style="color: #51afef;">var</span> <span style="color: #dcaeea;">next</span> <span style="color: #ECBE7B;">Event</span>
+<span class="linenr"> 9: </span>        <span style="color: #51afef;">if</span> <span style="color: #c678dd;">len</span>(q) &gt; <span style="color: #da8548; font-weight: bold;">0</span> {
+<span class="linenr">10: </span>            sendOut = out
+<span class="linenr">11: </span>            next = q[<span style="color: #da8548; font-weight: bold;">0</span>]
+<span class="linenr">12: </span>        }
+<span class="linenr">13: </span>        <span style="color: #51afef;">select</span> {
+<span class="linenr">14: </span>        <span style="color: #51afef;">case</span> <span style="color: #dcaeea;">e</span>, <span style="color: #dcaeea;">ok</span> := &lt;-in: <span style="color: #5B6268;">// </span><span style="color: #5B6268;">never reaches here after in = nil</span>
+<span class="linenr">15: </span>            <span style="color: #5B6268;">// </span><span style="color: #5B6268;">ok tells whether in is closed</span>
+<span class="linenr">16: </span>            <span style="color: #51afef;">if</span> <span style="color: #51afef; font-weight: bold;">!</span>ok {
+<span class="linenr">17: </span>                in = <span style="color: #a9a1e1;">nil</span>
+<span class="linenr">18: </span>                <span style="color: #51afef;">break</span>
+<span class="linenr">19: </span>            }
+<span class="linenr">20: </span>            q = <span style="color: #c678dd;">append</span>(q, e)
+<span class="linenr">21: </span>        <span style="color: #51afef;">case</span> sendOut &lt;- next: <span style="color: #5B6268;">// </span><span style="color: #5B6268;">if len(q) == 0, sendOut = nil</span>
+<span class="linenr">22: </span>            q = q[<span style="color: #da8548; font-weight: bold;">1</span>:]
+<span class="linenr">23: </span>        }
+<span class="linenr">24: </span>    }
+<span class="linenr">25: </span>    <span style="color: #c678dd;">close</span>(out)
+<span class="linenr">26: </span>}
+</pre>
+</div></li>
+<li><p>
+convert mutexes into goroutines, not suitable for Raft where state transition is complex
+</p>
+<div class="org-src-container">
+<pre class="src src-go"><span class="linenr"> 1: </span><span style="color: #51afef;">type</span> <span style="color: #ECBE7B;">Server</span> <span style="color: #51afef;">struct</span> {
+<span class="linenr"> 2: </span>    publish   <span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">Event</span>
+<span class="linenr"> 3: </span>    subscribe <span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">subReq</span>
+<span class="linenr"> 4: </span>    cancel    <span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">subReq</span>
+<span class="linenr"> 5: </span>}
+<span class="linenr"> 6: </span><span style="color: #51afef;">type</span> <span style="color: #ECBE7B;">subReq</span> <span style="color: #51afef;">struct</span> {
+<span class="linenr"> 7: </span>    c  <span style="color: #51afef;">chan</span>&lt;- <span style="color: #ECBE7B;">Event</span>
+<span class="linenr"> 8: </span>    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">a signal of whether an operation succeeds</span>
+<span class="linenr"> 9: </span>    ok <span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">bool</span>
+<span class="linenr">10: </span>}
+<span class="linenr">11: </span>
+<span class="linenr">12: </span><span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">s</span> *<span style="color: #ECBE7B;">Server</span>) <span style="color: #c678dd;">Init</span>() {
+<span class="linenr">13: </span>    s.publish = <span style="color: #c678dd;">make</span>(<span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">Event</span>)
+<span class="linenr">14: </span>    s.subscribe = <span style="color: #c678dd;">make</span>(<span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">subReq</span>)
+<span class="linenr">15: </span>    s.cancel = <span style="color: #c678dd;">make</span>(<span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">subReq</span>)
+<span class="linenr">16: </span>    <span style="color: #51afef;">go</span> s.<span style="color: #c678dd;">loop</span>()
+<span class="linenr">17: </span>}
+<span class="linenr">18: </span><span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">s</span> *<span style="color: #ECBE7B;">Server</span>) <span style="color: #c678dd;">Publish</span>(<span style="color: #dcaeea;">e</span> <span style="color: #ECBE7B;">Event</span>) {
+<span class="linenr">19: </span>    s.publish &lt;- e
+<span class="linenr">20: </span>}
+<span class="linenr">21: </span><span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">s</span> *<span style="color: #ECBE7B;">Server</span>) <span style="color: #c678dd;">Subscribe</span>(<span style="color: #dcaeea;">c</span> <span style="color: #51afef;">chan</span>&lt;- <span style="color: #ECBE7B;">Event</span>) {
+<span class="linenr">22: </span>    <span style="color: #dcaeea;">r</span> := <span style="color: #ECBE7B;">subReq</span>{<span style="color: #a9a1e1;">c</span>: c, <span style="color: #a9a1e1;">ok</span>: <span style="color: #c678dd;">make</span>(<span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">bool</span>)}
+<span class="linenr">23: </span>    s.subscribe &lt;- r
+<span class="linenr">24: </span>    <span style="color: #51afef;">if</span> <span style="color: #51afef; font-weight: bold;">!</span>&lt;-r.ok {
+<span class="linenr">25: </span>        <span style="color: #c678dd;">panic</span>(<span style="color: #98be65;">"pubsub: already subscribed"</span>)
+<span class="linenr">26: </span>    }
+<span class="linenr">27: </span>}
+<span class="linenr">28: </span><span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">s</span> *<span style="color: #ECBE7B;">Server</span>) <span style="color: #c678dd;">Cancel</span>(<span style="color: #dcaeea;">c</span> <span style="color: #51afef;">chan</span>&lt;- <span style="color: #ECBE7B;">Event</span>) {
+<span class="linenr">29: </span>    <span style="color: #dcaeea;">r</span> := <span style="color: #ECBE7B;">subReq</span>{<span style="color: #a9a1e1;">c</span>: c, <span style="color: #a9a1e1;">ok</span>: <span style="color: #c678dd;">make</span>(<span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">bool</span>)}
+<span class="linenr">30: </span>    s.cancel &lt;- r
+<span class="linenr">31: </span>    <span style="color: #51afef;">if</span> <span style="color: #51afef; font-weight: bold;">!</span>&lt;-r.ok {
+<span class="linenr">32: </span>        <span style="color: #c678dd;">panic</span>(<span style="color: #98be65;">"pubusb: not subscribed"</span>)
+<span class="linenr">33: </span>    }
+<span class="linenr">34: </span>}
+<span class="linenr">35: </span><span style="color: #51afef;">func</span> (<span style="color: #dcaeea;">s</span> *<span style="color: #ECBE7B;">Server</span>) <span style="color: #c678dd;">loop</span>() {
+<span class="linenr">36: </span>    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">now sub is a local variable, no lock is needed</span>
+<span class="linenr">37: </span>    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">sub maps from a subscribed channel to a helper channel</span>
+<span class="linenr">38: </span>    <span style="color: #dcaeea;">sub</span> := <span style="color: #c678dd;">make</span>(<span style="color: #51afef;">map</span>[<span style="color: #51afef;">chan</span>&lt;- <span style="color: #ECBE7B;">Event</span>]<span style="color: #51afef;">chan</span>&lt;- <span style="color: #ECBE7B;">Event</span>)
+<span class="linenr">39: </span>    <span style="color: #51afef;">for</span> {
+<span class="linenr">40: </span>        <span style="color: #51afef;">select</span> {
+<span class="linenr">41: </span>        <span style="color: #51afef;">case</span> <span style="color: #dcaeea;">e</span> := &lt;-s.publish:
+<span class="linenr">42: </span>            <span style="color: #51afef;">for</span> <span style="color: #dcaeea;">_</span>, <span style="color: #dcaeea;">h</span> := <span style="color: #51afef;">range</span> sub {
+<span class="linenr">43: </span>                <span style="color: #5B6268;">// </span><span style="color: #5B6268;">the event is published to a helper channel</span>
+<span class="linenr">44: </span>                h &lt;- e
+<span class="linenr">45: </span>            }
+<span class="linenr">46: </span>        <span style="color: #51afef;">case</span> <span style="color: #dcaeea;">r</span> := &lt;-s.subscribe:
+<span class="linenr">47: </span>            <span style="color: #5B6268;">// </span><span style="color: #5B6268;">the helper channel exists</span>
+<span class="linenr">48: </span>            <span style="color: #51afef;">if</span> sub[r.c] != <span style="color: #a9a1e1;">nil</span> {
+<span class="linenr">49: </span>                r.ok &lt;- <span style="color: #a9a1e1;">false</span>
+<span class="linenr">50: </span>                <span style="color: #51afef;">break</span>
+<span class="linenr">51: </span>            }
+<span class="linenr">52: </span>            h = <span style="color: #c678dd;">make</span>(<span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">Event</span>)
+<span class="linenr">53: </span>            <span style="color: #51afef;">go</span> <span style="color: #c678dd;">helper</span>(h, r.c)
+<span class="linenr">54: </span>            sub[r.c] = h
+<span class="linenr">55: </span>            r.ok &lt;- <span style="color: #a9a1e1;">true</span>
+<span class="linenr">56: </span>        <span style="color: #51afef;">case</span> <span style="color: #dcaeea;">c</span> := &lt;-s.cancel:
+<span class="linenr">57: </span>            <span style="color: #51afef;">if</span> <span style="color: #51afef; font-weight: bold;">!</span>sub[r.c] == <span style="color: #a9a1e1;">nil</span>{
+<span class="linenr">58: </span>                r.ok &lt;- <span style="color: #a9a1e1;">false</span>
+<span class="linenr">59: </span>                <span style="color: #51afef;">break</span>
+<span class="linenr">60: </span>            }
+<span class="linenr">61: </span>            <span style="color: #5B6268;">// </span><span style="color: #5B6268;">close the helper channel</span>
+<span class="linenr">62: </span>            <span style="color: #c678dd;">close</span>(sub[r.c])
+<span class="linenr">63: </span>            <span style="color: #c678dd;">delete</span>(sub, r.c)
+<span class="linenr">64: </span>            r.ok &lt;- <span style="color: #a9a1e1;">true</span>
+<span class="linenr">65: </span>        }
+<span class="linenr">66: </span>    }
+<span class="linenr">67: </span>}
 </pre>
 </div></li>
 </ul>
