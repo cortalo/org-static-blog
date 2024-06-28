@@ -1,0 +1,64 @@
+#+title: Parallel EVM: Sei-v2
+#+date: <2024-06-28 21:25>
+#+description: This is a personal note for [[https://blog.sei.io/sei-v2-the-first-parallelized-evm/][Sei-v2-blog]]
+#+filetags: parallel-evm
+
+* Blockchain fundamentals
+** Mainnet and Testnet
+- Mainnet: real transactions occur and have real-world value; any operation is final and irreversible.
+- Testnet: a sandbox environment with test cryptocurrencies without real-world value.
+
+** Mainnet Alpha and Beta
+- Alpha: test core functionalities and gather initial feedback in live environment.
+- Beta: more stable and feature-complete, but still need more testing.
+
+**  Ethereum and EVM
+- Ethereum: a blockchain ecosystem, includes the blockchain, consensus mechanism, smart contracts, native cryptocurrency.
+- EVM: the runtime environment to execute smart contracts in Ethereum.
+
+** Blockchain layers
+- Infrastructure layer: the physical devices that support the network; and the underlying communication protocols for data transfer between nodes.
+- Data layer: the distributed ledger and the storage methods.
+- Consensus layer: the protocols, validators and miners.
+- Execution layer: smart contracts and virtual machines.
+- Application layer: dApps to provide service and user interfaces.
+- Governance layer: the community decision-making process and proposals.
+- Security layer: cryptographic primitives and security protocols to avoid attacks.
+
+** Optimistic parallelization
+- Multiple transactions are processed in parallel under the assumption that they will conflict with each other; necessary corrections are made afterwards if conflicts are detected.
+- Increase throughput if conflicts are well handled.
+ 
+** Integrated and Modular blockchain
+- Integrated: all components, e.g., execution layer, consensus mechanism, networking are tightly coupled; faster internal communication but lower flexibility and scalability.
+- Modular: allow independent upgrades for different components; enhance scalability.
+
+** EVM Execution and storage layer
+- Execution: responsible for running smart contracts and processing transactions.
+- Storage: store all blockchain data, e.g., accounts, smart contract states, transaction history.
+
+** Block time and finalize time
+- Block: the average time for a new block to be added.
+- Finalize: the period after which a block is considered irreversible.
+- Faster block times often imply cheaper transaction fees due to increased transaction throughput and less block competition.
+
+** Blockchain audit
+- A review of a blockchain to ensures its security and functionality.
+
+* What is Sei
+- On mainnet beta since August 2023.
+- Consistently finalizes blocks at 390ms; the fastest chain in existence.
+- Consistently sees activity of >45 TPS (transaction per seconds); the second highest number of successful transactions per second.
+- Allows for Cosmwasm smart contracts written in Rust; more execution environments like EVM is the biggest request.
+
+* What is Sei v2
+- The first fully parallelized EVM.
+- Backwards compatibility of EVM smart contracts.
+- Optimistic parallelization; support parallelization without requiring any dependencies.
+- Improves the storage layer to prevent state bloat, read/write, and state sync for new nodes.
+- Seamless composability between different execution environments.
+- Offers 28,300 batched transactions per second of throughput; 390ms block times and 390ms finality; far cheaper per-transaction costs.
+- Once audits are complete, the upgrade is released in a public testnet in Q1 2024, and deployed to mainnet in H1 2024.
+
+* Sei's arguments
+- An integrated blockchain leads to substantially better performance than a modular chain.

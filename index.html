@@ -12,6 +12,155 @@
 <div id="preamble" class="status"></div>
 <div id="content">
 
+<div class="post-date">28 Jun 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-06-28-parallel-evm:-sei-v2.html">Parallel EVM: Sei-v2</a></h1>
+<nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgdbecf71">1. Blockchain fundamentals</a>
+<ul>
+<li><a href="#orgaeb7f0f">1.1. Mainnet and Testnet</a></li>
+<li><a href="#orgcf1c362">1.2. Mainnet Alpha and Beta</a></li>
+<li><a href="#orga4a53a5">1.3. Ethereum and EVM</a></li>
+<li><a href="#org4a73d50">1.4. Blockchain layers</a></li>
+<li><a href="#orgda584b6">1.5. Optimistic parallelization</a></li>
+<li><a href="#orgf11550e">1.6. Integrated and Modular blockchain</a></li>
+<li><a href="#org384adb1">1.7. EVM Execution and storage layer</a></li>
+<li><a href="#orgf21e47b">1.8. Block time and finalize time</a></li>
+<li><a href="#orgb47435d">1.9. Blockchain audit</a></li>
+</ul>
+</li>
+<li><a href="#org1dc1e41">2. What is Sei</a></li>
+<li><a href="#org65f5f93">3. What is Sei v2</a></li>
+<li><a href="#org020714f">4. Sei&rsquo;s arguments</a></li>
+</ul>
+</div>
+</nav>
+<div id="outline-container-orgdbecf71" class="outline-2">
+<h2 id="orgdbecf71"><span class="section-number-2">1.</span> Blockchain fundamentals</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-orgaeb7f0f" class="outline-3">
+<h3 id="orgaeb7f0f"><span class="section-number-3">1.1.</span> Mainnet and Testnet</h3>
+<div class="outline-text-3" id="text-1-1">
+<ul class="org-ul">
+<li>Mainnet: real transactions occur and have real-world value; any operation is final and irreversible.</li>
+<li>Testnet: a sandbox environment with test cryptocurrencies without real-world value.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgcf1c362" class="outline-3">
+<h3 id="orgcf1c362"><span class="section-number-3">1.2.</span> Mainnet Alpha and Beta</h3>
+<div class="outline-text-3" id="text-1-2">
+<ul class="org-ul">
+<li>Alpha: test core functionalities and gather initial feedback in live environment.</li>
+<li>Beta: more stable and feature-complete, but still need more testing.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orga4a53a5" class="outline-3">
+<h3 id="orga4a53a5"><span class="section-number-3">1.3.</span> Ethereum and EVM</h3>
+<div class="outline-text-3" id="text-1-3">
+<ul class="org-ul">
+<li>Ethereum: a blockchain ecosystem, includes the blockchain, consensus mechanism, smart contracts, native cryptocurrency.</li>
+<li>EVM: the runtime environment to execute smart contracts in Ethereum.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org4a73d50" class="outline-3">
+<h3 id="org4a73d50"><span class="section-number-3">1.4.</span> Blockchain layers</h3>
+<div class="outline-text-3" id="text-1-4">
+<ul class="org-ul">
+<li>Infrastructure layer: the physical devices that support the network; and the underlying communication protocols for data transfer between nodes.</li>
+<li>Data layer: the distributed ledger and the storage methods.</li>
+<li>Consensus layer: the protocols, validators and miners.</li>
+<li>Execution layer: smart contracts and virtual machines.</li>
+<li>Application layer: dApps to provide service and user interfaces.</li>
+<li>Governance layer: the community decision-making process and proposals.</li>
+<li>Security layer: cryptographic primitives and security protocols to avoid attacks.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgda584b6" class="outline-3">
+<h3 id="orgda584b6"><span class="section-number-3">1.5.</span> Optimistic parallelization</h3>
+<div class="outline-text-3" id="text-1-5">
+<ul class="org-ul">
+<li>Multiple transactions are processed in parallel under the assumption that they will conflict with each other; necessary corrections are made afterwards if conflicts are detected.</li>
+<li>Increase throughput if conflicts are well handled.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgf11550e" class="outline-3">
+<h3 id="orgf11550e"><span class="section-number-3">1.6.</span> Integrated and Modular blockchain</h3>
+<div class="outline-text-3" id="text-1-6">
+<ul class="org-ul">
+<li>Integrated: all components, e.g., execution layer, consensus mechanism, networking are tightly coupled; faster internal communication but lower flexibility and scalability.</li>
+<li>Modular: allow independent upgrades for different components; enhance scalability.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org384adb1" class="outline-3">
+<h3 id="org384adb1"><span class="section-number-3">1.7.</span> EVM Execution and storage layer</h3>
+<div class="outline-text-3" id="text-1-7">
+<ul class="org-ul">
+<li>Execution: responsible for running smart contracts and processing transactions.</li>
+<li>Storage: store all blockchain data, e.g., accounts, smart contract states, transaction history.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgf21e47b" class="outline-3">
+<h3 id="orgf21e47b"><span class="section-number-3">1.8.</span> Block time and finalize time</h3>
+<div class="outline-text-3" id="text-1-8">
+<ul class="org-ul">
+<li>Block: the average time for a new block to be added.</li>
+<li>Finalize: the period after which a block is considered irreversible.</li>
+<li>Faster block times often imply cheaper transaction fees due to increased transaction throughput and less block competition.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgb47435d" class="outline-3">
+<h3 id="orgb47435d"><span class="section-number-3">1.9.</span> Blockchain audit</h3>
+<div class="outline-text-3" id="text-1-9">
+<ul class="org-ul">
+<li>A review of a blockchain to ensures its security and functionality.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org1dc1e41" class="outline-2">
+<h2 id="org1dc1e41"><span class="section-number-2">2.</span> What is Sei</h2>
+<div class="outline-text-2" id="text-2">
+<ul class="org-ul">
+<li>On mainnet beta since August 2023.</li>
+<li>Consistently finalizes blocks at 390ms; the fastest chain in existence.</li>
+<li>Consistently sees activity of &gt;45 TPS (transaction per seconds); the second highest number of successful transactions per second.</li>
+<li>Allows for Cosmwasm smart contracts written in Rust; more execution environments like EVM is the biggest request.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org65f5f93" class="outline-2">
+<h2 id="org65f5f93"><span class="section-number-2">3.</span> What is Sei v2</h2>
+<div class="outline-text-2" id="text-3">
+<ul class="org-ul">
+<li>The first fully parallelized EVM.</li>
+<li>Backwards compatibility of EVM smart contracts.</li>
+<li>Optimistic parallelization; support parallelization without requiring any dependencies.</li>
+<li>Improves the storage layer to prevent state bloat, read/write, and state sync for new nodes.</li>
+<li>Seamless composability between different execution environments.</li>
+<li>Offers 28,300 batched transactions per second of throughput; 390ms block times and 390ms finality; far cheaper per-transaction costs.</li>
+<li>Once audits are complete, the upgrade is released in a public testnet in Q1 2024, and deployed to mainnet in H1 2024.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org020714f" class="outline-2">
+<h2 id="org020714f"><span class="section-number-2">4.</span> Sei&rsquo;s arguments</h2>
+<div class="outline-text-2" id="text-4">
+<ul class="org-ul">
+<li>An integrated blockchain leads to substantially better performance than a modular chain.</li>
+</ul>
+</div>
+</div>
+<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-parallel-evm.html">parallel-evm</a> </div>
 <div class="post-date">26 Jun 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-06-26-watched:-argo.html">Watched: Argo (2012)</a></h1>
 <nav id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
@@ -552,168 +701,7 @@ In the end, I need to append a new rule to make the RPC work.
 </div>
 </div>
 </div>
-<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-tools:linux:arch.html">tools:linux:arch</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-tools:linux:i3.html">tools:linux:i3</a> </div>
-<div class="post-date">23 Jun 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-06-23-weblab-notes:-react-route.html">Weblab notes: React route</a></h1>
-<nav id="table-of-contents" role="doc-toc">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents" role="doc-toc">
-<ul>
-<li><a href="#orgc75ded8">1. Router</a></li>
-<li><a href="#org7e1c17e">2. Link</a></li>
-<li><a href="#orgd178392">3. Workshop 3</a>
-<ul>
-<li><a href="#orga56a2a6">3.1. Structure</a></li>
-<li><a href="#org1155164">3.2. States</a></li>
-<li><a href="#org65b4752">3.3. Props</a></li>
-<li><a href="#org41099cf">3.4. Why passing down the update function in props 1, 4, 6?</a></li>
-</ul>
-</li>
-</ul>
-</div>
-</nav>
-<div id="outline-container-orgc75ded8" class="outline-2">
-<h2 id="orgc75ded8"><span class="section-number-2">1.</span> Router</h2>
-<div class="outline-text-2" id="text-1">
-<ul class="org-ul">
-<li>use the Reach <a href="https://reach.tech/router/">Reach Router</a> library</li>
-<li><p>
-URL -&gt; Router -&gt; render different components
-</p>
-<div class="org-src-container">
-<pre class="src src-js"><span class="linenr">1: </span>&lt;App&gt;
-<span class="linenr">2: </span>  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">conditional rendering based on curren url</span>
-<span class="linenr">3: </span>  &lt;Router&gt;
-<span class="linenr">4: </span>    &lt;Home path=<span style="color: #98be65;">"/"</span> /&gt; <span style="color: #5B6268;">// </span><span style="color: #5B6268;">root path</span>
-<span class="linenr">5: </span>    &lt;Dashboard path=<span style="color: #98be65;">"dashboard"</span> /&gt; <span style="color: #5B6268;">// </span><span style="color: #5B6268;">relative to the current URL</span>
-<span class="linenr">6: </span>    &lt;Team path=<span style="color: #98be65;">"/team"</span> /&gt; <span style="color: #5B6268;">// </span><span style="color: #5B6268;">absolute path: root path + "/team"</span>
-<span class="linenr">7: </span>    &lt;NotFound <span style="color: #51afef;">default</span> /&gt;
-<span class="linenr">8: </span>  &lt;/Router&gt;
-<span class="linenr">9: </span>&lt;/App&gt;;
-</pre>
-</div></li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org7e1c17e" class="outline-2">
-<h2 id="org7e1c17e"><span class="section-number-2">2.</span> Link</h2>
-<div class="outline-text-2" id="text-2">
-<ul class="org-ul">
-<li>relative: <code class="src src-js">&lt;Link to=<span style="color: #98be65;">"newpage"</span>&gt;Click me&lt;/Link&gt;</code></li>
-<li>absolute: <code class="src src-js">&lt;Link to=<span style="color: #98be65;">"/newpage"</span>&gt;Click me&lt;/Link&gt;</code></li>
-</ul>
-</div>
-</div>
-<div id="outline-container-orgd178392" class="outline-2">
-<h2 id="orgd178392"><span class="section-number-2">3.</span> Workshop 3</h2>
-<div class="outline-text-2" id="text-3">
-</div>
-<div id="outline-container-orga56a2a6" class="outline-3">
-<h3 id="orga56a2a6"><span class="section-number-3">3.1.</span> Structure</h3>
-<div class="outline-text-3" id="text-3-1">
-
-<figure id="org9a1427d">
-<img src="./static/workshop-3-structure.png" alt="workshop-3-structure.png" align="center" width="600px">
-
-<figcaption><span class="figure-number">Figure 1: </span>The Catbook structure in workshop 3</figcaption>
-</figure>
-</div>
-</div>
-<div id="outline-container-org1155164" class="outline-3">
-<h3 id="org1155164"><span class="section-number-3">3.2.</span> States</h3>
-<div class="outline-text-3" id="text-3-2">
-<table>
-
-
-<colgroup>
-<col  class="org-center">
-</colgroup>
-
-<colgroup>
-<col  class="org-left">
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-center">name</th>
-<th scope="col" class="org-left">states</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="org-center">Feed</td>
-<td class="org-left"><code>stories</code>: a list of stories</td>
-</tr>
-
-<tr>
-<td class="org-center">Card</td>
-<td class="org-left"><code>comments</code>: a list of comments for a story id</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="outline-container-org65b4752" class="outline-3">
-<h3 id="org65b4752"><span class="section-number-3">3.3.</span> Props</h3>
-<div class="outline-text-3" id="text-3-3">
-<table>
-
-
-<colgroup>
-<col  class="org-center">
-</colgroup>
-
-<colgroup>
-<col  class="org-left">
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-center">index</th>
-<th scope="col" class="org-left">props</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="org-center">1</td>
-<td class="org-left">a function to update <code>stories</code></td>
-</tr>
-
-<tr>
-<td class="org-center">2</td>
-<td class="org-left">all attributes in a story</td>
-</tr>
-
-<tr>
-<td class="org-center">3</td>
-<td class="org-left">the attributes used to display a story</td>
-</tr>
-
-<tr>
-<td class="org-center">4</td>
-<td class="org-left">a story id; a list of comments under the story; a function to update <code>comments</code></td>
-</tr>
-
-<tr>
-<td class="org-center">5</td>
-<td class="org-left">all attributes in a comment</td>
-</tr>
-
-<tr>
-<td class="org-center">6</td>
-<td class="org-left">a comment id; the function to update <code>comments</code></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="outline-container-org41099cf" class="outline-3">
-<h3 id="org41099cf"><span class="section-number-3">3.4.</span> Why passing down the update function in props 1, 4, 6?</h3>
-<div class="outline-text-3" id="text-3-4">
-<ul class="org-ul">
-<li>To share the parent states, i.e., <code>stories</code> and <code>comments</code> to child component. Since the post action happens in the child component, we need a way to automatically update the states to see new contents immediately.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-study:web-development:react.html">study:web-development:react</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-lecture:mit.html">lecture:mit</a> </div><div id="archive">
+<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-tools:linux:arch.html">tools:linux:arch</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-tools:linux:i3.html">tools:linux:i3</a> </div><div id="archive">
 <a href="https://chenyo-17.github.io/org-static-blog/archive.html">Other posts</a>
 </div>
 </div>
