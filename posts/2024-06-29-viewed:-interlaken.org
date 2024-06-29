@@ -1,0 +1,41 @@
+#+title: Viewed: Interlaken
+#+date: <2024-06-29 23:52>
+#+description: This is a memory of the Interlaken day trip
+#+filetags: trip:interlaken
+
+* Where did we go
+- We rent a car and drove to Interlaken.
+- We visited [[https://aareschlucht.ch/][Aareschlucht]] and [[https://www.brienz.ch/][Brienz]], and did some short strolls around.
+
+#+CAPTION: The view outside the car
+#+ATTR_HTML: :align center
+#+ATTR_HTML: :width 600px
+[[./static/car.jpg]]
+
+* Why did we go
+- According to the unpredictable [[https://www.meteoschweiz.admin.ch/#tab=forecast-map][Meteoswiss]] forecast, this Saturday would have been the only weekend-day with some good weather in limited locations to go hiking since 2? or 3? weeks ago.
+- But this was not the case anymore when we arrived the [[https://www.interlaken.ch/en/experiences/mountains-panoramas/mountain-excursions/brienzer-rothorn][Rothorn Kulm]] restaurant via the [[https://www.interlaken.ch/en/experiences/poi/brienz-rothorn-railway][steam train]].
+
+#+CAPTION: The weather at the Rothorn Kulm
+#+ATTR_HTML: :align center
+#+ATTR_HTML: :width 600px
+[[./static/restaurant.jpg]]
+
+* What did we do
+1. We first went a tour in Aareschlucht, where we experienced both strong cold wind and gentle warm wind.
+2. We then did a half-hour small hiking to go back to our starting point.
+3. Then we drove to Brienz, and had a relaxing lunch along the lake, where I ate a piece of watermelon.
+4. We took the 1-hour steam train to the Rothorn Kulm, when we arrived it started to be foggy, windy and rainy.
+5. We refilled our energy with hot drinks and snacks in the restaurant, and took a short stroll around the restaurant.
+6. We went back to the restaurant to escape the cold (yes it is end of June) and waited for the steam train to go down.
+7. During the train down the sun came out a bit, and the view was clear and nice again!
+
+#+CAPTION: The water in Aareschlucht
+#+ATTR_HTML: :align center
+#+ATTR_HTML: :width 600px
+[[./static/water.jpg]]
+
+#+CAPTION: The view on the train
+#+ATTR_HTML: :align center
+#+ATTR_HTML: :width 600px
+[[./static/view.jpg]]
