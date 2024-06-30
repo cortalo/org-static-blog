@@ -7,7 +7,12 @@
       href="https://chenyo-17.github.io/org-static-blog/rss.xml"
       title="RSS feed for https://chenyo-17.github.io/org-static-blog">
 <title>org-static-blog</title>
-</head>
+<script type="text/javascript"
+             src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+        <script type="text/x-mathjax-config">
+             MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'],['\\(','\\)']]}});
+        </script></head>
 <body>
 <div id="preamble" class="status"></div>
 <div id="content">
@@ -17,14 +22,14 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgdef4ee7">1. What happended</a></li>
-<li><a href="#org85997f9">2. What did I do</a></li>
-<li><a href="#org3b9504f">3. Another issue of running RPC in docker</a></li>
+<li><a href="#orgbc992eb">1. What happended</a></li>
+<li><a href="#orgac5167b">2. What did I do</a></li>
+<li><a href="#orgbd1a50d">3. Another issue of running RPC in docker</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-orgdef4ee7" class="outline-2">
-<h2 id="orgdef4ee7"><span class="section-number-2">1.</span> What happended</h2>
+<div id="outline-container-orgbc992eb" class="outline-2">
+<h2 id="orgbc992eb"><span class="section-number-2">1.</span> What happended</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Servers SA and SB have the same docker installation, and the same running container CA and CB.</li>
@@ -39,8 +44,8 @@ fatal error: newosproc<br>
 </ul>
 </div>
 </div>
-<div id="outline-container-org85997f9" class="outline-2">
-<h2 id="org85997f9"><span class="section-number-2">2.</span> What did I do</h2>
+<div id="outline-container-orgac5167b" class="outline-2">
+<h2 id="orgac5167b"><span class="section-number-2">2.</span> What did I do</h2>
 <div class="outline-text-2" id="text-2">
 <ol class="org-ol">
 <li>I compared any related configurations between SA and SB. and between CA and CB, e.g., <code class="src src-bash"><span style="color: #c678dd;">ulimit</span> -a</code>, <code class="src src-bash">/etc/security/limits.conf</code>. They all look the same.</li>
@@ -57,8 +62,8 @@ fatal error: newosproc<br>
 </ol>
 </div>
 </div>
-<div id="outline-container-org3b9504f" class="outline-2">
-<h2 id="org3b9504f"><span class="section-number-2">3.</span> Another issue of running RPC in docker</h2>
+<div id="outline-container-orgbd1a50d" class="outline-2">
+<h2 id="orgbd1a50d"><span class="section-number-2">3.</span> Another issue of running RPC in docker</h2>
 <div class="outline-text-2" id="text-3">
 <ul class="org-ul">
 <li>The other day, I also spent hours debugging a <code>route unreachable</code> error when I want to send a request from CA to SA.</li>
@@ -97,20 +102,20 @@ In the end, I need to append a new rule to make the RPC work.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org72056be">1. i3</a>
+<li><a href="#orgdc3d670">1. i3</a>
 <ul>
-<li><a href="#orge010602">1.1. move specific workspaces between different monitors (ref)</a></li>
+<li><a href="#orgdd5b494">1.1. move specific workspaces between different monitors (ref)</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org72056be" class="outline-2">
-<h2 id="org72056be"><span class="section-number-2">1.</span> i3</h2>
+<div id="outline-container-orgdc3d670" class="outline-2">
+<h2 id="orgdc3d670"><span class="section-number-2">1.</span> i3</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orge010602" class="outline-3">
-<h3 id="orge010602"><span class="section-number-3">1.1.</span> move specific workspaces between different monitors <a href="https://i3wm.org/docs/user-contributed/swapping-workspaces.html">(ref)</a></h3>
+<div id="outline-container-orgdd5b494" class="outline-3">
+<h3 id="orgdd5b494"><span class="section-number-3">1.1.</span> move specific workspaces between different monitors <a href="https://i3wm.org/docs/user-contributed/swapping-workspaces.html">(ref)</a></h3>
 <div class="outline-text-3" id="text-1-1">
 <ol class="org-ol">
 <li>adjust the monitor relative positions</li>

@@ -7,7 +7,12 @@
       href="https://chenyo-17.github.io/org-static-blog/rss.xml"
       title="RSS feed for https://chenyo-17.github.io/org-static-blog">
 <title>org-static-blog</title>
-</head>
+<script type="text/javascript"
+             src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+        <script type="text/x-mathjax-config">
+             MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'],['\\(','\\)']]}});
+        </script></head>
 <body>
 <div id="preamble" class="status"></div>
 <div id="content">
@@ -17,9 +22,16 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org26322ad">1. Terminology</a>
+<li><a href="#orgcccef36">1. Terminology</a>
 <ul>
-<li><a href="#orge3e8820">1.1. Transaction execution</a></li>
+<li><a href="#orgb78aeb0">1.1. Motivation</a></li>
+<li><a href="#org8637d41">1.2. Blockchain paradigm</a></li>
+<li><a href="#org8260661">1.3. Ethereum Transaction execution</a></li>
+<li><a href="#org95ae501">1.4. World state \(\sigma\)</a>
+<ul>
+<li><a href="#org6148fc3">1.4.1. The account state \(\sigma[a]\)</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -31,15 +43,16 @@ This is a personal note of EVM, resources are from:
 <ul class="org-ul">
 <li><a href="https://ethereum.org/en/developers/docs/evm/">ethereum.org</a></li>
 <li><a href="https://chatgpt.com/g/g-TJq7kBEsX-evm-gpt">EVM GPT</a></li>
-<li><a href="https://ethereum.github.io/yellowpaper/paper.pdf">Ethereum yellowpaper</a></li>
+<li><a href="https://ethereum.github.io/yellowpaper/paper.pdf">Ethereum yellowpaper: Paris version (26.06.2024)</a></li>
 </ul>
-<div id="outline-container-org26322ad" class="outline-2">
-<h2 id="org26322ad"><span class="section-number-2">1.</span> Terminology</h2>
+<div id="outline-container-orgcccef36" class="outline-2">
+<h2 id="orgcccef36"><span class="section-number-2">1.</span> Terminology</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>EVM: a decentralized virtual environment that executes code consistently and securely across all Ethereum nodes.</li>
 <li>Gas: used to measure the computational effort required to execute smart contracts.</li>
-<li>Ether: the native cryptocurrency in Ethereum.</li>
+<li>Ether(ETH): the native cryptocurrency in Ethereum; used to incentivize computation.</li>
+<li>Wei: the smallest subdenomination of Ether; 1 Ether = \(10^{18}\) Wei.</li>
 <li>State: A modified Merkle Patricia Trie to keep all accounts linked by hashes and reducible to a single root hash stored on the blockchain.</li>
 <li>State transition function: <code>Y(S, T)=S'</code>: produces a <b><b>deterministic</b></b> new valid state (<code>S'</code>) given an old valid state (<code>S</code>) new set of valid transactions (<code>T</code>)</li>
 <li>Transactions: signed instructions from accounts, includes
@@ -47,21 +60,51 @@ This is a personal note of EVM, resources are from:
 <li>a contraction creation to create a new contract account containing compiled contract bytecode, or</li>
 <li>a message call to a contract to execute the bytecode.</li>
 </ul></li>
-<li>Blockchain paradigm: a simple application on a decentralized, but singleton, compute resource (yellowpaper).</li>
+<li>Proof of work: a spam deterrence mechanism; demonstrate the potential for a basic data channel to carry a strong economic signal without relying on trust.</li>
+<li>Fork: a disagreement between nodes as to which root-to-leaf path down the block tree is the best blockchain.</li>
+<li>Chain Id (\(\beta\)): distinguish between diverged blockchains (EIP-155).</li>
 </ul>
 
 
-<figure id="org89d1ccc">
-<img src="https://ethereum.org/_next/image/?url=%2Fcontent%2Fdevelopers%2Fdocs%2Fevm%2Fevm.png&amp;w=1920&amp;q=75" alt="?url=%2Fcontent%2Fdevelopers%2Fdocs%2Fevm%2Fevm.png&amp;w=1920&amp;q=75" align="center" width="400px">
+<figure id="org023d19d">
+<img src="https://ethereum.org/_next/image/?url=%2Fcontent%2Fdevelopers%2Fdocs%2Fevm%2Fevm.png&amp;w=1920&amp;q=75" alt="?url=%2Fcontent%2Fdevelopers%2Fdocs%2Fevm%2Fevm.png&amp;w=1920&amp;q=75" align="center" width="500px">
 
 <figcaption><span class="figure-number">Figure 1: </span>The EVM structure</figcaption>
 </figure>
 </div>
-<div id="outline-container-orge3e8820" class="outline-3">
-<h3 id="orge3e8820"><span class="section-number-3">1.1.</span> Transaction execution</h3>
+<div id="outline-container-orgb78aeb0" class="outline-3">
+<h3 id="orgb78aeb0"><span class="section-number-3">1.1.</span> Motivation</h3>
 <div class="outline-text-3" id="text-1-1">
+<ul class="org-ul">
+<li>To facilitate transactions between individuals who would otherwise have no means to trust one another.</li>
+<li>To enforce a rich and unambiguous agreement autonomously (crypto-lay system).</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org8637d41" class="outline-3">
+<h3 id="org8637d41"><span class="section-number-3">1.2.</span> Blockchain paradigm</h3>
+<div class="outline-text-3" id="text-1-2">
+<div class="latex" id="org26d1047">
+\begin{aligned}
+\sigma_{t+1} & \equiv \Pi\left(\boldsymbol{\sigma}_t, B\right) \\
+B & \equiv\left(\ldots,\left(T_0, T_1, \ldots\right), \ldots\right) \\
+\Pi(\boldsymbol{\sigma}, B) & \equiv \Upsilon\left(\Upsilon\left(\boldsymbol{\sigma}, T_0\right), T_1\right) \ldots
+\end{aligned}
+
+</div>
+<ul class="org-ul">
+<li>\(\sigma\): a valid state between two transactions.</li>
+<li>\(B\): a block including a series of transactions.</li>
+<li>\(\Upsilon\): the Ethereum state transition function.</li>
+<li>\(\Pi\): the block-level state transition function.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org8260661" class="outline-3">
+<h3 id="org8260661"><span class="section-number-3">1.3.</span> Ethereum Transaction execution</h3>
+<div class="outline-text-3" id="text-1-3">
 <ol class="org-ol">
-<li>An user (EOA) signs a transaction, including the sender, receiver (the contract address), Ether value, Gas limit and Gas price.</li>
+<li>An user (externally owned accounts, EOA) signs a transaction, including the sender, receiver (the contract address), Ether value, Gas limit and Gas price.</li>
 <li>The transaction is broadcast to the Ethereum network.</li>
 <li>Once a validator receives the transaction, it first performs sanity check, e.g., signature validation, balance check.</li>
 <li>Upon passing the validation, a transaction is included in a block and executed.
@@ -75,6 +118,27 @@ This is a personal note of EVM, resources are from:
 </ol>
 </div>
 </div>
+<div id="outline-container-org95ae501" class="outline-3">
+<h3 id="org95ae501"><span class="section-number-3">1.4.</span> World state \(\sigma\)</h3>
+<div class="outline-text-3" id="text-1-4">
+<ul class="org-ul">
+<li>A mapping between 160-bit addresses and account states, maintained in a modified Merkle Patricia tree (MPT), serialized as RLP, stored in a off-chain database backend.</li>
+<li>MPT benefits: the root node depends on all internal data; allows any previous state with known root hash to be recalled as the tree is immutable.</li>
+<li><a href="https://media.licdn.com/dms/image/D4D12AQG2itcSOHtiKw/article-cover_image-shrink_720_1280/0/1690981109933?e=1725494400&amp;v=beta&amp;t=4e2FSROhKCs2qeGtpyb5STePXe80agLfg3G9nuD4oKc">Merkle Patricia Trie representation of state data across blocks</a></li>
+</ul>
+</div>
+<div id="outline-container-org6148fc3" class="outline-4">
+<h4 id="org6148fc3"><span class="section-number-4">1.4.1.</span> The account state \(\sigma[a]\)</h4>
+<div class="outline-text-4" id="text-1-4-1">
+<ul class="org-ul">
+<li><code>nonce</code>: the number of transactions the address has sent, or the number of contracts the address has made.</li>
+<li><code>balance</code>: the number of Wei owned by the address.</li>
+<li><code>storageRoot</code>: a 256-bit hash of the root node of a MPT which encodes the account storage, i.e., the contract storage.</li>
+<li><code>codeHash</code>: the hash of the EVM code, i.e., the contract bytecode, which is executed if the address receives a message call.</li>
+</ul>
+</div>
+</div>
+</div>
 </div>
 <div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-evm.html">evm</a> </div>
 <div class="post-date">29 Jun 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-06-29-viewed:-interlaken.html">Viewed: Interlaken</a></h1>
@@ -82,14 +146,14 @@ This is a personal note of EVM, resources are from:
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org5b2db9d">1. Where did we go</a></li>
-<li><a href="#org5f87072">2. Why did we go</a></li>
-<li><a href="#org7009744">3. What did we do</a></li>
+<li><a href="#org1cedd5e">1. Where did we go</a></li>
+<li><a href="#org8227e39">2. Why did we go</a></li>
+<li><a href="#org4f0fdf6">3. What did we do</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org5b2db9d" class="outline-2">
-<h2 id="org5b2db9d"><span class="section-number-2">1.</span> Where did we go</h2>
+<div id="outline-container-org1cedd5e" class="outline-2">
+<h2 id="org1cedd5e"><span class="section-number-2">1.</span> Where did we go</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>We rent a car and drove to Interlaken.</li>
@@ -97,15 +161,15 @@ This is a personal note of EVM, resources are from:
 </ul>
 
 
-<figure id="orge425eee">
+<figure id="org6c3eecc">
 <img src="./static/car.jpg" alt="car.jpg" align="center" width="600px">
 
 <figcaption><span class="figure-number">Figure 1: </span>The view outside the car</figcaption>
 </figure>
 </div>
 </div>
-<div id="outline-container-org5f87072" class="outline-2">
-<h2 id="org5f87072"><span class="section-number-2">2.</span> Why did we go</h2>
+<div id="outline-container-org8227e39" class="outline-2">
+<h2 id="org8227e39"><span class="section-number-2">2.</span> Why did we go</h2>
 <div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li>According to the unpredictable <a href="https://www.meteoschweiz.admin.ch/#tab=forecast-map">Meteoswiss</a> forecast, this Saturday would have been the only weekend-day with some good weather in limited locations to go hiking since 2? or 3? weeks ago.</li>
@@ -113,15 +177,15 @@ This is a personal note of EVM, resources are from:
 </ul>
 
 
-<figure id="org7145796">
+<figure id="org2738d09">
 <img src="./static/restaurant.jpg" alt="restaurant.jpg" align="center" width="400px">
 
 <figcaption><span class="figure-number">Figure 2: </span>The weather at the Rothorn Kulm</figcaption>
 </figure>
 </div>
 </div>
-<div id="outline-container-org7009744" class="outline-2">
-<h2 id="org7009744"><span class="section-number-2">3.</span> What did we do</h2>
+<div id="outline-container-org4f0fdf6" class="outline-2">
+<h2 id="org4f0fdf6"><span class="section-number-2">3.</span> What did we do</h2>
 <div class="outline-text-2" id="text-3">
 <ol class="org-ol">
 <li>We first went a tour in Aareschlucht, where we experienced both strong cold wind and gentle warm wind.</li>
@@ -134,14 +198,14 @@ This is a personal note of EVM, resources are from:
 </ol>
 
 
-<figure id="orgd3af150">
+<figure id="org067abc8">
 <img src="./static/water.jpg" alt="water.jpg" align="center" width="600px">
 
 <figcaption><span class="figure-number">Figure 3: </span>The water in Aareschlucht</figcaption>
 </figure>
 
 
-<figure id="orgbd1a0d9">
+<figure id="orgce07c2d">
 <img src="./static/view.jpg" alt="view.jpg" align="center" width="600px">
 
 <figcaption><span class="figure-number">Figure 4: </span>The view on the train</figcaption>
@@ -154,33 +218,33 @@ This is a personal note of EVM, resources are from:
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgf3fd5a9">1. Blockchain fundamentals</a>
+<li><a href="#org0b97437">1. Blockchain fundamentals</a>
 <ul>
-<li><a href="#org9bc879d">1.1. Mainnet and Testnet</a></li>
-<li><a href="#org6b070f8">1.2. Mainnet Alpha and Beta</a></li>
-<li><a href="#org586b9f0">1.3. Layer 1 and Layer 2</a></li>
-<li><a href="#orgf9b950f">1.4. Rollups</a></li>
-<li><a href="#org2a9ec55">1.5. State channels</a></li>
-<li><a href="#org81174bd">1.6. Sidechains</a></li>
-<li><a href="#org4354c91">1.7. Ethereum and EVM</a></li>
-<li><a href="#org9dfbe42">1.8. IAVL tree</a></li>
-<li><a href="#org347db3a">1.9. CosmWasm contract</a></li>
-<li><a href="#orge87c3d9">1.10. Cosmos Ecosystem</a></li>
-<li><a href="#org02ee096">1.11. Blockchain layers</a></li>
-<li><a href="#orga969371">1.12. Optimistic parallelization</a></li>
-<li><a href="#org3b08c45">1.13. Integrated and Modular blockchain</a></li>
-<li><a href="#orgbb5076d">1.14. EVM Execution and storage layer</a></li>
-<li><a href="#org77eaffe">1.15. Block time and finalize time</a></li>
-<li><a href="#org4171f7b">1.16. Blockchain audit</a></li>
+<li><a href="#org9cb944b">1.1. Mainnet and Testnet</a></li>
+<li><a href="#org62ab6e3">1.2. Mainnet Alpha and Beta</a></li>
+<li><a href="#orgf7351a4">1.3. Layer 1 and Layer 2</a></li>
+<li><a href="#org2a4320f">1.4. Rollups</a></li>
+<li><a href="#orga8b13a4">1.5. State channels</a></li>
+<li><a href="#orge193d8b">1.6. Sidechains</a></li>
+<li><a href="#org04b05ec">1.7. Ethereum and EVM</a></li>
+<li><a href="#orge1f6361">1.8. IAVL tree</a></li>
+<li><a href="#org84360c7">1.9. CosmWasm contract</a></li>
+<li><a href="#orgc94a691">1.10. Cosmos Ecosystem</a></li>
+<li><a href="#org0e429c3">1.11. Blockchain layers</a></li>
+<li><a href="#org36cd87b">1.12. Optimistic parallelization</a></li>
+<li><a href="#org5615603">1.13. Integrated and Modular blockchain</a></li>
+<li><a href="#orgd6b00d4">1.14. EVM Execution and storage layer</a></li>
+<li><a href="#org67d3cfa">1.15. Block time and finalize time</a></li>
+<li><a href="#org6f732ba">1.16. Blockchain audit</a></li>
 </ul>
 </li>
-<li><a href="#org4719308">2. What is Sei</a></li>
-<li><a href="#org87fab12">3. What is Sei v2</a>
+<li><a href="#orgc494a74">2. What is Sei</a></li>
+<li><a href="#orgf4fc424">3. What is Sei v2</a>
 <ul>
-<li><a href="#org9be8858">3.1. Backwards compatibility</a></li>
-<li><a href="#orgf5ff5ae">3.2. Optimistic parallelization</a></li>
-<li><a href="#org946fb71">3.3. SeiDB</a></li>
-<li><a href="#orgbbf288a">3.4. Interoperability</a></li>
+<li><a href="#org0300354">3.1. Backwards compatibility</a></li>
+<li><a href="#org9b573e6">3.2. Optimistic parallelization</a></li>
+<li><a href="#org47ecbcf">3.3. SeiDB</a></li>
+<li><a href="#org52b7537">3.4. Interoperability</a></li>
 </ul>
 </li>
 </ul>
@@ -189,12 +253,12 @@ This is a personal note of EVM, resources are from:
 <p>
 This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parallelized-evm/">Sei-v2-blog</a> as well as some terminology explained by <a href="https://chatgpt.com/g/g-TJq7kBEsX-evm-gpt">EVM GPT</a>.
 </p>
-<div id="outline-container-orgf3fd5a9" class="outline-2">
-<h2 id="orgf3fd5a9"><span class="section-number-2">1.</span> Blockchain fundamentals</h2>
+<div id="outline-container-org0b97437" class="outline-2">
+<h2 id="org0b97437"><span class="section-number-2">1.</span> Blockchain fundamentals</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org9bc879d" class="outline-3">
-<h3 id="org9bc879d"><span class="section-number-3">1.1.</span> Mainnet and Testnet</h3>
+<div id="outline-container-org9cb944b" class="outline-3">
+<h3 id="org9cb944b"><span class="section-number-3">1.1.</span> Mainnet and Testnet</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>Mainnet: real transactions occur and have real-world value; any operation is final and irreversible.</li>
@@ -202,8 +266,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org6b070f8" class="outline-3">
-<h3 id="org6b070f8"><span class="section-number-3">1.2.</span> Mainnet Alpha and Beta</h3>
+<div id="outline-container-org62ab6e3" class="outline-3">
+<h3 id="org62ab6e3"><span class="section-number-3">1.2.</span> Mainnet Alpha and Beta</h3>
 <div class="outline-text-3" id="text-1-2">
 <ul class="org-ul">
 <li>Alpha: test core functionalities and gather initial feedback in live environment.</li>
@@ -211,8 +275,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org586b9f0" class="outline-3">
-<h3 id="org586b9f0"><span class="section-number-3">1.3.</span> Layer 1 and Layer 2</h3>
+<div id="outline-container-orgf7351a4" class="outline-3">
+<h3 id="orgf7351a4"><span class="section-number-3">1.3.</span> Layer 1 and Layer 2</h3>
 <div class="outline-text-3" id="text-1-3">
 <ul class="org-ul">
 <li>L1: the main network where all transactions are processed and the primary chain is maintained.</li>
@@ -220,8 +284,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-orgf9b950f" class="outline-3">
-<h3 id="orgf9b950f"><span class="section-number-3">1.4.</span> Rollups</h3>
+<div id="outline-container-org2a4320f" class="outline-3">
+<h3 id="org2a4320f"><span class="section-number-3">1.4.</span> Rollups</h3>
 <div class="outline-text-3" id="text-1-4">
 <ul class="org-ul">
 <li>Processes transactions off-chain and periodically submits a summary (rollup) to L1.</li>
@@ -236,8 +300,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org2a9ec55" class="outline-3">
-<h3 id="org2a9ec55"><span class="section-number-3">1.5.</span> State channels</h3>
+<div id="outline-container-orga8b13a4" class="outline-3">
+<h3 id="orga8b13a4"><span class="section-number-3">1.5.</span> State channels</h3>
 <div class="outline-text-3" id="text-1-5">
 <ul class="org-ul">
 <li>allow participants to conduct numerous off-chain transactions, with only the final state recorded on the L1.</li>
@@ -245,8 +309,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org81174bd" class="outline-3">
-<h3 id="org81174bd"><span class="section-number-3">1.6.</span> Sidechains</h3>
+<div id="outline-container-orge193d8b" class="outline-3">
+<h3 id="orge193d8b"><span class="section-number-3">1.6.</span> Sidechains</h3>
 <div class="outline-text-3" id="text-1-6">
 <ul class="org-ul">
 <li>Independent blockchains running parallel to the main chain, with own consensus and security.</li>
@@ -254,8 +318,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org4354c91" class="outline-3">
-<h3 id="org4354c91"><span class="section-number-3">1.7.</span> Ethereum and EVM</h3>
+<div id="outline-container-org04b05ec" class="outline-3">
+<h3 id="org04b05ec"><span class="section-number-3">1.7.</span> Ethereum and EVM</h3>
 <div class="outline-text-3" id="text-1-7">
 <ul class="org-ul">
 <li>Ethereum: a blockchain ecosystem, includes the blockchain, consensus mechanism, smart contracts, native cryptocurrency.</li>
@@ -263,8 +327,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org9dfbe42" class="outline-3">
-<h3 id="org9dfbe42"><span class="section-number-3">1.8.</span> IAVL tree</h3>
+<div id="outline-container-orge1f6361" class="outline-3">
+<h3 id="orge1f6361"><span class="section-number-3">1.8.</span> IAVL tree</h3>
 <div class="outline-text-3" id="text-1-8">
 <ul class="org-ul">
 <li>AVL tree: self-balancing binary tree where the difference in heights between left and right subtrees of anynode is at most one.</li>
@@ -272,8 +336,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org347db3a" class="outline-3">
-<h3 id="org347db3a"><span class="section-number-3">1.9.</span> CosmWasm contract</h3>
+<div id="outline-container-org84360c7" class="outline-3">
+<h3 id="org84360c7"><span class="section-number-3">1.9.</span> CosmWasm contract</h3>
 <div class="outline-text-3" id="text-1-9">
 <ul class="org-ul">
 <li>Allows developers to write fast and portable smart contracts in WebAssembly.</li>
@@ -281,8 +345,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-orge87c3d9" class="outline-3">
-<h3 id="orge87c3d9"><span class="section-number-3">1.10.</span> Cosmos Ecosystem</h3>
+<div id="outline-container-orgc94a691" class="outline-3">
+<h3 id="orgc94a691"><span class="section-number-3">1.10.</span> Cosmos Ecosystem</h3>
 <div class="outline-text-3" id="text-1-10">
 <ul class="org-ul">
 <li>A network of independent, interoperable blockchains designed to create an Internet of blockchain.</li>
@@ -292,8 +356,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org02ee096" class="outline-3">
-<h3 id="org02ee096"><span class="section-number-3">1.11.</span> Blockchain layers</h3>
+<div id="outline-container-org0e429c3" class="outline-3">
+<h3 id="org0e429c3"><span class="section-number-3">1.11.</span> Blockchain layers</h3>
 <div class="outline-text-3" id="text-1-11">
 <ul class="org-ul">
 <li>Infrastructure layer: the physical devices that support the network; and the underlying communication protocols for data transfer between nodes.</li>
@@ -306,8 +370,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-orga969371" class="outline-3">
-<h3 id="orga969371"><span class="section-number-3">1.12.</span> Optimistic parallelization</h3>
+<div id="outline-container-org36cd87b" class="outline-3">
+<h3 id="org36cd87b"><span class="section-number-3">1.12.</span> Optimistic parallelization</h3>
 <div class="outline-text-3" id="text-1-12">
 <ul class="org-ul">
 <li>Multiple transactions are processed in parallel under the assumption that they will conflict with each other; necessary corrections are made afterwards if conflicts are detected.</li>
@@ -315,8 +379,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org3b08c45" class="outline-3">
-<h3 id="org3b08c45"><span class="section-number-3">1.13.</span> Integrated and Modular blockchain</h3>
+<div id="outline-container-org5615603" class="outline-3">
+<h3 id="org5615603"><span class="section-number-3">1.13.</span> Integrated and Modular blockchain</h3>
 <div class="outline-text-3" id="text-1-13">
 <ul class="org-ul">
 <li>Integrated: all components, e.g., execution layer, consensus mechanism, networking are tightly coupled; faster internal communication but lower flexibility and scalability.</li>
@@ -324,8 +388,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-orgbb5076d" class="outline-3">
-<h3 id="orgbb5076d"><span class="section-number-3">1.14.</span> EVM Execution and storage layer</h3>
+<div id="outline-container-orgd6b00d4" class="outline-3">
+<h3 id="orgd6b00d4"><span class="section-number-3">1.14.</span> EVM Execution and storage layer</h3>
 <div class="outline-text-3" id="text-1-14">
 <ul class="org-ul">
 <li>Execution: responsible for running smart contracts and processing transactions.</li>
@@ -333,8 +397,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org77eaffe" class="outline-3">
-<h3 id="org77eaffe"><span class="section-number-3">1.15.</span> Block time and finalize time</h3>
+<div id="outline-container-org67d3cfa" class="outline-3">
+<h3 id="org67d3cfa"><span class="section-number-3">1.15.</span> Block time and finalize time</h3>
 <div class="outline-text-3" id="text-1-15">
 <ul class="org-ul">
 <li>Block: the average time for a new block to be added.</li>
@@ -343,8 +407,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org4171f7b" class="outline-3">
-<h3 id="org4171f7b"><span class="section-number-3">1.16.</span> Blockchain audit</h3>
+<div id="outline-container-org6f732ba" class="outline-3">
+<h3 id="org6f732ba"><span class="section-number-3">1.16.</span> Blockchain audit</h3>
 <div class="outline-text-3" id="text-1-16">
 <ul class="org-ul">
 <li>A review of a blockchain to ensures its security and functionality.</li>
@@ -352,8 +416,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </div>
 </div>
 </div>
-<div id="outline-container-org4719308" class="outline-2">
-<h2 id="org4719308"><span class="section-number-2">2.</span> What is Sei</h2>
+<div id="outline-container-orgc494a74" class="outline-2">
+<h2 id="orgc494a74"><span class="section-number-2">2.</span> What is Sei</h2>
 <div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li>On mainnet beta since August 2023.</li>
@@ -363,8 +427,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org87fab12" class="outline-2">
-<h2 id="org87fab12"><span class="section-number-2">3.</span> What is Sei v2</h2>
+<div id="outline-container-orgf4fc424" class="outline-2">
+<h2 id="orgf4fc424"><span class="section-number-2">3.</span> What is Sei v2</h2>
 <div class="outline-text-2" id="text-3">
 <ul class="org-ul">
 <li>The first fully parallelized EVM.</li>
@@ -376,8 +440,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 <li>Once audits are complete, the upgrade is released in a public testnet in Q1 2024, and deployed to mainnet in H1 2024.</li>
 </ul>
 </div>
-<div id="outline-container-org9be8858" class="outline-3">
-<h3 id="org9be8858"><span class="section-number-3">3.1.</span> Backwards compatibility</h3>
+<div id="outline-container-org0300354" class="outline-3">
+<h3 id="org0300354"><span class="section-number-3">3.1.</span> Backwards compatibility</h3>
 <div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
 <li>Ethereum contracts can be seamlessly deployed on Sei v2 with no code changes.</li>
@@ -386,8 +450,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-orgf5ff5ae" class="outline-3">
-<h3 id="orgf5ff5ae"><span class="section-number-3">3.2.</span> Optimistic parallelization</h3>
+<div id="outline-container-org9b573e6" class="outline-3">
+<h3 id="org9b573e6"><span class="section-number-3">3.2.</span> Optimistic parallelization</h3>
 <div class="outline-text-3" id="text-3-2">
 <ul class="org-ul">
 <li>Sei requires smart contract developers to optionally define the state that smart contracts are using, Sei v2 removes this need.</li>
@@ -398,8 +462,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org946fb71" class="outline-3">
-<h3 id="org946fb71"><span class="section-number-3">3.3.</span> SeiDB</h3>
+<div id="outline-container-org47ecbcf" class="outline-3">
+<h3 id="org47ecbcf"><span class="section-number-3">3.3.</span> SeiDB</h3>
 <div class="outline-text-3" id="text-3-3">
 <ul class="org-ul">
 <li>Sei uses a vanilla database layer composed of an IAVL tree, which is less efficient in terms of storage and latency.</li>
@@ -412,8 +476,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-orgbbf288a" class="outline-3">
-<h3 id="orgbbf288a"><span class="section-number-3">3.4.</span> Interoperability</h3>
+<div id="outline-container-org52b7537" class="outline-3">
+<h3 id="org52b7537"><span class="section-number-3">3.4.</span> Interoperability</h3>
 <div class="outline-text-3" id="text-3-4">
 <ul class="org-ul">
 <li>Sei v2 processes different transactions, e.g., Cosmwasm, EVM in a uniformed way, and then forwards them to different storage sections.</li>
@@ -427,20 +491,20 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org91ff7b1">1. Why did I watch it</a></li>
-<li><a href="#orge7314c6">2. What is it about</a></li>
-<li><a href="#org703634b">3. Did I like it</a></li>
+<li><a href="#org17d47e5">1. Why did I watch it</a></li>
+<li><a href="#orgc23b9d4">2. What is it about</a></li>
+<li><a href="#org0d78fb4">3. Did I like it</a></li>
 </ul>
 </div>
 </nav>
 
-<figure id="org4b3ce4a">
+<figure id="orgc1bad84">
 <img src="https://miro.medium.com/v2/resize:fit:1100/format:webp/1*IFB2V5vjsVKtHcxBdCfQSQ.jpeg" alt="1*IFB2V5vjsVKtHcxBdCfQSQ.jpeg" align="center" width="300px">
 
 <figcaption><span class="figure-number">Figure 1: </span>Argo poster</figcaption>
 </figure>
-<div id="outline-container-org91ff7b1" class="outline-2">
-<h2 id="org91ff7b1"><span class="section-number-2">1.</span> Why did I watch it</h2>
+<div id="outline-container-org17d47e5" class="outline-2">
+<h2 id="org17d47e5"><span class="section-number-2">1.</span> Why did I watch it</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 This week, I found myself craving a movie with a &ldquo;Homeland&rdquo; theme.
@@ -449,8 +513,8 @@ I saw its name a decade ago (I am too old!) on some movie magazine cover.
 </p>
 </div>
 </div>
-<div id="outline-container-orge7314c6" class="outline-2">
-<h2 id="orge7314c6"><span class="section-number-2">2.</span> What is it about</h2>
+<div id="outline-container-orgc23b9d4" class="outline-2">
+<h2 id="orgc23b9d4"><span class="section-number-2">2.</span> What is it about</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 It has little thing to do with &ldquo;Homeland&rdquo;.
@@ -461,8 +525,8 @@ Every tension resolves safely in the end: the phone will be picked up at the las
 </p>
 </div>
 </div>
-<div id="outline-container-org703634b" class="outline-2">
-<h2 id="org703634b"><span class="section-number-2">3.</span> Did I like it</h2>
+<div id="outline-container-org0d78fb4" class="outline-2">
+<h2 id="org0d78fb4"><span class="section-number-2">3.</span> Did I like it</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 I guess?
@@ -475,7 +539,7 @@ I felt &ldquo;Argo&rdquo; could have delved deeper into the absurdities of war r
 </p>
 
 
-<figure id="org3d293e7">
+<figure id="org48f636d">
 <img src="https://m.media-amazon.com/images/M/MV5BOTI0MzcxMTYtZDVkMy00NjY1LTgyMTYtZmUxN2M3NmQ2NWJhXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg" alt="MV5BOTI0MzcxMTYtZDVkMy00NjY1LTgyMTYtZmUxN2M3NmQ2NWJhXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg" align="center" width="300px">
 
 <figcaption><span class="figure-number">Figure 2: </span>Good Will Hunting poster</figcaption>
@@ -483,7 +547,7 @@ I felt &ldquo;Argo&rdquo; could have delved deeper into the absurdities of war r
 
 
 
-<figure id="orgfd54b78">
+<figure id="orge79b484">
 <img src="https://posterspy.com/wp-content/uploads/2024/04/Civil-War-Kirsten.jpg" alt="Civil-War-Kirsten.jpg" align="center" width="300px">
 
 <figcaption><span class="figure-number">Figure 3: </span>Civil War poster</figcaption>
@@ -496,16 +560,16 @@ I felt &ldquo;Argo&rdquo; could have delved deeper into the absurdities of war r
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org5608f6f">1. Concurrency vs Parallelism</a></li>
-<li><a href="#org1780c05">2. Use goroutines for states</a>
+<li><a href="#org435f688">1. Concurrency vs Parallelism</a></li>
+<li><a href="#org3400546">2. Use goroutines for states</a>
 <ul>
-<li><a href="#orgbdc8e04">2.1. Matching a regex</a></li>
-<li><a href="#org4af7de3">2.2. When the state variable cannot be avoided</a></li>
+<li><a href="#org2e73967">2.1. Matching a regex</a></li>
+<li><a href="#org6b60e54">2.2. When the state variable cannot be avoided</a></li>
 </ul>
 </li>
-<li><a href="#org87662ed">3. Pattern 1: publish/subscribe server</a>
+<li><a href="#org1a96d85">3. Pattern 1: publish/subscribe server</a>
 <ul>
-<li><a href="#orgb063a17">3.1. Options for slow goroutines</a></li>
+<li><a href="#orgb82b8b0">3.1. Options for slow goroutines</a></li>
 </ul>
 </li>
 </ul>
@@ -514,8 +578,8 @@ I felt &ldquo;Argo&rdquo; could have delved deeper into the absurdities of war r
 <p>
 This a personal note for the <a href="https://www.youtube.com/watch?v=IdCbMO0Ey9I">Russ Cox guest lecture</a>.
 </p>
-<div id="outline-container-org5608f6f" class="outline-2">
-<h2 id="org5608f6f"><span class="section-number-2">1.</span> Concurrency vs Parallelism</h2>
+<div id="outline-container-org435f688" class="outline-2">
+<h2 id="org435f688"><span class="section-number-2">1.</span> Concurrency vs Parallelism</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Concurrency: write a program to handle lot of things at once
@@ -526,12 +590,12 @@ This a personal note for the <a href="https://www.youtube.com/watch?v=IdCbMO0Ey9
 </ul>
 </div>
 </div>
-<div id="outline-container-org1780c05" class="outline-2">
-<h2 id="org1780c05"><span class="section-number-2">2.</span> Use goroutines for states</h2>
+<div id="outline-container-org3400546" class="outline-2">
+<h2 id="org3400546"><span class="section-number-2">2.</span> Use goroutines for states</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-orgbdc8e04" class="outline-3">
-<h3 id="orgbdc8e04"><span class="section-number-3">2.1.</span> Matching a regex</h3>
+<div id="outline-container-org2e73967" class="outline-3">
+<h3 id="org2e73967"><span class="section-number-3">2.1.</span> Matching a regex</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>return if a given string matches a regex: start with <code>"</code>, contains arbitrary escape sequence and ends with <code>*</code></li>
@@ -588,8 +652,8 @@ clear logic: store states in the code
 </ul>
 </div>
 </div>
-<div id="outline-container-org4af7de3" class="outline-3">
-<h3 id="org4af7de3"><span class="section-number-3">2.2.</span> When the state variable cannot be avoided</h3>
+<div id="outline-container-org6b60e54" class="outline-3">
+<h3 id="org6b60e54"><span class="section-number-3">2.2.</span> When the state variable cannot be avoided</h3>
 <div class="outline-text-3" id="text-2-2">
 <ul class="org-ul">
 <li><p>
@@ -691,8 +755,8 @@ use additional goroutines to hold states
 </div>
 </div>
 </div>
-<div id="outline-container-org87662ed" class="outline-2">
-<h2 id="org87662ed"><span class="section-number-2">3.</span> Pattern 1: publish/subscribe server</h2>
+<div id="outline-container-org1a96d85" class="outline-2">
+<h2 id="org1a96d85"><span class="section-number-2">3.</span> Pattern 1: publish/subscribe server</h2>
 <div class="outline-text-2" id="text-3">
 <ul class="org-ul">
 <li>the information goes one way: server -&gt; client</li>
@@ -742,8 +806,8 @@ prefer <code>defer</code> when unlocking the mutex
 </div></li>
 </ul>
 </div>
-<div id="outline-container-orgb063a17" class="outline-3">
-<h3 id="orgb063a17"><span class="section-number-3">3.1.</span> Options for slow goroutines</h3>
+<div id="outline-container-orgb82b8b0" class="outline-3">
+<h3 id="orgb82b8b0"><span class="section-number-3">3.1.</span> Options for slow goroutines</h3>
 <div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
 <li>slow down event generation</li>

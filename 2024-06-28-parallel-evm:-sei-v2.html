@@ -17,33 +17,33 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgf3fd5a9">1. Blockchain fundamentals</a>
+<li><a href="#org0b97437">1. Blockchain fundamentals</a>
 <ul>
-<li><a href="#org9bc879d">1.1. Mainnet and Testnet</a></li>
-<li><a href="#org6b070f8">1.2. Mainnet Alpha and Beta</a></li>
-<li><a href="#org586b9f0">1.3. Layer 1 and Layer 2</a></li>
-<li><a href="#orgf9b950f">1.4. Rollups</a></li>
-<li><a href="#org2a9ec55">1.5. State channels</a></li>
-<li><a href="#org81174bd">1.6. Sidechains</a></li>
-<li><a href="#org4354c91">1.7. Ethereum and EVM</a></li>
-<li><a href="#org9dfbe42">1.8. IAVL tree</a></li>
-<li><a href="#org347db3a">1.9. CosmWasm contract</a></li>
-<li><a href="#orge87c3d9">1.10. Cosmos Ecosystem</a></li>
-<li><a href="#org02ee096">1.11. Blockchain layers</a></li>
-<li><a href="#orga969371">1.12. Optimistic parallelization</a></li>
-<li><a href="#org3b08c45">1.13. Integrated and Modular blockchain</a></li>
-<li><a href="#orgbb5076d">1.14. EVM Execution and storage layer</a></li>
-<li><a href="#org77eaffe">1.15. Block time and finalize time</a></li>
-<li><a href="#org4171f7b">1.16. Blockchain audit</a></li>
+<li><a href="#org9cb944b">1.1. Mainnet and Testnet</a></li>
+<li><a href="#org62ab6e3">1.2. Mainnet Alpha and Beta</a></li>
+<li><a href="#orgf7351a4">1.3. Layer 1 and Layer 2</a></li>
+<li><a href="#org2a4320f">1.4. Rollups</a></li>
+<li><a href="#orga8b13a4">1.5. State channels</a></li>
+<li><a href="#orge193d8b">1.6. Sidechains</a></li>
+<li><a href="#org04b05ec">1.7. Ethereum and EVM</a></li>
+<li><a href="#orge1f6361">1.8. IAVL tree</a></li>
+<li><a href="#org84360c7">1.9. CosmWasm contract</a></li>
+<li><a href="#orgc94a691">1.10. Cosmos Ecosystem</a></li>
+<li><a href="#org0e429c3">1.11. Blockchain layers</a></li>
+<li><a href="#org36cd87b">1.12. Optimistic parallelization</a></li>
+<li><a href="#org5615603">1.13. Integrated and Modular blockchain</a></li>
+<li><a href="#orgd6b00d4">1.14. EVM Execution and storage layer</a></li>
+<li><a href="#org67d3cfa">1.15. Block time and finalize time</a></li>
+<li><a href="#org6f732ba">1.16. Blockchain audit</a></li>
 </ul>
 </li>
-<li><a href="#org4719308">2. What is Sei</a></li>
-<li><a href="#org87fab12">3. What is Sei v2</a>
+<li><a href="#orgc494a74">2. What is Sei</a></li>
+<li><a href="#orgf4fc424">3. What is Sei v2</a>
 <ul>
-<li><a href="#org9be8858">3.1. Backwards compatibility</a></li>
-<li><a href="#orgf5ff5ae">3.2. Optimistic parallelization</a></li>
-<li><a href="#org946fb71">3.3. SeiDB</a></li>
-<li><a href="#orgbbf288a">3.4. Interoperability</a></li>
+<li><a href="#org0300354">3.1. Backwards compatibility</a></li>
+<li><a href="#org9b573e6">3.2. Optimistic parallelization</a></li>
+<li><a href="#org47ecbcf">3.3. SeiDB</a></li>
+<li><a href="#org52b7537">3.4. Interoperability</a></li>
 </ul>
 </li>
 </ul>
@@ -52,12 +52,12 @@
 <p>
 This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parallelized-evm/">Sei-v2-blog</a> as well as some terminology explained by <a href="https://chatgpt.com/g/g-TJq7kBEsX-evm-gpt">EVM GPT</a>.
 </p>
-<div id="outline-container-orgf3fd5a9" class="outline-2">
-<h2 id="orgf3fd5a9"><span class="section-number-2">1.</span> Blockchain fundamentals</h2>
+<div id="outline-container-org0b97437" class="outline-2">
+<h2 id="org0b97437"><span class="section-number-2">1.</span> Blockchain fundamentals</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org9bc879d" class="outline-3">
-<h3 id="org9bc879d"><span class="section-number-3">1.1.</span> Mainnet and Testnet</h3>
+<div id="outline-container-org9cb944b" class="outline-3">
+<h3 id="org9cb944b"><span class="section-number-3">1.1.</span> Mainnet and Testnet</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>Mainnet: real transactions occur and have real-world value; any operation is final and irreversible.</li>
@@ -65,8 +65,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org6b070f8" class="outline-3">
-<h3 id="org6b070f8"><span class="section-number-3">1.2.</span> Mainnet Alpha and Beta</h3>
+<div id="outline-container-org62ab6e3" class="outline-3">
+<h3 id="org62ab6e3"><span class="section-number-3">1.2.</span> Mainnet Alpha and Beta</h3>
 <div class="outline-text-3" id="text-1-2">
 <ul class="org-ul">
 <li>Alpha: test core functionalities and gather initial feedback in live environment.</li>
@@ -74,8 +74,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org586b9f0" class="outline-3">
-<h3 id="org586b9f0"><span class="section-number-3">1.3.</span> Layer 1 and Layer 2</h3>
+<div id="outline-container-orgf7351a4" class="outline-3">
+<h3 id="orgf7351a4"><span class="section-number-3">1.3.</span> Layer 1 and Layer 2</h3>
 <div class="outline-text-3" id="text-1-3">
 <ul class="org-ul">
 <li>L1: the main network where all transactions are processed and the primary chain is maintained.</li>
@@ -83,8 +83,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-orgf9b950f" class="outline-3">
-<h3 id="orgf9b950f"><span class="section-number-3">1.4.</span> Rollups</h3>
+<div id="outline-container-org2a4320f" class="outline-3">
+<h3 id="org2a4320f"><span class="section-number-3">1.4.</span> Rollups</h3>
 <div class="outline-text-3" id="text-1-4">
 <ul class="org-ul">
 <li>Processes transactions off-chain and periodically submits a summary (rollup) to L1.</li>
@@ -99,8 +99,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org2a9ec55" class="outline-3">
-<h3 id="org2a9ec55"><span class="section-number-3">1.5.</span> State channels</h3>
+<div id="outline-container-orga8b13a4" class="outline-3">
+<h3 id="orga8b13a4"><span class="section-number-3">1.5.</span> State channels</h3>
 <div class="outline-text-3" id="text-1-5">
 <ul class="org-ul">
 <li>allow participants to conduct numerous off-chain transactions, with only the final state recorded on the L1.</li>
@@ -108,8 +108,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org81174bd" class="outline-3">
-<h3 id="org81174bd"><span class="section-number-3">1.6.</span> Sidechains</h3>
+<div id="outline-container-orge193d8b" class="outline-3">
+<h3 id="orge193d8b"><span class="section-number-3">1.6.</span> Sidechains</h3>
 <div class="outline-text-3" id="text-1-6">
 <ul class="org-ul">
 <li>Independent blockchains running parallel to the main chain, with own consensus and security.</li>
@@ -117,8 +117,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org4354c91" class="outline-3">
-<h3 id="org4354c91"><span class="section-number-3">1.7.</span> Ethereum and EVM</h3>
+<div id="outline-container-org04b05ec" class="outline-3">
+<h3 id="org04b05ec"><span class="section-number-3">1.7.</span> Ethereum and EVM</h3>
 <div class="outline-text-3" id="text-1-7">
 <ul class="org-ul">
 <li>Ethereum: a blockchain ecosystem, includes the blockchain, consensus mechanism, smart contracts, native cryptocurrency.</li>
@@ -126,8 +126,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org9dfbe42" class="outline-3">
-<h3 id="org9dfbe42"><span class="section-number-3">1.8.</span> IAVL tree</h3>
+<div id="outline-container-orge1f6361" class="outline-3">
+<h3 id="orge1f6361"><span class="section-number-3">1.8.</span> IAVL tree</h3>
 <div class="outline-text-3" id="text-1-8">
 <ul class="org-ul">
 <li>AVL tree: self-balancing binary tree where the difference in heights between left and right subtrees of anynode is at most one.</li>
@@ -135,8 +135,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org347db3a" class="outline-3">
-<h3 id="org347db3a"><span class="section-number-3">1.9.</span> CosmWasm contract</h3>
+<div id="outline-container-org84360c7" class="outline-3">
+<h3 id="org84360c7"><span class="section-number-3">1.9.</span> CosmWasm contract</h3>
 <div class="outline-text-3" id="text-1-9">
 <ul class="org-ul">
 <li>Allows developers to write fast and portable smart contracts in WebAssembly.</li>
@@ -144,8 +144,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-orge87c3d9" class="outline-3">
-<h3 id="orge87c3d9"><span class="section-number-3">1.10.</span> Cosmos Ecosystem</h3>
+<div id="outline-container-orgc94a691" class="outline-3">
+<h3 id="orgc94a691"><span class="section-number-3">1.10.</span> Cosmos Ecosystem</h3>
 <div class="outline-text-3" id="text-1-10">
 <ul class="org-ul">
 <li>A network of independent, interoperable blockchains designed to create an Internet of blockchain.</li>
@@ -155,8 +155,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org02ee096" class="outline-3">
-<h3 id="org02ee096"><span class="section-number-3">1.11.</span> Blockchain layers</h3>
+<div id="outline-container-org0e429c3" class="outline-3">
+<h3 id="org0e429c3"><span class="section-number-3">1.11.</span> Blockchain layers</h3>
 <div class="outline-text-3" id="text-1-11">
 <ul class="org-ul">
 <li>Infrastructure layer: the physical devices that support the network; and the underlying communication protocols for data transfer between nodes.</li>
@@ -169,8 +169,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-orga969371" class="outline-3">
-<h3 id="orga969371"><span class="section-number-3">1.12.</span> Optimistic parallelization</h3>
+<div id="outline-container-org36cd87b" class="outline-3">
+<h3 id="org36cd87b"><span class="section-number-3">1.12.</span> Optimistic parallelization</h3>
 <div class="outline-text-3" id="text-1-12">
 <ul class="org-ul">
 <li>Multiple transactions are processed in parallel under the assumption that they will conflict with each other; necessary corrections are made afterwards if conflicts are detected.</li>
@@ -178,8 +178,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org3b08c45" class="outline-3">
-<h3 id="org3b08c45"><span class="section-number-3">1.13.</span> Integrated and Modular blockchain</h3>
+<div id="outline-container-org5615603" class="outline-3">
+<h3 id="org5615603"><span class="section-number-3">1.13.</span> Integrated and Modular blockchain</h3>
 <div class="outline-text-3" id="text-1-13">
 <ul class="org-ul">
 <li>Integrated: all components, e.g., execution layer, consensus mechanism, networking are tightly coupled; faster internal communication but lower flexibility and scalability.</li>
@@ -187,8 +187,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-orgbb5076d" class="outline-3">
-<h3 id="orgbb5076d"><span class="section-number-3">1.14.</span> EVM Execution and storage layer</h3>
+<div id="outline-container-orgd6b00d4" class="outline-3">
+<h3 id="orgd6b00d4"><span class="section-number-3">1.14.</span> EVM Execution and storage layer</h3>
 <div class="outline-text-3" id="text-1-14">
 <ul class="org-ul">
 <li>Execution: responsible for running smart contracts and processing transactions.</li>
@@ -196,8 +196,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org77eaffe" class="outline-3">
-<h3 id="org77eaffe"><span class="section-number-3">1.15.</span> Block time and finalize time</h3>
+<div id="outline-container-org67d3cfa" class="outline-3">
+<h3 id="org67d3cfa"><span class="section-number-3">1.15.</span> Block time and finalize time</h3>
 <div class="outline-text-3" id="text-1-15">
 <ul class="org-ul">
 <li>Block: the average time for a new block to be added.</li>
@@ -206,8 +206,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org4171f7b" class="outline-3">
-<h3 id="org4171f7b"><span class="section-number-3">1.16.</span> Blockchain audit</h3>
+<div id="outline-container-org6f732ba" class="outline-3">
+<h3 id="org6f732ba"><span class="section-number-3">1.16.</span> Blockchain audit</h3>
 <div class="outline-text-3" id="text-1-16">
 <ul class="org-ul">
 <li>A review of a blockchain to ensures its security and functionality.</li>
@@ -215,8 +215,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </div>
 </div>
 </div>
-<div id="outline-container-org4719308" class="outline-2">
-<h2 id="org4719308"><span class="section-number-2">2.</span> What is Sei</h2>
+<div id="outline-container-orgc494a74" class="outline-2">
+<h2 id="orgc494a74"><span class="section-number-2">2.</span> What is Sei</h2>
 <div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li>On mainnet beta since August 2023.</li>
@@ -226,8 +226,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org87fab12" class="outline-2">
-<h2 id="org87fab12"><span class="section-number-2">3.</span> What is Sei v2</h2>
+<div id="outline-container-orgf4fc424" class="outline-2">
+<h2 id="orgf4fc424"><span class="section-number-2">3.</span> What is Sei v2</h2>
 <div class="outline-text-2" id="text-3">
 <ul class="org-ul">
 <li>The first fully parallelized EVM.</li>
@@ -239,8 +239,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 <li>Once audits are complete, the upgrade is released in a public testnet in Q1 2024, and deployed to mainnet in H1 2024.</li>
 </ul>
 </div>
-<div id="outline-container-org9be8858" class="outline-3">
-<h3 id="org9be8858"><span class="section-number-3">3.1.</span> Backwards compatibility</h3>
+<div id="outline-container-org0300354" class="outline-3">
+<h3 id="org0300354"><span class="section-number-3">3.1.</span> Backwards compatibility</h3>
 <div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
 <li>Ethereum contracts can be seamlessly deployed on Sei v2 with no code changes.</li>
@@ -249,8 +249,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-orgf5ff5ae" class="outline-3">
-<h3 id="orgf5ff5ae"><span class="section-number-3">3.2.</span> Optimistic parallelization</h3>
+<div id="outline-container-org9b573e6" class="outline-3">
+<h3 id="org9b573e6"><span class="section-number-3">3.2.</span> Optimistic parallelization</h3>
 <div class="outline-text-3" id="text-3-2">
 <ul class="org-ul">
 <li>Sei requires smart contract developers to optionally define the state that smart contracts are using, Sei v2 removes this need.</li>
@@ -261,8 +261,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org946fb71" class="outline-3">
-<h3 id="org946fb71"><span class="section-number-3">3.3.</span> SeiDB</h3>
+<div id="outline-container-org47ecbcf" class="outline-3">
+<h3 id="org47ecbcf"><span class="section-number-3">3.3.</span> SeiDB</h3>
 <div class="outline-text-3" id="text-3-3">
 <ul class="org-ul">
 <li>Sei uses a vanilla database layer composed of an IAVL tree, which is less efficient in terms of storage and latency.</li>
@@ -275,8 +275,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-orgbbf288a" class="outline-3">
-<h3 id="orgbbf288a"><span class="section-number-3">3.4.</span> Interoperability</h3>
+<div id="outline-container-org52b7537" class="outline-3">
+<h3 id="org52b7537"><span class="section-number-3">3.4.</span> Interoperability</h3>
 <div class="outline-text-3" id="text-3-4">
 <ul class="org-ul">
 <li>Sei v2 processes different transactions, e.g., Cosmwasm, EVM in a uniformed way, and then forwards them to different storage sections.</li>

@@ -7,7 +7,12 @@
       href="https://chenyo-17.github.io/org-static-blog/rss.xml"
       title="RSS feed for https://chenyo-17.github.io/org-static-blog">
 <title>org-static-blog</title>
-</head>
+<script type="text/javascript"
+             src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+        <script type="text/x-mathjax-config">
+             MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'],['\\(','\\)']]}});
+        </script></head>
 <body>
 <div id="preamble" class="status"></div>
 <div id="content">
@@ -17,16 +22,16 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org5608f6f">1. Concurrency vs Parallelism</a></li>
-<li><a href="#org1780c05">2. Use goroutines for states</a>
+<li><a href="#org435f688">1. Concurrency vs Parallelism</a></li>
+<li><a href="#org3400546">2. Use goroutines for states</a>
 <ul>
-<li><a href="#orgbdc8e04">2.1. Matching a regex</a></li>
-<li><a href="#org4af7de3">2.2. When the state variable cannot be avoided</a></li>
+<li><a href="#org2e73967">2.1. Matching a regex</a></li>
+<li><a href="#org6b60e54">2.2. When the state variable cannot be avoided</a></li>
 </ul>
 </li>
-<li><a href="#org87662ed">3. Pattern 1: publish/subscribe server</a>
+<li><a href="#org1a96d85">3. Pattern 1: publish/subscribe server</a>
 <ul>
-<li><a href="#orgb063a17">3.1. Options for slow goroutines</a></li>
+<li><a href="#orgb82b8b0">3.1. Options for slow goroutines</a></li>
 </ul>
 </li>
 </ul>
@@ -35,8 +40,8 @@
 <p>
 This a personal note for the <a href="https://www.youtube.com/watch?v=IdCbMO0Ey9I">Russ Cox guest lecture</a>.
 </p>
-<div id="outline-container-org5608f6f" class="outline-2">
-<h2 id="org5608f6f"><span class="section-number-2">1.</span> Concurrency vs Parallelism</h2>
+<div id="outline-container-org435f688" class="outline-2">
+<h2 id="org435f688"><span class="section-number-2">1.</span> Concurrency vs Parallelism</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Concurrency: write a program to handle lot of things at once
@@ -47,12 +52,12 @@ This a personal note for the <a href="https://www.youtube.com/watch?v=IdCbMO0Ey9
 </ul>
 </div>
 </div>
-<div id="outline-container-org1780c05" class="outline-2">
-<h2 id="org1780c05"><span class="section-number-2">2.</span> Use goroutines for states</h2>
+<div id="outline-container-org3400546" class="outline-2">
+<h2 id="org3400546"><span class="section-number-2">2.</span> Use goroutines for states</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-orgbdc8e04" class="outline-3">
-<h3 id="orgbdc8e04"><span class="section-number-3">2.1.</span> Matching a regex</h3>
+<div id="outline-container-org2e73967" class="outline-3">
+<h3 id="org2e73967"><span class="section-number-3">2.1.</span> Matching a regex</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>return if a given string matches a regex: start with <code>"</code>, contains arbitrary escape sequence and ends with <code>*</code></li>
@@ -109,8 +114,8 @@ clear logic: store states in the code
 </ul>
 </div>
 </div>
-<div id="outline-container-org4af7de3" class="outline-3">
-<h3 id="org4af7de3"><span class="section-number-3">2.2.</span> When the state variable cannot be avoided</h3>
+<div id="outline-container-org6b60e54" class="outline-3">
+<h3 id="org6b60e54"><span class="section-number-3">2.2.</span> When the state variable cannot be avoided</h3>
 <div class="outline-text-3" id="text-2-2">
 <ul class="org-ul">
 <li><p>
@@ -212,8 +217,8 @@ use additional goroutines to hold states
 </div>
 </div>
 </div>
-<div id="outline-container-org87662ed" class="outline-2">
-<h2 id="org87662ed"><span class="section-number-2">3.</span> Pattern 1: publish/subscribe server</h2>
+<div id="outline-container-org1a96d85" class="outline-2">
+<h2 id="org1a96d85"><span class="section-number-2">3.</span> Pattern 1: publish/subscribe server</h2>
 <div class="outline-text-2" id="text-3">
 <ul class="org-ul">
 <li>the information goes one way: server -&gt; client</li>
@@ -263,8 +268,8 @@ prefer <code>defer</code> when unlocking the mutex
 </div></li>
 </ul>
 </div>
-<div id="outline-container-orgb063a17" class="outline-3">
-<h3 id="orgb063a17"><span class="section-number-3">3.1.</span> Options for slow goroutines</h3>
+<div id="outline-container-orgb82b8b0" class="outline-3">
+<h3 id="orgb82b8b0"><span class="section-number-3">3.1.</span> Options for slow goroutines</h3>
 <div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
 <li>slow down event generation</li>
@@ -384,21 +389,21 @@ convert mutexes into goroutines, not suitable for Raft where state transition is
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org9f465f9">1. Router</a></li>
-<li><a href="#org7c68506">2. Link</a></li>
-<li><a href="#org5f84d6a">3. Workshop 3</a>
+<li><a href="#orgfa812d5">1. Router</a></li>
+<li><a href="#org94be7df">2. Link</a></li>
+<li><a href="#orgce133ed">3. Workshop 3</a>
 <ul>
-<li><a href="#org81de9e0">3.1. Structure</a></li>
-<li><a href="#orga435c56">3.2. States</a></li>
-<li><a href="#orgd70da6a">3.3. Props</a></li>
-<li><a href="#org4d4ae86">3.4. Why passing down the update function in props 1, 4, 6?</a></li>
+<li><a href="#org722576a">3.1. Structure</a></li>
+<li><a href="#org27e4613">3.2. States</a></li>
+<li><a href="#orgae84d1e">3.3. Props</a></li>
+<li><a href="#org73c0eff">3.4. Why passing down the update function in props 1, 4, 6?</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org9f465f9" class="outline-2">
-<h2 id="org9f465f9"><span class="section-number-2">1.</span> Router</h2>
+<div id="outline-container-orgfa812d5" class="outline-2">
+<h2 id="orgfa812d5"><span class="section-number-2">1.</span> Router</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>use the Reach <a href="https://reach.tech/router/">Reach Router</a> library</li>
@@ -420,8 +425,8 @@ URL -&gt; Router -&gt; render different components
 </ul>
 </div>
 </div>
-<div id="outline-container-org7c68506" class="outline-2">
-<h2 id="org7c68506"><span class="section-number-2">2.</span> Link</h2>
+<div id="outline-container-org94be7df" class="outline-2">
+<h2 id="org94be7df"><span class="section-number-2">2.</span> Link</h2>
 <div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li>relative: <code class="src src-js">&lt;Link to=<span style="color: #98be65;">"newpage"</span>&gt;Click me&lt;/Link&gt;</code></li>
@@ -429,23 +434,23 @@ URL -&gt; Router -&gt; render different components
 </ul>
 </div>
 </div>
-<div id="outline-container-org5f84d6a" class="outline-2">
-<h2 id="org5f84d6a"><span class="section-number-2">3.</span> Workshop 3</h2>
+<div id="outline-container-orgce133ed" class="outline-2">
+<h2 id="orgce133ed"><span class="section-number-2">3.</span> Workshop 3</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org81de9e0" class="outline-3">
-<h3 id="org81de9e0"><span class="section-number-3">3.1.</span> Structure</h3>
+<div id="outline-container-org722576a" class="outline-3">
+<h3 id="org722576a"><span class="section-number-3">3.1.</span> Structure</h3>
 <div class="outline-text-3" id="text-3-1">
 
-<figure id="org124a54e">
+<figure id="org77026f0">
 <img src="./static/workshop-3-structure.png" alt="workshop-3-structure.png" align="center" width="600px">
 
 <figcaption><span class="figure-number">Figure 1: </span>The Catbook structure in workshop 3</figcaption>
 </figure>
 </div>
 </div>
-<div id="outline-container-orga435c56" class="outline-3">
-<h3 id="orga435c56"><span class="section-number-3">3.2.</span> States</h3>
+<div id="outline-container-org27e4613" class="outline-3">
+<h3 id="org27e4613"><span class="section-number-3">3.2.</span> States</h3>
 <div class="outline-text-3" id="text-3-2">
 <table>
 
@@ -477,8 +482,8 @@ URL -&gt; Router -&gt; render different components
 </table>
 </div>
 </div>
-<div id="outline-container-orgd70da6a" class="outline-3">
-<h3 id="orgd70da6a"><span class="section-number-3">3.3.</span> Props</h3>
+<div id="outline-container-orgae84d1e" class="outline-3">
+<h3 id="orgae84d1e"><span class="section-number-3">3.3.</span> Props</h3>
 <div class="outline-text-3" id="text-3-3">
 <table>
 
@@ -530,8 +535,8 @@ URL -&gt; Router -&gt; render different components
 </table>
 </div>
 </div>
-<div id="outline-container-org4d4ae86" class="outline-3">
-<h3 id="org4d4ae86"><span class="section-number-3">3.4.</span> Why passing down the update function in props 1, 4, 6?</h3>
+<div id="outline-container-org73c0eff" class="outline-3">
+<h3 id="org73c0eff"><span class="section-number-3">3.4.</span> Why passing down the update function in props 1, 4, 6?</h3>
 <div class="outline-text-3" id="text-3-4">
 <ul class="org-ul">
 <li>To share the parent states, i.e., <code>stories</code> and <code>comments</code> to child component. Since the post action happens in the child component, we need a way to automatically update the states to see new contents immediately.</li>
@@ -545,34 +550,34 @@ URL -&gt; Router -&gt; render different components
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgaa0174a">1. What is a React hook</a>
+<li><a href="#org49d8414">1. What is a React hook</a>
 <ul>
-<li><a href="#orga7cee8a">1.1. <code>useState</code> is not enough</a></li>
-<li><a href="#org260f295">1.2. <code>useEffect</code> runs after specific variable change</a></li>
+<li><a href="#org61fadd3">1.1. <code>useState</code> is not enough</a></li>
+<li><a href="#orgb625ec0">1.2. <code>useEffect</code> runs after specific variable change</a></li>
 </ul>
 </li>
-<li><a href="#org040fd54">2. React hook patterns</a>
+<li><a href="#org160bc21">2. React hook patterns</a>
 <ul>
-<li><a href="#org23a5fc8">2.1. Fetch and send data</a></li>
-<li><a href="#orge68faf5">2.2. Conditional rendering</a></li>
-<li><a href="#org23cf355">2.3. Render an array of Data</a></li>
+<li><a href="#org2eb59f5">2.1. Fetch and send data</a></li>
+<li><a href="#orgf0f85b9">2.2. Conditional rendering</a></li>
+<li><a href="#org69b2b17">2.3. Render an array of Data</a></li>
 </ul>
 </li>
-<li><a href="#org2a8e80c">3. Example: Stopwatch</a></li>
-<li><a href="#org76fea2b">4. DOM and component mounting</a></li>
+<li><a href="#org87ae685">3. Example: Stopwatch</a></li>
+<li><a href="#org1965800">4. DOM and component mounting</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-orgaa0174a" class="outline-2">
-<h2 id="orgaa0174a"><span class="section-number-2">1.</span> What is a React hook</h2>
+<div id="outline-container-org49d8414" class="outline-2">
+<h2 id="org49d8414"><span class="section-number-2">1.</span> What is a React hook</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Special functions to access parts of the component lifestyle.</li>
 <li>e.g., <code>useState</code></li>
 </ul>
 </div>
-<div id="outline-container-orga7cee8a" class="outline-3">
-<h3 id="orga7cee8a"><span class="section-number-3">1.1.</span> <code>useState</code> is not enough</h3>
+<div id="outline-container-org61fadd3" class="outline-3">
+<h3 id="org61fadd3"><span class="section-number-3">1.1.</span> <code>useState</code> is not enough</h3>
 <div class="outline-text-3" id="text-1-1">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr">1: </span><span style="color: #51afef;">const</span> [<span style="color: #dcaeea;">persons</span>, <span style="color: #dcaeea;">setPersons</span>] = useState([]);
@@ -591,8 +596,8 @@ URL -&gt; Router -&gt; render different components
 </ul>
 </div>
 </div>
-<div id="outline-container-org260f295" class="outline-3">
-<h3 id="org260f295"><span class="section-number-3">1.2.</span> <code>useEffect</code> runs after specific variable change</h3>
+<div id="outline-container-orgb625ec0" class="outline-3">
+<h3 id="orgb625ec0"><span class="section-number-3">1.2.</span> <code>useEffect</code> runs after specific variable change</h3>
 <div class="outline-text-3" id="text-1-2">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr">1: </span>useEffect(() =&gt; {
@@ -620,12 +625,12 @@ URL -&gt; Router -&gt; render different components
 </div>
 </div>
 </div>
-<div id="outline-container-org040fd54" class="outline-2">
-<h2 id="org040fd54"><span class="section-number-2">2.</span> React hook patterns</h2>
+<div id="outline-container-org160bc21" class="outline-2">
+<h2 id="org160bc21"><span class="section-number-2">2.</span> React hook patterns</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org23a5fc8" class="outline-3">
-<h3 id="org23a5fc8"><span class="section-number-3">2.1.</span> Fetch and send data</h3>
+<div id="outline-container-org2eb59f5" class="outline-3">
+<h3 id="org2eb59f5"><span class="section-number-3">2.1.</span> Fetch and send data</h3>
 <div class="outline-text-3" id="text-2-1">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr">1: </span><span style="color: #5B6268;">/* </span><span style="color: #5B6268;">fetch data on mount</span><span style="color: #5B6268;"> */</span>
@@ -650,8 +655,8 @@ URL -&gt; Router -&gt; render different components
 </div>
 </div>
 </div>
-<div id="outline-container-orge68faf5" class="outline-3">
-<h3 id="orge68faf5"><span class="section-number-3">2.2.</span> Conditional rendering</h3>
+<div id="outline-container-orgf0f85b9" class="outline-3">
+<h3 id="orgf0f85b9"><span class="section-number-3">2.2.</span> Conditional rendering</h3>
 <div class="outline-text-3" id="text-2-2">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr">1: </span><span style="color: #5B6268;">// </span><span style="color: #5B6268;">JSX is a way of writing HTML in js</span>
@@ -666,8 +671,8 @@ URL -&gt; Router -&gt; render different components
 </div>
 </div>
 </div>
-<div id="outline-container-org23cf355" class="outline-3">
-<h3 id="org23cf355"><span class="section-number-3">2.3.</span> Render an array of Data</h3>
+<div id="outline-container-org69b2b17" class="outline-3">
+<h3 id="org69b2b17"><span class="section-number-3">2.3.</span> Render an array of Data</h3>
 <div class="outline-text-3" id="text-2-3">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr">1: </span><span style="color: #51afef;">const</span> <span style="color: #dcaeea;">data</span> = [
@@ -686,8 +691,8 @@ URL -&gt; Router -&gt; render different components
 </div>
 </div>
 </div>
-<div id="outline-container-org2a8e80c" class="outline-2">
-<h2 id="org2a8e80c"><span class="section-number-2">3.</span> Example: Stopwatch</h2>
+<div id="outline-container-org87ae685" class="outline-2">
+<h2 id="org87ae685"><span class="section-number-2">3.</span> Example: Stopwatch</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr"> 1: </span><span style="color: #51afef;">const</span> <span style="color: #dcaeea;">Stopwatch</span> = () =&gt; {
@@ -708,8 +713,8 @@ URL -&gt; Router -&gt; render different components
 </div>
 </div>
 </div>
-<div id="outline-container-org76fea2b" class="outline-2">
-<h2 id="org76fea2b"><span class="section-number-2">4.</span> DOM and component mounting</h2>
+<div id="outline-container-org1965800" class="outline-2">
+<h2 id="org1965800"><span class="section-number-2">4.</span> DOM and component mounting</h2>
 <div class="outline-text-2" id="text-4">
 <ul class="org-ul">
 <li>DOM (Document Object Model): a programming interface for web documents; represents the structure of a document, e.g., HTML, as a tree of objects, where each object corresponds to a part of the document; it dynamically updates the document contents
