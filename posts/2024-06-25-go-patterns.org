@@ -3,6 +3,8 @@
 #+description: This a personal note for the [[https://www.youtube.com/watch?v=IdCbMO0Ey9I][Go lecture]].
 #+filetags: go design-pattern study
 
+This a personal note for the [[https://www.youtube.com/watch?v=IdCbMO0Ey9I][Russ Cox guest lecture]].
+
 * Concurrency vs Parallelism
 - Concurrency: write a program to handle lot of things at once
   - not necessarily faster

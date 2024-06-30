@@ -18,7 +18,7 @@
 
 #+CAPTION: The weather at the Rothorn Kulm
 #+ATTR_HTML: :align center
-#+ATTR_HTML: :width 600px
+#+ATTR_HTML: :width 400px
 [[./static/restaurant.jpg]]
 
 * What did we do

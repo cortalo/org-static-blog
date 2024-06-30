@@ -12,19 +12,84 @@
 <div id="preamble" class="status"></div>
 <div id="content">
 
+<div class="post-date">30 Jun 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-06-30-ethereum-virtual-machine.html">Ethereum Virtual Machine</a></h1>
+<nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org26322ad">1. Terminology</a>
+<ul>
+<li><a href="#orge3e8820">1.1. Transaction execution</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+<p>
+This is a personal note of EVM, resources are from:
+</p>
+<ul class="org-ul">
+<li><a href="https://ethereum.org/en/developers/docs/evm/">ethereum.org</a></li>
+<li><a href="https://chatgpt.com/g/g-TJq7kBEsX-evm-gpt">EVM GPT</a></li>
+<li><a href="https://ethereum.github.io/yellowpaper/paper.pdf">Ethereum yellowpaper</a></li>
+</ul>
+<div id="outline-container-org26322ad" class="outline-2">
+<h2 id="org26322ad"><span class="section-number-2">1.</span> Terminology</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>EVM: a decentralized virtual environment that executes code consistently and securely across all Ethereum nodes.</li>
+<li>Gas: used to measure the computational effort required to execute smart contracts.</li>
+<li>Ether: the native cryptocurrency in Ethereum.</li>
+<li>State: A modified Merkle Patricia Trie to keep all accounts linked by hashes and reducible to a single root hash stored on the blockchain.</li>
+<li>State transition function: <code>Y(S, T)=S'</code>: produces a <b><b>deterministic</b></b> new valid state (<code>S'</code>) given an old valid state (<code>S</code>) new set of valid transactions (<code>T</code>)</li>
+<li>Transactions: signed instructions from accounts, includes
+<ul class="org-ul">
+<li>a contraction creation to create a new contract account containing compiled contract bytecode, or</li>
+<li>a message call to a contract to execute the bytecode.</li>
+</ul></li>
+<li>Blockchain paradigm: a simple application on a decentralized, but singleton, compute resource (yellowpaper).</li>
+</ul>
+
+
+<figure id="org89d1ccc">
+<img src="https://ethereum.org/_next/image/?url=%2Fcontent%2Fdevelopers%2Fdocs%2Fevm%2Fevm.png&amp;w=1920&amp;q=75" alt="?url=%2Fcontent%2Fdevelopers%2Fdocs%2Fevm%2Fevm.png&amp;w=1920&amp;q=75" align="center" width="400px">
+
+<figcaption><span class="figure-number">Figure 1: </span>The EVM structure</figcaption>
+</figure>
+</div>
+<div id="outline-container-orge3e8820" class="outline-3">
+<h3 id="orge3e8820"><span class="section-number-3">1.1.</span> Transaction execution</h3>
+<div class="outline-text-3" id="text-1-1">
+<ol class="org-ol">
+<li>An user (EOA) signs a transaction, including the sender, receiver (the contract address), Ether value, Gas limit and Gas price.</li>
+<li>The transaction is broadcast to the Ethereum network.</li>
+<li>Once a validator receives the transaction, it first performs sanity check, e.g., signature validation, balance check.</li>
+<li>Upon passing the validation, a transaction is included in a block and executed.
+<ol class="org-ol">
+<li>Initialization: PC set to the start of the contract code; Gas limit; empty stack, memory; contract state trie loaded to the storage.</li>
+<li>Execution: locally executes each bytecode and modifies stack (<code>PUSH</code>), memory (<code>MSTORE</code>) and storage (<code>SSTORE</code>); modifies the global state tree (<code>CALL</code>).</li>
+<li>Abortion: if the gas is used up, all state changes during the execution are reverted.</li>
+</ol></li>
+<li>After the execution is finished, the validator assembles the block and proposes the new block.</li>
+<li>If a consensus is reached, the block is appended to the blockchain, and other nodes verify the block and update their global states accordingly.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-evm.html">evm</a> </div>
 <div class="post-date">29 Jun 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-06-29-viewed:-interlaken.html">Viewed: Interlaken</a></h1>
 <nav id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org00ead8f">1. Where did we go</a></li>
-<li><a href="#orgac3bbe9">2. Why did we go</a></li>
-<li><a href="#org33b5d80">3. What did we do</a></li>
+<li><a href="#org5b2db9d">1. Where did we go</a></li>
+<li><a href="#org5f87072">2. Why did we go</a></li>
+<li><a href="#org7009744">3. What did we do</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org00ead8f" class="outline-2">
-<h2 id="org00ead8f"><span class="section-number-2">1.</span> Where did we go</h2>
+<div id="outline-container-org5b2db9d" class="outline-2">
+<h2 id="org5b2db9d"><span class="section-number-2">1.</span> Where did we go</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>We rent a car and drove to Interlaken.</li>
@@ -32,15 +97,15 @@
 </ul>
 
 
-<figure id="org7742e0c">
+<figure id="orge425eee">
 <img src="./static/car.jpg" alt="car.jpg" align="center" width="600px">
 
 <figcaption><span class="figure-number">Figure 1: </span>The view outside the car</figcaption>
 </figure>
 </div>
 </div>
-<div id="outline-container-orgac3bbe9" class="outline-2">
-<h2 id="orgac3bbe9"><span class="section-number-2">2.</span> Why did we go</h2>
+<div id="outline-container-org5f87072" class="outline-2">
+<h2 id="org5f87072"><span class="section-number-2">2.</span> Why did we go</h2>
 <div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li>According to the unpredictable <a href="https://www.meteoschweiz.admin.ch/#tab=forecast-map">Meteoswiss</a> forecast, this Saturday would have been the only weekend-day with some good weather in limited locations to go hiking since 2? or 3? weeks ago.</li>
@@ -48,15 +113,15 @@
 </ul>
 
 
-<figure id="org9ce1999">
-<img src="./static/restaurant.jpg" alt="restaurant.jpg" align="center" width="600px">
+<figure id="org7145796">
+<img src="./static/restaurant.jpg" alt="restaurant.jpg" align="center" width="400px">
 
 <figcaption><span class="figure-number">Figure 2: </span>The weather at the Rothorn Kulm</figcaption>
 </figure>
 </div>
 </div>
-<div id="outline-container-org33b5d80" class="outline-2">
-<h2 id="org33b5d80"><span class="section-number-2">3.</span> What did we do</h2>
+<div id="outline-container-org7009744" class="outline-2">
+<h2 id="org7009744"><span class="section-number-2">3.</span> What did we do</h2>
 <div class="outline-text-2" id="text-3">
 <ol class="org-ol">
 <li>We first went a tour in Aareschlucht, where we experienced both strong cold wind and gentle warm wind.</li>
@@ -69,14 +134,14 @@
 </ol>
 
 
-<figure id="orgc798616">
+<figure id="orgd3af150">
 <img src="./static/water.jpg" alt="water.jpg" align="center" width="600px">
 
 <figcaption><span class="figure-number">Figure 3: </span>The water in Aareschlucht</figcaption>
 </figure>
 
 
-<figure id="org7369844">
+<figure id="orgbd1a0d9">
 <img src="./static/view.jpg" alt="view.jpg" align="center" width="600px">
 
 <figcaption><span class="figure-number">Figure 4: </span>The view on the train</figcaption>
@@ -431,23 +496,26 @@ I felt &ldquo;Argo&rdquo; could have delved deeper into the absurdities of war r
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgaae3698">1. Concurrency vs Parallelism</a></li>
-<li><a href="#org3c43804">2. Use goroutines for states</a>
+<li><a href="#org5608f6f">1. Concurrency vs Parallelism</a></li>
+<li><a href="#org1780c05">2. Use goroutines for states</a>
 <ul>
-<li><a href="#org52e6ace">2.1. Matching a regex</a></li>
-<li><a href="#org37b8ba9">2.2. When the state variable cannot be avoided</a></li>
+<li><a href="#orgbdc8e04">2.1. Matching a regex</a></li>
+<li><a href="#org4af7de3">2.2. When the state variable cannot be avoided</a></li>
 </ul>
 </li>
-<li><a href="#org2de5dc6">3. Pattern 1: publish/subscribe server</a>
+<li><a href="#org87662ed">3. Pattern 1: publish/subscribe server</a>
 <ul>
-<li><a href="#orgd98e29e">3.1. Options for slow goroutines</a></li>
+<li><a href="#orgb063a17">3.1. Options for slow goroutines</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-orgaae3698" class="outline-2">
-<h2 id="orgaae3698"><span class="section-number-2">1.</span> Concurrency vs Parallelism</h2>
+<p>
+This a personal note for the <a href="https://www.youtube.com/watch?v=IdCbMO0Ey9I">Russ Cox guest lecture</a>.
+</p>
+<div id="outline-container-org5608f6f" class="outline-2">
+<h2 id="org5608f6f"><span class="section-number-2">1.</span> Concurrency vs Parallelism</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Concurrency: write a program to handle lot of things at once
@@ -458,12 +526,12 @@ I felt &ldquo;Argo&rdquo; could have delved deeper into the absurdities of war r
 </ul>
 </div>
 </div>
-<div id="outline-container-org3c43804" class="outline-2">
-<h2 id="org3c43804"><span class="section-number-2">2.</span> Use goroutines for states</h2>
+<div id="outline-container-org1780c05" class="outline-2">
+<h2 id="org1780c05"><span class="section-number-2">2.</span> Use goroutines for states</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org52e6ace" class="outline-3">
-<h3 id="org52e6ace"><span class="section-number-3">2.1.</span> Matching a regex</h3>
+<div id="outline-container-orgbdc8e04" class="outline-3">
+<h3 id="orgbdc8e04"><span class="section-number-3">2.1.</span> Matching a regex</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>return if a given string matches a regex: start with <code>"</code>, contains arbitrary escape sequence and ends with <code>*</code></li>
@@ -520,8 +588,8 @@ clear logic: store states in the code
 </ul>
 </div>
 </div>
-<div id="outline-container-org37b8ba9" class="outline-3">
-<h3 id="org37b8ba9"><span class="section-number-3">2.2.</span> When the state variable cannot be avoided</h3>
+<div id="outline-container-org4af7de3" class="outline-3">
+<h3 id="org4af7de3"><span class="section-number-3">2.2.</span> When the state variable cannot be avoided</h3>
 <div class="outline-text-3" id="text-2-2">
 <ul class="org-ul">
 <li><p>
@@ -623,8 +691,8 @@ use additional goroutines to hold states
 </div>
 </div>
 </div>
-<div id="outline-container-org2de5dc6" class="outline-2">
-<h2 id="org2de5dc6"><span class="section-number-2">3.</span> Pattern 1: publish/subscribe server</h2>
+<div id="outline-container-org87662ed" class="outline-2">
+<h2 id="org87662ed"><span class="section-number-2">3.</span> Pattern 1: publish/subscribe server</h2>
 <div class="outline-text-2" id="text-3">
 <ul class="org-ul">
 <li>the information goes one way: server -&gt; client</li>
@@ -674,8 +742,8 @@ prefer <code>defer</code> when unlocking the mutex
 </div></li>
 </ul>
 </div>
-<div id="outline-container-orgd98e29e" class="outline-3">
-<h3 id="orgd98e29e"><span class="section-number-3">3.1.</span> Options for slow goroutines</h3>
+<div id="outline-container-orgb063a17" class="outline-3">
+<h3 id="orgb063a17"><span class="section-number-3">3.1.</span> Options for slow goroutines</h3>
 <div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
 <li>slow down event generation</li>
@@ -789,87 +857,7 @@ convert mutexes into goroutines, not suitable for Raft where state transition is
 </div>
 </div>
 </div>
-<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-go.html">go</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-design-pattern.html">design-pattern</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-study.html">study</a> </div>
-<div class="post-date">24 Jun 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-06-24-a-stupid-debugging-experience.html">A stupid debugging experience</a></h1>
-<nav id="table-of-contents" role="doc-toc">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents" role="doc-toc">
-<ul>
-<li><a href="#orgdef4ee7">1. What happended</a></li>
-<li><a href="#org85997f9">2. What did I do</a></li>
-<li><a href="#org3b9504f">3. Another issue of running RPC in docker</a></li>
-</ul>
-</div>
-</nav>
-<div id="outline-container-orgdef4ee7" class="outline-2">
-<h2 id="orgdef4ee7"><span class="section-number-2">1.</span> What happended</h2>
-<div class="outline-text-2" id="text-1">
-<ul class="org-ul">
-<li>Servers SA and SB have the same docker installation, and the same running container CA and CB.</li>
-<li><p>
-A Go file G can be built on CA, but on CB it reports this error:
-</p>
-<p class="verse">
-runtime: failed to create new OS thread (have 2 already; errno=11)<br>
-runtime: may need to increase max user processes (ulimit -u)<br>
-fatal error: newosproc<br>
-</p></li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org85997f9" class="outline-2">
-<h2 id="org85997f9"><span class="section-number-2">2.</span> What did I do</h2>
-<div class="outline-text-2" id="text-2">
-<ol class="org-ol">
-<li>I compared any related configurations between SA and SB. and between CA and CB, e.g., <code class="src src-bash"><span style="color: #c678dd;">ulimit</span> -a</code>, <code class="src src-bash">/etc/security/limits.conf</code>. They all look the same.</li>
-<li>I created a new container CN on SA with the same docker image, CN can compile G.</li>
-<li>I looked into the (complex) <code>docker run</code> script for CA/CB and figured out it was due to a resource constraint <code>--pids-limit 100</code>.
-<ul class="org-ul">
-<li>Increasing this limit to 200 seems resolve the issue, but I had no idea why the Go compiler needed so many resources (perhaps due to package I imported).</li>
-</ul></li>
-<li><b><b>Until this point</b></b>, I realized, since the container did not support the compilation, why not just only transfer the compiled binary!
-<ul class="org-ul">
-<li>How silly that I didn&rsquo;t even try this in the beginning!</li>
-</ul></li>
-<li>Since the program imports the <code>net</code> package, and there is a <a href="https://www.reddit.com/r/golang/comments/pi97sp/what_is_the_consequence_of_using_cgo_enabled0/">known issue</a> of Alpine image running a Go binary file, I followed the post and disabled <code>CGO</code> on SA, then <code>docker cp</code> the binary to CA, and it worked.</li>
-</ol>
-</div>
-</div>
-<div id="outline-container-org3b9504f" class="outline-2">
-<h2 id="org3b9504f"><span class="section-number-2">3.</span> Another issue of running RPC in docker</h2>
-<div class="outline-text-2" id="text-3">
-<ul class="org-ul">
-<li>The other day, I also spent hours debugging a <code>route unreachable</code> error when I want to send a request from CA to SA.</li>
-<li>The CA is using the <code>bridge</code> network, so it should talk to SA via SA&rsquo;s interface <code>docker0</code> within the subnet <code>172.17.0.0/16</code>.</li>
-<li><p>
-However, in my case, the docker by default rejects packages from any container as shown in SA&rsquo;s <code>tcpdump</code> result:
-</p>
-<p class="verse">
-172.17.0.1-&gt;172.17.0.3 ICMP host unreachable- admin prohibited, length 68<br>
-</p></li>
-
-<li><p>
-By checking SA&rsquo;s iptables, I found this rule:
-</p>
-<div class="org-src-container">
-<pre class="src src-bash">  -A INPUT -j REJECT --reject-with icmp-host-prohibited
-</pre>
-</div>
-<ul class="org-ul">
-<li>Strangely, the <code>ping</code> still works with this rule.</li>
-</ul></li>
-
-<li><p>
-In the end, I need to append a new rule to make the RPC work.
-</p>
-<div class="org-src-container">
-<pre class="src src-bash">  iptables -I INPUT <span style="color: #da8548; font-weight: bold;">1</span> -i docker0 -p tcp --dport &lt;port&gt; -s 172.17.0.0/16 -j ACCEPT
-</pre>
-</div></li>
-</ul>
-</div>
-</div>
-<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-docker.html">docker</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-go.html">go</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-linux.html">linux</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-alpine.html">alpine</a> </div><div id="archive">
+<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-go.html">go</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-design-pattern.html">design-pattern</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-study.html">study</a> </div><div id="archive">
 <a href="https://chenyo-17.github.io/org-static-blog/archive.html">Other posts</a>
 </div>
 </div>

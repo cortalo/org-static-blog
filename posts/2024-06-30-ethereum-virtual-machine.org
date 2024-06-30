@@ -1,0 +1,39 @@
+#+title:  Ethereum Virtual Machine
+#+date: <2024-06-30 11:29>
+#+description: This is a personal note for learning EVM
+#+filetags: evm
+
+This is a personal note of EVM, resources are from:
+ - [[https://ethereum.org/en/developers/docs/evm/][ethereum.org]]
+ - [[https://chatgpt.com/g/g-TJq7kBEsX-evm-gpt][EVM GPT]]
+ - [[https://ethereum.github.io/yellowpaper/paper.pdf][Ethereum yellowpaper]]
+
+* Terminology
+- EVM: a decentralized virtual environment that executes code consistently and securely across all Ethereum nodes.
+- Gas: used to measure the computational effort required to execute smart contracts.
+- Ether: the native cryptocurrency in Ethereum.
+- State: A modified Merkle Patricia Trie to keep all accounts linked by hashes and reducible to a single root hash stored on the blockchain.
+- State transition function: ~Y(S, T)=S'~: produces a **deterministic** new valid state (~S'~) given an old valid state (~S~) new set of valid transactions (~T~)
+- Transactions: signed instructions from accounts, includes
+  - a contraction creation to create a new contract account containing compiled contract bytecode, or
+  - a message call to a contract to execute the bytecode.
+- Blockchain paradigm: a simple application on a decentralized, but singleton, compute resource (yellowpaper).
+
+# - ledger: maintains a record of activity which must adhere to a set of rules that govern what one can and cannot do to modify the ledger, e.g., cannot spend more Bitcoin than one has received.
+# - Ethereum's state: a large data structure maintaining a machine state, which can change from block to block based on a pre-defined set of rules.
+
+#+CAPTION: The EVM structure
+#+ATTR_HTML: :align center
+#+ATTR_HTML: :width 400px
+[[https://ethereum.org/_next/image/?url=%2Fcontent%2Fdevelopers%2Fdocs%2Fevm%2Fevm.png&w=1920&q=75]]
+
+** Transaction execution
+1. An user (EOA) signs a transaction, including the sender, receiver (the contract address), Ether value, Gas limit and Gas price.
+2. The transaction is broadcast to the Ethereum network.
+3. Once a validator receives the transaction, it first performs sanity check, e.g., signature validation, balance check.
+4. Upon passing the validation, a transaction is included in a block and executed.
+   1. Initialization: PC set to the start of the contract code; Gas limit; empty stack, memory; contract state trie loaded to the storage.
+   2. Execution: locally executes each bytecode and modifies stack (~PUSH~), memory (~MSTORE~) and storage (~SSTORE~); modifies the global state tree (~CALL~).
+   3. Abortion: if the gas is used up, all state changes during the execution are reverted.
+5. After the execution is finished, the validator assembles the block and proposes the new block.
+6. If a consensus is reached, the block is appended to the blockchain, and other nodes verify the block and update their global states accordingly.
