@@ -1,7 +1,7 @@
 #+title: A stupid debugging experience
 #+date: <2024-06-24 15:06>
 #+description: This post records how I debug a docker issue
-#+filetags: tools:docker lang:go tools:linux:apline
+#+filetags: docker go linux alpine
 
 * What happended
 - Servers SA and SB have the same docker installation, and the same running container CA and CB.

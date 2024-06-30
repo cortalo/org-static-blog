@@ -1,7 +1,7 @@
 #+title: Go patterns
 #+date: <2024-06-25 21:25>
 #+description: This a personal note for the [[https://www.youtube.com/watch?v=IdCbMO0Ey9I][Go lecture]].
-#+filetags: lang:go design-patterns
+#+filetags: go design-pattern study
 
 * Concurrency vs Parallelism
 - Concurrency: write a program to handle lot of things at once

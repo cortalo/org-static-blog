@@ -2,16 +2,177 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="description" content="This is a personal note for the [[https://docs.google.com/presentation/d/1n5RlpgBtXQ1OHvutx9TRLotWizyg2BPKv_780DD4-90/edit#slide=id.gb2bbafee77_1_66][web.lab lectures]].">
 <link rel="alternate"
       type="application/rss+xml"
       href="https://chenyo-17.github.io/org-static-blog/rss.xml"
       title="RSS feed for https://chenyo-17.github.io/org-static-blog">
-<title>Weblab notes: React hooks</title>
+<title>org-static-blog</title>
 </head>
 <body>
 <div id="preamble" class="status"></div>
 <div id="content">
+<h1 class="title">Posts tagged "mit":</h1>
+<div class="post-date">23 Jun 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-06-23-weblab-notes:-react-route.html">Weblab notes: React route</a></h1>
+<nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org9f465f9">1. Router</a></li>
+<li><a href="#org7c68506">2. Link</a></li>
+<li><a href="#org5f84d6a">3. Workshop 3</a>
+<ul>
+<li><a href="#org81de9e0">3.1. Structure</a></li>
+<li><a href="#orga435c56">3.2. States</a></li>
+<li><a href="#orgd70da6a">3.3. Props</a></li>
+<li><a href="#org4d4ae86">3.4. Why passing down the update function in props 1, 4, 6?</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+<div id="outline-container-org9f465f9" class="outline-2">
+<h2 id="org9f465f9"><span class="section-number-2">1.</span> Router</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>use the Reach <a href="https://reach.tech/router/">Reach Router</a> library</li>
+<li><p>
+URL -&gt; Router -&gt; render different components
+</p>
+<div class="org-src-container">
+<pre class="src src-js"><span class="linenr">1: </span>&lt;App&gt;
+<span class="linenr">2: </span>  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">conditional rendering based on curren url</span>
+<span class="linenr">3: </span>  &lt;Router&gt;
+<span class="linenr">4: </span>    &lt;Home path=<span style="color: #98be65;">"/"</span> /&gt; <span style="color: #5B6268;">// </span><span style="color: #5B6268;">root path</span>
+<span class="linenr">5: </span>    &lt;Dashboard path=<span style="color: #98be65;">"dashboard"</span> /&gt; <span style="color: #5B6268;">// </span><span style="color: #5B6268;">relative to the current URL</span>
+<span class="linenr">6: </span>    &lt;Team path=<span style="color: #98be65;">"/team"</span> /&gt; <span style="color: #5B6268;">// </span><span style="color: #5B6268;">absolute path: root path + "/team"</span>
+<span class="linenr">7: </span>    &lt;NotFound <span style="color: #51afef;">default</span> /&gt;
+<span class="linenr">8: </span>  &lt;/Router&gt;
+<span class="linenr">9: </span>&lt;/App&gt;;
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org7c68506" class="outline-2">
+<h2 id="org7c68506"><span class="section-number-2">2.</span> Link</h2>
+<div class="outline-text-2" id="text-2">
+<ul class="org-ul">
+<li>relative: <code class="src src-js">&lt;Link to=<span style="color: #98be65;">"newpage"</span>&gt;Click me&lt;/Link&gt;</code></li>
+<li>absolute: <code class="src src-js">&lt;Link to=<span style="color: #98be65;">"/newpage"</span>&gt;Click me&lt;/Link&gt;</code></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org5f84d6a" class="outline-2">
+<h2 id="org5f84d6a"><span class="section-number-2">3.</span> Workshop 3</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org81de9e0" class="outline-3">
+<h3 id="org81de9e0"><span class="section-number-3">3.1.</span> Structure</h3>
+<div class="outline-text-3" id="text-3-1">
+
+<figure id="org124a54e">
+<img src="./static/workshop-3-structure.png" alt="workshop-3-structure.png" align="center" width="600px">
+
+<figcaption><span class="figure-number">Figure 1: </span>The Catbook structure in workshop 3</figcaption>
+</figure>
+</div>
+</div>
+<div id="outline-container-orga435c56" class="outline-3">
+<h3 id="orga435c56"><span class="section-number-3">3.2.</span> States</h3>
+<div class="outline-text-3" id="text-3-2">
+<table>
+
+
+<colgroup>
+<col  class="org-center">
+</colgroup>
+
+<colgroup>
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-center">name</th>
+<th scope="col" class="org-left">states</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-center">Feed</td>
+<td class="org-left"><code>stories</code>: a list of stories</td>
+</tr>
+
+<tr>
+<td class="org-center">Card</td>
+<td class="org-left"><code>comments</code>: a list of comments for a story id</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-orgd70da6a" class="outline-3">
+<h3 id="orgd70da6a"><span class="section-number-3">3.3.</span> Props</h3>
+<div class="outline-text-3" id="text-3-3">
+<table>
+
+
+<colgroup>
+<col  class="org-center">
+</colgroup>
+
+<colgroup>
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-center">index</th>
+<th scope="col" class="org-left">props</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-center">1</td>
+<td class="org-left">a function to update <code>stories</code></td>
+</tr>
+
+<tr>
+<td class="org-center">2</td>
+<td class="org-left">all attributes in a story</td>
+</tr>
+
+<tr>
+<td class="org-center">3</td>
+<td class="org-left">the attributes used to display a story</td>
+</tr>
+
+<tr>
+<td class="org-center">4</td>
+<td class="org-left">a story id; a list of comments under the story; a function to update <code>comments</code></td>
+</tr>
+
+<tr>
+<td class="org-center">5</td>
+<td class="org-left">all attributes in a comment</td>
+</tr>
+
+<tr>
+<td class="org-center">6</td>
+<td class="org-left">a comment id; the function to update <code>comments</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org4d4ae86" class="outline-3">
+<h3 id="org4d4ae86"><span class="section-number-3">3.4.</span> Why passing down the update function in props 1, 4, 6?</h3>
+<div class="outline-text-3" id="text-3-4">
+<ul class="org-ul">
+<li>To share the parent states, i.e., <code>stories</code> and <code>comments</code> to child component. Since the post action happens in the child component, we need a way to automatically update the states to see new contents immediately.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-study.html">study</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-web.html">web</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-react.html">react</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-mit.html">mit</a> </div>
 <div class="post-date">23 Jun 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-06-23-weblab-notes:-react-hooks.html">Weblab notes: React hooks</a></h1>
 <nav id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
@@ -197,7 +358,10 @@
 </ul>
 </div>
 </div>
-<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-study.html">study</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-web.html">web</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-react.html">react</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-mit.html">mit</a> </div></div>
+<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-study.html">study</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-web.html">web</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-react.html">react</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-mit.html">mit</a> </div><div id="archive">
+<a href="https://chenyo-17.github.io/org-static-blog/archive.html">Other posts</a>
+</div>
+</div>
 <div id="postamble" class="status"></div>
 </body>
 </html>

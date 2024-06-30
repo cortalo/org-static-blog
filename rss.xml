@@ -4,7 +4,7 @@
 <title><![CDATA[org-static-blog]]></title>
 <description><![CDATA[org-static-blog]]></description>
 <link>https://chenyo-17.github.io/org-static-blog</link>
-<lastBuildDate>Sun, 30 Jun 2024 11:22:23 +0200</lastBuildDate>
+<lastBuildDate>Sun, 30 Jun 2024 11:28:36 +0200</lastBuildDate>
 <item>
   <title><![CDATA[Viewed: Interlaken]]></title>
   <description><![CDATA[
@@ -12,14 +12,14 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orge6d6653">1. Where did we go</a></li>
-<li><a href="#org619cd3a">2. Why did we go</a></li>
-<li><a href="#orgff150ec">3. What did we do</a></li>
+<li><a href="#org00ead8f">1. Where did we go</a></li>
+<li><a href="#orgac3bbe9">2. Why did we go</a></li>
+<li><a href="#org33b5d80">3. What did we do</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-orge6d6653" class="outline-2">
-<h2 id="orge6d6653"><span class="section-number-2">1.</span> Where did we go</h2>
+<div id="outline-container-org00ead8f" class="outline-2">
+<h2 id="org00ead8f"><span class="section-number-2">1.</span> Where did we go</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>We rent a car and drove to Interlaken.</li>
@@ -27,15 +27,15 @@
 </ul>
 
 
-<figure id="org9b14a09">
+<figure id="org7742e0c">
 <img src="./static/car.jpg" alt="car.jpg" align="center" width="600px">
 
 <figcaption><span class="figure-number">Figure 1: </span>The view outside the car</figcaption>
 </figure>
 </div>
 </div>
-<div id="outline-container-org619cd3a" class="outline-2">
-<h2 id="org619cd3a"><span class="section-number-2">2.</span> Why did we go</h2>
+<div id="outline-container-orgac3bbe9" class="outline-2">
+<h2 id="orgac3bbe9"><span class="section-number-2">2.</span> Why did we go</h2>
 <div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li>According to the unpredictable <a href="https://www.meteoschweiz.admin.ch/#tab=forecast-map">Meteoswiss</a> forecast, this Saturday would have been the only weekend-day with some good weather in limited locations to go hiking since 2? or 3? weeks ago.</li>
@@ -43,15 +43,15 @@
 </ul>
 
 
-<figure id="org833229d">
+<figure id="org9ce1999">
 <img src="./static/restaurant.jpg" alt="restaurant.jpg" align="center" width="600px">
 
 <figcaption><span class="figure-number">Figure 2: </span>The weather at the Rothorn Kulm</figcaption>
 </figure>
 </div>
 </div>
-<div id="outline-container-orgff150ec" class="outline-2">
-<h2 id="orgff150ec"><span class="section-number-2">3.</span> What did we do</h2>
+<div id="outline-container-org33b5d80" class="outline-2">
+<h2 id="org33b5d80"><span class="section-number-2">3.</span> What did we do</h2>
 <div class="outline-text-2" id="text-3">
 <ol class="org-ol">
 <li>We first went a tour in Aareschlucht, where we experienced both strong cold wind and gentle warm wind.</li>
@@ -64,22 +64,24 @@
 </ol>
 
 
-<figure id="org21155ae">
+<figure id="orgc798616">
 <img src="./static/water.jpg" alt="water.jpg" align="center" width="600px">
 
 <figcaption><span class="figure-number">Figure 3: </span>The water in Aareschlucht</figcaption>
 </figure>
 
 
-<figure id="org9f8fe73">
+<figure id="org7369844">
 <img src="./static/view.jpg" alt="view.jpg" align="center" width="600px">
 
 <figcaption><span class="figure-number">Figure 4: </span>The view on the train</figcaption>
 </figure>
 </div>
 </div>
-<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-trip:interlaken.html">trip:interlaken</a> </div>]]></description>
-  <category><![CDATA[trip:interlaken]]></category>
+<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-personal.html">personal</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-trip.html">trip</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-interlaken.html">interlaken</a> </div>]]></description>
+  <category><![CDATA[personal]]></category>
+  <category><![CDATA[trip]]></category>
+  <category><![CDATA[interlaken]]></category>
   <link>https://chenyo-17.github.io/org-static-blog/2024-06-29-viewed:-interlaken.html</link>
   <guid>https://chenyo-17.github.io/org-static-blog/2024-06-29-viewed:-interlaken.html</guid>
   <pubDate>Sat, 29 Jun 2024 23:52:00 +0200</pubDate>
@@ -91,33 +93,33 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org97f7f6d">1. Blockchain fundamentals</a>
+<li><a href="#orgf3fd5a9">1. Blockchain fundamentals</a>
 <ul>
-<li><a href="#org8aa269c">1.1. Mainnet and Testnet</a></li>
-<li><a href="#org643c827">1.2. Mainnet Alpha and Beta</a></li>
-<li><a href="#org38cee08">1.3. Layer 1 and Layer 2</a></li>
-<li><a href="#org7cd5054">1.4. Rollups</a></li>
-<li><a href="#org648b712">1.5. State channels</a></li>
-<li><a href="#org6ff5f25">1.6. Sidechains</a></li>
-<li><a href="#org7b60e19">1.7. Ethereum and EVM</a></li>
-<li><a href="#orga5ea0fc">1.8. IAVL tree</a></li>
-<li><a href="#orge980fe9">1.9. CosmWasm contract</a></li>
-<li><a href="#orgaa21019">1.10. Cosmos Ecosystem</a></li>
-<li><a href="#orgdbff89b">1.11. Blockchain layers</a></li>
-<li><a href="#orgbaab313">1.12. Optimistic parallelization</a></li>
-<li><a href="#org6a8d080">1.13. Integrated and Modular blockchain</a></li>
-<li><a href="#org96e6e36">1.14. EVM Execution and storage layer</a></li>
-<li><a href="#org7109e04">1.15. Block time and finalize time</a></li>
-<li><a href="#org11b1459">1.16. Blockchain audit</a></li>
+<li><a href="#org9bc879d">1.1. Mainnet and Testnet</a></li>
+<li><a href="#org6b070f8">1.2. Mainnet Alpha and Beta</a></li>
+<li><a href="#org586b9f0">1.3. Layer 1 and Layer 2</a></li>
+<li><a href="#orgf9b950f">1.4. Rollups</a></li>
+<li><a href="#org2a9ec55">1.5. State channels</a></li>
+<li><a href="#org81174bd">1.6. Sidechains</a></li>
+<li><a href="#org4354c91">1.7. Ethereum and EVM</a></li>
+<li><a href="#org9dfbe42">1.8. IAVL tree</a></li>
+<li><a href="#org347db3a">1.9. CosmWasm contract</a></li>
+<li><a href="#orge87c3d9">1.10. Cosmos Ecosystem</a></li>
+<li><a href="#org02ee096">1.11. Blockchain layers</a></li>
+<li><a href="#orga969371">1.12. Optimistic parallelization</a></li>
+<li><a href="#org3b08c45">1.13. Integrated and Modular blockchain</a></li>
+<li><a href="#orgbb5076d">1.14. EVM Execution and storage layer</a></li>
+<li><a href="#org77eaffe">1.15. Block time and finalize time</a></li>
+<li><a href="#org4171f7b">1.16. Blockchain audit</a></li>
 </ul>
 </li>
-<li><a href="#orgea9deac">2. What is Sei</a></li>
-<li><a href="#orgf8e53d7">3. What is Sei v2</a>
+<li><a href="#org4719308">2. What is Sei</a></li>
+<li><a href="#org87fab12">3. What is Sei v2</a>
 <ul>
-<li><a href="#org9722240">3.1. Backwards compatibility</a></li>
-<li><a href="#org15385d8">3.2. Optimistic parallelization</a></li>
-<li><a href="#orgd4f21cb">3.3. SeiDB</a></li>
-<li><a href="#org0d7a47c">3.4. Interoperability</a></li>
+<li><a href="#org9be8858">3.1. Backwards compatibility</a></li>
+<li><a href="#orgf5ff5ae">3.2. Optimistic parallelization</a></li>
+<li><a href="#org946fb71">3.3. SeiDB</a></li>
+<li><a href="#orgbbf288a">3.4. Interoperability</a></li>
 </ul>
 </li>
 </ul>
@@ -126,12 +128,12 @@
 <p>
 This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parallelized-evm/">Sei-v2-blog</a> as well as some terminology explained by <a href="https://chatgpt.com/g/g-TJq7kBEsX-evm-gpt">EVM GPT</a>.
 </p>
-<div id="outline-container-org97f7f6d" class="outline-2">
-<h2 id="org97f7f6d"><span class="section-number-2">1.</span> Blockchain fundamentals</h2>
+<div id="outline-container-orgf3fd5a9" class="outline-2">
+<h2 id="orgf3fd5a9"><span class="section-number-2">1.</span> Blockchain fundamentals</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org8aa269c" class="outline-3">
-<h3 id="org8aa269c"><span class="section-number-3">1.1.</span> Mainnet and Testnet</h3>
+<div id="outline-container-org9bc879d" class="outline-3">
+<h3 id="org9bc879d"><span class="section-number-3">1.1.</span> Mainnet and Testnet</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>Mainnet: real transactions occur and have real-world value; any operation is final and irreversible.</li>
@@ -139,8 +141,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org643c827" class="outline-3">
-<h3 id="org643c827"><span class="section-number-3">1.2.</span> Mainnet Alpha and Beta</h3>
+<div id="outline-container-org6b070f8" class="outline-3">
+<h3 id="org6b070f8"><span class="section-number-3">1.2.</span> Mainnet Alpha and Beta</h3>
 <div class="outline-text-3" id="text-1-2">
 <ul class="org-ul">
 <li>Alpha: test core functionalities and gather initial feedback in live environment.</li>
@@ -148,8 +150,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org38cee08" class="outline-3">
-<h3 id="org38cee08"><span class="section-number-3">1.3.</span> Layer 1 and Layer 2</h3>
+<div id="outline-container-org586b9f0" class="outline-3">
+<h3 id="org586b9f0"><span class="section-number-3">1.3.</span> Layer 1 and Layer 2</h3>
 <div class="outline-text-3" id="text-1-3">
 <ul class="org-ul">
 <li>L1: the main network where all transactions are processed and the primary chain is maintained.</li>
@@ -157,8 +159,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org7cd5054" class="outline-3">
-<h3 id="org7cd5054"><span class="section-number-3">1.4.</span> Rollups</h3>
+<div id="outline-container-orgf9b950f" class="outline-3">
+<h3 id="orgf9b950f"><span class="section-number-3">1.4.</span> Rollups</h3>
 <div class="outline-text-3" id="text-1-4">
 <ul class="org-ul">
 <li>Processes transactions off-chain and periodically submits a summary (rollup) to L1.</li>
@@ -173,8 +175,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org648b712" class="outline-3">
-<h3 id="org648b712"><span class="section-number-3">1.5.</span> State channels</h3>
+<div id="outline-container-org2a9ec55" class="outline-3">
+<h3 id="org2a9ec55"><span class="section-number-3">1.5.</span> State channels</h3>
 <div class="outline-text-3" id="text-1-5">
 <ul class="org-ul">
 <li>allow participants to conduct numerous off-chain transactions, with only the final state recorded on the L1.</li>
@@ -182,8 +184,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org6ff5f25" class="outline-3">
-<h3 id="org6ff5f25"><span class="section-number-3">1.6.</span> Sidechains</h3>
+<div id="outline-container-org81174bd" class="outline-3">
+<h3 id="org81174bd"><span class="section-number-3">1.6.</span> Sidechains</h3>
 <div class="outline-text-3" id="text-1-6">
 <ul class="org-ul">
 <li>Independent blockchains running parallel to the main chain, with own consensus and security.</li>
@@ -191,8 +193,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org7b60e19" class="outline-3">
-<h3 id="org7b60e19"><span class="section-number-3">1.7.</span> Ethereum and EVM</h3>
+<div id="outline-container-org4354c91" class="outline-3">
+<h3 id="org4354c91"><span class="section-number-3">1.7.</span> Ethereum and EVM</h3>
 <div class="outline-text-3" id="text-1-7">
 <ul class="org-ul">
 <li>Ethereum: a blockchain ecosystem, includes the blockchain, consensus mechanism, smart contracts, native cryptocurrency.</li>
@@ -200,8 +202,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-orga5ea0fc" class="outline-3">
-<h3 id="orga5ea0fc"><span class="section-number-3">1.8.</span> IAVL tree</h3>
+<div id="outline-container-org9dfbe42" class="outline-3">
+<h3 id="org9dfbe42"><span class="section-number-3">1.8.</span> IAVL tree</h3>
 <div class="outline-text-3" id="text-1-8">
 <ul class="org-ul">
 <li>AVL tree: self-balancing binary tree where the difference in heights between left and right subtrees of anynode is at most one.</li>
@@ -209,8 +211,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-orge980fe9" class="outline-3">
-<h3 id="orge980fe9"><span class="section-number-3">1.9.</span> CosmWasm contract</h3>
+<div id="outline-container-org347db3a" class="outline-3">
+<h3 id="org347db3a"><span class="section-number-3">1.9.</span> CosmWasm contract</h3>
 <div class="outline-text-3" id="text-1-9">
 <ul class="org-ul">
 <li>Allows developers to write fast and portable smart contracts in WebAssembly.</li>
@@ -218,8 +220,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-orgaa21019" class="outline-3">
-<h3 id="orgaa21019"><span class="section-number-3">1.10.</span> Cosmos Ecosystem</h3>
+<div id="outline-container-orge87c3d9" class="outline-3">
+<h3 id="orge87c3d9"><span class="section-number-3">1.10.</span> Cosmos Ecosystem</h3>
 <div class="outline-text-3" id="text-1-10">
 <ul class="org-ul">
 <li>A network of independent, interoperable blockchains designed to create an Internet of blockchain.</li>
@@ -229,8 +231,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-orgdbff89b" class="outline-3">
-<h3 id="orgdbff89b"><span class="section-number-3">1.11.</span> Blockchain layers</h3>
+<div id="outline-container-org02ee096" class="outline-3">
+<h3 id="org02ee096"><span class="section-number-3">1.11.</span> Blockchain layers</h3>
 <div class="outline-text-3" id="text-1-11">
 <ul class="org-ul">
 <li>Infrastructure layer: the physical devices that support the network; and the underlying communication protocols for data transfer between nodes.</li>
@@ -243,8 +245,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-orgbaab313" class="outline-3">
-<h3 id="orgbaab313"><span class="section-number-3">1.12.</span> Optimistic parallelization</h3>
+<div id="outline-container-orga969371" class="outline-3">
+<h3 id="orga969371"><span class="section-number-3">1.12.</span> Optimistic parallelization</h3>
 <div class="outline-text-3" id="text-1-12">
 <ul class="org-ul">
 <li>Multiple transactions are processed in parallel under the assumption that they will conflict with each other; necessary corrections are made afterwards if conflicts are detected.</li>
@@ -252,8 +254,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org6a8d080" class="outline-3">
-<h3 id="org6a8d080"><span class="section-number-3">1.13.</span> Integrated and Modular blockchain</h3>
+<div id="outline-container-org3b08c45" class="outline-3">
+<h3 id="org3b08c45"><span class="section-number-3">1.13.</span> Integrated and Modular blockchain</h3>
 <div class="outline-text-3" id="text-1-13">
 <ul class="org-ul">
 <li>Integrated: all components, e.g., execution layer, consensus mechanism, networking are tightly coupled; faster internal communication but lower flexibility and scalability.</li>
@@ -261,8 +263,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org96e6e36" class="outline-3">
-<h3 id="org96e6e36"><span class="section-number-3">1.14.</span> EVM Execution and storage layer</h3>
+<div id="outline-container-orgbb5076d" class="outline-3">
+<h3 id="orgbb5076d"><span class="section-number-3">1.14.</span> EVM Execution and storage layer</h3>
 <div class="outline-text-3" id="text-1-14">
 <ul class="org-ul">
 <li>Execution: responsible for running smart contracts and processing transactions.</li>
@@ -270,8 +272,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org7109e04" class="outline-3">
-<h3 id="org7109e04"><span class="section-number-3">1.15.</span> Block time and finalize time</h3>
+<div id="outline-container-org77eaffe" class="outline-3">
+<h3 id="org77eaffe"><span class="section-number-3">1.15.</span> Block time and finalize time</h3>
 <div class="outline-text-3" id="text-1-15">
 <ul class="org-ul">
 <li>Block: the average time for a new block to be added.</li>
@@ -280,8 +282,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org11b1459" class="outline-3">
-<h3 id="org11b1459"><span class="section-number-3">1.16.</span> Blockchain audit</h3>
+<div id="outline-container-org4171f7b" class="outline-3">
+<h3 id="org4171f7b"><span class="section-number-3">1.16.</span> Blockchain audit</h3>
 <div class="outline-text-3" id="text-1-16">
 <ul class="org-ul">
 <li>A review of a blockchain to ensures its security and functionality.</li>
@@ -289,8 +291,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </div>
 </div>
 </div>
-<div id="outline-container-orgea9deac" class="outline-2">
-<h2 id="orgea9deac"><span class="section-number-2">2.</span> What is Sei</h2>
+<div id="outline-container-org4719308" class="outline-2">
+<h2 id="org4719308"><span class="section-number-2">2.</span> What is Sei</h2>
 <div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li>On mainnet beta since August 2023.</li>
@@ -300,8 +302,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-orgf8e53d7" class="outline-2">
-<h2 id="orgf8e53d7"><span class="section-number-2">3.</span> What is Sei v2</h2>
+<div id="outline-container-org87fab12" class="outline-2">
+<h2 id="org87fab12"><span class="section-number-2">3.</span> What is Sei v2</h2>
 <div class="outline-text-2" id="text-3">
 <ul class="org-ul">
 <li>The first fully parallelized EVM.</li>
@@ -313,8 +315,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 <li>Once audits are complete, the upgrade is released in a public testnet in Q1 2024, and deployed to mainnet in H1 2024.</li>
 </ul>
 </div>
-<div id="outline-container-org9722240" class="outline-3">
-<h3 id="org9722240"><span class="section-number-3">3.1.</span> Backwards compatibility</h3>
+<div id="outline-container-org9be8858" class="outline-3">
+<h3 id="org9be8858"><span class="section-number-3">3.1.</span> Backwards compatibility</h3>
 <div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
 <li>Ethereum contracts can be seamlessly deployed on Sei v2 with no code changes.</li>
@@ -323,8 +325,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org15385d8" class="outline-3">
-<h3 id="org15385d8"><span class="section-number-3">3.2.</span> Optimistic parallelization</h3>
+<div id="outline-container-orgf5ff5ae" class="outline-3">
+<h3 id="orgf5ff5ae"><span class="section-number-3">3.2.</span> Optimistic parallelization</h3>
 <div class="outline-text-3" id="text-3-2">
 <ul class="org-ul">
 <li>Sei requires smart contract developers to optionally define the state that smart contracts are using, Sei v2 removes this need.</li>
@@ -335,8 +337,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-orgd4f21cb" class="outline-3">
-<h3 id="orgd4f21cb"><span class="section-number-3">3.3.</span> SeiDB</h3>
+<div id="outline-container-org946fb71" class="outline-3">
+<h3 id="org946fb71"><span class="section-number-3">3.3.</span> SeiDB</h3>
 <div class="outline-text-3" id="text-3-3">
 <ul class="org-ul">
 <li>Sei uses a vanilla database layer composed of an IAVL tree, which is less efficient in terms of storage and latency.</li>
@@ -349,8 +351,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org0d7a47c" class="outline-3">
-<h3 id="org0d7a47c"><span class="section-number-3">3.4.</span> Interoperability</h3>
+<div id="outline-container-orgbbf288a" class="outline-3">
+<h3 id="orgbbf288a"><span class="section-number-3">3.4.</span> Interoperability</h3>
 <div class="outline-text-3" id="text-3-4">
 <ul class="org-ul">
 <li>Sei v2 processes different transactions, e.g., Cosmwasm, EVM in a uniformed way, and then forwards them to different storage sections.</li>
@@ -358,8 +360,10 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </div>
 </div>
 </div>
-<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-evm:parallel.html">evm:parallel</a> </div>]]></description>
-  <category><![CDATA[evm:parallel]]></category>
+<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-evm.html">evm</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-paralle-evm.html">paralle-evm</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-sei.html">sei</a> </div>]]></description>
+  <category><![CDATA[evm]]></category>
+  <category><![CDATA[paralle-evm]]></category>
+  <category><![CDATA[sei]]></category>
   <link>https://chenyo-17.github.io/org-static-blog/2024-06-28-parallel-evm:-sei-v2.html</link>
   <guid>https://chenyo-17.github.io/org-static-blog/2024-06-28-parallel-evm:-sei-v2.html</guid>
   <pubDate>Fri, 28 Jun 2024 21:25:00 +0200</pubDate>
@@ -371,20 +375,20 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org2097fef">1. Why did I watch it</a></li>
-<li><a href="#org7ef0e91">2. What is it about</a></li>
-<li><a href="#org8bee9e7">3. Did I like it</a></li>
+<li><a href="#org91ff7b1">1. Why did I watch it</a></li>
+<li><a href="#orge7314c6">2. What is it about</a></li>
+<li><a href="#org703634b">3. Did I like it</a></li>
 </ul>
 </div>
 </nav>
 
-<figure id="orgdcf8499">
+<figure id="org4b3ce4a">
 <img src="https://miro.medium.com/v2/resize:fit:1100/format:webp/1*IFB2V5vjsVKtHcxBdCfQSQ.jpeg" alt="1*IFB2V5vjsVKtHcxBdCfQSQ.jpeg" align="center" width="300px">
 
 <figcaption><span class="figure-number">Figure 1: </span>Argo poster</figcaption>
 </figure>
-<div id="outline-container-org2097fef" class="outline-2">
-<h2 id="org2097fef"><span class="section-number-2">1.</span> Why did I watch it</h2>
+<div id="outline-container-org91ff7b1" class="outline-2">
+<h2 id="org91ff7b1"><span class="section-number-2">1.</span> Why did I watch it</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 This week, I found myself craving a movie with a &ldquo;Homeland&rdquo; theme.
@@ -393,8 +397,8 @@ I saw its name a decade ago (I am too old!) on some movie magazine cover.
 </p>
 </div>
 </div>
-<div id="outline-container-org7ef0e91" class="outline-2">
-<h2 id="org7ef0e91"><span class="section-number-2">2.</span> What is it about</h2>
+<div id="outline-container-orge7314c6" class="outline-2">
+<h2 id="orge7314c6"><span class="section-number-2">2.</span> What is it about</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 It has little thing to do with &ldquo;Homeland&rdquo;.
@@ -405,8 +409,8 @@ Every tension resolves safely in the end: the phone will be picked up at the las
 </p>
 </div>
 </div>
-<div id="outline-container-org8bee9e7" class="outline-2">
-<h2 id="org8bee9e7"><span class="section-number-2">3.</span> Did I like it</h2>
+<div id="outline-container-org703634b" class="outline-2">
+<h2 id="org703634b"><span class="section-number-2">3.</span> Did I like it</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 I guess?
@@ -419,7 +423,7 @@ I felt &ldquo;Argo&rdquo; could have delved deeper into the absurdities of war r
 </p>
 
 
-<figure id="org5855754">
+<figure id="org3d293e7">
 <img src="https://m.media-amazon.com/images/M/MV5BOTI0MzcxMTYtZDVkMy00NjY1LTgyMTYtZmUxN2M3NmQ2NWJhXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg" alt="MV5BOTI0MzcxMTYtZDVkMy00NjY1LTgyMTYtZmUxN2M3NmQ2NWJhXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg" align="center" width="300px">
 
 <figcaption><span class="figure-number">Figure 2: </span>Good Will Hunting poster</figcaption>
@@ -427,15 +431,16 @@ I felt &ldquo;Argo&rdquo; could have delved deeper into the absurdities of war r
 
 
 
-<figure id="org37f60ed">
+<figure id="orgfd54b78">
 <img src="https://posterspy.com/wp-content/uploads/2024/04/Civil-War-Kirsten.jpg" alt="Civil-War-Kirsten.jpg" align="center" width="300px">
 
 <figcaption><span class="figure-number">Figure 3: </span>Civil War poster</figcaption>
 </figure>
 </div>
 </div>
-<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-movie-review.html">movie-review</a> </div>]]></description>
-  <category><![CDATA[movie-review]]></category>
+<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-personal.html">personal</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-moive.html">moive</a> </div>]]></description>
+  <category><![CDATA[personal]]></category>
+  <category><![CDATA[moive]]></category>
   <link>https://chenyo-17.github.io/org-static-blog/2024-06-26-watched:-argo.html</link>
   <guid>https://chenyo-17.github.io/org-static-blog/2024-06-26-watched:-argo.html</guid>
   <pubDate>Wed, 26 Jun 2024 21:37:00 +0200</pubDate>
@@ -447,23 +452,23 @@ I felt &ldquo;Argo&rdquo; could have delved deeper into the absurdities of war r
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orge464b2d">1. Concurrency vs Parallelism</a></li>
-<li><a href="#org18c2a0a">2. Use goroutines for states</a>
+<li><a href="#orgaae3698">1. Concurrency vs Parallelism</a></li>
+<li><a href="#org3c43804">2. Use goroutines for states</a>
 <ul>
-<li><a href="#org35c1493">2.1. Matching a regex</a></li>
-<li><a href="#orgaa2a6ad">2.2. When the state variable cannot be avoided</a></li>
+<li><a href="#org52e6ace">2.1. Matching a regex</a></li>
+<li><a href="#org37b8ba9">2.2. When the state variable cannot be avoided</a></li>
 </ul>
 </li>
-<li><a href="#org085be3f">3. Pattern 1: publish/subscribe server</a>
+<li><a href="#org2de5dc6">3. Pattern 1: publish/subscribe server</a>
 <ul>
-<li><a href="#org897995b">3.1. Options for slow goroutines</a></li>
+<li><a href="#orgd98e29e">3.1. Options for slow goroutines</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-orge464b2d" class="outline-2">
-<h2 id="orge464b2d"><span class="section-number-2">1.</span> Concurrency vs Parallelism</h2>
+<div id="outline-container-orgaae3698" class="outline-2">
+<h2 id="orgaae3698"><span class="section-number-2">1.</span> Concurrency vs Parallelism</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Concurrency: write a program to handle lot of things at once
@@ -474,12 +479,12 @@ I felt &ldquo;Argo&rdquo; could have delved deeper into the absurdities of war r
 </ul>
 </div>
 </div>
-<div id="outline-container-org18c2a0a" class="outline-2">
-<h2 id="org18c2a0a"><span class="section-number-2">2.</span> Use goroutines for states</h2>
+<div id="outline-container-org3c43804" class="outline-2">
+<h2 id="org3c43804"><span class="section-number-2">2.</span> Use goroutines for states</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org35c1493" class="outline-3">
-<h3 id="org35c1493"><span class="section-number-3">2.1.</span> Matching a regex</h3>
+<div id="outline-container-org52e6ace" class="outline-3">
+<h3 id="org52e6ace"><span class="section-number-3">2.1.</span> Matching a regex</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>return if a given string matches a regex: start with <code>"</code>, contains arbitrary escape sequence and ends with <code>*</code></li>
@@ -536,8 +541,8 @@ clear logic: store states in the code
 </ul>
 </div>
 </div>
-<div id="outline-container-orgaa2a6ad" class="outline-3">
-<h3 id="orgaa2a6ad"><span class="section-number-3">2.2.</span> When the state variable cannot be avoided</h3>
+<div id="outline-container-org37b8ba9" class="outline-3">
+<h3 id="org37b8ba9"><span class="section-number-3">2.2.</span> When the state variable cannot be avoided</h3>
 <div class="outline-text-3" id="text-2-2">
 <ul class="org-ul">
 <li><p>
@@ -639,8 +644,8 @@ use additional goroutines to hold states
 </div>
 </div>
 </div>
-<div id="outline-container-org085be3f" class="outline-2">
-<h2 id="org085be3f"><span class="section-number-2">3.</span> Pattern 1: publish/subscribe server</h2>
+<div id="outline-container-org2de5dc6" class="outline-2">
+<h2 id="org2de5dc6"><span class="section-number-2">3.</span> Pattern 1: publish/subscribe server</h2>
 <div class="outline-text-2" id="text-3">
 <ul class="org-ul">
 <li>the information goes one way: server -&gt; client</li>
@@ -690,8 +695,8 @@ prefer <code>defer</code> when unlocking the mutex
 </div></li>
 </ul>
 </div>
-<div id="outline-container-org897995b" class="outline-3">
-<h3 id="org897995b"><span class="section-number-3">3.1.</span> Options for slow goroutines</h3>
+<div id="outline-container-orgd98e29e" class="outline-3">
+<h3 id="orgd98e29e"><span class="section-number-3">3.1.</span> Options for slow goroutines</h3>
 <div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
 <li>slow down event generation</li>
@@ -805,9 +810,10 @@ convert mutexes into goroutines, not suitable for Raft where state transition is
 </div>
 </div>
 </div>
-<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-lang:go.html">lang:go</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-design-patterns.html">design-patterns</a> </div>]]></description>
-  <category><![CDATA[lang:go]]></category>
-  <category><![CDATA[design-patterns]]></category>
+<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-go.html">go</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-design-pattern.html">design-pattern</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-study.html">study</a> </div>]]></description>
+  <category><![CDATA[go]]></category>
+  <category><![CDATA[design-pattern]]></category>
+  <category><![CDATA[study]]></category>
   <link>https://chenyo-17.github.io/org-static-blog/2024-06-25-go-patterns.html</link>
   <guid>https://chenyo-17.github.io/org-static-blog/2024-06-25-go-patterns.html</guid>
   <pubDate>Tue, 25 Jun 2024 21:25:00 +0200</pubDate>
@@ -819,14 +825,14 @@ convert mutexes into goroutines, not suitable for Raft where state transition is
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgf727f8f">1. What happended</a></li>
-<li><a href="#orgfd53298">2. What did I do</a></li>
-<li><a href="#org0423d38">3. Another issue of running RPC in docker</a></li>
+<li><a href="#orgdef4ee7">1. What happended</a></li>
+<li><a href="#org85997f9">2. What did I do</a></li>
+<li><a href="#org3b9504f">3. Another issue of running RPC in docker</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-orgf727f8f" class="outline-2">
-<h2 id="orgf727f8f"><span class="section-number-2">1.</span> What happended</h2>
+<div id="outline-container-orgdef4ee7" class="outline-2">
+<h2 id="orgdef4ee7"><span class="section-number-2">1.</span> What happended</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Servers SA and SB have the same docker installation, and the same running container CA and CB.</li>
@@ -841,8 +847,8 @@ fatal error: newosproc<br>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgfd53298" class="outline-2">
-<h2 id="orgfd53298"><span class="section-number-2">2.</span> What did I do</h2>
+<div id="outline-container-org85997f9" class="outline-2">
+<h2 id="org85997f9"><span class="section-number-2">2.</span> What did I do</h2>
 <div class="outline-text-2" id="text-2">
 <ol class="org-ol">
 <li>I compared any related configurations between SA and SB. and between CA and CB, e.g., <code class="src src-bash"><span style="color: #c678dd;">ulimit</span> -a</code>, <code class="src src-bash">/etc/security/limits.conf</code>. They all look the same.</li>
@@ -859,8 +865,8 @@ fatal error: newosproc<br>
 </ol>
 </div>
 </div>
-<div id="outline-container-org0423d38" class="outline-2">
-<h2 id="org0423d38"><span class="section-number-2">3.</span> Another issue of running RPC in docker</h2>
+<div id="outline-container-org3b9504f" class="outline-2">
+<h2 id="org3b9504f"><span class="section-number-2">3.</span> Another issue of running RPC in docker</h2>
 <div class="outline-text-2" id="text-3">
 <ul class="org-ul">
 <li>The other day, I also spent hours debugging a <code>route unreachable</code> error when I want to send a request from CA to SA.</li>
@@ -893,10 +899,11 @@ In the end, I need to append a new rule to make the RPC work.
 </ul>
 </div>
 </div>
-<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-tools:docker.html">tools:docker</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-lang:go.html">lang:go</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-tools:linux:apline.html">tools:linux:apline</a> </div>]]></description>
-  <category><![CDATA[tools:docker]]></category>
-  <category><![CDATA[lang:go]]></category>
-  <category><![CDATA[tools:linux:apline]]></category>
+<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-docker.html">docker</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-go.html">go</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-linux.html">linux</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-alpine.html">alpine</a> </div>]]></description>
+  <category><![CDATA[docker]]></category>
+  <category><![CDATA[go]]></category>
+  <category><![CDATA[linux]]></category>
+  <category><![CDATA[alpine]]></category>
   <link>https://chenyo-17.github.io/org-static-blog/2024-06-24-a-stupid-debugging-experience.html</link>
   <guid>https://chenyo-17.github.io/org-static-blog/2024-06-24-a-stupid-debugging-experience.html</guid>
   <pubDate>Mon, 24 Jun 2024 15:06:00 +0200</pubDate>
@@ -908,20 +915,20 @@ In the end, I need to append a new rule to make the RPC work.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org1aa25bf">1. i3</a>
+<li><a href="#org72056be">1. i3</a>
 <ul>
-<li><a href="#org2d81efe">1.1. move specific workspaces between different monitors (ref)</a></li>
+<li><a href="#orge010602">1.1. move specific workspaces between different monitors (ref)</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org1aa25bf" class="outline-2">
-<h2 id="org1aa25bf"><span class="section-number-2">1.</span> i3</h2>
+<div id="outline-container-org72056be" class="outline-2">
+<h2 id="org72056be"><span class="section-number-2">1.</span> i3</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org2d81efe" class="outline-3">
-<h3 id="org2d81efe"><span class="section-number-3">1.1.</span> move specific workspaces between different monitors <a href="https://i3wm.org/docs/user-contributed/swapping-workspaces.html">(ref)</a></h3>
+<div id="outline-container-orge010602" class="outline-3">
+<h3 id="orge010602"><span class="section-number-3">1.1.</span> move specific workspaces between different monitors <a href="https://i3wm.org/docs/user-contributed/swapping-workspaces.html">(ref)</a></h3>
 <div class="outline-text-3" id="text-1-1">
 <ol class="org-ol">
 <li>adjust the monitor relative positions</li>
@@ -930,9 +937,11 @@ In the end, I need to append a new rule to make the RPC work.
 </div>
 </div>
 </div>
-<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-tools:linux:arch.html">tools:linux:arch</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-tools:linux:i3.html">tools:linux:i3</a> </div>]]></description>
-  <category><![CDATA[tools:linux:arch]]></category>
-  <category><![CDATA[tools:linux:i3]]></category>
+<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-tool.html">tool</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-linux.html">linux</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-i3.html">i3</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-arch.html">arch</a> </div>]]></description>
+  <category><![CDATA[tool]]></category>
+  <category><![CDATA[linux]]></category>
+  <category><![CDATA[i3]]></category>
+  <category><![CDATA[arch]]></category>
   <link>https://chenyo-17.github.io/org-static-blog/2024-06-24-linux-use-tips.html</link>
   <guid>https://chenyo-17.github.io/org-static-blog/2024-06-24-linux-use-tips.html</guid>
   <pubDate>Mon, 24 Jun 2024 09:17:00 +0200</pubDate>
@@ -944,21 +953,21 @@ In the end, I need to append a new rule to make the RPC work.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgc75ded8">1. Router</a></li>
-<li><a href="#org7e1c17e">2. Link</a></li>
-<li><a href="#orgd178392">3. Workshop 3</a>
+<li><a href="#org9f465f9">1. Router</a></li>
+<li><a href="#org7c68506">2. Link</a></li>
+<li><a href="#org5f84d6a">3. Workshop 3</a>
 <ul>
-<li><a href="#orga56a2a6">3.1. Structure</a></li>
-<li><a href="#org1155164">3.2. States</a></li>
-<li><a href="#org65b4752">3.3. Props</a></li>
-<li><a href="#org41099cf">3.4. Why passing down the update function in props 1, 4, 6?</a></li>
+<li><a href="#org81de9e0">3.1. Structure</a></li>
+<li><a href="#orga435c56">3.2. States</a></li>
+<li><a href="#orgd70da6a">3.3. Props</a></li>
+<li><a href="#org4d4ae86">3.4. Why passing down the update function in props 1, 4, 6?</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-orgc75ded8" class="outline-2">
-<h2 id="orgc75ded8"><span class="section-number-2">1.</span> Router</h2>
+<div id="outline-container-org9f465f9" class="outline-2">
+<h2 id="org9f465f9"><span class="section-number-2">1.</span> Router</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>use the Reach <a href="https://reach.tech/router/">Reach Router</a> library</li>
@@ -980,8 +989,8 @@ URL -&gt; Router -&gt; render different components
 </ul>
 </div>
 </div>
-<div id="outline-container-org7e1c17e" class="outline-2">
-<h2 id="org7e1c17e"><span class="section-number-2">2.</span> Link</h2>
+<div id="outline-container-org7c68506" class="outline-2">
+<h2 id="org7c68506"><span class="section-number-2">2.</span> Link</h2>
 <div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li>relative: <code class="src src-js">&lt;Link to=<span style="color: #98be65;">"newpage"</span>&gt;Click me&lt;/Link&gt;</code></li>
@@ -989,23 +998,23 @@ URL -&gt; Router -&gt; render different components
 </ul>
 </div>
 </div>
-<div id="outline-container-orgd178392" class="outline-2">
-<h2 id="orgd178392"><span class="section-number-2">3.</span> Workshop 3</h2>
+<div id="outline-container-org5f84d6a" class="outline-2">
+<h2 id="org5f84d6a"><span class="section-number-2">3.</span> Workshop 3</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-orga56a2a6" class="outline-3">
-<h3 id="orga56a2a6"><span class="section-number-3">3.1.</span> Structure</h3>
+<div id="outline-container-org81de9e0" class="outline-3">
+<h3 id="org81de9e0"><span class="section-number-3">3.1.</span> Structure</h3>
 <div class="outline-text-3" id="text-3-1">
 
-<figure id="org9a1427d">
+<figure id="org124a54e">
 <img src="./static/workshop-3-structure.png" alt="workshop-3-structure.png" align="center" width="600px">
 
 <figcaption><span class="figure-number">Figure 1: </span>The Catbook structure in workshop 3</figcaption>
 </figure>
 </div>
 </div>
-<div id="outline-container-org1155164" class="outline-3">
-<h3 id="org1155164"><span class="section-number-3">3.2.</span> States</h3>
+<div id="outline-container-orga435c56" class="outline-3">
+<h3 id="orga435c56"><span class="section-number-3">3.2.</span> States</h3>
 <div class="outline-text-3" id="text-3-2">
 <table>
 
@@ -1037,8 +1046,8 @@ URL -&gt; Router -&gt; render different components
 </table>
 </div>
 </div>
-<div id="outline-container-org65b4752" class="outline-3">
-<h3 id="org65b4752"><span class="section-number-3">3.3.</span> Props</h3>
+<div id="outline-container-orgd70da6a" class="outline-3">
+<h3 id="orgd70da6a"><span class="section-number-3">3.3.</span> Props</h3>
 <div class="outline-text-3" id="text-3-3">
 <table>
 
@@ -1090,8 +1099,8 @@ URL -&gt; Router -&gt; render different components
 </table>
 </div>
 </div>
-<div id="outline-container-org41099cf" class="outline-3">
-<h3 id="org41099cf"><span class="section-number-3">3.4.</span> Why passing down the update function in props 1, 4, 6?</h3>
+<div id="outline-container-org4d4ae86" class="outline-3">
+<h3 id="org4d4ae86"><span class="section-number-3">3.4.</span> Why passing down the update function in props 1, 4, 6?</h3>
 <div class="outline-text-3" id="text-3-4">
 <ul class="org-ul">
 <li>To share the parent states, i.e., <code>stories</code> and <code>comments</code> to child component. Since the post action happens in the child component, we need a way to automatically update the states to see new contents immediately.</li>
@@ -1099,9 +1108,11 @@ URL -&gt; Router -&gt; render different components
 </div>
 </div>
 </div>
-<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-study:web-development:react.html">study:web-development:react</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-lecture:mit.html">lecture:mit</a> </div>]]></description>
-  <category><![CDATA[study:web-development:react]]></category>
-  <category><![CDATA[lecture:mit]]></category>
+<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-study.html">study</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-web.html">web</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-react.html">react</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-mit.html">mit</a> </div>]]></description>
+  <category><![CDATA[study]]></category>
+  <category><![CDATA[web]]></category>
+  <category><![CDATA[react]]></category>
+  <category><![CDATA[mit]]></category>
   <link>https://chenyo-17.github.io/org-static-blog/2024-06-23-weblab-notes:-react-route.html</link>
   <guid>https://chenyo-17.github.io/org-static-blog/2024-06-23-weblab-notes:-react-route.html</guid>
   <pubDate>Sun, 23 Jun 2024 18:38:00 +0200</pubDate>
@@ -1113,34 +1124,34 @@ URL -&gt; Router -&gt; render different components
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgad57afb">1. What is a React hook</a>
+<li><a href="#orgaa0174a">1. What is a React hook</a>
 <ul>
-<li><a href="#org4f54953">1.1. <code>useState</code> is not enough</a></li>
-<li><a href="#orge56ab90">1.2. <code>useEffect</code> runs after specific variable change</a></li>
+<li><a href="#orga7cee8a">1.1. <code>useState</code> is not enough</a></li>
+<li><a href="#org260f295">1.2. <code>useEffect</code> runs after specific variable change</a></li>
 </ul>
 </li>
-<li><a href="#org8adfa8d">2. React hook patterns</a>
+<li><a href="#org040fd54">2. React hook patterns</a>
 <ul>
-<li><a href="#org2ed8266">2.1. Fetch and send data</a></li>
-<li><a href="#orgacb3b7e">2.2. Conditional rendering</a></li>
-<li><a href="#org2893529">2.3. Render an array of Data</a></li>
+<li><a href="#org23a5fc8">2.1. Fetch and send data</a></li>
+<li><a href="#orge68faf5">2.2. Conditional rendering</a></li>
+<li><a href="#org23cf355">2.3. Render an array of Data</a></li>
 </ul>
 </li>
-<li><a href="#org6ede2d8">3. Example: Stopwatch</a></li>
-<li><a href="#org284c9c3">4. DOM and component mounting</a></li>
+<li><a href="#org2a8e80c">3. Example: Stopwatch</a></li>
+<li><a href="#org76fea2b">4. DOM and component mounting</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-orgad57afb" class="outline-2">
-<h2 id="orgad57afb"><span class="section-number-2">1.</span> What is a React hook</h2>
+<div id="outline-container-orgaa0174a" class="outline-2">
+<h2 id="orgaa0174a"><span class="section-number-2">1.</span> What is a React hook</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Special functions to access parts of the component lifestyle.</li>
 <li>e.g., <code>useState</code></li>
 </ul>
 </div>
-<div id="outline-container-org4f54953" class="outline-3">
-<h3 id="org4f54953"><span class="section-number-3">1.1.</span> <code>useState</code> is not enough</h3>
+<div id="outline-container-orga7cee8a" class="outline-3">
+<h3 id="orga7cee8a"><span class="section-number-3">1.1.</span> <code>useState</code> is not enough</h3>
 <div class="outline-text-3" id="text-1-1">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr">1: </span><span style="color: #51afef;">const</span> [<span style="color: #dcaeea;">persons</span>, <span style="color: #dcaeea;">setPersons</span>] = useState([]);
@@ -1159,8 +1170,8 @@ URL -&gt; Router -&gt; render different components
 </ul>
 </div>
 </div>
-<div id="outline-container-orge56ab90" class="outline-3">
-<h3 id="orge56ab90"><span class="section-number-3">1.2.</span> <code>useEffect</code> runs after specific variable change</h3>
+<div id="outline-container-org260f295" class="outline-3">
+<h3 id="org260f295"><span class="section-number-3">1.2.</span> <code>useEffect</code> runs after specific variable change</h3>
 <div class="outline-text-3" id="text-1-2">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr">1: </span>useEffect(() =&gt; {
@@ -1188,12 +1199,12 @@ URL -&gt; Router -&gt; render different components
 </div>
 </div>
 </div>
-<div id="outline-container-org8adfa8d" class="outline-2">
-<h2 id="org8adfa8d"><span class="section-number-2">2.</span> React hook patterns</h2>
+<div id="outline-container-org040fd54" class="outline-2">
+<h2 id="org040fd54"><span class="section-number-2">2.</span> React hook patterns</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org2ed8266" class="outline-3">
-<h3 id="org2ed8266"><span class="section-number-3">2.1.</span> Fetch and send data</h3>
+<div id="outline-container-org23a5fc8" class="outline-3">
+<h3 id="org23a5fc8"><span class="section-number-3">2.1.</span> Fetch and send data</h3>
 <div class="outline-text-3" id="text-2-1">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr">1: </span><span style="color: #5B6268;">/* </span><span style="color: #5B6268;">fetch data on mount</span><span style="color: #5B6268;"> */</span>
@@ -1218,8 +1229,8 @@ URL -&gt; Router -&gt; render different components
 </div>
 </div>
 </div>
-<div id="outline-container-orgacb3b7e" class="outline-3">
-<h3 id="orgacb3b7e"><span class="section-number-3">2.2.</span> Conditional rendering</h3>
+<div id="outline-container-orge68faf5" class="outline-3">
+<h3 id="orge68faf5"><span class="section-number-3">2.2.</span> Conditional rendering</h3>
 <div class="outline-text-3" id="text-2-2">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr">1: </span><span style="color: #5B6268;">// </span><span style="color: #5B6268;">JSX is a way of writing HTML in js</span>
@@ -1234,8 +1245,8 @@ URL -&gt; Router -&gt; render different components
 </div>
 </div>
 </div>
-<div id="outline-container-org2893529" class="outline-3">
-<h3 id="org2893529"><span class="section-number-3">2.3.</span> Render an array of Data</h3>
+<div id="outline-container-org23cf355" class="outline-3">
+<h3 id="org23cf355"><span class="section-number-3">2.3.</span> Render an array of Data</h3>
 <div class="outline-text-3" id="text-2-3">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr">1: </span><span style="color: #51afef;">const</span> <span style="color: #dcaeea;">data</span> = [
@@ -1254,8 +1265,8 @@ URL -&gt; Router -&gt; render different components
 </div>
 </div>
 </div>
-<div id="outline-container-org6ede2d8" class="outline-2">
-<h2 id="org6ede2d8"><span class="section-number-2">3.</span> Example: Stopwatch</h2>
+<div id="outline-container-org2a8e80c" class="outline-2">
+<h2 id="org2a8e80c"><span class="section-number-2">3.</span> Example: Stopwatch</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr"> 1: </span><span style="color: #51afef;">const</span> <span style="color: #dcaeea;">Stopwatch</span> = () =&gt; {
@@ -1276,8 +1287,8 @@ URL -&gt; Router -&gt; render different components
 </div>
 </div>
 </div>
-<div id="outline-container-org284c9c3" class="outline-2">
-<h2 id="org284c9c3"><span class="section-number-2">4.</span> DOM and component mounting</h2>
+<div id="outline-container-org76fea2b" class="outline-2">
+<h2 id="org76fea2b"><span class="section-number-2">4.</span> DOM and component mounting</h2>
 <div class="outline-text-2" id="text-4">
 <ul class="org-ul">
 <li>DOM (Document Object Model): a programming interface for web documents; represents the structure of a document, e.g., HTML, as a tree of objects, where each object corresponds to a part of the document; it dynamically updates the document contents
@@ -1293,9 +1304,11 @@ URL -&gt; Router -&gt; render different components
 </ul>
 </div>
 </div>
-<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-study:web-development:react.html">study:web-development:react</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-lecture:mit.html">lecture:mit</a> </div>]]></description>
-  <category><![CDATA[study:web-development:react]]></category>
-  <category><![CDATA[lecture:mit]]></category>
+<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-study.html">study</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-web.html">web</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-react.html">react</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-mit.html">mit</a> </div>]]></description>
+  <category><![CDATA[study]]></category>
+  <category><![CDATA[web]]></category>
+  <category><![CDATA[react]]></category>
+  <category><![CDATA[mit]]></category>
   <link>https://chenyo-17.github.io/org-static-blog/2024-06-23-weblab-notes:-react-hooks.html</link>
   <guid>https://chenyo-17.github.io/org-static-blog/2024-06-23-weblab-notes:-react-hooks.html</guid>
   <pubDate>Sun, 23 Jun 2024 18:21:00 +0200</pubDate>

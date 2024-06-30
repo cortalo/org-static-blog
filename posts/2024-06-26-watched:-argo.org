@@ -1,7 +1,7 @@
 #+title: Watched: Argo (2012)
 #+date: <2024-06-26 21:37>
 #+description: A short review of the 2012 movie Argo
-#+filetags: movie-review
+#+filetags: personal moive
 
 #+CAPTION: Argo poster
 #+ATTR_HTML: :align center

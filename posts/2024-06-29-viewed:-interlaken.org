@@ -1,7 +1,7 @@
 #+title: Viewed: Interlaken
 #+date: <2024-06-29 23:52>
 #+description: This is a memory of the Interlaken day trip
-#+filetags: trip:interlaken
+#+filetags: personal trip interlaken
 
 * Where did we go
 - We rent a car and drove to Interlaken.

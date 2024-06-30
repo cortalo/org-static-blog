@@ -1,7 +1,7 @@
 #+title: Weblab notes: React route
 #+date: <2024-06-23 18:38>
 #+description: This is a personal note for the [[https://docs.google.com/presentation/d/1hrTjcB8GU4hWPHzS5lI17WALogP4biZ1UAtyxXfafkI/edit#slide=id.p][web.lab lectures]].
-#+filetags: study:web-development:react lecture:mit
+#+filetags: study web react mit
 
 * Router
 - use the Reach [[https://reach.tech/router/][Reach Router]] library

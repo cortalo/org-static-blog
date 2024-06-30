@@ -1,7 +1,7 @@
 #+title: Linux use tips
 #+date: <2024-06-24 09:17>
 #+description: This post records some linux use tips
-#+filetags: tools:linux:arch tools:linux:i3
+#+filetags: tool linux i3 arch
 
 * i3
 ** move specific workspaces between different monitors [[https://i3wm.org/docs/user-contributed/swapping-workspaces.html][(ref)]]
