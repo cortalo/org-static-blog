@@ -1,7 +1,9 @@
 #+title: Parallel EVM: Sei-v2
 #+date: <2024-06-28 21:25>
 #+description: This is a personal note for [[https://blog.sei.io/sei-v2-the-first-parallelized-evm/][Sei-v2-blog]]
-#+filetags: parallel-evm
+#+filetags: evm:parallel
+
+This is a personal note for [[https://blog.sei.io/sei-v2-the-first-parallelized-evm/][Sei-v2-blog]] as well as some terminology explained by [[https://chatgpt.com/g/g-TJq7kBEsX-evm-gpt][EVM GPT]].
 
 * Blockchain fundamentals
 ** Mainnet and Testnet
@@ -12,9 +14,42 @@
 - Alpha: test core functionalities and gather initial feedback in live environment.
 - Beta: more stable and feature-complete, but still need more testing.
 
+** Layer 1 and Layer 2
+- L1: the main network where all transactions are processed and the primary chain is maintained.
+- L2: secondary frameworks on top of L1 chain, aimed to enhance scalability without compromising the security of the L1.
+
+** Rollups
+- Processes transactions off-chain and periodically submits a summary (rollup) to L1.
+- Optimistic rollups: assume transactions are valid be default and use a challenge period to allow disputes
+  - Examples: Optimism, Arbitrum.
+- ZK-rollups: use zero-knowledge proofs to validate transactions.
+  - Examples: zkSync, StarkNet.
+
+** State channels
+- allow participants to conduct numerous off-chain transactions, with only the final state recorded on the L1.
+- Examples: Bitcoin lightning network.
+
+** Sidechains
+- Independent blockchains running parallel to the main chain, with own consensus and security.
+- Examples: Polygon.
+
 **  Ethereum and EVM
 - Ethereum: a blockchain ecosystem, includes the blockchain, consensus mechanism, smart contracts, native cryptocurrency.
 - EVM: the runtime environment to execute smart contracts in Ethereum.
+
+** IAVL tree
+- AVL tree: self-balancing binary tree where the difference in heights between left and right subtrees of anynode is at most one.
+- IAVL tree: immutable AVL tree; node cannot be changed once it is added.
+
+** CosmWasm contract
+- Allows developers to write fast and portable smart contracts in WebAssembly.
+- Designed to be interoperable within in the Cosmos ecosystem, a network of independent blockchains connected via the Inter-blockchain communication (IBC) protocol.
+
+** Cosmos Ecosystem
+- A network of independent, interoperable blockchains designed to create an Internet of blockchain.
+- Decouples the consensus (BFT consensus engine) and networking (IBC protocol) layers from the application layers
+- Cosmos SDK: a modular framework for building application-specific blockchains efficiently.
+- Cosmos Hub: the first blockchain in the Cosmos network, serves as a central hub to connect multiple blockchains via IBC.
 
 ** Blockchain layers
 - Infrastructure layer: the physical devices that support the network; and the underlying communication protocols for data transfer between nodes.
@@ -61,9 +96,13 @@
 - Once audits are complete, the upgrade is released in a public testnet in Q1 2024, and deployed to mainnet in H1 2024.
 
 ** Backwards compatibility
-- Every major contract on Ethereum can seamlessly be deployed on Sei with no code changes.
-- Sei binary imports Geth (a Go implementation of the EVM) to process Ethereum transactions and state updates with a special interface Sei makes for the EVM.
-- The RPC interface will be identical for Sei as EVM, existing tooling from Ethereum can be seamlessly reused, e.g., Metamask, Hardhat.
+# - Every major contract on Ethereum can seamlessly be deployed on Sei with no code changes.
+# - Sei binary imports Geth (a Go implementation of the EVM) to process Ethereum transactions and state updates with a special interface Sei makes for the EVM.
+# - The RPC interface will be identical for Sei as EVM, existing tooling from Ethereum can be seamlessly reused, e.g., Metamask, Hardhat.
+- Ethereum contracts can be seamlessly deployed on Sei v2 with no code changes.
+- User can send a Eth transaction to the Ethereum contract on Sei v2 via the same interface, e.g., Metamask, Hardhat.
+- Sei v2 imports Geth (a Go EVM implementation) to process the Eth transaction, and convert the result to Sei storage.
+
 
 ** Optimistic parallelization
 - Sei requires smart contract developers to optionally define the state that smart contracts are using, Sei v2 removes this need.
@@ -71,3 +110,14 @@
 - Transactions touching different parts will be rerun in parallel; transactions touching the same state will be rerun sequentially.
 - Recursively continue until no more conflicts.
 - Since the transactions are ordered in a block, this process is deterministic.
+
+** SeiDB
+- Sei uses a vanilla database layer composed of an IAVL tree, which is less efficient in terms of storage and latency.
+- Sei v2 breaks the single IAVL tree into 2 components:
+  - state store: provide low latency direct access to raw key-value pairs to remove the overhead of redundant metadata and disk usage; uses a write-ahead log to help event recovery.
+  - state commitment: use an in-memory IAVL tree to help validators reach consensus faster.
+- After benchmarking, Sei v2 replaces GoLevelDB with PebbleDB for better read/write in multi-threaded access.
+
+** Interoperability
+- Sei v2 processes different transactions, e.g., Cosmwasm, EVM in a uniformed way, and then forwards them to different storage sections.
+

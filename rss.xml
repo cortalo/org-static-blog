@@ -4,7 +4,7 @@
 <title><![CDATA[org-static-blog]]></title>
 <description><![CDATA[org-static-blog]]></description>
 <link>https://chenyo-17.github.io/org-static-blog</link>
-<lastBuildDate>Sun, 30 Jun 2024 00:35:10 +0200</lastBuildDate>
+<lastBuildDate>Sun, 30 Jun 2024 11:22:23 +0200</lastBuildDate>
 <item>
   <title><![CDATA[Viewed: Interlaken]]></title>
   <description><![CDATA[
@@ -91,35 +91,47 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org3db9712">1. Blockchain fundamentals</a>
+<li><a href="#org97f7f6d">1. Blockchain fundamentals</a>
 <ul>
-<li><a href="#org03014f0">1.1. Mainnet and Testnet</a></li>
-<li><a href="#org5d23d45">1.2. Mainnet Alpha and Beta</a></li>
-<li><a href="#org30cf74f">1.3. Ethereum and EVM</a></li>
-<li><a href="#org7708728">1.4. Blockchain layers</a></li>
-<li><a href="#org40b2d55">1.5. Optimistic parallelization</a></li>
-<li><a href="#org38aa547">1.6. Integrated and Modular blockchain</a></li>
-<li><a href="#org36a0cfb">1.7. EVM Execution and storage layer</a></li>
-<li><a href="#orgc2c3ac6">1.8. Block time and finalize time</a></li>
-<li><a href="#orgf3647be">1.9. Blockchain audit</a></li>
+<li><a href="#org8aa269c">1.1. Mainnet and Testnet</a></li>
+<li><a href="#org643c827">1.2. Mainnet Alpha and Beta</a></li>
+<li><a href="#org38cee08">1.3. Layer 1 and Layer 2</a></li>
+<li><a href="#org7cd5054">1.4. Rollups</a></li>
+<li><a href="#org648b712">1.5. State channels</a></li>
+<li><a href="#org6ff5f25">1.6. Sidechains</a></li>
+<li><a href="#org7b60e19">1.7. Ethereum and EVM</a></li>
+<li><a href="#orga5ea0fc">1.8. IAVL tree</a></li>
+<li><a href="#orge980fe9">1.9. CosmWasm contract</a></li>
+<li><a href="#orgaa21019">1.10. Cosmos Ecosystem</a></li>
+<li><a href="#orgdbff89b">1.11. Blockchain layers</a></li>
+<li><a href="#orgbaab313">1.12. Optimistic parallelization</a></li>
+<li><a href="#org6a8d080">1.13. Integrated and Modular blockchain</a></li>
+<li><a href="#org96e6e36">1.14. EVM Execution and storage layer</a></li>
+<li><a href="#org7109e04">1.15. Block time and finalize time</a></li>
+<li><a href="#org11b1459">1.16. Blockchain audit</a></li>
 </ul>
 </li>
-<li><a href="#org270605d">2. What is Sei</a></li>
-<li><a href="#org31afb8f">3. What is Sei v2</a>
+<li><a href="#orgea9deac">2. What is Sei</a></li>
+<li><a href="#orgf8e53d7">3. What is Sei v2</a>
 <ul>
-<li><a href="#orgee58b14">3.1. Backwards compatibility</a></li>
-<li><a href="#org94176df">3.2. Optimistic parallelization</a></li>
+<li><a href="#org9722240">3.1. Backwards compatibility</a></li>
+<li><a href="#org15385d8">3.2. Optimistic parallelization</a></li>
+<li><a href="#orgd4f21cb">3.3. SeiDB</a></li>
+<li><a href="#org0d7a47c">3.4. Interoperability</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org3db9712" class="outline-2">
-<h2 id="org3db9712"><span class="section-number-2">1.</span> Blockchain fundamentals</h2>
+<p>
+This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parallelized-evm/">Sei-v2-blog</a> as well as some terminology explained by <a href="https://chatgpt.com/g/g-TJq7kBEsX-evm-gpt">EVM GPT</a>.
+</p>
+<div id="outline-container-org97f7f6d" class="outline-2">
+<h2 id="org97f7f6d"><span class="section-number-2">1.</span> Blockchain fundamentals</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org03014f0" class="outline-3">
-<h3 id="org03014f0"><span class="section-number-3">1.1.</span> Mainnet and Testnet</h3>
+<div id="outline-container-org8aa269c" class="outline-3">
+<h3 id="org8aa269c"><span class="section-number-3">1.1.</span> Mainnet and Testnet</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>Mainnet: real transactions occur and have real-world value; any operation is final and irreversible.</li>
@@ -127,8 +139,8 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org5d23d45" class="outline-3">
-<h3 id="org5d23d45"><span class="section-number-3">1.2.</span> Mainnet Alpha and Beta</h3>
+<div id="outline-container-org643c827" class="outline-3">
+<h3 id="org643c827"><span class="section-number-3">1.2.</span> Mainnet Alpha and Beta</h3>
 <div class="outline-text-3" id="text-1-2">
 <ul class="org-ul">
 <li>Alpha: test core functionalities and gather initial feedback in live environment.</li>
@@ -136,18 +148,90 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org30cf74f" class="outline-3">
-<h3 id="org30cf74f"><span class="section-number-3">1.3.</span> Ethereum and EVM</h3>
+<div id="outline-container-org38cee08" class="outline-3">
+<h3 id="org38cee08"><span class="section-number-3">1.3.</span> Layer 1 and Layer 2</h3>
 <div class="outline-text-3" id="text-1-3">
+<ul class="org-ul">
+<li>L1: the main network where all transactions are processed and the primary chain is maintained.</li>
+<li>L2: secondary frameworks on top of L1 chain, aimed to enhance scalability without compromising the security of the L1.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org7cd5054" class="outline-3">
+<h3 id="org7cd5054"><span class="section-number-3">1.4.</span> Rollups</h3>
+<div class="outline-text-3" id="text-1-4">
+<ul class="org-ul">
+<li>Processes transactions off-chain and periodically submits a summary (rollup) to L1.</li>
+<li>Optimistic rollups: assume transactions are valid be default and use a challenge period to allow disputes
+<ul class="org-ul">
+<li>Examples: Optimism, Arbitrum.</li>
+</ul></li>
+<li>ZK-rollups: use zero-knowledge proofs to validate transactions.
+<ul class="org-ul">
+<li>Examples: zkSync, StarkNet.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org648b712" class="outline-3">
+<h3 id="org648b712"><span class="section-number-3">1.5.</span> State channels</h3>
+<div class="outline-text-3" id="text-1-5">
+<ul class="org-ul">
+<li>allow participants to conduct numerous off-chain transactions, with only the final state recorded on the L1.</li>
+<li>Examples: Bitcoin lightning network.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org6ff5f25" class="outline-3">
+<h3 id="org6ff5f25"><span class="section-number-3">1.6.</span> Sidechains</h3>
+<div class="outline-text-3" id="text-1-6">
+<ul class="org-ul">
+<li>Independent blockchains running parallel to the main chain, with own consensus and security.</li>
+<li>Examples: Polygon.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org7b60e19" class="outline-3">
+<h3 id="org7b60e19"><span class="section-number-3">1.7.</span> Ethereum and EVM</h3>
+<div class="outline-text-3" id="text-1-7">
 <ul class="org-ul">
 <li>Ethereum: a blockchain ecosystem, includes the blockchain, consensus mechanism, smart contracts, native cryptocurrency.</li>
 <li>EVM: the runtime environment to execute smart contracts in Ethereum.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org7708728" class="outline-3">
-<h3 id="org7708728"><span class="section-number-3">1.4.</span> Blockchain layers</h3>
-<div class="outline-text-3" id="text-1-4">
+<div id="outline-container-orga5ea0fc" class="outline-3">
+<h3 id="orga5ea0fc"><span class="section-number-3">1.8.</span> IAVL tree</h3>
+<div class="outline-text-3" id="text-1-8">
+<ul class="org-ul">
+<li>AVL tree: self-balancing binary tree where the difference in heights between left and right subtrees of anynode is at most one.</li>
+<li>IAVL tree: immutable AVL tree; node cannot be changed once it is added.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orge980fe9" class="outline-3">
+<h3 id="orge980fe9"><span class="section-number-3">1.9.</span> CosmWasm contract</h3>
+<div class="outline-text-3" id="text-1-9">
+<ul class="org-ul">
+<li>Allows developers to write fast and portable smart contracts in WebAssembly.</li>
+<li>Designed to be interoperable within in the Cosmos ecosystem, a network of independent blockchains connected via the Inter-blockchain communication (IBC) protocol.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgaa21019" class="outline-3">
+<h3 id="orgaa21019"><span class="section-number-3">1.10.</span> Cosmos Ecosystem</h3>
+<div class="outline-text-3" id="text-1-10">
+<ul class="org-ul">
+<li>A network of independent, interoperable blockchains designed to create an Internet of blockchain.</li>
+<li>Decouples the consensus (BFT consensus engine) and networking (IBC protocol) layers from the application layers</li>
+<li>Cosmos SDK: a modular framework for building application-specific blockchains efficiently.</li>
+<li>Cosmos Hub: the first blockchain in the Cosmos network, serves as a central hub to connect multiple blockchains via IBC.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgdbff89b" class="outline-3">
+<h3 id="orgdbff89b"><span class="section-number-3">1.11.</span> Blockchain layers</h3>
+<div class="outline-text-3" id="text-1-11">
 <ul class="org-ul">
 <li>Infrastructure layer: the physical devices that support the network; and the underlying communication protocols for data transfer between nodes.</li>
 <li>Data layer: the distributed ledger and the storage methods.</li>
@@ -159,36 +243,36 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org40b2d55" class="outline-3">
-<h3 id="org40b2d55"><span class="section-number-3">1.5.</span> Optimistic parallelization</h3>
-<div class="outline-text-3" id="text-1-5">
+<div id="outline-container-orgbaab313" class="outline-3">
+<h3 id="orgbaab313"><span class="section-number-3">1.12.</span> Optimistic parallelization</h3>
+<div class="outline-text-3" id="text-1-12">
 <ul class="org-ul">
 <li>Multiple transactions are processed in parallel under the assumption that they will conflict with each other; necessary corrections are made afterwards if conflicts are detected.</li>
 <li>Increase throughput if conflicts are well handled.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org38aa547" class="outline-3">
-<h3 id="org38aa547"><span class="section-number-3">1.6.</span> Integrated and Modular blockchain</h3>
-<div class="outline-text-3" id="text-1-6">
+<div id="outline-container-org6a8d080" class="outline-3">
+<h3 id="org6a8d080"><span class="section-number-3">1.13.</span> Integrated and Modular blockchain</h3>
+<div class="outline-text-3" id="text-1-13">
 <ul class="org-ul">
 <li>Integrated: all components, e.g., execution layer, consensus mechanism, networking are tightly coupled; faster internal communication but lower flexibility and scalability.</li>
 <li>Modular: allow independent upgrades for different components; enhance scalability.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org36a0cfb" class="outline-3">
-<h3 id="org36a0cfb"><span class="section-number-3">1.7.</span> EVM Execution and storage layer</h3>
-<div class="outline-text-3" id="text-1-7">
+<div id="outline-container-org96e6e36" class="outline-3">
+<h3 id="org96e6e36"><span class="section-number-3">1.14.</span> EVM Execution and storage layer</h3>
+<div class="outline-text-3" id="text-1-14">
 <ul class="org-ul">
 <li>Execution: responsible for running smart contracts and processing transactions.</li>
 <li>Storage: store all blockchain data, e.g., accounts, smart contract states, transaction history.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgc2c3ac6" class="outline-3">
-<h3 id="orgc2c3ac6"><span class="section-number-3">1.8.</span> Block time and finalize time</h3>
-<div class="outline-text-3" id="text-1-8">
+<div id="outline-container-org7109e04" class="outline-3">
+<h3 id="org7109e04"><span class="section-number-3">1.15.</span> Block time and finalize time</h3>
+<div class="outline-text-3" id="text-1-15">
 <ul class="org-ul">
 <li>Block: the average time for a new block to be added.</li>
 <li>Finalize: the period after which a block is considered irreversible.</li>
@@ -196,17 +280,17 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-orgf3647be" class="outline-3">
-<h3 id="orgf3647be"><span class="section-number-3">1.9.</span> Blockchain audit</h3>
-<div class="outline-text-3" id="text-1-9">
+<div id="outline-container-org11b1459" class="outline-3">
+<h3 id="org11b1459"><span class="section-number-3">1.16.</span> Blockchain audit</h3>
+<div class="outline-text-3" id="text-1-16">
 <ul class="org-ul">
 <li>A review of a blockchain to ensures its security and functionality.</li>
 </ul>
 </div>
 </div>
 </div>
-<div id="outline-container-org270605d" class="outline-2">
-<h2 id="org270605d"><span class="section-number-2">2.</span> What is Sei</h2>
+<div id="outline-container-orgea9deac" class="outline-2">
+<h2 id="orgea9deac"><span class="section-number-2">2.</span> What is Sei</h2>
 <div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li>On mainnet beta since August 2023.</li>
@@ -216,8 +300,8 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org31afb8f" class="outline-2">
-<h2 id="org31afb8f"><span class="section-number-2">3.</span> What is Sei v2</h2>
+<div id="outline-container-orgf8e53d7" class="outline-2">
+<h2 id="orgf8e53d7"><span class="section-number-2">3.</span> What is Sei v2</h2>
 <div class="outline-text-2" id="text-3">
 <ul class="org-ul">
 <li>The first fully parallelized EVM.</li>
@@ -229,18 +313,18 @@
 <li>Once audits are complete, the upgrade is released in a public testnet in Q1 2024, and deployed to mainnet in H1 2024.</li>
 </ul>
 </div>
-<div id="outline-container-orgee58b14" class="outline-3">
-<h3 id="orgee58b14"><span class="section-number-3">3.1.</span> Backwards compatibility</h3>
+<div id="outline-container-org9722240" class="outline-3">
+<h3 id="org9722240"><span class="section-number-3">3.1.</span> Backwards compatibility</h3>
 <div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
-<li>Every major contract on Ethereum can seamlessly be deployed on Sei with no code changes.</li>
-<li>Sei binary imports Geth (a Go implementation of the EVM) to process Ethereum transactions and state updates with a special interface Sei makes for the EVM.</li>
-<li>The RPC interface will be identical for Sei as EVM, existing tooling from Ethereum can be seamlessly reused, e.g., Metamask, Hardhat.</li>
+<li>Ethereum contracts can be seamlessly deployed on Sei v2 with no code changes.</li>
+<li>User can send a Eth transaction to the Ethereum contract on Sei v2 via the same interface, e.g., Metamask, Hardhat.</li>
+<li>Sei v2 imports Geth (a Go EVM implementation) to process the Eth transaction, and convert the result to Sei storage.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org94176df" class="outline-3">
-<h3 id="org94176df"><span class="section-number-3">3.2.</span> Optimistic parallelization</h3>
+<div id="outline-container-org15385d8" class="outline-3">
+<h3 id="org15385d8"><span class="section-number-3">3.2.</span> Optimistic parallelization</h3>
 <div class="outline-text-3" id="text-3-2">
 <ul class="org-ul">
 <li>Sei requires smart contract developers to optionally define the state that smart contracts are using, Sei v2 removes this need.</li>
@@ -251,9 +335,31 @@
 </ul>
 </div>
 </div>
+<div id="outline-container-orgd4f21cb" class="outline-3">
+<h3 id="orgd4f21cb"><span class="section-number-3">3.3.</span> SeiDB</h3>
+<div class="outline-text-3" id="text-3-3">
+<ul class="org-ul">
+<li>Sei uses a vanilla database layer composed of an IAVL tree, which is less efficient in terms of storage and latency.</li>
+<li>Sei v2 breaks the single IAVL tree into 2 components:
+<ul class="org-ul">
+<li>state store: provide low latency direct access to raw key-value pairs to remove the overhead of redundant metadata and disk usage; uses a write-ahead log to help event recovery.</li>
+<li>state commitment: use an in-memory IAVL tree to help validators reach consensus faster.</li>
+</ul></li>
+<li>After benchmarking, Sei v2 replaces GoLevelDB with PebbleDB for better read/write in multi-threaded access.</li>
+</ul>
 </div>
-<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-parallel-evm.html">parallel-evm</a> </div>]]></description>
-  <category><![CDATA[parallel-evm]]></category>
+</div>
+<div id="outline-container-org0d7a47c" class="outline-3">
+<h3 id="org0d7a47c"><span class="section-number-3">3.4.</span> Interoperability</h3>
+<div class="outline-text-3" id="text-3-4">
+<ul class="org-ul">
+<li>Sei v2 processes different transactions, e.g., Cosmwasm, EVM in a uniformed way, and then forwards them to different storage sections.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-evm:parallel.html">evm:parallel</a> </div>]]></description>
+  <category><![CDATA[evm:parallel]]></category>
   <link>https://chenyo-17.github.io/org-static-blog/2024-06-28-parallel-evm:-sei-v2.html</link>
   <guid>https://chenyo-17.github.io/org-static-blog/2024-06-28-parallel-evm:-sei-v2.html</guid>
   <pubDate>Fri, 28 Jun 2024 21:25:00 +0200</pubDate>
