@@ -1,0 +1,71 @@
+#+title: Parallel EVM: MegaETH
+#+date: <2024-07-04 15:34>
+#+description:  This is a personal note for [[https://megaeth.systems/research][MegaETH-blog]]
+#+filetags: evm parallel-evm megaeth
+
+This is a personal note for [[https://megaeth.systems/research][MegaETH-blog]] as well as some terminology explained online.
+
+* Blockchain fundamentals
+** [[https://docs.conduit.xyz/][Conduit chain]]
+- Allows one to deploy a rollup through its Rollups-as-a-service platform within in minutes.
+
+** Gas per second
+- Reflects the amount of computation the blockchain can handle per second.
+- Different EVM operation costs different gas, e.g., ~ADD~ costs 3 gas.
+
+** Target gas per block
+- Dynamically regulate the amount of computation a block can include.
+- ~Gas per second = Target Gas per block / Block time~.
+
+** Current blockchain scalability
+
+#+CAPTION: 2024 blockchain scalability comparison
+#+ATTR_HTML: :align center
+#+ATTR_HTML: :width 400px
+[[https://hackmd.io/_uploads/rkHVB0iHR.png]]
+
+- Throughput: 100MGas/s (\(\approx\) 3700 ERC-20 transfer) cannot compares to Web2 database with >1M transactions per second.
+- Capacity: Complex applications cannot be on-chain, e.g., compute large Fibonacci (e.g., \(10^8\)) number would take 55 seconds on opBNB, while in C just 30 milliseconds in a single core.
+- Delay: Applications that require fast feedback loop, e.g., high-frequency trading are not feasible with long block times, e.g., 1s.
+
+** Blockchain node hardware requirements
+- Lower hardware requirements for full nodes increase decentralization.
+- Higher requirements increase performance and security.
+
+** L1 and L2 nodes
+- L1 nodes are homogeneous; each node performs identical tasks, i.e., transaction consensus and execution without specialization.
+- L2 nodes are heterogeneous; different nodes perform specific tasks, e.g., sequencer node determines the transaction order, prover nodes rely on accelerators to enhance proof generation.
+
+** [[https://ethereum.org/en/developers/docs/networking-layer/portal-network/][Portal Network]]
+- An in-development p2p network for serving historical data where each node stores a small piece of Ethereum's history.
+- Light nodes do not need to trust on full nodes.
+- The entire history exists distributed across the network.
+
+** [[https://ethereum.org/en/roadmap/statelessness/][Node storage]] (Roadmap)
+- High disk space is the main barrier to a full node access, due to the need to store large chunks of Ethereum state data to process new transactions.
+- Using cheap hard drivers to store old data cannot keep up with new blocks.
+- Clients should find new ways to verify transactions without relying on looking up local databases.
+
+*** History expiry
+- Nodes discard state data older than X blocks with weak subjectivity checkpoints, i.e., a genesis block close to the present.
+- Nodes can request historical data from peers with Portal Network, e.g., altruistic nodes that are willing to maintain and serve historical achieves, e.g., DAO.
+- Does not fundamentally change how Ethereum node handles data.
+- Controversial due to it could introduce new censorship risks if centralized organizations are providing historical data.
+- EIP-4444 is under active discussion regarding community management.
+
+*** State expiry
+
+*** Statelessness
+
+# - state expiry: ignore inactive state data until it is resurrected.
+# - weak statelessness: only block producers need access to full state data.
+# - strong statelessness: no nodes need access to the full state data.
+
+* What is MagaETH
+
+- An EVM-compatible L2 blockchain with Web2-level real-time processing and publishing, i.e., millisecond-level response times under heavy load.
+- Main idea: delegate security and censorship resistance to base layers, e.g., Ethereum to make room for L2 optimization.
+- 3 major roles in MegaETH to decouple transaction execution.
+  - sequencer: only one active sequencer at any time to **eliminate the consensus overhead**.
+  - full node: receive state diff from the sequencer via a p2p network and apply the diffs to update local states; don't re-execute transactions, only validates the block indirectly using proofs provided by the provers.
+  - provers: validate the block asynchronously using the stateless validation scheme.

@@ -17,19 +17,172 @@
 <div id="preamble" class="status"></div>
 <div id="content">
 
+<div class="post-date">04 Jul 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-07-04-parallel-evm:-megaeth.html">Parallel EVM: MegaETH</a></h1>
+<nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org190c832">1. Blockchain fundamentals</a>
+<ul>
+<li><a href="#orge64d3d1">1.1. Conduit chain</a></li>
+<li><a href="#orgd6fcc5f">1.2. Gas per second</a></li>
+<li><a href="#org4b61d5a">1.3. Target gas per block</a></li>
+<li><a href="#orgc2fb762">1.4. Current blockchain scalability</a></li>
+<li><a href="#orgbfe12cf">1.5. Blockchain node hardware requirements</a></li>
+<li><a href="#org348e792">1.6. L1 and L2 nodes</a></li>
+<li><a href="#org65f8cbc">1.7. Portal Network</a></li>
+<li><a href="#org990de1d">1.8. Node storage (Roadmap)</a>
+<ul>
+<li><a href="#org908c29d">1.8.1. History expiry</a></li>
+<li><a href="#org5f50921">1.8.2. State expiry</a></li>
+<li><a href="#org001ff7a">1.8.3. Statelessness</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org4c4bb94">2. What is MagaETH</a></li>
+</ul>
+</div>
+</nav>
+<p>
+This is a personal note for <a href="https://megaeth.systems/research">MegaETH-blog</a> as well as some terminology explained online.
+</p>
+<div id="outline-container-org190c832" class="outline-2">
+<h2 id="org190c832"><span class="section-number-2">1.</span> Blockchain fundamentals</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-orge64d3d1" class="outline-3">
+<h3 id="orge64d3d1"><span class="section-number-3">1.1.</span> <a href="https://docs.conduit.xyz/">Conduit chain</a></h3>
+<div class="outline-text-3" id="text-1-1">
+<ul class="org-ul">
+<li>Allows one to deploy a rollup through its Rollups-as-a-service platform within in minutes.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgd6fcc5f" class="outline-3">
+<h3 id="orgd6fcc5f"><span class="section-number-3">1.2.</span> Gas per second</h3>
+<div class="outline-text-3" id="text-1-2">
+<ul class="org-ul">
+<li>Reflects the amount of computation the blockchain can handle per second.</li>
+<li>Different EVM operation costs different gas, e.g., <code>ADD</code> costs 3 gas.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org4b61d5a" class="outline-3">
+<h3 id="org4b61d5a"><span class="section-number-3">1.3.</span> Target gas per block</h3>
+<div class="outline-text-3" id="text-1-3">
+<ul class="org-ul">
+<li>Dynamically regulate the amount of computation a block can include.</li>
+<li><code>Gas per second = Target Gas per block / Block time</code>.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgc2fb762" class="outline-3">
+<h3 id="orgc2fb762"><span class="section-number-3">1.4.</span> Current blockchain scalability</h3>
+<div class="outline-text-3" id="text-1-4">
+
+<figure id="org3ebeaf7">
+<img src="https://hackmd.io/_uploads/rkHVB0iHR.png" alt="rkHVB0iHR.png" align="center" width="400px">
+
+<figcaption><span class="figure-number">Figure 1: </span>2024 blockchain scalability comparison</figcaption>
+</figure>
+
+<ul class="org-ul">
+<li>Throughput: 100MGas/s (\(\approx\) 3700 ERC-20 transfer) cannot compares to Web2 database with &gt;1M transactions per second.</li>
+<li>Capacity: Complex applications cannot be on-chain, e.g., compute large Fibonacci (e.g., \(10^8\)) number would take 55 seconds on opBNB, while in C just 30 milliseconds in a single core.</li>
+<li>Delay: Applications that require fast feedback loop, e.g., high-frequency trading are not feasible with long block times, e.g., 1s.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgbfe12cf" class="outline-3">
+<h3 id="orgbfe12cf"><span class="section-number-3">1.5.</span> Blockchain node hardware requirements</h3>
+<div class="outline-text-3" id="text-1-5">
+<ul class="org-ul">
+<li>Lower hardware requirements for full nodes increase decentralization.</li>
+<li>Higher requirements increase performance and security.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org348e792" class="outline-3">
+<h3 id="org348e792"><span class="section-number-3">1.6.</span> L1 and L2 nodes</h3>
+<div class="outline-text-3" id="text-1-6">
+<ul class="org-ul">
+<li>L1 nodes are homogeneous; each node performs identical tasks, i.e., transaction consensus and execution without specialization.</li>
+<li>L2 nodes are heterogeneous; different nodes perform specific tasks, e.g., sequencer node determines the transaction order, prover nodes rely on accelerators to enhance proof generation.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org65f8cbc" class="outline-3">
+<h3 id="org65f8cbc"><span class="section-number-3">1.7.</span> <a href="https://ethereum.org/en/developers/docs/networking-layer/portal-network/">Portal Network</a></h3>
+<div class="outline-text-3" id="text-1-7">
+<ul class="org-ul">
+<li>An in-development p2p network for serving historical data where each node stores a small piece of Ethereum&rsquo;s history.</li>
+<li>Light nodes do not need to trust on full nodes.</li>
+<li>The entire history exists distributed across the network.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org990de1d" class="outline-3">
+<h3 id="org990de1d"><span class="section-number-3">1.8.</span> <a href="https://ethereum.org/en/roadmap/statelessness/">Node storage</a> (Roadmap)</h3>
+<div class="outline-text-3" id="text-1-8">
+<ul class="org-ul">
+<li>High disk space is the main barrier to a full node access, due to the need to store large chunks of Ethereum state data to process new transactions.</li>
+<li>Using cheap hard drivers to store old data cannot keep up with new blocks.</li>
+<li>Clients should find new ways to verify transactions without relying on looking up local databases.</li>
+</ul>
+</div>
+<div id="outline-container-org908c29d" class="outline-4">
+<h4 id="org908c29d"><span class="section-number-4">1.8.1.</span> History expiry</h4>
+<div class="outline-text-4" id="text-1-8-1">
+<ul class="org-ul">
+<li>Nodes discard state data older than X blocks with weak subjectivity checkpoints, i.e., a genesis block close to the present.</li>
+<li>Nodes can request historical data from peers with Portal Network, e.g., altruistic nodes that are willing to maintain and serve historical achieves, e.g., DAO.</li>
+<li>Does not fundamentally change how Ethereum node handles data.</li>
+<li>Controversial due to it could introduce new censorship risks if centralized organizations are providing historical data.</li>
+<li>EIP-4444 is under active discussion regarding community management.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org5f50921" class="outline-4">
+<h4 id="org5f50921"><span class="section-number-4">1.8.2.</span> State expiry</h4>
+</div>
+
+<div id="outline-container-org001ff7a" class="outline-4">
+<h4 id="org001ff7a"><span class="section-number-4">1.8.3.</span> Statelessness</h4>
+<div class="outline-text-4" id="text-1-8-3">
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org4c4bb94" class="outline-2">
+<h2 id="org4c4bb94"><span class="section-number-2">2.</span> What is MagaETH</h2>
+<div class="outline-text-2" id="text-2">
+<ul class="org-ul">
+<li>An EVM-compatible L2 blockchain with Web2-level real-time processing and publishing, i.e., millisecond-level response times under heavy load.</li>
+<li>Main idea: delegate security and censorship resistance to base layers, e.g., Ethereum to make room for L2 optimization.</li>
+<li>3 major roles in MegaETH to decouple transaction execution.
+<ul class="org-ul">
+<li>sequencer: only one active sequencer at any time to <b><b>eliminate the consensus overhead</b></b>.</li>
+<li>full node: receive state diff from the sequencer via a p2p network and apply the diffs to update local states; don&rsquo;t re-execute transactions, only validates the block indirectly using proofs provided by the provers.</li>
+<li>provers: validate the block asynchronously using the stateless validation scheme.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-evm.html">evm</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-parallel-evm.html">parallel-evm</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-megaeth.html">megaeth</a> </div>
 <div class="post-date">04 Jul 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-07-04-my-german-course.html">My German course</a></h1>
 <nav id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgb713d4e">1. Was ist passiert</a></li>
-<li><a href="#org599f946">2. Ich kann kein gutes Englisch schreiben</a></li>
-<li><a href="#org85c3ec6">3. Ich kann nicht mich vorstellen</a></li>
+<li><a href="#org5a16434">1. Was ist passiert</a></li>
+<li><a href="#org01a225e">2. Ich kann kein gutes Englisch schreiben</a></li>
+<li><a href="#org16e62e1">3. Ich kann nicht mich vorstellen</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-orgb713d4e" class="outline-2">
-<h2 id="orgb713d4e"><span class="section-number-2">1.</span> Was ist passiert</h2>
+<div id="outline-container-org5a16434" class="outline-2">
+<h2 id="org5a16434"><span class="section-number-2">1.</span> Was ist passiert</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Ich habe seit diesem Montag einen intensiven Deutschkurs gemacht.
@@ -41,8 +194,8 @@ Ich gehe circa 11 Uhr ins Bett.
 </p>
 </div>
 </div>
-<div id="outline-container-org599f946" class="outline-2">
-<h2 id="org599f946"><span class="section-number-2">2.</span> Ich kann kein gutes Englisch schreiben</h2>
+<div id="outline-container-org01a225e" class="outline-2">
+<h2 id="org01a225e"><span class="section-number-2">2.</span> Ich kann kein gutes Englisch schreiben</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Wenn ich hier diesen Satzen schreibe, merke ich, dass ich komplexe Satze auf Englisch nicht mehr schreiben kann.
@@ -56,8 +209,8 @@ As a result, my written english falls back to almost the same level as german.
 </p>
 </div>
 </div>
-<div id="outline-container-org85c3ec6" class="outline-2">
-<h2 id="org85c3ec6"><span class="section-number-2">3.</span> Ich kann nicht mich vorstellen</h2>
+<div id="outline-container-org16e62e1" class="outline-2">
+<h2 id="org16e62e1"><span class="section-number-2">3.</span> Ich kann nicht mich vorstellen</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 All my classmates come from diverse backgrounds.
@@ -84,7 +237,7 @@ And before this I have never thought of such a bias in my question.
 More and more often recently, I realize how limited my perspective is.
 I did not know what the life with a social worker is like.
 I did not know that Afghan can often speak Turkish.
-I did not know what my lecture thinks when he works as a security guard at night.
+I did not know what my lecturer thinks when he works as a security guard at night.
 I have been too much caught up in my own world, such that I am unable to ask a meaningful question of people I don&rsquo;t understand.
 I want to know more about the difference of this world, but I don&rsquo;t know how.
 </p>
@@ -292,33 +445,33 @@ B & \equiv\left(\ldots,\left(T_0, T_1, \ldots\right), \ldots\right) \\
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org0b97437">1. Blockchain fundamentals</a>
+<li><a href="#org967e1d0">1. Blockchain fundamentals</a>
 <ul>
-<li><a href="#org9cb944b">1.1. Mainnet and Testnet</a></li>
-<li><a href="#org62ab6e3">1.2. Mainnet Alpha and Beta</a></li>
-<li><a href="#orgf7351a4">1.3. Layer 1 and Layer 2</a></li>
-<li><a href="#org2a4320f">1.4. Rollups</a></li>
-<li><a href="#orga8b13a4">1.5. State channels</a></li>
-<li><a href="#orge193d8b">1.6. Sidechains</a></li>
-<li><a href="#org04b05ec">1.7. Ethereum and EVM</a></li>
-<li><a href="#orge1f6361">1.8. IAVL tree</a></li>
-<li><a href="#org84360c7">1.9. CosmWasm contract</a></li>
-<li><a href="#orgc94a691">1.10. Cosmos Ecosystem</a></li>
-<li><a href="#org0e429c3">1.11. Blockchain layers</a></li>
-<li><a href="#org36cd87b">1.12. Optimistic parallelization</a></li>
-<li><a href="#org5615603">1.13. Integrated and Modular blockchain</a></li>
-<li><a href="#orgd6b00d4">1.14. EVM Execution and storage layer</a></li>
-<li><a href="#org67d3cfa">1.15. Block time and finalize time</a></li>
-<li><a href="#org6f732ba">1.16. Blockchain audit</a></li>
+<li><a href="#orga94b008">1.1. Mainnet and Testnet</a></li>
+<li><a href="#org357461e">1.2. Mainnet Alpha and Beta</a></li>
+<li><a href="#orga00eab4">1.3. Layer 1 and Layer 2</a></li>
+<li><a href="#orgdfe16e4">1.4. Rollups</a></li>
+<li><a href="#org5f2b1fd">1.5. State channels</a></li>
+<li><a href="#org845b769">1.6. Sidechains</a></li>
+<li><a href="#org46530ae">1.7. Ethereum and EVM</a></li>
+<li><a href="#org0950449">1.8. IAVL tree</a></li>
+<li><a href="#org56bf22e">1.9. CosmWasm contract</a></li>
+<li><a href="#org2d49772">1.10. Cosmos Ecosystem</a></li>
+<li><a href="#org9db60d2">1.11. Blockchain layers</a></li>
+<li><a href="#orgdc9c912">1.12. Optimistic parallelization</a></li>
+<li><a href="#orgb71a01a">1.13. Integrated and Modular blockchain</a></li>
+<li><a href="#org11417b2">1.14. EVM Execution and storage layer</a></li>
+<li><a href="#org582c768">1.15. Block time and finalize time</a></li>
+<li><a href="#orgb6045e7">1.16. Blockchain audit</a></li>
 </ul>
 </li>
-<li><a href="#orgc494a74">2. What is Sei</a></li>
-<li><a href="#orgf4fc424">3. What is Sei v2</a>
+<li><a href="#org9f94d38">2. What is Sei</a></li>
+<li><a href="#orgc0bbbcd">3. What is Sei v2</a>
 <ul>
-<li><a href="#org0300354">3.1. Backwards compatibility</a></li>
-<li><a href="#org9b573e6">3.2. Optimistic parallelization</a></li>
-<li><a href="#org47ecbcf">3.3. SeiDB</a></li>
-<li><a href="#org52b7537">3.4. Interoperability</a></li>
+<li><a href="#org3358197">3.1. Backwards compatibility</a></li>
+<li><a href="#orgc29b5bf">3.2. Optimistic parallelization</a></li>
+<li><a href="#org84f6795">3.3. SeiDB</a></li>
+<li><a href="#orgec7954c">3.4. Interoperability</a></li>
 </ul>
 </li>
 </ul>
@@ -327,12 +480,12 @@ B & \equiv\left(\ldots,\left(T_0, T_1, \ldots\right), \ldots\right) \\
 <p>
 This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parallelized-evm/">Sei-v2-blog</a> as well as some terminology explained by <a href="https://chatgpt.com/g/g-TJq7kBEsX-evm-gpt">EVM GPT</a>.
 </p>
-<div id="outline-container-org0b97437" class="outline-2">
-<h2 id="org0b97437"><span class="section-number-2">1.</span> Blockchain fundamentals</h2>
+<div id="outline-container-org967e1d0" class="outline-2">
+<h2 id="org967e1d0"><span class="section-number-2">1.</span> Blockchain fundamentals</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org9cb944b" class="outline-3">
-<h3 id="org9cb944b"><span class="section-number-3">1.1.</span> Mainnet and Testnet</h3>
+<div id="outline-container-orga94b008" class="outline-3">
+<h3 id="orga94b008"><span class="section-number-3">1.1.</span> Mainnet and Testnet</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>Mainnet: real transactions occur and have real-world value; any operation is final and irreversible.</li>
@@ -340,8 +493,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org62ab6e3" class="outline-3">
-<h3 id="org62ab6e3"><span class="section-number-3">1.2.</span> Mainnet Alpha and Beta</h3>
+<div id="outline-container-org357461e" class="outline-3">
+<h3 id="org357461e"><span class="section-number-3">1.2.</span> Mainnet Alpha and Beta</h3>
 <div class="outline-text-3" id="text-1-2">
 <ul class="org-ul">
 <li>Alpha: test core functionalities and gather initial feedback in live environment.</li>
@@ -349,8 +502,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-orgf7351a4" class="outline-3">
-<h3 id="orgf7351a4"><span class="section-number-3">1.3.</span> Layer 1 and Layer 2</h3>
+<div id="outline-container-orga00eab4" class="outline-3">
+<h3 id="orga00eab4"><span class="section-number-3">1.3.</span> Layer 1 and Layer 2</h3>
 <div class="outline-text-3" id="text-1-3">
 <ul class="org-ul">
 <li>L1: the main network where all transactions are processed and the primary chain is maintained.</li>
@@ -358,8 +511,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org2a4320f" class="outline-3">
-<h3 id="org2a4320f"><span class="section-number-3">1.4.</span> Rollups</h3>
+<div id="outline-container-orgdfe16e4" class="outline-3">
+<h3 id="orgdfe16e4"><span class="section-number-3">1.4.</span> Rollups</h3>
 <div class="outline-text-3" id="text-1-4">
 <ul class="org-ul">
 <li>Processes transactions off-chain and periodically submits a summary (rollup) to L1.</li>
@@ -374,8 +527,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-orga8b13a4" class="outline-3">
-<h3 id="orga8b13a4"><span class="section-number-3">1.5.</span> State channels</h3>
+<div id="outline-container-org5f2b1fd" class="outline-3">
+<h3 id="org5f2b1fd"><span class="section-number-3">1.5.</span> State channels</h3>
 <div class="outline-text-3" id="text-1-5">
 <ul class="org-ul">
 <li>allow participants to conduct numerous off-chain transactions, with only the final state recorded on the L1.</li>
@@ -383,8 +536,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-orge193d8b" class="outline-3">
-<h3 id="orge193d8b"><span class="section-number-3">1.6.</span> Sidechains</h3>
+<div id="outline-container-org845b769" class="outline-3">
+<h3 id="org845b769"><span class="section-number-3">1.6.</span> Sidechains</h3>
 <div class="outline-text-3" id="text-1-6">
 <ul class="org-ul">
 <li>Independent blockchains running parallel to the main chain, with own consensus and security.</li>
@@ -392,8 +545,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org04b05ec" class="outline-3">
-<h3 id="org04b05ec"><span class="section-number-3">1.7.</span> Ethereum and EVM</h3>
+<div id="outline-container-org46530ae" class="outline-3">
+<h3 id="org46530ae"><span class="section-number-3">1.7.</span> Ethereum and EVM</h3>
 <div class="outline-text-3" id="text-1-7">
 <ul class="org-ul">
 <li>Ethereum: a blockchain ecosystem, includes the blockchain, consensus mechanism, smart contracts, native cryptocurrency.</li>
@@ -401,8 +554,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-orge1f6361" class="outline-3">
-<h3 id="orge1f6361"><span class="section-number-3">1.8.</span> IAVL tree</h3>
+<div id="outline-container-org0950449" class="outline-3">
+<h3 id="org0950449"><span class="section-number-3">1.8.</span> IAVL tree</h3>
 <div class="outline-text-3" id="text-1-8">
 <ul class="org-ul">
 <li>AVL tree: self-balancing binary tree where the difference in heights between left and right subtrees of anynode is at most one.</li>
@@ -410,8 +563,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org84360c7" class="outline-3">
-<h3 id="org84360c7"><span class="section-number-3">1.9.</span> CosmWasm contract</h3>
+<div id="outline-container-org56bf22e" class="outline-3">
+<h3 id="org56bf22e"><span class="section-number-3">1.9.</span> CosmWasm contract</h3>
 <div class="outline-text-3" id="text-1-9">
 <ul class="org-ul">
 <li>Allows developers to write fast and portable smart contracts in WebAssembly.</li>
@@ -419,8 +572,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-orgc94a691" class="outline-3">
-<h3 id="orgc94a691"><span class="section-number-3">1.10.</span> Cosmos Ecosystem</h3>
+<div id="outline-container-org2d49772" class="outline-3">
+<h3 id="org2d49772"><span class="section-number-3">1.10.</span> Cosmos Ecosystem</h3>
 <div class="outline-text-3" id="text-1-10">
 <ul class="org-ul">
 <li>A network of independent, interoperable blockchains designed to create an Internet of blockchain.</li>
@@ -430,22 +583,22 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org0e429c3" class="outline-3">
-<h3 id="org0e429c3"><span class="section-number-3">1.11.</span> Blockchain layers</h3>
+<div id="outline-container-org9db60d2" class="outline-3">
+<h3 id="org9db60d2"><span class="section-number-3">1.11.</span> Blockchain layers</h3>
 <div class="outline-text-3" id="text-1-11">
 <ul class="org-ul">
 <li>Infrastructure layer: the physical devices that support the network; and the underlying communication protocols for data transfer between nodes.</li>
 <li>Data layer: the distributed ledger and the storage methods.</li>
-<li>Consensus layer: the protocols, validators and miners.</li>
-<li>Execution layer: smart contracts and virtual machines.</li>
+<li>Consensus layer: the protocols, validators and miners; determines the transaction orders.</li>
+<li>Execution layer: smart contracts and virtual machines; determines the transaction update.</li>
 <li>Application layer: dApps to provide service and user interfaces.</li>
 <li>Governance layer: the community decision-making process and proposals.</li>
 <li>Security layer: cryptographic primitives and security protocols to avoid attacks.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org36cd87b" class="outline-3">
-<h3 id="org36cd87b"><span class="section-number-3">1.12.</span> Optimistic parallelization</h3>
+<div id="outline-container-orgdc9c912" class="outline-3">
+<h3 id="orgdc9c912"><span class="section-number-3">1.12.</span> Optimistic parallelization</h3>
 <div class="outline-text-3" id="text-1-12">
 <ul class="org-ul">
 <li>Multiple transactions are processed in parallel under the assumption that they will conflict with each other; necessary corrections are made afterwards if conflicts are detected.</li>
@@ -453,8 +606,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org5615603" class="outline-3">
-<h3 id="org5615603"><span class="section-number-3">1.13.</span> Integrated and Modular blockchain</h3>
+<div id="outline-container-orgb71a01a" class="outline-3">
+<h3 id="orgb71a01a"><span class="section-number-3">1.13.</span> Integrated and Modular blockchain</h3>
 <div class="outline-text-3" id="text-1-13">
 <ul class="org-ul">
 <li>Integrated: all components, e.g., execution layer, consensus mechanism, networking are tightly coupled; faster internal communication but lower flexibility and scalability.</li>
@@ -462,8 +615,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-orgd6b00d4" class="outline-3">
-<h3 id="orgd6b00d4"><span class="section-number-3">1.14.</span> EVM Execution and storage layer</h3>
+<div id="outline-container-org11417b2" class="outline-3">
+<h3 id="org11417b2"><span class="section-number-3">1.14.</span> EVM Execution and storage layer</h3>
 <div class="outline-text-3" id="text-1-14">
 <ul class="org-ul">
 <li>Execution: responsible for running smart contracts and processing transactions.</li>
@@ -471,8 +624,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org67d3cfa" class="outline-3">
-<h3 id="org67d3cfa"><span class="section-number-3">1.15.</span> Block time and finalize time</h3>
+<div id="outline-container-org582c768" class="outline-3">
+<h3 id="org582c768"><span class="section-number-3">1.15.</span> Block time and finalize time</h3>
 <div class="outline-text-3" id="text-1-15">
 <ul class="org-ul">
 <li>Block: the average time for a new block to be added.</li>
@@ -481,8 +634,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org6f732ba" class="outline-3">
-<h3 id="org6f732ba"><span class="section-number-3">1.16.</span> Blockchain audit</h3>
+<div id="outline-container-orgb6045e7" class="outline-3">
+<h3 id="orgb6045e7"><span class="section-number-3">1.16.</span> Blockchain audit</h3>
 <div class="outline-text-3" id="text-1-16">
 <ul class="org-ul">
 <li>A review of a blockchain to ensures its security and functionality.</li>
@@ -490,8 +643,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </div>
 </div>
 </div>
-<div id="outline-container-orgc494a74" class="outline-2">
-<h2 id="orgc494a74"><span class="section-number-2">2.</span> What is Sei</h2>
+<div id="outline-container-org9f94d38" class="outline-2">
+<h2 id="org9f94d38"><span class="section-number-2">2.</span> What is Sei</h2>
 <div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li>On mainnet beta since August 2023.</li>
@@ -501,8 +654,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-orgf4fc424" class="outline-2">
-<h2 id="orgf4fc424"><span class="section-number-2">3.</span> What is Sei v2</h2>
+<div id="outline-container-orgc0bbbcd" class="outline-2">
+<h2 id="orgc0bbbcd"><span class="section-number-2">3.</span> What is Sei v2</h2>
 <div class="outline-text-2" id="text-3">
 <ul class="org-ul">
 <li>The first fully parallelized EVM.</li>
@@ -514,8 +667,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 <li>Once audits are complete, the upgrade is released in a public testnet in Q1 2024, and deployed to mainnet in H1 2024.</li>
 </ul>
 </div>
-<div id="outline-container-org0300354" class="outline-3">
-<h3 id="org0300354"><span class="section-number-3">3.1.</span> Backwards compatibility</h3>
+<div id="outline-container-org3358197" class="outline-3">
+<h3 id="org3358197"><span class="section-number-3">3.1.</span> Backwards compatibility</h3>
 <div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
 <li>Ethereum contracts can be seamlessly deployed on Sei v2 with no code changes.</li>
@@ -524,8 +677,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org9b573e6" class="outline-3">
-<h3 id="org9b573e6"><span class="section-number-3">3.2.</span> Optimistic parallelization</h3>
+<div id="outline-container-orgc29b5bf" class="outline-3">
+<h3 id="orgc29b5bf"><span class="section-number-3">3.2.</span> Optimistic parallelization</h3>
 <div class="outline-text-3" id="text-3-2">
 <ul class="org-ul">
 <li>Sei requires smart contract developers to optionally define the state that smart contracts are using, Sei v2 removes this need.</li>
@@ -536,8 +689,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org47ecbcf" class="outline-3">
-<h3 id="org47ecbcf"><span class="section-number-3">3.3.</span> SeiDB</h3>
+<div id="outline-container-org84f6795" class="outline-3">
+<h3 id="org84f6795"><span class="section-number-3">3.3.</span> SeiDB</h3>
 <div class="outline-text-3" id="text-3-3">
 <ul class="org-ul">
 <li>Sei uses a vanilla database layer composed of an IAVL tree, which is less efficient in terms of storage and latency.</li>
@@ -550,8 +703,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org52b7537" class="outline-3">
-<h3 id="org52b7537"><span class="section-number-3">3.4.</span> Interoperability</h3>
+<div id="outline-container-orgec7954c" class="outline-3">
+<h3 id="orgec7954c"><span class="section-number-3">3.4.</span> Interoperability</h3>
 <div class="outline-text-3" id="text-3-4">
 <ul class="org-ul">
 <li>Sei v2 processes different transactions, e.g., Cosmwasm, EVM in a uniformed way, and then forwards them to different storage sections.</li>
@@ -559,76 +712,7 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </div>
 </div>
 </div>
-<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-evm.html">evm</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-paralle-evm.html">paralle-evm</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-sei.html">sei</a> </div>
-<div class="post-date">26 Jun 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-06-26-watched:-argo.html">Watched: Argo (2012)</a></h1>
-<nav id="table-of-contents" role="doc-toc">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents" role="doc-toc">
-<ul>
-<li><a href="#org2ed0dc1">1. Why did I watch it</a></li>
-<li><a href="#org7c27470">2. What is it about</a></li>
-<li><a href="#org431726b">3. Did I like it</a></li>
-</ul>
-</div>
-</nav>
-
-<figure id="org3fb1172">
-<img src="https://miro.medium.com/v2/resize:fit:1100/format:webp/1*IFB2V5vjsVKtHcxBdCfQSQ.jpeg" alt="1*IFB2V5vjsVKtHcxBdCfQSQ.jpeg" align="center" width="300px">
-
-<figcaption><span class="figure-number">Figure 1: </span>Argo poster</figcaption>
-</figure>
-<div id="outline-container-org2ed0dc1" class="outline-2">
-<h2 id="org2ed0dc1"><span class="section-number-2">1.</span> Why did I watch it</h2>
-<div class="outline-text-2" id="text-1">
-<p>
-This week, I found myself craving a movie with a &ldquo;Homeland&rdquo; theme.
-Then the name of Argo came to me.
-I saw its name a decade ago (I am too old!) on some movie magazine cover.
-</p>
-</div>
-</div>
-<div id="outline-container-org7c27470" class="outline-2">
-<h2 id="org7c27470"><span class="section-number-2">2.</span> What is it about</h2>
-<div class="outline-text-2" id="text-2">
-<p>
-It has little thing to do with &ldquo;Homeland&rdquo;.
-Instead, it blends action, comedy and drama based on a true story, although non of any dramatic conflicts really happened in history afak.
-It is about how a selfless agent, backed by an entire intelligence system which behaved incredibly efficient, and an alliance which also behaved incredibly generous, escaped a group of compatriots, who also behaved incredibly brave, from a dangerous place.
-My boyfriend said it is quite &ldquo;Hitchcock&rdquo;.
-Every tension resolves safely in the end: the phone will be picked up at the last second, the plane will take off at the last second, even the plane tickets will magically show up at the last second (Swissair yeah!).
-</p>
-</div>
-</div>
-<div id="outline-container-org431726b" class="outline-2">
-<h2 id="org431726b"><span class="section-number-2">3.</span> Did I like it</h2>
-<div class="outline-text-2" id="text-3">
-<p>
-I guess?
-The filming is good, as well as the narration and the performance.
-There were some moments where I was not fully convinced, but I accept them if that was the history.
-What really amazed me was when I found the actor of Tony was also the director, and also wrote &ldquo;Good Will Hunting (1997)&rdquo;, what a genius!
-But I guessed I preferred &ldquo;Civil war (2024)&rdquo; (my last movie) to this one.
-The reason?
-I felt &ldquo;Argo&rdquo; could have delved deeper into the absurdities of war rather than solely focusing on a heroic narrative.
-</p>
-
-
-<figure id="orga79c726">
-<img src="https://m.media-amazon.com/images/M/MV5BOTI0MzcxMTYtZDVkMy00NjY1LTgyMTYtZmUxN2M3NmQ2NWJhXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg" alt="MV5BOTI0MzcxMTYtZDVkMy00NjY1LTgyMTYtZmUxN2M3NmQ2NWJhXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg" align="center" width="300px">
-
-<figcaption><span class="figure-number">Figure 2: </span>Good Will Hunting poster</figcaption>
-</figure>
-
-
-
-<figure id="org0c8a9fc">
-<img src="https://posterspy.com/wp-content/uploads/2024/04/Civil-War-Kirsten.jpg" alt="Civil-War-Kirsten.jpg" align="center" width="300px">
-
-<figcaption><span class="figure-number">Figure 3: </span>Civil War poster</figcaption>
-</figure>
-</div>
-</div>
-<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-personal.html">personal</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-moive.html">moive</a> </div><div id="archive">
+<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-evm.html">evm</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-paralle-evm.html">paralle-evm</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-sei.html">sei</a> </div><div id="archive">
 <a href="https://chenyo-17.github.io/org-static-blog/archive.html">Other posts</a>
 </div>
 </div>

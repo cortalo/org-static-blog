@@ -54,8 +54,8 @@ This is a personal note for [[https://blog.sei.io/sei-v2-the-first-parallelized-
 ** Blockchain layers
 - Infrastructure layer: the physical devices that support the network; and the underlying communication protocols for data transfer between nodes.
 - Data layer: the distributed ledger and the storage methods.
-- Consensus layer: the protocols, validators and miners.
-- Execution layer: smart contracts and virtual machines.
+- Consensus layer: the protocols, validators and miners; determines the transaction orders.
+- Execution layer: smart contracts and virtual machines; determines the transaction update.
 - Application layer: dApps to provide service and user interfaces.
 - Governance layer: the community decision-making process and proposals.
 - Security layer: cryptographic primitives and security protocols to avoid attacks.
