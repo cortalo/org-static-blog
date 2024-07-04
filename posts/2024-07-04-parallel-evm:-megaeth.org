@@ -3,7 +3,7 @@
 #+description:  This is a personal note for [[https://megaeth.systems/research][MegaETH-blog]]
 #+filetags: evm parallel-evm megaeth
 
-This is a personal note for [[https://megaeth.systems/research][MegaETH-blog]] as well as some terminology explained online.
+This is a personal note for [[https://megaeth.systems/research][MegaETH-blog]] as well as some terminology explained online, e.g.,  [[https://ethereum.org/en/roadmap/][ethereum.org]].
 
 * Blockchain fundamentals
 ** [[https://docs.conduit.xyz/][Conduit chain]]
@@ -21,7 +21,7 @@ This is a personal note for [[https://megaeth.systems/research][MegaETH-blog]] a
 
 #+CAPTION: 2024 blockchain scalability comparison
 #+ATTR_HTML: :align center
-#+ATTR_HTML: :width 400px
+#+ATTR_HTML: :width 500px
 [[https://hackmd.io/_uploads/rkHVB0iHR.png]]
 
 - Throughput: 100MGas/s (\(\approx\) 3700 ERC-20 transfer) cannot compares to Web2 database with >1M transactions per second.
@@ -36,12 +36,37 @@ This is a personal note for [[https://megaeth.systems/research][MegaETH-blog]] a
 - L1 nodes are homogeneous; each node performs identical tasks, i.e., transaction consensus and execution without specialization.
 - L2 nodes are heterogeneous; different nodes perform specific tasks, e.g., sequencer node determines the transaction order, prover nodes rely on accelerators to enhance proof generation.
 
+** Verifying a block
+- Re-execute the transactions in the block.
+- Applying the changes to Ethereum state trie.
+- Calculate the new root hash and compare it with the root hash provided by the block.
+
+** Maximum extractable value (MEV)
+- Validators maximize their profitability by favorably ordering transactions.
+
+** Proposer-builder separation (PBS)
+- Block builders are responsible for creating blocks and offering them to the block proposer in each slot.
+- Block proposers cannot see the contents, but simply choose the most profitable one and pay a fee to the block builder before broadcasting the block.
+- PBS makes it harder for block builders to censor transactions, and to outperform individuals at MEV extraction.
+
+** Live and historical sync
+- Live (online): continuously update a node with the latest data.
+- Historical (offline): synchronize a node by downloading the processing data up to a certain point.
+- Historical sync has much higher TPS than live sync, e.g., 10x, since historical sync can perform batch processing and does not have network latency.
+
 ** [[https://ethereum.org/en/developers/docs/networking-layer/portal-network/][Portal Network]]
 - An in-development p2p network for serving historical data where each node stores a small piece of Ethereum's history.
 - Light nodes do not need to trust on full nodes.
 - The entire history exists distributed across the network.
 
-** [[https://ethereum.org/en/roadmap/statelessness/][Node storage]] (Roadmap)
+** [[https://ethereum.org/en/roadmap/verkle-trees/][Verkle tree]]
+- Stateless clients use a witness to the state data that arrives with the block instead of local databases.
+- **Witness**: the minimal set of data that prove the values of the state that are being changed by the transactions in a block.
+# - Witness: A collection of individual pieces of the state data required to execute the block transactions, and a cryptographic proof that the witness is indeed a part of the full data.
+- Merkle tree is too large to be broadcast between peers; the witness is a path connecting the data from leaved to the root, and to verify the data the hash of all sibling nodes are also required (to compute the parent hash).
+- Verkle trees reduce the witness size by shortening the distance between leaves and eliminating the need to provide sibling nodes; Using a polynomial commitment scheme(?) allows the witness to have a fixed size.
+
+** [[https://ethereum.org/en/roadmap/statelessness/][Node storage]]
 - High disk space is the main barrier to a full node access, due to the need to store large chunks of Ethereum state data to process new transactions.
 - Using cheap hard drivers to store old data cannot keep up with new blocks.
 - Clients should find new ways to verify transactions without relying on looking up local databases.
@@ -54,18 +79,35 @@ This is a personal note for [[https://megaeth.systems/research][MegaETH-blog]] a
 - EIP-4444 is under active discussion regarding community management.
 
 *** State expiry
+- Remove state from individual nodes if it has not been accessed recently.
+- The inactive accounts is not deleted, but stored separately from the active state and can be resurrected.
+- A leading approach requires to add timestamps to the account address.
+- The responsibility of storing old data may also be moved to centralized providers.
 
 *** Statelessness
-
-# - state expiry: ignore inactive state data until it is resurrected.
-# - weak statelessness: only block producers need access to full state data.
-# - strong statelessness: no nodes need access to the full state data.
+- weak statelessness: only block producers need access to full state data.
+- Weak statelessness require Verkle trees and proposer-builder separation.
+- strong statelessness: no nodes need access to the full state data.
+- In strong statelessness, witnesses are generated by users to declare accounts related to the transaction; not a part of Ethereum's roadmap.
 
 * What is MagaETH
 
 - An EVM-compatible L2 blockchain with Web2-level real-time processing and publishing, i.e., millisecond-level response times under heavy load.
 - Main idea: delegate security and censorship resistance to base layers, e.g., Ethereum to make room for L2 optimization.
-- 3 major roles in MegaETH to decouple transaction execution.
-  - sequencer: only one active sequencer at any time to **eliminate the consensus overhead**.
-  - full node: receive state diff from the sequencer via a p2p network and apply the diffs to update local states; don't re-execute transactions, only validates the block indirectly using proofs provided by the provers.
-  - provers: validate the block asynchronously using the stateless validation scheme.
+
+** Node specialization
+ - sequencer: only one active sequencer at any time to **eliminate the consensus overhead**.
+ - full node: receive state diff from the sequencer via a p2p network and apply the diffs to update local states; don't re-execute transactions, only validates the block indirectly using proofs provided by the provers.
+ - provers: validate the block asynchronously using the stateless validation scheme.
+ - [[https://vitalik.eth.limo/general/2021/12/06/endgame.html][Endgame, Vitalik 2021]]: Node specialization ensures trustless and high decentralized block validation (more provers), even though block production becomes more centralized (one sequencer).
+  
+** Design philosophy
+- Reth (Rust implementation of the Ethereum protocol) is bottlenecked by the MPT update in a live sync setup, even with a powerful sequencer.
+- [[https://www.usenix.org/conference/atc19/presentation/keynote][Measure, then build]]: first get insights from real problems, then design techniques to address all problems simultaneously.
+- Prefer clean-slate, as addressing any bottleneck in isolation rarely results in significant end-to-end performance improvement.
+
+* MegaETH challenges
+- Traditional EVM implementation face 3 major inefficiency for a real-time blockchain:
+  - high state access latency: solved by powerful single sequencer.
+  - lack of parallel execution
+  - interpreter overhead
