@@ -103,7 +103,6 @@ This is a personal note for [[https://blog.sei.io/sei-v2-the-first-parallelized-
 - User can send a Eth transaction to the Ethereum contract on Sei v2 via the same interface, e.g., Metamask, Hardhat.
 - Sei v2 imports Geth (a Go EVM implementation) to process the Eth transaction, and convert the result to Sei storage.
 
-
 ** Optimistic parallelization
 - Sei requires smart contract developers to optionally define the state that smart contracts are using, Sei v2 removes this need.
 - Sei v2 chain optimistically runs all transactions in parallel, when reaching conflicts, i.e., transactions touching the same state, the chain tracks the storage parts each transaction is touching.
