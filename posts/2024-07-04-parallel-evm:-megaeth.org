@@ -95,7 +95,7 @@ In summary, this blog proposes many challenges when designing a high-performance
 
 ** Software transactional memory (STM)
 - A concurrency control mechanism to control access to shares memory in software.
-- A transaction refers to a piece of ode executing a series of reads and writes to the shared memory.
+- A transaction refers to a piece of code executing a series of reads and writes to the shared memory.
 - Transactions are isolated; changes made by one transaction are not visible to others until the transaction commits.
 - When a conflict is detected, e.g., two transactions try to modify the same memory, one transaction is rolled back.
 

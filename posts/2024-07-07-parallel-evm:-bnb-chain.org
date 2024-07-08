@@ -1,0 +1,35 @@
+#+title: Parallel EVM: BNB chain
+#+date: <2024-07-07 22:19>
+#+description:  This is a personal note for [[https://www.bnbchain.org/zh-CN/blog/road-to-high-performance-parallel-evm-for-bnb-chain][BNB chain-blog]]
+#+filetags: evm parallel-evm bnb
+
+This is a personal note for [[https://www.bnbchain.org/zh-CN/blog/road-to-high-performance-parallel-evm-for-bnb-chain][BNB chain-blog]].
+
+* Blockchain fundamentals
+** Why parallel EVM is not easy
+- Lack of visibility of potential transaction conflict.
+- Blockchains experience transaction bursts, e.g., >70M transactions per day.
+
+** A Parallel EVM ideas
+- Run multiple EVM instances concurrently on different threads.
+- Execute transactions independently on each thread and later merge a fiinal state update.
+
+#+CAPTION: Parallel Evm diagram
+#+ATTR_HTML: :align center
+#+ATTR_HTML: :width 600px
+[[https://lh7-us.googleusercontent.com/Dh1GAMYlMkiRI0xWQ0ByYOxq_GNtA9h1PP1OF7FP9b8O3VRxVtlh1eq991OlNa4rNX_ZXH8tVPRBeN58_0dBF1jPUVRuuJMl4JqmBchhCTZp_vF-W003l77KajIjIMCHfapjsBH--0EpMi0FT2iNPlw]]
+
+** Block STM algorithm
+- Optimistic parallelism: assigns transactions to various threads.
+- Software transaction memory (STM): detect conflicts when transactions try to modify the same shared state simultaneously.
+- Conflict resolution: when conflicts are detected, the offending transactions are discarded without affecting the blockchain state and re-executed.
+
+* BNB Parallel EVM 1.0: Infrastructure
+- Proposal: [[https://github.com/bnb-chain/BEPs/pull/130?ref=bnbchain.ghost.io][BEP-130 (2022)]]
+- Dispatcher: distributes transactions across threads to optimize throughput.
+- Parallel execution engine: execute transactions independently on each thread.
+- Local stateDB: each thread maintains a local stateDB to record state access.
+- Conflict detection: detect conflicts and re-execute conflicting transacttions.
+- State commit: the finalized results are committed to the global state DB.
+
+* BNB Parallel EVM 2.0: Performance enhancement

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="This is a personal note for [[https://www.bnbchain.org/zh-CN/blog/road-to-high-performance-parallel-evm-for-bnb-chain][BNB chain-blog]]">
+<link rel="alternate"
+      type="application/rss+xml"
+      href="https://chenyo-17.github.io/org-static-blog/rss.xml"
+      title="RSS feed for https://chenyo-17.github.io/org-static-blog">
+<title>Parallel EVM: BNB chain</title>
+<script type="text/javascript"
+             src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+        <script type="text/x-mathjax-config">
+             MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'],['\\(','\\)']]}});
+        </script></head>
+<body>
+<div id="preamble" class="status"></div>
+<div id="content">
+<div class="post-date">07 Jul 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-07-07-parallel-evm:-bnb-chain.html">Parallel EVM: BNB chain</a></h1>
+<nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org9a9b42e">1. Blockchain fundamentals</a>
+<ul>
+<li><a href="#orge97164e">1.1. Why parallel EVM is not easy</a></li>
+<li><a href="#orgb29d4bf">1.2. A Parallel EVM ideas</a></li>
+<li><a href="#orgc0aa01e">1.3. Block STM algorithm</a></li>
+</ul>
+</li>
+<li><a href="#orga3e48da">2. BNB Parallel EVM 1.0: Infrastructure</a></li>
+<li><a href="#org3e39e09">3. BNB Parallel EVM 2.0: Performance enhancement</a></li>
+</ul>
+</div>
+</nav>
+<p>
+This is a personal note for <a href="https://www.bnbchain.org/zh-CN/blog/road-to-high-performance-parallel-evm-for-bnb-chain">BNB chain-blog</a>.
+</p>
+<div id="outline-container-org9a9b42e" class="outline-2">
+<h2 id="org9a9b42e"><span class="section-number-2">1.</span> Blockchain fundamentals</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-orge97164e" class="outline-3">
+<h3 id="orge97164e"><span class="section-number-3">1.1.</span> Why parallel EVM is not easy</h3>
+<div class="outline-text-3" id="text-1-1">
+<ul class="org-ul">
+<li>Lack of visibility of potential transaction conflict.</li>
+<li>Blockchains experience transaction bursts, e.g., &gt;70M transactions per day.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgb29d4bf" class="outline-3">
+<h3 id="orgb29d4bf"><span class="section-number-3">1.2.</span> A Parallel EVM ideas</h3>
+<div class="outline-text-3" id="text-1-2">
+<ul class="org-ul">
+<li>Run multiple EVM instances concurrently on different threads.</li>
+<li>Execute transactions independently on each thread and later merge a fiinal state update.</li>
+</ul>
+
+<p align="center" width="600px">
+<a href="https://lh7-us.googleusercontent.com/Dh1GAMYlMkiRI0xWQ0ByYOxq_GNtA9h1PP1OF7FP9b8O3VRxVtlh1eq991OlNa4rNX_ZXH8tVPRBeN58_0dBF1jPUVRuuJMl4JqmBchhCTZp_vF-W003l77KajIjIMCHfapjsBH--0EpMi0FT2iNPlw" align="center" width="600px">https://lh7-us.googleusercontent.com/Dh1GAMYlMkiRI0xWQ0ByYOxq_GNtA9h1PP1OF7FP9b8O3VRxVtlh1eq991OlNa4rNX_ZXH8tVPRBeN58_0dBF1jPUVRuuJMl4JqmBchhCTZp_vF-W003l77KajIjIMCHfapjsBH--0EpMi0FT2iNPlw</a>
+</p>
+</div>
+</div>
+<div id="outline-container-orgc0aa01e" class="outline-3">
+<h3 id="orgc0aa01e"><span class="section-number-3">1.3.</span> Block STM algorithm</h3>
+<div class="outline-text-3" id="text-1-3">
+<ul class="org-ul">
+<li>Optimistic parallelism: assigns transactions to various threads.</li>
+<li>Software transaction memory (STM): detect conflicts when transactions try to modify the same shared state simultaneously.</li>
+<li>Conflict resolution: when conflicts are detected, the offending transactions are discarded without affecting the blockchain state and re-executed.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orga3e48da" class="outline-2">
+<h2 id="orga3e48da"><span class="section-number-2">2.</span> BNB Parallel EVM 1.0: Infrastructure</h2>
+<div class="outline-text-2" id="text-2">
+<ul class="org-ul">
+<li>Proposal: <a href="https://github.com/bnb-chain/BEPs/pull/130?ref=bnbchain.ghost.io">BEP-130 (2022)</a></li>
+<li>Dispatcher: distributes transactions across threads to optimize throughput.</li>
+<li>Parallel execution engine: execute transactions independently on each thread.</li>
+<li>Local stateDB: each thread maintains a local stateDB to record state access.</li>
+<li>Conflict detection: detect conflicts and re-execute conflicting transacttions.</li>
+<li>State commit: the finalized results are committed to the global state DB.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org3e39e09" class="outline-2">
+<h2 id="org3e39e09"><span class="section-number-2">3.</span> BNB Parallel EVM 2.0: Performance enhancement</h2>
+</div>
+<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-evm.html">evm</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-parallel-evm.html">parallel-evm</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-bnb.html">bnb</a> </div></div>
+<div id="postamble" class="status"></div>
+</body>
+</html>
