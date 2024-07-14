@@ -12,24 +12,55 @@ This is a personal note for [[https://www.bnbchain.org/zh-CN/blog/road-to-high-p
 
 ** A Parallel EVM ideas
 - Run multiple EVM instances concurrently on different threads.
-- Execute transactions independently on each thread and later merge a fiinal state update.
-
-#+CAPTION: Parallel Evm diagram
-#+ATTR_HTML: :align center
-#+ATTR_HTML: :width 600px
-[[https://lh7-us.googleusercontent.com/Dh1GAMYlMkiRI0xWQ0ByYOxq_GNtA9h1PP1OF7FP9b8O3VRxVtlh1eq991OlNa4rNX_ZXH8tVPRBeN58_0dBF1jPUVRuuJMl4JqmBchhCTZp_vF-W003l77KajIjIMCHfapjsBH--0EpMi0FT2iNPlw]]
+- Execute transactions independently on each thread and later merge a finial state update.
+- [[https://lh7-us.googleusercontent.com/Dh1GAMYlMkiRI0xWQ0ByYOxq_GNtA9h1PP1OF7FP9b8O3VRxVtlh1eq991OlNa4rNX_ZXH8tVPRBeN58_0dBF1jPUVRuuJMl4JqmBchhCTZp_vF-W003l77KajIjIMCHfapjsBH--0EpMi0FT2iNPlw][Parallel EVM scheme]]
 
 ** Block STM algorithm
 - Optimistic parallelism: assigns transactions to various threads.
 - Software transaction memory (STM): detect conflicts when transactions try to modify the same shared state simultaneously.
-- Conflict resolution: when conflicts are detected, the offending transactions are discarded without affecting the blockchain state and re-executed.
+- Conflict resolution: when conflicts are detected, the offending transactions are discarded without affecting the blockchain state and are re-executed.
 
 * BNB Parallel EVM 1.0: Infrastructure
 - Proposal: [[https://github.com/bnb-chain/BEPs/pull/130?ref=bnbchain.ghost.io][BEP-130 (2022)]]
 - Dispatcher: distributes transactions across threads to optimize throughput.
 - Parallel execution engine: execute transactions independently on each thread.
 - Local stateDB: each thread maintains a local stateDB to record state access.
-- Conflict detection: detect conflicts and re-execute conflicting transacttions.
+- Conflict detection: detect conflicts and re-execute conflicting transactions.
 - State commit: the finalized results are committed to the global state DB.
 
 * BNB Parallel EVM 2.0: Performance enhancement
+- Dispatcher: combine both static and dynamic dispatch strategies.
+- Execution engine: streaming pipeline to enable smooth transaction processing.
+- Conflict detection: ensure data integrity while minimizing unnecessary re-execution.
+- Memory: shared memory pools and light copying techniques to reduce memory footprint.
+- The overall performance ranges from 20% to 50%.
+
+* BNB Parallel EVM 3.0: Production
+** Hint-based dispatcher
+- leverages external hint providers to analyze transactions and generate predictions about potential state access conflicts.
+- Simple hints include read/write state sets; advanced hints incorporate weak/strong ordering for optimal parallelism.
+- Conflicting transactions are assigned to the same slot.
+- Transactions with no conflicts are distributed across different slots.
+- Conflict detector remains as a backup for handling unforeseen conflicts.
+
+** Seamless BNB chain ecosystem integration
+- Modularization and reconstructing.
+- Thorough testing and validation.
+
+* Comparison with other solutions
+ |------------------------------+---------------------------+------------------------------------+----------------------|
+ |          Solutions           |    TX dependency check    |        Conflict resolution         | StateDB optimization |
+ |------------------------------+---------------------------+------------------------------------+----------------------|
+ |           BlockSTM           |    tracks at execution    |            re-execution            |         N/A          |
+ |           Polygon            | minimal metadata solution |        reduced re-execution        |         N/A          |
+ |            Monad             |      static analysis      |        reduced re-execution        |       Monad DB       |
+ |             Sei              |    tracks at execution    |            re-execution            |        SeiDB         |
+ | Neon EVM and Solana Sealevel |     contract provided     |        reduced re-execution        |  depends on Solana   |
+ |           BNBChain           |         hint info         | reduced or eliminated re-execution |   Thread local DB    |
+ |------------------------------+---------------------------+------------------------------------+----------------------|
+
+* Other optimizations
+- Opcode-level optimization: fine-tuning individual EVM instructions for maximum efficiency.
+- Compilation optimization: JIT/AOT compilation paradigms; instruction-level parallelism (SIMD).
+- Database sharding: distribute data across multiple databases.
+- Concurrent node execution.
