@@ -17,6 +17,109 @@
 <div id="preamble" class="status"></div>
 <div id="content">
 
+<div class="post-date">14 Jul 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-07-14-parallel-evm:-bep-130.html">Parallel EVM: BEP-130</a></h1>
+<nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org643eaf9">1. Blockchain fundamentals</a>
+<ul>
+<li><a href="#org8c47d44">1.1. System contract</a></li>
+<li><a href="#org829eecf">1.2. Transaction execution phases</a></li>
+</ul>
+</li>
+<li><a href="#org6829a6e">2. Design principle</a></li>
+<li><a href="#org8d2a14e">3. Workflow</a>
+<ul>
+<li><a href="#orgc823c40">3.1. Dispatch factors</a></li>
+<li><a href="#org8b67e9a">3.2. Slot execution stages</a></li>
+<li><a href="#org901faf2">3.3. Conflict detection</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+<p>
+This is a personal note for <a href="https://github.com/bnb-chain/BEPs/blob/master/BEPs/BEP130.md">BEP-130</a>.
+BEP-130 is a proposal that introduces a parallel transaction execution mechanism on the BNB Smart Chain (BSC).
+</p>
+<div id="outline-container-org643eaf9" class="outline-2">
+<h2 id="org643eaf9"><span class="section-number-2">1.</span> Blockchain fundamentals</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org8c47d44" class="outline-3">
+<h3 id="org8c47d44"><span class="section-number-3">1.1.</span> System contract</h3>
+<div class="outline-text-3" id="text-1-1">
+<ul class="org-ul">
+<li>Built-in contracts to perform system level operations, e,g,m gas fee reward, cross chain communication.</li>
+<li>Cannot be executed concurrently since they depend on the execution results of other transactions, e.g., a number of transaction made by an account at some timestamp.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org829eecf" class="outline-3">
+<h3 id="org829eecf"><span class="section-number-3">1.2.</span> Transaction execution phases</h3>
+<div class="outline-text-3" id="text-1-2">
+<ul class="org-ul">
+<li>Block mining phase: received from the P2P transaction pool, could contain invalid transactions.</li>
+<li>Block sync phase: the block is confirmed.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org6829a6e" class="outline-2">
+<h2 id="org6829a6e"><span class="section-number-2">2.</span> Design principle</h2>
+<div class="outline-text-2" id="text-2">
+<ul class="org-ul">
+<li>Should always produce the same result as the current sequential execution.</li>
+<li>Should be decoupled into existing or new modules with no circular dependency.</li>
+<li>Should be configurable based on node hardware resources.</li>
+<li>Keep it simple and smart.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org8d2a14e" class="outline-2">
+<h2 id="org8d2a14e"><span class="section-number-2">3.</span> Workflow</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-orgc823c40" class="outline-3">
+<h3 id="orgc823c40"><span class="section-number-3">3.1.</span> Dispatch factors</h3>
+<div class="outline-text-3" id="text-3-1">
+<ul class="org-ul">
+<li>Is the slot idle or occupied?</li>
+<li>Is there a same address contract running or pending in this slot?</li>
+<li>Has the slot&rsquo;s pending transactions size reached the max transactions queue size limitation?</li>
+<li>Is there a big transaction index gap between the slot&rsquo;s head transaction and the dispatched transaction?</li>
+<li>Is the transaction contract likely to have high gas cost or a conflict rate?</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org8b67e9a" class="outline-3">
+<h3 id="org8b67e9a"><span class="section-number-3">3.2.</span> Slot execution stages</h3>
+<div class="outline-text-3" id="text-3-2">
+<ol class="org-ol">
+<li>Execute the transaction \(Tx<sub>i</sub>\])based on a specific worldstate, e.g., the state when the execution starts.</li>
+<li>Wait for the finalization of the previous transaction \(Tx_{i-1}\).</li>
+<li>Detect if there is any conflict between the state read by \(Tx_i\) and the state change after the execution of \(Tx_i\) starts.</li>
+<li>If a conflict is detected, re-execute \(Tx_{i}\) again based on the latest finalized worldstate.</li>
+<li>Finalize the state changed by \(Tx_i\) to the latest worldstate.</li>
+<li>The state changes are kept within each slot, and are merged to the main StateDB once the execution is done.</li>
+<li>The first transaction in a block can be immediately finalized.</li>
+<li>If \(Tx_i\) and \(Tx_{i-1}\) are in the same slot, \(Tx_i\) can immediately start conflict detection.</li>
+<li>Re-executed transaction can be immediately finalized as it reads the latest worldstate.</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org901faf2" class="outline-3">
+<h3 id="org901faf2"><span class="section-number-3">3.3.</span> Conflict detection</h3>
+<div class="outline-text-3" id="text-3-3">
+<ul class="org-ul">
+<li>Detection items: storage key/value pair; account balance; contract content and status.</li>
+<li>Overlap reads without write, or hardcode writes without read are not conflicts.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-evm.html">evm</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-parallel-evm.html">parallel-evm</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-bnb.html">bnb</a> </div>
 <div class="post-date">07 Jul 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-07-07-parallel-evm:-bnb-chain.html">Parallel EVM: BNB chain</a></h1>
 <nav id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
@@ -699,79 +802,7 @@ B & \equiv\left(\ldots,\left(T_0, T_1, \ldots\right), \ldots\right) \\
 </div>
 </div>
 </div>
-<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-evm.html">evm</a> </div>
-<div class="post-date">29 Jun 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-06-29-viewed:-interlaken.html">Viewed: Interlaken</a></h1>
-<nav id="table-of-contents" role="doc-toc">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents" role="doc-toc">
-<ul>
-<li><a href="#org1cedd5e">1. Where did we go</a></li>
-<li><a href="#org8227e39">2. Why did we go</a></li>
-<li><a href="#org4f0fdf6">3. What did we do</a></li>
-</ul>
-</div>
-</nav>
-<div id="outline-container-org1cedd5e" class="outline-2">
-<h2 id="org1cedd5e"><span class="section-number-2">1.</span> Where did we go</h2>
-<div class="outline-text-2" id="text-1">
-<ul class="org-ul">
-<li>We rent a car and drove to Interlaken.</li>
-<li>We visited <a href="https://aareschlucht.ch/">Aareschlucht</a> and <a href="https://www.brienz.ch/">Brienz</a>, and did some short strolls around.</li>
-</ul>
-
-
-<figure id="org6c3eecc">
-<img src="./static/car.jpg" alt="car.jpg" align="center" width="600px">
-
-<figcaption><span class="figure-number">Figure 1: </span>The view outside the car</figcaption>
-</figure>
-</div>
-</div>
-<div id="outline-container-org8227e39" class="outline-2">
-<h2 id="org8227e39"><span class="section-number-2">2.</span> Why did we go</h2>
-<div class="outline-text-2" id="text-2">
-<ul class="org-ul">
-<li>According to the unpredictable <a href="https://www.meteoschweiz.admin.ch/#tab=forecast-map">Meteoswiss</a> forecast, this Saturday would have been the only weekend-day with some good weather in limited locations to go hiking since 2? or 3? weeks ago.</li>
-<li>But this was not the case anymore when we arrived the <a href="https://www.interlaken.ch/en/experiences/mountains-panoramas/mountain-excursions/brienzer-rothorn">Rothorn Kulm</a> restaurant via the <a href="https://www.interlaken.ch/en/experiences/poi/brienz-rothorn-railway">steam train</a>.</li>
-</ul>
-
-
-<figure id="org2738d09">
-<img src="./static/restaurant.jpg" alt="restaurant.jpg" align="center" width="400px">
-
-<figcaption><span class="figure-number">Figure 2: </span>The weather at the Rothorn Kulm</figcaption>
-</figure>
-</div>
-</div>
-<div id="outline-container-org4f0fdf6" class="outline-2">
-<h2 id="org4f0fdf6"><span class="section-number-2">3.</span> What did we do</h2>
-<div class="outline-text-2" id="text-3">
-<ol class="org-ol">
-<li>We first went a tour in Aareschlucht, where we experienced both strong cold wind and gentle warm wind.</li>
-<li>We then did a half-hour small hiking to go back to our starting point.</li>
-<li>Then we drove to Brienz, and had a relaxing lunch along the lake, where I ate a piece of watermelon.</li>
-<li>We took the 1-hour steam train to the Rothorn Kulm, when we arrived it started to be foggy, windy and rainy.</li>
-<li>We refilled our energy with hot drinks and snacks in the restaurant, and took a short stroll around the restaurant.</li>
-<li>We went back to the restaurant to escape the cold (yes it is end of June) and waited for the steam train to go down.</li>
-<li>During the train down the sun came out a bit, and the view was clear and nice again!</li>
-</ol>
-
-
-<figure id="org067abc8">
-<img src="./static/water.jpg" alt="water.jpg" align="center" width="600px">
-
-<figcaption><span class="figure-number">Figure 3: </span>The water in Aareschlucht</figcaption>
-</figure>
-
-
-<figure id="orgce07c2d">
-<img src="./static/view.jpg" alt="view.jpg" align="center" width="600px">
-
-<figcaption><span class="figure-number">Figure 4: </span>The view on the train</figcaption>
-</figure>
-</div>
-</div>
-<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-personal.html">personal</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-trip.html">trip</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-interlaken.html">interlaken</a> </div><div id="archive">
+<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-evm.html">evm</a> </div><div id="archive">
 <a href="https://chenyo-17.github.io/org-static-blog/archive.html">Other posts</a>
 </div>
 </div>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="This is a personal note for [[https://github.com/bnb-chain/BEPs/blob/master/BEPs/BEP130.md][BEP-130]]">
+<link rel="alternate"
+      type="application/rss+xml"
+      href="https://chenyo-17.github.io/org-static-blog/rss.xml"
+      title="RSS feed for https://chenyo-17.github.io/org-static-blog">
+<title>Parallel EVM: BEP-130</title>
+<script type="text/javascript"
+             src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+        <script type="text/x-mathjax-config">
+             MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'],['\\(','\\)']]}});
+        </script></head>
+<body>
+<div id="preamble" class="status"></div>
+<div id="content">
+<div class="post-date">14 Jul 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-07-14-parallel-evm:-bep-130.html">Parallel EVM: BEP-130</a></h1>
+<nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org643eaf9">1. Blockchain fundamentals</a>
+<ul>
+<li><a href="#org8c47d44">1.1. System contract</a></li>
+<li><a href="#org829eecf">1.2. Transaction execution phases</a></li>
+</ul>
+</li>
+<li><a href="#org6829a6e">2. Design principle</a></li>
+<li><a href="#org8d2a14e">3. Workflow</a>
+<ul>
+<li><a href="#orgc823c40">3.1. Dispatch factors</a></li>
+<li><a href="#org8b67e9a">3.2. Slot execution stages</a></li>
+<li><a href="#org901faf2">3.3. Conflict detection</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+<p>
+This is a personal note for <a href="https://github.com/bnb-chain/BEPs/blob/master/BEPs/BEP130.md">BEP-130</a>.
+BEP-130 is a proposal that introduces a parallel transaction execution mechanism on the BNB Smart Chain (BSC).
+</p>
+<div id="outline-container-org643eaf9" class="outline-2">
+<h2 id="org643eaf9"><span class="section-number-2">1.</span> Blockchain fundamentals</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org8c47d44" class="outline-3">
+<h3 id="org8c47d44"><span class="section-number-3">1.1.</span> System contract</h3>
+<div class="outline-text-3" id="text-1-1">
+<ul class="org-ul">
+<li>Built-in contracts to perform system level operations, e,g,m gas fee reward, cross chain communication.</li>
+<li>Cannot be executed concurrently since they depend on the execution results of other transactions, e.g., a number of transaction made by an account at some timestamp.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org829eecf" class="outline-3">
+<h3 id="org829eecf"><span class="section-number-3">1.2.</span> Transaction execution phases</h3>
+<div class="outline-text-3" id="text-1-2">
+<ul class="org-ul">
+<li>Block mining phase: received from the P2P transaction pool, could contain invalid transactions.</li>
+<li>Block sync phase: the block is confirmed.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org6829a6e" class="outline-2">
+<h2 id="org6829a6e"><span class="section-number-2">2.</span> Design principle</h2>
+<div class="outline-text-2" id="text-2">
+<ul class="org-ul">
+<li>Should always produce the same result as the current sequential execution.</li>
+<li>Should be decoupled into existing or new modules with no circular dependency.</li>
+<li>Should be configurable based on node hardware resources.</li>
+<li>Keep it simple and smart.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org8d2a14e" class="outline-2">
+<h2 id="org8d2a14e"><span class="section-number-2">3.</span> Workflow</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-orgc823c40" class="outline-3">
+<h3 id="orgc823c40"><span class="section-number-3">3.1.</span> Dispatch factors</h3>
+<div class="outline-text-3" id="text-3-1">
+<ul class="org-ul">
+<li>Is the slot idle or occupied?</li>
+<li>Is there a same address contract running or pending in this slot?</li>
+<li>Has the slot&rsquo;s pending transactions size reached the max transactions queue size limitation?</li>
+<li>Is there a big transaction index gap between the slot&rsquo;s head transaction and the dispatched transaction?</li>
+<li>Is the transaction contract likely to have high gas cost or a conflict rate?</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org8b67e9a" class="outline-3">
+<h3 id="org8b67e9a"><span class="section-number-3">3.2.</span> Slot execution stages</h3>
+<div class="outline-text-3" id="text-3-2">
+<ol class="org-ol">
+<li>Execute the transaction \(Tx<sub>i</sub>\])based on a specific worldstate, e.g., the state when the execution starts.</li>
+<li>Wait for the finalization of the previous transaction \(Tx_{i-1}\).</li>
+<li>Detect if there is any conflict between the state read by \(Tx_i\) and the state change after the execution of \(Tx_i\) starts.</li>
+<li>If a conflict is detected, re-execute \(Tx_{i}\) again based on the latest finalized worldstate.</li>
+<li>Finalize the state changed by \(Tx_i\) to the latest worldstate.</li>
+<li>The state changes are kept within each slot, and are merged to the main StateDB once the execution is done.</li>
+<li>The first transaction in a block can be immediately finalized.</li>
+<li>If \(Tx_i\) and \(Tx_{i-1}\) are in the same slot, \(Tx_i\) can immediately start conflict detection.</li>
+<li>Re-executed transaction can be immediately finalized as it reads the latest worldstate.</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org901faf2" class="outline-3">
+<h3 id="org901faf2"><span class="section-number-3">3.3.</span> Conflict detection</h3>
+<div class="outline-text-3" id="text-3-3">
+<ul class="org-ul">
+<li>Detection items: storage key/value pair; account balance; contract content and status.</li>
+<li>Overlap reads without write, or hardcode writes without read are not conflicts.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-evm.html">evm</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-parallel-evm.html">parallel-evm</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-bnb.html">bnb</a> </div></div>
+<div id="postamble" class="status"></div>
+</body>
+</html>
