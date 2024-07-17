@@ -22,18 +22,18 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org643eaf9">1. Blockchain fundamentals</a>
+<li><a href="#org1c61afd">1. Blockchain fundamentals</a>
 <ul>
-<li><a href="#org8c47d44">1.1. System contract</a></li>
-<li><a href="#org829eecf">1.2. Transaction execution phases</a></li>
+<li><a href="#orgdb42d3a">1.1. System contract</a></li>
+<li><a href="#org3471550">1.2. Transaction execution phases</a></li>
 </ul>
 </li>
-<li><a href="#org6829a6e">2. Design principle</a></li>
-<li><a href="#org8d2a14e">3. Workflow</a>
+<li><a href="#orgc754e1d">2. Design principle</a></li>
+<li><a href="#org5aff251">3. Workflow</a>
 <ul>
-<li><a href="#orgc823c40">3.1. Dispatch factors</a></li>
-<li><a href="#org8b67e9a">3.2. Slot execution stages</a></li>
-<li><a href="#org901faf2">3.3. Conflict detection</a></li>
+<li><a href="#orgac6b072">3.1. Dispatch factors</a></li>
+<li><a href="#orgfc1385b">3.2. Slot execution stages</a></li>
+<li><a href="#orga3f3546">3.3. Conflict detection</a></li>
 </ul>
 </li>
 </ul>
@@ -43,21 +43,21 @@
 This is a personal note for <a href="https://github.com/bnb-chain/BEPs/blob/master/BEPs/BEP130.md">BEP-130</a>.
 BEP-130 is a proposal that introduces a parallel transaction execution mechanism on the BNB Smart Chain (BSC).
 </p>
-<div id="outline-container-org643eaf9" class="outline-2">
-<h2 id="org643eaf9"><span class="section-number-2">1.</span> Blockchain fundamentals</h2>
+<div id="outline-container-org1c61afd" class="outline-2">
+<h2 id="org1c61afd"><span class="section-number-2">1.</span> Blockchain fundamentals</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org8c47d44" class="outline-3">
-<h3 id="org8c47d44"><span class="section-number-3">1.1.</span> System contract</h3>
+<div id="outline-container-orgdb42d3a" class="outline-3">
+<h3 id="orgdb42d3a"><span class="section-number-3">1.1.</span> System contract</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
-<li>Built-in contracts to perform system level operations, e,g,m gas fee reward, cross chain communication.</li>
+<li>Built-in contracts to perform system level operations, e,g., gas fee reward, cross chain communication.</li>
 <li>Cannot be executed concurrently since they depend on the execution results of other transactions, e.g., a number of transaction made by an account at some timestamp.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org829eecf" class="outline-3">
-<h3 id="org829eecf"><span class="section-number-3">1.2.</span> Transaction execution phases</h3>
+<div id="outline-container-org3471550" class="outline-3">
+<h3 id="org3471550"><span class="section-number-3">1.2.</span> Transaction execution phases</h3>
 <div class="outline-text-3" id="text-1-2">
 <ul class="org-ul">
 <li>Block mining phase: received from the P2P transaction pool, could contain invalid transactions.</li>
@@ -66,8 +66,8 @@ BEP-130 is a proposal that introduces a parallel transaction execution mechanism
 </div>
 </div>
 </div>
-<div id="outline-container-org6829a6e" class="outline-2">
-<h2 id="org6829a6e"><span class="section-number-2">2.</span> Design principle</h2>
+<div id="outline-container-orgc754e1d" class="outline-2">
+<h2 id="orgc754e1d"><span class="section-number-2">2.</span> Design principle</h2>
 <div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li>Should always produce the same result as the current sequential execution.</li>
@@ -77,12 +77,12 @@ BEP-130 is a proposal that introduces a parallel transaction execution mechanism
 </ul>
 </div>
 </div>
-<div id="outline-container-org8d2a14e" class="outline-2">
-<h2 id="org8d2a14e"><span class="section-number-2">3.</span> Workflow</h2>
+<div id="outline-container-org5aff251" class="outline-2">
+<h2 id="org5aff251"><span class="section-number-2">3.</span> Workflow</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-orgc823c40" class="outline-3">
-<h3 id="orgc823c40"><span class="section-number-3">3.1.</span> Dispatch factors</h3>
+<div id="outline-container-orgac6b072" class="outline-3">
+<h3 id="orgac6b072"><span class="section-number-3">3.1.</span> Dispatch factors</h3>
 <div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
 <li>Is the slot idle or occupied?</li>
@@ -93,11 +93,11 @@ BEP-130 is a proposal that introduces a parallel transaction execution mechanism
 </ul>
 </div>
 </div>
-<div id="outline-container-org8b67e9a" class="outline-3">
-<h3 id="org8b67e9a"><span class="section-number-3">3.2.</span> Slot execution stages</h3>
+<div id="outline-container-orgfc1385b" class="outline-3">
+<h3 id="orgfc1385b"><span class="section-number-3">3.2.</span> Slot execution stages</h3>
 <div class="outline-text-3" id="text-3-2">
 <ol class="org-ol">
-<li>Execute the transaction \(Tx<sub>i</sub>\])based on a specific worldstate, e.g., the state when the execution starts.</li>
+<li>Execute the transaction \(Tx_i\)based on a specific worldstate, e.g., the state when the execution starts.</li>
 <li>Wait for the finalization of the previous transaction \(Tx_{i-1}\).</li>
 <li>Detect if there is any conflict between the state read by \(Tx_i\) and the state change after the execution of \(Tx_i\) starts.</li>
 <li>If a conflict is detected, re-execute \(Tx_{i}\) again based on the latest finalized worldstate.</li>
@@ -109,8 +109,8 @@ BEP-130 is a proposal that introduces a parallel transaction execution mechanism
 </ol>
 </div>
 </div>
-<div id="outline-container-org901faf2" class="outline-3">
-<h3 id="org901faf2"><span class="section-number-3">3.3.</span> Conflict detection</h3>
+<div id="outline-container-orga3f3546" class="outline-3">
+<h3 id="orga3f3546"><span class="section-number-3">3.3.</span> Conflict detection</h3>
 <div class="outline-text-3" id="text-3-3">
 <ul class="org-ul">
 <li>Detection items: storage key/value pair; account balance; contract content and status.</li>

@@ -17,23 +17,229 @@
 <div id="preamble" class="status"></div>
 <div id="content">
 
+<div class="post-date">17 Jul 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-07-17-db-notes:-relational-model.html">CMU 15-445 notes: Relational Model & Algebra</a></h1>
+<nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org0a9f482">1. Terminology</a>
+<ul>
+<li><a href="#orge830edb">1.1. Database</a></li>
+<li><a href="#orgdfef04b">1.2. Database design consideration</a></li>
+<li><a href="#orge055a12">1.3. Database management system (DBMS)</a></li>
+<li><a href="#org12b971a">1.4. Data model</a></li>
+<li><a href="#orgcf40f28">1.5. Schema</a></li>
+<li><a href="#orgd99fbc5">1.6. Entities and Tables</a></li>
+<li><a href="#org6f9c1e1">1.7. Attributes and Fields</a></li>
+<li><a href="#orgb2eb665">1.8. Logical layer</a></li>
+<li><a href="#org67aae8b">1.9. Physical layer</a></li>
+<li><a href="#orgf54c3c9">1.10. Data manipulation languages (DMLs)</a></li>
+<li><a href="#org15343eb">1.11. SQL (Structured Query Language) and relational model</a></li>
+</ul>
+</li>
+<li><a href="#org82f5220">2. Relational model</a>
+<ul>
+<li><a href="#org2128abf">2.1. A relation</a></li>
+<li><a href="#orga9aa093">2.2. A domain</a></li>
+<li><a href="#org76a118c">2.3. A tuple</a></li>
+<li><a href="#org468a289">2.4. Keys</a></li>
+</ul>
+</li>
+<li><a href="#org0555ac7">3. Relational Algebra</a></li>
+</ul>
+</div>
+</nav>
+<p>
+This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpVZS2s&amp;list=PLSE8ODhjZXjaKScG3l0nuOiDTTqpfnWFf&amp;index=2">CMU 15-445 L1 video</a> and <a href="https://15445.courses.cs.cmu.edu/fall2022/notes/01-introduction.pdf">CMU 15-445 L1 notes</a>, along with some terminology explained by <a href="https://claude.ai/chat/14f3c4ec-0ca8-495e-ac70-dd13f9eab5ea">Claude.ai</a>.
+</p>
+<div id="outline-container-org0a9f482" class="outline-2">
+<h2 id="org0a9f482"><span class="section-number-2">1.</span> Terminology</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-orge830edb" class="outline-3">
+<h3 id="orge830edb"><span class="section-number-3">1.1.</span> Database</h3>
+<div class="outline-text-3" id="text-1-1">
+<ul class="org-ul">
+<li>An organized collection of inter-related data that models some aspect of the real-world.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgdfef04b" class="outline-3">
+<h3 id="orgdfef04b"><span class="section-number-3">1.2.</span> Database design consideration</h3>
+<div class="outline-text-3" id="text-1-2">
+<ul class="org-ul">
+<li>Data integrity: protect invalid writing.</li>
+<li>Implementation: query complexity, concurrent query.</li>
+<li>Durability: replication, fault tolerance.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orge055a12" class="outline-3">
+<h3 id="orge055a12"><span class="section-number-3">1.3.</span> Database management system (DBMS)</h3>
+<div class="outline-text-3" id="text-1-3">
+<ul class="org-ul">
+<li>A software that manages a database.</li>
+<li>Allow the definition, creation, query, update and administration of databases.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org12b971a" class="outline-3">
+<h3 id="org12b971a"><span class="section-number-3">1.4.</span> Data model</h3>
+<div class="outline-text-3" id="text-1-4">
+<ul class="org-ul">
+<li>A conceptual, high-level representation of how data is structured</li>
+<li>Defines entities, attributes, relationships between entities and constraints.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgcf40f28" class="outline-3">
+<h3 id="orgcf40f28"><span class="section-number-3">1.5.</span> Schema</h3>
+<div class="outline-text-3" id="text-1-5">
+<ul class="org-ul">
+<li>A concrete implementation of a data model.</li>
+<li>Defines tables, fields, data types, keys and rules.</li>
+<li>Typically represented by a specific database language.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgd99fbc5" class="outline-3">
+<h3 id="orgd99fbc5"><span class="section-number-3">1.6.</span> Entities and Tables</h3>
+<div class="outline-text-3" id="text-1-6">
+<ul class="org-ul">
+<li>Entities: conceptual representations of objects in the logical data model.</li>
+<li>Tables: physical storage structures in the physical data model.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org6f9c1e1" class="outline-3">
+<h3 id="org6f9c1e1"><span class="section-number-3">1.7.</span> Attributes and Fields</h3>
+<div class="outline-text-3" id="text-1-7">
+<ul class="org-ul">
+<li>Attributes: properties of an entity.</li>
+<li>Fields: columns in a database table.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgb2eb665" class="outline-3">
+<h3 id="orgb2eb665"><span class="section-number-3">1.8.</span> Logical layer</h3>
+<div class="outline-text-3" id="text-1-8">
+<ul class="org-ul">
+<li>The entities and attributes the database has.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org67aae8b" class="outline-3">
+<h3 id="org67aae8b"><span class="section-number-3">1.9.</span> Physical layer</h3>
+<div class="outline-text-3" id="text-1-9">
+<ul class="org-ul">
+<li>How are entities and attributes stored in the database.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgf54c3c9" class="outline-3">
+<h3 id="orgf54c3c9"><span class="section-number-3">1.10.</span> Data manipulation languages (DMLs)</h3>
+<div class="outline-text-3" id="text-1-10">
+<ul class="org-ul">
+<li>Methods to store and retrieve information from a database.</li>
+<li>Procedural: the query specifies the (high-level) strategy the DBMS should use to get the results, e.g., with relational algebra.</li>
+<li>Declarative: the query specifies only what data is desired but not how to get it, e.g., with relational calculus (a formal language).</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org15343eb" class="outline-3">
+<h3 id="org15343eb"><span class="section-number-3">1.11.</span> SQL (Structured Query Language) and relational model</h3>
+<div class="outline-text-3" id="text-1-11">
+<ul class="org-ul">
+<li>SQL <b><b>implements</b></b> the relational model in DBMS and provides a standard way to create, manipulate and query relational databases.</li>
+<li>Different SQL implementation may vary and do not strictly adhere to the relational model, e.g., allow duplicate rows.</li>
+<li>SQL borrows both relational algebra and relational calculus (?).</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org82f5220" class="outline-2">
+<h2 id="org82f5220"><span class="section-number-2">2.</span> Relational model</h2>
+<div class="outline-text-2" id="text-2">
+<ul class="org-ul">
+<li>A <b><b>data model</b></b> that defines a database <b><b>abstraction</b></b> to avoid maintenance overhead when changing the physical layer.</li>
+<li>Data is stored as relations/tables.</li>
+<li>Physical layer implementation and execution strategy depends on DBMS implementation.</li>
+</ul>
+
+
+<figure id="orgd24af86">
+<img src="https://people.cs.pitt.edu/~chang/156/images/fig41.gif" alt="fig41.gif" align="center" width="500px">
+
+<figcaption><span class="figure-number">Figure 1: </span>Relational model concepts</figcaption>
+</figure>
+</div>
+<div id="outline-container-org2128abf" class="outline-3">
+<h3 id="org2128abf"><span class="section-number-3">2.1.</span> A relation</h3>
+<div class="outline-text-3" id="text-2-1">
+<ul class="org-ul">
+<li>An unordered set that contains the relationship of attributes that represent entities.</li>
+<li>Relationships are unordered in the relation.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orga9aa093" class="outline-3">
+<h3 id="orga9aa093"><span class="section-number-3">2.2.</span> A domain</h3>
+<div class="outline-text-3" id="text-2-2">
+<ul class="org-ul">
+<li>A named set of allowable values for a specific attribute.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org76a118c" class="outline-3">
+<h3 id="org76a118c"><span class="section-number-3">2.3.</span> A tuple</h3>
+<div class="outline-text-3" id="text-2-3">
+<ul class="org-ul">
+<li>A set of attribute values in the relation.</li>
+<li>Values can also be lists or nested data structures.</li>
+<li><code>Null</code>: a special value in any attribute which means the attribute in a tuple is undefined.</li>
+<li>\(n-ary\): a relation with \(n\) attributes.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org468a289" class="outline-3">
+<h3 id="org468a289"><span class="section-number-3">2.4.</span> Keys</h3>
+<div class="outline-text-3" id="text-2-4">
+<ul class="org-ul">
+<li>Primary key: uniquely identifies a single tuple.</li>
+<li>Foreign key: specifies that an attribute (e.g., <code>CustomerID</code>) in one relation (e.g., <code>OrderTable</code>) has to map to a tuple (e.g., the tuple with the same <code>CustomerID</code>) in another relation (e.g., <code>CustomerTable</code>).</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org0555ac7" class="outline-2">
+<h2 id="org0555ac7"><span class="section-number-2">3.</span> Relational Algebra</h2>
+<div class="outline-text-2" id="text-3">
+<ul class="org-ul">
+<li>A set of fundamental operations to retrieve and manipulate tuples in a relation.</li>
+<li>Each operator takes in one or more relations as inputs, and outputs a new relation; operators can be chained.</li>
+<li>Is a <b><b>procedure language</b></b>, meaning the execution always follow the query, even there exists more efficient way to get the same result; A better way is to be more declarative, e.g., SQL&rsquo;s <code>where</code> syntax.</li>
+<li><a href="https://i.sstatic.net/AHjRg.png">Common relational algebra</a>.</li>
+</ul>
+</div>
+</div>
+<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-study.html">study</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-database.html">database</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-cmu.html">cmu</a> </div>
 <div class="post-date">14 Jul 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-07-14-parallel-evm:-bep-130.html">Parallel EVM: BEP-130</a></h1>
 <nav id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org643eaf9">1. Blockchain fundamentals</a>
+<li><a href="#org1c61afd">1. Blockchain fundamentals</a>
 <ul>
-<li><a href="#org8c47d44">1.1. System contract</a></li>
-<li><a href="#org829eecf">1.2. Transaction execution phases</a></li>
+<li><a href="#orgdb42d3a">1.1. System contract</a></li>
+<li><a href="#org3471550">1.2. Transaction execution phases</a></li>
 </ul>
 </li>
-<li><a href="#org6829a6e">2. Design principle</a></li>
-<li><a href="#org8d2a14e">3. Workflow</a>
+<li><a href="#orgc754e1d">2. Design principle</a></li>
+<li><a href="#org5aff251">3. Workflow</a>
 <ul>
-<li><a href="#orgc823c40">3.1. Dispatch factors</a></li>
-<li><a href="#org8b67e9a">3.2. Slot execution stages</a></li>
-<li><a href="#org901faf2">3.3. Conflict detection</a></li>
+<li><a href="#orgac6b072">3.1. Dispatch factors</a></li>
+<li><a href="#orgfc1385b">3.2. Slot execution stages</a></li>
+<li><a href="#orga3f3546">3.3. Conflict detection</a></li>
 </ul>
 </li>
 </ul>
@@ -43,21 +249,21 @@
 This is a personal note for <a href="https://github.com/bnb-chain/BEPs/blob/master/BEPs/BEP130.md">BEP-130</a>.
 BEP-130 is a proposal that introduces a parallel transaction execution mechanism on the BNB Smart Chain (BSC).
 </p>
-<div id="outline-container-org643eaf9" class="outline-2">
-<h2 id="org643eaf9"><span class="section-number-2">1.</span> Blockchain fundamentals</h2>
+<div id="outline-container-org1c61afd" class="outline-2">
+<h2 id="org1c61afd"><span class="section-number-2">1.</span> Blockchain fundamentals</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org8c47d44" class="outline-3">
-<h3 id="org8c47d44"><span class="section-number-3">1.1.</span> System contract</h3>
+<div id="outline-container-orgdb42d3a" class="outline-3">
+<h3 id="orgdb42d3a"><span class="section-number-3">1.1.</span> System contract</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
-<li>Built-in contracts to perform system level operations, e,g,m gas fee reward, cross chain communication.</li>
+<li>Built-in contracts to perform system level operations, e,g., gas fee reward, cross chain communication.</li>
 <li>Cannot be executed concurrently since they depend on the execution results of other transactions, e.g., a number of transaction made by an account at some timestamp.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org829eecf" class="outline-3">
-<h3 id="org829eecf"><span class="section-number-3">1.2.</span> Transaction execution phases</h3>
+<div id="outline-container-org3471550" class="outline-3">
+<h3 id="org3471550"><span class="section-number-3">1.2.</span> Transaction execution phases</h3>
 <div class="outline-text-3" id="text-1-2">
 <ul class="org-ul">
 <li>Block mining phase: received from the P2P transaction pool, could contain invalid transactions.</li>
@@ -66,8 +272,8 @@ BEP-130 is a proposal that introduces a parallel transaction execution mechanism
 </div>
 </div>
 </div>
-<div id="outline-container-org6829a6e" class="outline-2">
-<h2 id="org6829a6e"><span class="section-number-2">2.</span> Design principle</h2>
+<div id="outline-container-orgc754e1d" class="outline-2">
+<h2 id="orgc754e1d"><span class="section-number-2">2.</span> Design principle</h2>
 <div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li>Should always produce the same result as the current sequential execution.</li>
@@ -77,12 +283,12 @@ BEP-130 is a proposal that introduces a parallel transaction execution mechanism
 </ul>
 </div>
 </div>
-<div id="outline-container-org8d2a14e" class="outline-2">
-<h2 id="org8d2a14e"><span class="section-number-2">3.</span> Workflow</h2>
+<div id="outline-container-org5aff251" class="outline-2">
+<h2 id="org5aff251"><span class="section-number-2">3.</span> Workflow</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-orgc823c40" class="outline-3">
-<h3 id="orgc823c40"><span class="section-number-3">3.1.</span> Dispatch factors</h3>
+<div id="outline-container-orgac6b072" class="outline-3">
+<h3 id="orgac6b072"><span class="section-number-3">3.1.</span> Dispatch factors</h3>
 <div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
 <li>Is the slot idle or occupied?</li>
@@ -93,11 +299,11 @@ BEP-130 is a proposal that introduces a parallel transaction execution mechanism
 </ul>
 </div>
 </div>
-<div id="outline-container-org8b67e9a" class="outline-3">
-<h3 id="org8b67e9a"><span class="section-number-3">3.2.</span> Slot execution stages</h3>
+<div id="outline-container-orgfc1385b" class="outline-3">
+<h3 id="orgfc1385b"><span class="section-number-3">3.2.</span> Slot execution stages</h3>
 <div class="outline-text-3" id="text-3-2">
 <ol class="org-ol">
-<li>Execute the transaction \(Tx<sub>i</sub>\])based on a specific worldstate, e.g., the state when the execution starts.</li>
+<li>Execute the transaction \(Tx_i\)based on a specific worldstate, e.g., the state when the execution starts.</li>
 <li>Wait for the finalization of the previous transaction \(Tx_{i-1}\).</li>
 <li>Detect if there is any conflict between the state read by \(Tx_i\) and the state change after the execution of \(Tx_i\) starts.</li>
 <li>If a conflict is detected, re-execute \(Tx_{i}\) again based on the latest finalized worldstate.</li>
@@ -109,8 +315,8 @@ BEP-130 is a proposal that introduces a parallel transaction execution mechanism
 </ol>
 </div>
 </div>
-<div id="outline-container-org901faf2" class="outline-3">
-<h3 id="org901faf2"><span class="section-number-3">3.3.</span> Conflict detection</h3>
+<div id="outline-container-orga3f3546" class="outline-3">
+<h3 id="orga3f3546"><span class="section-number-3">3.3.</span> Conflict detection</h3>
 <div class="outline-text-3" id="text-3-3">
 <ul class="org-ul">
 <li>Detection items: storage key/value pair; account balance; contract content and status.</li>
@@ -678,131 +884,7 @@ I want to know more about the difference of this world, but I don&rsquo;t know h
 </p>
 </div>
 </div>
-<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-personal.html">personal</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-german.html">german</a> </div>
-<div class="post-date">30 Jun 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-06-30-ethereum-virtual-machine.html">Ethereum Virtual Machine</a></h1>
-<nav id="table-of-contents" role="doc-toc">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents" role="doc-toc">
-<ul>
-<li><a href="#orgcccef36">1. Terminology</a>
-<ul>
-<li><a href="#orgb78aeb0">1.1. Motivation</a></li>
-<li><a href="#org8637d41">1.2. Blockchain paradigm</a></li>
-<li><a href="#org8260661">1.3. Ethereum Transaction execution</a></li>
-<li><a href="#org95ae501">1.4. World state \(\sigma\)</a>
-<ul>
-<li><a href="#org6148fc3">1.4.1. The account state \(\sigma[a]\)</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-</nav>
-<p>
-This is a personal note of EVM, resources are from:
-</p>
-<ul class="org-ul">
-<li><a href="https://ethereum.org/en/developers/docs/evm/">ethereum.org</a></li>
-<li><a href="https://chatgpt.com/g/g-TJq7kBEsX-evm-gpt">EVM GPT</a></li>
-<li><a href="https://ethereum.github.io/yellowpaper/paper.pdf">Ethereum yellowpaper: Paris version (26.06.2024)</a></li>
-</ul>
-<div id="outline-container-orgcccef36" class="outline-2">
-<h2 id="orgcccef36"><span class="section-number-2">1.</span> Terminology</h2>
-<div class="outline-text-2" id="text-1">
-<ul class="org-ul">
-<li>EVM: a decentralized virtual environment that executes code consistently and securely across all Ethereum nodes.</li>
-<li>Gas: used to measure the computational effort required to execute smart contracts.</li>
-<li>Ether(ETH): the native cryptocurrency in Ethereum; used to incentivize computation.</li>
-<li>Wei: the smallest subdenomination of Ether; 1 Ether = \(10^{18}\) Wei.</li>
-<li>State: A modified Merkle Patricia Trie to keep all accounts linked by hashes and reducible to a single root hash stored on the blockchain.</li>
-<li>State transition function: <code>Y(S, T)=S'</code>: produces a <b><b>deterministic</b></b> new valid state (<code>S'</code>) given an old valid state (<code>S</code>) new set of valid transactions (<code>T</code>)</li>
-<li>Transactions: signed instructions from accounts, includes
-<ul class="org-ul">
-<li>a contraction creation to create a new contract account containing compiled contract bytecode, or</li>
-<li>a message call to a contract to execute the bytecode.</li>
-</ul></li>
-<li>Proof of work: a spam deterrence mechanism; demonstrate the potential for a basic data channel to carry a strong economic signal without relying on trust.</li>
-<li>Fork: a disagreement between nodes as to which root-to-leaf path down the block tree is the best blockchain.</li>
-<li>Chain Id (\(\beta\)): distinguish between diverged blockchains (EIP-155).</li>
-</ul>
-
-
-<figure id="org023d19d">
-<img src="https://ethereum.org/_next/image/?url=%2Fcontent%2Fdevelopers%2Fdocs%2Fevm%2Fevm.png&amp;w=1920&amp;q=75" alt="?url=%2Fcontent%2Fdevelopers%2Fdocs%2Fevm%2Fevm.png&amp;w=1920&amp;q=75" align="center" width="500px">
-
-<figcaption><span class="figure-number">Figure 1: </span>The EVM structure</figcaption>
-</figure>
-</div>
-<div id="outline-container-orgb78aeb0" class="outline-3">
-<h3 id="orgb78aeb0"><span class="section-number-3">1.1.</span> Motivation</h3>
-<div class="outline-text-3" id="text-1-1">
-<ul class="org-ul">
-<li>To facilitate transactions between individuals who would otherwise have no means to trust one another.</li>
-<li>To enforce a rich and unambiguous agreement autonomously (crypto-lay system).</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org8637d41" class="outline-3">
-<h3 id="org8637d41"><span class="section-number-3">1.2.</span> Blockchain paradigm</h3>
-<div class="outline-text-3" id="text-1-2">
-<div class="latex" id="org26d1047">
-\begin{aligned}
-\sigma_{t+1} & \equiv \Pi\left(\boldsymbol{\sigma}_t, B\right) \\
-B & \equiv\left(\ldots,\left(T_0, T_1, \ldots\right), \ldots\right) \\
-\Pi(\boldsymbol{\sigma}, B) & \equiv \Upsilon\left(\Upsilon\left(\boldsymbol{\sigma}, T_0\right), T_1\right) \ldots
-\end{aligned}
-
-</div>
-<ul class="org-ul">
-<li>\(\sigma\): a valid state between two transactions.</li>
-<li>\(B\): a block including a series of transactions.</li>
-<li>\(\Upsilon\): the Ethereum state transition function.</li>
-<li>\(\Pi\): the block-level state transition function.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org8260661" class="outline-3">
-<h3 id="org8260661"><span class="section-number-3">1.3.</span> Ethereum Transaction execution</h3>
-<div class="outline-text-3" id="text-1-3">
-<ol class="org-ol">
-<li>An user (externally owned accounts, EOA) signs a transaction, including the sender, receiver (the contract address), Ether value, Gas limit and Gas price.</li>
-<li>The transaction is broadcast to the Ethereum network.</li>
-<li>Once a validator receives the transaction, it first performs sanity check, e.g., signature validation, balance check.</li>
-<li>Upon passing the validation, a transaction is included in a block and executed.
-<ol class="org-ol">
-<li>Initialization: PC set to the start of the contract code; Gas limit; empty stack, memory; contract state trie loaded to the storage.</li>
-<li>Execution: locally executes each bytecode and modifies stack (<code>PUSH</code>), memory (<code>MSTORE</code>) and storage (<code>SSTORE</code>); modifies the global state tree (<code>CALL</code>).</li>
-<li>Abortion: if the gas is used up, all state changes during the execution are reverted.</li>
-</ol></li>
-<li>After the execution is finished, the validator assembles the block and proposes the new block.</li>
-<li>If a consensus is reached, the block is appended to the blockchain, and other nodes verify the block and update their global states accordingly.</li>
-</ol>
-</div>
-</div>
-<div id="outline-container-org95ae501" class="outline-3">
-<h3 id="org95ae501"><span class="section-number-3">1.4.</span> World state \(\sigma\)</h3>
-<div class="outline-text-3" id="text-1-4">
-<ul class="org-ul">
-<li>A mapping between 160-bit addresses and account states, maintained in a modified Merkle Patricia tree (MPT), serialized as RLP, stored in a off-chain database backend.</li>
-<li>MPT benefits: the root node depends on all internal data; allows any previous state with known root hash to be recalled as the tree is immutable.</li>
-<li><a href="https://media.licdn.com/dms/image/D4D12AQG2itcSOHtiKw/article-cover_image-shrink_720_1280/0/1690981109933?e=1725494400&amp;v=beta&amp;t=4e2FSROhKCs2qeGtpyb5STePXe80agLfg3G9nuD4oKc">Merkle Patricia Trie representation of state data across blocks</a></li>
-</ul>
-</div>
-<div id="outline-container-org6148fc3" class="outline-4">
-<h4 id="org6148fc3"><span class="section-number-4">1.4.1.</span> The account state \(\sigma[a]\)</h4>
-<div class="outline-text-4" id="text-1-4-1">
-<ul class="org-ul">
-<li><code>nonce</code>: the number of transactions the address has sent, or the number of contracts the address has made.</li>
-<li><code>balance</code>: the number of Wei owned by the address.</li>
-<li><code>storageRoot</code>: a 256-bit hash of the root node of a MPT which encodes the account storage, i.e., the contract storage.</li>
-<li><code>codeHash</code>: the hash of the EVM code, i.e., the contract bytecode, which is executed if the address receives a message call.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-evm.html">evm</a> </div><div id="archive">
+<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-personal.html">personal</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-german.html">german</a> </div><div id="archive">
 <a href="https://chenyo-17.github.io/org-static-blog/archive.html">Other posts</a>
 </div>
 </div>

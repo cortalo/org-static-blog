@@ -1,0 +1,86 @@
+#+title: CMU 15-445 notes: Relational Model & Algebra
+#+date: <2024-07-17 17:05>
+#+description: This is a personal note for the [[https://www.youtube.com/watch?v=uikbtpVZS2s&list=PLSE8ODhjZXjaKScG3l0nuOiDTTqpfnWFf&index=2][CMU 15-445 L1 video]] and [[https://15445.courses.cs.cmu.edu/fall2022/notes/01-introduction.pdf][CMU 15-445 L1 notes]]
+#+filetags: study database cmu
+
+This is a personal note for the [[https://www.youtube.com/watch?v=uikbtpVZS2s&list=PLSE8ODhjZXjaKScG3l0nuOiDTTqpfnWFf&index=2][CMU 15-445 L1 video]] and [[https://15445.courses.cs.cmu.edu/fall2022/notes/01-introduction.pdf][CMU 15-445 L1 notes]], along with some terminology explained by [[https://claude.ai/chat/14f3c4ec-0ca8-495e-ac70-dd13f9eab5ea][Claude.ai]].
+
+* Terminology
+
+** Database
+- An organized collection of inter-related data that models some aspect of the real-world.
+
+** Database design consideration
+- Data integrity: protect invalid writing.
+- Implementation: query complexity, concurrent query.
+- Durability: replication, fault tolerance.
+
+** Database management system (DBMS)
+- A software that manages a database.
+- Allow the definition, creation, query, update and administration of databases.
+
+** Data model
+- A conceptual, high-level representation of how data is structured
+- Defines entities, attributes, relationships between entities and constraints.
+
+** Schema
+- A concrete implementation of a data model.
+- Defines tables, fields, data types, keys and rules.
+- Typically represented by a specific database language.
+
+** Entities and Tables
+- Entities: conceptual representations of objects in the logical data model.
+- Tables: physical storage structures in the physical data model.
+
+** Attributes and Fields
+- Attributes: properties of an entity.
+- Fields: columns in a database table.
+
+** Logical layer
+- The entities and attributes the database has.
+
+** Physical layer
+- How are entities and attributes stored in the database.
+
+** Data manipulation languages (DMLs)
+- Methods to store and retrieve information from a database.
+- Procedural: the query specifies the (high-level) strategy the DBMS should use to get the results, e.g., with relational algebra.
+- Declarative: the query specifies only what data is desired but not how to get it, e.g., with relational calculus (a formal language).
+
+** SQL (Structured Query Language) and relational model
+- SQL **implements** the relational model in DBMS and provides a standard way to create, manipulate and query relational databases.
+- Different SQL implementation may vary and do not strictly adhere to the relational model, e.g., allow duplicate rows.
+- SQL borrows both relational algebra and relational calculus (?).
+
+* Relational model
+- A **data model** that defines a database **abstraction** to avoid maintenance overhead when changing the physical layer.
+- Data is stored as relations/tables.
+- Physical layer implementation and execution strategy depends on DBMS implementation.
+
+#+CAPTION: Relational model concepts
+#+ATTR_HTML: :align center
+#+ATTR_HTML: :width 500px
+[[https://people.cs.pitt.edu/~chang/156/images/fig41.gif]]
+
+** A relation
+- An unordered set that contains the relationship of attributes that represent entities.
+- Relationships are unordered in the relation.
+
+** A domain
+- A named set of allowable values for a specific attribute.
+
+** A tuple
+- A set of attribute values in the relation.
+- Values can also be lists or nested data structures.
+- ~Null~: a special value in any attribute which means the attribute in a tuple is undefined.
+- \(n-ary\): a relation with \(n\) attributes.
+
+** Keys
+- Primary key: uniquely identifies a single tuple.
+- Foreign key: specifies that an attribute (e.g., ~CustomerID~) in one relation (e.g., ~OrderTable~) has to map to a tuple (e.g., the tuple with the same ~CustomerID~) in another relation (e.g., ~CustomerTable~).
+
+* Relational Algebra
+- A set of fundamental operations to retrieve and manipulate tuples in a relation.
+- Each operator takes in one or more relations as inputs, and outputs a new relation; operators can be chained.
+- Is a **procedure language**, meaning the execution always follow the query, even there exists more efficient way to get the same result; A better way is to be more declarative, e.g., SQL's ~where~ syntax.
+- [[https://i.sstatic.net/AHjRg.png][Common relational algebra]].

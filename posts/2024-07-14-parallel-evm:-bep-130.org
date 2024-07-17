@@ -8,7 +8,7 @@ BEP-130 is a proposal that introduces a parallel transaction execution mechanism
 
 * Blockchain fundamentals
 ** System contract
-- Built-in contracts to perform system level operations, e,g,m gas fee reward, cross chain communication.
+- Built-in contracts to perform system level operations, e,g., gas fee reward, cross chain communication.
 - Cannot be executed concurrently since they depend on the execution results of other transactions, e.g., a number of transaction made by an account at some timestamp.
 
 ** Transaction execution phases
@@ -30,7 +30,7 @@ BEP-130 is a proposal that introduces a parallel transaction execution mechanism
 - Is the transaction contract likely to have high gas cost or a conflict rate?
 
 ** Slot execution stages
-1. Execute the transaction \(Tx_i\])based on a specific worldstate, e.g., the state when the execution starts.
+1. Execute the transaction \(Tx_i\)based on a specific worldstate, e.g., the state when the execution starts.
 2. Wait for the finalization of the previous transaction \(Tx_{i-1}\).
 3. Detect if there is any conflict between the state read by \(Tx_i\) and the state change after the execution of \(Tx_i\) starts.
 4. If a conflict is detected, re-execute \(Tx_{i}\) again based on the latest finalized worldstate.
