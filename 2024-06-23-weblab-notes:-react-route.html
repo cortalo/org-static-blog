@@ -8,30 +8,46 @@
       href="https://chenyo-17.github.io/org-static-blog/rss.xml"
       title="RSS feed for https://chenyo-17.github.io/org-static-blog">
 <title>Weblab notes: React route</title>
-</head>
+<script type="text/javascript"
+             src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+       </script>
+       <script type="text/x-mathjax-config">
+             MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'],['\\(','\\)']]}});
+       </script>
+       <meta name="author" content="chenyo">
+      <meta name="referrer" content="no-referrer">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="static/style.css" type="text/css"/></head>
 <body>
-<div id="preamble" class="status"></div>
+<div id="preamble" class="status"><header>
+      <h1><a href="https://chenyo-17.github.io/org-static-blog">Chenyo's org-static-blog</a></h1>
+      <nav>
+      <a href="https://chenyo-17.github.io/org-static-blog">Home</a>
+      <a href="https://chenyo-17.github.io/org-static-blog/archive.html">Archive</a>
+      <a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>
+      </nav>
+      </header></div>
 <div id="content">
 <div class="post-date">23 Jun 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-06-23-weblab-notes:-react-route.html">Weblab notes: React route</a></h1>
 <nav id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgfa812d5">1. Router</a></li>
-<li><a href="#org94be7df">2. Link</a></li>
-<li><a href="#orgce133ed">3. Workshop 3</a>
+<li><a href="#org4be4369">1. Router</a></li>
+<li><a href="#orgf3a5a66">2. Link</a></li>
+<li><a href="#org9ef0cd4">3. Workshop 3</a>
 <ul>
-<li><a href="#org722576a">3.1. Structure</a></li>
-<li><a href="#org27e4613">3.2. States</a></li>
-<li><a href="#orgae84d1e">3.3. Props</a></li>
-<li><a href="#org73c0eff">3.4. Why passing down the update function in props 1, 4, 6?</a></li>
+<li><a href="#org689d1d2">3.1. Structure</a></li>
+<li><a href="#org788e87e">3.2. States</a></li>
+<li><a href="#orge43b4c4">3.3. Props</a></li>
+<li><a href="#org8a091bd">3.4. Why passing down the update function in props 1, 4, 6?</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-orgfa812d5" class="outline-2">
-<h2 id="orgfa812d5"><span class="section-number-2">1.</span> Router</h2>
+<div id="outline-container-org4be4369" class="outline-2">
+<h2 id="org4be4369"><span class="section-number-2">1.</span> Router</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>use the Reach <a href="https://reach.tech/router/">Reach Router</a> library</li>
@@ -53,8 +69,8 @@ URL -&gt; Router -&gt; render different components
 </ul>
 </div>
 </div>
-<div id="outline-container-org94be7df" class="outline-2">
-<h2 id="org94be7df"><span class="section-number-2">2.</span> Link</h2>
+<div id="outline-container-orgf3a5a66" class="outline-2">
+<h2 id="orgf3a5a66"><span class="section-number-2">2.</span> Link</h2>
 <div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li>relative: <code class="src src-js">&lt;Link to=<span style="color: #98be65;">"newpage"</span>&gt;Click me&lt;/Link&gt;</code></li>
@@ -62,23 +78,23 @@ URL -&gt; Router -&gt; render different components
 </ul>
 </div>
 </div>
-<div id="outline-container-orgce133ed" class="outline-2">
-<h2 id="orgce133ed"><span class="section-number-2">3.</span> Workshop 3</h2>
+<div id="outline-container-org9ef0cd4" class="outline-2">
+<h2 id="org9ef0cd4"><span class="section-number-2">3.</span> Workshop 3</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org722576a" class="outline-3">
-<h3 id="org722576a"><span class="section-number-3">3.1.</span> Structure</h3>
+<div id="outline-container-org689d1d2" class="outline-3">
+<h3 id="org689d1d2"><span class="section-number-3">3.1.</span> Structure</h3>
 <div class="outline-text-3" id="text-3-1">
 
-<figure id="org77026f0">
+<figure id="orgd7c1339">
 <img src="./static/workshop-3-structure.png" alt="workshop-3-structure.png" align="center" width="600px">
 
 <figcaption><span class="figure-number">Figure 1: </span>The Catbook structure in workshop 3</figcaption>
 </figure>
 </div>
 </div>
-<div id="outline-container-org27e4613" class="outline-3">
-<h3 id="org27e4613"><span class="section-number-3">3.2.</span> States</h3>
+<div id="outline-container-org788e87e" class="outline-3">
+<h3 id="org788e87e"><span class="section-number-3">3.2.</span> States</h3>
 <div class="outline-text-3" id="text-3-2">
 <table>
 
@@ -110,8 +126,8 @@ URL -&gt; Router -&gt; render different components
 </table>
 </div>
 </div>
-<div id="outline-container-orgae84d1e" class="outline-3">
-<h3 id="orgae84d1e"><span class="section-number-3">3.3.</span> Props</h3>
+<div id="outline-container-orge43b4c4" class="outline-3">
+<h3 id="orge43b4c4"><span class="section-number-3">3.3.</span> Props</h3>
 <div class="outline-text-3" id="text-3-3">
 <table>
 
@@ -163,8 +179,8 @@ URL -&gt; Router -&gt; render different components
 </table>
 </div>
 </div>
-<div id="outline-container-org73c0eff" class="outline-3">
-<h3 id="org73c0eff"><span class="section-number-3">3.4.</span> Why passing down the update function in props 1, 4, 6?</h3>
+<div id="outline-container-org8a091bd" class="outline-3">
+<h3 id="org8a091bd"><span class="section-number-3">3.4.</span> Why passing down the update function in props 1, 4, 6?</h3>
 <div class="outline-text-3" id="text-3-4">
 <ul class="org-ul">
 <li>To share the parent states, i.e., <code>stories</code> and <code>comments</code> to child component. Since the post action happens in the child component, we need a way to automatically update the states to see new contents immediately.</li>
@@ -173,6 +189,8 @@ URL -&gt; Router -&gt; render different components
 </div>
 </div>
 <div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-study.html">study</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-web.html">web</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-react.html">react</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-mit.html">mit</a> </div></div>
-<div id="postamble" class="status"></div>
+<div id="postamble" class="status"><footer>
+      <p>© 2024 chenyo. Some rights reserved.</p>
+      </footer></div>
 </body>
 </html>

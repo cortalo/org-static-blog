@@ -4,7 +4,7 @@
 <title><![CDATA[org-static-blog]]></title>
 <description><![CDATA[org-static-blog]]></description>
 <link>https://chenyo-17.github.io/org-static-blog</link>
-<lastBuildDate>Wed, 17 Jul 2024 21:02:59 +0200</lastBuildDate>
+<lastBuildDate>Thu, 18 Jul 2024 23:10:15 +0200</lastBuildDate>
 <item>
   <title><![CDATA[CMU 15-445 notes: Relational Model & Algebra]]></title>
   <description><![CDATA[
@@ -12,50 +12,50 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org0a9f482">1. Terminology</a>
+<li><a href="#org2d9c25d">1. Terminology</a>
 <ul>
-<li><a href="#orge830edb">1.1. Database</a></li>
-<li><a href="#orgdfef04b">1.2. Database design consideration</a></li>
-<li><a href="#orge055a12">1.3. Database management system (DBMS)</a></li>
-<li><a href="#org12b971a">1.4. Data model</a></li>
-<li><a href="#orgcf40f28">1.5. Schema</a></li>
-<li><a href="#orgd99fbc5">1.6. Entities and Tables</a></li>
-<li><a href="#org6f9c1e1">1.7. Attributes and Fields</a></li>
-<li><a href="#orgb2eb665">1.8. Logical layer</a></li>
-<li><a href="#org67aae8b">1.9. Physical layer</a></li>
-<li><a href="#orgf54c3c9">1.10. Data manipulation languages (DMLs)</a></li>
-<li><a href="#org15343eb">1.11. SQL (Structured Query Language) and relational model</a></li>
+<li><a href="#orgd8e68b1">1.1. Database</a></li>
+<li><a href="#orgc71ca49">1.2. Database design consideration</a></li>
+<li><a href="#org7f388b2">1.3. Database management system (DBMS)</a></li>
+<li><a href="#org5f91e18">1.4. Data model</a></li>
+<li><a href="#org8925fa2">1.5. Schema</a></li>
+<li><a href="#orge4ecc49">1.6. Entities and Tables</a></li>
+<li><a href="#org5abd86d">1.7. Attributes and Fields</a></li>
+<li><a href="#org20e51c0">1.8. Logical layer</a></li>
+<li><a href="#org7604b9e">1.9. Physical layer</a></li>
+<li><a href="#org44c6619">1.10. Data manipulation languages (DMLs)</a></li>
+<li><a href="#org8ea925a">1.11. SQL (Structured Query Language) and relational model</a></li>
 </ul>
 </li>
-<li><a href="#org82f5220">2. Relational model</a>
+<li><a href="#org364364e">2. Relational model</a>
 <ul>
-<li><a href="#org2128abf">2.1. A relation</a></li>
-<li><a href="#orga9aa093">2.2. A domain</a></li>
-<li><a href="#org76a118c">2.3. A tuple</a></li>
-<li><a href="#org468a289">2.4. Keys</a></li>
+<li><a href="#org85b2181">2.1. A relation</a></li>
+<li><a href="#orge75963d">2.2. A domain</a></li>
+<li><a href="#orgfa08c4e">2.3. A tuple</a></li>
+<li><a href="#org454d9b3">2.4. Keys</a></li>
 </ul>
 </li>
-<li><a href="#org0555ac7">3. Relational Algebra</a></li>
+<li><a href="#orgf8f1fd7">3. Relational Algebra</a></li>
 </ul>
 </div>
 </nav>
 <p>
 This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpVZS2s&amp;list=PLSE8ODhjZXjaKScG3l0nuOiDTTqpfnWFf&amp;index=2">CMU 15-445 L1 video</a> and <a href="https://15445.courses.cs.cmu.edu/fall2022/notes/01-introduction.pdf">CMU 15-445 L1 notes</a>, along with some terminology explained by <a href="https://claude.ai/chat/14f3c4ec-0ca8-495e-ac70-dd13f9eab5ea">Claude.ai</a>.
 </p>
-<div id="outline-container-org0a9f482" class="outline-2">
-<h2 id="org0a9f482"><span class="section-number-2">1.</span> Terminology</h2>
+<div id="outline-container-org2d9c25d" class="outline-2">
+<h2 id="org2d9c25d"><span class="section-number-2">1.</span> Terminology</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orge830edb" class="outline-3">
-<h3 id="orge830edb"><span class="section-number-3">1.1.</span> Database</h3>
+<div id="outline-container-orgd8e68b1" class="outline-3">
+<h3 id="orgd8e68b1"><span class="section-number-3">1.1.</span> Database</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>An organized collection of inter-related data that models some aspect of the real-world.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgdfef04b" class="outline-3">
-<h3 id="orgdfef04b"><span class="section-number-3">1.2.</span> Database design consideration</h3>
+<div id="outline-container-orgc71ca49" class="outline-3">
+<h3 id="orgc71ca49"><span class="section-number-3">1.2.</span> Database design consideration</h3>
 <div class="outline-text-3" id="text-1-2">
 <ul class="org-ul">
 <li>Data integrity: protect invalid writing.</li>
@@ -64,8 +64,8 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 </ul>
 </div>
 </div>
-<div id="outline-container-orge055a12" class="outline-3">
-<h3 id="orge055a12"><span class="section-number-3">1.3.</span> Database management system (DBMS)</h3>
+<div id="outline-container-org7f388b2" class="outline-3">
+<h3 id="org7f388b2"><span class="section-number-3">1.3.</span> Database management system (DBMS)</h3>
 <div class="outline-text-3" id="text-1-3">
 <ul class="org-ul">
 <li>A software that manages a database.</li>
@@ -73,8 +73,8 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 </ul>
 </div>
 </div>
-<div id="outline-container-org12b971a" class="outline-3">
-<h3 id="org12b971a"><span class="section-number-3">1.4.</span> Data model</h3>
+<div id="outline-container-org5f91e18" class="outline-3">
+<h3 id="org5f91e18"><span class="section-number-3">1.4.</span> Data model</h3>
 <div class="outline-text-3" id="text-1-4">
 <ul class="org-ul">
 <li>A conceptual, high-level representation of how data is structured</li>
@@ -82,8 +82,8 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 </ul>
 </div>
 </div>
-<div id="outline-container-orgcf40f28" class="outline-3">
-<h3 id="orgcf40f28"><span class="section-number-3">1.5.</span> Schema</h3>
+<div id="outline-container-org8925fa2" class="outline-3">
+<h3 id="org8925fa2"><span class="section-number-3">1.5.</span> Schema</h3>
 <div class="outline-text-3" id="text-1-5">
 <ul class="org-ul">
 <li>A concrete implementation of a data model.</li>
@@ -92,8 +92,8 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 </ul>
 </div>
 </div>
-<div id="outline-container-orgd99fbc5" class="outline-3">
-<h3 id="orgd99fbc5"><span class="section-number-3">1.6.</span> Entities and Tables</h3>
+<div id="outline-container-orge4ecc49" class="outline-3">
+<h3 id="orge4ecc49"><span class="section-number-3">1.6.</span> Entities and Tables</h3>
 <div class="outline-text-3" id="text-1-6">
 <ul class="org-ul">
 <li>Entities: conceptual representations of objects in the logical data model.</li>
@@ -101,8 +101,8 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 </ul>
 </div>
 </div>
-<div id="outline-container-org6f9c1e1" class="outline-3">
-<h3 id="org6f9c1e1"><span class="section-number-3">1.7.</span> Attributes and Fields</h3>
+<div id="outline-container-org5abd86d" class="outline-3">
+<h3 id="org5abd86d"><span class="section-number-3">1.7.</span> Attributes and Fields</h3>
 <div class="outline-text-3" id="text-1-7">
 <ul class="org-ul">
 <li>Attributes: properties of an entity.</li>
@@ -110,24 +110,24 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 </ul>
 </div>
 </div>
-<div id="outline-container-orgb2eb665" class="outline-3">
-<h3 id="orgb2eb665"><span class="section-number-3">1.8.</span> Logical layer</h3>
+<div id="outline-container-org20e51c0" class="outline-3">
+<h3 id="org20e51c0"><span class="section-number-3">1.8.</span> Logical layer</h3>
 <div class="outline-text-3" id="text-1-8">
 <ul class="org-ul">
 <li>The entities and attributes the database has.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org67aae8b" class="outline-3">
-<h3 id="org67aae8b"><span class="section-number-3">1.9.</span> Physical layer</h3>
+<div id="outline-container-org7604b9e" class="outline-3">
+<h3 id="org7604b9e"><span class="section-number-3">1.9.</span> Physical layer</h3>
 <div class="outline-text-3" id="text-1-9">
 <ul class="org-ul">
 <li>How are entities and attributes stored in the database.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgf54c3c9" class="outline-3">
-<h3 id="orgf54c3c9"><span class="section-number-3">1.10.</span> Data manipulation languages (DMLs)</h3>
+<div id="outline-container-org44c6619" class="outline-3">
+<h3 id="org44c6619"><span class="section-number-3">1.10.</span> Data manipulation languages (DMLs)</h3>
 <div class="outline-text-3" id="text-1-10">
 <ul class="org-ul">
 <li>Methods to store and retrieve information from a database.</li>
@@ -136,8 +136,8 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 </ul>
 </div>
 </div>
-<div id="outline-container-org15343eb" class="outline-3">
-<h3 id="org15343eb"><span class="section-number-3">1.11.</span> SQL (Structured Query Language) and relational model</h3>
+<div id="outline-container-org8ea925a" class="outline-3">
+<h3 id="org8ea925a"><span class="section-number-3">1.11.</span> SQL (Structured Query Language) and relational model</h3>
 <div class="outline-text-3" id="text-1-11">
 <ul class="org-ul">
 <li>SQL <b><b>implements</b></b> the relational model in DBMS and provides a standard way to create, manipulate and query relational databases.</li>
@@ -147,8 +147,8 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 </div>
 </div>
 </div>
-<div id="outline-container-org82f5220" class="outline-2">
-<h2 id="org82f5220"><span class="section-number-2">2.</span> Relational model</h2>
+<div id="outline-container-org364364e" class="outline-2">
+<h2 id="org364364e"><span class="section-number-2">2.</span> Relational model</h2>
 <div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li>A <b><b>data model</b></b> that defines a database <b><b>abstraction</b></b> to avoid maintenance overhead when changing the physical layer.</li>
@@ -157,14 +157,14 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 </ul>
 
 
-<figure id="orgd24af86">
+<figure id="orgeb77340">
 <img src="https://people.cs.pitt.edu/~chang/156/images/fig41.gif" alt="fig41.gif" align="center" width="500px">
 
 <figcaption><span class="figure-number">Figure 1: </span>Relational model concepts</figcaption>
 </figure>
 </div>
-<div id="outline-container-org2128abf" class="outline-3">
-<h3 id="org2128abf"><span class="section-number-3">2.1.</span> A relation</h3>
+<div id="outline-container-org85b2181" class="outline-3">
+<h3 id="org85b2181"><span class="section-number-3">2.1.</span> A relation</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>An unordered set that contains the relationship of attributes that represent entities.</li>
@@ -172,16 +172,16 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 </ul>
 </div>
 </div>
-<div id="outline-container-orga9aa093" class="outline-3">
-<h3 id="orga9aa093"><span class="section-number-3">2.2.</span> A domain</h3>
+<div id="outline-container-orge75963d" class="outline-3">
+<h3 id="orge75963d"><span class="section-number-3">2.2.</span> A domain</h3>
 <div class="outline-text-3" id="text-2-2">
 <ul class="org-ul">
 <li>A named set of allowable values for a specific attribute.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org76a118c" class="outline-3">
-<h3 id="org76a118c"><span class="section-number-3">2.3.</span> A tuple</h3>
+<div id="outline-container-orgfa08c4e" class="outline-3">
+<h3 id="orgfa08c4e"><span class="section-number-3">2.3.</span> A tuple</h3>
 <div class="outline-text-3" id="text-2-3">
 <ul class="org-ul">
 <li>A set of attribute values in the relation.</li>
@@ -191,8 +191,8 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 </ul>
 </div>
 </div>
-<div id="outline-container-org468a289" class="outline-3">
-<h3 id="org468a289"><span class="section-number-3">2.4.</span> Keys</h3>
+<div id="outline-container-org454d9b3" class="outline-3">
+<h3 id="org454d9b3"><span class="section-number-3">2.4.</span> Keys</h3>
 <div class="outline-text-3" id="text-2-4">
 <ul class="org-ul">
 <li>Primary key: uniquely identifies a single tuple.</li>
@@ -201,8 +201,8 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 </div>
 </div>
 </div>
-<div id="outline-container-org0555ac7" class="outline-2">
-<h2 id="org0555ac7"><span class="section-number-2">3.</span> Relational Algebra</h2>
+<div id="outline-container-orgf8f1fd7" class="outline-2">
+<h2 id="orgf8f1fd7"><span class="section-number-2">3.</span> Relational Algebra</h2>
 <div class="outline-text-2" id="text-3">
 <ul class="org-ul">
 <li>A set of fundamental operations to retrieve and manipulate tuples in a relation.</li>
@@ -227,18 +227,18 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org1c61afd">1. Blockchain fundamentals</a>
+<li><a href="#orgd40a5cb">1. Blockchain fundamentals</a>
 <ul>
-<li><a href="#orgdb42d3a">1.1. System contract</a></li>
-<li><a href="#org3471550">1.2. Transaction execution phases</a></li>
+<li><a href="#orgbd0805d">1.1. System contract</a></li>
+<li><a href="#org66309a0">1.2. Transaction execution phases</a></li>
 </ul>
 </li>
-<li><a href="#orgc754e1d">2. Design principle</a></li>
-<li><a href="#org5aff251">3. Workflow</a>
+<li><a href="#org31679b6">2. Design principle</a></li>
+<li><a href="#org5bf2405">3. Workflow</a>
 <ul>
-<li><a href="#orgac6b072">3.1. Dispatch factors</a></li>
-<li><a href="#orgfc1385b">3.2. Slot execution stages</a></li>
-<li><a href="#orga3f3546">3.3. Conflict detection</a></li>
+<li><a href="#org291683f">3.1. Dispatch factors</a></li>
+<li><a href="#org0992c4c">3.2. Slot execution stages</a></li>
+<li><a href="#orgf253039">3.3. Conflict detection</a></li>
 </ul>
 </li>
 </ul>
@@ -248,12 +248,12 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 This is a personal note for <a href="https://github.com/bnb-chain/BEPs/blob/master/BEPs/BEP130.md">BEP-130</a>.
 BEP-130 is a proposal that introduces a parallel transaction execution mechanism on the BNB Smart Chain (BSC).
 </p>
-<div id="outline-container-org1c61afd" class="outline-2">
-<h2 id="org1c61afd"><span class="section-number-2">1.</span> Blockchain fundamentals</h2>
+<div id="outline-container-orgd40a5cb" class="outline-2">
+<h2 id="orgd40a5cb"><span class="section-number-2">1.</span> Blockchain fundamentals</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orgdb42d3a" class="outline-3">
-<h3 id="orgdb42d3a"><span class="section-number-3">1.1.</span> System contract</h3>
+<div id="outline-container-orgbd0805d" class="outline-3">
+<h3 id="orgbd0805d"><span class="section-number-3">1.1.</span> System contract</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>Built-in contracts to perform system level operations, e,g., gas fee reward, cross chain communication.</li>
@@ -261,8 +261,8 @@ BEP-130 is a proposal that introduces a parallel transaction execution mechanism
 </ul>
 </div>
 </div>
-<div id="outline-container-org3471550" class="outline-3">
-<h3 id="org3471550"><span class="section-number-3">1.2.</span> Transaction execution phases</h3>
+<div id="outline-container-org66309a0" class="outline-3">
+<h3 id="org66309a0"><span class="section-number-3">1.2.</span> Transaction execution phases</h3>
 <div class="outline-text-3" id="text-1-2">
 <ul class="org-ul">
 <li>Block mining phase: received from the P2P transaction pool, could contain invalid transactions.</li>
@@ -271,8 +271,8 @@ BEP-130 is a proposal that introduces a parallel transaction execution mechanism
 </div>
 </div>
 </div>
-<div id="outline-container-orgc754e1d" class="outline-2">
-<h2 id="orgc754e1d"><span class="section-number-2">2.</span> Design principle</h2>
+<div id="outline-container-org31679b6" class="outline-2">
+<h2 id="org31679b6"><span class="section-number-2">2.</span> Design principle</h2>
 <div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li>Should always produce the same result as the current sequential execution.</li>
@@ -282,12 +282,12 @@ BEP-130 is a proposal that introduces a parallel transaction execution mechanism
 </ul>
 </div>
 </div>
-<div id="outline-container-org5aff251" class="outline-2">
-<h2 id="org5aff251"><span class="section-number-2">3.</span> Workflow</h2>
+<div id="outline-container-org5bf2405" class="outline-2">
+<h2 id="org5bf2405"><span class="section-number-2">3.</span> Workflow</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-orgac6b072" class="outline-3">
-<h3 id="orgac6b072"><span class="section-number-3">3.1.</span> Dispatch factors</h3>
+<div id="outline-container-org291683f" class="outline-3">
+<h3 id="org291683f"><span class="section-number-3">3.1.</span> Dispatch factors</h3>
 <div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
 <li>Is the slot idle or occupied?</li>
@@ -298,8 +298,8 @@ BEP-130 is a proposal that introduces a parallel transaction execution mechanism
 </ul>
 </div>
 </div>
-<div id="outline-container-orgfc1385b" class="outline-3">
-<h3 id="orgfc1385b"><span class="section-number-3">3.2.</span> Slot execution stages</h3>
+<div id="outline-container-org0992c4c" class="outline-3">
+<h3 id="org0992c4c"><span class="section-number-3">3.2.</span> Slot execution stages</h3>
 <div class="outline-text-3" id="text-3-2">
 <ol class="org-ol">
 <li>Execute the transaction \(Tx_i\)based on a specific worldstate, e.g., the state when the execution starts.</li>
@@ -314,8 +314,8 @@ BEP-130 is a proposal that introduces a parallel transaction execution mechanism
 </ol>
 </div>
 </div>
-<div id="outline-container-orga3f3546" class="outline-3">
-<h3 id="orga3f3546"><span class="section-number-3">3.3.</span> Conflict detection</h3>
+<div id="outline-container-orgf253039" class="outline-3">
+<h3 id="orgf253039"><span class="section-number-3">3.3.</span> Conflict detection</h3>
 <div class="outline-text-3" id="text-3-3">
 <ul class="org-ul">
 <li>Detection items: storage key/value pair; account balance; contract content and status.</li>
@@ -339,35 +339,35 @@ BEP-130 is a proposal that introduces a parallel transaction execution mechanism
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org5283713">1. Blockchain fundamentals</a>
+<li><a href="#orgceae7a3">1. Blockchain fundamentals</a>
 <ul>
-<li><a href="#org2bdd103">1.1. Why parallel EVM is not easy</a></li>
-<li><a href="#orga5864dc">1.2. A Parallel EVM ideas</a></li>
-<li><a href="#org1643e1e">1.3. Block STM algorithm</a></li>
+<li><a href="#org0796871">1.1. Why parallel EVM is not easy</a></li>
+<li><a href="#orgd3292a8">1.2. A Parallel EVM ideas</a></li>
+<li><a href="#org781fbde">1.3. Block STM algorithm</a></li>
 </ul>
 </li>
-<li><a href="#org52eb11e">2. BNB Parallel EVM 1.0: Infrastructure</a></li>
-<li><a href="#org83c4cdb">3. BNB Parallel EVM 2.0: Performance enhancement</a></li>
-<li><a href="#orgb91f64b">4. BNB Parallel EVM 3.0: Production</a>
+<li><a href="#org2d42f56">2. BNB Parallel EVM 1.0: Infrastructure</a></li>
+<li><a href="#org378b401">3. BNB Parallel EVM 2.0: Performance enhancement</a></li>
+<li><a href="#org96145a8">4. BNB Parallel EVM 3.0: Production</a>
 <ul>
-<li><a href="#org4b94c6f">4.1. Hint-based dispatcher</a></li>
-<li><a href="#org2d610c3">4.2. Seamless BNB chain ecosystem integration</a></li>
+<li><a href="#org274e74c">4.1. Hint-based dispatcher</a></li>
+<li><a href="#orge017774">4.2. Seamless BNB chain ecosystem integration</a></li>
 </ul>
 </li>
-<li><a href="#orgb2556b7">5. Comparison with other solutions</a></li>
-<li><a href="#orgd1eb401">6. Other optimizations</a></li>
+<li><a href="#orgeff2c01">5. Comparison with other solutions</a></li>
+<li><a href="#org9de763a">6. Other optimizations</a></li>
 </ul>
 </div>
 </nav>
 <p>
 This is a personal note for <a href="https://www.bnbchain.org/zh-CN/blog/road-to-high-performance-parallel-evm-for-bnb-chain">BNB chain-blog</a>.
 </p>
-<div id="outline-container-org5283713" class="outline-2">
-<h2 id="org5283713"><span class="section-number-2">1.</span> Blockchain fundamentals</h2>
+<div id="outline-container-orgceae7a3" class="outline-2">
+<h2 id="orgceae7a3"><span class="section-number-2">1.</span> Blockchain fundamentals</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org2bdd103" class="outline-3">
-<h3 id="org2bdd103"><span class="section-number-3">1.1.</span> Why parallel EVM is not easy</h3>
+<div id="outline-container-org0796871" class="outline-3">
+<h3 id="org0796871"><span class="section-number-3">1.1.</span> Why parallel EVM is not easy</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>Lack of visibility of potential transaction conflict.</li>
@@ -375,8 +375,8 @@ This is a personal note for <a href="https://www.bnbchain.org/zh-CN/blog/road-to
 </ul>
 </div>
 </div>
-<div id="outline-container-orga5864dc" class="outline-3">
-<h3 id="orga5864dc"><span class="section-number-3">1.2.</span> A Parallel EVM ideas</h3>
+<div id="outline-container-orgd3292a8" class="outline-3">
+<h3 id="orgd3292a8"><span class="section-number-3">1.2.</span> A Parallel EVM ideas</h3>
 <div class="outline-text-3" id="text-1-2">
 <ul class="org-ul">
 <li>Run multiple EVM instances concurrently on different threads.</li>
@@ -385,8 +385,8 @@ This is a personal note for <a href="https://www.bnbchain.org/zh-CN/blog/road-to
 </ul>
 </div>
 </div>
-<div id="outline-container-org1643e1e" class="outline-3">
-<h3 id="org1643e1e"><span class="section-number-3">1.3.</span> Block STM algorithm</h3>
+<div id="outline-container-org781fbde" class="outline-3">
+<h3 id="org781fbde"><span class="section-number-3">1.3.</span> Block STM algorithm</h3>
 <div class="outline-text-3" id="text-1-3">
 <ul class="org-ul">
 <li>Optimistic parallelism: assigns transactions to various threads.</li>
@@ -396,8 +396,8 @@ This is a personal note for <a href="https://www.bnbchain.org/zh-CN/blog/road-to
 </div>
 </div>
 </div>
-<div id="outline-container-org52eb11e" class="outline-2">
-<h2 id="org52eb11e"><span class="section-number-2">2.</span> BNB Parallel EVM 1.0: Infrastructure</h2>
+<div id="outline-container-org2d42f56" class="outline-2">
+<h2 id="org2d42f56"><span class="section-number-2">2.</span> BNB Parallel EVM 1.0: Infrastructure</h2>
 <div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li>Proposal: <a href="https://github.com/bnb-chain/BEPs/pull/130?ref=bnbchain.ghost.io">BEP-130 (2022)</a></li>
@@ -409,8 +409,8 @@ This is a personal note for <a href="https://www.bnbchain.org/zh-CN/blog/road-to
 </ul>
 </div>
 </div>
-<div id="outline-container-org83c4cdb" class="outline-2">
-<h2 id="org83c4cdb"><span class="section-number-2">3.</span> BNB Parallel EVM 2.0: Performance enhancement</h2>
+<div id="outline-container-org378b401" class="outline-2">
+<h2 id="org378b401"><span class="section-number-2">3.</span> BNB Parallel EVM 2.0: Performance enhancement</h2>
 <div class="outline-text-2" id="text-3">
 <ul class="org-ul">
 <li>Dispatcher: combine both static and dynamic dispatch strategies.</li>
@@ -421,12 +421,12 @@ This is a personal note for <a href="https://www.bnbchain.org/zh-CN/blog/road-to
 </ul>
 </div>
 </div>
-<div id="outline-container-orgb91f64b" class="outline-2">
-<h2 id="orgb91f64b"><span class="section-number-2">4.</span> BNB Parallel EVM 3.0: Production</h2>
+<div id="outline-container-org96145a8" class="outline-2">
+<h2 id="org96145a8"><span class="section-number-2">4.</span> BNB Parallel EVM 3.0: Production</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-org4b94c6f" class="outline-3">
-<h3 id="org4b94c6f"><span class="section-number-3">4.1.</span> Hint-based dispatcher</h3>
+<div id="outline-container-org274e74c" class="outline-3">
+<h3 id="org274e74c"><span class="section-number-3">4.1.</span> Hint-based dispatcher</h3>
 <div class="outline-text-3" id="text-4-1">
 <ul class="org-ul">
 <li>leverages external hint providers to analyze transactions and generate predictions about potential state access conflicts.</li>
@@ -437,8 +437,8 @@ This is a personal note for <a href="https://www.bnbchain.org/zh-CN/blog/road-to
 </ul>
 </div>
 </div>
-<div id="outline-container-org2d610c3" class="outline-3">
-<h3 id="org2d610c3"><span class="section-number-3">4.2.</span> Seamless BNB chain ecosystem integration</h3>
+<div id="outline-container-orge017774" class="outline-3">
+<h3 id="orge017774"><span class="section-number-3">4.2.</span> Seamless BNB chain ecosystem integration</h3>
 <div class="outline-text-3" id="text-4-2">
 <ul class="org-ul">
 <li>Modularization and reconstructing.</li>
@@ -447,8 +447,8 @@ This is a personal note for <a href="https://www.bnbchain.org/zh-CN/blog/road-to
 </div>
 </div>
 </div>
-<div id="outline-container-orgb2556b7" class="outline-2">
-<h2 id="orgb2556b7"><span class="section-number-2">5.</span> Comparison with other solutions</h2>
+<div id="outline-container-orgeff2c01" class="outline-2">
+<h2 id="orgeff2c01"><span class="section-number-2">5.</span> Comparison with other solutions</h2>
 <div class="outline-text-2" id="text-5">
 <table>
 
@@ -516,8 +516,8 @@ This is a personal note for <a href="https://www.bnbchain.org/zh-CN/blog/road-to
 </table>
 </div>
 </div>
-<div id="outline-container-orgd1eb401" class="outline-2">
-<h2 id="orgd1eb401"><span class="section-number-2">6.</span> Other optimizations</h2>
+<div id="outline-container-org9de763a" class="outline-2">
+<h2 id="org9de763a"><span class="section-number-2">6.</span> Other optimizations</h2>
 <div class="outline-text-2" id="text-6">
 <ul class="org-ul">
 <li>Opcode-level optimization: fine-tuning individual EVM instructions for maximum efficiency.</li>
@@ -542,38 +542,38 @@ This is a personal note for <a href="https://www.bnbchain.org/zh-CN/blog/road-to
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org2b70411">1. Blockchain fundamentals</a>
+<li><a href="#org89dd53c">1. Blockchain fundamentals</a>
 <ul>
-<li><a href="#orgf9088b0">1.1. Conduit chain</a></li>
-<li><a href="#org2146931">1.2. Gas per second</a></li>
-<li><a href="#org7626f31">1.3. Target gas per block</a></li>
-<li><a href="#org97f172c">1.4. Current blockchain scalability</a></li>
-<li><a href="#orga0e6c4a">1.5. Blockchain node hardware requirements</a></li>
-<li><a href="#orge6482c1">1.6. L1 and L2 nodes</a></li>
-<li><a href="#orgcdbaaa6">1.7. Verifying a block</a></li>
-<li><a href="#orga07160a">1.8. Maximum extractable value (MEV)</a></li>
-<li><a href="#orga779962">1.9. Proposer-builder separation (PBS)</a></li>
-<li><a href="#orgf845425">1.10. Live and historical sync</a></li>
-<li><a href="#org5e76999">1.11. Portal Network</a></li>
-<li><a href="#org3cfcd77">1.12. Verkle tree</a></li>
-<li><a href="#orgaa08fb8">1.13. Node storage</a>
+<li><a href="#orgf672243">1.1. Conduit chain</a></li>
+<li><a href="#org03f35d5">1.2. Gas per second</a></li>
+<li><a href="#org6a111f1">1.3. Target gas per block</a></li>
+<li><a href="#orga8e61c7">1.4. Current blockchain scalability</a></li>
+<li><a href="#org1d6f66d">1.5. Blockchain node hardware requirements</a></li>
+<li><a href="#org3cf8080">1.6. L1 and L2 nodes</a></li>
+<li><a href="#org340fa84">1.7. Verifying a block</a></li>
+<li><a href="#orga50cda3">1.8. Maximum extractable value (MEV)</a></li>
+<li><a href="#org33a33ca">1.9. Proposer-builder separation (PBS)</a></li>
+<li><a href="#org0ec95f3">1.10. Live and historical sync</a></li>
+<li><a href="#orgee686fa">1.11. Portal Network</a></li>
+<li><a href="#org3462e91">1.12. Verkle tree</a></li>
+<li><a href="#orgb958689">1.13. Node storage</a>
 <ul>
-<li><a href="#org234bef9">1.13.1. History expiry</a></li>
-<li><a href="#org3d7f871">1.13.2. State expiry</a></li>
-<li><a href="#orgdf10468">1.13.3. Statelessness</a></li>
+<li><a href="#orgbe058ea">1.13.1. History expiry</a></li>
+<li><a href="#org29aac95">1.13.2. State expiry</a></li>
+<li><a href="#org4ecc2f9">1.13.3. Statelessness</a></li>
 </ul>
 </li>
-<li><a href="#orgc86912f">1.14. Software transactional memory (STM)</a></li>
-<li><a href="#org662a0ac">1.15. Block-STM</a></li>
+<li><a href="#orga5df4cf">1.14. Software transactional memory (STM)</a></li>
+<li><a href="#org5931f70">1.15. Block-STM</a></li>
 </ul>
 </li>
-<li><a href="#org2b71285">2. What is MagaETH</a>
+<li><a href="#org5dcf1bf">2. What is MagaETH</a>
 <ul>
-<li><a href="#org42986c6">2.1. Node specialization</a></li>
-<li><a href="#org033d457">2.2. Design philosophy</a></li>
+<li><a href="#orgd994fcc">2.1. Node specialization</a></li>
+<li><a href="#orgc8b9ab9">2.2. Design philosophy</a></li>
 </ul>
 </li>
-<li><a href="#org245c29d">3. MegaETH challenges</a></li>
+<li><a href="#org116f752">3. MegaETH challenges</a></li>
 </ul>
 </div>
 </nav>
@@ -584,20 +584,20 @@ This is a personal note for <a href="https://megaeth.systems/research">MegaETH-b
 <p>
 In summary, this blog proposes many challenges when designing a high-performance EVM chain, but does not include any design details of MegaETH itself.
 </p>
-<div id="outline-container-org2b70411" class="outline-2">
-<h2 id="org2b70411"><span class="section-number-2">1.</span> Blockchain fundamentals</h2>
+<div id="outline-container-org89dd53c" class="outline-2">
+<h2 id="org89dd53c"><span class="section-number-2">1.</span> Blockchain fundamentals</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orgf9088b0" class="outline-3">
-<h3 id="orgf9088b0"><span class="section-number-3">1.1.</span> <a href="https://docs.conduit.xyz/">Conduit chain</a></h3>
+<div id="outline-container-orgf672243" class="outline-3">
+<h3 id="orgf672243"><span class="section-number-3">1.1.</span> <a href="https://docs.conduit.xyz/">Conduit chain</a></h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>Allows one to deploy a rollup through its Rollups-as-a-service platform within in minutes.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org2146931" class="outline-3">
-<h3 id="org2146931"><span class="section-number-3">1.2.</span> Gas per second</h3>
+<div id="outline-container-org03f35d5" class="outline-3">
+<h3 id="org03f35d5"><span class="section-number-3">1.2.</span> Gas per second</h3>
 <div class="outline-text-3" id="text-1-2">
 <ul class="org-ul">
 <li>Reflects the amount of computation the blockchain can handle per second.</li>
@@ -606,8 +606,8 @@ In summary, this blog proposes many challenges when designing a high-performance
 </ul>
 </div>
 </div>
-<div id="outline-container-org7626f31" class="outline-3">
-<h3 id="org7626f31"><span class="section-number-3">1.3.</span> Target gas per block</h3>
+<div id="outline-container-org6a111f1" class="outline-3">
+<h3 id="org6a111f1"><span class="section-number-3">1.3.</span> Target gas per block</h3>
 <div class="outline-text-3" id="text-1-3">
 <ul class="org-ul">
 <li>Dynamically regulate the amount of computation a block can include.</li>
@@ -615,11 +615,11 @@ In summary, this blog proposes many challenges when designing a high-performance
 </ul>
 </div>
 </div>
-<div id="outline-container-org97f172c" class="outline-3">
-<h3 id="org97f172c"><span class="section-number-3">1.4.</span> Current blockchain scalability</h3>
+<div id="outline-container-orga8e61c7" class="outline-3">
+<h3 id="orga8e61c7"><span class="section-number-3">1.4.</span> Current blockchain scalability</h3>
 <div class="outline-text-3" id="text-1-4">
 
-<figure id="org0e9d26c">
+<figure id="orgc00c008">
 <img src="https://hackmd.io/_uploads/rkHVB0iHR.png" alt="rkHVB0iHR.png" align="center" width="500px">
 
 <figcaption><span class="figure-number">Figure 1: </span>2024 blockchain scalability comparison</figcaption>
@@ -632,8 +632,8 @@ In summary, this blog proposes many challenges when designing a high-performance
 </ul>
 </div>
 </div>
-<div id="outline-container-orga0e6c4a" class="outline-3">
-<h3 id="orga0e6c4a"><span class="section-number-3">1.5.</span> Blockchain node hardware requirements</h3>
+<div id="outline-container-org1d6f66d" class="outline-3">
+<h3 id="org1d6f66d"><span class="section-number-3">1.5.</span> Blockchain node hardware requirements</h3>
 <div class="outline-text-3" id="text-1-5">
 <ul class="org-ul">
 <li>Lower hardware requirements for full nodes increase decentralization.</li>
@@ -641,8 +641,8 @@ In summary, this blog proposes many challenges when designing a high-performance
 </ul>
 </div>
 </div>
-<div id="outline-container-orge6482c1" class="outline-3">
-<h3 id="orge6482c1"><span class="section-number-3">1.6.</span> L1 and L2 nodes</h3>
+<div id="outline-container-org3cf8080" class="outline-3">
+<h3 id="org3cf8080"><span class="section-number-3">1.6.</span> L1 and L2 nodes</h3>
 <div class="outline-text-3" id="text-1-6">
 <ul class="org-ul">
 <li>L1 nodes are homogeneous; each node performs identical tasks, i.e., transaction consensus and execution without specialization.</li>
@@ -650,8 +650,8 @@ In summary, this blog proposes many challenges when designing a high-performance
 </ul>
 </div>
 </div>
-<div id="outline-container-orgcdbaaa6" class="outline-3">
-<h3 id="orgcdbaaa6"><span class="section-number-3">1.7.</span> Verifying a block</h3>
+<div id="outline-container-org340fa84" class="outline-3">
+<h3 id="org340fa84"><span class="section-number-3">1.7.</span> Verifying a block</h3>
 <div class="outline-text-3" id="text-1-7">
 <ul class="org-ul">
 <li>Re-execute the transactions in the block.</li>
@@ -660,16 +660,16 @@ In summary, this blog proposes many challenges when designing a high-performance
 </ul>
 </div>
 </div>
-<div id="outline-container-orga07160a" class="outline-3">
-<h3 id="orga07160a"><span class="section-number-3">1.8.</span> Maximum extractable value (MEV)</h3>
+<div id="outline-container-orga50cda3" class="outline-3">
+<h3 id="orga50cda3"><span class="section-number-3">1.8.</span> Maximum extractable value (MEV)</h3>
 <div class="outline-text-3" id="text-1-8">
 <ul class="org-ul">
 <li>Validators maximize their profitability by favorably ordering transactions.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orga779962" class="outline-3">
-<h3 id="orga779962"><span class="section-number-3">1.9.</span> Proposer-builder separation (PBS)</h3>
+<div id="outline-container-org33a33ca" class="outline-3">
+<h3 id="org33a33ca"><span class="section-number-3">1.9.</span> Proposer-builder separation (PBS)</h3>
 <div class="outline-text-3" id="text-1-9">
 <ul class="org-ul">
 <li>Block builders are responsible for creating blocks and offering them to the block proposer in each slot.</li>
@@ -678,8 +678,8 @@ In summary, this blog proposes many challenges when designing a high-performance
 </ul>
 </div>
 </div>
-<div id="outline-container-orgf845425" class="outline-3">
-<h3 id="orgf845425"><span class="section-number-3">1.10.</span> Live and historical sync</h3>
+<div id="outline-container-org0ec95f3" class="outline-3">
+<h3 id="org0ec95f3"><span class="section-number-3">1.10.</span> Live and historical sync</h3>
 <div class="outline-text-3" id="text-1-10">
 <ul class="org-ul">
 <li>Live (online): continuously update a node with the latest data.</li>
@@ -688,8 +688,8 @@ In summary, this blog proposes many challenges when designing a high-performance
 </ul>
 </div>
 </div>
-<div id="outline-container-org5e76999" class="outline-3">
-<h3 id="org5e76999"><span class="section-number-3">1.11.</span> <a href="https://ethereum.org/en/developers/docs/networking-layer/portal-network/">Portal Network</a></h3>
+<div id="outline-container-orgee686fa" class="outline-3">
+<h3 id="orgee686fa"><span class="section-number-3">1.11.</span> <a href="https://ethereum.org/en/developers/docs/networking-layer/portal-network/">Portal Network</a></h3>
 <div class="outline-text-3" id="text-1-11">
 <ul class="org-ul">
 <li>An in-development p2p network for serving historical data where each node stores a small piece of Ethereum&rsquo;s history.</li>
@@ -698,8 +698,8 @@ In summary, this blog proposes many challenges when designing a high-performance
 </ul>
 </div>
 </div>
-<div id="outline-container-org3cfcd77" class="outline-3">
-<h3 id="org3cfcd77"><span class="section-number-3">1.12.</span> <a href="https://ethereum.org/en/roadmap/verkle-trees/">Verkle tree</a></h3>
+<div id="outline-container-org3462e91" class="outline-3">
+<h3 id="org3462e91"><span class="section-number-3">1.12.</span> <a href="https://ethereum.org/en/roadmap/verkle-trees/">Verkle tree</a></h3>
 <div class="outline-text-3" id="text-1-12">
 <ul class="org-ul">
 <li>Stateless clients use a witness to the state data that arrives with the block instead of local databases.</li>
@@ -712,8 +712,8 @@ In summary, this blog proposes many challenges when designing a high-performance
 </ul>
 </div>
 </div>
-<div id="outline-container-orgaa08fb8" class="outline-3">
-<h3 id="orgaa08fb8"><span class="section-number-3">1.13.</span> Node storage</h3>
+<div id="outline-container-orgb958689" class="outline-3">
+<h3 id="orgb958689"><span class="section-number-3">1.13.</span> Node storage</h3>
 <div class="outline-text-3" id="text-1-13">
 <ul class="org-ul">
 <li>High disk space is the main barrier to a full node access, due to the need to store large chunks of Ethereum state data to process new transactions.</li>
@@ -721,8 +721,8 @@ In summary, this blog proposes many challenges when designing a high-performance
 <li>Clients should find new ways to verify transactions without relying on looking up local databases.</li>
 </ul>
 </div>
-<div id="outline-container-org234bef9" class="outline-4">
-<h4 id="org234bef9"><span class="section-number-4">1.13.1.</span> History expiry</h4>
+<div id="outline-container-orgbe058ea" class="outline-4">
+<h4 id="orgbe058ea"><span class="section-number-4">1.13.1.</span> History expiry</h4>
 <div class="outline-text-4" id="text-1-13-1">
 <ul class="org-ul">
 <li>Nodes discard state data older than X blocks with weak subjectivity checkpoints, i.e., a genesis block close to the present.</li>
@@ -733,8 +733,8 @@ In summary, this blog proposes many challenges when designing a high-performance
 </ul>
 </div>
 </div>
-<div id="outline-container-org3d7f871" class="outline-4">
-<h4 id="org3d7f871"><span class="section-number-4">1.13.2.</span> State expiry</h4>
+<div id="outline-container-org29aac95" class="outline-4">
+<h4 id="org29aac95"><span class="section-number-4">1.13.2.</span> State expiry</h4>
 <div class="outline-text-4" id="text-1-13-2">
 <ul class="org-ul">
 <li>Remove state from individual nodes if it has not been accessed recently.</li>
@@ -744,8 +744,8 @@ In summary, this blog proposes many challenges when designing a high-performance
 </ul>
 </div>
 </div>
-<div id="outline-container-orgdf10468" class="outline-4">
-<h4 id="orgdf10468"><span class="section-number-4">1.13.3.</span> Statelessness</h4>
+<div id="outline-container-org4ecc2f9" class="outline-4">
+<h4 id="org4ecc2f9"><span class="section-number-4">1.13.3.</span> Statelessness</h4>
 <div class="outline-text-4" id="text-1-13-3">
 <ul class="org-ul">
 <li>weak statelessness: only block producers need access to full state data.</li>
@@ -756,8 +756,8 @@ In summary, this blog proposes many challenges when designing a high-performance
 </div>
 </div>
 </div>
-<div id="outline-container-orgc86912f" class="outline-3">
-<h3 id="orgc86912f"><span class="section-number-3">1.14.</span> Software transactional memory (STM)</h3>
+<div id="outline-container-orga5df4cf" class="outline-3">
+<h3 id="orga5df4cf"><span class="section-number-3">1.14.</span> Software transactional memory (STM)</h3>
 <div class="outline-text-3" id="text-1-14">
 <ul class="org-ul">
 <li>A concurrency control mechanism to control access to shares memory in software.</li>
@@ -767,8 +767,8 @@ In summary, this blog proposes many challenges when designing a high-performance
 </ul>
 </div>
 </div>
-<div id="outline-container-org662a0ac" class="outline-3">
-<h3 id="org662a0ac"><span class="section-number-3">1.15.</span> Block-STM</h3>
+<div id="outline-container-org5931f70" class="outline-3">
+<h3 id="org5931f70"><span class="section-number-3">1.15.</span> Block-STM</h3>
 <div class="outline-text-3" id="text-1-15">
 <ul class="org-ul">
 <li>A parallel execution engine to schedule smart contract transactions based on STM.</li>
@@ -777,16 +777,16 @@ In summary, this blog proposes many challenges when designing a high-performance
 </div>
 </div>
 </div>
-<div id="outline-container-org2b71285" class="outline-2">
-<h2 id="org2b71285"><span class="section-number-2">2.</span> What is MagaETH</h2>
+<div id="outline-container-org5dcf1bf" class="outline-2">
+<h2 id="org5dcf1bf"><span class="section-number-2">2.</span> What is MagaETH</h2>
 <div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li>An EVM-compatible L2 blockchain with Web2-level real-time processing and publishing, i.e., millisecond-level response times under heavy load.</li>
 <li>Main idea: delegate security and censorship resistance to base layers, e.g., Ethereum to make room for L2 optimization.</li>
 </ul>
 </div>
-<div id="outline-container-org42986c6" class="outline-3">
-<h3 id="org42986c6"><span class="section-number-3">2.1.</span> Node specialization</h3>
+<div id="outline-container-orgd994fcc" class="outline-3">
+<h3 id="orgd994fcc"><span class="section-number-3">2.1.</span> Node specialization</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>sequencer: only one active sequencer at any time to <b><b>eliminate the consensus overhead</b></b>.</li>
@@ -796,8 +796,8 @@ In summary, this blog proposes many challenges when designing a high-performance
 </ul>
 </div>
 </div>
-<div id="outline-container-org033d457" class="outline-3">
-<h3 id="org033d457"><span class="section-number-3">2.2.</span> Design philosophy</h3>
+<div id="outline-container-orgc8b9ab9" class="outline-3">
+<h3 id="orgc8b9ab9"><span class="section-number-3">2.2.</span> Design philosophy</h3>
 <div class="outline-text-3" id="text-2-2">
 <ul class="org-ul">
 <li>Reth (Rust implementation of the Ethereum protocol) is bottlenecked by the MPT update in a live sync setup, even with a powerful sequencer.</li>
@@ -807,11 +807,11 @@ In summary, this blog proposes many challenges when designing a high-performance
 </div>
 </div>
 </div>
-<div id="outline-container-org245c29d" class="outline-2">
-<h2 id="org245c29d"><span class="section-number-2">3.</span> MegaETH challenges</h2>
+<div id="outline-container-org116f752" class="outline-2">
+<h2 id="org116f752"><span class="section-number-2">3.</span> MegaETH challenges</h2>
 <div class="outline-text-2" id="text-3">
 
-<figure id="orgb9053b7">
+<figure id="orgebe822c">
 <img src="https://hackmd.io/_uploads/BJW2EG4L0.png" alt="BJW2EG4L0.png" align="center" width="600px">
 
 <figcaption><span class="figure-number">Figure 2: </span>A transaction life-cycle.</figcaption>
@@ -842,14 +842,14 @@ In summary, this blog proposes many challenges when designing a high-performance
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org5a16434">1. Was ist passiert</a></li>
-<li><a href="#org01a225e">2. Ich kann kein gutes Englisch schreiben</a></li>
-<li><a href="#org16e62e1">3. Ich kann nicht mich vorstellen</a></li>
+<li><a href="#org99db1bf">1. Was ist passiert</a></li>
+<li><a href="#org2248469">2. Ich kann kein gutes Englisch schreiben</a></li>
+<li><a href="#org851b4d8">3. Ich kann nicht mich vorstellen</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org5a16434" class="outline-2">
-<h2 id="org5a16434"><span class="section-number-2">1.</span> Was ist passiert</h2>
+<div id="outline-container-org99db1bf" class="outline-2">
+<h2 id="org99db1bf"><span class="section-number-2">1.</span> Was ist passiert</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Ich habe seit diesem Montag einen intensiven Deutschkurs gemacht.
@@ -861,8 +861,8 @@ Ich gehe circa 11 Uhr ins Bett.
 </p>
 </div>
 </div>
-<div id="outline-container-org01a225e" class="outline-2">
-<h2 id="org01a225e"><span class="section-number-2">2.</span> Ich kann kein gutes Englisch schreiben</h2>
+<div id="outline-container-org2248469" class="outline-2">
+<h2 id="org2248469"><span class="section-number-2">2.</span> Ich kann kein gutes Englisch schreiben</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Wenn ich hier diesen Satzen schreibe, merke ich, dass ich komplexe Satze auf Englisch nicht mehr schreiben kann.
@@ -876,8 +876,8 @@ As a result, my written english falls back to almost the same level as german.
 </p>
 </div>
 </div>
-<div id="outline-container-org16e62e1" class="outline-2">
-<h2 id="org16e62e1"><span class="section-number-2">3.</span> Ich kann nicht mich vorstellen</h2>
+<div id="outline-container-org851b4d8" class="outline-2">
+<h2 id="org851b4d8"><span class="section-number-2">3.</span> Ich kann nicht mich vorstellen</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 All my classmates come from diverse backgrounds.
@@ -924,14 +924,14 @@ I want to know more about the difference of this world, but I don&rsquo;t know h
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgcccef36">1. Terminology</a>
+<li><a href="#org8b2dbc8">1. Terminology</a>
 <ul>
-<li><a href="#orgb78aeb0">1.1. Motivation</a></li>
-<li><a href="#org8637d41">1.2. Blockchain paradigm</a></li>
-<li><a href="#org8260661">1.3. Ethereum Transaction execution</a></li>
-<li><a href="#org95ae501">1.4. World state \(\sigma\)</a>
+<li><a href="#org87a21e4">1.1. Motivation</a></li>
+<li><a href="#org9b42878">1.2. Blockchain paradigm</a></li>
+<li><a href="#org08e8d4c">1.3. Ethereum Transaction execution</a></li>
+<li><a href="#orgc052965">1.4. World state \(\sigma\)</a>
 <ul>
-<li><a href="#org6148fc3">1.4.1. The account state \(\sigma[a]\)</a></li>
+<li><a href="#orgfe6e531">1.4.1. The account state \(\sigma[a]\)</a></li>
 </ul>
 </li>
 </ul>
@@ -947,8 +947,8 @@ This is a personal note of EVM, resources are from:
 <li><a href="https://chatgpt.com/g/g-TJq7kBEsX-evm-gpt">EVM GPT</a></li>
 <li><a href="https://ethereum.github.io/yellowpaper/paper.pdf">Ethereum yellowpaper: Paris version (26.06.2024)</a></li>
 </ul>
-<div id="outline-container-orgcccef36" class="outline-2">
-<h2 id="orgcccef36"><span class="section-number-2">1.</span> Terminology</h2>
+<div id="outline-container-org8b2dbc8" class="outline-2">
+<h2 id="org8b2dbc8"><span class="section-number-2">1.</span> Terminology</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>EVM: a decentralized virtual environment that executes code consistently and securely across all Ethereum nodes.</li>
@@ -968,14 +968,14 @@ This is a personal note of EVM, resources are from:
 </ul>
 
 
-<figure id="org023d19d">
+<figure id="org9204aad">
 <img src="https://ethereum.org/_next/image/?url=%2Fcontent%2Fdevelopers%2Fdocs%2Fevm%2Fevm.png&amp;w=1920&amp;q=75" alt="?url=%2Fcontent%2Fdevelopers%2Fdocs%2Fevm%2Fevm.png&amp;w=1920&amp;q=75" align="center" width="500px">
 
 <figcaption><span class="figure-number">Figure 1: </span>The EVM structure</figcaption>
 </figure>
 </div>
-<div id="outline-container-orgb78aeb0" class="outline-3">
-<h3 id="orgb78aeb0"><span class="section-number-3">1.1.</span> Motivation</h3>
+<div id="outline-container-org87a21e4" class="outline-3">
+<h3 id="org87a21e4"><span class="section-number-3">1.1.</span> Motivation</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>To facilitate transactions between individuals who would otherwise have no means to trust one another.</li>
@@ -983,10 +983,10 @@ This is a personal note of EVM, resources are from:
 </ul>
 </div>
 </div>
-<div id="outline-container-org8637d41" class="outline-3">
-<h3 id="org8637d41"><span class="section-number-3">1.2.</span> Blockchain paradigm</h3>
+<div id="outline-container-org9b42878" class="outline-3">
+<h3 id="org9b42878"><span class="section-number-3">1.2.</span> Blockchain paradigm</h3>
 <div class="outline-text-3" id="text-1-2">
-<div class="latex" id="org26d1047">
+<div class="latex" id="orgfc07400">
 \begin{aligned}
 \sigma_{t+1} & \equiv \Pi\left(\boldsymbol{\sigma}_t, B\right) \\
 B & \equiv\left(\ldots,\left(T_0, T_1, \ldots\right), \ldots\right) \\
@@ -1002,8 +1002,8 @@ B & \equiv\left(\ldots,\left(T_0, T_1, \ldots\right), \ldots\right) \\
 </ul>
 </div>
 </div>
-<div id="outline-container-org8260661" class="outline-3">
-<h3 id="org8260661"><span class="section-number-3">1.3.</span> Ethereum Transaction execution</h3>
+<div id="outline-container-org08e8d4c" class="outline-3">
+<h3 id="org08e8d4c"><span class="section-number-3">1.3.</span> Ethereum Transaction execution</h3>
 <div class="outline-text-3" id="text-1-3">
 <ol class="org-ol">
 <li>An user (externally owned accounts, EOA) signs a transaction, including the sender, receiver (the contract address), Ether value, Gas limit and Gas price.</li>
@@ -1020,8 +1020,8 @@ B & \equiv\left(\ldots,\left(T_0, T_1, \ldots\right), \ldots\right) \\
 </ol>
 </div>
 </div>
-<div id="outline-container-org95ae501" class="outline-3">
-<h3 id="org95ae501"><span class="section-number-3">1.4.</span> World state \(\sigma\)</h3>
+<div id="outline-container-orgc052965" class="outline-3">
+<h3 id="orgc052965"><span class="section-number-3">1.4.</span> World state \(\sigma\)</h3>
 <div class="outline-text-3" id="text-1-4">
 <ul class="org-ul">
 <li>A mapping between 160-bit addresses and account states, maintained in a modified Merkle Patricia tree (MPT), serialized as RLP, stored in a off-chain database backend.</li>
@@ -1029,8 +1029,8 @@ B & \equiv\left(\ldots,\left(T_0, T_1, \ldots\right), \ldots\right) \\
 <li><a href="https://media.licdn.com/dms/image/D4D12AQG2itcSOHtiKw/article-cover_image-shrink_720_1280/0/1690981109933?e=1725494400&amp;v=beta&amp;t=4e2FSROhKCs2qeGtpyb5STePXe80agLfg3G9nuD4oKc">Merkle Patricia Trie representation of state data across blocks</a></li>
 </ul>
 </div>
-<div id="outline-container-org6148fc3" class="outline-4">
-<h4 id="org6148fc3"><span class="section-number-4">1.4.1.</span> The account state \(\sigma[a]\)</h4>
+<div id="outline-container-orgfe6e531" class="outline-4">
+<h4 id="orgfe6e531"><span class="section-number-4">1.4.1.</span> The account state \(\sigma[a]\)</h4>
 <div class="outline-text-4" id="text-1-4-1">
 <ul class="org-ul">
 <li><code>nonce</code>: the number of transactions the address has sent, or the number of contracts the address has made.</li>
@@ -1055,14 +1055,14 @@ B & \equiv\left(\ldots,\left(T_0, T_1, \ldots\right), \ldots\right) \\
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org1cedd5e">1. Where did we go</a></li>
-<li><a href="#org8227e39">2. Why did we go</a></li>
-<li><a href="#org4f0fdf6">3. What did we do</a></li>
+<li><a href="#org127cee6">1. Where did we go</a></li>
+<li><a href="#orgc7a67a9">2. Why did we go</a></li>
+<li><a href="#org76972c8">3. What did we do</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org1cedd5e" class="outline-2">
-<h2 id="org1cedd5e"><span class="section-number-2">1.</span> Where did we go</h2>
+<div id="outline-container-org127cee6" class="outline-2">
+<h2 id="org127cee6"><span class="section-number-2">1.</span> Where did we go</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>We rent a car and drove to Interlaken.</li>
@@ -1070,15 +1070,15 @@ B & \equiv\left(\ldots,\left(T_0, T_1, \ldots\right), \ldots\right) \\
 </ul>
 
 
-<figure id="org6c3eecc">
+<figure id="org749ee1d">
 <img src="./static/car.jpg" alt="car.jpg" align="center" width="600px">
 
 <figcaption><span class="figure-number">Figure 1: </span>The view outside the car</figcaption>
 </figure>
 </div>
 </div>
-<div id="outline-container-org8227e39" class="outline-2">
-<h2 id="org8227e39"><span class="section-number-2">2.</span> Why did we go</h2>
+<div id="outline-container-orgc7a67a9" class="outline-2">
+<h2 id="orgc7a67a9"><span class="section-number-2">2.</span> Why did we go</h2>
 <div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li>According to the unpredictable <a href="https://www.meteoschweiz.admin.ch/#tab=forecast-map">Meteoswiss</a> forecast, this Saturday would have been the only weekend-day with some good weather in limited locations to go hiking since 2? or 3? weeks ago.</li>
@@ -1086,15 +1086,15 @@ B & \equiv\left(\ldots,\left(T_0, T_1, \ldots\right), \ldots\right) \\
 </ul>
 
 
-<figure id="org2738d09">
+<figure id="orgc16c720">
 <img src="./static/restaurant.jpg" alt="restaurant.jpg" align="center" width="400px">
 
 <figcaption><span class="figure-number">Figure 2: </span>The weather at the Rothorn Kulm</figcaption>
 </figure>
 </div>
 </div>
-<div id="outline-container-org4f0fdf6" class="outline-2">
-<h2 id="org4f0fdf6"><span class="section-number-2">3.</span> What did we do</h2>
+<div id="outline-container-org76972c8" class="outline-2">
+<h2 id="org76972c8"><span class="section-number-2">3.</span> What did we do</h2>
 <div class="outline-text-2" id="text-3">
 <ol class="org-ol">
 <li>We first went a tour in Aareschlucht, where we experienced both strong cold wind and gentle warm wind.</li>
@@ -1107,14 +1107,14 @@ B & \equiv\left(\ldots,\left(T_0, T_1, \ldots\right), \ldots\right) \\
 </ol>
 
 
-<figure id="org067abc8">
+<figure id="org7111439">
 <img src="./static/water.jpg" alt="water.jpg" align="center" width="600px">
 
 <figcaption><span class="figure-number">Figure 3: </span>The water in Aareschlucht</figcaption>
 </figure>
 
 
-<figure id="orgce07c2d">
+<figure id="org6bf2d81">
 <img src="./static/view.jpg" alt="view.jpg" align="center" width="600px">
 
 <figcaption><span class="figure-number">Figure 4: </span>The view on the train</figcaption>
@@ -1136,33 +1136,33 @@ B & \equiv\left(\ldots,\left(T_0, T_1, \ldots\right), \ldots\right) \\
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org9352deb">1. Blockchain fundamentals</a>
+<li><a href="#orgfed3365">1. Blockchain fundamentals</a>
 <ul>
-<li><a href="#orgd9b8bec">1.1. Mainnet and Testnet</a></li>
-<li><a href="#org22a86a8">1.2. Mainnet Alpha and Beta</a></li>
-<li><a href="#org67e5484">1.3. Layer 1 and Layer 2</a></li>
-<li><a href="#org4c1c36b">1.4. Rollups</a></li>
-<li><a href="#orge3b9d6c">1.5. State channels</a></li>
-<li><a href="#org504d1ba">1.6. Sidechains</a></li>
-<li><a href="#org63da140">1.7. Ethereum and EVM</a></li>
-<li><a href="#org21b6a47">1.8. IAVL tree</a></li>
-<li><a href="#org148dd6c">1.9. CosmWasm contract</a></li>
-<li><a href="#orgaaa2a80">1.10. Cosmos Ecosystem</a></li>
-<li><a href="#org88077f3">1.11. Blockchain layers</a></li>
-<li><a href="#orgad2bd65">1.12. Optimistic parallelization</a></li>
-<li><a href="#org10a23c5">1.13. Integrated and Modular blockchain</a></li>
-<li><a href="#org4d0dea6">1.14. EVM Execution and storage layer</a></li>
-<li><a href="#orgcb23728">1.15. Block time and finalize time</a></li>
-<li><a href="#org7773a88">1.16. Blockchain audit</a></li>
+<li><a href="#org6bb3cde">1.1. Mainnet and Testnet</a></li>
+<li><a href="#org95226aa">1.2. Mainnet Alpha and Beta</a></li>
+<li><a href="#org1b4f013">1.3. Layer 1 and Layer 2</a></li>
+<li><a href="#org98f6c01">1.4. Rollups</a></li>
+<li><a href="#orgaf7e6aa">1.5. State channels</a></li>
+<li><a href="#org55e99a1">1.6. Sidechains</a></li>
+<li><a href="#orgea8efdc">1.7. Ethereum and EVM</a></li>
+<li><a href="#orgbf44590">1.8. IAVL tree</a></li>
+<li><a href="#org699fdd1">1.9. CosmWasm contract</a></li>
+<li><a href="#org6e6d304">1.10. Cosmos Ecosystem</a></li>
+<li><a href="#orga451051">1.11. Blockchain layers</a></li>
+<li><a href="#org05475fb">1.12. Optimistic parallelization</a></li>
+<li><a href="#org73f1976">1.13. Integrated and Modular blockchain</a></li>
+<li><a href="#orgfde9604">1.14. EVM Execution and storage layer</a></li>
+<li><a href="#orge939b4e">1.15. Block time and finalize time</a></li>
+<li><a href="#org6536f20">1.16. Blockchain audit</a></li>
 </ul>
 </li>
-<li><a href="#org4ec6737">2. What is Sei</a></li>
-<li><a href="#orgd19c08c">3. What is Sei v2</a>
+<li><a href="#org1f2bd72">2. What is Sei</a></li>
+<li><a href="#org49b039a">3. What is Sei v2</a>
 <ul>
-<li><a href="#org3c2f364">3.1. Backwards compatibility</a></li>
-<li><a href="#org0dcdf4f">3.2. Optimistic parallelization</a></li>
-<li><a href="#orgb7432ae">3.3. SeiDB</a></li>
-<li><a href="#org52836e2">3.4. Interoperability</a></li>
+<li><a href="#orgea4afc2">3.1. Backwards compatibility</a></li>
+<li><a href="#org4feaf8b">3.2. Optimistic parallelization</a></li>
+<li><a href="#org438b352">3.3. SeiDB</a></li>
+<li><a href="#orgd477081">3.4. Interoperability</a></li>
 </ul>
 </li>
 </ul>
@@ -1171,12 +1171,12 @@ B & \equiv\left(\ldots,\left(T_0, T_1, \ldots\right), \ldots\right) \\
 <p>
 This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parallelized-evm/">Sei-v2-blog</a> as well as some terminology explained by <a href="https://chatgpt.com/g/g-TJq7kBEsX-evm-gpt">EVM GPT</a>.
 </p>
-<div id="outline-container-org9352deb" class="outline-2">
-<h2 id="org9352deb"><span class="section-number-2">1.</span> Blockchain fundamentals</h2>
+<div id="outline-container-orgfed3365" class="outline-2">
+<h2 id="orgfed3365"><span class="section-number-2">1.</span> Blockchain fundamentals</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orgd9b8bec" class="outline-3">
-<h3 id="orgd9b8bec"><span class="section-number-3">1.1.</span> Mainnet and Testnet</h3>
+<div id="outline-container-org6bb3cde" class="outline-3">
+<h3 id="org6bb3cde"><span class="section-number-3">1.1.</span> Mainnet and Testnet</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>Mainnet: real transactions occur and have real-world value; any operation is final and irreversible.</li>
@@ -1184,8 +1184,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org22a86a8" class="outline-3">
-<h3 id="org22a86a8"><span class="section-number-3">1.2.</span> Mainnet Alpha and Beta</h3>
+<div id="outline-container-org95226aa" class="outline-3">
+<h3 id="org95226aa"><span class="section-number-3">1.2.</span> Mainnet Alpha and Beta</h3>
 <div class="outline-text-3" id="text-1-2">
 <ul class="org-ul">
 <li>Alpha: test core functionalities and gather initial feedback in live environment.</li>
@@ -1193,8 +1193,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org67e5484" class="outline-3">
-<h3 id="org67e5484"><span class="section-number-3">1.3.</span> Layer 1 and Layer 2</h3>
+<div id="outline-container-org1b4f013" class="outline-3">
+<h3 id="org1b4f013"><span class="section-number-3">1.3.</span> Layer 1 and Layer 2</h3>
 <div class="outline-text-3" id="text-1-3">
 <ul class="org-ul">
 <li>L1: the main network where all transactions are processed and the primary chain is maintained.</li>
@@ -1202,8 +1202,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org4c1c36b" class="outline-3">
-<h3 id="org4c1c36b"><span class="section-number-3">1.4.</span> Rollups</h3>
+<div id="outline-container-org98f6c01" class="outline-3">
+<h3 id="org98f6c01"><span class="section-number-3">1.4.</span> Rollups</h3>
 <div class="outline-text-3" id="text-1-4">
 <ul class="org-ul">
 <li>Processes transactions off-chain and periodically submits a summary (rollup) to L1.</li>
@@ -1218,8 +1218,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-orge3b9d6c" class="outline-3">
-<h3 id="orge3b9d6c"><span class="section-number-3">1.5.</span> State channels</h3>
+<div id="outline-container-orgaf7e6aa" class="outline-3">
+<h3 id="orgaf7e6aa"><span class="section-number-3">1.5.</span> State channels</h3>
 <div class="outline-text-3" id="text-1-5">
 <ul class="org-ul">
 <li>allow participants to conduct numerous off-chain transactions, with only the final state recorded on the L1.</li>
@@ -1227,8 +1227,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org504d1ba" class="outline-3">
-<h3 id="org504d1ba"><span class="section-number-3">1.6.</span> Sidechains</h3>
+<div id="outline-container-org55e99a1" class="outline-3">
+<h3 id="org55e99a1"><span class="section-number-3">1.6.</span> Sidechains</h3>
 <div class="outline-text-3" id="text-1-6">
 <ul class="org-ul">
 <li>Independent blockchains running parallel to the main chain, with own consensus and security.</li>
@@ -1236,8 +1236,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org63da140" class="outline-3">
-<h3 id="org63da140"><span class="section-number-3">1.7.</span> Ethereum and EVM</h3>
+<div id="outline-container-orgea8efdc" class="outline-3">
+<h3 id="orgea8efdc"><span class="section-number-3">1.7.</span> Ethereum and EVM</h3>
 <div class="outline-text-3" id="text-1-7">
 <ul class="org-ul">
 <li>Ethereum: a blockchain ecosystem, includes the blockchain, consensus mechanism, smart contracts, native cryptocurrency.</li>
@@ -1245,8 +1245,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org21b6a47" class="outline-3">
-<h3 id="org21b6a47"><span class="section-number-3">1.8.</span> IAVL tree</h3>
+<div id="outline-container-orgbf44590" class="outline-3">
+<h3 id="orgbf44590"><span class="section-number-3">1.8.</span> IAVL tree</h3>
 <div class="outline-text-3" id="text-1-8">
 <ul class="org-ul">
 <li>AVL tree: self-balancing binary tree where the difference in heights between left and right subtrees of anynode is at most one.</li>
@@ -1254,8 +1254,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org148dd6c" class="outline-3">
-<h3 id="org148dd6c"><span class="section-number-3">1.9.</span> CosmWasm contract</h3>
+<div id="outline-container-org699fdd1" class="outline-3">
+<h3 id="org699fdd1"><span class="section-number-3">1.9.</span> CosmWasm contract</h3>
 <div class="outline-text-3" id="text-1-9">
 <ul class="org-ul">
 <li>Allows developers to write fast and portable smart contracts in WebAssembly.</li>
@@ -1263,8 +1263,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-orgaaa2a80" class="outline-3">
-<h3 id="orgaaa2a80"><span class="section-number-3">1.10.</span> Cosmos Ecosystem</h3>
+<div id="outline-container-org6e6d304" class="outline-3">
+<h3 id="org6e6d304"><span class="section-number-3">1.10.</span> Cosmos Ecosystem</h3>
 <div class="outline-text-3" id="text-1-10">
 <ul class="org-ul">
 <li>A network of independent, interoperable blockchains designed to create an Internet of blockchain.</li>
@@ -1274,8 +1274,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org88077f3" class="outline-3">
-<h3 id="org88077f3"><span class="section-number-3">1.11.</span> Blockchain layers</h3>
+<div id="outline-container-orga451051" class="outline-3">
+<h3 id="orga451051"><span class="section-number-3">1.11.</span> Blockchain layers</h3>
 <div class="outline-text-3" id="text-1-11">
 <ul class="org-ul">
 <li>Infrastructure layer: the physical devices that support the network; and the underlying communication protocols for data transfer between nodes.</li>
@@ -1288,8 +1288,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-orgad2bd65" class="outline-3">
-<h3 id="orgad2bd65"><span class="section-number-3">1.12.</span> Optimistic parallelization</h3>
+<div id="outline-container-org05475fb" class="outline-3">
+<h3 id="org05475fb"><span class="section-number-3">1.12.</span> Optimistic parallelization</h3>
 <div class="outline-text-3" id="text-1-12">
 <ul class="org-ul">
 <li>Multiple transactions are processed in parallel under the assumption that they will conflict with each other; necessary corrections are made afterwards if conflicts are detected.</li>
@@ -1297,8 +1297,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org10a23c5" class="outline-3">
-<h3 id="org10a23c5"><span class="section-number-3">1.13.</span> Integrated and Modular blockchain</h3>
+<div id="outline-container-org73f1976" class="outline-3">
+<h3 id="org73f1976"><span class="section-number-3">1.13.</span> Integrated and Modular blockchain</h3>
 <div class="outline-text-3" id="text-1-13">
 <ul class="org-ul">
 <li>Integrated: all components, e.g., execution layer, consensus mechanism, networking are tightly coupled; faster internal communication but lower flexibility and scalability.</li>
@@ -1306,8 +1306,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org4d0dea6" class="outline-3">
-<h3 id="org4d0dea6"><span class="section-number-3">1.14.</span> EVM Execution and storage layer</h3>
+<div id="outline-container-orgfde9604" class="outline-3">
+<h3 id="orgfde9604"><span class="section-number-3">1.14.</span> EVM Execution and storage layer</h3>
 <div class="outline-text-3" id="text-1-14">
 <ul class="org-ul">
 <li>Execution: responsible for running smart contracts and processing transactions.</li>
@@ -1315,8 +1315,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-orgcb23728" class="outline-3">
-<h3 id="orgcb23728"><span class="section-number-3">1.15.</span> Block time and finalize time</h3>
+<div id="outline-container-orge939b4e" class="outline-3">
+<h3 id="orge939b4e"><span class="section-number-3">1.15.</span> Block time and finalize time</h3>
 <div class="outline-text-3" id="text-1-15">
 <ul class="org-ul">
 <li>Block: the average time for a new block to be added.</li>
@@ -1325,8 +1325,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org7773a88" class="outline-3">
-<h3 id="org7773a88"><span class="section-number-3">1.16.</span> Blockchain audit</h3>
+<div id="outline-container-org6536f20" class="outline-3">
+<h3 id="org6536f20"><span class="section-number-3">1.16.</span> Blockchain audit</h3>
 <div class="outline-text-3" id="text-1-16">
 <ul class="org-ul">
 <li>A review of a blockchain to ensures its security and functionality.</li>
@@ -1334,8 +1334,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </div>
 </div>
 </div>
-<div id="outline-container-org4ec6737" class="outline-2">
-<h2 id="org4ec6737"><span class="section-number-2">2.</span> What is Sei</h2>
+<div id="outline-container-org1f2bd72" class="outline-2">
+<h2 id="org1f2bd72"><span class="section-number-2">2.</span> What is Sei</h2>
 <div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li>On mainnet beta since August 2023.</li>
@@ -1345,8 +1345,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-orgd19c08c" class="outline-2">
-<h2 id="orgd19c08c"><span class="section-number-2">3.</span> What is Sei v2</h2>
+<div id="outline-container-org49b039a" class="outline-2">
+<h2 id="org49b039a"><span class="section-number-2">3.</span> What is Sei v2</h2>
 <div class="outline-text-2" id="text-3">
 <ul class="org-ul">
 <li>The first fully parallelized EVM.</li>
@@ -1358,8 +1358,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 <li>Once audits are complete, the upgrade is released in a public testnet in Q1 2024, and deployed to mainnet in H1 2024.</li>
 </ul>
 </div>
-<div id="outline-container-org3c2f364" class="outline-3">
-<h3 id="org3c2f364"><span class="section-number-3">3.1.</span> Backwards compatibility</h3>
+<div id="outline-container-orgea4afc2" class="outline-3">
+<h3 id="orgea4afc2"><span class="section-number-3">3.1.</span> Backwards compatibility</h3>
 <div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
 <li>Ethereum contracts can be seamlessly deployed on Sei v2 with no code changes.</li>
@@ -1368,8 +1368,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org0dcdf4f" class="outline-3">
-<h3 id="org0dcdf4f"><span class="section-number-3">3.2.</span> Optimistic parallelization</h3>
+<div id="outline-container-org4feaf8b" class="outline-3">
+<h3 id="org4feaf8b"><span class="section-number-3">3.2.</span> Optimistic parallelization</h3>
 <div class="outline-text-3" id="text-3-2">
 <ul class="org-ul">
 <li>Sei requires smart contract developers to optionally define the state that smart contracts are using, Sei v2 removes this need.</li>
@@ -1380,8 +1380,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-orgb7432ae" class="outline-3">
-<h3 id="orgb7432ae"><span class="section-number-3">3.3.</span> SeiDB</h3>
+<div id="outline-container-org438b352" class="outline-3">
+<h3 id="org438b352"><span class="section-number-3">3.3.</span> SeiDB</h3>
 <div class="outline-text-3" id="text-3-3">
 <ul class="org-ul">
 <li>Sei uses a vanilla database layer composed of an IAVL tree, which is less efficient in terms of storage and latency.</li>
@@ -1394,8 +1394,8 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 </ul>
 </div>
 </div>
-<div id="outline-container-org52836e2" class="outline-3">
-<h3 id="org52836e2"><span class="section-number-3">3.4.</span> Interoperability</h3>
+<div id="outline-container-orgd477081" class="outline-3">
+<h3 id="orgd477081"><span class="section-number-3">3.4.</span> Interoperability</h3>
 <div class="outline-text-3" id="text-3-4">
 <ul class="org-ul">
 <li>Sei v2 processes different transactions, e.g., Cosmwasm, EVM in a uniformed way, and then forwards them to different storage sections.</li>
@@ -1418,20 +1418,20 @@ This is a personal note for <a href="https://blog.sei.io/sei-v2-the-first-parall
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org2ed0dc1">1. Why did I watch it</a></li>
-<li><a href="#org7c27470">2. What is it about</a></li>
-<li><a href="#org431726b">3. Did I like it</a></li>
+<li><a href="#org28baad8">1. Why did I watch it</a></li>
+<li><a href="#org097c3a8">2. What is it about</a></li>
+<li><a href="#org258f4dd">3. Did I like it</a></li>
 </ul>
 </div>
 </nav>
 
-<figure id="org3fb1172">
+<figure id="org9ecb894">
 <img src="https://miro.medium.com/v2/resize:fit:1100/format:webp/1*IFB2V5vjsVKtHcxBdCfQSQ.jpeg" alt="1*IFB2V5vjsVKtHcxBdCfQSQ.jpeg" align="center" width="300px">
 
 <figcaption><span class="figure-number">Figure 1: </span>Argo poster</figcaption>
 </figure>
-<div id="outline-container-org2ed0dc1" class="outline-2">
-<h2 id="org2ed0dc1"><span class="section-number-2">1.</span> Why did I watch it</h2>
+<div id="outline-container-org28baad8" class="outline-2">
+<h2 id="org28baad8"><span class="section-number-2">1.</span> Why did I watch it</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 This week, I found myself craving a movie with a &ldquo;Homeland&rdquo; theme.
@@ -1440,8 +1440,8 @@ I saw its name a decade ago (I am too old!) on some movie magazine cover.
 </p>
 </div>
 </div>
-<div id="outline-container-org7c27470" class="outline-2">
-<h2 id="org7c27470"><span class="section-number-2">2.</span> What is it about</h2>
+<div id="outline-container-org097c3a8" class="outline-2">
+<h2 id="org097c3a8"><span class="section-number-2">2.</span> What is it about</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 It has little thing to do with &ldquo;Homeland&rdquo;.
@@ -1452,8 +1452,8 @@ Every tension resolves safely in the end: the phone will be picked up at the las
 </p>
 </div>
 </div>
-<div id="outline-container-org431726b" class="outline-2">
-<h2 id="org431726b"><span class="section-number-2">3.</span> Did I like it</h2>
+<div id="outline-container-org258f4dd" class="outline-2">
+<h2 id="org258f4dd"><span class="section-number-2">3.</span> Did I like it</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 I guess?
@@ -1466,7 +1466,7 @@ I felt &ldquo;Argo&rdquo; could have delved deeper into the absurdities of war r
 </p>
 
 
-<figure id="orga79c726">
+<figure id="org570a441">
 <img src="https://m.media-amazon.com/images/M/MV5BOTI0MzcxMTYtZDVkMy00NjY1LTgyMTYtZmUxN2M3NmQ2NWJhXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg" alt="MV5BOTI0MzcxMTYtZDVkMy00NjY1LTgyMTYtZmUxN2M3NmQ2NWJhXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg" align="center" width="300px">
 
 <figcaption><span class="figure-number">Figure 2: </span>Good Will Hunting poster</figcaption>
@@ -1474,7 +1474,7 @@ I felt &ldquo;Argo&rdquo; could have delved deeper into the absurdities of war r
 
 
 
-<figure id="org0c8a9fc">
+<figure id="org08eae16">
 <img src="https://posterspy.com/wp-content/uploads/2024/04/Civil-War-Kirsten.jpg" alt="Civil-War-Kirsten.jpg" align="center" width="300px">
 
 <figcaption><span class="figure-number">Figure 3: </span>Civil War poster</figcaption>
@@ -1495,16 +1495,16 @@ I felt &ldquo;Argo&rdquo; could have delved deeper into the absurdities of war r
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org435f688">1. Concurrency vs Parallelism</a></li>
-<li><a href="#org3400546">2. Use goroutines for states</a>
+<li><a href="#org7da2f0d">1. Concurrency vs Parallelism</a></li>
+<li><a href="#org015789e">2. Use goroutines for states</a>
 <ul>
-<li><a href="#org2e73967">2.1. Matching a regex</a></li>
-<li><a href="#org6b60e54">2.2. When the state variable cannot be avoided</a></li>
+<li><a href="#org1c1adfe">2.1. Matching a regex</a></li>
+<li><a href="#org3f86129">2.2. When the state variable cannot be avoided</a></li>
 </ul>
 </li>
-<li><a href="#org1a96d85">3. Pattern 1: publish/subscribe server</a>
+<li><a href="#org21cb34b">3. Pattern 1: publish/subscribe server</a>
 <ul>
-<li><a href="#orgb82b8b0">3.1. Options for slow goroutines</a></li>
+<li><a href="#orgcd02e65">3.1. Options for slow goroutines</a></li>
 </ul>
 </li>
 </ul>
@@ -1513,8 +1513,8 @@ I felt &ldquo;Argo&rdquo; could have delved deeper into the absurdities of war r
 <p>
 This a personal note for the <a href="https://www.youtube.com/watch?v=IdCbMO0Ey9I">Russ Cox guest lecture</a>.
 </p>
-<div id="outline-container-org435f688" class="outline-2">
-<h2 id="org435f688"><span class="section-number-2">1.</span> Concurrency vs Parallelism</h2>
+<div id="outline-container-org7da2f0d" class="outline-2">
+<h2 id="org7da2f0d"><span class="section-number-2">1.</span> Concurrency vs Parallelism</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Concurrency: write a program to handle lot of things at once
@@ -1525,12 +1525,12 @@ This a personal note for the <a href="https://www.youtube.com/watch?v=IdCbMO0Ey9
 </ul>
 </div>
 </div>
-<div id="outline-container-org3400546" class="outline-2">
-<h2 id="org3400546"><span class="section-number-2">2.</span> Use goroutines for states</h2>
+<div id="outline-container-org015789e" class="outline-2">
+<h2 id="org015789e"><span class="section-number-2">2.</span> Use goroutines for states</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org2e73967" class="outline-3">
-<h3 id="org2e73967"><span class="section-number-3">2.1.</span> Matching a regex</h3>
+<div id="outline-container-org1c1adfe" class="outline-3">
+<h3 id="org1c1adfe"><span class="section-number-3">2.1.</span> Matching a regex</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>return if a given string matches a regex: start with <code>"</code>, contains arbitrary escape sequence and ends with <code>*</code></li>
@@ -1587,8 +1587,8 @@ clear logic: store states in the code
 </ul>
 </div>
 </div>
-<div id="outline-container-org6b60e54" class="outline-3">
-<h3 id="org6b60e54"><span class="section-number-3">2.2.</span> When the state variable cannot be avoided</h3>
+<div id="outline-container-org3f86129" class="outline-3">
+<h3 id="org3f86129"><span class="section-number-3">2.2.</span> When the state variable cannot be avoided</h3>
 <div class="outline-text-3" id="text-2-2">
 <ul class="org-ul">
 <li><p>
@@ -1690,8 +1690,8 @@ use additional goroutines to hold states
 </div>
 </div>
 </div>
-<div id="outline-container-org1a96d85" class="outline-2">
-<h2 id="org1a96d85"><span class="section-number-2">3.</span> Pattern 1: publish/subscribe server</h2>
+<div id="outline-container-org21cb34b" class="outline-2">
+<h2 id="org21cb34b"><span class="section-number-2">3.</span> Pattern 1: publish/subscribe server</h2>
 <div class="outline-text-2" id="text-3">
 <ul class="org-ul">
 <li>the information goes one way: server -&gt; client</li>
@@ -1741,8 +1741,8 @@ prefer <code>defer</code> when unlocking the mutex
 </div></li>
 </ul>
 </div>
-<div id="outline-container-orgb82b8b0" class="outline-3">
-<h3 id="orgb82b8b0"><span class="section-number-3">3.1.</span> Options for slow goroutines</h3>
+<div id="outline-container-orgcd02e65" class="outline-3">
+<h3 id="orgcd02e65"><span class="section-number-3">3.1.</span> Options for slow goroutines</h3>
 <div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
 <li>slow down event generation</li>
@@ -1871,14 +1871,14 @@ convert mutexes into goroutines, not suitable for Raft where state transition is
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgbc992eb">1. What happended</a></li>
-<li><a href="#orgac5167b">2. What did I do</a></li>
-<li><a href="#orgbd1a50d">3. Another issue of running RPC in docker</a></li>
+<li><a href="#orgda455ea">1. What happended</a></li>
+<li><a href="#org481e495">2. What did I do</a></li>
+<li><a href="#orgde067e0">3. Another issue of running RPC in docker</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-orgbc992eb" class="outline-2">
-<h2 id="orgbc992eb"><span class="section-number-2">1.</span> What happended</h2>
+<div id="outline-container-orgda455ea" class="outline-2">
+<h2 id="orgda455ea"><span class="section-number-2">1.</span> What happended</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Servers SA and SB have the same docker installation, and the same running container CA and CB.</li>
@@ -1893,8 +1893,8 @@ fatal error: newosproc<br>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgac5167b" class="outline-2">
-<h2 id="orgac5167b"><span class="section-number-2">2.</span> What did I do</h2>
+<div id="outline-container-org481e495" class="outline-2">
+<h2 id="org481e495"><span class="section-number-2">2.</span> What did I do</h2>
 <div class="outline-text-2" id="text-2">
 <ol class="org-ol">
 <li>I compared any related configurations between SA and SB. and between CA and CB, e.g., <code class="src src-bash"><span style="color: #c678dd;">ulimit</span> -a</code>, <code class="src src-bash">/etc/security/limits.conf</code>. They all look the same.</li>
@@ -1911,8 +1911,8 @@ fatal error: newosproc<br>
 </ol>
 </div>
 </div>
-<div id="outline-container-orgbd1a50d" class="outline-2">
-<h2 id="orgbd1a50d"><span class="section-number-2">3.</span> Another issue of running RPC in docker</h2>
+<div id="outline-container-orgde067e0" class="outline-2">
+<h2 id="orgde067e0"><span class="section-number-2">3.</span> Another issue of running RPC in docker</h2>
 <div class="outline-text-2" id="text-3">
 <ul class="org-ul">
 <li>The other day, I also spent hours debugging a <code>route unreachable</code> error when I want to send a request from CA to SA.</li>
@@ -1961,20 +1961,20 @@ In the end, I need to append a new rule to make the RPC work.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgdc3d670">1. i3</a>
+<li><a href="#org228f610">1. i3</a>
 <ul>
-<li><a href="#orgdd5b494">1.1. move specific workspaces between different monitors (ref)</a></li>
+<li><a href="#org30cc4ac">1.1. move specific workspaces between different monitors (ref)</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-orgdc3d670" class="outline-2">
-<h2 id="orgdc3d670"><span class="section-number-2">1.</span> i3</h2>
+<div id="outline-container-org228f610" class="outline-2">
+<h2 id="org228f610"><span class="section-number-2">1.</span> i3</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orgdd5b494" class="outline-3">
-<h3 id="orgdd5b494"><span class="section-number-3">1.1.</span> move specific workspaces between different monitors <a href="https://i3wm.org/docs/user-contributed/swapping-workspaces.html">(ref)</a></h3>
+<div id="outline-container-org30cc4ac" class="outline-3">
+<h3 id="org30cc4ac"><span class="section-number-3">1.1.</span> move specific workspaces between different monitors <a href="https://i3wm.org/docs/user-contributed/swapping-workspaces.html">(ref)</a></h3>
 <div class="outline-text-3" id="text-1-1">
 <ol class="org-ol">
 <li>adjust the monitor relative positions</li>
@@ -1999,21 +1999,21 @@ In the end, I need to append a new rule to make the RPC work.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgfa812d5">1. Router</a></li>
-<li><a href="#org94be7df">2. Link</a></li>
-<li><a href="#orgce133ed">3. Workshop 3</a>
+<li><a href="#org4be4369">1. Router</a></li>
+<li><a href="#orgf3a5a66">2. Link</a></li>
+<li><a href="#org9ef0cd4">3. Workshop 3</a>
 <ul>
-<li><a href="#org722576a">3.1. Structure</a></li>
-<li><a href="#org27e4613">3.2. States</a></li>
-<li><a href="#orgae84d1e">3.3. Props</a></li>
-<li><a href="#org73c0eff">3.4. Why passing down the update function in props 1, 4, 6?</a></li>
+<li><a href="#org689d1d2">3.1. Structure</a></li>
+<li><a href="#org788e87e">3.2. States</a></li>
+<li><a href="#orge43b4c4">3.3. Props</a></li>
+<li><a href="#org8a091bd">3.4. Why passing down the update function in props 1, 4, 6?</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-orgfa812d5" class="outline-2">
-<h2 id="orgfa812d5"><span class="section-number-2">1.</span> Router</h2>
+<div id="outline-container-org4be4369" class="outline-2">
+<h2 id="org4be4369"><span class="section-number-2">1.</span> Router</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>use the Reach <a href="https://reach.tech/router/">Reach Router</a> library</li>
@@ -2035,8 +2035,8 @@ URL -&gt; Router -&gt; render different components
 </ul>
 </div>
 </div>
-<div id="outline-container-org94be7df" class="outline-2">
-<h2 id="org94be7df"><span class="section-number-2">2.</span> Link</h2>
+<div id="outline-container-orgf3a5a66" class="outline-2">
+<h2 id="orgf3a5a66"><span class="section-number-2">2.</span> Link</h2>
 <div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li>relative: <code class="src src-js">&lt;Link to=<span style="color: #98be65;">"newpage"</span>&gt;Click me&lt;/Link&gt;</code></li>
@@ -2044,23 +2044,23 @@ URL -&gt; Router -&gt; render different components
 </ul>
 </div>
 </div>
-<div id="outline-container-orgce133ed" class="outline-2">
-<h2 id="orgce133ed"><span class="section-number-2">3.</span> Workshop 3</h2>
+<div id="outline-container-org9ef0cd4" class="outline-2">
+<h2 id="org9ef0cd4"><span class="section-number-2">3.</span> Workshop 3</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org722576a" class="outline-3">
-<h3 id="org722576a"><span class="section-number-3">3.1.</span> Structure</h3>
+<div id="outline-container-org689d1d2" class="outline-3">
+<h3 id="org689d1d2"><span class="section-number-3">3.1.</span> Structure</h3>
 <div class="outline-text-3" id="text-3-1">
 
-<figure id="org77026f0">
+<figure id="orgd7c1339">
 <img src="./static/workshop-3-structure.png" alt="workshop-3-structure.png" align="center" width="600px">
 
 <figcaption><span class="figure-number">Figure 1: </span>The Catbook structure in workshop 3</figcaption>
 </figure>
 </div>
 </div>
-<div id="outline-container-org27e4613" class="outline-3">
-<h3 id="org27e4613"><span class="section-number-3">3.2.</span> States</h3>
+<div id="outline-container-org788e87e" class="outline-3">
+<h3 id="org788e87e"><span class="section-number-3">3.2.</span> States</h3>
 <div class="outline-text-3" id="text-3-2">
 <table>
 
@@ -2092,8 +2092,8 @@ URL -&gt; Router -&gt; render different components
 </table>
 </div>
 </div>
-<div id="outline-container-orgae84d1e" class="outline-3">
-<h3 id="orgae84d1e"><span class="section-number-3">3.3.</span> Props</h3>
+<div id="outline-container-orge43b4c4" class="outline-3">
+<h3 id="orge43b4c4"><span class="section-number-3">3.3.</span> Props</h3>
 <div class="outline-text-3" id="text-3-3">
 <table>
 
@@ -2145,8 +2145,8 @@ URL -&gt; Router -&gt; render different components
 </table>
 </div>
 </div>
-<div id="outline-container-org73c0eff" class="outline-3">
-<h3 id="org73c0eff"><span class="section-number-3">3.4.</span> Why passing down the update function in props 1, 4, 6?</h3>
+<div id="outline-container-org8a091bd" class="outline-3">
+<h3 id="org8a091bd"><span class="section-number-3">3.4.</span> Why passing down the update function in props 1, 4, 6?</h3>
 <div class="outline-text-3" id="text-3-4">
 <ul class="org-ul">
 <li>To share the parent states, i.e., <code>stories</code> and <code>comments</code> to child component. Since the post action happens in the child component, we need a way to automatically update the states to see new contents immediately.</li>
@@ -2170,34 +2170,34 @@ URL -&gt; Router -&gt; render different components
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org49d8414">1. What is a React hook</a>
+<li><a href="#org880d741">1. What is a React hook</a>
 <ul>
-<li><a href="#org61fadd3">1.1. <code>useState</code> is not enough</a></li>
-<li><a href="#orgb625ec0">1.2. <code>useEffect</code> runs after specific variable change</a></li>
+<li><a href="#orgf146c80">1.1. <code>useState</code> is not enough</a></li>
+<li><a href="#orgb5f13fc">1.2. <code>useEffect</code> runs after specific variable change</a></li>
 </ul>
 </li>
-<li><a href="#org160bc21">2. React hook patterns</a>
+<li><a href="#orgb4d6dfd">2. React hook patterns</a>
 <ul>
-<li><a href="#org2eb59f5">2.1. Fetch and send data</a></li>
-<li><a href="#orgf0f85b9">2.2. Conditional rendering</a></li>
-<li><a href="#org69b2b17">2.3. Render an array of Data</a></li>
+<li><a href="#org4ca96a9">2.1. Fetch and send data</a></li>
+<li><a href="#org5e3811e">2.2. Conditional rendering</a></li>
+<li><a href="#org176c8a8">2.3. Render an array of Data</a></li>
 </ul>
 </li>
-<li><a href="#org87ae685">3. Example: Stopwatch</a></li>
-<li><a href="#org1965800">4. DOM and component mounting</a></li>
+<li><a href="#orgc2469f7">3. Example: Stopwatch</a></li>
+<li><a href="#orgfb2bb56">4. DOM and component mounting</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org49d8414" class="outline-2">
-<h2 id="org49d8414"><span class="section-number-2">1.</span> What is a React hook</h2>
+<div id="outline-container-org880d741" class="outline-2">
+<h2 id="org880d741"><span class="section-number-2">1.</span> What is a React hook</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Special functions to access parts of the component lifestyle.</li>
 <li>e.g., <code>useState</code></li>
 </ul>
 </div>
-<div id="outline-container-org61fadd3" class="outline-3">
-<h3 id="org61fadd3"><span class="section-number-3">1.1.</span> <code>useState</code> is not enough</h3>
+<div id="outline-container-orgf146c80" class="outline-3">
+<h3 id="orgf146c80"><span class="section-number-3">1.1.</span> <code>useState</code> is not enough</h3>
 <div class="outline-text-3" id="text-1-1">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr">1: </span><span style="color: #51afef;">const</span> [<span style="color: #dcaeea;">persons</span>, <span style="color: #dcaeea;">setPersons</span>] = useState([]);
@@ -2216,8 +2216,8 @@ URL -&gt; Router -&gt; render different components
 </ul>
 </div>
 </div>
-<div id="outline-container-orgb625ec0" class="outline-3">
-<h3 id="orgb625ec0"><span class="section-number-3">1.2.</span> <code>useEffect</code> runs after specific variable change</h3>
+<div id="outline-container-orgb5f13fc" class="outline-3">
+<h3 id="orgb5f13fc"><span class="section-number-3">1.2.</span> <code>useEffect</code> runs after specific variable change</h3>
 <div class="outline-text-3" id="text-1-2">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr">1: </span>useEffect(() =&gt; {
@@ -2245,12 +2245,12 @@ URL -&gt; Router -&gt; render different components
 </div>
 </div>
 </div>
-<div id="outline-container-org160bc21" class="outline-2">
-<h2 id="org160bc21"><span class="section-number-2">2.</span> React hook patterns</h2>
+<div id="outline-container-orgb4d6dfd" class="outline-2">
+<h2 id="orgb4d6dfd"><span class="section-number-2">2.</span> React hook patterns</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org2eb59f5" class="outline-3">
-<h3 id="org2eb59f5"><span class="section-number-3">2.1.</span> Fetch and send data</h3>
+<div id="outline-container-org4ca96a9" class="outline-3">
+<h3 id="org4ca96a9"><span class="section-number-3">2.1.</span> Fetch and send data</h3>
 <div class="outline-text-3" id="text-2-1">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr">1: </span><span style="color: #5B6268;">/* </span><span style="color: #5B6268;">fetch data on mount</span><span style="color: #5B6268;"> */</span>
@@ -2275,8 +2275,8 @@ URL -&gt; Router -&gt; render different components
 </div>
 </div>
 </div>
-<div id="outline-container-orgf0f85b9" class="outline-3">
-<h3 id="orgf0f85b9"><span class="section-number-3">2.2.</span> Conditional rendering</h3>
+<div id="outline-container-org5e3811e" class="outline-3">
+<h3 id="org5e3811e"><span class="section-number-3">2.2.</span> Conditional rendering</h3>
 <div class="outline-text-3" id="text-2-2">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr">1: </span><span style="color: #5B6268;">// </span><span style="color: #5B6268;">JSX is a way of writing HTML in js</span>
@@ -2291,8 +2291,8 @@ URL -&gt; Router -&gt; render different components
 </div>
 </div>
 </div>
-<div id="outline-container-org69b2b17" class="outline-3">
-<h3 id="org69b2b17"><span class="section-number-3">2.3.</span> Render an array of Data</h3>
+<div id="outline-container-org176c8a8" class="outline-3">
+<h3 id="org176c8a8"><span class="section-number-3">2.3.</span> Render an array of Data</h3>
 <div class="outline-text-3" id="text-2-3">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr">1: </span><span style="color: #51afef;">const</span> <span style="color: #dcaeea;">data</span> = [
@@ -2311,8 +2311,8 @@ URL -&gt; Router -&gt; render different components
 </div>
 </div>
 </div>
-<div id="outline-container-org87ae685" class="outline-2">
-<h2 id="org87ae685"><span class="section-number-2">3.</span> Example: Stopwatch</h2>
+<div id="outline-container-orgc2469f7" class="outline-2">
+<h2 id="orgc2469f7"><span class="section-number-2">3.</span> Example: Stopwatch</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr"> 1: </span><span style="color: #51afef;">const</span> <span style="color: #dcaeea;">Stopwatch</span> = () =&gt; {
@@ -2333,8 +2333,8 @@ URL -&gt; Router -&gt; render different components
 </div>
 </div>
 </div>
-<div id="outline-container-org1965800" class="outline-2">
-<h2 id="org1965800"><span class="section-number-2">4.</span> DOM and component mounting</h2>
+<div id="outline-container-orgfb2bb56" class="outline-2">
+<h2 id="orgfb2bb56"><span class="section-number-2">4.</span> DOM and component mounting</h2>
 <div class="outline-text-2" id="text-4">
 <ul class="org-ul">
 <li>DOM (Document Object Model): a programming interface for web documents; represents the structure of a document, e.g., HTML, as a tree of objects, where each object corresponds to a part of the document; it dynamically updates the document contents
@@ -2366,12 +2366,12 @@ URL -&gt; Router -&gt; render different components
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org4d441a4">1. Hallo!</a></li>
+<li><a href="#org450bbe5">1. Hallo!</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org4d441a4" class="outline-2">
-<h2 id="org4d441a4"><span class="section-number-2">1.</span> Hallo!</h2>
+<div id="outline-container-org450bbe5" class="outline-2">
+<h2 id="org450bbe5"><span class="section-number-2">1.</span> Hallo!</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 This is the first blog with org-static-blog!

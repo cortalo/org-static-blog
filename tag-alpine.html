@@ -9,12 +9,23 @@
 <title>org-static-blog</title>
 <script type="text/javascript"
              src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-        </script>
-        <script type="text/x-mathjax-config">
+       </script>
+       <script type="text/x-mathjax-config">
              MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'],['\\(','\\)']]}});
-        </script></head>
+       </script>
+       <meta name="author" content="chenyo">
+      <meta name="referrer" content="no-referrer">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="static/style.css" type="text/css"/></head>
 <body>
-<div id="preamble" class="status"></div>
+<div id="preamble" class="status"><header>
+      <h1><a href="https://chenyo-17.github.io/org-static-blog">Chenyo's org-static-blog</a></h1>
+      <nav>
+      <a href="https://chenyo-17.github.io/org-static-blog">Home</a>
+      <a href="https://chenyo-17.github.io/org-static-blog/archive.html">Archive</a>
+      <a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>
+      </nav>
+      </header></div>
 <div id="content">
 <h1 class="title">Posts tagged "alpine":</h1>
 <div class="post-date">24 Jun 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-06-24-a-stupid-debugging-experience.html">A stupid debugging experience</a></h1>
@@ -22,14 +33,14 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgbc992eb">1. What happended</a></li>
-<li><a href="#orgac5167b">2. What did I do</a></li>
-<li><a href="#orgbd1a50d">3. Another issue of running RPC in docker</a></li>
+<li><a href="#orgda455ea">1. What happended</a></li>
+<li><a href="#org481e495">2. What did I do</a></li>
+<li><a href="#orgde067e0">3. Another issue of running RPC in docker</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-orgbc992eb" class="outline-2">
-<h2 id="orgbc992eb"><span class="section-number-2">1.</span> What happended</h2>
+<div id="outline-container-orgda455ea" class="outline-2">
+<h2 id="orgda455ea"><span class="section-number-2">1.</span> What happended</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Servers SA and SB have the same docker installation, and the same running container CA and CB.</li>
@@ -44,8 +55,8 @@ fatal error: newosproc<br>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgac5167b" class="outline-2">
-<h2 id="orgac5167b"><span class="section-number-2">2.</span> What did I do</h2>
+<div id="outline-container-org481e495" class="outline-2">
+<h2 id="org481e495"><span class="section-number-2">2.</span> What did I do</h2>
 <div class="outline-text-2" id="text-2">
 <ol class="org-ol">
 <li>I compared any related configurations between SA and SB. and between CA and CB, e.g., <code class="src src-bash"><span style="color: #c678dd;">ulimit</span> -a</code>, <code class="src src-bash">/etc/security/limits.conf</code>. They all look the same.</li>
@@ -62,8 +73,8 @@ fatal error: newosproc<br>
 </ol>
 </div>
 </div>
-<div id="outline-container-orgbd1a50d" class="outline-2">
-<h2 id="orgbd1a50d"><span class="section-number-2">3.</span> Another issue of running RPC in docker</h2>
+<div id="outline-container-orgde067e0" class="outline-2">
+<h2 id="orgde067e0"><span class="section-number-2">3.</span> Another issue of running RPC in docker</h2>
 <div class="outline-text-2" id="text-3">
 <ul class="org-ul">
 <li>The other day, I also spent hours debugging a <code>route unreachable</code> error when I want to send a request from CA to SA.</li>
@@ -100,6 +111,8 @@ In the end, I need to append a new rule to make the RPC work.
 <a href="https://chenyo-17.github.io/org-static-blog/archive.html">Other posts</a>
 </div>
 </div>
-<div id="postamble" class="status"></div>
+<div id="postamble" class="status"><footer>
+      <p>© 2024 chenyo. Some rights reserved.</p>
+      </footer></div>
 </body>
 </html>

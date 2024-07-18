@@ -9,12 +9,23 @@
 <title>org-static-blog</title>
 <script type="text/javascript"
              src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-        </script>
-        <script type="text/x-mathjax-config">
+       </script>
+       <script type="text/x-mathjax-config">
              MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'],['\\(','\\)']]}});
-        </script></head>
+       </script>
+       <meta name="author" content="chenyo">
+      <meta name="referrer" content="no-referrer">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="static/style.css" type="text/css"/></head>
 <body>
-<div id="preamble" class="status"></div>
+<div id="preamble" class="status"><header>
+      <h1><a href="https://chenyo-17.github.io/org-static-blog">Chenyo's org-static-blog</a></h1>
+      <nav>
+      <a href="https://chenyo-17.github.io/org-static-blog">Home</a>
+      <a href="https://chenyo-17.github.io/org-static-blog/archive.html">Archive</a>
+      <a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>
+      </nav>
+      </header></div>
 <div id="content">
 <h1 class="title">Posts tagged "study":</h1>
 <div class="post-date">17 Jul 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-07-17-db-notes:-relational-model.html">CMU 15-445 notes: Relational Model & Algebra</a></h1>
@@ -22,50 +33,50 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org0a9f482">1. Terminology</a>
+<li><a href="#org2d9c25d">1. Terminology</a>
 <ul>
-<li><a href="#orge830edb">1.1. Database</a></li>
-<li><a href="#orgdfef04b">1.2. Database design consideration</a></li>
-<li><a href="#orge055a12">1.3. Database management system (DBMS)</a></li>
-<li><a href="#org12b971a">1.4. Data model</a></li>
-<li><a href="#orgcf40f28">1.5. Schema</a></li>
-<li><a href="#orgd99fbc5">1.6. Entities and Tables</a></li>
-<li><a href="#org6f9c1e1">1.7. Attributes and Fields</a></li>
-<li><a href="#orgb2eb665">1.8. Logical layer</a></li>
-<li><a href="#org67aae8b">1.9. Physical layer</a></li>
-<li><a href="#orgf54c3c9">1.10. Data manipulation languages (DMLs)</a></li>
-<li><a href="#org15343eb">1.11. SQL (Structured Query Language) and relational model</a></li>
+<li><a href="#orgd8e68b1">1.1. Database</a></li>
+<li><a href="#orgc71ca49">1.2. Database design consideration</a></li>
+<li><a href="#org7f388b2">1.3. Database management system (DBMS)</a></li>
+<li><a href="#org5f91e18">1.4. Data model</a></li>
+<li><a href="#org8925fa2">1.5. Schema</a></li>
+<li><a href="#orge4ecc49">1.6. Entities and Tables</a></li>
+<li><a href="#org5abd86d">1.7. Attributes and Fields</a></li>
+<li><a href="#org20e51c0">1.8. Logical layer</a></li>
+<li><a href="#org7604b9e">1.9. Physical layer</a></li>
+<li><a href="#org44c6619">1.10. Data manipulation languages (DMLs)</a></li>
+<li><a href="#org8ea925a">1.11. SQL (Structured Query Language) and relational model</a></li>
 </ul>
 </li>
-<li><a href="#org82f5220">2. Relational model</a>
+<li><a href="#org364364e">2. Relational model</a>
 <ul>
-<li><a href="#org2128abf">2.1. A relation</a></li>
-<li><a href="#orga9aa093">2.2. A domain</a></li>
-<li><a href="#org76a118c">2.3. A tuple</a></li>
-<li><a href="#org468a289">2.4. Keys</a></li>
+<li><a href="#org85b2181">2.1. A relation</a></li>
+<li><a href="#orge75963d">2.2. A domain</a></li>
+<li><a href="#orgfa08c4e">2.3. A tuple</a></li>
+<li><a href="#org454d9b3">2.4. Keys</a></li>
 </ul>
 </li>
-<li><a href="#org0555ac7">3. Relational Algebra</a></li>
+<li><a href="#orgf8f1fd7">3. Relational Algebra</a></li>
 </ul>
 </div>
 </nav>
 <p>
 This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpVZS2s&amp;list=PLSE8ODhjZXjaKScG3l0nuOiDTTqpfnWFf&amp;index=2">CMU 15-445 L1 video</a> and <a href="https://15445.courses.cs.cmu.edu/fall2022/notes/01-introduction.pdf">CMU 15-445 L1 notes</a>, along with some terminology explained by <a href="https://claude.ai/chat/14f3c4ec-0ca8-495e-ac70-dd13f9eab5ea">Claude.ai</a>.
 </p>
-<div id="outline-container-org0a9f482" class="outline-2">
-<h2 id="org0a9f482"><span class="section-number-2">1.</span> Terminology</h2>
+<div id="outline-container-org2d9c25d" class="outline-2">
+<h2 id="org2d9c25d"><span class="section-number-2">1.</span> Terminology</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orge830edb" class="outline-3">
-<h3 id="orge830edb"><span class="section-number-3">1.1.</span> Database</h3>
+<div id="outline-container-orgd8e68b1" class="outline-3">
+<h3 id="orgd8e68b1"><span class="section-number-3">1.1.</span> Database</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>An organized collection of inter-related data that models some aspect of the real-world.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgdfef04b" class="outline-3">
-<h3 id="orgdfef04b"><span class="section-number-3">1.2.</span> Database design consideration</h3>
+<div id="outline-container-orgc71ca49" class="outline-3">
+<h3 id="orgc71ca49"><span class="section-number-3">1.2.</span> Database design consideration</h3>
 <div class="outline-text-3" id="text-1-2">
 <ul class="org-ul">
 <li>Data integrity: protect invalid writing.</li>
@@ -74,8 +85,8 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 </ul>
 </div>
 </div>
-<div id="outline-container-orge055a12" class="outline-3">
-<h3 id="orge055a12"><span class="section-number-3">1.3.</span> Database management system (DBMS)</h3>
+<div id="outline-container-org7f388b2" class="outline-3">
+<h3 id="org7f388b2"><span class="section-number-3">1.3.</span> Database management system (DBMS)</h3>
 <div class="outline-text-3" id="text-1-3">
 <ul class="org-ul">
 <li>A software that manages a database.</li>
@@ -83,8 +94,8 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 </ul>
 </div>
 </div>
-<div id="outline-container-org12b971a" class="outline-3">
-<h3 id="org12b971a"><span class="section-number-3">1.4.</span> Data model</h3>
+<div id="outline-container-org5f91e18" class="outline-3">
+<h3 id="org5f91e18"><span class="section-number-3">1.4.</span> Data model</h3>
 <div class="outline-text-3" id="text-1-4">
 <ul class="org-ul">
 <li>A conceptual, high-level representation of how data is structured</li>
@@ -92,8 +103,8 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 </ul>
 </div>
 </div>
-<div id="outline-container-orgcf40f28" class="outline-3">
-<h3 id="orgcf40f28"><span class="section-number-3">1.5.</span> Schema</h3>
+<div id="outline-container-org8925fa2" class="outline-3">
+<h3 id="org8925fa2"><span class="section-number-3">1.5.</span> Schema</h3>
 <div class="outline-text-3" id="text-1-5">
 <ul class="org-ul">
 <li>A concrete implementation of a data model.</li>
@@ -102,8 +113,8 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 </ul>
 </div>
 </div>
-<div id="outline-container-orgd99fbc5" class="outline-3">
-<h3 id="orgd99fbc5"><span class="section-number-3">1.6.</span> Entities and Tables</h3>
+<div id="outline-container-orge4ecc49" class="outline-3">
+<h3 id="orge4ecc49"><span class="section-number-3">1.6.</span> Entities and Tables</h3>
 <div class="outline-text-3" id="text-1-6">
 <ul class="org-ul">
 <li>Entities: conceptual representations of objects in the logical data model.</li>
@@ -111,8 +122,8 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 </ul>
 </div>
 </div>
-<div id="outline-container-org6f9c1e1" class="outline-3">
-<h3 id="org6f9c1e1"><span class="section-number-3">1.7.</span> Attributes and Fields</h3>
+<div id="outline-container-org5abd86d" class="outline-3">
+<h3 id="org5abd86d"><span class="section-number-3">1.7.</span> Attributes and Fields</h3>
 <div class="outline-text-3" id="text-1-7">
 <ul class="org-ul">
 <li>Attributes: properties of an entity.</li>
@@ -120,24 +131,24 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 </ul>
 </div>
 </div>
-<div id="outline-container-orgb2eb665" class="outline-3">
-<h3 id="orgb2eb665"><span class="section-number-3">1.8.</span> Logical layer</h3>
+<div id="outline-container-org20e51c0" class="outline-3">
+<h3 id="org20e51c0"><span class="section-number-3">1.8.</span> Logical layer</h3>
 <div class="outline-text-3" id="text-1-8">
 <ul class="org-ul">
 <li>The entities and attributes the database has.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org67aae8b" class="outline-3">
-<h3 id="org67aae8b"><span class="section-number-3">1.9.</span> Physical layer</h3>
+<div id="outline-container-org7604b9e" class="outline-3">
+<h3 id="org7604b9e"><span class="section-number-3">1.9.</span> Physical layer</h3>
 <div class="outline-text-3" id="text-1-9">
 <ul class="org-ul">
 <li>How are entities and attributes stored in the database.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgf54c3c9" class="outline-3">
-<h3 id="orgf54c3c9"><span class="section-number-3">1.10.</span> Data manipulation languages (DMLs)</h3>
+<div id="outline-container-org44c6619" class="outline-3">
+<h3 id="org44c6619"><span class="section-number-3">1.10.</span> Data manipulation languages (DMLs)</h3>
 <div class="outline-text-3" id="text-1-10">
 <ul class="org-ul">
 <li>Methods to store and retrieve information from a database.</li>
@@ -146,8 +157,8 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 </ul>
 </div>
 </div>
-<div id="outline-container-org15343eb" class="outline-3">
-<h3 id="org15343eb"><span class="section-number-3">1.11.</span> SQL (Structured Query Language) and relational model</h3>
+<div id="outline-container-org8ea925a" class="outline-3">
+<h3 id="org8ea925a"><span class="section-number-3">1.11.</span> SQL (Structured Query Language) and relational model</h3>
 <div class="outline-text-3" id="text-1-11">
 <ul class="org-ul">
 <li>SQL <b><b>implements</b></b> the relational model in DBMS and provides a standard way to create, manipulate and query relational databases.</li>
@@ -157,8 +168,8 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 </div>
 </div>
 </div>
-<div id="outline-container-org82f5220" class="outline-2">
-<h2 id="org82f5220"><span class="section-number-2">2.</span> Relational model</h2>
+<div id="outline-container-org364364e" class="outline-2">
+<h2 id="org364364e"><span class="section-number-2">2.</span> Relational model</h2>
 <div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li>A <b><b>data model</b></b> that defines a database <b><b>abstraction</b></b> to avoid maintenance overhead when changing the physical layer.</li>
@@ -167,14 +178,14 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 </ul>
 
 
-<figure id="orgd24af86">
+<figure id="orgeb77340">
 <img src="https://people.cs.pitt.edu/~chang/156/images/fig41.gif" alt="fig41.gif" align="center" width="500px">
 
 <figcaption><span class="figure-number">Figure 1: </span>Relational model concepts</figcaption>
 </figure>
 </div>
-<div id="outline-container-org2128abf" class="outline-3">
-<h3 id="org2128abf"><span class="section-number-3">2.1.</span> A relation</h3>
+<div id="outline-container-org85b2181" class="outline-3">
+<h3 id="org85b2181"><span class="section-number-3">2.1.</span> A relation</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>An unordered set that contains the relationship of attributes that represent entities.</li>
@@ -182,16 +193,16 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 </ul>
 </div>
 </div>
-<div id="outline-container-orga9aa093" class="outline-3">
-<h3 id="orga9aa093"><span class="section-number-3">2.2.</span> A domain</h3>
+<div id="outline-container-orge75963d" class="outline-3">
+<h3 id="orge75963d"><span class="section-number-3">2.2.</span> A domain</h3>
 <div class="outline-text-3" id="text-2-2">
 <ul class="org-ul">
 <li>A named set of allowable values for a specific attribute.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org76a118c" class="outline-3">
-<h3 id="org76a118c"><span class="section-number-3">2.3.</span> A tuple</h3>
+<div id="outline-container-orgfa08c4e" class="outline-3">
+<h3 id="orgfa08c4e"><span class="section-number-3">2.3.</span> A tuple</h3>
 <div class="outline-text-3" id="text-2-3">
 <ul class="org-ul">
 <li>A set of attribute values in the relation.</li>
@@ -201,8 +212,8 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 </ul>
 </div>
 </div>
-<div id="outline-container-org468a289" class="outline-3">
-<h3 id="org468a289"><span class="section-number-3">2.4.</span> Keys</h3>
+<div id="outline-container-org454d9b3" class="outline-3">
+<h3 id="org454d9b3"><span class="section-number-3">2.4.</span> Keys</h3>
 <div class="outline-text-3" id="text-2-4">
 <ul class="org-ul">
 <li>Primary key: uniquely identifies a single tuple.</li>
@@ -211,8 +222,8 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 </div>
 </div>
 </div>
-<div id="outline-container-org0555ac7" class="outline-2">
-<h2 id="org0555ac7"><span class="section-number-2">3.</span> Relational Algebra</h2>
+<div id="outline-container-orgf8f1fd7" class="outline-2">
+<h2 id="orgf8f1fd7"><span class="section-number-2">3.</span> Relational Algebra</h2>
 <div class="outline-text-2" id="text-3">
 <ul class="org-ul">
 <li>A set of fundamental operations to retrieve and manipulate tuples in a relation.</li>
@@ -228,16 +239,16 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org435f688">1. Concurrency vs Parallelism</a></li>
-<li><a href="#org3400546">2. Use goroutines for states</a>
+<li><a href="#org7da2f0d">1. Concurrency vs Parallelism</a></li>
+<li><a href="#org015789e">2. Use goroutines for states</a>
 <ul>
-<li><a href="#org2e73967">2.1. Matching a regex</a></li>
-<li><a href="#org6b60e54">2.2. When the state variable cannot be avoided</a></li>
+<li><a href="#org1c1adfe">2.1. Matching a regex</a></li>
+<li><a href="#org3f86129">2.2. When the state variable cannot be avoided</a></li>
 </ul>
 </li>
-<li><a href="#org1a96d85">3. Pattern 1: publish/subscribe server</a>
+<li><a href="#org21cb34b">3. Pattern 1: publish/subscribe server</a>
 <ul>
-<li><a href="#orgb82b8b0">3.1. Options for slow goroutines</a></li>
+<li><a href="#orgcd02e65">3.1. Options for slow goroutines</a></li>
 </ul>
 </li>
 </ul>
@@ -246,8 +257,8 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 <p>
 This a personal note for the <a href="https://www.youtube.com/watch?v=IdCbMO0Ey9I">Russ Cox guest lecture</a>.
 </p>
-<div id="outline-container-org435f688" class="outline-2">
-<h2 id="org435f688"><span class="section-number-2">1.</span> Concurrency vs Parallelism</h2>
+<div id="outline-container-org7da2f0d" class="outline-2">
+<h2 id="org7da2f0d"><span class="section-number-2">1.</span> Concurrency vs Parallelism</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Concurrency: write a program to handle lot of things at once
@@ -258,12 +269,12 @@ This a personal note for the <a href="https://www.youtube.com/watch?v=IdCbMO0Ey9
 </ul>
 </div>
 </div>
-<div id="outline-container-org3400546" class="outline-2">
-<h2 id="org3400546"><span class="section-number-2">2.</span> Use goroutines for states</h2>
+<div id="outline-container-org015789e" class="outline-2">
+<h2 id="org015789e"><span class="section-number-2">2.</span> Use goroutines for states</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org2e73967" class="outline-3">
-<h3 id="org2e73967"><span class="section-number-3">2.1.</span> Matching a regex</h3>
+<div id="outline-container-org1c1adfe" class="outline-3">
+<h3 id="org1c1adfe"><span class="section-number-3">2.1.</span> Matching a regex</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>return if a given string matches a regex: start with <code>"</code>, contains arbitrary escape sequence and ends with <code>*</code></li>
@@ -320,8 +331,8 @@ clear logic: store states in the code
 </ul>
 </div>
 </div>
-<div id="outline-container-org6b60e54" class="outline-3">
-<h3 id="org6b60e54"><span class="section-number-3">2.2.</span> When the state variable cannot be avoided</h3>
+<div id="outline-container-org3f86129" class="outline-3">
+<h3 id="org3f86129"><span class="section-number-3">2.2.</span> When the state variable cannot be avoided</h3>
 <div class="outline-text-3" id="text-2-2">
 <ul class="org-ul">
 <li><p>
@@ -423,8 +434,8 @@ use additional goroutines to hold states
 </div>
 </div>
 </div>
-<div id="outline-container-org1a96d85" class="outline-2">
-<h2 id="org1a96d85"><span class="section-number-2">3.</span> Pattern 1: publish/subscribe server</h2>
+<div id="outline-container-org21cb34b" class="outline-2">
+<h2 id="org21cb34b"><span class="section-number-2">3.</span> Pattern 1: publish/subscribe server</h2>
 <div class="outline-text-2" id="text-3">
 <ul class="org-ul">
 <li>the information goes one way: server -&gt; client</li>
@@ -474,8 +485,8 @@ prefer <code>defer</code> when unlocking the mutex
 </div></li>
 </ul>
 </div>
-<div id="outline-container-orgb82b8b0" class="outline-3">
-<h3 id="orgb82b8b0"><span class="section-number-3">3.1.</span> Options for slow goroutines</h3>
+<div id="outline-container-orgcd02e65" class="outline-3">
+<h3 id="orgcd02e65"><span class="section-number-3">3.1.</span> Options for slow goroutines</h3>
 <div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
 <li>slow down event generation</li>
@@ -595,21 +606,21 @@ convert mutexes into goroutines, not suitable for Raft where state transition is
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgfa812d5">1. Router</a></li>
-<li><a href="#org94be7df">2. Link</a></li>
-<li><a href="#orgce133ed">3. Workshop 3</a>
+<li><a href="#org4be4369">1. Router</a></li>
+<li><a href="#orgf3a5a66">2. Link</a></li>
+<li><a href="#org9ef0cd4">3. Workshop 3</a>
 <ul>
-<li><a href="#org722576a">3.1. Structure</a></li>
-<li><a href="#org27e4613">3.2. States</a></li>
-<li><a href="#orgae84d1e">3.3. Props</a></li>
-<li><a href="#org73c0eff">3.4. Why passing down the update function in props 1, 4, 6?</a></li>
+<li><a href="#org689d1d2">3.1. Structure</a></li>
+<li><a href="#org788e87e">3.2. States</a></li>
+<li><a href="#orge43b4c4">3.3. Props</a></li>
+<li><a href="#org8a091bd">3.4. Why passing down the update function in props 1, 4, 6?</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-orgfa812d5" class="outline-2">
-<h2 id="orgfa812d5"><span class="section-number-2">1.</span> Router</h2>
+<div id="outline-container-org4be4369" class="outline-2">
+<h2 id="org4be4369"><span class="section-number-2">1.</span> Router</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>use the Reach <a href="https://reach.tech/router/">Reach Router</a> library</li>
@@ -631,8 +642,8 @@ URL -&gt; Router -&gt; render different components
 </ul>
 </div>
 </div>
-<div id="outline-container-org94be7df" class="outline-2">
-<h2 id="org94be7df"><span class="section-number-2">2.</span> Link</h2>
+<div id="outline-container-orgf3a5a66" class="outline-2">
+<h2 id="orgf3a5a66"><span class="section-number-2">2.</span> Link</h2>
 <div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li>relative: <code class="src src-js">&lt;Link to=<span style="color: #98be65;">"newpage"</span>&gt;Click me&lt;/Link&gt;</code></li>
@@ -640,23 +651,23 @@ URL -&gt; Router -&gt; render different components
 </ul>
 </div>
 </div>
-<div id="outline-container-orgce133ed" class="outline-2">
-<h2 id="orgce133ed"><span class="section-number-2">3.</span> Workshop 3</h2>
+<div id="outline-container-org9ef0cd4" class="outline-2">
+<h2 id="org9ef0cd4"><span class="section-number-2">3.</span> Workshop 3</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org722576a" class="outline-3">
-<h3 id="org722576a"><span class="section-number-3">3.1.</span> Structure</h3>
+<div id="outline-container-org689d1d2" class="outline-3">
+<h3 id="org689d1d2"><span class="section-number-3">3.1.</span> Structure</h3>
 <div class="outline-text-3" id="text-3-1">
 
-<figure id="org77026f0">
+<figure id="orgd7c1339">
 <img src="./static/workshop-3-structure.png" alt="workshop-3-structure.png" align="center" width="600px">
 
 <figcaption><span class="figure-number">Figure 1: </span>The Catbook structure in workshop 3</figcaption>
 </figure>
 </div>
 </div>
-<div id="outline-container-org27e4613" class="outline-3">
-<h3 id="org27e4613"><span class="section-number-3">3.2.</span> States</h3>
+<div id="outline-container-org788e87e" class="outline-3">
+<h3 id="org788e87e"><span class="section-number-3">3.2.</span> States</h3>
 <div class="outline-text-3" id="text-3-2">
 <table>
 
@@ -688,8 +699,8 @@ URL -&gt; Router -&gt; render different components
 </table>
 </div>
 </div>
-<div id="outline-container-orgae84d1e" class="outline-3">
-<h3 id="orgae84d1e"><span class="section-number-3">3.3.</span> Props</h3>
+<div id="outline-container-orge43b4c4" class="outline-3">
+<h3 id="orge43b4c4"><span class="section-number-3">3.3.</span> Props</h3>
 <div class="outline-text-3" id="text-3-3">
 <table>
 
@@ -741,8 +752,8 @@ URL -&gt; Router -&gt; render different components
 </table>
 </div>
 </div>
-<div id="outline-container-org73c0eff" class="outline-3">
-<h3 id="org73c0eff"><span class="section-number-3">3.4.</span> Why passing down the update function in props 1, 4, 6?</h3>
+<div id="outline-container-org8a091bd" class="outline-3">
+<h3 id="org8a091bd"><span class="section-number-3">3.4.</span> Why passing down the update function in props 1, 4, 6?</h3>
 <div class="outline-text-3" id="text-3-4">
 <ul class="org-ul">
 <li>To share the parent states, i.e., <code>stories</code> and <code>comments</code> to child component. Since the post action happens in the child component, we need a way to automatically update the states to see new contents immediately.</li>
@@ -756,34 +767,34 @@ URL -&gt; Router -&gt; render different components
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org49d8414">1. What is a React hook</a>
+<li><a href="#org880d741">1. What is a React hook</a>
 <ul>
-<li><a href="#org61fadd3">1.1. <code>useState</code> is not enough</a></li>
-<li><a href="#orgb625ec0">1.2. <code>useEffect</code> runs after specific variable change</a></li>
+<li><a href="#orgf146c80">1.1. <code>useState</code> is not enough</a></li>
+<li><a href="#orgb5f13fc">1.2. <code>useEffect</code> runs after specific variable change</a></li>
 </ul>
 </li>
-<li><a href="#org160bc21">2. React hook patterns</a>
+<li><a href="#orgb4d6dfd">2. React hook patterns</a>
 <ul>
-<li><a href="#org2eb59f5">2.1. Fetch and send data</a></li>
-<li><a href="#orgf0f85b9">2.2. Conditional rendering</a></li>
-<li><a href="#org69b2b17">2.3. Render an array of Data</a></li>
+<li><a href="#org4ca96a9">2.1. Fetch and send data</a></li>
+<li><a href="#org5e3811e">2.2. Conditional rendering</a></li>
+<li><a href="#org176c8a8">2.3. Render an array of Data</a></li>
 </ul>
 </li>
-<li><a href="#org87ae685">3. Example: Stopwatch</a></li>
-<li><a href="#org1965800">4. DOM and component mounting</a></li>
+<li><a href="#orgc2469f7">3. Example: Stopwatch</a></li>
+<li><a href="#orgfb2bb56">4. DOM and component mounting</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org49d8414" class="outline-2">
-<h2 id="org49d8414"><span class="section-number-2">1.</span> What is a React hook</h2>
+<div id="outline-container-org880d741" class="outline-2">
+<h2 id="org880d741"><span class="section-number-2">1.</span> What is a React hook</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Special functions to access parts of the component lifestyle.</li>
 <li>e.g., <code>useState</code></li>
 </ul>
 </div>
-<div id="outline-container-org61fadd3" class="outline-3">
-<h3 id="org61fadd3"><span class="section-number-3">1.1.</span> <code>useState</code> is not enough</h3>
+<div id="outline-container-orgf146c80" class="outline-3">
+<h3 id="orgf146c80"><span class="section-number-3">1.1.</span> <code>useState</code> is not enough</h3>
 <div class="outline-text-3" id="text-1-1">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr">1: </span><span style="color: #51afef;">const</span> [<span style="color: #dcaeea;">persons</span>, <span style="color: #dcaeea;">setPersons</span>] = useState([]);
@@ -802,8 +813,8 @@ URL -&gt; Router -&gt; render different components
 </ul>
 </div>
 </div>
-<div id="outline-container-orgb625ec0" class="outline-3">
-<h3 id="orgb625ec0"><span class="section-number-3">1.2.</span> <code>useEffect</code> runs after specific variable change</h3>
+<div id="outline-container-orgb5f13fc" class="outline-3">
+<h3 id="orgb5f13fc"><span class="section-number-3">1.2.</span> <code>useEffect</code> runs after specific variable change</h3>
 <div class="outline-text-3" id="text-1-2">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr">1: </span>useEffect(() =&gt; {
@@ -831,12 +842,12 @@ URL -&gt; Router -&gt; render different components
 </div>
 </div>
 </div>
-<div id="outline-container-org160bc21" class="outline-2">
-<h2 id="org160bc21"><span class="section-number-2">2.</span> React hook patterns</h2>
+<div id="outline-container-orgb4d6dfd" class="outline-2">
+<h2 id="orgb4d6dfd"><span class="section-number-2">2.</span> React hook patterns</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org2eb59f5" class="outline-3">
-<h3 id="org2eb59f5"><span class="section-number-3">2.1.</span> Fetch and send data</h3>
+<div id="outline-container-org4ca96a9" class="outline-3">
+<h3 id="org4ca96a9"><span class="section-number-3">2.1.</span> Fetch and send data</h3>
 <div class="outline-text-3" id="text-2-1">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr">1: </span><span style="color: #5B6268;">/* </span><span style="color: #5B6268;">fetch data on mount</span><span style="color: #5B6268;"> */</span>
@@ -861,8 +872,8 @@ URL -&gt; Router -&gt; render different components
 </div>
 </div>
 </div>
-<div id="outline-container-orgf0f85b9" class="outline-3">
-<h3 id="orgf0f85b9"><span class="section-number-3">2.2.</span> Conditional rendering</h3>
+<div id="outline-container-org5e3811e" class="outline-3">
+<h3 id="org5e3811e"><span class="section-number-3">2.2.</span> Conditional rendering</h3>
 <div class="outline-text-3" id="text-2-2">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr">1: </span><span style="color: #5B6268;">// </span><span style="color: #5B6268;">JSX is a way of writing HTML in js</span>
@@ -877,8 +888,8 @@ URL -&gt; Router -&gt; render different components
 </div>
 </div>
 </div>
-<div id="outline-container-org69b2b17" class="outline-3">
-<h3 id="org69b2b17"><span class="section-number-3">2.3.</span> Render an array of Data</h3>
+<div id="outline-container-org176c8a8" class="outline-3">
+<h3 id="org176c8a8"><span class="section-number-3">2.3.</span> Render an array of Data</h3>
 <div class="outline-text-3" id="text-2-3">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr">1: </span><span style="color: #51afef;">const</span> <span style="color: #dcaeea;">data</span> = [
@@ -897,8 +908,8 @@ URL -&gt; Router -&gt; render different components
 </div>
 </div>
 </div>
-<div id="outline-container-org87ae685" class="outline-2">
-<h2 id="org87ae685"><span class="section-number-2">3.</span> Example: Stopwatch</h2>
+<div id="outline-container-orgc2469f7" class="outline-2">
+<h2 id="orgc2469f7"><span class="section-number-2">3.</span> Example: Stopwatch</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 <pre class="src src-js"><span class="linenr"> 1: </span><span style="color: #51afef;">const</span> <span style="color: #dcaeea;">Stopwatch</span> = () =&gt; {
@@ -919,8 +930,8 @@ URL -&gt; Router -&gt; render different components
 </div>
 </div>
 </div>
-<div id="outline-container-org1965800" class="outline-2">
-<h2 id="org1965800"><span class="section-number-2">4.</span> DOM and component mounting</h2>
+<div id="outline-container-orgfb2bb56" class="outline-2">
+<h2 id="orgfb2bb56"><span class="section-number-2">4.</span> DOM and component mounting</h2>
 <div class="outline-text-2" id="text-4">
 <ul class="org-ul">
 <li>DOM (Document Object Model): a programming interface for web documents; represents the structure of a document, e.g., HTML, as a tree of objects, where each object corresponds to a part of the document; it dynamically updates the document contents
@@ -940,6 +951,8 @@ URL -&gt; Router -&gt; render different components
 <a href="https://chenyo-17.github.io/org-static-blog/archive.html">Other posts</a>
 </div>
 </div>
-<div id="postamble" class="status"></div>
+<div id="postamble" class="status"><footer>
+      <p>© 2024 chenyo. Some rights reserved.</p>
+      </footer></div>
 </body>
 </html>
