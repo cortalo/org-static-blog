@@ -33,35 +33,35 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgceae7a3">1. Blockchain fundamentals</a>
+<li><a href="#org50546b9">1. Blockchain fundamentals</a>
 <ul>
-<li><a href="#org0796871">1.1. Why parallel EVM is not easy</a></li>
-<li><a href="#orgd3292a8">1.2. A Parallel EVM ideas</a></li>
-<li><a href="#org781fbde">1.3. Block STM algorithm</a></li>
+<li><a href="#orgb99e643">1.1. Why parallel EVM is not easy</a></li>
+<li><a href="#org33e7ded">1.2. A Parallel EVM ideas</a></li>
+<li><a href="#orgef305d4">1.3. Block STM algorithm</a></li>
 </ul>
 </li>
-<li><a href="#org2d42f56">2. BNB Parallel EVM 1.0: Infrastructure</a></li>
-<li><a href="#org378b401">3. BNB Parallel EVM 2.0: Performance enhancement</a></li>
-<li><a href="#org96145a8">4. BNB Parallel EVM 3.0: Production</a>
+<li><a href="#org92cb377">2. BNB Parallel EVM 1.0: Infrastructure</a></li>
+<li><a href="#org5f4229a">3. BNB Parallel EVM 2.0: Performance enhancement</a></li>
+<li><a href="#org10ca388">4. BNB Parallel EVM 3.0: Production</a>
 <ul>
-<li><a href="#org274e74c">4.1. Hint-based dispatcher</a></li>
-<li><a href="#orge017774">4.2. Seamless BNB chain ecosystem integration</a></li>
+<li><a href="#org901eb7b">4.1. Hint-based dispatcher</a></li>
+<li><a href="#org9a75ab8">4.2. Seamless BNB chain ecosystem integration</a></li>
 </ul>
 </li>
-<li><a href="#orgeff2c01">5. Comparison with other solutions</a></li>
-<li><a href="#org9de763a">6. Other optimizations</a></li>
+<li><a href="#org6fa8f4f">5. Comparison with other solutions</a></li>
+<li><a href="#orgdca39c6">6. Other optimizations</a></li>
 </ul>
 </div>
 </nav>
 <p>
 This is a personal note for <a href="https://www.bnbchain.org/zh-CN/blog/road-to-high-performance-parallel-evm-for-bnb-chain">BNB chain-blog</a>.
 </p>
-<div id="outline-container-orgceae7a3" class="outline-2">
-<h2 id="orgceae7a3"><span class="section-number-2">1.</span> Blockchain fundamentals</h2>
+<div id="outline-container-org50546b9" class="outline-2">
+<h2 id="org50546b9"><span class="section-number-2">1.</span> Blockchain fundamentals</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org0796871" class="outline-3">
-<h3 id="org0796871"><span class="section-number-3">1.1.</span> Why parallel EVM is not easy</h3>
+<div id="outline-container-orgb99e643" class="outline-3">
+<h3 id="orgb99e643"><span class="section-number-3">1.1.</span> Why parallel EVM is not easy</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>Lack of visibility of potential transaction conflict.</li>
@@ -69,8 +69,8 @@ This is a personal note for <a href="https://www.bnbchain.org/zh-CN/blog/road-to
 </ul>
 </div>
 </div>
-<div id="outline-container-orgd3292a8" class="outline-3">
-<h3 id="orgd3292a8"><span class="section-number-3">1.2.</span> A Parallel EVM ideas</h3>
+<div id="outline-container-org33e7ded" class="outline-3">
+<h3 id="org33e7ded"><span class="section-number-3">1.2.</span> A Parallel EVM ideas</h3>
 <div class="outline-text-3" id="text-1-2">
 <ul class="org-ul">
 <li>Run multiple EVM instances concurrently on different threads.</li>
@@ -79,8 +79,8 @@ This is a personal note for <a href="https://www.bnbchain.org/zh-CN/blog/road-to
 </ul>
 </div>
 </div>
-<div id="outline-container-org781fbde" class="outline-3">
-<h3 id="org781fbde"><span class="section-number-3">1.3.</span> Block STM algorithm</h3>
+<div id="outline-container-orgef305d4" class="outline-3">
+<h3 id="orgef305d4"><span class="section-number-3">1.3.</span> Block STM algorithm</h3>
 <div class="outline-text-3" id="text-1-3">
 <ul class="org-ul">
 <li>Optimistic parallelism: assigns transactions to various threads.</li>
@@ -90,8 +90,8 @@ This is a personal note for <a href="https://www.bnbchain.org/zh-CN/blog/road-to
 </div>
 </div>
 </div>
-<div id="outline-container-org2d42f56" class="outline-2">
-<h2 id="org2d42f56"><span class="section-number-2">2.</span> BNB Parallel EVM 1.0: Infrastructure</h2>
+<div id="outline-container-org92cb377" class="outline-2">
+<h2 id="org92cb377"><span class="section-number-2">2.</span> BNB Parallel EVM 1.0: Infrastructure</h2>
 <div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li>Proposal: <a href="https://github.com/bnb-chain/BEPs/pull/130?ref=bnbchain.ghost.io">BEP-130 (2022)</a></li>
@@ -103,8 +103,8 @@ This is a personal note for <a href="https://www.bnbchain.org/zh-CN/blog/road-to
 </ul>
 </div>
 </div>
-<div id="outline-container-org378b401" class="outline-2">
-<h2 id="org378b401"><span class="section-number-2">3.</span> BNB Parallel EVM 2.0: Performance enhancement</h2>
+<div id="outline-container-org5f4229a" class="outline-2">
+<h2 id="org5f4229a"><span class="section-number-2">3.</span> BNB Parallel EVM 2.0: Performance enhancement</h2>
 <div class="outline-text-2" id="text-3">
 <ul class="org-ul">
 <li>Dispatcher: combine both static and dynamic dispatch strategies.</li>
@@ -115,12 +115,12 @@ This is a personal note for <a href="https://www.bnbchain.org/zh-CN/blog/road-to
 </ul>
 </div>
 </div>
-<div id="outline-container-org96145a8" class="outline-2">
-<h2 id="org96145a8"><span class="section-number-2">4.</span> BNB Parallel EVM 3.0: Production</h2>
+<div id="outline-container-org10ca388" class="outline-2">
+<h2 id="org10ca388"><span class="section-number-2">4.</span> BNB Parallel EVM 3.0: Production</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-org274e74c" class="outline-3">
-<h3 id="org274e74c"><span class="section-number-3">4.1.</span> Hint-based dispatcher</h3>
+<div id="outline-container-org901eb7b" class="outline-3">
+<h3 id="org901eb7b"><span class="section-number-3">4.1.</span> Hint-based dispatcher</h3>
 <div class="outline-text-3" id="text-4-1">
 <ul class="org-ul">
 <li>leverages external hint providers to analyze transactions and generate predictions about potential state access conflicts.</li>
@@ -131,8 +131,8 @@ This is a personal note for <a href="https://www.bnbchain.org/zh-CN/blog/road-to
 </ul>
 </div>
 </div>
-<div id="outline-container-orge017774" class="outline-3">
-<h3 id="orge017774"><span class="section-number-3">4.2.</span> Seamless BNB chain ecosystem integration</h3>
+<div id="outline-container-org9a75ab8" class="outline-3">
+<h3 id="org9a75ab8"><span class="section-number-3">4.2.</span> Seamless BNB chain ecosystem integration</h3>
 <div class="outline-text-3" id="text-4-2">
 <ul class="org-ul">
 <li>Modularization and reconstructing.</li>
@@ -141,8 +141,8 @@ This is a personal note for <a href="https://www.bnbchain.org/zh-CN/blog/road-to
 </div>
 </div>
 </div>
-<div id="outline-container-orgeff2c01" class="outline-2">
-<h2 id="orgeff2c01"><span class="section-number-2">5.</span> Comparison with other solutions</h2>
+<div id="outline-container-org6fa8f4f" class="outline-2">
+<h2 id="org6fa8f4f"><span class="section-number-2">5.</span> Comparison with other solutions</h2>
 <div class="outline-text-2" id="text-5">
 <table>
 
@@ -210,8 +210,8 @@ This is a personal note for <a href="https://www.bnbchain.org/zh-CN/blog/road-to
 </table>
 </div>
 </div>
-<div id="outline-container-org9de763a" class="outline-2">
-<h2 id="org9de763a"><span class="section-number-2">6.</span> Other optimizations</h2>
+<div id="outline-container-orgdca39c6" class="outline-2">
+<h2 id="orgdca39c6"><span class="section-number-2">6.</span> Other optimizations</h2>
 <div class="outline-text-2" id="text-6">
 <ul class="org-ul">
 <li>Opcode-level optimization: fine-tuning individual EVM instructions for maximum efficiency.</li>

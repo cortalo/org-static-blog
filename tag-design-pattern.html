@@ -33,16 +33,16 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org7da2f0d">1. Concurrency vs Parallelism</a></li>
-<li><a href="#org015789e">2. Use goroutines for states</a>
+<li><a href="#org31c77a1">1. Concurrency vs Parallelism</a></li>
+<li><a href="#org281856c">2. Use goroutines for states</a>
 <ul>
-<li><a href="#org1c1adfe">2.1. Matching a regex</a></li>
-<li><a href="#org3f86129">2.2. When the state variable cannot be avoided</a></li>
+<li><a href="#org2729b69">2.1. Matching a regex</a></li>
+<li><a href="#org552c895">2.2. When the state variable cannot be avoided</a></li>
 </ul>
 </li>
-<li><a href="#org21cb34b">3. Pattern 1: publish/subscribe server</a>
+<li><a href="#orgdd15392">3. Pattern 1: publish/subscribe server</a>
 <ul>
-<li><a href="#orgcd02e65">3.1. Options for slow goroutines</a></li>
+<li><a href="#orgba0c0a2">3.1. Options for slow goroutines</a></li>
 </ul>
 </li>
 </ul>
@@ -51,8 +51,8 @@
 <p>
 This a personal note for the <a href="https://www.youtube.com/watch?v=IdCbMO0Ey9I">Russ Cox guest lecture</a>.
 </p>
-<div id="outline-container-org7da2f0d" class="outline-2">
-<h2 id="org7da2f0d"><span class="section-number-2">1.</span> Concurrency vs Parallelism</h2>
+<div id="outline-container-org31c77a1" class="outline-2">
+<h2 id="org31c77a1"><span class="section-number-2">1.</span> Concurrency vs Parallelism</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Concurrency: write a program to handle lot of things at once
@@ -63,12 +63,12 @@ This a personal note for the <a href="https://www.youtube.com/watch?v=IdCbMO0Ey9
 </ul>
 </div>
 </div>
-<div id="outline-container-org015789e" class="outline-2">
-<h2 id="org015789e"><span class="section-number-2">2.</span> Use goroutines for states</h2>
+<div id="outline-container-org281856c" class="outline-2">
+<h2 id="org281856c"><span class="section-number-2">2.</span> Use goroutines for states</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org1c1adfe" class="outline-3">
-<h3 id="org1c1adfe"><span class="section-number-3">2.1.</span> Matching a regex</h3>
+<div id="outline-container-org2729b69" class="outline-3">
+<h3 id="org2729b69"><span class="section-number-3">2.1.</span> Matching a regex</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>return if a given string matches a regex: start with <code>"</code>, contains arbitrary escape sequence and ends with <code>*</code></li>
@@ -125,8 +125,8 @@ clear logic: store states in the code
 </ul>
 </div>
 </div>
-<div id="outline-container-org3f86129" class="outline-3">
-<h3 id="org3f86129"><span class="section-number-3">2.2.</span> When the state variable cannot be avoided</h3>
+<div id="outline-container-org552c895" class="outline-3">
+<h3 id="org552c895"><span class="section-number-3">2.2.</span> When the state variable cannot be avoided</h3>
 <div class="outline-text-3" id="text-2-2">
 <ul class="org-ul">
 <li><p>
@@ -228,8 +228,8 @@ use additional goroutines to hold states
 </div>
 </div>
 </div>
-<div id="outline-container-org21cb34b" class="outline-2">
-<h2 id="org21cb34b"><span class="section-number-2">3.</span> Pattern 1: publish/subscribe server</h2>
+<div id="outline-container-orgdd15392" class="outline-2">
+<h2 id="orgdd15392"><span class="section-number-2">3.</span> Pattern 1: publish/subscribe server</h2>
 <div class="outline-text-2" id="text-3">
 <ul class="org-ul">
 <li>the information goes one way: server -&gt; client</li>
@@ -279,8 +279,8 @@ prefer <code>defer</code> when unlocking the mutex
 </div></li>
 </ul>
 </div>
-<div id="outline-container-orgcd02e65" class="outline-3">
-<h3 id="orgcd02e65"><span class="section-number-3">3.1.</span> Options for slow goroutines</h3>
+<div id="outline-container-orgba0c0a2" class="outline-3">
+<h3 id="orgba0c0a2"><span class="section-number-3">3.1.</span> Options for slow goroutines</h3>
 <div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
 <li>slow down event generation</li>
