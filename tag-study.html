@@ -1,288 +1,916 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<link rel="alternate"
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="alternate"
       type="application/rss+xml"
       href="https://chenyo-17.github.io/org-static-blog/rss.xml"
-      title="RSS feed for https://chenyo-17.github.io/org-static-blog">
-<title>org-static-blog</title>
-<script type="text/javascript"
-             src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-       </script>
-       <script type="text/x-mathjax-config">
-             MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'],['\\(','\\)']]}});
-       </script>
-       <meta name="author" content="chenyo">
-      <meta name="referrer" content="no-referrer">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="static/style.css" type="text/css"/></head>
-<body>
-<div id="preamble" class="status"><header>
-      <h1><a href="https://chenyo-17.github.io/org-static-blog">Chenyo's org-static-blog</a></h1>
-      <nav>
-      <a href="https://chenyo-17.github.io/org-static-blog">Home</a>
-      <a href="https://chenyo-17.github.io/org-static-blog/archive.html">Archive</a>
-      <a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>
+      title="RSS feed for https://chenyo-17.github.io/org-static-blog"
+    />
+    <title>org-static-blog</title>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+    ></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'],['\\(','\\)']]}});
+    </script>
+    <meta name="author" content="chenyo" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+  </head>
+  <body>
+    <div id="preamble" class="status">
+      <header>
+        <h1>
+          <a href="https://chenyo-17.github.io/org-static-blog"
+            >Chenyo's org-static-blog</a
+          >
+        </h1>
+        <nav>
+          <a href="https://chenyo-17.github.io/org-static-blog">Home</a>
+          <a href="https://chenyo-17.github.io/org-static-blog/archive.html"
+            >Archive</a
+          >
+          <a href="https://chenyo-17.github.io/org-static-blog/tags.html"
+            >Tags</a
+          >
+        </nav>
+      </header>
+    </div>
+    <div id="content">
+      <h1 class="title">Posts tagged "study":</h1>
+      <div class="post-date">23 Jul 2024</div>
+      <h1 class="post-title">
+        <a
+          href="https://chenyo-17.github.io/org-static-blog/2024-07-23-db-notes:-modern-sql.html"
+          >CMU 15-445 notes: Modern SQL</a
+        >
+      </h1>
+      <nav id="table-of-contents" role="doc-toc">
+        <h2>Table of Contents</h2>
+        <div id="text-table-of-contents" role="doc-toc">
+          <ul>
+            <li>
+              <a href="#orgbf8fcd5">1. Terminology</a>
+              <ul>
+                <li>
+                  <a href="#org248e702">1.1. SQL and relational algebra</a>
+                </li>
+                <li><a href="#org159d833">1.2. SQL commands</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#org0147dad">2. SQL syntax</a>
+              <ul>
+                <li><a href="#orgbd38431">2.1. Join</a></li>
+                <li><a href="#orga173fb3">2.2. Aggregation function</a></li>
+                <li><a href="#org3810076">2.3. String operation</a></li>
+                <li><a href="#orgf01c19f">2.4. Date and time</a></li>
+                <li><a href="#orgcd7cf97">2.5. Output redirection</a></li>
+                <li><a href="#org5a5bb90">2.6. Output control</a></li>
+                <li><a href="#orgcfc545f">2.7. Nested queries</a></li>
+                <li><a href="#org6295067">2.8. Window functions</a></li>
+                <li>
+                  <a href="#orgca6458d">2.9. Common Table Expressions (CTE)</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
       </nav>
-      </header></div>
-<div id="content">
-<h1 class="title">Posts tagged "study":</h1>
-<div class="post-date">17 Jul 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-07-17-db-notes:-relational-model.html">CMU 15-445 notes: Relational Model & Algebra</a></h1>
-<nav id="table-of-contents" role="doc-toc">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents" role="doc-toc">
-<ul>
-<li><a href="#orgdb8e5cf">1. Terminology</a>
-<ul>
-<li><a href="#orgd60887e">1.1. Database</a></li>
-<li><a href="#org1abe017">1.2. Database design consideration</a></li>
-<li><a href="#org377f2ce">1.3. Database management system (DBMS)</a></li>
-<li><a href="#org48a0e7e">1.4. Data model</a></li>
-<li><a href="#org016a124">1.5. Schema</a></li>
-<li><a href="#org6cbaa77">1.6. Entities and Tables</a></li>
-<li><a href="#orgfd654bd">1.7. Attributes and Fields</a></li>
-<li><a href="#orged26937">1.8. Logical layer</a></li>
-<li><a href="#orge6c0772">1.9. Physical layer</a></li>
-<li><a href="#org3cdf27c">1.10. Data manipulation languages (DMLs)</a></li>
-<li><a href="#orgd7d77d3">1.11. SQL (Structured Query Language) and relational model</a></li>
-</ul>
-</li>
-<li><a href="#orgbc5376c">2. Relational model</a>
-<ul>
-<li><a href="#org9f609bb">2.1. A relation</a></li>
-<li><a href="#orgeefa289">2.2. A domain</a></li>
-<li><a href="#org56db007">2.3. A tuple</a></li>
-<li><a href="#org8044bd1">2.4. Keys</a></li>
-</ul>
-</li>
-<li><a href="#org713859d">3. Relational Algebra</a></li>
-</ul>
-</div>
-</nav>
-<p>
-This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpVZS2s&amp;list=PLSE8ODhjZXjaKScG3l0nuOiDTTqpfnWFf&amp;index=2">CMU 15-445 L1 video</a> and <a href="https://15445.courses.cs.cmu.edu/fall2022/notes/01-introduction.pdf">CMU 15-445 L1 notes</a>, along with some terminology explained by <a href="https://claude.ai/chat/14f3c4ec-0ca8-495e-ac70-dd13f9eab5ea">Claude.ai</a>.
-</p>
-<div id="outline-container-orgdb8e5cf" class="outline-2">
-<h2 id="orgdb8e5cf"><span class="section-number-2">1.</span> Terminology</h2>
-<div class="outline-text-2" id="text-1">
-</div>
-<div id="outline-container-orgd60887e" class="outline-3">
-<h3 id="orgd60887e"><span class="section-number-3">1.1.</span> Database</h3>
-<div class="outline-text-3" id="text-1-1">
-<ul class="org-ul">
-<li>An organized collection of inter-related data that models some aspect of the real-world.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org1abe017" class="outline-3">
-<h3 id="org1abe017"><span class="section-number-3">1.2.</span> Database design consideration</h3>
-<div class="outline-text-3" id="text-1-2">
-<ul class="org-ul">
-<li>Data integrity: protect invalid writing.</li>
-<li>Implementation: query complexity, concurrent query.</li>
-<li>Durability: replication, fault tolerance.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org377f2ce" class="outline-3">
-<h3 id="org377f2ce"><span class="section-number-3">1.3.</span> Database management system (DBMS)</h3>
-<div class="outline-text-3" id="text-1-3">
-<ul class="org-ul">
-<li>A software that manages a database.</li>
-<li>Allow the definition, creation, query, update and administration of databases.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org48a0e7e" class="outline-3">
-<h3 id="org48a0e7e"><span class="section-number-3">1.4.</span> Data model</h3>
-<div class="outline-text-3" id="text-1-4">
-<ul class="org-ul">
-<li>A conceptual, high-level representation of how data is structured</li>
-<li>Defines entities, attributes, relationships between entities and constraints.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org016a124" class="outline-3">
-<h3 id="org016a124"><span class="section-number-3">1.5.</span> Schema</h3>
-<div class="outline-text-3" id="text-1-5">
-<ul class="org-ul">
-<li>A concrete implementation of a data model.</li>
-<li>Defines tables, fields, data types, keys and rules.</li>
-<li>Typically represented by a specific database language.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org6cbaa77" class="outline-3">
-<h3 id="org6cbaa77"><span class="section-number-3">1.6.</span> Entities and Tables</h3>
-<div class="outline-text-3" id="text-1-6">
-<ul class="org-ul">
-<li>Entities: conceptual representations of objects in the logical data model.</li>
-<li>Tables: physical storage structures in the physical data model.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-orgfd654bd" class="outline-3">
-<h3 id="orgfd654bd"><span class="section-number-3">1.7.</span> Attributes and Fields</h3>
-<div class="outline-text-3" id="text-1-7">
-<ul class="org-ul">
-<li>Attributes: properties of an entity.</li>
-<li>Fields: columns in a database table.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-orged26937" class="outline-3">
-<h3 id="orged26937"><span class="section-number-3">1.8.</span> Logical layer</h3>
-<div class="outline-text-3" id="text-1-8">
-<ul class="org-ul">
-<li>The entities and attributes the database has.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-orge6c0772" class="outline-3">
-<h3 id="orge6c0772"><span class="section-number-3">1.9.</span> Physical layer</h3>
-<div class="outline-text-3" id="text-1-9">
-<ul class="org-ul">
-<li>How are entities and attributes stored in the database.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org3cdf27c" class="outline-3">
-<h3 id="org3cdf27c"><span class="section-number-3">1.10.</span> Data manipulation languages (DMLs)</h3>
-<div class="outline-text-3" id="text-1-10">
-<ul class="org-ul">
-<li>Methods to store and retrieve information from a database.</li>
-<li>Procedural: the query specifies the (high-level) strategy the DBMS should use to get the results, e.g., with relational algebra.</li>
-<li>Declarative: the query specifies only what data is desired but not how to get it, e.g., with relational calculus (a formal language).</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-orgd7d77d3" class="outline-3">
-<h3 id="orgd7d77d3"><span class="section-number-3">1.11.</span> SQL (Structured Query Language) and relational model</h3>
-<div class="outline-text-3" id="text-1-11">
-<ul class="org-ul">
-<li>SQL <b><b>implements</b></b> the relational model in DBMS and provides a standard way to create, manipulate and query relational databases.</li>
-<li>Different SQL implementation may vary and do not strictly adhere to the relational model, e.g., allow duplicate rows.</li>
-<li>SQL borrows both relational algebra and relational calculus (?).</li>
-</ul>
-</div>
-</div>
-</div>
-<div id="outline-container-orgbc5376c" class="outline-2">
-<h2 id="orgbc5376c"><span class="section-number-2">2.</span> Relational model</h2>
-<div class="outline-text-2" id="text-2">
-<ul class="org-ul">
-<li>A <b><b>data model</b></b> that defines a database <b><b>abstraction</b></b> to avoid maintenance overhead when changing the physical layer.</li>
-<li>Data is stored as relations/tables.</li>
-<li>Physical layer implementation and execution strategy depends on DBMS implementation.</li>
-</ul>
+      <p>
+        This is a personal note for the
+        <a
+          href="https://15445.courses.cs.cmu.edu/fall2022/notes/02-modernsql.pdf"
+          >CMU 15-445 L2 notes</a
+        >, along with some SQL command explained by
+        <a href="https://claude.ai/chat/a2f07962-eb31-4f76-9a31-5e408722894b"
+          >Claude.ai</a
+        >.
+      </p>
+      <div id="outline-container-orgbf8fcd5" class="outline-2">
+        <h2 id="orgbf8fcd5">
+          <span class="section-number-2">1.</span> Terminology
+        </h2>
+        <div class="outline-text-2" id="text-1"></div>
+        <div id="outline-container-org248e702" class="outline-3">
+          <h3 id="org248e702">
+            <span class="section-number-3">1.1.</span> SQL and relational
+            algebra
+          </h3>
+          <div class="outline-text-3" id="text-1-1">
+            <ul class="org-ul">
+              <li>
+                Relational algebra is based on sets (unordered, no duplicates);
+                SQL is based on bags (unordered, allows duplicates).
+              </li>
+              <li>
+                SQL is a declarative query language; users use SQL to specify
+                the desired result, each DBMS determines the most efficient
+                strategy to produce the answer.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org159d833" class="outline-3">
+          <h3 id="org159d833">
+            <span class="section-number-3">1.2.</span> SQL commands
+          </h3>
+          <div class="outline-text-3" id="text-1-2">
+            <ul class="org-ul">
+              <li>
+                Data manipulation language (DML): <code>SELECT</code>,
+                <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>.
+              </li>
+              <li>
+                <p>Data definition language (DDL): <code>CREATE</code>.</p>
+                <div class="org-src-container">
+                  <pre
+                    class="src src-sql"
+                  ><span style="color: #51afef;">CREATE</span> TABLR student (
+    sid <span style="color: #ECBE7B;">INT</span> <span style="color: #51afef;">PRIMARY</span> <span style="color: #51afef;">KEY</span>,
+    <span style="color: #51afef;">name</span> <span style="color: #ECBE7B;">VARCHAR</span>(<span style="color: #da8548; font-weight: bold;">16</span>),
+    login <span style="color: #ECBE7B;">VARCHAR</span>(<span style="color: #da8548; font-weight: bold;">32</span>) <span style="color: #51afef;">UNIQUE</span>,
+    age <span style="color: #ECBE7B;">SMALLINT</span>,
+    gpa <span style="color: #ECBE7B;">FLOAT</span>
+);
+</pre>
+                </div>
+              </li>
+              <li>Data control language (DCL): security, access control.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="outline-container-org0147dad" class="outline-2">
+        <h2 id="org0147dad">
+          <span class="section-number-2">2.</span> SQL syntax
+        </h2>
+        <div class="outline-text-2" id="text-2"></div>
+        <div id="outline-container-orgbd38431" class="outline-3">
+          <h3 id="orgbd38431">
+            <span class="section-number-3">2.1.</span> Join
+          </h3>
+          <div class="outline-text-3" id="text-2-1">
+            <ul class="org-ul">
+              <li>
+                <p>
+                  Combine columns from one or more tables and produces a new
+                  table.
+                </p>
+                <div class="org-src-container">
+                  <pre
+                    class="src src-sql"
+                  ><span style="color: #5B6268;">-- </span><span style="color: #5B6268;">All students that get an A in 15-721</span>
+<span style="color: #51afef;">SELECT</span> s.<span style="color: #51afef;">name</span>
+    <span style="color: #51afef;">FROM</span> enrolled <span style="color: #51afef;">AS</span> e, student <span style="color: #51afef;">AS</span> s
+<span style="color: #51afef;">WHERE</span> e.grade = <span style="color: #98be65;">'A'</span> <span style="color: #51afef;">AND</span> e.cid = <span style="color: #98be65;">'15-721'</span>
+    <span style="color: #51afef;">AND</span> e.sid = s.sid
+</pre>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-orga173fb3" class="outline-3">
+          <h3 id="orga173fb3">
+            <span class="section-number-3">2.2.</span> Aggregation function
+          </h3>
+          <div class="outline-text-3" id="text-2-2">
+            <ul class="org-ul">
+              <li>
+                <code>AVG(COL)</code>, <code>MIN(COL)</code>,
+                <code>MAX(COL)</code>, <code>COUNT(COL)</code>.
+              </li>
+              <li>
+                <p>
+                  Take as input a bag of tuples and produce a single scalar
+                  value.
+                </p>
+                <div class="org-src-container">
+                  <pre
+                    class="src src-sql"
+                  ><span style="color: #5B6268;">-- </span><span style="color: #5B6268;">Get number of students and their average GPA with a '@cs' login</span>
+<span style="color: #51afef;">SELECT</span> <span style="color: #c678dd;">AVG</span>(gpa), <span style="color: #c678dd;">COUNT</span>(sid) <span style="color: #51afef;">FROM</span> student <span style="color: #51afef;">WHERE</span> login <span style="color: #51afef;">LIKE</span> <span style="color: #98be65;">'@cs'</span>;
+<span style="color: #5B6268;">-- </span><span style="color: #5B6268;">Get the unique students</span>
+<span style="color: #51afef;">SELECT</span> <span style="color: #c678dd;">COUNT</span>(<span style="color: #51afef;">DISTINCT</span> login) <span style="color: #51afef;">FROM</span> student <span style="color: #51afef;">WHERE</span> login <span style="color: #51afef;">LIKE</span> <span style="color: #98be65;">'@cs'</span>;
+</pre>
+                </div>
+              </li>
+              <li>
+                <p>
+                  Non-aggregated values in <code>SELECT</code> output must
+                  appear in <code>GROUP BY</code>.
+                </p>
+                <div class="org-src-container">
+                  <pre
+                    class="src src-sql"
+                  ><span style="color: #5B6268;">-- </span><span style="color: #5B6268;">Get the average GPA in each course</span>
+<span style="color: #51afef;">SELECT</span> <span style="color: #c678dd;">AVG</span>(s.gpa), e.cid
+    <span style="color: #51afef;">FROM</span> enrolled <span style="color: #51afef;">AS</span> e, student <span style="color: #51afef;">AS</span> s
+<span style="color: #51afef;">WHERE</span> e.sid = s.sid
+<span style="color: #51afef;">GROUP</span> <span style="color: #51afef;">BY</span> e.cid;
+</pre>
+                </div>
+              </li>
+              <li>
+                <p>
+                  <code>HAVING</code>: filter output results based on
+                  aggregation computation.
+                </p>
+                <div class="org-src-container">
+                  <pre
+                    class="src src-sql"
+                  ><span style="color: #51afef;">SELECT</span> <span style="color: #c678dd;">AVG</span>(s.gpa), e.cid
+    <span style="color: #51afef;">FROM</span> enrolled <span style="color: #51afef;">AS</span> e, student <span style="color: #51afef;">AS</span> s
+<span style="color: #51afef;">WHERE</span> e.sid = s.sid
+<span style="color: #51afef;">GROUP</span> <span style="color: #51afef;">BY</span> e.cid
+<span style="color: #51afef;">HAVING</span> <span style="color: #c678dd;">AVG</span>(s.gpa) &gt; <span style="color: #da8548; font-weight: bold;">3.9</span>;
+</pre>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org3810076" class="outline-3">
+          <h3 id="org3810076">
+            <span class="section-number-3">2.3.</span> String operation
+          </h3>
+          <div class="outline-text-3" id="text-2-3">
+            <ul class="org-ul">
+              <li>
+                Strings are case sensitive and single-quotes only in the SQL
+                standard.
+              </li>
+              <li>
+                Use <code>LIKE</code> for string pattern matching:
+                <ul class="org-ul">
+                  <li><code>%</code> matches any sub-string,</li>
+                  <li><code>_</code> matches any one character</li>
+                </ul>
+              </li>
+              <li>
+                Standard string functions: <code>UPPER(S)</code>,
+                <code>SUBSTRING(S, B, E)</code>.
+              </li>
+              <li><code>||</code>: string concatenation.</li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-orgf01c19f" class="outline-3">
+          <h3 id="orgf01c19f">
+            <span class="section-number-3">2.4.</span> Date and time
+          </h3>
+          <div class="outline-text-3" id="text-2-4">
+            <ul class="org-ul">
+              <li>Attributes: <code>DATE</code>, <code>TIME</code>.</li>
+              <li>Different DBMS have different date/time operations.</li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-orgcd7cf97" class="outline-3">
+          <h3 id="orgcd7cf97">
+            <span class="section-number-3">2.5.</span> Output redirection
+          </h3>
+          <div class="outline-text-3" id="text-2-5">
+            <ul class="org-ul">
+              <li>
+                <p>One can store the results into another table</p>
+                <div class="org-src-container">
+                  <pre
+                    class="src src-sql"
+                  ><span style="color: #5B6268;">-- </span><span style="color: #5B6268;">output to a non-existing table</span>
+<span style="color: #51afef;">SELECT</span> <span style="color: #51afef;">DISTINCT</span> cis <span style="color: #51afef;">INTO</span> CourseIds <span style="color: #51afef;">FROM</span> enrolled;
+<span style="color: #5B6268;">-- </span><span style="color: #5B6268;">output to an existing table with the same number of columns and column type</span>
+<span style="color: #5B6268;">-- </span><span style="color: #5B6268;">but the names do not matter</span>
+<span style="color: #51afef;">INSERT</span> <span style="color: #51afef;">INTO</span> CourseIds (<span style="color: #51afef;">SELECT</span> <span style="color: #51afef;">DISTINCT</span> cid <span style="color: #51afef;">FROM</span> enrolled);
+</pre>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org5a5bb90" class="outline-3">
+          <h3 id="org5a5bb90">
+            <span class="section-number-3">2.6.</span> Output control
+          </h3>
+          <div class="outline-text-3" id="text-2-6">
+            <ul class="org-ul">
+              <li>
+                Use <code>ORDER</code>, <code>ASC</code> and
+                <code>DESC</code> to sort the output tuples; otherwise the
+                output could have different order every time.
+              </li>
+              <li>
+                <p>
+                  Use <code>LIMIT</code>, <code>OFFSET</code> to restrict the
+                  output number.
+                </p>
+                <div class="org-src-container">
+                  <pre
+                    class="src src-sql"
+                  ><span style="color: #51afef;">SELECT</span> sid <span style="color: #51afef;">FROM</span> enrolled <span style="color: #51afef;">WHERE</span> cid = <span style="color: #98be65;">'15-721'</span>
+<span style="color: #51afef;">ORDER</span> <span style="color: #51afef;">BY</span> <span style="color: #c678dd;">UPPER</span>(grade) <span style="color: #51afef;">DESC</span>, sid + <span style="color: #da8548; font-weight: bold;">1</span> <span style="color: #51afef;">ASC</span>;
+    <span style="color: #51afef;">LIMIT</span> <span style="color: #da8548; font-weight: bold;">10</span> OFFSET <span style="color: #da8548; font-weight: bold;">10</span>;  <span style="color: #5B6268;">-- </span><span style="color: #5B6268;">output 10 tuples, starting from the 11th tuple</span>
+</pre>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-orgcfc545f" class="outline-3">
+          <h3 id="orgcfc545f">
+            <span class="section-number-3">2.7.</span> Nested queries
+          </h3>
+          <div class="outline-text-3" id="text-2-7">
+            <ul class="org-ul">
+              <li>Nested queries are often difficult to optimize.</li>
+              <li>
+                The inner query can access attributes defined in the outer
+                query.
+              </li>
+              <li>
+                <p>Inner queries can appear anywhere.</p>
+                <div class="org-src-container">
+                  <pre
+                    class="src src-sql"
+                  ><span style="color: #5B6268;">-- </span><span style="color: #5B6268;">Output a column 'one' with 1s, the number of 1s</span>
+<span style="color: #5B6268;">-- </span><span style="color: #5B6268;">equals to the number of rows in 'student'</span>
+<span style="color: #51afef;">SELECT</span> (<span style="color: #51afef;">SELECT</span> <span style="color: #da8548; font-weight: bold;">1</span>) <span style="color: #51afef;">AS</span> one <span style="color: #51afef;">FROM</span> student;
 
+<span style="color: #5B6268;">-- </span><span style="color: #5B6268;">Get the names of students that are enrolled in '15-445'</span>
+<span style="color: #51afef;">SELECT</span> <span style="color: #51afef;">name</span> <span style="color: #51afef;">FROM</span> students
+    <span style="color: #51afef;">WHERE</span> sid <span style="color: #51afef;">IN</span> (
+        <span style="color: #51afef;">SELECT</span> sid <span style="color: #51afef;">FROM</span> enrolled
+        <span style="color: #51afef;">WHERE</span> cid = <span style="color: #98be65;">'15-445'</span>
+);
 
-<figure id="org85d863c">
-<img src="https://people.cs.pitt.edu/~chang/156/images/fig41.gif" alt="fig41.gif" align="center" width="500px">
+<span style="color: #5B6268;">-- </span><span style="color: #5B6268;">Get student record with the highest id</span>
+<span style="color: #5B6268;">-- </span><span style="color: #5B6268;">that is enrolled in at least one course.</span>
+<span style="color: #51afef;">SELECT</span> student.sid, <span style="color: #51afef;">name</span>
+    <span style="color: #51afef;">FROM</span> student
+    <span style="color: #5B6268;">-- </span><span style="color: #5B6268;">the intermediate output is aliases as max_e</span>
+    <span style="color: #51afef;">JOIN</span> (<span style="color: #51afef;">SELECT</span> <span style="color: #c678dd;">MAX</span>(sid) <span style="color: #51afef;">AS</span> sid <span style="color: #51afef;">FROM</span> enrolled) <span style="color: #51afef;">AS</span> max_e
+    <span style="color: #5B6268;">-- </span><span style="color: #5B6268;">only select student who has the max_e</span>
+    <span style="color: #51afef;">ON</span> student.sid = max_e.sid;
 
-<figcaption><span class="figure-number">Figure 1: </span>Relational model concepts</figcaption>
-</figure>
-</div>
-<div id="outline-container-org9f609bb" class="outline-3">
-<h3 id="org9f609bb"><span class="section-number-3">2.1.</span> A relation</h3>
-<div class="outline-text-3" id="text-2-1">
-<ul class="org-ul">
-<li>An unordered set that contains the relationship of attributes that represent entities.</li>
-<li>Relationships are unordered in the relation.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-orgeefa289" class="outline-3">
-<h3 id="orgeefa289"><span class="section-number-3">2.2.</span> A domain</h3>
-<div class="outline-text-3" id="text-2-2">
-<ul class="org-ul">
-<li>A named set of allowable values for a specific attribute.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org56db007" class="outline-3">
-<h3 id="org56db007"><span class="section-number-3">2.3.</span> A tuple</h3>
-<div class="outline-text-3" id="text-2-3">
-<ul class="org-ul">
-<li>A set of attribute values in the relation.</li>
-<li>Values can also be lists or nested data structures.</li>
-<li><code>Null</code>: a special value in any attribute which means the attribute in a tuple is undefined.</li>
-<li>\(n-ary\): a relation with \(n\) attributes.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org8044bd1" class="outline-3">
-<h3 id="org8044bd1"><span class="section-number-3">2.4.</span> Keys</h3>
-<div class="outline-text-3" id="text-2-4">
-<ul class="org-ul">
-<li>Primary key: uniquely identifies a single tuple.</li>
-<li>Foreign key: specifies that an attribute (e.g., <code>CustomerID</code>) in one relation (e.g., <code>OrderTable</code>) has to map to a tuple (e.g., the tuple with the same <code>CustomerID</code>) in another relation (e.g., <code>CustomerTable</code>).</li>
-</ul>
-</div>
-</div>
-</div>
-<div id="outline-container-org713859d" class="outline-2">
-<h2 id="org713859d"><span class="section-number-2">3.</span> Relational Algebra</h2>
-<div class="outline-text-2" id="text-3">
-<ul class="org-ul">
-<li>A set of fundamental operations to retrieve and manipulate tuples in a relation.</li>
-<li>Each operator takes in one or more relations as inputs, and outputs a new relation; operators can be chained.</li>
-<li>Is a <b><b>procedure language</b></b>, meaning the execution always follow the query, even there exists more efficient way to get the same result; A better way is to be more declarative, e.g., SQL&rsquo;s <code>where</code> syntax.</li>
-<li><a href="https://i.sstatic.net/AHjRg.png">Common relational algebra</a>.</li>
-</ul>
-</div>
-</div>
-<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-study.html">study</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-database.html">database</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-cmu.html">cmu</a> </div>
-<div class="post-date">25 Jun 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-06-25-go-patterns.html">Go patterns</a></h1>
-<nav id="table-of-contents" role="doc-toc">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents" role="doc-toc">
-<ul>
-<li><a href="#org31c77a1">1. Concurrency vs Parallelism</a></li>
-<li><a href="#org281856c">2. Use goroutines for states</a>
-<ul>
-<li><a href="#org2729b69">2.1. Matching a regex</a></li>
-<li><a href="#org552c895">2.2. When the state variable cannot be avoided</a></li>
-</ul>
-</li>
-<li><a href="#orgdd15392">3. Pattern 1: publish/subscribe server</a>
-<ul>
-<li><a href="#orgba0c0a2">3.1. Options for slow goroutines</a></li>
-</ul>
-</li>
-</ul>
-</div>
-</nav>
-<p>
-This a personal note for the <a href="https://www.youtube.com/watch?v=IdCbMO0Ey9I">Russ Cox guest lecture</a>.
-</p>
-<div id="outline-container-org31c77a1" class="outline-2">
-<h2 id="org31c77a1"><span class="section-number-2">1.</span> Concurrency vs Parallelism</h2>
-<div class="outline-text-2" id="text-1">
-<ul class="org-ul">
-<li>Concurrency: write a program to handle lot of things at once
-<ul class="org-ul">
-<li>not necessarily faster</li>
-</ul></li>
-<li>Parallelism: the program itself can do a lot of computations at once</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org281856c" class="outline-2">
-<h2 id="org281856c"><span class="section-number-2">2.</span> Use goroutines for states</h2>
-<div class="outline-text-2" id="text-2">
-</div>
-<div id="outline-container-org2729b69" class="outline-3">
-<h3 id="org2729b69"><span class="section-number-3">2.1.</span> Matching a regex</h3>
-<div class="outline-text-3" id="text-2-1">
-<ul class="org-ul">
-<li>return if a given string matches a regex: start with <code>"</code>, contains arbitrary escape sequence and ends with <code>*</code></li>
-<li><p>
-unclear logic: store states in the data
-</p>
-<div class="org-src-container">
-<pre class="src src-go"><span class="linenr"> 1: </span><span style="color: #dcaeea;">state</span> := <span style="color: #da8548; font-weight: bold;">0</span>
+<span style="color: #5B6268;">-- </span><span style="color: #5B6268;">the above is same as below, but `join` syntax is more preferred</span>
+<span style="color: #51afef;">SELECT</span> student.sid, <span style="color: #51afef;">name</span>
+<span style="color: #51afef;">FROM</span> student <span style="color: #51afef;">AS</span> s, (<span style="color: #51afef;">SELECT</span> <span style="color: #c678dd;">MAX</span>(sid) <span style="color: #51afef;">AS</span> sid <span style="color: #51afef;">FROM</span> enrolled) <span style="color: #51afef;">AS</span> max_e
+<span style="color: #51afef;">WHERE</span> s.sid = max_e.sid;
+</pre>
+                </div>
+              </li>
+
+              <li>
+                Nested query results expression:
+                <ul class="org-ul">
+                  <li>
+                    <code>ALL</code>: must satisfy expression for all
+                    <b><b>rows</b></b> in sub-query.
+                  </li>
+                  <li>
+                    <code>ANY</code>, <code>IN</code>: must satisfy expression
+                    for at least one row in sub-query.
+                  </li>
+                  <li>
+                    <p><code>EXISTS</code>: at least one row is returned.</p>
+                    <div class="org-src-container">
+                      <pre
+                        class="src src-sql"
+                      ><span style="color: #5B6268;">-- </span><span style="color: #5B6268;">Get all courses with no students enrolled in</span>
+<span style="color: #51afef;">SELECT</span> * <span style="color: #51afef;">FROM</span> course
+    <span style="color: #51afef;">WHERE</span> <span style="color: #51afef;">NOT</span> <span style="color: #51afef;">EXISTS</span>(
+        <span style="color: #51afef;">SELECT</span> * <span style="color: #51afef;">FROM</span> enrolled
+            <span style="color: #51afef;">WHERE</span> course.cid = enrolled.cid
+)
+
+<span style="color: #5B6268;">-- </span><span style="color: #5B6268;">Get students whose gpa is larget than the highest score in '15-712'</span>
+<span style="color: #5B6268;">-- </span><span style="color: #5B6268;">and the login has a level &gt; 3</span>
+<span style="color: #51afef;">SELECT</span> student.sid, <span style="color: #51afef;">name</span>
+    <span style="color: #51afef;">FROM</span> student <span style="color: #51afef;">AS</span> S
+<span style="color: #51afef;">WHERE</span> s.gpa &gt; <span style="color: #51afef;">ALL</span> (
+    <span style="color: #51afef;">SELECT</span> course.score <span style="color: #51afef;">FROM</span> course
+        <span style="color: #51afef;">WHERE</span> course.cid = <span style="color: #98be65;">'15-712'</span>
+)
+<span style="color: #51afef;">AND</span> student.login <span style="color: #51afef;">IN</span> (
+    <span style="color: #51afef;">SELECT</span> login <span style="color: #51afef;">FROM</span> enrolled
+    <span style="color: #51afef;">WHERE</span> <span style="color: #51afef;">level</span> &gt; <span style="color: #da8548; font-weight: bold;">3</span>
+);
+</pre>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org6295067" class="outline-3">
+          <h3 id="org6295067">
+            <span class="section-number-3">2.8.</span> Window functions
+          </h3>
+          <div class="outline-text-3" id="text-2-8">
+            <ul class="org-ul">
+              <li>Perform sliding calculation across a set of tuples.</li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-orgca6458d" class="outline-3">
+          <h3 id="orgca6458d">
+            <span class="section-number-3">2.9.</span> Common Table Expressions
+            (CTE)
+          </h3>
+          <div class="outline-text-3" id="text-2-9">
+            <ul class="org-ul">
+              <li>
+                An alternative to windows or nested queries when writing more
+                complex queries.
+              </li>
+              <li>
+                <p>
+                  CTEs use <code>WITH</code> to bind the output of an inner
+                  query to a temporary table.
+                </p>
+                <div class="org-src-container">
+                  <pre
+                    class="src src-sql"
+                  ><span style="color: #51afef;">WITH</span> cteName (col1, col2) <span style="color: #51afef;">AS</span> (
+    <span style="color: #51afef;">SELECT</span> <span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">2</span>
+)
+<span style="color: #51afef;">SELECT</span> col1 + col2 <span style="color: #51afef;">FROM</span> cteName;
+</pre>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="taglist">
+        <a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a
+        >:
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-study.html"
+          >study</a
+        >
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-database.html"
+          >database</a
+        >
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-cmu.html"
+          >cmu</a
+        >
+      </div>
+
+      <div class="post-date">17 Jul 2024</div>
+      <h1 class="post-title">
+        <a
+          href="https://chenyo-17.github.io/org-static-blog/2024-07-17-db-notes:-relational-model.html"
+          >CMU 15-445 notes: Relational Model & Algebra</a
+        >
+      </h1>
+      <nav id="table-of-contents" role="doc-toc">
+        <h2>Table of Contents</h2>
+        <div id="text-table-of-contents" role="doc-toc">
+          <ul>
+            <li>
+              <a href="#org3e79133">1. Terminology</a>
+              <ul>
+                <li><a href="#orgec86120">1.1. Database</a></li>
+                <li>
+                  <a href="#org1efce92">1.2. Database design consideration</a>
+                </li>
+                <li>
+                  <a href="#org987f05d"
+                    >1.3. Database management system (DBMS)</a
+                  >
+                </li>
+                <li><a href="#org6e59de6">1.4. Data model</a></li>
+                <li><a href="#org0703938">1.5. Schema</a></li>
+                <li><a href="#org149bbef">1.6. Entities and Tables</a></li>
+                <li><a href="#orgeabab19">1.7. Attributes and Fields</a></li>
+                <li><a href="#orgb9ccd72">1.8. Logical layer</a></li>
+                <li><a href="#org3560635">1.9. Physical layer</a></li>
+                <li>
+                  <a href="#orgaff54f4"
+                    >1.10. Data manipulation languages (DMLs)</a
+                  >
+                </li>
+                <li>
+                  <a href="#orgf6bba7c"
+                    >1.11. SQL (Structured Query Language) and relational
+                    model</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#org97dedbe">2. Relational model</a>
+              <ul>
+                <li><a href="#org09d63b8">2.1. A relation</a></li>
+                <li><a href="#org10591b4">2.2. A domain</a></li>
+                <li><a href="#orga145e38">2.3. A tuple</a></li>
+                <li><a href="#orgac33859">2.4. Keys</a></li>
+              </ul>
+            </li>
+            <li><a href="#org38e6c34">3. Relational Algebra</a></li>
+          </ul>
+        </div>
+      </nav>
+      <p>
+        This is a personal note for the
+        <a
+          href="https://www.youtube.com/watch?v=uikbtpVZS2s&amp;list=PLSE8ODhjZXjaKScG3l0nuOiDTTqpfnWFf&amp;index=2"
+          >CMU 15-445 L1 video</a
+        >
+        and
+        <a
+          href="https://15445.courses.cs.cmu.edu/fall2022/notes/01-introduction.pdf"
+          >CMU 15-445 L1 notes</a
+        >, along with some terminology explained by
+        <a href="https://claude.ai/chat/14f3c4ec-0ca8-495e-ac70-dd13f9eab5ea"
+          >Claude.ai</a
+        >.
+      </p>
+      <div id="outline-container-org3e79133" class="outline-2">
+        <h2 id="org3e79133">
+          <span class="section-number-2">1.</span> Terminology
+        </h2>
+        <div class="outline-text-2" id="text-1"></div>
+        <div id="outline-container-orgec86120" class="outline-3">
+          <h3 id="orgec86120">
+            <span class="section-number-3">1.1.</span> Database
+          </h3>
+          <div class="outline-text-3" id="text-1-1">
+            <ul class="org-ul">
+              <li>
+                An organized collection of inter-related data that models some
+                aspect of the real-world.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org1efce92" class="outline-3">
+          <h3 id="org1efce92">
+            <span class="section-number-3">1.2.</span> Database design
+            consideration
+          </h3>
+          <div class="outline-text-3" id="text-1-2">
+            <ul class="org-ul">
+              <li>Data integrity: protect invalid writing.</li>
+              <li>Implementation: query complexity, concurrent query.</li>
+              <li>Durability: replication, fault tolerance.</li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org987f05d" class="outline-3">
+          <h3 id="org987f05d">
+            <span class="section-number-3">1.3.</span> Database management
+            system (DBMS)
+          </h3>
+          <div class="outline-text-3" id="text-1-3">
+            <ul class="org-ul">
+              <li>A software that manages a database.</li>
+              <li>
+                Allow the definition, creation, query, update and administration
+                of databases.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org6e59de6" class="outline-3">
+          <h3 id="org6e59de6">
+            <span class="section-number-3">1.4.</span> Data model
+          </h3>
+          <div class="outline-text-3" id="text-1-4">
+            <ul class="org-ul">
+              <li>
+                A conceptual, high-level representation of how data is
+                structured
+              </li>
+              <li>
+                Defines entities, attributes, relationships between entities and
+                constraints.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org0703938" class="outline-3">
+          <h3 id="org0703938">
+            <span class="section-number-3">1.5.</span> Schema
+          </h3>
+          <div class="outline-text-3" id="text-1-5">
+            <ul class="org-ul">
+              <li>A concrete implementation of a data model.</li>
+              <li>Defines tables, fields, data types, keys and rules.</li>
+              <li>Typically represented by a specific database language.</li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org149bbef" class="outline-3">
+          <h3 id="org149bbef">
+            <span class="section-number-3">1.6.</span> Entities and Tables
+          </h3>
+          <div class="outline-text-3" id="text-1-6">
+            <ul class="org-ul">
+              <li>
+                Entities: conceptual representations of objects in the logical
+                data model.
+              </li>
+              <li>
+                Tables: physical storage structures in the physical data model.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-orgeabab19" class="outline-3">
+          <h3 id="orgeabab19">
+            <span class="section-number-3">1.7.</span> Attributes and Fields
+          </h3>
+          <div class="outline-text-3" id="text-1-7">
+            <ul class="org-ul">
+              <li>Attributes: properties of an entity.</li>
+              <li>Fields: columns in a database table.</li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-orgb9ccd72" class="outline-3">
+          <h3 id="orgb9ccd72">
+            <span class="section-number-3">1.8.</span> Logical layer
+          </h3>
+          <div class="outline-text-3" id="text-1-8">
+            <ul class="org-ul">
+              <li>The entities and attributes the database has.</li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org3560635" class="outline-3">
+          <h3 id="org3560635">
+            <span class="section-number-3">1.9.</span> Physical layer
+          </h3>
+          <div class="outline-text-3" id="text-1-9">
+            <ul class="org-ul">
+              <li>How are entities and attributes stored in the database.</li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-orgaff54f4" class="outline-3">
+          <h3 id="orgaff54f4">
+            <span class="section-number-3">1.10.</span> Data manipulation
+            languages (DMLs)
+          </h3>
+          <div class="outline-text-3" id="text-1-10">
+            <ul class="org-ul">
+              <li>
+                Methods to store and retrieve information from a database.
+              </li>
+              <li>
+                Procedural: the query specifies the (high-level) strategy the
+                DBMS should use to get the results, e.g., with relational
+                algebra.
+              </li>
+              <li>
+                Declarative: the query specifies only what data is desired but
+                not how to get it, e.g., with relational calculus (a formal
+                language).
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-orgf6bba7c" class="outline-3">
+          <h3 id="orgf6bba7c">
+            <span class="section-number-3">1.11.</span> SQL (Structured Query
+            Language) and relational model
+          </h3>
+          <div class="outline-text-3" id="text-1-11">
+            <ul class="org-ul">
+              <li>
+                SQL <b><b>implements</b></b> the relational model in DBMS and
+                provides a standard way to create, manipulate and query
+                relational databases.
+              </li>
+              <li>
+                Different SQL implementation may vary and do not strictly adhere
+                to the relational model, e.g., allow duplicate rows.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="outline-container-org97dedbe" class="outline-2">
+        <h2 id="org97dedbe">
+          <span class="section-number-2">2.</span> Relational model
+        </h2>
+        <div class="outline-text-2" id="text-2">
+          <ul class="org-ul">
+            <li>
+              A <b><b>data model</b></b> that defines a database
+              <b><b>abstraction</b></b> to avoid maintenance overhead when
+              changing the physical layer.
+            </li>
+            <li>Data is stored as relations/tables.</li>
+            <li>
+              Physical layer implementation and execution strategy depends on
+              DBMS implementation.
+            </li>
+          </ul>
+
+          <figure id="org79ae6b9">
+            <img
+              src="https://people.cs.pitt.edu/~chang/156/images/fig41.gif"
+              alt="fig41.gif"
+              align="center"
+              width="500px"
+            />
+
+            <figcaption>
+              <span class="figure-number">Figure 1: </span>Relational model
+              concepts
+            </figcaption>
+          </figure>
+        </div>
+        <div id="outline-container-org09d63b8" class="outline-3">
+          <h3 id="org09d63b8">
+            <span class="section-number-3">2.1.</span> A relation
+          </h3>
+          <div class="outline-text-3" id="text-2-1">
+            <ul class="org-ul">
+              <li>
+                An unordered set that contains the relationship of attributes
+                that represent entities.
+              </li>
+              <li>Relationships are unordered in the relation.</li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org10591b4" class="outline-3">
+          <h3 id="org10591b4">
+            <span class="section-number-3">2.2.</span> A domain
+          </h3>
+          <div class="outline-text-3" id="text-2-2">
+            <ul class="org-ul">
+              <li>A named set of allowable values for a specific attribute.</li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-orga145e38" class="outline-3">
+          <h3 id="orga145e38">
+            <span class="section-number-3">2.3.</span> A tuple
+          </h3>
+          <div class="outline-text-3" id="text-2-3">
+            <ul class="org-ul">
+              <li>A set of attribute values in the relation.</li>
+              <li>Values can also be lists or nested data structures.</li>
+              <li>
+                <code>Null</code>: a special value in any attribute which means
+                the attribute in a tuple is undefined.
+              </li>
+              <li>\(n-ary\): a relation with \(n\) attributes.</li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-orgac33859" class="outline-3">
+          <h3 id="orgac33859">
+            <span class="section-number-3">2.4.</span> Keys
+          </h3>
+          <div class="outline-text-3" id="text-2-4">
+            <ul class="org-ul">
+              <li>Primary key: uniquely identifies a single tuple.</li>
+              <li>
+                Foreign key: specifies that an attribute (e.g.,
+                <code>CustomerID</code>) in one relation (e.g.,
+                <code>OrderTable</code>) has to map to a tuple (e.g., the tuple
+                with the same <code>CustomerID</code>) in another relation
+                (e.g., <code>CustomerTable</code>).
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="outline-container-org38e6c34" class="outline-2">
+        <h2 id="org38e6c34">
+          <span class="section-number-2">3.</span> Relational Algebra
+        </h2>
+        <div class="outline-text-2" id="text-3">
+          <ul class="org-ul">
+            <li>
+              A set of fundamental operations to retrieve and manipulate tuples
+              in a relation.
+            </li>
+            <li>
+              Each operator takes in one or more relations as inputs, and
+              outputs a new relation; operators can be chained.
+            </li>
+            <li>
+              Is a <b><b>procedure language</b></b
+              >, meaning the execution always follow the query, even there
+              exists more efficient way to get the same result; A better way is
+              to be more declarative, e.g., SQL&rsquo;s
+              <code>where</code> syntax.
+            </li>
+            <li>
+              <a href="https://i.sstatic.net/AHjRg.png"
+                >Common relational algebra</a
+              >.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="taglist">
+        <a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a
+        >:
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-study.html"
+          >study</a
+        >
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-database.html"
+          >database</a
+        >
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-cmu.html"
+          >cmu</a
+        >
+      </div>
+
+      <div class="post-date">25 Jun 2024</div>
+      <h1 class="post-title">
+        <a
+          href="https://chenyo-17.github.io/org-static-blog/2024-06-25-go-patterns.html"
+          >Go patterns</a
+        >
+      </h1>
+      <nav id="table-of-contents" role="doc-toc">
+        <h2>Table of Contents</h2>
+        <div id="text-table-of-contents" role="doc-toc">
+          <ul>
+            <li><a href="#org31c77a1">1. Concurrency vs Parallelism</a></li>
+            <li>
+              <a href="#org281856c">2. Use goroutines for states</a>
+              <ul>
+                <li><a href="#org2729b69">2.1. Matching a regex</a></li>
+                <li>
+                  <a href="#org552c895"
+                    >2.2. When the state variable cannot be avoided</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#orgdd15392">3. Pattern 1: publish/subscribe server</a>
+              <ul>
+                <li>
+                  <a href="#orgba0c0a2">3.1. Options for slow goroutines</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <p>
+        This a personal note for the
+        <a href="https://www.youtube.com/watch?v=IdCbMO0Ey9I"
+          >Russ Cox guest lecture</a
+        >.
+      </p>
+      <div id="outline-container-org31c77a1" class="outline-2">
+        <h2 id="org31c77a1">
+          <span class="section-number-2">1.</span> Concurrency vs Parallelism
+        </h2>
+        <div class="outline-text-2" id="text-1">
+          <ul class="org-ul">
+            <li>
+              Concurrency: write a program to handle lot of things at once
+              <ul class="org-ul">
+                <li>not necessarily faster</li>
+              </ul>
+            </li>
+            <li>
+              Parallelism: the program itself can do a lot of computations at
+              once
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div id="outline-container-org281856c" class="outline-2">
+        <h2 id="org281856c">
+          <span class="section-number-2">2.</span> Use goroutines for states
+        </h2>
+        <div class="outline-text-2" id="text-2"></div>
+        <div id="outline-container-org2729b69" class="outline-3">
+          <h3 id="org2729b69">
+            <span class="section-number-3">2.1.</span> Matching a regex
+          </h3>
+          <div class="outline-text-3" id="text-2-1">
+            <ul class="org-ul">
+              <li>
+                return if a given string matches a regex: start with
+                <code>"</code>, contains arbitrary escape sequence and ends with
+                <code>*</code>
+              </li>
+              <li>
+                <p>unclear logic: store states in the data</p>
+                <div class="org-src-container">
+                  <pre
+                    class="src src-go"
+                  ><span class="linenr"> 1: </span><span style="color: #dcaeea;">state</span> := <span style="color: #da8548; font-weight: bold;">0</span>
 <span class="linenr"> 2: </span><span style="color: #51afef;">for</span> {
 <span class="linenr"> 3: </span>    <span style="color: #dcaeea;">c</span> := <span style="color: #c678dd;">read</span>()
 <span class="linenr"> 4: </span>    <span style="color: #51afef;">switch</span> state {
@@ -309,12 +937,14 @@ unclear logic: store states in the data
 <span class="linenr">25: </span>    }
 <span class="linenr">26: </span>}
 </pre>
-</div></li>
-<li><p>
-clear logic: store states in the code
-</p>
-<div class="org-src-container">
-<pre class="src src-go"><span class="linenr"> 1: </span><span style="color: #5B6268;">// </span><span style="color: #5B6268;">no variable to store state</span>
+                </div>
+              </li>
+              <li>
+                <p>clear logic: store states in the code</p>
+                <div class="org-src-container">
+                  <pre
+                    class="src src-go"
+                  ><span class="linenr"> 1: </span><span style="color: #5B6268;">// </span><span style="color: #5B6268;">no variable to store state</span>
 <span class="linenr"> 2: </span><span style="color: #51afef;">if</span> <span style="color: #c678dd;">read</span>() != <span style="color: #98be65;">'"'</span> {
 <span class="linenr"> 3: </span>    <span style="color: #51afef;">return</span> <span style="color: #a9a1e1;">false</span>
 <span class="linenr"> 4: </span>}
@@ -327,19 +957,24 @@ clear logic: store states in the code
 <span class="linenr">11: </span>}
 <span class="linenr">12: </span><span style="color: #51afef;">return</span> <span style="color: #a9a1e1;">true</span>
 </pre>
-</div></li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org552c895" class="outline-3">
-<h3 id="org552c895"><span class="section-number-3">2.2.</span> When the state variable cannot be avoided</h3>
-<div class="outline-text-3" id="text-2-2">
-<ul class="org-ul">
-<li><p>
-the function needs to return the state
-</p>
-<div class="org-src-container">
-<pre class="src src-go"><span class="linenr"> 1: </span><span style="color: #51afef;">type</span> <span style="color: #ECBE7B;">quoter</span> <span style="color: #51afef;">struct</span> {
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org552c895" class="outline-3">
+          <h3 id="org552c895">
+            <span class="section-number-3">2.2.</span> When the state variable
+            cannot be avoided
+          </h3>
+          <div class="outline-text-3" id="text-2-2">
+            <ul class="org-ul">
+              <li>
+                <p>the function needs to return the state</p>
+                <div class="org-src-container">
+                  <pre
+                    class="src src-go"
+                  ><span class="linenr"> 1: </span><span style="color: #51afef;">type</span> <span style="color: #ECBE7B;">quoter</span> <span style="color: #51afef;">struct</span> {
 <span class="linenr"> 2: </span>    state <span style="color: #ECBE7B;">int</span>
 <span class="linenr"> 3: </span>}
 <span class="linenr"> 4: </span>
@@ -369,12 +1004,14 @@ the function needs to return the state
 <span class="linenr">28: </span>    <span style="color: #51afef;">return</span> NeedMoreInput
 <span class="linenr">29: </span>}
 </pre>
-</div></li>
-<li><p>
-use additional goroutines to hold states
-</p>
-<div class="org-src-container">
-<pre class="src src-go"><span class="linenr"> 1: </span><span style="color: #51afef;">type</span> <span style="color: #ECBE7B;">quoter</span> <span style="color: #51afef;">struct</span> {
+                </div>
+              </li>
+              <li>
+                <p>use additional goroutines to hold states</p>
+                <div class="org-src-container">
+                  <pre
+                    class="src src-go"
+                  ><span class="linenr"> 1: </span><span style="color: #51afef;">type</span> <span style="color: #ECBE7B;">quoter</span> <span style="color: #51afef;">struct</span> {
 <span class="linenr"> 2: </span>    char <span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">rune</span>
 <span class="linenr"> 3: </span>    status <span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">Status</span>
 <span class="linenr"> 4: </span>}
@@ -424,27 +1061,38 @@ use additional goroutines to hold states
 <span class="linenr">48: </span>    }
 <span class="linenr">49: </span>}
 </pre>
-</div></li>
-<li>check goroutine blockage
-<ul class="org-ul">
-<li><code>Ctrl-\</code> sends <code>SIGQUIT</code></li>
-<li>use the HTTP server&rsquo;s <code>/debug/pprof/goroutine</code> if importing <code>net/http</code></li>
-</ul></li>
-</ul>
-</div>
-</div>
-</div>
-<div id="outline-container-orgdd15392" class="outline-2">
-<h2 id="orgdd15392"><span class="section-number-2">3.</span> Pattern 1: publish/subscribe server</h2>
-<div class="outline-text-2" id="text-3">
-<ul class="org-ul">
-<li>the information goes one way: server -&gt; client</li>
-<li>close a channel to signal no new values will be sent</li>
-<li><p>
-prefer <code>defer</code> when unlocking the mutex
-</p>
-<div class="org-src-container">
-<pre class="src src-go"><span class="linenr"> 1: </span><span style="color: #51afef;">type</span> <span style="color: #ECBE7B;">Server</span> <span style="color: #51afef;">struct</span> {
+                </div>
+              </li>
+              <li>
+                check goroutine blockage
+                <ul class="org-ul">
+                  <li><code>Ctrl-\</code> sends <code>SIGQUIT</code></li>
+                  <li>
+                    use the HTTP server&rsquo;s
+                    <code>/debug/pprof/goroutine</code> if importing
+                    <code>net/http</code>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="outline-container-orgdd15392" class="outline-2">
+        <h2 id="orgdd15392">
+          <span class="section-number-2">3.</span> Pattern 1: publish/subscribe
+          server
+        </h2>
+        <div class="outline-text-2" id="text-3">
+          <ul class="org-ul">
+            <li>the information goes one way: server -&gt; client</li>
+            <li>close a channel to signal no new values will be sent</li>
+            <li>
+              <p>prefer <code>defer</code> when unlocking the mutex</p>
+              <div class="org-src-container">
+                <pre
+                  class="src src-go"
+                ><span class="linenr"> 1: </span><span style="color: #51afef;">type</span> <span style="color: #ECBE7B;">Server</span> <span style="color: #51afef;">struct</span> {
 <span class="linenr"> 2: </span>    mu  <span style="color: #ECBE7B;">sync.Mutex</span> <span style="color: #5B6268;">// </span><span style="color: #5B6268;">protect sub</span>
 <span class="linenr"> 3: </span>    sub <span style="color: #51afef;">map</span>[<span style="color: #51afef;">chan</span>&lt;- <span style="color: #ECBE7B;">Event</span>]<span style="color: #ECBE7B;">bool</span>  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">whether a channel should be closed</span>
 <span class="linenr"> 4: </span>}
@@ -482,20 +1130,31 @@ prefer <code>defer</code> when unlocking the mutex
 <span class="linenr">36: </span>    <span style="color: #c678dd;">delete</span>(s.sub, c)
 <span class="linenr">37: </span>}
 </pre>
-</div></li>
-</ul>
-</div>
-<div id="outline-container-orgba0c0a2" class="outline-3">
-<h3 id="orgba0c0a2"><span class="section-number-3">3.1.</span> Options for slow goroutines</h3>
-<div class="outline-text-3" id="text-3-1">
-<ul class="org-ul">
-<li>slow down event generation</li>
-<li>drop events if it cannot be sent, e.g., <code>os/signal</code>, <code>runtime/pprof</code></li>
-<li><p>
-queue events, e.g., add a <code>helper</code> between the server and each client, which also separates the concerns
-</p>
-<div class="org-src-container">
-<pre class="src src-go"><span class="linenr"> 1: </span><span style="color: #51afef;">func</span> <span style="color: #c678dd;">helper</span>(<span style="color: #dcaeea;">in</span> &lt;-<span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">Event</span>, <span style="color: #dcaeea;">out</span> <span style="color: #51afef;">chan</span>&lt;- <span style="color: #ECBE7B;">Event</span>) {
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div id="outline-container-orgba0c0a2" class="outline-3">
+          <h3 id="orgba0c0a2">
+            <span class="section-number-3">3.1.</span> Options for slow
+            goroutines
+          </h3>
+          <div class="outline-text-3" id="text-3-1">
+            <ul class="org-ul">
+              <li>slow down event generation</li>
+              <li>
+                drop events if it cannot be sent, e.g., <code>os/signal</code>,
+                <code>runtime/pprof</code>
+              </li>
+              <li>
+                <p>
+                  queue events, e.g., add a <code>helper</code> between the
+                  server and each client, which also separates the concerns
+                </p>
+                <div class="org-src-container">
+                  <pre
+                    class="src src-go"
+                  ><span class="linenr"> 1: </span><span style="color: #51afef;">func</span> <span style="color: #c678dd;">helper</span>(<span style="color: #dcaeea;">in</span> &lt;-<span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">Event</span>, <span style="color: #dcaeea;">out</span> <span style="color: #51afef;">chan</span>&lt;- <span style="color: #ECBE7B;">Event</span>) {
 <span class="linenr"> 2: </span>    <span style="color: #51afef;">var</span> <span style="color: #dcaeea;">q</span> []<span style="color: #ECBE7B;">Event</span>
 <span class="linenr"> 3: </span>    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">if the in is closed, flash out the pending events in q</span>
 <span class="linenr"> 4: </span>    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">and close out</span>
@@ -522,12 +1181,17 @@ queue events, e.g., add a <code>helper</code> between the server and each client
 <span class="linenr">25: </span>    <span style="color: #c678dd;">close</span>(out)
 <span class="linenr">26: </span>}
 </pre>
-</div></li>
-<li><p>
-convert mutexes into goroutines, not suitable for Raft where state transition is complex
-</p>
-<div class="org-src-container">
-<pre class="src src-go"><span class="linenr"> 1: </span><span style="color: #51afef;">type</span> <span style="color: #ECBE7B;">Server</span> <span style="color: #51afef;">struct</span> {
+                </div>
+              </li>
+              <li>
+                <p>
+                  convert mutexes into goroutines, not suitable for Raft where
+                  state transition is complex
+                </p>
+                <div class="org-src-container">
+                  <pre
+                    class="src src-go"
+                  ><span class="linenr"> 1: </span><span style="color: #51afef;">type</span> <span style="color: #ECBE7B;">Server</span> <span style="color: #51afef;">struct</span> {
 <span class="linenr"> 2: </span>    publish   <span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">Event</span>
 <span class="linenr"> 3: </span>    subscribe <span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">subReq</span>
 <span class="linenr"> 4: </span>    cancel    <span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">subReq</span>
@@ -595,40 +1259,68 @@ convert mutexes into goroutines, not suitable for Raft where state transition is
 <span class="linenr">66: </span>    }
 <span class="linenr">67: </span>}
 </pre>
-</div></li>
-</ul>
-</div>
-</div>
-</div>
-<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-go.html">go</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-design-pattern.html">design-pattern</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-study.html">study</a> </div>
-<div class="post-date">23 Jun 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-06-23-weblab-notes:-react-route.html">Weblab notes: React route</a></h1>
-<nav id="table-of-contents" role="doc-toc">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents" role="doc-toc">
-<ul>
-<li><a href="#org4b6a4f4">1. Router</a></li>
-<li><a href="#org770f3b0">2. Link</a></li>
-<li><a href="#org401c0d7">3. Workshop 3</a>
-<ul>
-<li><a href="#org16ef4ca">3.1. Structure</a></li>
-<li><a href="#orgaa5beae">3.2. States</a></li>
-<li><a href="#org2f1e568">3.3. Props</a></li>
-<li><a href="#org675305a">3.4. Why passing down the update function in props 1, 4, 6?</a></li>
-</ul>
-</li>
-</ul>
-</div>
-</nav>
-<div id="outline-container-org4b6a4f4" class="outline-2">
-<h2 id="org4b6a4f4"><span class="section-number-2">1.</span> Router</h2>
-<div class="outline-text-2" id="text-1">
-<ul class="org-ul">
-<li>use the Reach <a href="https://reach.tech/router/">Reach Router</a> library</li>
-<li><p>
-URL -&gt; Router -&gt; render different components
-</p>
-<div class="org-src-container">
-<pre class="src src-js"><span class="linenr">1: </span>&lt;App&gt;
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="taglist">
+        <a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a
+        >:
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-go.html">go</a>
+        <a
+          href="https://chenyo-17.github.io/org-static-blog/tag-design-pattern.html"
+          >design-pattern</a
+        >
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-study.html"
+          >study</a
+        >
+      </div>
+      <div class="post-date">23 Jun 2024</div>
+      <h1 class="post-title">
+        <a
+          href="https://chenyo-17.github.io/org-static-blog/2024-06-23-weblab-notes:-react-route.html"
+          >Weblab notes: React route</a
+        >
+      </h1>
+      <nav id="table-of-contents" role="doc-toc">
+        <h2>Table of Contents</h2>
+        <div id="text-table-of-contents" role="doc-toc">
+          <ul>
+            <li><a href="#org4b6a4f4">1. Router</a></li>
+            <li><a href="#org770f3b0">2. Link</a></li>
+            <li>
+              <a href="#org401c0d7">3. Workshop 3</a>
+              <ul>
+                <li><a href="#org16ef4ca">3.1. Structure</a></li>
+                <li><a href="#orgaa5beae">3.2. States</a></li>
+                <li><a href="#org2f1e568">3.3. Props</a></li>
+                <li>
+                  <a href="#org675305a"
+                    >3.4. Why passing down the update function in props 1, 4,
+                    6?</a
+                  >
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div id="outline-container-org4b6a4f4" class="outline-2">
+        <h2 id="org4b6a4f4"><span class="section-number-2">1.</span> Router</h2>
+        <div class="outline-text-2" id="text-1">
+          <ul class="org-ul">
+            <li>
+              use the Reach
+              <a href="https://reach.tech/router/">Reach Router</a> library
+            </li>
+            <li>
+              <p>URL -&gt; Router -&gt; render different components</p>
+              <div class="org-src-container">
+                <pre
+                  class="src src-js"
+                ><span class="linenr">1: </span>&lt;App&gt;
 <span class="linenr">2: </span>  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">conditional rendering based on curren url</span>
 <span class="linenr">3: </span>  &lt;Router&gt;
 <span class="linenr">4: </span>    &lt;Home path=<span style="color: #98be65;">"/"</span> /&gt; <span style="color: #5B6268;">// </span><span style="color: #5B6268;">root path</span>
@@ -638,166 +1330,251 @@ URL -&gt; Router -&gt; render different components
 <span class="linenr">8: </span>  &lt;/Router&gt;
 <span class="linenr">9: </span>&lt;/App&gt;;
 </pre>
-</div></li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org770f3b0" class="outline-2">
-<h2 id="org770f3b0"><span class="section-number-2">2.</span> Link</h2>
-<div class="outline-text-2" id="text-2">
-<ul class="org-ul">
-<li>relative: <code class="src src-js">&lt;Link to=<span style="color: #98be65;">"newpage"</span>&gt;Click me&lt;/Link&gt;</code></li>
-<li>absolute: <code class="src src-js">&lt;Link to=<span style="color: #98be65;">"/newpage"</span>&gt;Click me&lt;/Link&gt;</code></li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org401c0d7" class="outline-2">
-<h2 id="org401c0d7"><span class="section-number-2">3.</span> Workshop 3</h2>
-<div class="outline-text-2" id="text-3">
-</div>
-<div id="outline-container-org16ef4ca" class="outline-3">
-<h3 id="org16ef4ca"><span class="section-number-3">3.1.</span> Structure</h3>
-<div class="outline-text-3" id="text-3-1">
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div id="outline-container-org770f3b0" class="outline-2">
+        <h2 id="org770f3b0"><span class="section-number-2">2.</span> Link</h2>
+        <div class="outline-text-2" id="text-2">
+          <ul class="org-ul">
+            <li>
+              relative:
+              <code class="src src-js"
+                >&lt;Link to=<span style="color: #98be65">"newpage"</span
+                >&gt;Click me&lt;/Link&gt;</code
+              >
+            </li>
+            <li>
+              absolute:
+              <code class="src src-js"
+                >&lt;Link to=<span style="color: #98be65">"/newpage"</span
+                >&gt;Click me&lt;/Link&gt;</code
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div id="outline-container-org401c0d7" class="outline-2">
+        <h2 id="org401c0d7">
+          <span class="section-number-2">3.</span> Workshop 3
+        </h2>
+        <div class="outline-text-2" id="text-3"></div>
+        <div id="outline-container-org16ef4ca" class="outline-3">
+          <h3 id="org16ef4ca">
+            <span class="section-number-3">3.1.</span> Structure
+          </h3>
+          <div class="outline-text-3" id="text-3-1">
+            <figure id="org109de6b">
+              <img
+                src="./static/workshop-3-structure.png"
+                alt="workshop-3-structure.png"
+                align="center"
+                width="600px"
+              />
 
-<figure id="org109de6b">
-<img src="./static/workshop-3-structure.png" alt="workshop-3-structure.png" align="center" width="600px">
+              <figcaption>
+                <span class="figure-number">Figure 1: </span>The Catbook
+                structure in workshop 3
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+        <div id="outline-container-orgaa5beae" class="outline-3">
+          <h3 id="orgaa5beae">
+            <span class="section-number-3">3.2.</span> States
+          </h3>
+          <div class="outline-text-3" id="text-3-2">
+            <table>
+              <colgroup>
+                <col class="org-center" />
+              </colgroup>
 
-<figcaption><span class="figure-number">Figure 1: </span>The Catbook structure in workshop 3</figcaption>
-</figure>
-</div>
-</div>
-<div id="outline-container-orgaa5beae" class="outline-3">
-<h3 id="orgaa5beae"><span class="section-number-3">3.2.</span> States</h3>
-<div class="outline-text-3" id="text-3-2">
-<table>
+              <colgroup>
+                <col class="org-left" />
+              </colgroup>
+              <thead>
+                <tr>
+                  <th scope="col" class="org-center">name</th>
+                  <th scope="col" class="org-left">states</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="org-center">Feed</td>
+                  <td class="org-left">
+                    <code>stories</code>: a list of stories
+                  </td>
+                </tr>
 
+                <tr>
+                  <td class="org-center">Card</td>
+                  <td class="org-left">
+                    <code>comments</code>: a list of comments for a story id
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div id="outline-container-org2f1e568" class="outline-3">
+          <h3 id="org2f1e568">
+            <span class="section-number-3">3.3.</span> Props
+          </h3>
+          <div class="outline-text-3" id="text-3-3">
+            <table>
+              <colgroup>
+                <col class="org-center" />
+              </colgroup>
 
-<colgroup>
-<col  class="org-center">
-</colgroup>
+              <colgroup>
+                <col class="org-left" />
+              </colgroup>
+              <thead>
+                <tr>
+                  <th scope="col" class="org-center">index</th>
+                  <th scope="col" class="org-left">props</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="org-center">1</td>
+                  <td class="org-left">
+                    a function to update <code>stories</code>
+                  </td>
+                </tr>
 
-<colgroup>
-<col  class="org-left">
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-center">name</th>
-<th scope="col" class="org-left">states</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="org-center">Feed</td>
-<td class="org-left"><code>stories</code>: a list of stories</td>
-</tr>
+                <tr>
+                  <td class="org-center">2</td>
+                  <td class="org-left">all attributes in a story</td>
+                </tr>
 
-<tr>
-<td class="org-center">Card</td>
-<td class="org-left"><code>comments</code>: a list of comments for a story id</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="outline-container-org2f1e568" class="outline-3">
-<h3 id="org2f1e568"><span class="section-number-3">3.3.</span> Props</h3>
-<div class="outline-text-3" id="text-3-3">
-<table>
+                <tr>
+                  <td class="org-center">3</td>
+                  <td class="org-left">
+                    the attributes used to display a story
+                  </td>
+                </tr>
 
+                <tr>
+                  <td class="org-center">4</td>
+                  <td class="org-left">
+                    a story id; a list of comments under the story; a function
+                    to update <code>comments</code>
+                  </td>
+                </tr>
 
-<colgroup>
-<col  class="org-center">
-</colgroup>
+                <tr>
+                  <td class="org-center">5</td>
+                  <td class="org-left">all attributes in a comment</td>
+                </tr>
 
-<colgroup>
-<col  class="org-left">
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-center">index</th>
-<th scope="col" class="org-left">props</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="org-center">1</td>
-<td class="org-left">a function to update <code>stories</code></td>
-</tr>
-
-<tr>
-<td class="org-center">2</td>
-<td class="org-left">all attributes in a story</td>
-</tr>
-
-<tr>
-<td class="org-center">3</td>
-<td class="org-left">the attributes used to display a story</td>
-</tr>
-
-<tr>
-<td class="org-center">4</td>
-<td class="org-left">a story id; a list of comments under the story; a function to update <code>comments</code></td>
-</tr>
-
-<tr>
-<td class="org-center">5</td>
-<td class="org-left">all attributes in a comment</td>
-</tr>
-
-<tr>
-<td class="org-center">6</td>
-<td class="org-left">a comment id; the function to update <code>comments</code></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="outline-container-org675305a" class="outline-3">
-<h3 id="org675305a"><span class="section-number-3">3.4.</span> Why passing down the update function in props 1, 4, 6?</h3>
-<div class="outline-text-3" id="text-3-4">
-<ul class="org-ul">
-<li>To share the parent states, i.e., <code>stories</code> and <code>comments</code> to child component. Since the post action happens in the child component, we need a way to automatically update the states to see new contents immediately.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-study.html">study</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-web.html">web</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-react.html">react</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-mit.html">mit</a> </div>
-<div class="post-date">23 Jun 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-06-23-weblab-notes:-react-hooks.html">Weblab notes: React hooks</a></h1>
-<nav id="table-of-contents" role="doc-toc">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents" role="doc-toc">
-<ul>
-<li><a href="#org97cd2a3">1. What is a React hook</a>
-<ul>
-<li><a href="#orga35f0ff">1.1. <code>useState</code> is not enough</a></li>
-<li><a href="#org51b650f">1.2. <code>useEffect</code> runs after specific variable change</a></li>
-</ul>
-</li>
-<li><a href="#org0564f0a">2. React hook patterns</a>
-<ul>
-<li><a href="#orgdba814a">2.1. Fetch and send data</a></li>
-<li><a href="#org0b9a6c4">2.2. Conditional rendering</a></li>
-<li><a href="#org4ce2ad9">2.3. Render an array of Data</a></li>
-</ul>
-</li>
-<li><a href="#org24b0c82">3. Example: Stopwatch</a></li>
-<li><a href="#orgfdd89bb">4. DOM and component mounting</a></li>
-</ul>
-</div>
-</nav>
-<div id="outline-container-org97cd2a3" class="outline-2">
-<h2 id="org97cd2a3"><span class="section-number-2">1.</span> What is a React hook</h2>
-<div class="outline-text-2" id="text-1">
-<ul class="org-ul">
-<li>Special functions to access parts of the component lifestyle.</li>
-<li>e.g., <code>useState</code></li>
-</ul>
-</div>
-<div id="outline-container-orga35f0ff" class="outline-3">
-<h3 id="orga35f0ff"><span class="section-number-3">1.1.</span> <code>useState</code> is not enough</h3>
-<div class="outline-text-3" id="text-1-1">
-<div class="org-src-container">
-<pre class="src src-js"><span class="linenr">1: </span><span style="color: #51afef;">const</span> [<span style="color: #dcaeea;">persons</span>, <span style="color: #dcaeea;">setPersons</span>] = useState([]);
+                <tr>
+                  <td class="org-center">6</td>
+                  <td class="org-left">
+                    a comment id; the function to update <code>comments</code>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div id="outline-container-org675305a" class="outline-3">
+          <h3 id="org675305a">
+            <span class="section-number-3">3.4.</span> Why passing down the
+            update function in props 1, 4, 6?
+          </h3>
+          <div class="outline-text-3" id="text-3-4">
+            <ul class="org-ul">
+              <li>
+                To share the parent states, i.e., <code>stories</code> and
+                <code>comments</code> to child component. Since the post action
+                happens in the child component, we need a way to automatically
+                update the states to see new contents immediately.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="taglist">
+        <a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a
+        >:
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-study.html"
+          >study</a
+        >
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-web.html"
+          >web</a
+        >
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-react.html"
+          >react</a
+        >
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-mit.html"
+          >mit</a
+        >
+      </div>
+      <div class="post-date">23 Jun 2024</div>
+      <h1 class="post-title">
+        <a
+          href="https://chenyo-17.github.io/org-static-blog/2024-06-23-weblab-notes:-react-hooks.html"
+          >Weblab notes: React hooks</a
+        >
+      </h1>
+      <nav id="table-of-contents" role="doc-toc">
+        <h2>Table of Contents</h2>
+        <div id="text-table-of-contents" role="doc-toc">
+          <ul>
+            <li>
+              <a href="#org97cd2a3">1. What is a React hook</a>
+              <ul>
+                <li>
+                  <a href="#orga35f0ff"
+                    >1.1. <code>useState</code> is not enough</a
+                  >
+                </li>
+                <li>
+                  <a href="#org51b650f"
+                    >1.2. <code>useEffect</code> runs after specific variable
+                    change</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#org0564f0a">2. React hook patterns</a>
+              <ul>
+                <li><a href="#orgdba814a">2.1. Fetch and send data</a></li>
+                <li><a href="#org0b9a6c4">2.2. Conditional rendering</a></li>
+                <li><a href="#org4ce2ad9">2.3. Render an array of Data</a></li>
+              </ul>
+            </li>
+            <li><a href="#org24b0c82">3. Example: Stopwatch</a></li>
+            <li><a href="#orgfdd89bb">4. DOM and component mounting</a></li>
+          </ul>
+        </div>
+      </nav>
+      <div id="outline-container-org97cd2a3" class="outline-2">
+        <h2 id="org97cd2a3">
+          <span class="section-number-2">1.</span> What is a React hook
+        </h2>
+        <div class="outline-text-2" id="text-1">
+          <ul class="org-ul">
+            <li>
+              Special functions to access parts of the component lifestyle.
+            </li>
+            <li>e.g., <code>useState</code></li>
+          </ul>
+        </div>
+        <div id="outline-container-orga35f0ff" class="outline-3">
+          <h3 id="orga35f0ff">
+            <span class="section-number-3">1.1.</span> <code>useState</code> is
+            not enough
+          </h3>
+          <div class="outline-text-3" id="text-1-1">
+            <div class="org-src-container">
+              <pre
+                class="src src-js"
+              ><span class="linenr">1: </span><span style="color: #51afef;">const</span> [<span style="color: #dcaeea;">persons</span>, <span style="color: #dcaeea;">setPersons</span>] = useState([]);
 <span class="linenr">2: </span>
 <span class="linenr">3: </span>testingStuff = () =&gt; {
 <span class="linenr">4: </span>    <span style="color: #5B6268;">/* </span><span style="color: #5B6268;">assume persons is empty before</span><span style="color: #5B6268;"> */</span>
@@ -805,26 +1582,41 @@ URL -&gt; Router -&gt; render different components
 <span class="linenr">6: </span>}
 <span class="linenr">7: </span>console.log(persons);
 </pre>
-</div>
+            </div>
 
-<ul class="org-ul">
-<li>The output of <code class="src src-js">console.log</code> is <code>[]</code> instead of <code>["me"]</code> because setting a state is <b><b>async</b></b>!</li>
-<li>To do something immediately after a state is changed, use <code>useEffect</code> hook!</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org51b650f" class="outline-3">
-<h3 id="org51b650f"><span class="section-number-3">1.2.</span> <code>useEffect</code> runs after specific variable change</h3>
-<div class="outline-text-3" id="text-1-2">
-<div class="org-src-container">
-<pre class="src src-js"><span class="linenr">1: </span>useEffect(() =&gt; {
+            <ul class="org-ul">
+              <li>
+                The output of <code class="src src-js">console.log</code> is
+                <code>[]</code> instead of <code>["me"]</code> because setting a
+                state is <b><b>async</b></b
+                >!
+              </li>
+              <li>
+                To do something immediately after a state is changed, use
+                <code>useEffect</code> hook!
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org51b650f" class="outline-3">
+          <h3 id="org51b650f">
+            <span class="section-number-3">1.2.</span>
+            <code>useEffect</code> runs after specific variable change
+          </h3>
+          <div class="outline-text-3" id="text-1-2">
+            <div class="org-src-container">
+              <pre
+                class="src src-js"
+              ><span class="linenr">1: </span>useEffect(() =&gt; {
 <span class="linenr">2: </span>    console.log(persons);
 <span class="linenr">3: </span>}, [persons]);
 </pre>
-</div>
+            </div>
 
-<div class="org-src-container">
-<pre class="src src-js"><span class="linenr">1: </span>useEffect(() =&gt; {
+            <div class="org-src-container">
+              <pre
+                class="src src-js"
+              ><span class="linenr">1: </span>useEffect(() =&gt; {
 <span class="linenr">2: </span><span style="color: #5B6268;">/* </span><span style="color: #5B6268;">do something, e.g., interact with an external service</span><span style="color: #5B6268;"> */</span>
 <span class="linenr">3: </span>
 <span class="linenr">4: </span><span style="color: #51afef;">return</span> () =&gt; {
@@ -832,35 +1624,55 @@ URL -&gt; Router -&gt; render different components
 <span class="linenr">6: </span>}
 <span class="linenr">7: </span>}, [<span style="color: #5B6268;">/*</span><span style="color: #5B6268;">dependencies</span><span style="color: #5B6268;"> */</span>])
 </pre>
-</div>
+            </div>
 
-<ul class="org-ul">
-<li><code class="src src-js">useEffect(myFunction, [var1, var2])</code> calls <code>myFunction</code> everytime when <code>var1</code> or <code>var2</code> changes</li>
-<li><code class="src src-js">useEffect(myFunction, []])</code> calls only once when the component is rendered for the first time (on mount)</li>
-<li><code class="src src-js">useEffect(myFunction)</code> calls at every render</li>
-</ul>
-</div>
-</div>
-</div>
-<div id="outline-container-org0564f0a" class="outline-2">
-<h2 id="org0564f0a"><span class="section-number-2">2.</span> React hook patterns</h2>
-<div class="outline-text-2" id="text-2">
-</div>
-<div id="outline-container-orgdba814a" class="outline-3">
-<h3 id="orgdba814a"><span class="section-number-3">2.1.</span> Fetch and send data</h3>
-<div class="outline-text-3" id="text-2-1">
-<div class="org-src-container">
-<pre class="src src-js"><span class="linenr">1: </span><span style="color: #5B6268;">/* </span><span style="color: #5B6268;">fetch data on mount</span><span style="color: #5B6268;"> */</span>
+            <ul class="org-ul">
+              <li>
+                <code class="src src-js"
+                  >useEffect(myFunction, [var1, var2])</code
+                >
+                calls <code>myFunction</code> everytime when
+                <code>var1</code> or <code>var2</code> changes
+              </li>
+              <li>
+                <code class="src src-js">useEffect(myFunction, []])</code> calls
+                only once when the component is rendered for the first time (on
+                mount)
+              </li>
+              <li>
+                <code class="src src-js">useEffect(myFunction)</code> calls at
+                every render
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="outline-container-org0564f0a" class="outline-2">
+        <h2 id="org0564f0a">
+          <span class="section-number-2">2.</span> React hook patterns
+        </h2>
+        <div class="outline-text-2" id="text-2"></div>
+        <div id="outline-container-orgdba814a" class="outline-3">
+          <h3 id="orgdba814a">
+            <span class="section-number-3">2.1.</span> Fetch and send data
+          </h3>
+          <div class="outline-text-3" id="text-2-1">
+            <div class="org-src-container">
+              <pre
+                class="src src-js"
+              ><span class="linenr">1: </span><span style="color: #5B6268;">/* </span><span style="color: #5B6268;">fetch data on mount</span><span style="color: #5B6268;"> */</span>
 <span class="linenr">2: </span>useEffect(() =&gt; {
 <span class="linenr">3: </span>    get(<span style="color: #98be65;">"/api/packages"</span>).then((packageList) =&gt; {
 <span class="linenr">4: </span>        setPackages(packageList);
 <span class="linenr">5: </span>    });
 <span class="linenr">6: </span>}, []);
 </pre>
-</div>
+            </div>
 
-<div class="org-src-container">
-<pre class="src src-js"><span class="linenr">1: </span><span style="color: #5B6268;">/* </span><span style="color: #5B6268;">send data then toggle admin state</span><span style="color: #5B6268;"> */</span>
+            <div class="org-src-container">
+              <pre
+                class="src src-js"
+              ><span class="linenr">1: </span><span style="color: #5B6268;">/* </span><span style="color: #5B6268;">send data then toggle admin state</span><span style="color: #5B6268;"> */</span>
 <span class="linenr">2: </span><span style="color: #51afef;">const</span> <span style="color: #dcaeea;">handleToggleAdmin</span> = () =&gt; {
 <span class="linenr">3: </span>    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">.then(), do something once the promise is fulfilled</span>
 <span class="linenr">4: </span>    post(<span style="color: #98be65;">"/api/user/admin"</span>, { admin: !admin }).then(() =&gt; {
@@ -869,14 +1681,18 @@ URL -&gt; Router -&gt; render different components
 <span class="linenr">7: </span>};
 <span class="linenr">8: </span><span style="color: #5B6268;">/* </span><span style="color: #5B6268;">&lt;Button onClick={handleToggleAdmin}</span><span style="color: #5B6268;"> */</span>
 </pre>
-</div>
-</div>
-</div>
-<div id="outline-container-org0b9a6c4" class="outline-3">
-<h3 id="org0b9a6c4"><span class="section-number-3">2.2.</span> Conditional rendering</h3>
-<div class="outline-text-3" id="text-2-2">
-<div class="org-src-container">
-<pre class="src src-js"><span class="linenr">1: </span><span style="color: #5B6268;">// </span><span style="color: #5B6268;">JSX is a way of writing HTML in js</span>
+            </div>
+          </div>
+        </div>
+        <div id="outline-container-org0b9a6c4" class="outline-3">
+          <h3 id="org0b9a6c4">
+            <span class="section-number-3">2.2.</span> Conditional rendering
+          </h3>
+          <div class="outline-text-3" id="text-2-2">
+            <div class="org-src-container">
+              <pre
+                class="src src-js"
+              ><span class="linenr">1: </span><span style="color: #5B6268;">// </span><span style="color: #5B6268;">JSX is a way of writing HTML in js</span>
 <span class="linenr">2: </span><span style="color: #51afef;">let</span> <span style="color: #dcaeea;">content</span> = loading ? &lt;p&gt;Loading...&lt;/p&gt; : &lt;p&gt;Loaded&lt;/p&gt;;
 <span class="linenr">3: </span><span style="color: #51afef;">return</span> (
 <span class="linenr">4: </span>    &lt;div&gt;
@@ -885,14 +1701,18 @@ URL -&gt; Router -&gt; render different components
 <span class="linenr">7: </span>    &lt;/div&gt;
 <span class="linenr">8: </span>);
 </pre>
-</div>
-</div>
-</div>
-<div id="outline-container-org4ce2ad9" class="outline-3">
-<h3 id="org4ce2ad9"><span class="section-number-3">2.3.</span> Render an array of Data</h3>
-<div class="outline-text-3" id="text-2-3">
-<div class="org-src-container">
-<pre class="src src-js"><span class="linenr">1: </span><span style="color: #51afef;">const</span> <span style="color: #dcaeea;">data</span> = [
+            </div>
+          </div>
+        </div>
+        <div id="outline-container-org4ce2ad9" class="outline-3">
+          <h3 id="org4ce2ad9">
+            <span class="section-number-3">2.3.</span> Render an array of Data
+          </h3>
+          <div class="outline-text-3" id="text-2-3">
+            <div class="org-src-container">
+              <pre
+                class="src src-js"
+              ><span class="linenr">1: </span><span style="color: #51afef;">const</span> <span style="color: #dcaeea;">data</span> = [
 <span class="linenr">2: </span>    { id: <span style="color: #da8548; font-weight: bold;">0</span>, text: <span style="color: #98be65;">"Text 1"</span> },
 <span class="linenr">3: </span>    { id: <span style="color: #da8548; font-weight: bold;">1</span>, text: <span style="color: #98be65;">"Text 2"</span> },
 <span class="linenr">4: </span>];
@@ -901,18 +1721,25 @@ URL -&gt; Router -&gt; render different components
 <span class="linenr">7: </span>    &lt;ItemComponent key={item.id}&gt;{item.text}&lt;/ItemComponent&gt;
 <span class="linenr">8: </span>));
 </pre>
-</div>
-<ul class="org-ul">
-<li><code>key</code> is a special prop in React; it is used identify which item has changed efficiently</li>
-</ul>
-</div>
-</div>
-</div>
-<div id="outline-container-org24b0c82" class="outline-2">
-<h2 id="org24b0c82"><span class="section-number-2">3.</span> Example: Stopwatch</h2>
-<div class="outline-text-2" id="text-3">
-<div class="org-src-container">
-<pre class="src src-js"><span class="linenr"> 1: </span><span style="color: #51afef;">const</span> <span style="color: #dcaeea;">Stopwatch</span> = () =&gt; {
+            </div>
+            <ul class="org-ul">
+              <li>
+                <code>key</code> is a special prop in React; it is used identify
+                which item has changed efficiently
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="outline-container-org24b0c82" class="outline-2">
+        <h2 id="org24b0c82">
+          <span class="section-number-2">3.</span> Example: Stopwatch
+        </h2>
+        <div class="outline-text-2" id="text-3">
+          <div class="org-src-container">
+            <pre
+              class="src src-js"
+            ><span class="linenr"> 1: </span><span style="color: #51afef;">const</span> <span style="color: #dcaeea;">Stopwatch</span> = () =&gt; {
 <span class="linenr"> 2: </span>    <span style="color: #51afef;">const</span> [<span style="color: #dcaeea;">time</span>, <span style="color: #dcaeea;">setTimer</span>] = useState(<span style="color: #da8548; font-weight: bold;">0</span>);
 <span class="linenr"> 3: </span>
 <span class="linenr"> 4: </span>    useEffect(() =&gt; {
@@ -927,32 +1754,61 @@ URL -&gt; Router -&gt; render different components
 <span class="linenr">13: </span>    <span style="color: #51afef;">return</span> &lt;&gt;TIme: {time}&lt;/&gt;;
 <span class="linenr">14: </span>};
 </pre>
-</div>
-</div>
-</div>
-<div id="outline-container-orgfdd89bb" class="outline-2">
-<h2 id="orgfdd89bb"><span class="section-number-2">4.</span> DOM and component mounting</h2>
-<div class="outline-text-2" id="text-4">
-<ul class="org-ul">
-<li>DOM (Document Object Model): a programming interface for web documents; represents the structure of a document, e.g., HTML, as a tree of objects, where each object corresponds to a part of the document; it dynamically updates the document contents
-<ul class="org-ul">
-<li>React is a framework that manipulates DOM</li>
-</ul></li>
-<li>A React component is unmounted when:
-<ul class="org-ul">
-<li>conditional rendering</li>
-<li>routing; navigating from one route to another</li>
-<li>its parent component is unmounted</li>
-</ul></li>
-</ul>
-</div>
-</div>
-<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-study.html">study</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-web.html">web</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-react.html">react</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-mit.html">mit</a> </div><div id="archive">
-<a href="https://chenyo-17.github.io/org-static-blog/archive.html">Other posts</a>
-</div>
-</div>
-<div id="postamble" class="status"><footer>
-      <p>© 2024 chenyo. Some rights reserved.</p>
-      </footer></div>
-</body>
+          </div>
+        </div>
+      </div>
+      <div id="outline-container-orgfdd89bb" class="outline-2">
+        <h2 id="orgfdd89bb">
+          <span class="section-number-2">4.</span> DOM and component mounting
+        </h2>
+        <div class="outline-text-2" id="text-4">
+          <ul class="org-ul">
+            <li>
+              DOM (Document Object Model): a programming interface for web
+              documents; represents the structure of a document, e.g., HTML, as
+              a tree of objects, where each object corresponds to a part of the
+              document; it dynamically updates the document contents
+              <ul class="org-ul">
+                <li>React is a framework that manipulates DOM</li>
+              </ul>
+            </li>
+            <li>
+              A React component is unmounted when:
+              <ul class="org-ul">
+                <li>conditional rendering</li>
+                <li>routing; navigating from one route to another</li>
+                <li>its parent component is unmounted</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="taglist">
+        <a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a
+        >:
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-study.html"
+          >study</a
+        >
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-web.html"
+          >web</a
+        >
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-react.html"
+          >react</a
+        >
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-mit.html"
+          >mit</a
+        >
+      </div>
+      <div id="archive">
+        <a href="https://chenyo-17.github.io/org-static-blog/archive.html"
+          >Other posts</a
+        >
+      </div>
+    </div>
+    <div id="postamble" class="status">
+      <footer>
+        <p>© 2024 chenyo. Some rights reserved.</p>
+      </footer>
+    </div>
+  </body>
 </html>

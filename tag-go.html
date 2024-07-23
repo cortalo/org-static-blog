@@ -1,82 +1,128 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<link rel="alternate"
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="alternate"
       type="application/rss+xml"
       href="https://chenyo-17.github.io/org-static-blog/rss.xml"
-      title="RSS feed for https://chenyo-17.github.io/org-static-blog">
-<title>org-static-blog</title>
-<script type="text/javascript"
-             src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-       </script>
-       <script type="text/x-mathjax-config">
-             MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'],['\\(','\\)']]}});
-       </script>
-       <meta name="author" content="chenyo">
-      <meta name="referrer" content="no-referrer">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="static/style.css" type="text/css"/></head>
-<body>
-<div id="preamble" class="status"><header>
-      <h1><a href="https://chenyo-17.github.io/org-static-blog">Chenyo's org-static-blog</a></h1>
-      <nav>
-      <a href="https://chenyo-17.github.io/org-static-blog">Home</a>
-      <a href="https://chenyo-17.github.io/org-static-blog/archive.html">Archive</a>
-      <a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>
+      title="RSS feed for https://chenyo-17.github.io/org-static-blog"
+    />
+    <title>org-static-blog</title>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+    ></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'],['\\(','\\)']]}});
+    </script>
+    <meta name="author" content="chenyo" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+  </head>
+  <body>
+    <div id="preamble" class="status">
+      <header>
+        <h1>
+          <a href="https://chenyo-17.github.io/org-static-blog"
+            >Chenyo's org-static-blog</a
+          >
+        </h1>
+        <nav>
+          <a href="https://chenyo-17.github.io/org-static-blog">Home</a>
+          <a href="https://chenyo-17.github.io/org-static-blog/archive.html"
+            >Archive</a
+          >
+          <a href="https://chenyo-17.github.io/org-static-blog/tags.html"
+            >Tags</a
+          >
+        </nav>
+      </header>
+    </div>
+    <div id="content">
+      <h1 class="title">Posts tagged "go":</h1>
+      <div class="post-date">25 Jun 2024</div>
+      <h1 class="post-title">
+        <a
+          href="https://chenyo-17.github.io/org-static-blog/2024-06-25-go-patterns.html"
+          >Go patterns</a
+        >
+      </h1>
+      <nav id="table-of-contents" role="doc-toc">
+        <h2>Table of Contents</h2>
+        <div id="text-table-of-contents" role="doc-toc">
+          <ul>
+            <li><a href="#org31c77a1">1. Concurrency vs Parallelism</a></li>
+            <li>
+              <a href="#org281856c">2. Use goroutines for states</a>
+              <ul>
+                <li><a href="#org2729b69">2.1. Matching a regex</a></li>
+                <li>
+                  <a href="#org552c895"
+                    >2.2. When the state variable cannot be avoided</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#orgdd15392">3. Pattern 1: publish/subscribe server</a>
+              <ul>
+                <li>
+                  <a href="#orgba0c0a2">3.1. Options for slow goroutines</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
       </nav>
-      </header></div>
-<div id="content">
-<h1 class="title">Posts tagged "go":</h1>
-<div class="post-date">25 Jun 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-06-25-go-patterns.html">Go patterns</a></h1>
-<nav id="table-of-contents" role="doc-toc">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents" role="doc-toc">
-<ul>
-<li><a href="#org31c77a1">1. Concurrency vs Parallelism</a></li>
-<li><a href="#org281856c">2. Use goroutines for states</a>
-<ul>
-<li><a href="#org2729b69">2.1. Matching a regex</a></li>
-<li><a href="#org552c895">2.2. When the state variable cannot be avoided</a></li>
-</ul>
-</li>
-<li><a href="#orgdd15392">3. Pattern 1: publish/subscribe server</a>
-<ul>
-<li><a href="#orgba0c0a2">3.1. Options for slow goroutines</a></li>
-</ul>
-</li>
-</ul>
-</div>
-</nav>
-<p>
-This a personal note for the <a href="https://www.youtube.com/watch?v=IdCbMO0Ey9I">Russ Cox guest lecture</a>.
-</p>
-<div id="outline-container-org31c77a1" class="outline-2">
-<h2 id="org31c77a1"><span class="section-number-2">1.</span> Concurrency vs Parallelism</h2>
-<div class="outline-text-2" id="text-1">
-<ul class="org-ul">
-<li>Concurrency: write a program to handle lot of things at once
-<ul class="org-ul">
-<li>not necessarily faster</li>
-</ul></li>
-<li>Parallelism: the program itself can do a lot of computations at once</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org281856c" class="outline-2">
-<h2 id="org281856c"><span class="section-number-2">2.</span> Use goroutines for states</h2>
-<div class="outline-text-2" id="text-2">
-</div>
-<div id="outline-container-org2729b69" class="outline-3">
-<h3 id="org2729b69"><span class="section-number-3">2.1.</span> Matching a regex</h3>
-<div class="outline-text-3" id="text-2-1">
-<ul class="org-ul">
-<li>return if a given string matches a regex: start with <code>"</code>, contains arbitrary escape sequence and ends with <code>*</code></li>
-<li><p>
-unclear logic: store states in the data
-</p>
-<div class="org-src-container">
-<pre class="src src-go"><span class="linenr"> 1: </span><span style="color: #dcaeea;">state</span> := <span style="color: #da8548; font-weight: bold;">0</span>
+      <p>
+        This a personal note for the
+        <a href="https://www.youtube.com/watch?v=IdCbMO0Ey9I"
+          >Russ Cox guest lecture</a
+        >.
+      </p>
+      <div id="outline-container-org31c77a1" class="outline-2">
+        <h2 id="org31c77a1">
+          <span class="section-number-2">1.</span> Concurrency vs Parallelism
+        </h2>
+        <div class="outline-text-2" id="text-1">
+          <ul class="org-ul">
+            <li>
+              Concurrency: write a program to handle lot of things at once
+              <ul class="org-ul">
+                <li>not necessarily faster</li>
+              </ul>
+            </li>
+            <li>
+              Parallelism: the program itself can do a lot of computations at
+              once
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div id="outline-container-org281856c" class="outline-2">
+        <h2 id="org281856c">
+          <span class="section-number-2">2.</span> Use goroutines for states
+        </h2>
+        <div class="outline-text-2" id="text-2"></div>
+        <div id="outline-container-org2729b69" class="outline-3">
+          <h3 id="org2729b69">
+            <span class="section-number-3">2.1.</span> Matching a regex
+          </h3>
+          <div class="outline-text-3" id="text-2-1">
+            <ul class="org-ul">
+              <li>
+                return if a given string matches a regex: start with
+                <code>"</code>, contains arbitrary escape sequence and ends with
+                <code>*</code>
+              </li>
+              <li>
+                <p>unclear logic: store states in the data</p>
+                <div class="org-src-container">
+                  <pre
+                    class="src src-go"
+                  ><span class="linenr"> 1: </span><span style="color: #dcaeea;">state</span> := <span style="color: #da8548; font-weight: bold;">0</span>
 <span class="linenr"> 2: </span><span style="color: #51afef;">for</span> {
 <span class="linenr"> 3: </span>    <span style="color: #dcaeea;">c</span> := <span style="color: #c678dd;">read</span>()
 <span class="linenr"> 4: </span>    <span style="color: #51afef;">switch</span> state {
@@ -103,12 +149,14 @@ unclear logic: store states in the data
 <span class="linenr">25: </span>    }
 <span class="linenr">26: </span>}
 </pre>
-</div></li>
-<li><p>
-clear logic: store states in the code
-</p>
-<div class="org-src-container">
-<pre class="src src-go"><span class="linenr"> 1: </span><span style="color: #5B6268;">// </span><span style="color: #5B6268;">no variable to store state</span>
+                </div>
+              </li>
+              <li>
+                <p>clear logic: store states in the code</p>
+                <div class="org-src-container">
+                  <pre
+                    class="src src-go"
+                  ><span class="linenr"> 1: </span><span style="color: #5B6268;">// </span><span style="color: #5B6268;">no variable to store state</span>
 <span class="linenr"> 2: </span><span style="color: #51afef;">if</span> <span style="color: #c678dd;">read</span>() != <span style="color: #98be65;">'"'</span> {
 <span class="linenr"> 3: </span>    <span style="color: #51afef;">return</span> <span style="color: #a9a1e1;">false</span>
 <span class="linenr"> 4: </span>}
@@ -121,19 +169,24 @@ clear logic: store states in the code
 <span class="linenr">11: </span>}
 <span class="linenr">12: </span><span style="color: #51afef;">return</span> <span style="color: #a9a1e1;">true</span>
 </pre>
-</div></li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org552c895" class="outline-3">
-<h3 id="org552c895"><span class="section-number-3">2.2.</span> When the state variable cannot be avoided</h3>
-<div class="outline-text-3" id="text-2-2">
-<ul class="org-ul">
-<li><p>
-the function needs to return the state
-</p>
-<div class="org-src-container">
-<pre class="src src-go"><span class="linenr"> 1: </span><span style="color: #51afef;">type</span> <span style="color: #ECBE7B;">quoter</span> <span style="color: #51afef;">struct</span> {
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org552c895" class="outline-3">
+          <h3 id="org552c895">
+            <span class="section-number-3">2.2.</span> When the state variable
+            cannot be avoided
+          </h3>
+          <div class="outline-text-3" id="text-2-2">
+            <ul class="org-ul">
+              <li>
+                <p>the function needs to return the state</p>
+                <div class="org-src-container">
+                  <pre
+                    class="src src-go"
+                  ><span class="linenr"> 1: </span><span style="color: #51afef;">type</span> <span style="color: #ECBE7B;">quoter</span> <span style="color: #51afef;">struct</span> {
 <span class="linenr"> 2: </span>    state <span style="color: #ECBE7B;">int</span>
 <span class="linenr"> 3: </span>}
 <span class="linenr"> 4: </span>
@@ -163,12 +216,14 @@ the function needs to return the state
 <span class="linenr">28: </span>    <span style="color: #51afef;">return</span> NeedMoreInput
 <span class="linenr">29: </span>}
 </pre>
-</div></li>
-<li><p>
-use additional goroutines to hold states
-</p>
-<div class="org-src-container">
-<pre class="src src-go"><span class="linenr"> 1: </span><span style="color: #51afef;">type</span> <span style="color: #ECBE7B;">quoter</span> <span style="color: #51afef;">struct</span> {
+                </div>
+              </li>
+              <li>
+                <p>use additional goroutines to hold states</p>
+                <div class="org-src-container">
+                  <pre
+                    class="src src-go"
+                  ><span class="linenr"> 1: </span><span style="color: #51afef;">type</span> <span style="color: #ECBE7B;">quoter</span> <span style="color: #51afef;">struct</span> {
 <span class="linenr"> 2: </span>    char <span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">rune</span>
 <span class="linenr"> 3: </span>    status <span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">Status</span>
 <span class="linenr"> 4: </span>}
@@ -218,27 +273,38 @@ use additional goroutines to hold states
 <span class="linenr">48: </span>    }
 <span class="linenr">49: </span>}
 </pre>
-</div></li>
-<li>check goroutine blockage
-<ul class="org-ul">
-<li><code>Ctrl-\</code> sends <code>SIGQUIT</code></li>
-<li>use the HTTP server&rsquo;s <code>/debug/pprof/goroutine</code> if importing <code>net/http</code></li>
-</ul></li>
-</ul>
-</div>
-</div>
-</div>
-<div id="outline-container-orgdd15392" class="outline-2">
-<h2 id="orgdd15392"><span class="section-number-2">3.</span> Pattern 1: publish/subscribe server</h2>
-<div class="outline-text-2" id="text-3">
-<ul class="org-ul">
-<li>the information goes one way: server -&gt; client</li>
-<li>close a channel to signal no new values will be sent</li>
-<li><p>
-prefer <code>defer</code> when unlocking the mutex
-</p>
-<div class="org-src-container">
-<pre class="src src-go"><span class="linenr"> 1: </span><span style="color: #51afef;">type</span> <span style="color: #ECBE7B;">Server</span> <span style="color: #51afef;">struct</span> {
+                </div>
+              </li>
+              <li>
+                check goroutine blockage
+                <ul class="org-ul">
+                  <li><code>Ctrl-\</code> sends <code>SIGQUIT</code></li>
+                  <li>
+                    use the HTTP server&rsquo;s
+                    <code>/debug/pprof/goroutine</code> if importing
+                    <code>net/http</code>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="outline-container-orgdd15392" class="outline-2">
+        <h2 id="orgdd15392">
+          <span class="section-number-2">3.</span> Pattern 1: publish/subscribe
+          server
+        </h2>
+        <div class="outline-text-2" id="text-3">
+          <ul class="org-ul">
+            <li>the information goes one way: server -&gt; client</li>
+            <li>close a channel to signal no new values will be sent</li>
+            <li>
+              <p>prefer <code>defer</code> when unlocking the mutex</p>
+              <div class="org-src-container">
+                <pre
+                  class="src src-go"
+                ><span class="linenr"> 1: </span><span style="color: #51afef;">type</span> <span style="color: #ECBE7B;">Server</span> <span style="color: #51afef;">struct</span> {
 <span class="linenr"> 2: </span>    mu  <span style="color: #ECBE7B;">sync.Mutex</span> <span style="color: #5B6268;">// </span><span style="color: #5B6268;">protect sub</span>
 <span class="linenr"> 3: </span>    sub <span style="color: #51afef;">map</span>[<span style="color: #51afef;">chan</span>&lt;- <span style="color: #ECBE7B;">Event</span>]<span style="color: #ECBE7B;">bool</span>  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">whether a channel should be closed</span>
 <span class="linenr"> 4: </span>}
@@ -276,20 +342,31 @@ prefer <code>defer</code> when unlocking the mutex
 <span class="linenr">36: </span>    <span style="color: #c678dd;">delete</span>(s.sub, c)
 <span class="linenr">37: </span>}
 </pre>
-</div></li>
-</ul>
-</div>
-<div id="outline-container-orgba0c0a2" class="outline-3">
-<h3 id="orgba0c0a2"><span class="section-number-3">3.1.</span> Options for slow goroutines</h3>
-<div class="outline-text-3" id="text-3-1">
-<ul class="org-ul">
-<li>slow down event generation</li>
-<li>drop events if it cannot be sent, e.g., <code>os/signal</code>, <code>runtime/pprof</code></li>
-<li><p>
-queue events, e.g., add a <code>helper</code> between the server and each client, which also separates the concerns
-</p>
-<div class="org-src-container">
-<pre class="src src-go"><span class="linenr"> 1: </span><span style="color: #51afef;">func</span> <span style="color: #c678dd;">helper</span>(<span style="color: #dcaeea;">in</span> &lt;-<span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">Event</span>, <span style="color: #dcaeea;">out</span> <span style="color: #51afef;">chan</span>&lt;- <span style="color: #ECBE7B;">Event</span>) {
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div id="outline-container-orgba0c0a2" class="outline-3">
+          <h3 id="orgba0c0a2">
+            <span class="section-number-3">3.1.</span> Options for slow
+            goroutines
+          </h3>
+          <div class="outline-text-3" id="text-3-1">
+            <ul class="org-ul">
+              <li>slow down event generation</li>
+              <li>
+                drop events if it cannot be sent, e.g., <code>os/signal</code>,
+                <code>runtime/pprof</code>
+              </li>
+              <li>
+                <p>
+                  queue events, e.g., add a <code>helper</code> between the
+                  server and each client, which also separates the concerns
+                </p>
+                <div class="org-src-container">
+                  <pre
+                    class="src src-go"
+                  ><span class="linenr"> 1: </span><span style="color: #51afef;">func</span> <span style="color: #c678dd;">helper</span>(<span style="color: #dcaeea;">in</span> &lt;-<span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">Event</span>, <span style="color: #dcaeea;">out</span> <span style="color: #51afef;">chan</span>&lt;- <span style="color: #ECBE7B;">Event</span>) {
 <span class="linenr"> 2: </span>    <span style="color: #51afef;">var</span> <span style="color: #dcaeea;">q</span> []<span style="color: #ECBE7B;">Event</span>
 <span class="linenr"> 3: </span>    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">if the in is closed, flash out the pending events in q</span>
 <span class="linenr"> 4: </span>    <span style="color: #5B6268;">// </span><span style="color: #5B6268;">and close out</span>
@@ -316,12 +393,17 @@ queue events, e.g., add a <code>helper</code> between the server and each client
 <span class="linenr">25: </span>    <span style="color: #c678dd;">close</span>(out)
 <span class="linenr">26: </span>}
 </pre>
-</div></li>
-<li><p>
-convert mutexes into goroutines, not suitable for Raft where state transition is complex
-</p>
-<div class="org-src-container">
-<pre class="src src-go"><span class="linenr"> 1: </span><span style="color: #51afef;">type</span> <span style="color: #ECBE7B;">Server</span> <span style="color: #51afef;">struct</span> {
+                </div>
+              </li>
+              <li>
+                <p>
+                  convert mutexes into goroutines, not suitable for Raft where
+                  state transition is complex
+                </p>
+                <div class="org-src-container">
+                  <pre
+                    class="src src-go"
+                  ><span class="linenr"> 1: </span><span style="color: #51afef;">type</span> <span style="color: #ECBE7B;">Server</span> <span style="color: #51afef;">struct</span> {
 <span class="linenr"> 2: </span>    publish   <span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">Event</span>
 <span class="linenr"> 3: </span>    subscribe <span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">subReq</span>
 <span class="linenr"> 4: </span>    cancel    <span style="color: #51afef;">chan</span> <span style="color: #ECBE7B;">subReq</span>
@@ -389,97 +471,205 @@ convert mutexes into goroutines, not suitable for Raft where state transition is
 <span class="linenr">66: </span>    }
 <span class="linenr">67: </span>}
 </pre>
-</div></li>
-</ul>
-</div>
-</div>
-</div>
-<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-go.html">go</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-design-pattern.html">design-pattern</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-study.html">study</a> </div>
-<div class="post-date">24 Jun 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-06-24-a-stupid-debugging-experience.html">A stupid debugging experience</a></h1>
-<nav id="table-of-contents" role="doc-toc">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents" role="doc-toc">
-<ul>
-<li><a href="#org4e2074d">1. What happended</a></li>
-<li><a href="#orgf1f9039">2. What did I do</a></li>
-<li><a href="#org45c7ea5">3. Another issue of running RPC in docker</a></li>
-</ul>
-</div>
-</nav>
-<div id="outline-container-org4e2074d" class="outline-2">
-<h2 id="org4e2074d"><span class="section-number-2">1.</span> What happended</h2>
-<div class="outline-text-2" id="text-1">
-<ul class="org-ul">
-<li>Servers SA and SB have the same docker installation, and the same running container CA and CB.</li>
-<li><p>
-A Go file G can be built on CA, but on CB it reports this error:
-</p>
-<p class="verse">
-runtime: failed to create new OS thread (have 2 already; errno=11)<br>
-runtime: may need to increase max user processes (ulimit -u)<br>
-fatal error: newosproc<br>
-</p></li>
-</ul>
-</div>
-</div>
-<div id="outline-container-orgf1f9039" class="outline-2">
-<h2 id="orgf1f9039"><span class="section-number-2">2.</span> What did I do</h2>
-<div class="outline-text-2" id="text-2">
-<ol class="org-ol">
-<li>I compared any related configurations between SA and SB. and between CA and CB, e.g., <code class="src src-bash"><span style="color: #c678dd;">ulimit</span> -a</code>, <code class="src src-bash">/etc/security/limits.conf</code>. They all look the same.</li>
-<li>I created a new container CN on SA with the same docker image, CN can compile G.</li>
-<li>I looked into the (complex) <code>docker run</code> script for CA/CB and figured out it was due to a resource constraint <code>--pids-limit 100</code>.
-<ul class="org-ul">
-<li>Increasing this limit to 200 seems resolve the issue, but I had no idea why the Go compiler needed so many resources (perhaps due to package I imported).</li>
-</ul></li>
-<li><b><b>Until this point</b></b>, I realized, since the container did not support the compilation, why not just only transfer the compiled binary!
-<ul class="org-ul">
-<li>How silly that I didn&rsquo;t even try this in the beginning!</li>
-</ul></li>
-<li>Since the program imports the <code>net</code> package, and there is a <a href="https://www.reddit.com/r/golang/comments/pi97sp/what_is_the_consequence_of_using_cgo_enabled0/">known issue</a> of Alpine image running a Go binary file, I followed the post and disabled <code>CGO</code> on SA, then <code>docker cp</code> the binary to CA, and it worked.</li>
-</ol>
-</div>
-</div>
-<div id="outline-container-org45c7ea5" class="outline-2">
-<h2 id="org45c7ea5"><span class="section-number-2">3.</span> Another issue of running RPC in docker</h2>
-<div class="outline-text-2" id="text-3">
-<ul class="org-ul">
-<li>The other day, I also spent hours debugging a <code>route unreachable</code> error when I want to send a request from CA to SA.</li>
-<li>The CA is using the <code>bridge</code> network, so it should talk to SA via SA&rsquo;s interface <code>docker0</code> within the subnet <code>172.17.0.0/16</code>.</li>
-<li><p>
-However, in my case, the docker by default rejects packages from any container as shown in SA&rsquo;s <code>tcpdump</code> result:
-</p>
-<p class="verse">
-172.17.0.1-&gt;172.17.0.3 ICMP host unreachable- admin prohibited, length 68<br>
-</p></li>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="taglist">
+        <a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a
+        >:
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-go.html">go</a>
+        <a
+          href="https://chenyo-17.github.io/org-static-blog/tag-design-pattern.html"
+          >design-pattern</a
+        >
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-study.html"
+          >study</a
+        >
+      </div>
+      <div class="post-date">24 Jun 2024</div>
+      <h1 class="post-title">
+        <a
+          href="https://chenyo-17.github.io/org-static-blog/2024-06-24-a-stupid-debugging-experience.html"
+          >A stupid debugging experience</a
+        >
+      </h1>
+      <nav id="table-of-contents" role="doc-toc">
+        <h2>Table of Contents</h2>
+        <div id="text-table-of-contents" role="doc-toc">
+          <ul>
+            <li><a href="#org4e2074d">1. What happended</a></li>
+            <li><a href="#orgf1f9039">2. What did I do</a></li>
+            <li>
+              <a href="#org45c7ea5"
+                >3. Another issue of running RPC in docker</a
+              >
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div id="outline-container-org4e2074d" class="outline-2">
+        <h2 id="org4e2074d">
+          <span class="section-number-2">1.</span> What happended
+        </h2>
+        <div class="outline-text-2" id="text-1">
+          <ul class="org-ul">
+            <li>
+              Servers SA and SB have the same docker installation, and the same
+              running container CA and CB.
+            </li>
+            <li>
+              <p>
+                A Go file G can be built on CA, but on CB it reports this error:
+              </p>
+              <p class="verse">
+                runtime: failed to create new OS thread (have 2 already;
+                errno=11)<br />
+                runtime: may need to increase max user processes (ulimit -u)<br />
+                fatal error: newosproc<br />
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div id="outline-container-orgf1f9039" class="outline-2">
+        <h2 id="orgf1f9039">
+          <span class="section-number-2">2.</span> What did I do
+        </h2>
+        <div class="outline-text-2" id="text-2">
+          <ol class="org-ol">
+            <li>
+              I compared any related configurations between SA and SB. and
+              between CA and CB, e.g.,
+              <code class="src src-bash"
+                ><span style="color: #c678dd">ulimit</span> -a</code
+              >, <code class="src src-bash">/etc/security/limits.conf</code>.
+              They all look the same.
+            </li>
+            <li>
+              I created a new container CN on SA with the same docker image, CN
+              can compile G.
+            </li>
+            <li>
+              I looked into the (complex) <code>docker run</code> script for
+              CA/CB and figured out it was due to a resource constraint
+              <code>--pids-limit 100</code>.
+              <ul class="org-ul">
+                <li>
+                  Increasing this limit to 200 seems resolve the issue, but I
+                  had no idea why the Go compiler needed so many resources
+                  (perhaps due to package I imported).
+                </li>
+              </ul>
+            </li>
+            <li>
+              <b><b>Until this point</b></b
+              >, I realized, since the container did not support the
+              compilation, why not just only transfer the compiled binary!
+              <ul class="org-ul">
+                <li>
+                  How silly that I didn&rsquo;t even try this in the beginning!
+                </li>
+              </ul>
+            </li>
+            <li>
+              Since the program imports the <code>net</code> package, and there
+              is a
+              <a
+                href="https://www.reddit.com/r/golang/comments/pi97sp/what_is_the_consequence_of_using_cgo_enabled0/"
+                >known issue</a
+              >
+              of Alpine image running a Go binary file, I followed the post and
+              disabled <code>CGO</code> on SA, then <code>docker cp</code> the
+              binary to CA, and it worked.
+            </li>
+          </ol>
+        </div>
+      </div>
+      <div id="outline-container-org45c7ea5" class="outline-2">
+        <h2 id="org45c7ea5">
+          <span class="section-number-2">3.</span> Another issue of running RPC
+          in docker
+        </h2>
+        <div class="outline-text-2" id="text-3">
+          <ul class="org-ul">
+            <li>
+              The other day, I also spent hours debugging a
+              <code>route unreachable</code> error when I want to send a request
+              from CA to SA.
+            </li>
+            <li>
+              The CA is using the <code>bridge</code> network, so it should talk
+              to SA via SA&rsquo;s interface <code>docker0</code> within the
+              subnet <code>172.17.0.0/16</code>.
+            </li>
+            <li>
+              <p>
+                However, in my case, the docker by default rejects packages from
+                any container as shown in SA&rsquo;s
+                <code>tcpdump</code> result:
+              </p>
+              <p class="verse">
+                172.17.0.1-&gt;172.17.0.3 ICMP host unreachable- admin
+                prohibited, length 68<br />
+              </p>
+            </li>
 
-<li><p>
-By checking SA&rsquo;s iptables, I found this rule:
-</p>
-<div class="org-src-container">
-<pre class="src src-bash">  -A INPUT -j REJECT --reject-with icmp-host-prohibited
-</pre>
-</div>
-<ul class="org-ul">
-<li>Strangely, the <code>ping</code> still works with this rule.</li>
-</ul></li>
+            <li>
+              <p>By checking SA&rsquo;s iptables, I found this rule:</p>
+              <div class="org-src-container">
+                <pre class="src src-bash">
+  -A INPUT -j REJECT --reject-with icmp-host-prohibited
+</pre
+                >
+              </div>
+              <ul class="org-ul">
+                <li>
+                  Strangely, the <code>ping</code> still works with this rule.
+                </li>
+              </ul>
+            </li>
 
-<li><p>
-In the end, I need to append a new rule to make the RPC work.
-</p>
-<div class="org-src-container">
-<pre class="src src-bash">  iptables -I INPUT <span style="color: #da8548; font-weight: bold;">1</span> -i docker0 -p tcp --dport &lt;port&gt; -s 172.17.0.0/16 -j ACCEPT
+            <li>
+              <p>
+                In the end, I need to append a new rule to make the RPC work.
+              </p>
+              <div class="org-src-container">
+                <pre
+                  class="src src-bash"
+                >  iptables -I INPUT <span style="color: #da8548; font-weight: bold;">1</span> -i docker0 -p tcp --dport &lt;port&gt; -s 172.17.0.0/16 -j ACCEPT
 </pre>
-</div></li>
-</ul>
-</div>
-</div>
-<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-docker.html">docker</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-go.html">go</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-linux.html">linux</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-alpine.html">alpine</a> </div><div id="archive">
-<a href="https://chenyo-17.github.io/org-static-blog/archive.html">Other posts</a>
-</div>
-</div>
-<div id="postamble" class="status"><footer>
-      <p>© 2024 chenyo. Some rights reserved.</p>
-      </footer></div>
-</body>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="taglist">
+        <a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a
+        >:
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-docker.html"
+          >docker</a
+        >
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-go.html">go</a>
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-linux.html"
+          >linux</a
+        >
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-alpine.html"
+          >alpine</a
+        >
+      </div>
+      <div id="archive">
+        <a href="https://chenyo-17.github.io/org-static-blog/archive.html"
+          >Other posts</a
+        >
+      </div>
+    </div>
+    <div id="postamble" class="status">
+      <footer>
+        <p>© 2024 chenyo. Some rights reserved.</p>
+      </footer>
+    </div>
+  </body>
 </html>

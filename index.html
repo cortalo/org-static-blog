@@ -1,907 +1,1996 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<link rel="alternate"
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="alternate"
       type="application/rss+xml"
       href="https://chenyo-17.github.io/org-static-blog/rss.xml"
-      title="RSS feed for https://chenyo-17.github.io/org-static-blog">
-<title>org-static-blog</title>
-<script type="text/javascript"
-             src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-       </script>
-       <script type="text/x-mathjax-config">
-             MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'],['\\(','\\)']]}});
-       </script>
-       <meta name="author" content="chenyo">
-      <meta name="referrer" content="no-referrer">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="static/style.css" type="text/css"/></head>
-<body>
-<div id="preamble" class="status"><header>
-      <h1><a href="https://chenyo-17.github.io/org-static-blog">Chenyo's org-static-blog</a></h1>
-      <nav>
-      <a href="https://chenyo-17.github.io/org-static-blog">Home</a>
-      <a href="https://chenyo-17.github.io/org-static-blog/archive.html">Archive</a>
-      <a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>
-      </nav>
-      </header></div>
-<div id="content">
-<h2>Welcome!</h2>
+      title="RSS feed for https://chenyo-17.github.io/org-static-blog"
+    />
+    <title>org-static-blog</title>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+    ></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'],['\\(','\\)']]}});
+    </script>
+    <meta name="author" content="chenyo" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+  </head>
+  <body>
+    <div id="preamble" class="status">
+      <header>
+        <h1>
+          <a href="https://chenyo-17.github.io/org-static-blog"
+            >Chenyo's org-static-blog</a
+          >
+        </h1>
+        <nav>
+          <a href="https://chenyo-17.github.io/org-static-blog">Home</a>
+          <a href="https://chenyo-17.github.io/org-static-blog/archive.html"
+            >Archive</a
+          >
+          <a href="https://chenyo-17.github.io/org-static-blog/tags.html"
+            >Tags</a
+          >
+        </nav>
+      </header>
+    </div>
+    <div id="content">
+      <h2>Welcome!</h2>
       <p>Take a look if you are bored.</p>
-<div class="post-date">17 Jul 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-07-17-db-notes:-relational-model.html">CMU 15-445 notes: Relational Model & Algebra</a></h1>
-<nav id="table-of-contents" role="doc-toc">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents" role="doc-toc">
-<ul>
-<li><a href="#orgdb8e5cf">1. Terminology</a>
-<ul>
-<li><a href="#orgd60887e">1.1. Database</a></li>
-<li><a href="#org1abe017">1.2. Database design consideration</a></li>
-<li><a href="#org377f2ce">1.3. Database management system (DBMS)</a></li>
-<li><a href="#org48a0e7e">1.4. Data model</a></li>
-<li><a href="#org016a124">1.5. Schema</a></li>
-<li><a href="#org6cbaa77">1.6. Entities and Tables</a></li>
-<li><a href="#orgfd654bd">1.7. Attributes and Fields</a></li>
-<li><a href="#orged26937">1.8. Logical layer</a></li>
-<li><a href="#orge6c0772">1.9. Physical layer</a></li>
-<li><a href="#org3cdf27c">1.10. Data manipulation languages (DMLs)</a></li>
-<li><a href="#orgd7d77d3">1.11. SQL (Structured Query Language) and relational model</a></li>
-</ul>
-</li>
-<li><a href="#orgbc5376c">2. Relational model</a>
-<ul>
-<li><a href="#org9f609bb">2.1. A relation</a></li>
-<li><a href="#orgeefa289">2.2. A domain</a></li>
-<li><a href="#org56db007">2.3. A tuple</a></li>
-<li><a href="#org8044bd1">2.4. Keys</a></li>
-</ul>
-</li>
-<li><a href="#org713859d">3. Relational Algebra</a></li>
-</ul>
-</div>
-</nav>
-<p>
-This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpVZS2s&amp;list=PLSE8ODhjZXjaKScG3l0nuOiDTTqpfnWFf&amp;index=2">CMU 15-445 L1 video</a> and <a href="https://15445.courses.cs.cmu.edu/fall2022/notes/01-introduction.pdf">CMU 15-445 L1 notes</a>, along with some terminology explained by <a href="https://claude.ai/chat/14f3c4ec-0ca8-495e-ac70-dd13f9eab5ea">Claude.ai</a>.
-</p>
-<div id="outline-container-orgdb8e5cf" class="outline-2">
-<h2 id="orgdb8e5cf"><span class="section-number-2">1.</span> Terminology</h2>
-<div class="outline-text-2" id="text-1">
-</div>
-<div id="outline-container-orgd60887e" class="outline-3">
-<h3 id="orgd60887e"><span class="section-number-3">1.1.</span> Database</h3>
-<div class="outline-text-3" id="text-1-1">
-<ul class="org-ul">
-<li>An organized collection of inter-related data that models some aspect of the real-world.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org1abe017" class="outline-3">
-<h3 id="org1abe017"><span class="section-number-3">1.2.</span> Database design consideration</h3>
-<div class="outline-text-3" id="text-1-2">
-<ul class="org-ul">
-<li>Data integrity: protect invalid writing.</li>
-<li>Implementation: query complexity, concurrent query.</li>
-<li>Durability: replication, fault tolerance.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org377f2ce" class="outline-3">
-<h3 id="org377f2ce"><span class="section-number-3">1.3.</span> Database management system (DBMS)</h3>
-<div class="outline-text-3" id="text-1-3">
-<ul class="org-ul">
-<li>A software that manages a database.</li>
-<li>Allow the definition, creation, query, update and administration of databases.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org48a0e7e" class="outline-3">
-<h3 id="org48a0e7e"><span class="section-number-3">1.4.</span> Data model</h3>
-<div class="outline-text-3" id="text-1-4">
-<ul class="org-ul">
-<li>A conceptual, high-level representation of how data is structured</li>
-<li>Defines entities, attributes, relationships between entities and constraints.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org016a124" class="outline-3">
-<h3 id="org016a124"><span class="section-number-3">1.5.</span> Schema</h3>
-<div class="outline-text-3" id="text-1-5">
-<ul class="org-ul">
-<li>A concrete implementation of a data model.</li>
-<li>Defines tables, fields, data types, keys and rules.</li>
-<li>Typically represented by a specific database language.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org6cbaa77" class="outline-3">
-<h3 id="org6cbaa77"><span class="section-number-3">1.6.</span> Entities and Tables</h3>
-<div class="outline-text-3" id="text-1-6">
-<ul class="org-ul">
-<li>Entities: conceptual representations of objects in the logical data model.</li>
-<li>Tables: physical storage structures in the physical data model.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-orgfd654bd" class="outline-3">
-<h3 id="orgfd654bd"><span class="section-number-3">1.7.</span> Attributes and Fields</h3>
-<div class="outline-text-3" id="text-1-7">
-<ul class="org-ul">
-<li>Attributes: properties of an entity.</li>
-<li>Fields: columns in a database table.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-orged26937" class="outline-3">
-<h3 id="orged26937"><span class="section-number-3">1.8.</span> Logical layer</h3>
-<div class="outline-text-3" id="text-1-8">
-<ul class="org-ul">
-<li>The entities and attributes the database has.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-orge6c0772" class="outline-3">
-<h3 id="orge6c0772"><span class="section-number-3">1.9.</span> Physical layer</h3>
-<div class="outline-text-3" id="text-1-9">
-<ul class="org-ul">
-<li>How are entities and attributes stored in the database.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org3cdf27c" class="outline-3">
-<h3 id="org3cdf27c"><span class="section-number-3">1.10.</span> Data manipulation languages (DMLs)</h3>
-<div class="outline-text-3" id="text-1-10">
-<ul class="org-ul">
-<li>Methods to store and retrieve information from a database.</li>
-<li>Procedural: the query specifies the (high-level) strategy the DBMS should use to get the results, e.g., with relational algebra.</li>
-<li>Declarative: the query specifies only what data is desired but not how to get it, e.g., with relational calculus (a formal language).</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-orgd7d77d3" class="outline-3">
-<h3 id="orgd7d77d3"><span class="section-number-3">1.11.</span> SQL (Structured Query Language) and relational model</h3>
-<div class="outline-text-3" id="text-1-11">
-<ul class="org-ul">
-<li>SQL <b><b>implements</b></b> the relational model in DBMS and provides a standard way to create, manipulate and query relational databases.</li>
-<li>Different SQL implementation may vary and do not strictly adhere to the relational model, e.g., allow duplicate rows.</li>
-<li>SQL borrows both relational algebra and relational calculus (?).</li>
-</ul>
-</div>
-</div>
-</div>
-<div id="outline-container-orgbc5376c" class="outline-2">
-<h2 id="orgbc5376c"><span class="section-number-2">2.</span> Relational model</h2>
-<div class="outline-text-2" id="text-2">
-<ul class="org-ul">
-<li>A <b><b>data model</b></b> that defines a database <b><b>abstraction</b></b> to avoid maintenance overhead when changing the physical layer.</li>
-<li>Data is stored as relations/tables.</li>
-<li>Physical layer implementation and execution strategy depends on DBMS implementation.</li>
-</ul>
+      <div class="post-date">23 Jul 2024</div>
+      <h1 class="post-title">
+        <a
+          href="https://chenyo-17.github.io/org-static-blog/2024-07-23-db-notes:-modern-sql.html"
+          >CMU 15-445 notes: Modern SQL</a
+        >
+      </h1>
+      <nav id="table-of-contents" role="doc-toc">
+        <h2>Table of Contents</h2>
+        <div id="text-table-of-contents" role="doc-toc">
+          <ul>
+            <li>
+              <a href="#orgbf8fcd5">1. Terminology</a>
+              <ul>
+                <li>
+                  <a href="#org248e702">1.1. SQL and relational algebra</a>
+                </li>
+                <li><a href="#org159d833">1.2. SQL commands</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#org0147dad">2. SQL syntax</a>
+              <ul>
+                <li><a href="#orgbd38431">2.1. Join</a></li>
+                <li><a href="#orga173fb3">2.2. Aggregation function</a></li>
+                <li><a href="#org3810076">2.3. String operation</a></li>
+                <li><a href="#orgf01c19f">2.4. Date and time</a></li>
+                <li><a href="#orgcd7cf97">2.5. Output redirection</a></li>
+                <li><a href="#org5a5bb90">2.6. Output control</a></li>
+                <li><a href="#orgcfc545f">2.7. Nested queries</a></li>
+                <li><a href="#org6295067">2.8. Window functions</a></li>
+                <li>
+                  <a href="#orgca6458d">2.9. Common Table Expressions (CTE)</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <p>
+        This is a personal note for the
+        <a
+          href="https://15445.courses.cs.cmu.edu/fall2022/notes/02-modernsql.pdf"
+          >CMU 15-445 L2 notes</a
+        >, along with some SQL command explained by
+        <a href="https://claude.ai/chat/a2f07962-eb31-4f76-9a31-5e408722894b"
+          >Claude.ai</a
+        >.
+      </p>
+      <div id="outline-container-orgbf8fcd5" class="outline-2">
+        <h2 id="orgbf8fcd5">
+          <span class="section-number-2">1.</span> Terminology
+        </h2>
+        <div class="outline-text-2" id="text-1"></div>
+        <div id="outline-container-org248e702" class="outline-3">
+          <h3 id="org248e702">
+            <span class="section-number-3">1.1.</span> SQL and relational
+            algebra
+          </h3>
+          <div class="outline-text-3" id="text-1-1">
+            <ul class="org-ul">
+              <li>
+                Relational algebra is based on sets (unordered, no duplicates);
+                SQL is based on bags (unordered, allows duplicates).
+              </li>
+              <li>
+                SQL is a declarative query language; users use SQL to specify
+                the desired result, each DBMS determines the most efficient
+                strategy to produce the answer.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org159d833" class="outline-3">
+          <h3 id="org159d833">
+            <span class="section-number-3">1.2.</span> SQL commands
+          </h3>
+          <div class="outline-text-3" id="text-1-2">
+            <ul class="org-ul">
+              <li>
+                Data manipulation language (DML): <code>SELECT</code>,
+                <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>.
+              </li>
+              <li>
+                <p>Data definition language (DDL): <code>CREATE</code>.</p>
+                <div class="org-src-container">
+                  <pre
+                    class="src src-sql"
+                  ><span style="color: #51afef;">CREATE</span> TABLR student (
+    sid <span style="color: #ECBE7B;">INT</span> <span style="color: #51afef;">PRIMARY</span> <span style="color: #51afef;">KEY</span>,
+    <span style="color: #51afef;">name</span> <span style="color: #ECBE7B;">VARCHAR</span>(<span style="color: #da8548; font-weight: bold;">16</span>),
+    login <span style="color: #ECBE7B;">VARCHAR</span>(<span style="color: #da8548; font-weight: bold;">32</span>) <span style="color: #51afef;">UNIQUE</span>,
+    age <span style="color: #ECBE7B;">SMALLINT</span>,
+    gpa <span style="color: #ECBE7B;">FLOAT</span>
+);
+</pre>
+                </div>
+              </li>
+              <li>Data control language (DCL): security, access control.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="outline-container-org0147dad" class="outline-2">
+        <h2 id="org0147dad">
+          <span class="section-number-2">2.</span> SQL syntax
+        </h2>
+        <div class="outline-text-2" id="text-2"></div>
+        <div id="outline-container-orgbd38431" class="outline-3">
+          <h3 id="orgbd38431">
+            <span class="section-number-3">2.1.</span> Join
+          </h3>
+          <div class="outline-text-3" id="text-2-1">
+            <ul class="org-ul">
+              <li>
+                <p>
+                  Combine columns from one or more tables and produces a new
+                  table.
+                </p>
+                <div class="org-src-container">
+                  <pre
+                    class="src src-sql"
+                  ><span style="color: #5B6268;">-- </span><span style="color: #5B6268;">All students that get an A in 15-721</span>
+<span style="color: #51afef;">SELECT</span> s.<span style="color: #51afef;">name</span>
+    <span style="color: #51afef;">FROM</span> enrolled <span style="color: #51afef;">AS</span> e, student <span style="color: #51afef;">AS</span> s
+<span style="color: #51afef;">WHERE</span> e.grade = <span style="color: #98be65;">'A'</span> <span style="color: #51afef;">AND</span> e.cid = <span style="color: #98be65;">'15-721'</span>
+    <span style="color: #51afef;">AND</span> e.sid = s.sid
+</pre>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-orga173fb3" class="outline-3">
+          <h3 id="orga173fb3">
+            <span class="section-number-3">2.2.</span> Aggregation function
+          </h3>
+          <div class="outline-text-3" id="text-2-2">
+            <ul class="org-ul">
+              <li>
+                <code>AVG(COL)</code>, <code>MIN(COL)</code>,
+                <code>MAX(COL)</code>, <code>COUNT(COL)</code>.
+              </li>
+              <li>
+                <p>
+                  Take as input a bag of tuples and produce a single scalar
+                  value.
+                </p>
+                <div class="org-src-container">
+                  <pre
+                    class="src src-sql"
+                  ><span style="color: #5B6268;">-- </span><span style="color: #5B6268;">Get number of students and their average GPA with a '@cs' login</span>
+<span style="color: #51afef;">SELECT</span> <span style="color: #c678dd;">AVG</span>(gpa), <span style="color: #c678dd;">COUNT</span>(sid) <span style="color: #51afef;">FROM</span> student <span style="color: #51afef;">WHERE</span> login <span style="color: #51afef;">LIKE</span> <span style="color: #98be65;">'@cs'</span>;
+<span style="color: #5B6268;">-- </span><span style="color: #5B6268;">Get the unique students</span>
+<span style="color: #51afef;">SELECT</span> <span style="color: #c678dd;">COUNT</span>(<span style="color: #51afef;">DISTINCT</span> login) <span style="color: #51afef;">FROM</span> student <span style="color: #51afef;">WHERE</span> login <span style="color: #51afef;">LIKE</span> <span style="color: #98be65;">'@cs'</span>;
+</pre>
+                </div>
+              </li>
+              <li>
+                <p>
+                  Non-aggregated values in <code>SELECT</code> output must
+                  appear in <code>GROUP BY</code>.
+                </p>
+                <div class="org-src-container">
+                  <pre
+                    class="src src-sql"
+                  ><span style="color: #5B6268;">-- </span><span style="color: #5B6268;">Get the average GPA in each course</span>
+<span style="color: #51afef;">SELECT</span> <span style="color: #c678dd;">AVG</span>(s.gpa), e.cid
+    <span style="color: #51afef;">FROM</span> enrolled <span style="color: #51afef;">AS</span> e, student <span style="color: #51afef;">AS</span> s
+<span style="color: #51afef;">WHERE</span> e.sid = s.sid
+<span style="color: #51afef;">GROUP</span> <span style="color: #51afef;">BY</span> e.cid;
+</pre>
+                </div>
+              </li>
+              <li>
+                <p>
+                  <code>HAVING</code>: filter output results based on
+                  aggregation computation.
+                </p>
+                <div class="org-src-container">
+                  <pre
+                    class="src src-sql"
+                  ><span style="color: #51afef;">SELECT</span> <span style="color: #c678dd;">AVG</span>(s.gpa), e.cid
+    <span style="color: #51afef;">FROM</span> enrolled <span style="color: #51afef;">AS</span> e, student <span style="color: #51afef;">AS</span> s
+<span style="color: #51afef;">WHERE</span> e.sid = s.sid
+<span style="color: #51afef;">GROUP</span> <span style="color: #51afef;">BY</span> e.cid
+<span style="color: #51afef;">HAVING</span> <span style="color: #c678dd;">AVG</span>(s.gpa) &gt; <span style="color: #da8548; font-weight: bold;">3.9</span>;
+</pre>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org3810076" class="outline-3">
+          <h3 id="org3810076">
+            <span class="section-number-3">2.3.</span> String operation
+          </h3>
+          <div class="outline-text-3" id="text-2-3">
+            <ul class="org-ul">
+              <li>
+                Strings are case sensitive and single-quotes only in the SQL
+                standard.
+              </li>
+              <li>
+                Use <code>LIKE</code> for string pattern matching:
+                <ul class="org-ul">
+                  <li><code>%</code> matches any sub-string,</li>
+                  <li><code>_</code> matches any one character</li>
+                </ul>
+              </li>
+              <li>
+                Standard string functions: <code>UPPER(S)</code>,
+                <code>SUBSTRING(S, B, E)</code>.
+              </li>
+              <li><code>||</code>: string concatenation.</li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-orgf01c19f" class="outline-3">
+          <h3 id="orgf01c19f">
+            <span class="section-number-3">2.4.</span> Date and time
+          </h3>
+          <div class="outline-text-3" id="text-2-4">
+            <ul class="org-ul">
+              <li>Attributes: <code>DATE</code>, <code>TIME</code>.</li>
+              <li>Different DBMS have different date/time operations.</li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-orgcd7cf97" class="outline-3">
+          <h3 id="orgcd7cf97">
+            <span class="section-number-3">2.5.</span> Output redirection
+          </h3>
+          <div class="outline-text-3" id="text-2-5">
+            <ul class="org-ul">
+              <li>
+                <p>One can store the results into another table</p>
+                <div class="org-src-container">
+                  <pre
+                    class="src src-sql"
+                  ><span style="color: #5B6268;">-- </span><span style="color: #5B6268;">output to a non-existing table</span>
+<span style="color: #51afef;">SELECT</span> <span style="color: #51afef;">DISTINCT</span> cis <span style="color: #51afef;">INTO</span> CourseIds <span style="color: #51afef;">FROM</span> enrolled;
+<span style="color: #5B6268;">-- </span><span style="color: #5B6268;">output to an existing table with the same number of columns and column type</span>
+<span style="color: #5B6268;">-- </span><span style="color: #5B6268;">but the names do not matter</span>
+<span style="color: #51afef;">INSERT</span> <span style="color: #51afef;">INTO</span> CourseIds (<span style="color: #51afef;">SELECT</span> <span style="color: #51afef;">DISTINCT</span> cid <span style="color: #51afef;">FROM</span> enrolled);
+</pre>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org5a5bb90" class="outline-3">
+          <h3 id="org5a5bb90">
+            <span class="section-number-3">2.6.</span> Output control
+          </h3>
+          <div class="outline-text-3" id="text-2-6">
+            <ul class="org-ul">
+              <li>
+                Use <code>ORDER</code>, <code>ASC</code> and
+                <code>DESC</code> to sort the output tuples; otherwise the
+                output could have different order every time.
+              </li>
+              <li>
+                <p>
+                  Use <code>LIMIT</code>, <code>OFFSET</code> to restrict the
+                  output number.
+                </p>
+                <div class="org-src-container">
+                  <pre
+                    class="src src-sql"
+                  ><span style="color: #51afef;">SELECT</span> sid <span style="color: #51afef;">FROM</span> enrolled <span style="color: #51afef;">WHERE</span> cid = <span style="color: #98be65;">'15-721'</span>
+<span style="color: #51afef;">ORDER</span> <span style="color: #51afef;">BY</span> <span style="color: #c678dd;">UPPER</span>(grade) <span style="color: #51afef;">DESC</span>, sid + <span style="color: #da8548; font-weight: bold;">1</span> <span style="color: #51afef;">ASC</span>;
+    <span style="color: #51afef;">LIMIT</span> <span style="color: #da8548; font-weight: bold;">10</span> OFFSET <span style="color: #da8548; font-weight: bold;">10</span>;  <span style="color: #5B6268;">-- </span><span style="color: #5B6268;">output 10 tuples, starting from the 11th tuple</span>
+</pre>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-orgcfc545f" class="outline-3">
+          <h3 id="orgcfc545f">
+            <span class="section-number-3">2.7.</span> Nested queries
+          </h3>
+          <div class="outline-text-3" id="text-2-7">
+            <ul class="org-ul">
+              <li>Nested queries are often difficult to optimize.</li>
+              <li>
+                The inner query can access attributes defined in the outer
+                query.
+              </li>
+              <li>
+                <p>Inner queries can appear anywhere.</p>
+                <div class="org-src-container">
+                  <pre
+                    class="src src-sql"
+                  ><span style="color: #5B6268;">-- </span><span style="color: #5B6268;">Output a column 'one' with 1s, the number of 1s</span>
+<span style="color: #5B6268;">-- </span><span style="color: #5B6268;">equals to the number of rows in 'student'</span>
+<span style="color: #51afef;">SELECT</span> (<span style="color: #51afef;">SELECT</span> <span style="color: #da8548; font-weight: bold;">1</span>) <span style="color: #51afef;">AS</span> one <span style="color: #51afef;">FROM</span> student;
 
+<span style="color: #5B6268;">-- </span><span style="color: #5B6268;">Get the names of students that are enrolled in '15-445'</span>
+<span style="color: #51afef;">SELECT</span> <span style="color: #51afef;">name</span> <span style="color: #51afef;">FROM</span> students
+    <span style="color: #51afef;">WHERE</span> sid <span style="color: #51afef;">IN</span> (
+        <span style="color: #51afef;">SELECT</span> sid <span style="color: #51afef;">FROM</span> enrolled
+        <span style="color: #51afef;">WHERE</span> cid = <span style="color: #98be65;">'15-445'</span>
+);
 
-<figure id="org85d863c">
-<img src="https://people.cs.pitt.edu/~chang/156/images/fig41.gif" alt="fig41.gif" align="center" width="500px">
+<span style="color: #5B6268;">-- </span><span style="color: #5B6268;">Get student record with the highest id</span>
+<span style="color: #5B6268;">-- </span><span style="color: #5B6268;">that is enrolled in at least one course.</span>
+<span style="color: #51afef;">SELECT</span> student.sid, <span style="color: #51afef;">name</span>
+    <span style="color: #51afef;">FROM</span> student
+    <span style="color: #5B6268;">-- </span><span style="color: #5B6268;">the intermediate output is aliases as max_e</span>
+    <span style="color: #51afef;">JOIN</span> (<span style="color: #51afef;">SELECT</span> <span style="color: #c678dd;">MAX</span>(sid) <span style="color: #51afef;">AS</span> sid <span style="color: #51afef;">FROM</span> enrolled) <span style="color: #51afef;">AS</span> max_e
+    <span style="color: #5B6268;">-- </span><span style="color: #5B6268;">only select student who has the max_e</span>
+    <span style="color: #51afef;">ON</span> student.sid = max_e.sid;
 
-<figcaption><span class="figure-number">Figure 1: </span>Relational model concepts</figcaption>
-</figure>
-</div>
-<div id="outline-container-org9f609bb" class="outline-3">
-<h3 id="org9f609bb"><span class="section-number-3">2.1.</span> A relation</h3>
-<div class="outline-text-3" id="text-2-1">
-<ul class="org-ul">
-<li>An unordered set that contains the relationship of attributes that represent entities.</li>
-<li>Relationships are unordered in the relation.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-orgeefa289" class="outline-3">
-<h3 id="orgeefa289"><span class="section-number-3">2.2.</span> A domain</h3>
-<div class="outline-text-3" id="text-2-2">
-<ul class="org-ul">
-<li>A named set of allowable values for a specific attribute.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org56db007" class="outline-3">
-<h3 id="org56db007"><span class="section-number-3">2.3.</span> A tuple</h3>
-<div class="outline-text-3" id="text-2-3">
-<ul class="org-ul">
-<li>A set of attribute values in the relation.</li>
-<li>Values can also be lists or nested data structures.</li>
-<li><code>Null</code>: a special value in any attribute which means the attribute in a tuple is undefined.</li>
-<li>\(n-ary\): a relation with \(n\) attributes.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org8044bd1" class="outline-3">
-<h3 id="org8044bd1"><span class="section-number-3">2.4.</span> Keys</h3>
-<div class="outline-text-3" id="text-2-4">
-<ul class="org-ul">
-<li>Primary key: uniquely identifies a single tuple.</li>
-<li>Foreign key: specifies that an attribute (e.g., <code>CustomerID</code>) in one relation (e.g., <code>OrderTable</code>) has to map to a tuple (e.g., the tuple with the same <code>CustomerID</code>) in another relation (e.g., <code>CustomerTable</code>).</li>
-</ul>
-</div>
-</div>
-</div>
-<div id="outline-container-org713859d" class="outline-2">
-<h2 id="org713859d"><span class="section-number-2">3.</span> Relational Algebra</h2>
-<div class="outline-text-2" id="text-3">
-<ul class="org-ul">
-<li>A set of fundamental operations to retrieve and manipulate tuples in a relation.</li>
-<li>Each operator takes in one or more relations as inputs, and outputs a new relation; operators can be chained.</li>
-<li>Is a <b><b>procedure language</b></b>, meaning the execution always follow the query, even there exists more efficient way to get the same result; A better way is to be more declarative, e.g., SQL&rsquo;s <code>where</code> syntax.</li>
-<li><a href="https://i.sstatic.net/AHjRg.png">Common relational algebra</a>.</li>
-</ul>
-</div>
-</div>
-<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-study.html">study</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-database.html">database</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-cmu.html">cmu</a> </div>
-<div class="post-date">14 Jul 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-07-14-parallel-evm:-bep-130.html">Parallel EVM: BEP-130</a></h1>
-<nav id="table-of-contents" role="doc-toc">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents" role="doc-toc">
-<ul>
-<li><a href="#orgebfec85">1. Blockchain fundamentals</a>
-<ul>
-<li><a href="#org312100a">1.1. System contract</a></li>
-<li><a href="#org9636d82">1.2. Transaction execution phases</a></li>
-</ul>
-</li>
-<li><a href="#orgbe6ee60">2. Design principle</a></li>
-<li><a href="#org03891d9">3. Workflow</a>
-<ul>
-<li><a href="#org05d90b1">3.1. Dispatch factors</a></li>
-<li><a href="#org1b86e22">3.2. Slot execution stages</a></li>
-<li><a href="#orga0b3b7b">3.3. Conflict detection</a></li>
-</ul>
-</li>
-</ul>
-</div>
-</nav>
-<p>
-This is a personal note for <a href="https://github.com/bnb-chain/BEPs/blob/master/BEPs/BEP130.md">BEP-130</a>.
-BEP-130 is a proposal that introduces a parallel transaction execution mechanism on the BNB Smart Chain (BSC).
-</p>
-<div id="outline-container-orgebfec85" class="outline-2">
-<h2 id="orgebfec85"><span class="section-number-2">1.</span> Blockchain fundamentals</h2>
-<div class="outline-text-2" id="text-1">
-</div>
-<div id="outline-container-org312100a" class="outline-3">
-<h3 id="org312100a"><span class="section-number-3">1.1.</span> System contract</h3>
-<div class="outline-text-3" id="text-1-1">
-<ul class="org-ul">
-<li>Built-in contracts to perform system level operations, e,g., gas fee reward, cross chain communication.</li>
-<li>Cannot be executed concurrently since they depend on the execution results of other transactions, e.g., a number of transaction made by an account at some timestamp.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org9636d82" class="outline-3">
-<h3 id="org9636d82"><span class="section-number-3">1.2.</span> Transaction execution phases</h3>
-<div class="outline-text-3" id="text-1-2">
-<ul class="org-ul">
-<li>Block mining phase: received from the P2P transaction pool, could contain invalid transactions.</li>
-<li>Block sync phase: the block is confirmed.</li>
-</ul>
-</div>
-</div>
-</div>
-<div id="outline-container-orgbe6ee60" class="outline-2">
-<h2 id="orgbe6ee60"><span class="section-number-2">2.</span> Design principle</h2>
-<div class="outline-text-2" id="text-2">
-<ul class="org-ul">
-<li>Should always produce the same result as the current sequential execution.</li>
-<li>Should be decoupled into existing or new modules with no circular dependency.</li>
-<li>Should be configurable based on node hardware resources.</li>
-<li>Keep it simple and smart.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org03891d9" class="outline-2">
-<h2 id="org03891d9"><span class="section-number-2">3.</span> Workflow</h2>
-<div class="outline-text-2" id="text-3">
-</div>
-<div id="outline-container-org05d90b1" class="outline-3">
-<h3 id="org05d90b1"><span class="section-number-3">3.1.</span> Dispatch factors</h3>
-<div class="outline-text-3" id="text-3-1">
-<ul class="org-ul">
-<li>Is the slot idle or occupied?</li>
-<li>Is there a same address contract running or pending in this slot?</li>
-<li>Has the slot&rsquo;s pending transactions size reached the max transactions queue size limitation?</li>
-<li>Is there a big transaction index gap between the slot&rsquo;s head transaction and the dispatched transaction?</li>
-<li>Is the transaction contract likely to have high gas cost or a conflict rate?</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org1b86e22" class="outline-3">
-<h3 id="org1b86e22"><span class="section-number-3">3.2.</span> Slot execution stages</h3>
-<div class="outline-text-3" id="text-3-2">
-<ol class="org-ol">
-<li>Execute the transaction \(Tx_i\)based on a specific worldstate, e.g., the state when the execution starts.</li>
-<li>Wait for the finalization of the previous transaction \(Tx_{i-1}\).</li>
-<li>Detect if there is any conflict between the state read by \(Tx_i\) and the state change after the execution of \(Tx_i\) starts.</li>
-<li>If a conflict is detected, re-execute \(Tx_{i}\) again based on the latest finalized worldstate.</li>
-<li>Finalize the state changed by \(Tx_i\) to the latest worldstate.</li>
-<li>The state changes are kept within each slot, and are merged to the main StateDB once the execution is done.</li>
-<li>The first transaction in a block can be immediately finalized.</li>
-<li>If \(Tx_i\) and \(Tx_{i-1}\) are in the same slot, \(Tx_i\) can immediately start conflict detection.</li>
-<li>Re-executed transaction can be immediately finalized as it reads the latest worldstate.</li>
-</ol>
-</div>
-</div>
-<div id="outline-container-orga0b3b7b" class="outline-3">
-<h3 id="orga0b3b7b"><span class="section-number-3">3.3.</span> Conflict detection</h3>
-<div class="outline-text-3" id="text-3-3">
-<ul class="org-ul">
-<li>Detection items: storage key/value pair; account balance; contract content and status.</li>
-<li>Overlap reads without write, or hardcode writes without read are not conflicts.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-evm.html">evm</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-parallel-evm.html">parallel-evm</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-bnb.html">bnb</a> </div>
-<div class="post-date">07 Jul 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-07-07-parallel-evm:-bnb-chain.html">Parallel EVM: BNB chain</a></h1>
-<nav id="table-of-contents" role="doc-toc">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents" role="doc-toc">
-<ul>
-<li><a href="#org50546b9">1. Blockchain fundamentals</a>
-<ul>
-<li><a href="#orgb99e643">1.1. Why parallel EVM is not easy</a></li>
-<li><a href="#org33e7ded">1.2. A Parallel EVM ideas</a></li>
-<li><a href="#orgef305d4">1.3. Block STM algorithm</a></li>
-</ul>
-</li>
-<li><a href="#org92cb377">2. BNB Parallel EVM 1.0: Infrastructure</a></li>
-<li><a href="#org5f4229a">3. BNB Parallel EVM 2.0: Performance enhancement</a></li>
-<li><a href="#org10ca388">4. BNB Parallel EVM 3.0: Production</a>
-<ul>
-<li><a href="#org901eb7b">4.1. Hint-based dispatcher</a></li>
-<li><a href="#org9a75ab8">4.2. Seamless BNB chain ecosystem integration</a></li>
-</ul>
-</li>
-<li><a href="#org6fa8f4f">5. Comparison with other solutions</a></li>
-<li><a href="#orgdca39c6">6. Other optimizations</a></li>
-</ul>
-</div>
-</nav>
-<p>
-This is a personal note for <a href="https://www.bnbchain.org/zh-CN/blog/road-to-high-performance-parallel-evm-for-bnb-chain">BNB chain-blog</a>.
-</p>
-<div id="outline-container-org50546b9" class="outline-2">
-<h2 id="org50546b9"><span class="section-number-2">1.</span> Blockchain fundamentals</h2>
-<div class="outline-text-2" id="text-1">
-</div>
-<div id="outline-container-orgb99e643" class="outline-3">
-<h3 id="orgb99e643"><span class="section-number-3">1.1.</span> Why parallel EVM is not easy</h3>
-<div class="outline-text-3" id="text-1-1">
-<ul class="org-ul">
-<li>Lack of visibility of potential transaction conflict.</li>
-<li>Blockchains experience transaction bursts, e.g., &gt;70M transactions per day.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org33e7ded" class="outline-3">
-<h3 id="org33e7ded"><span class="section-number-3">1.2.</span> A Parallel EVM ideas</h3>
-<div class="outline-text-3" id="text-1-2">
-<ul class="org-ul">
-<li>Run multiple EVM instances concurrently on different threads.</li>
-<li>Execute transactions independently on each thread and later merge a finial state update.</li>
-<li><a href="https://lh7-us.googleusercontent.com/Dh1GAMYlMkiRI0xWQ0ByYOxq_GNtA9h1PP1OF7FP9b8O3VRxVtlh1eq991OlNa4rNX_ZXH8tVPRBeN58_0dBF1jPUVRuuJMl4JqmBchhCTZp_vF-W003l77KajIjIMCHfapjsBH--0EpMi0FT2iNPlw">Parallel EVM scheme</a></li>
-</ul>
-</div>
-</div>
-<div id="outline-container-orgef305d4" class="outline-3">
-<h3 id="orgef305d4"><span class="section-number-3">1.3.</span> Block STM algorithm</h3>
-<div class="outline-text-3" id="text-1-3">
-<ul class="org-ul">
-<li>Optimistic parallelism: assigns transactions to various threads.</li>
-<li>Software transaction memory (STM): detect conflicts when transactions try to modify the same shared state simultaneously.</li>
-<li>Conflict resolution: when conflicts are detected, the offending transactions are discarded without affecting the blockchain state and are re-executed.</li>
-</ul>
-</div>
-</div>
-</div>
-<div id="outline-container-org92cb377" class="outline-2">
-<h2 id="org92cb377"><span class="section-number-2">2.</span> BNB Parallel EVM 1.0: Infrastructure</h2>
-<div class="outline-text-2" id="text-2">
-<ul class="org-ul">
-<li>Proposal: <a href="https://github.com/bnb-chain/BEPs/pull/130?ref=bnbchain.ghost.io">BEP-130 (2022)</a></li>
-<li>Dispatcher: distributes transactions across threads to optimize throughput.</li>
-<li>Parallel execution engine: execute transactions independently on each thread.</li>
-<li>Local stateDB: each thread maintains a local stateDB to record state access.</li>
-<li>Conflict detection: detect conflicts and re-execute conflicting transactions.</li>
-<li>State commit: the finalized results are committed to the global state DB.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org5f4229a" class="outline-2">
-<h2 id="org5f4229a"><span class="section-number-2">3.</span> BNB Parallel EVM 2.0: Performance enhancement</h2>
-<div class="outline-text-2" id="text-3">
-<ul class="org-ul">
-<li>Dispatcher: combine both static and dynamic dispatch strategies.</li>
-<li>Execution engine: streaming pipeline to enable smooth transaction processing.</li>
-<li>Conflict detection: ensure data integrity while minimizing unnecessary re-execution.</li>
-<li>Memory: shared memory pools and light copying techniques to reduce memory footprint.</li>
-<li>The overall performance ranges from 20% to 50%.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org10ca388" class="outline-2">
-<h2 id="org10ca388"><span class="section-number-2">4.</span> BNB Parallel EVM 3.0: Production</h2>
-<div class="outline-text-2" id="text-4">
-</div>
-<div id="outline-container-org901eb7b" class="outline-3">
-<h3 id="org901eb7b"><span class="section-number-3">4.1.</span> Hint-based dispatcher</h3>
-<div class="outline-text-3" id="text-4-1">
-<ul class="org-ul">
-<li>leverages external hint providers to analyze transactions and generate predictions about potential state access conflicts.</li>
-<li>Simple hints include read/write state sets; advanced hints incorporate weak/strong ordering for optimal parallelism.</li>
-<li>Conflicting transactions are assigned to the same slot.</li>
-<li>Transactions with no conflicts are distributed across different slots.</li>
-<li>Conflict detector remains as a backup for handling unforeseen conflicts.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org9a75ab8" class="outline-3">
-<h3 id="org9a75ab8"><span class="section-number-3">4.2.</span> Seamless BNB chain ecosystem integration</h3>
-<div class="outline-text-3" id="text-4-2">
-<ul class="org-ul">
-<li>Modularization and reconstructing.</li>
-<li>Thorough testing and validation.</li>
-</ul>
-</div>
-</div>
-</div>
-<div id="outline-container-org6fa8f4f" class="outline-2">
-<h2 id="org6fa8f4f"><span class="section-number-2">5.</span> Comparison with other solutions</h2>
-<div class="outline-text-2" id="text-5">
-<table>
+<span style="color: #5B6268;">-- </span><span style="color: #5B6268;">the above is same as below, but `join` syntax is more preferred</span>
+<span style="color: #51afef;">SELECT</span> student.sid, <span style="color: #51afef;">name</span>
+<span style="color: #51afef;">FROM</span> student <span style="color: #51afef;">AS</span> s, (<span style="color: #51afef;">SELECT</span> <span style="color: #c678dd;">MAX</span>(sid) <span style="color: #51afef;">AS</span> sid <span style="color: #51afef;">FROM</span> enrolled) <span style="color: #51afef;">AS</span> max_e
+<span style="color: #51afef;">WHERE</span> s.sid = max_e.sid;
+</pre>
+                </div>
+              </li>
 
+              <li>
+                Nested query results expression:
+                <ul class="org-ul">
+                  <li>
+                    <code>ALL</code>: must satisfy expression for all
+                    <b><b>rows</b></b> in sub-query.
+                  </li>
+                  <li>
+                    <code>ANY</code>, <code>IN</code>: must satisfy expression
+                    for at least one row in sub-query.
+                  </li>
+                  <li>
+                    <p><code>EXISTS</code>: at least one row is returned.</p>
+                    <div class="org-src-container">
+                      <pre
+                        class="src src-sql"
+                      ><span style="color: #5B6268;">-- </span><span style="color: #5B6268;">Get all courses with no students enrolled in</span>
+<span style="color: #51afef;">SELECT</span> * <span style="color: #51afef;">FROM</span> course
+    <span style="color: #51afef;">WHERE</span> <span style="color: #51afef;">NOT</span> <span style="color: #51afef;">EXISTS</span>(
+        <span style="color: #51afef;">SELECT</span> * <span style="color: #51afef;">FROM</span> enrolled
+            <span style="color: #51afef;">WHERE</span> course.cid = enrolled.cid
+)
 
-<colgroup>
-<col  class="org-left">
+<span style="color: #5B6268;">-- </span><span style="color: #5B6268;">Get students whose gpa is larget than the highest score in '15-712'</span>
+<span style="color: #5B6268;">-- </span><span style="color: #5B6268;">and the login has a level &gt; 3</span>
+<span style="color: #51afef;">SELECT</span> student.sid, <span style="color: #51afef;">name</span>
+    <span style="color: #51afef;">FROM</span> student <span style="color: #51afef;">AS</span> S
+<span style="color: #51afef;">WHERE</span> s.gpa &gt; <span style="color: #51afef;">ALL</span> (
+    <span style="color: #51afef;">SELECT</span> course.score <span style="color: #51afef;">FROM</span> course
+        <span style="color: #51afef;">WHERE</span> course.cid = <span style="color: #98be65;">'15-712'</span>
+)
+<span style="color: #51afef;">AND</span> student.login <span style="color: #51afef;">IN</span> (
+    <span style="color: #51afef;">SELECT</span> login <span style="color: #51afef;">FROM</span> enrolled
+    <span style="color: #51afef;">WHERE</span> <span style="color: #51afef;">level</span> &gt; <span style="color: #da8548; font-weight: bold;">3</span>
+);
+</pre>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org6295067" class="outline-3">
+          <h3 id="org6295067">
+            <span class="section-number-3">2.8.</span> Window functions
+          </h3>
+          <div class="outline-text-3" id="text-2-8">
+            <ul class="org-ul">
+              <li>Perform sliding calculation across a set of tuples.</li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-orgca6458d" class="outline-3">
+          <h3 id="orgca6458d">
+            <span class="section-number-3">2.9.</span> Common Table Expressions
+            (CTE)
+          </h3>
+          <div class="outline-text-3" id="text-2-9">
+            <ul class="org-ul">
+              <li>
+                An alternative to windows or nested queries when writing more
+                complex queries.
+              </li>
+              <li>
+                <p>
+                  CTEs use <code>WITH</code> to bind the output of an inner
+                  query to a temporary table.
+                </p>
+                <div class="org-src-container">
+                  <pre
+                    class="src src-sql"
+                  ><span style="color: #51afef;">WITH</span> cteName (col1, col2) <span style="color: #51afef;">AS</span> (
+    <span style="color: #51afef;">SELECT</span> <span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">2</span>
+)
+<span style="color: #51afef;">SELECT</span> col1 + col2 <span style="color: #51afef;">FROM</span> cteName;
+</pre>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="taglist">
+        <a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a
+        >:
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-study.html"
+          >study</a
+        >
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-database.html"
+          >database</a
+        >
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-cmu.html"
+          >cmu</a
+        >
+      </div>
+      <div class="post-date">17 Jul 2024</div>
+      <h1 class="post-title">
+        <a
+          href="https://chenyo-17.github.io/org-static-blog/2024-07-17-db-notes:-relational-model.html"
+          >CMU 15-445 notes: Relational Model & Algebra</a
+        >
+      </h1>
+      <nav id="table-of-contents" role="doc-toc">
+        <h2>Table of Contents</h2>
+        <div id="text-table-of-contents" role="doc-toc">
+          <ul>
+            <li>
+              <a href="#org3e79133">1. Terminology</a>
+              <ul>
+                <li><a href="#orgec86120">1.1. Database</a></li>
+                <li>
+                  <a href="#org1efce92">1.2. Database design consideration</a>
+                </li>
+                <li>
+                  <a href="#org987f05d"
+                    >1.3. Database management system (DBMS)</a
+                  >
+                </li>
+                <li><a href="#org6e59de6">1.4. Data model</a></li>
+                <li><a href="#org0703938">1.5. Schema</a></li>
+                <li><a href="#org149bbef">1.6. Entities and Tables</a></li>
+                <li><a href="#orgeabab19">1.7. Attributes and Fields</a></li>
+                <li><a href="#orgb9ccd72">1.8. Logical layer</a></li>
+                <li><a href="#org3560635">1.9. Physical layer</a></li>
+                <li>
+                  <a href="#orgaff54f4"
+                    >1.10. Data manipulation languages (DMLs)</a
+                  >
+                </li>
+                <li>
+                  <a href="#orgf6bba7c"
+                    >1.11. SQL (Structured Query Language) and relational
+                    model</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#org97dedbe">2. Relational model</a>
+              <ul>
+                <li><a href="#org09d63b8">2.1. A relation</a></li>
+                <li><a href="#org10591b4">2.2. A domain</a></li>
+                <li><a href="#orga145e38">2.3. A tuple</a></li>
+                <li><a href="#orgac33859">2.4. Keys</a></li>
+              </ul>
+            </li>
+            <li><a href="#org38e6c34">3. Relational Algebra</a></li>
+          </ul>
+        </div>
+      </nav>
+      <p>
+        This is a personal note for the
+        <a
+          href="https://www.youtube.com/watch?v=uikbtpVZS2s&amp;list=PLSE8ODhjZXjaKScG3l0nuOiDTTqpfnWFf&amp;index=2"
+          >CMU 15-445 L1 video</a
+        >
+        and
+        <a
+          href="https://15445.courses.cs.cmu.edu/fall2022/notes/01-introduction.pdf"
+          >CMU 15-445 L1 notes</a
+        >, along with some terminology explained by
+        <a href="https://claude.ai/chat/14f3c4ec-0ca8-495e-ac70-dd13f9eab5ea"
+          >Claude.ai</a
+        >.
+      </p>
+      <div id="outline-container-org3e79133" class="outline-2">
+        <h2 id="org3e79133">
+          <span class="section-number-2">1.</span> Terminology
+        </h2>
+        <div class="outline-text-2" id="text-1"></div>
+        <div id="outline-container-orgec86120" class="outline-3">
+          <h3 id="orgec86120">
+            <span class="section-number-3">1.1.</span> Database
+          </h3>
+          <div class="outline-text-3" id="text-1-1">
+            <ul class="org-ul">
+              <li>
+                An organized collection of inter-related data that models some
+                aspect of the real-world.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org1efce92" class="outline-3">
+          <h3 id="org1efce92">
+            <span class="section-number-3">1.2.</span> Database design
+            consideration
+          </h3>
+          <div class="outline-text-3" id="text-1-2">
+            <ul class="org-ul">
+              <li>Data integrity: protect invalid writing.</li>
+              <li>Implementation: query complexity, concurrent query.</li>
+              <li>Durability: replication, fault tolerance.</li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org987f05d" class="outline-3">
+          <h3 id="org987f05d">
+            <span class="section-number-3">1.3.</span> Database management
+            system (DBMS)
+          </h3>
+          <div class="outline-text-3" id="text-1-3">
+            <ul class="org-ul">
+              <li>A software that manages a database.</li>
+              <li>
+                Allow the definition, creation, query, update and administration
+                of databases.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org6e59de6" class="outline-3">
+          <h3 id="org6e59de6">
+            <span class="section-number-3">1.4.</span> Data model
+          </h3>
+          <div class="outline-text-3" id="text-1-4">
+            <ul class="org-ul">
+              <li>
+                A conceptual, high-level representation of how data is
+                structured
+              </li>
+              <li>
+                Defines entities, attributes, relationships between entities and
+                constraints.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org0703938" class="outline-3">
+          <h3 id="org0703938">
+            <span class="section-number-3">1.5.</span> Schema
+          </h3>
+          <div class="outline-text-3" id="text-1-5">
+            <ul class="org-ul">
+              <li>A concrete implementation of a data model.</li>
+              <li>Defines tables, fields, data types, keys and rules.</li>
+              <li>Typically represented by a specific database language.</li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org149bbef" class="outline-3">
+          <h3 id="org149bbef">
+            <span class="section-number-3">1.6.</span> Entities and Tables
+          </h3>
+          <div class="outline-text-3" id="text-1-6">
+            <ul class="org-ul">
+              <li>
+                Entities: conceptual representations of objects in the logical
+                data model.
+              </li>
+              <li>
+                Tables: physical storage structures in the physical data model.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-orgeabab19" class="outline-3">
+          <h3 id="orgeabab19">
+            <span class="section-number-3">1.7.</span> Attributes and Fields
+          </h3>
+          <div class="outline-text-3" id="text-1-7">
+            <ul class="org-ul">
+              <li>Attributes: properties of an entity.</li>
+              <li>Fields: columns in a database table.</li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-orgb9ccd72" class="outline-3">
+          <h3 id="orgb9ccd72">
+            <span class="section-number-3">1.8.</span> Logical layer
+          </h3>
+          <div class="outline-text-3" id="text-1-8">
+            <ul class="org-ul">
+              <li>The entities and attributes the database has.</li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org3560635" class="outline-3">
+          <h3 id="org3560635">
+            <span class="section-number-3">1.9.</span> Physical layer
+          </h3>
+          <div class="outline-text-3" id="text-1-9">
+            <ul class="org-ul">
+              <li>How are entities and attributes stored in the database.</li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-orgaff54f4" class="outline-3">
+          <h3 id="orgaff54f4">
+            <span class="section-number-3">1.10.</span> Data manipulation
+            languages (DMLs)
+          </h3>
+          <div class="outline-text-3" id="text-1-10">
+            <ul class="org-ul">
+              <li>
+                Methods to store and retrieve information from a database.
+              </li>
+              <li>
+                Procedural: the query specifies the (high-level) strategy the
+                DBMS should use to get the results, e.g., with relational
+                algebra.
+              </li>
+              <li>
+                Declarative: the query specifies only what data is desired but
+                not how to get it, e.g., with relational calculus (a formal
+                language).
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-orgf6bba7c" class="outline-3">
+          <h3 id="orgf6bba7c">
+            <span class="section-number-3">1.11.</span> SQL (Structured Query
+            Language) and relational model
+          </h3>
+          <div class="outline-text-3" id="text-1-11">
+            <ul class="org-ul">
+              <li>
+                SQL <b><b>implements</b></b> the relational model in DBMS and
+                provides a standard way to create, manipulate and query
+                relational databases.
+              </li>
+              <li>
+                Different SQL implementation may vary and do not strictly adhere
+                to the relational model, e.g., allow duplicate rows.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="outline-container-org97dedbe" class="outline-2">
+        <h2 id="org97dedbe">
+          <span class="section-number-2">2.</span> Relational model
+        </h2>
+        <div class="outline-text-2" id="text-2">
+          <ul class="org-ul">
+            <li>
+              A <b><b>data model</b></b> that defines a database
+              <b><b>abstraction</b></b> to avoid maintenance overhead when
+              changing the physical layer.
+            </li>
+            <li>Data is stored as relations/tables.</li>
+            <li>
+              Physical layer implementation and execution strategy depends on
+              DBMS implementation.
+            </li>
+          </ul>
 
-<col  class="org-left">
+          <figure id="org79ae6b9">
+            <img
+              src="https://people.cs.pitt.edu/~chang/156/images/fig41.gif"
+              alt="fig41.gif"
+              align="center"
+              width="500px"
+            />
 
-<col  class="org-left">
+            <figcaption>
+              <span class="figure-number">Figure 1: </span>Relational model
+              concepts
+            </figcaption>
+          </figure>
+        </div>
+        <div id="outline-container-org09d63b8" class="outline-3">
+          <h3 id="org09d63b8">
+            <span class="section-number-3">2.1.</span> A relation
+          </h3>
+          <div class="outline-text-3" id="text-2-1">
+            <ul class="org-ul">
+              <li>
+                An unordered set that contains the relationship of attributes
+                that represent entities.
+              </li>
+              <li>Relationships are unordered in the relation.</li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org10591b4" class="outline-3">
+          <h3 id="org10591b4">
+            <span class="section-number-3">2.2.</span> A domain
+          </h3>
+          <div class="outline-text-3" id="text-2-2">
+            <ul class="org-ul">
+              <li>A named set of allowable values for a specific attribute.</li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-orga145e38" class="outline-3">
+          <h3 id="orga145e38">
+            <span class="section-number-3">2.3.</span> A tuple
+          </h3>
+          <div class="outline-text-3" id="text-2-3">
+            <ul class="org-ul">
+              <li>A set of attribute values in the relation.</li>
+              <li>Values can also be lists or nested data structures.</li>
+              <li>
+                <code>Null</code>: a special value in any attribute which means
+                the attribute in a tuple is undefined.
+              </li>
+              <li>\(n-ary\): a relation with \(n\) attributes.</li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-orgac33859" class="outline-3">
+          <h3 id="orgac33859">
+            <span class="section-number-3">2.4.</span> Keys
+          </h3>
+          <div class="outline-text-3" id="text-2-4">
+            <ul class="org-ul">
+              <li>Primary key: uniquely identifies a single tuple.</li>
+              <li>
+                Foreign key: specifies that an attribute (e.g.,
+                <code>CustomerID</code>) in one relation (e.g.,
+                <code>OrderTable</code>) has to map to a tuple (e.g., the tuple
+                with the same <code>CustomerID</code>) in another relation
+                (e.g., <code>CustomerTable</code>).
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="outline-container-org38e6c34" class="outline-2">
+        <h2 id="org38e6c34">
+          <span class="section-number-2">3.</span> Relational Algebra
+        </h2>
+        <div class="outline-text-2" id="text-3">
+          <ul class="org-ul">
+            <li>
+              A set of fundamental operations to retrieve and manipulate tuples
+              in a relation.
+            </li>
+            <li>
+              Each operator takes in one or more relations as inputs, and
+              outputs a new relation; operators can be chained.
+            </li>
+            <li>
+              Is a <b><b>procedure language</b></b
+              >, meaning the execution always follow the query, even there
+              exists more efficient way to get the same result; A better way is
+              to be more declarative, e.g., SQL&rsquo;s
+              <code>where</code> syntax.
+            </li>
+            <li>
+              <a href="https://i.sstatic.net/AHjRg.png"
+                >Common relational algebra</a
+              >.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="taglist">
+        <a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a
+        >:
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-study.html"
+          >study</a
+        >
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-database.html"
+          >database</a
+        >
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-cmu.html"
+          >cmu</a
+        >
+      </div>
+      <div class="post-date">14 Jul 2024</div>
+      <h1 class="post-title">
+        <a
+          href="https://chenyo-17.github.io/org-static-blog/2024-07-14-parallel-evm:-bep-130.html"
+          >Parallel EVM: BEP-130</a
+        >
+      </h1>
+      <nav id="table-of-contents" role="doc-toc">
+        <h2>Table of Contents</h2>
+        <div id="text-table-of-contents" role="doc-toc">
+          <ul>
+            <li>
+              <a href="#orgebfec85">1. Blockchain fundamentals</a>
+              <ul>
+                <li><a href="#org312100a">1.1. System contract</a></li>
+                <li>
+                  <a href="#org9636d82">1.2. Transaction execution phases</a>
+                </li>
+              </ul>
+            </li>
+            <li><a href="#orgbe6ee60">2. Design principle</a></li>
+            <li>
+              <a href="#org03891d9">3. Workflow</a>
+              <ul>
+                <li><a href="#org05d90b1">3.1. Dispatch factors</a></li>
+                <li><a href="#org1b86e22">3.2. Slot execution stages</a></li>
+                <li><a href="#orga0b3b7b">3.3. Conflict detection</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <p>
+        This is a personal note for
+        <a href="https://github.com/bnb-chain/BEPs/blob/master/BEPs/BEP130.md"
+          >BEP-130</a
+        >. BEP-130 is a proposal that introduces a parallel transaction
+        execution mechanism on the BNB Smart Chain (BSC).
+      </p>
+      <div id="outline-container-orgebfec85" class="outline-2">
+        <h2 id="orgebfec85">
+          <span class="section-number-2">1.</span> Blockchain fundamentals
+        </h2>
+        <div class="outline-text-2" id="text-1"></div>
+        <div id="outline-container-org312100a" class="outline-3">
+          <h3 id="org312100a">
+            <span class="section-number-3">1.1.</span> System contract
+          </h3>
+          <div class="outline-text-3" id="text-1-1">
+            <ul class="org-ul">
+              <li>
+                Built-in contracts to perform system level operations, e,g., gas
+                fee reward, cross chain communication.
+              </li>
+              <li>
+                Cannot be executed concurrently since they depend on the
+                execution results of other transactions, e.g., a number of
+                transaction made by an account at some timestamp.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org9636d82" class="outline-3">
+          <h3 id="org9636d82">
+            <span class="section-number-3">1.2.</span> Transaction execution
+            phases
+          </h3>
+          <div class="outline-text-3" id="text-1-2">
+            <ul class="org-ul">
+              <li>
+                Block mining phase: received from the P2P transaction pool,
+                could contain invalid transactions.
+              </li>
+              <li>Block sync phase: the block is confirmed.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="outline-container-orgbe6ee60" class="outline-2">
+        <h2 id="orgbe6ee60">
+          <span class="section-number-2">2.</span> Design principle
+        </h2>
+        <div class="outline-text-2" id="text-2">
+          <ul class="org-ul">
+            <li>
+              Should always produce the same result as the current sequential
+              execution.
+            </li>
+            <li>
+              Should be decoupled into existing or new modules with no circular
+              dependency.
+            </li>
+            <li>Should be configurable based on node hardware resources.</li>
+            <li>Keep it simple and smart.</li>
+          </ul>
+        </div>
+      </div>
+      <div id="outline-container-org03891d9" class="outline-2">
+        <h2 id="org03891d9">
+          <span class="section-number-2">3.</span> Workflow
+        </h2>
+        <div class="outline-text-2" id="text-3"></div>
+        <div id="outline-container-org05d90b1" class="outline-3">
+          <h3 id="org05d90b1">
+            <span class="section-number-3">3.1.</span> Dispatch factors
+          </h3>
+          <div class="outline-text-3" id="text-3-1">
+            <ul class="org-ul">
+              <li>Is the slot idle or occupied?</li>
+              <li>
+                Is there a same address contract running or pending in this
+                slot?
+              </li>
+              <li>
+                Has the slot&rsquo;s pending transactions size reached the max
+                transactions queue size limitation?
+              </li>
+              <li>
+                Is there a big transaction index gap between the slot&rsquo;s
+                head transaction and the dispatched transaction?
+              </li>
+              <li>
+                Is the transaction contract likely to have high gas cost or a
+                conflict rate?
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org1b86e22" class="outline-3">
+          <h3 id="org1b86e22">
+            <span class="section-number-3">3.2.</span> Slot execution stages
+          </h3>
+          <div class="outline-text-3" id="text-3-2">
+            <ol class="org-ol">
+              <li>
+                Execute the transaction \(Tx_i\)based on a specific worldstate,
+                e.g., the state when the execution starts.
+              </li>
+              <li>
+                Wait for the finalization of the previous transaction
+                \(Tx_{i-1}\).
+              </li>
+              <li>
+                Detect if there is any conflict between the state read by
+                \(Tx_i\) and the state change after the execution of \(Tx_i\)
+                starts.
+              </li>
+              <li>
+                If a conflict is detected, re-execute \(Tx_{i}\) again based on
+                the latest finalized worldstate.
+              </li>
+              <li>
+                Finalize the state changed by \(Tx_i\) to the latest worldstate.
+              </li>
+              <li>
+                The state changes are kept within each slot, and are merged to
+                the main StateDB once the execution is done.
+              </li>
+              <li>
+                The first transaction in a block can be immediately finalized.
+              </li>
+              <li>
+                If \(Tx_i\) and \(Tx_{i-1}\) are in the same slot, \(Tx_i\) can
+                immediately start conflict detection.
+              </li>
+              <li>
+                Re-executed transaction can be immediately finalized as it reads
+                the latest worldstate.
+              </li>
+            </ol>
+          </div>
+        </div>
+        <div id="outline-container-orga0b3b7b" class="outline-3">
+          <h3 id="orga0b3b7b">
+            <span class="section-number-3">3.3.</span> Conflict detection
+          </h3>
+          <div class="outline-text-3" id="text-3-3">
+            <ul class="org-ul">
+              <li>
+                Detection items: storage key/value pair; account balance;
+                contract content and status.
+              </li>
+              <li>
+                Overlap reads without write, or hardcode writes without read are
+                not conflicts.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="taglist">
+        <a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a
+        >:
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-evm.html"
+          >evm</a
+        >
+        <a
+          href="https://chenyo-17.github.io/org-static-blog/tag-parallel-evm.html"
+          >parallel-evm</a
+        >
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-bnb.html"
+          >bnb</a
+        >
+      </div>
+      <div class="post-date">07 Jul 2024</div>
+      <h1 class="post-title">
+        <a
+          href="https://chenyo-17.github.io/org-static-blog/2024-07-07-parallel-evm:-bnb-chain.html"
+          >Parallel EVM: BNB chain</a
+        >
+      </h1>
+      <nav id="table-of-contents" role="doc-toc">
+        <h2>Table of Contents</h2>
+        <div id="text-table-of-contents" role="doc-toc">
+          <ul>
+            <li>
+              <a href="#org50546b9">1. Blockchain fundamentals</a>
+              <ul>
+                <li>
+                  <a href="#orgb99e643">1.1. Why parallel EVM is not easy</a>
+                </li>
+                <li><a href="#org33e7ded">1.2. A Parallel EVM ideas</a></li>
+                <li><a href="#orgef305d4">1.3. Block STM algorithm</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#org92cb377">2. BNB Parallel EVM 1.0: Infrastructure</a>
+            </li>
+            <li>
+              <a href="#org5f4229a"
+                >3. BNB Parallel EVM 2.0: Performance enhancement</a
+              >
+            </li>
+            <li>
+              <a href="#org10ca388">4. BNB Parallel EVM 3.0: Production</a>
+              <ul>
+                <li><a href="#org901eb7b">4.1. Hint-based dispatcher</a></li>
+                <li>
+                  <a href="#org9a75ab8"
+                    >4.2. Seamless BNB chain ecosystem integration</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#org6fa8f4f">5. Comparison with other solutions</a>
+            </li>
+            <li><a href="#orgdca39c6">6. Other optimizations</a></li>
+          </ul>
+        </div>
+      </nav>
+      <p>
+        This is a personal note for
+        <a
+          href="https://www.bnbchain.org/zh-CN/blog/road-to-high-performance-parallel-evm-for-bnb-chain"
+          >BNB chain-blog</a
+        >.
+      </p>
+      <div id="outline-container-org50546b9" class="outline-2">
+        <h2 id="org50546b9">
+          <span class="section-number-2">1.</span> Blockchain fundamentals
+        </h2>
+        <div class="outline-text-2" id="text-1"></div>
+        <div id="outline-container-orgb99e643" class="outline-3">
+          <h3 id="orgb99e643">
+            <span class="section-number-3">1.1.</span> Why parallel EVM is not
+            easy
+          </h3>
+          <div class="outline-text-3" id="text-1-1">
+            <ul class="org-ul">
+              <li>Lack of visibility of potential transaction conflict.</li>
+              <li>
+                Blockchains experience transaction bursts, e.g., &gt;70M
+                transactions per day.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org33e7ded" class="outline-3">
+          <h3 id="org33e7ded">
+            <span class="section-number-3">1.2.</span> A Parallel EVM ideas
+          </h3>
+          <div class="outline-text-3" id="text-1-2">
+            <ul class="org-ul">
+              <li>
+                Run multiple EVM instances concurrently on different threads.
+              </li>
+              <li>
+                Execute transactions independently on each thread and later
+                merge a finial state update.
+              </li>
+              <li>
+                <a
+                  href="https://lh7-us.googleusercontent.com/Dh1GAMYlMkiRI0xWQ0ByYOxq_GNtA9h1PP1OF7FP9b8O3VRxVtlh1eq991OlNa4rNX_ZXH8tVPRBeN58_0dBF1jPUVRuuJMl4JqmBchhCTZp_vF-W003l77KajIjIMCHfapjsBH--0EpMi0FT2iNPlw"
+                  >Parallel EVM scheme</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-orgef305d4" class="outline-3">
+          <h3 id="orgef305d4">
+            <span class="section-number-3">1.3.</span> Block STM algorithm
+          </h3>
+          <div class="outline-text-3" id="text-1-3">
+            <ul class="org-ul">
+              <li>
+                Optimistic parallelism: assigns transactions to various threads.
+              </li>
+              <li>
+                Software transaction memory (STM): detect conflicts when
+                transactions try to modify the same shared state simultaneously.
+              </li>
+              <li>
+                Conflict resolution: when conflicts are detected, the offending
+                transactions are discarded without affecting the blockchain
+                state and are re-executed.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="outline-container-org92cb377" class="outline-2">
+        <h2 id="org92cb377">
+          <span class="section-number-2">2.</span> BNB Parallel EVM 1.0:
+          Infrastructure
+        </h2>
+        <div class="outline-text-2" id="text-2">
+          <ul class="org-ul">
+            <li>
+              Proposal:
+              <a
+                href="https://github.com/bnb-chain/BEPs/pull/130?ref=bnbchain.ghost.io"
+                >BEP-130 (2022)</a
+              >
+            </li>
+            <li>
+              Dispatcher: distributes transactions across threads to optimize
+              throughput.
+            </li>
+            <li>
+              Parallel execution engine: execute transactions independently on
+              each thread.
+            </li>
+            <li>
+              Local stateDB: each thread maintains a local stateDB to record
+              state access.
+            </li>
+            <li>
+              Conflict detection: detect conflicts and re-execute conflicting
+              transactions.
+            </li>
+            <li>
+              State commit: the finalized results are committed to the global
+              state DB.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div id="outline-container-org5f4229a" class="outline-2">
+        <h2 id="org5f4229a">
+          <span class="section-number-2">3.</span> BNB Parallel EVM 2.0:
+          Performance enhancement
+        </h2>
+        <div class="outline-text-2" id="text-3">
+          <ul class="org-ul">
+            <li>
+              Dispatcher: combine both static and dynamic dispatch strategies.
+            </li>
+            <li>
+              Execution engine: streaming pipeline to enable smooth transaction
+              processing.
+            </li>
+            <li>
+              Conflict detection: ensure data integrity while minimizing
+              unnecessary re-execution.
+            </li>
+            <li>
+              Memory: shared memory pools and light copying techniques to reduce
+              memory footprint.
+            </li>
+            <li>The overall performance ranges from 20% to 50%.</li>
+          </ul>
+        </div>
+      </div>
+      <div id="outline-container-org10ca388" class="outline-2">
+        <h2 id="org10ca388">
+          <span class="section-number-2">4.</span> BNB Parallel EVM 3.0:
+          Production
+        </h2>
+        <div class="outline-text-2" id="text-4"></div>
+        <div id="outline-container-org901eb7b" class="outline-3">
+          <h3 id="org901eb7b">
+            <span class="section-number-3">4.1.</span> Hint-based dispatcher
+          </h3>
+          <div class="outline-text-3" id="text-4-1">
+            <ul class="org-ul">
+              <li>
+                leverages external hint providers to analyze transactions and
+                generate predictions about potential state access conflicts.
+              </li>
+              <li>
+                Simple hints include read/write state sets; advanced hints
+                incorporate weak/strong ordering for optimal parallelism.
+              </li>
+              <li>Conflicting transactions are assigned to the same slot.</li>
+              <li>
+                Transactions with no conflicts are distributed across different
+                slots.
+              </li>
+              <li>
+                Conflict detector remains as a backup for handling unforeseen
+                conflicts.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org9a75ab8" class="outline-3">
+          <h3 id="org9a75ab8">
+            <span class="section-number-3">4.2.</span> Seamless BNB chain
+            ecosystem integration
+          </h3>
+          <div class="outline-text-3" id="text-4-2">
+            <ul class="org-ul">
+              <li>Modularization and reconstructing.</li>
+              <li>Thorough testing and validation.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="outline-container-org6fa8f4f" class="outline-2">
+        <h2 id="org6fa8f4f">
+          <span class="section-number-2">5.</span> Comparison with other
+          solutions
+        </h2>
+        <div class="outline-text-2" id="text-5">
+          <table>
+            <colgroup>
+              <col class="org-left" />
 
-<col  class="org-left">
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-left">Solutions</th>
-<th scope="col" class="org-left">TX dependency check</th>
-<th scope="col" class="org-left">Conflict resolution</th>
-<th scope="col" class="org-left">StateDB optimization</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="org-left">BlockSTM</td>
-<td class="org-left">tracks at execution</td>
-<td class="org-left">re-execution</td>
-<td class="org-left">N/A</td>
-</tr>
+              <col class="org-left" />
 
-<tr>
-<td class="org-left">Polygon</td>
-<td class="org-left">minimal metadata solution</td>
-<td class="org-left">reduced re-execution</td>
-<td class="org-left">N/A</td>
-</tr>
+              <col class="org-left" />
 
-<tr>
-<td class="org-left">Monad</td>
-<td class="org-left">static analysis</td>
-<td class="org-left">reduced re-execution</td>
-<td class="org-left">Monad DB</td>
-</tr>
+              <col class="org-left" />
+            </colgroup>
+            <thead>
+              <tr>
+                <th scope="col" class="org-left">Solutions</th>
+                <th scope="col" class="org-left">TX dependency check</th>
+                <th scope="col" class="org-left">Conflict resolution</th>
+                <th scope="col" class="org-left">StateDB optimization</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="org-left">BlockSTM</td>
+                <td class="org-left">tracks at execution</td>
+                <td class="org-left">re-execution</td>
+                <td class="org-left">N/A</td>
+              </tr>
 
-<tr>
-<td class="org-left">Sei</td>
-<td class="org-left">tracks at execution</td>
-<td class="org-left">re-execution</td>
-<td class="org-left">SeiDB</td>
-</tr>
+              <tr>
+                <td class="org-left">Polygon</td>
+                <td class="org-left">minimal metadata solution</td>
+                <td class="org-left">reduced re-execution</td>
+                <td class="org-left">N/A</td>
+              </tr>
 
-<tr>
-<td class="org-left">Neon EVM and Solana Sealevel</td>
-<td class="org-left">contract provided</td>
-<td class="org-left">reduced re-execution</td>
-<td class="org-left">depends on Solana</td>
-</tr>
+              <tr>
+                <td class="org-left">Monad</td>
+                <td class="org-left">static analysis</td>
+                <td class="org-left">reduced re-execution</td>
+                <td class="org-left">Monad DB</td>
+              </tr>
 
-<tr>
-<td class="org-left">BNBChain</td>
-<td class="org-left">hint info</td>
-<td class="org-left">reduced or eliminated re-execution</td>
-<td class="org-left">Thread local DB</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="outline-container-orgdca39c6" class="outline-2">
-<h2 id="orgdca39c6"><span class="section-number-2">6.</span> Other optimizations</h2>
-<div class="outline-text-2" id="text-6">
-<ul class="org-ul">
-<li>Opcode-level optimization: fine-tuning individual EVM instructions for maximum efficiency.</li>
-<li>Compilation optimization: JIT/AOT compilation paradigms; instruction-level parallelism (SIMD).</li>
-<li>Database sharding: distribute data across multiple databases.</li>
-<li>Concurrent node execution.</li>
-</ul>
-</div>
-</div>
-<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-evm.html">evm</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-parallel-evm.html">parallel-evm</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-bnb.html">bnb</a> </div>
-<div class="post-date">04 Jul 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-07-04-parallel-evm:-megaeth.html">Parallel EVM: MegaETH</a></h1>
-<nav id="table-of-contents" role="doc-toc">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents" role="doc-toc">
-<ul>
-<li><a href="#org7044937">1. Blockchain fundamentals</a>
-<ul>
-<li><a href="#org3d5d99d">1.1. Conduit chain</a></li>
-<li><a href="#org476f3c7">1.2. Gas per second</a></li>
-<li><a href="#orgfbb7034">1.3. Target gas per block</a></li>
-<li><a href="#org775dcd4">1.4. Current blockchain scalability</a></li>
-<li><a href="#org26174de">1.5. Blockchain node hardware requirements</a></li>
-<li><a href="#org090b6fa">1.6. L1 and L2 nodes</a></li>
-<li><a href="#org0a02422">1.7. Verifying a block</a></li>
-<li><a href="#org145636b">1.8. Maximum extractable value (MEV)</a></li>
-<li><a href="#orgf9ae504">1.9. Proposer-builder separation (PBS)</a></li>
-<li><a href="#org0b8e1a7">1.10. Live and historical sync</a></li>
-<li><a href="#org0baec9f">1.11. Portal Network</a></li>
-<li><a href="#org24d5ea4">1.12. Verkle tree</a></li>
-<li><a href="#org85744a7">1.13. Node storage</a>
-<ul>
-<li><a href="#orgb875531">1.13.1. History expiry</a></li>
-<li><a href="#orgd5fca81">1.13.2. State expiry</a></li>
-<li><a href="#org4fc40c1">1.13.3. Statelessness</a></li>
-</ul>
-</li>
-<li><a href="#org0740ef9">1.14. Software transactional memory (STM)</a></li>
-<li><a href="#org9ad5a9a">1.15. Block-STM</a></li>
-</ul>
-</li>
-<li><a href="#org087b928">2. What is MagaETH</a>
-<ul>
-<li><a href="#orgda1450b">2.1. Node specialization</a></li>
-<li><a href="#orga31ba51">2.2. Design philosophy</a></li>
-</ul>
-</li>
-<li><a href="#orga076845">3. MegaETH challenges</a></li>
-</ul>
-</div>
-</nav>
-<p>
-This is a personal note for <a href="https://megaeth.systems/research">MegaETH-blog</a> as well as some terminology explained online, e.g.,  <a href="https://ethereum.org/en/roadmap/">ethereum.org</a>.
-</p>
+              <tr>
+                <td class="org-left">Sei</td>
+                <td class="org-left">tracks at execution</td>
+                <td class="org-left">re-execution</td>
+                <td class="org-left">SeiDB</td>
+              </tr>
 
-<p>
-In summary, this blog proposes many challenges when designing a high-performance EVM chain, but does not include any design details of MegaETH itself.
-</p>
-<div id="outline-container-org7044937" class="outline-2">
-<h2 id="org7044937"><span class="section-number-2">1.</span> Blockchain fundamentals</h2>
-<div class="outline-text-2" id="text-1">
-</div>
-<div id="outline-container-org3d5d99d" class="outline-3">
-<h3 id="org3d5d99d"><span class="section-number-3">1.1.</span> <a href="https://docs.conduit.xyz/">Conduit chain</a></h3>
-<div class="outline-text-3" id="text-1-1">
-<ul class="org-ul">
-<li>Allows one to deploy a rollup through its Rollups-as-a-service platform within in minutes.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org476f3c7" class="outline-3">
-<h3 id="org476f3c7"><span class="section-number-3">1.2.</span> Gas per second</h3>
-<div class="outline-text-3" id="text-1-2">
-<ul class="org-ul">
-<li>Reflects the amount of computation the blockchain can handle per second.</li>
-<li>Different EVM operation costs different gas, e.g., <code>ADD</code> costs 3 gas.</li>
-<li>Block gas limit: ensures that any node can reliably keep up with the rest of the network.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-orgfbb7034" class="outline-3">
-<h3 id="orgfbb7034"><span class="section-number-3">1.3.</span> Target gas per block</h3>
-<div class="outline-text-3" id="text-1-3">
-<ul class="org-ul">
-<li>Dynamically regulate the amount of computation a block can include.</li>
-<li><code>Gas per second = Target Gas per block / Block time</code>.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org775dcd4" class="outline-3">
-<h3 id="org775dcd4"><span class="section-number-3">1.4.</span> Current blockchain scalability</h3>
-<div class="outline-text-3" id="text-1-4">
+              <tr>
+                <td class="org-left">Neon EVM and Solana Sealevel</td>
+                <td class="org-left">contract provided</td>
+                <td class="org-left">reduced re-execution</td>
+                <td class="org-left">depends on Solana</td>
+              </tr>
 
-<figure id="org662fb2e">
-<img src="https://hackmd.io/_uploads/rkHVB0iHR.png" alt="rkHVB0iHR.png" align="center" width="500px">
+              <tr>
+                <td class="org-left">BNBChain</td>
+                <td class="org-left">hint info</td>
+                <td class="org-left">reduced or eliminated re-execution</td>
+                <td class="org-left">Thread local DB</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div id="outline-container-orgdca39c6" class="outline-2">
+        <h2 id="orgdca39c6">
+          <span class="section-number-2">6.</span> Other optimizations
+        </h2>
+        <div class="outline-text-2" id="text-6">
+          <ul class="org-ul">
+            <li>
+              Opcode-level optimization: fine-tuning individual EVM instructions
+              for maximum efficiency.
+            </li>
+            <li>
+              Compilation optimization: JIT/AOT compilation paradigms;
+              instruction-level parallelism (SIMD).
+            </li>
+            <li>
+              Database sharding: distribute data across multiple databases.
+            </li>
+            <li>Concurrent node execution.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="taglist">
+        <a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a
+        >:
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-evm.html"
+          >evm</a
+        >
+        <a
+          href="https://chenyo-17.github.io/org-static-blog/tag-parallel-evm.html"
+          >parallel-evm</a
+        >
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-bnb.html"
+          >bnb</a
+        >
+      </div>
+      <div class="post-date">04 Jul 2024</div>
+      <h1 class="post-title">
+        <a
+          href="https://chenyo-17.github.io/org-static-blog/2024-07-04-parallel-evm:-megaeth.html"
+          >Parallel EVM: MegaETH</a
+        >
+      </h1>
+      <nav id="table-of-contents" role="doc-toc">
+        <h2>Table of Contents</h2>
+        <div id="text-table-of-contents" role="doc-toc">
+          <ul>
+            <li>
+              <a href="#org7044937">1. Blockchain fundamentals</a>
+              <ul>
+                <li><a href="#org3d5d99d">1.1. Conduit chain</a></li>
+                <li><a href="#org476f3c7">1.2. Gas per second</a></li>
+                <li><a href="#orgfbb7034">1.3. Target gas per block</a></li>
+                <li>
+                  <a href="#org775dcd4">1.4. Current blockchain scalability</a>
+                </li>
+                <li>
+                  <a href="#org26174de"
+                    >1.5. Blockchain node hardware requirements</a
+                  >
+                </li>
+                <li><a href="#org090b6fa">1.6. L1 and L2 nodes</a></li>
+                <li><a href="#org0a02422">1.7. Verifying a block</a></li>
+                <li>
+                  <a href="#org145636b">1.8. Maximum extractable value (MEV)</a>
+                </li>
+                <li>
+                  <a href="#orgf9ae504"
+                    >1.9. Proposer-builder separation (PBS)</a
+                  >
+                </li>
+                <li>
+                  <a href="#org0b8e1a7">1.10. Live and historical sync</a>
+                </li>
+                <li><a href="#org0baec9f">1.11. Portal Network</a></li>
+                <li><a href="#org24d5ea4">1.12. Verkle tree</a></li>
+                <li>
+                  <a href="#org85744a7">1.13. Node storage</a>
+                  <ul>
+                    <li><a href="#orgb875531">1.13.1. History expiry</a></li>
+                    <li><a href="#orgd5fca81">1.13.2. State expiry</a></li>
+                    <li><a href="#org4fc40c1">1.13.3. Statelessness</a></li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="#org0740ef9"
+                    >1.14. Software transactional memory (STM)</a
+                  >
+                </li>
+                <li><a href="#org9ad5a9a">1.15. Block-STM</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#org087b928">2. What is MagaETH</a>
+              <ul>
+                <li><a href="#orgda1450b">2.1. Node specialization</a></li>
+                <li><a href="#orga31ba51">2.2. Design philosophy</a></li>
+              </ul>
+            </li>
+            <li><a href="#orga076845">3. MegaETH challenges</a></li>
+          </ul>
+        </div>
+      </nav>
+      <p>
+        This is a personal note for
+        <a href="https://megaeth.systems/research">MegaETH-blog</a> as well as
+        some terminology explained online, e.g.,
+        <a href="https://ethereum.org/en/roadmap/">ethereum.org</a>.
+      </p>
 
-<figcaption><span class="figure-number">Figure 1: </span>2024 blockchain scalability comparison</figcaption>
-</figure>
+      <p>
+        In summary, this blog proposes many challenges when designing a
+        high-performance EVM chain, but does not include any design details of
+        MegaETH itself.
+      </p>
+      <div id="outline-container-org7044937" class="outline-2">
+        <h2 id="org7044937">
+          <span class="section-number-2">1.</span> Blockchain fundamentals
+        </h2>
+        <div class="outline-text-2" id="text-1"></div>
+        <div id="outline-container-org3d5d99d" class="outline-3">
+          <h3 id="org3d5d99d">
+            <span class="section-number-3">1.1.</span>
+            <a href="https://docs.conduit.xyz/">Conduit chain</a>
+          </h3>
+          <div class="outline-text-3" id="text-1-1">
+            <ul class="org-ul">
+              <li>
+                Allows one to deploy a rollup through its Rollups-as-a-service
+                platform within in minutes.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org476f3c7" class="outline-3">
+          <h3 id="org476f3c7">
+            <span class="section-number-3">1.2.</span> Gas per second
+          </h3>
+          <div class="outline-text-3" id="text-1-2">
+            <ul class="org-ul">
+              <li>
+                Reflects the amount of computation the blockchain can handle per
+                second.
+              </li>
+              <li>
+                Different EVM operation costs different gas, e.g.,
+                <code>ADD</code> costs 3 gas.
+              </li>
+              <li>
+                Block gas limit: ensures that any node can reliably keep up with
+                the rest of the network.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-orgfbb7034" class="outline-3">
+          <h3 id="orgfbb7034">
+            <span class="section-number-3">1.3.</span> Target gas per block
+          </h3>
+          <div class="outline-text-3" id="text-1-3">
+            <ul class="org-ul">
+              <li>
+                Dynamically regulate the amount of computation a block can
+                include.
+              </li>
+              <li>
+                <code>Gas per second = Target Gas per block / Block time</code>.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org775dcd4" class="outline-3">
+          <h3 id="org775dcd4">
+            <span class="section-number-3">1.4.</span> Current blockchain
+            scalability
+          </h3>
+          <div class="outline-text-3" id="text-1-4">
+            <figure id="org662fb2e">
+              <img
+                src="https://hackmd.io/_uploads/rkHVB0iHR.png"
+                alt="rkHVB0iHR.png"
+                align="center"
+                width="500px"
+              />
 
-<ul class="org-ul">
-<li>Throughput: 100MGas/s (\(\approx\) 3700 ERC-20 transfer) cannot compares to Web2 database with &gt;1M transactions per second.</li>
-<li>Capacity: Complex applications cannot be on-chain, e.g., compute large Fibonacci (e.g., \(10^8\)) number would take 55 seconds on opBNB, while in C just 30 milliseconds in a single core.</li>
-<li>Delay: Applications that require fast feedback loop, e.g., high-frequency trading are not feasible with long block times, e.g., 1s.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org26174de" class="outline-3">
-<h3 id="org26174de"><span class="section-number-3">1.5.</span> Blockchain node hardware requirements</h3>
-<div class="outline-text-3" id="text-1-5">
-<ul class="org-ul">
-<li>Lower hardware requirements for full nodes increase decentralization.</li>
-<li>Higher requirements increase performance and security.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org090b6fa" class="outline-3">
-<h3 id="org090b6fa"><span class="section-number-3">1.6.</span> L1 and L2 nodes</h3>
-<div class="outline-text-3" id="text-1-6">
-<ul class="org-ul">
-<li>L1 nodes are homogeneous; each node performs identical tasks, i.e., transaction consensus and execution without specialization.</li>
-<li>L2 nodes are heterogeneous; different nodes perform specific tasks, e.g., sequencer node determines the transaction order, prover nodes rely on accelerators to enhance proof generation.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org0a02422" class="outline-3">
-<h3 id="org0a02422"><span class="section-number-3">1.7.</span> Verifying a block</h3>
-<div class="outline-text-3" id="text-1-7">
-<ul class="org-ul">
-<li>Re-execute the transactions in the block.</li>
-<li>Applying the changes to Ethereum state trie.</li>
-<li>Calculate the new root hash and compare it with the root hash provided by the block.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org145636b" class="outline-3">
-<h3 id="org145636b"><span class="section-number-3">1.8.</span> Maximum extractable value (MEV)</h3>
-<div class="outline-text-3" id="text-1-8">
-<ul class="org-ul">
-<li>Validators maximize their profitability by favorably ordering transactions.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-orgf9ae504" class="outline-3">
-<h3 id="orgf9ae504"><span class="section-number-3">1.9.</span> Proposer-builder separation (PBS)</h3>
-<div class="outline-text-3" id="text-1-9">
-<ul class="org-ul">
-<li>Block builders are responsible for creating blocks and offering them to the block proposer in each slot.</li>
-<li>Block proposers cannot see the contents, but simply choose the most profitable one and pay a fee to the block builder before broadcasting the block.</li>
-<li>PBS makes it harder for block builders to censor transactions, and to outperform individuals at MEV extraction.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org0b8e1a7" class="outline-3">
-<h3 id="org0b8e1a7"><span class="section-number-3">1.10.</span> Live and historical sync</h3>
-<div class="outline-text-3" id="text-1-10">
-<ul class="org-ul">
-<li>Live (online): continuously update a node with the latest data.</li>
-<li>Historical (offline): synchronize a node by downloading the processing data up to a certain point.</li>
-<li>Historical sync has much higher TPS than live sync, e.g., 10x, since historical sync can perform batch processing and does not have network latency.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org0baec9f" class="outline-3">
-<h3 id="org0baec9f"><span class="section-number-3">1.11.</span> <a href="https://ethereum.org/en/developers/docs/networking-layer/portal-network/">Portal Network</a></h3>
-<div class="outline-text-3" id="text-1-11">
-<ul class="org-ul">
-<li>An in-development p2p network for serving historical data where each node stores a small piece of Ethereum&rsquo;s history.</li>
-<li>Light nodes do not need to trust on full nodes.</li>
-<li>The entire history exists distributed across the network.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org24d5ea4" class="outline-3">
-<h3 id="org24d5ea4"><span class="section-number-3">1.12.</span> <a href="https://ethereum.org/en/roadmap/verkle-trees/">Verkle tree</a></h3>
-<div class="outline-text-3" id="text-1-12">
-<ul class="org-ul">
-<li>Stateless clients use a witness to the state data that arrives with the block instead of local databases.</li>
-<li><b><b>Witness</b></b>: the minimal set of data that prove the values of the state that are being changed by the transactions in a block.</li>
-</ul>
+              <figcaption>
+                <span class="figure-number">Figure 1: </span>2024 blockchain
+                scalability comparison
+              </figcaption>
+            </figure>
 
-<ul class="org-ul">
-<li>Merkle tree is too large to be broadcast between peers; the witness is a path connecting the data from leaved to the root, and to verify the data the hash of all sibling nodes are also required (to compute the parent hash).</li>
-<li>Verkle trees reduce the witness size by shortening the distance between leaves and eliminating the need to provide sibling nodes; Using a polynomial commitment scheme(?) allows the witness to have a fixed size.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org85744a7" class="outline-3">
-<h3 id="org85744a7"><span class="section-number-3">1.13.</span> Node storage</h3>
-<div class="outline-text-3" id="text-1-13">
-<ul class="org-ul">
-<li>High disk space is the main barrier to a full node access, due to the need to store large chunks of Ethereum state data to process new transactions.</li>
-<li>Using cheap hard drivers to store old data cannot keep up with new blocks.</li>
-<li>Clients should find new ways to verify transactions without relying on looking up local databases.</li>
-</ul>
-</div>
-<div id="outline-container-orgb875531" class="outline-4">
-<h4 id="orgb875531"><span class="section-number-4">1.13.1.</span> History expiry</h4>
-<div class="outline-text-4" id="text-1-13-1">
-<ul class="org-ul">
-<li>Nodes discard state data older than X blocks with weak subjectivity checkpoints, i.e., a genesis block close to the present.</li>
-<li>Nodes can request historical data from peers with Portal Network, e.g., altruistic nodes that are willing to maintain and serve historical achieves, e.g., DAO.</li>
-<li>Does not fundamentally change how Ethereum node handles data.</li>
-<li>Controversial due to it could introduce new censorship risks if centralized organizations are providing historical data.</li>
-<li>EIP-4444 is under active discussion regarding community management.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-orgd5fca81" class="outline-4">
-<h4 id="orgd5fca81"><span class="section-number-4">1.13.2.</span> State expiry</h4>
-<div class="outline-text-4" id="text-1-13-2">
-<ul class="org-ul">
-<li>Remove state from individual nodes if it has not been accessed recently.</li>
-<li>The inactive accounts is not deleted, but stored separately from the active state and can be resurrected.</li>
-<li>A leading approach requires to add timestamps to the account address.</li>
-<li>The responsibility of storing old data may also be moved to centralized providers.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org4fc40c1" class="outline-4">
-<h4 id="org4fc40c1"><span class="section-number-4">1.13.3.</span> Statelessness</h4>
-<div class="outline-text-4" id="text-1-13-3">
-<ul class="org-ul">
-<li>weak statelessness: only block producers need access to full state data.</li>
-<li>Weak statelessness require Verkle trees and proposer-builder separation.</li>
-<li>strong statelessness: no nodes need access to the full state data.</li>
-<li>In strong statelessness, witnesses are generated by users to declare accounts related to the transaction; not a part of Ethereum&rsquo;s roadmap.</li>
-</ul>
-</div>
-</div>
-</div>
-<div id="outline-container-org0740ef9" class="outline-3">
-<h3 id="org0740ef9"><span class="section-number-3">1.14.</span> Software transactional memory (STM)</h3>
-<div class="outline-text-3" id="text-1-14">
-<ul class="org-ul">
-<li>A concurrency control mechanism to control access to shares memory in software.</li>
-<li>A transaction refers to a piece of code executing a series of reads and writes to the shared memory.</li>
-<li>Transactions are isolated; changes made by one transaction are not visible to others until the transaction commits.</li>
-<li>When a conflict is detected, e.g., two transactions try to modify the same memory, one transaction is rolled back.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org9ad5a9a" class="outline-3">
-<h3 id="org9ad5a9a"><span class="section-number-3">1.15.</span> Block-STM</h3>
-<div class="outline-text-3" id="text-1-15">
-<ul class="org-ul">
-<li>A parallel execution engine to schedule smart contract transactions based on STM.</li>
-<li>Transactions are grouped in blocks, every execution of the block must yield the deterministic and consistent outcome.</li>
-</ul>
-</div>
-</div>
-</div>
-<div id="outline-container-org087b928" class="outline-2">
-<h2 id="org087b928"><span class="section-number-2">2.</span> What is MagaETH</h2>
-<div class="outline-text-2" id="text-2">
-<ul class="org-ul">
-<li>An EVM-compatible L2 blockchain with Web2-level real-time processing and publishing, i.e., millisecond-level response times under heavy load.</li>
-<li>Main idea: delegate security and censorship resistance to base layers, e.g., Ethereum to make room for L2 optimization.</li>
-</ul>
-</div>
-<div id="outline-container-orgda1450b" class="outline-3">
-<h3 id="orgda1450b"><span class="section-number-3">2.1.</span> Node specialization</h3>
-<div class="outline-text-3" id="text-2-1">
-<ul class="org-ul">
-<li>sequencer: only one active sequencer at any time to <b><b>eliminate the consensus overhead</b></b>.</li>
-<li>full node: receive state diff from the sequencer via a p2p network and apply the diffs to update local states; don&rsquo;t re-execute transactions, only validates the block indirectly using proofs provided by the provers.</li>
-<li>provers: validate the block asynchronously using the stateless validation scheme.</li>
-<li><a href="https://vitalik.eth.limo/general/2021/12/06/endgame.html">Endgame, Vitalik 2021</a>: Node specialization ensures trustless and high decentralized block validation (more provers), even though block production becomes more centralized (one sequencer).</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-orga31ba51" class="outline-3">
-<h3 id="orga31ba51"><span class="section-number-3">2.2.</span> Design philosophy</h3>
-<div class="outline-text-3" id="text-2-2">
-<ul class="org-ul">
-<li>Reth (Rust implementation of the Ethereum protocol) is bottlenecked by the MPT update in a live sync setup, even with a powerful sequencer.</li>
-<li><a href="https://www.usenix.org/conference/atc19/presentation/keynote">Measure, then build</a>: first get insights from real problems, then design techniques to address all problems simultaneously.</li>
-<li>Prefer clean-slate, as addressing any bottleneck in isolation rarely results in significant end-to-end performance improvement.</li>
-</ul>
-</div>
-</div>
-</div>
-<div id="outline-container-orga076845" class="outline-2">
-<h2 id="orga076845"><span class="section-number-2">3.</span> MegaETH challenges</h2>
-<div class="outline-text-2" id="text-3">
+            <ul class="org-ul">
+              <li>
+                Throughput: 100MGas/s (\(\approx\) 3700 ERC-20 transfer) cannot
+                compares to Web2 database with &gt;1M transactions per second.
+              </li>
+              <li>
+                Capacity: Complex applications cannot be on-chain, e.g., compute
+                large Fibonacci (e.g., \(10^8\)) number would take 55 seconds on
+                opBNB, while in C just 30 milliseconds in a single core.
+              </li>
+              <li>
+                Delay: Applications that require fast feedback loop, e.g.,
+                high-frequency trading are not feasible with long block times,
+                e.g., 1s.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org26174de" class="outline-3">
+          <h3 id="org26174de">
+            <span class="section-number-3">1.5.</span> Blockchain node hardware
+            requirements
+          </h3>
+          <div class="outline-text-3" id="text-1-5">
+            <ul class="org-ul">
+              <li>
+                Lower hardware requirements for full nodes increase
+                decentralization.
+              </li>
+              <li>Higher requirements increase performance and security.</li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org090b6fa" class="outline-3">
+          <h3 id="org090b6fa">
+            <span class="section-number-3">1.6.</span> L1 and L2 nodes
+          </h3>
+          <div class="outline-text-3" id="text-1-6">
+            <ul class="org-ul">
+              <li>
+                L1 nodes are homogeneous; each node performs identical tasks,
+                i.e., transaction consensus and execution without
+                specialization.
+              </li>
+              <li>
+                L2 nodes are heterogeneous; different nodes perform specific
+                tasks, e.g., sequencer node determines the transaction order,
+                prover nodes rely on accelerators to enhance proof generation.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org0a02422" class="outline-3">
+          <h3 id="org0a02422">
+            <span class="section-number-3">1.7.</span> Verifying a block
+          </h3>
+          <div class="outline-text-3" id="text-1-7">
+            <ul class="org-ul">
+              <li>Re-execute the transactions in the block.</li>
+              <li>Applying the changes to Ethereum state trie.</li>
+              <li>
+                Calculate the new root hash and compare it with the root hash
+                provided by the block.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org145636b" class="outline-3">
+          <h3 id="org145636b">
+            <span class="section-number-3">1.8.</span> Maximum extractable value
+            (MEV)
+          </h3>
+          <div class="outline-text-3" id="text-1-8">
+            <ul class="org-ul">
+              <li>
+                Validators maximize their profitability by favorably ordering
+                transactions.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-orgf9ae504" class="outline-3">
+          <h3 id="orgf9ae504">
+            <span class="section-number-3">1.9.</span> Proposer-builder
+            separation (PBS)
+          </h3>
+          <div class="outline-text-3" id="text-1-9">
+            <ul class="org-ul">
+              <li>
+                Block builders are responsible for creating blocks and offering
+                them to the block proposer in each slot.
+              </li>
+              <li>
+                Block proposers cannot see the contents, but simply choose the
+                most profitable one and pay a fee to the block builder before
+                broadcasting the block.
+              </li>
+              <li>
+                PBS makes it harder for block builders to censor transactions,
+                and to outperform individuals at MEV extraction.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org0b8e1a7" class="outline-3">
+          <h3 id="org0b8e1a7">
+            <span class="section-number-3">1.10.</span> Live and historical sync
+          </h3>
+          <div class="outline-text-3" id="text-1-10">
+            <ul class="org-ul">
+              <li>
+                Live (online): continuously update a node with the latest data.
+              </li>
+              <li>
+                Historical (offline): synchronize a node by downloading the
+                processing data up to a certain point.
+              </li>
+              <li>
+                Historical sync has much higher TPS than live sync, e.g., 10x,
+                since historical sync can perform batch processing and does not
+                have network latency.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org0baec9f" class="outline-3">
+          <h3 id="org0baec9f">
+            <span class="section-number-3">1.11.</span>
+            <a
+              href="https://ethereum.org/en/developers/docs/networking-layer/portal-network/"
+              >Portal Network</a
+            >
+          </h3>
+          <div class="outline-text-3" id="text-1-11">
+            <ul class="org-ul">
+              <li>
+                An in-development p2p network for serving historical data where
+                each node stores a small piece of Ethereum&rsquo;s history.
+              </li>
+              <li>Light nodes do not need to trust on full nodes.</li>
+              <li>The entire history exists distributed across the network.</li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org24d5ea4" class="outline-3">
+          <h3 id="org24d5ea4">
+            <span class="section-number-3">1.12.</span>
+            <a href="https://ethereum.org/en/roadmap/verkle-trees/"
+              >Verkle tree</a
+            >
+          </h3>
+          <div class="outline-text-3" id="text-1-12">
+            <ul class="org-ul">
+              <li>
+                Stateless clients use a witness to the state data that arrives
+                with the block instead of local databases.
+              </li>
+              <li>
+                <b><b>Witness</b></b
+                >: the minimal set of data that prove the values of the state
+                that are being changed by the transactions in a block.
+              </li>
+            </ul>
 
-<figure id="orgd64a5b1">
-<img src="https://hackmd.io/_uploads/BJW2EG4L0.png" alt="BJW2EG4L0.png" align="center" width="600px">
+            <ul class="org-ul">
+              <li>
+                Merkle tree is too large to be broadcast between peers; the
+                witness is a path connecting the data from leaved to the root,
+                and to verify the data the hash of all sibling nodes are also
+                required (to compute the parent hash).
+              </li>
+              <li>
+                Verkle trees reduce the witness size by shortening the distance
+                between leaves and eliminating the need to provide sibling
+                nodes; Using a polynomial commitment scheme(?) allows the
+                witness to have a fixed size.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org85744a7" class="outline-3">
+          <h3 id="org85744a7">
+            <span class="section-number-3">1.13.</span> Node storage
+          </h3>
+          <div class="outline-text-3" id="text-1-13">
+            <ul class="org-ul">
+              <li>
+                High disk space is the main barrier to a full node access, due
+                to the need to store large chunks of Ethereum state data to
+                process new transactions.
+              </li>
+              <li>
+                Using cheap hard drivers to store old data cannot keep up with
+                new blocks.
+              </li>
+              <li>
+                Clients should find new ways to verify transactions without
+                relying on looking up local databases.
+              </li>
+            </ul>
+          </div>
+          <div id="outline-container-orgb875531" class="outline-4">
+            <h4 id="orgb875531">
+              <span class="section-number-4">1.13.1.</span> History expiry
+            </h4>
+            <div class="outline-text-4" id="text-1-13-1">
+              <ul class="org-ul">
+                <li>
+                  Nodes discard state data older than X blocks with weak
+                  subjectivity checkpoints, i.e., a genesis block close to the
+                  present.
+                </li>
+                <li>
+                  Nodes can request historical data from peers with Portal
+                  Network, e.g., altruistic nodes that are willing to maintain
+                  and serve historical achieves, e.g., DAO.
+                </li>
+                <li>
+                  Does not fundamentally change how Ethereum node handles data.
+                </li>
+                <li>
+                  Controversial due to it could introduce new censorship risks
+                  if centralized organizations are providing historical data.
+                </li>
+                <li>
+                  EIP-4444 is under active discussion regarding community
+                  management.
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div id="outline-container-orgd5fca81" class="outline-4">
+            <h4 id="orgd5fca81">
+              <span class="section-number-4">1.13.2.</span> State expiry
+            </h4>
+            <div class="outline-text-4" id="text-1-13-2">
+              <ul class="org-ul">
+                <li>
+                  Remove state from individual nodes if it has not been accessed
+                  recently.
+                </li>
+                <li>
+                  The inactive accounts is not deleted, but stored separately
+                  from the active state and can be resurrected.
+                </li>
+                <li>
+                  A leading approach requires to add timestamps to the account
+                  address.
+                </li>
+                <li>
+                  The responsibility of storing old data may also be moved to
+                  centralized providers.
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div id="outline-container-org4fc40c1" class="outline-4">
+            <h4 id="org4fc40c1">
+              <span class="section-number-4">1.13.3.</span> Statelessness
+            </h4>
+            <div class="outline-text-4" id="text-1-13-3">
+              <ul class="org-ul">
+                <li>
+                  weak statelessness: only block producers need access to full
+                  state data.
+                </li>
+                <li>
+                  Weak statelessness require Verkle trees and proposer-builder
+                  separation.
+                </li>
+                <li>
+                  strong statelessness: no nodes need access to the full state
+                  data.
+                </li>
+                <li>
+                  In strong statelessness, witnesses are generated by users to
+                  declare accounts related to the transaction; not a part of
+                  Ethereum&rsquo;s roadmap.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div id="outline-container-org0740ef9" class="outline-3">
+          <h3 id="org0740ef9">
+            <span class="section-number-3">1.14.</span> Software transactional
+            memory (STM)
+          </h3>
+          <div class="outline-text-3" id="text-1-14">
+            <ul class="org-ul">
+              <li>
+                A concurrency control mechanism to control access to shares
+                memory in software.
+              </li>
+              <li>
+                A transaction refers to a piece of code executing a series of
+                reads and writes to the shared memory.
+              </li>
+              <li>
+                Transactions are isolated; changes made by one transaction are
+                not visible to others until the transaction commits.
+              </li>
+              <li>
+                When a conflict is detected, e.g., two transactions try to
+                modify the same memory, one transaction is rolled back.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org9ad5a9a" class="outline-3">
+          <h3 id="org9ad5a9a">
+            <span class="section-number-3">1.15.</span> Block-STM
+          </h3>
+          <div class="outline-text-3" id="text-1-15">
+            <ul class="org-ul">
+              <li>
+                A parallel execution engine to schedule smart contract
+                transactions based on STM.
+              </li>
+              <li>
+                Transactions are grouped in blocks, every execution of the block
+                must yield the deterministic and consistent outcome.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="outline-container-org087b928" class="outline-2">
+        <h2 id="org087b928">
+          <span class="section-number-2">2.</span> What is MagaETH
+        </h2>
+        <div class="outline-text-2" id="text-2">
+          <ul class="org-ul">
+            <li>
+              An EVM-compatible L2 blockchain with Web2-level real-time
+              processing and publishing, i.e., millisecond-level response times
+              under heavy load.
+            </li>
+            <li>
+              Main idea: delegate security and censorship resistance to base
+              layers, e.g., Ethereum to make room for L2 optimization.
+            </li>
+          </ul>
+        </div>
+        <div id="outline-container-orgda1450b" class="outline-3">
+          <h3 id="orgda1450b">
+            <span class="section-number-3">2.1.</span> Node specialization
+          </h3>
+          <div class="outline-text-3" id="text-2-1">
+            <ul class="org-ul">
+              <li>
+                sequencer: only one active sequencer at any time to
+                <b><b>eliminate the consensus overhead</b></b
+                >.
+              </li>
+              <li>
+                full node: receive state diff from the sequencer via a p2p
+                network and apply the diffs to update local states; don&rsquo;t
+                re-execute transactions, only validates the block indirectly
+                using proofs provided by the provers.
+              </li>
+              <li>
+                provers: validate the block asynchronously using the stateless
+                validation scheme.
+              </li>
+              <li>
+                <a
+                  href="https://vitalik.eth.limo/general/2021/12/06/endgame.html"
+                  >Endgame, Vitalik 2021</a
+                >: Node specialization ensures trustless and high decentralized
+                block validation (more provers), even though block production
+                becomes more centralized (one sequencer).
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-orga31ba51" class="outline-3">
+          <h3 id="orga31ba51">
+            <span class="section-number-3">2.2.</span> Design philosophy
+          </h3>
+          <div class="outline-text-3" id="text-2-2">
+            <ul class="org-ul">
+              <li>
+                Reth (Rust implementation of the Ethereum protocol) is
+                bottlenecked by the MPT update in a live sync setup, even with a
+                powerful sequencer.
+              </li>
+              <li>
+                <a
+                  href="https://www.usenix.org/conference/atc19/presentation/keynote"
+                  >Measure, then build</a
+                >: first get insights from real problems, then design techniques
+                to address all problems simultaneously.
+              </li>
+              <li>
+                Prefer clean-slate, as addressing any bottleneck in isolation
+                rarely results in significant end-to-end performance
+                improvement.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="outline-container-orga076845" class="outline-2">
+        <h2 id="orga076845">
+          <span class="section-number-2">3.</span> MegaETH challenges
+        </h2>
+        <div class="outline-text-2" id="text-3">
+          <figure id="orgd64a5b1">
+            <img
+              src="https://hackmd.io/_uploads/BJW2EG4L0.png"
+              alt="BJW2EG4L0.png"
+              align="center"
+              width="600px"
+            />
 
-<figcaption><span class="figure-number">Figure 2: </span>A transaction life-cycle.</figcaption>
-</figure>
+            <figcaption>
+              <span class="figure-number">Figure 2: </span>A transaction
+              life-cycle.
+            </figcaption>
+          </figure>
 
-<ul class="org-ul">
-<li>State synchronization requires high data compression given limited network bandwidth.</li>
-<li>Updating the hash root requires intensive disk I/O operation, which cannot be well speedup with optimized smart-contract compilers.</li>
-<li>Cannot easily raise block gas limit without properly repricing opcodes that do not benefit from optimized compilation.</li>
-<li>Parallelism is low for long dependency chains.</li>
-<li>The actual user experience highly depend on the infrastructure, e.g., RPC nodes, indexers.</li>
-<li>Support transaction priorities, e.g., critical transactions should be processed without queuing delays.</li>
-</ul>
-</div>
-</div>
-<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-evm.html">evm</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-parallel-evm.html">parallel-evm</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-megaeth.html">megaeth</a> </div>
-<div class="post-date">04 Jul 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-07-04-my-german-course.html">My German course</a></h1>
-<nav id="table-of-contents" role="doc-toc">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents" role="doc-toc">
-<ul>
-<li><a href="#orgb389158">1. Was ist passiert</a></li>
-<li><a href="#org8a277ca">2. Ich kann kein gutes Englisch schreiben</a></li>
-<li><a href="#org1dc231d">3. Ich kann nicht mich vorstellen</a></li>
-</ul>
-</div>
-</nav>
-<div id="outline-container-orgb389158" class="outline-2">
-<h2 id="orgb389158"><span class="section-number-2">1.</span> Was ist passiert</h2>
-<div class="outline-text-2" id="text-1">
-<p>
-Ich habe seit diesem Montag einen intensiven Deutschkurs gemacht.
-Die Kurs fangt von 8:30 Uhr bis 11:45 Uhr jeden Tag an.
-Weil von mein Wohnung bis zu die Schule ich fast einen Stunden brauche, muss ich vor 7 aufstehen und zur Bushaltstelle runnen.
-Nach dem Kurs fahre ich mit dem Bus zur Buro und arbeite ich bis zum Abendessen.
-Danach komme ich nach Haus zuruck und mache ein paar Haushalt.
-Ich gehe circa 11 Uhr ins Bett.
-</p>
-</div>
-</div>
-<div id="outline-container-org8a277ca" class="outline-2">
-<h2 id="org8a277ca"><span class="section-number-2">2.</span> Ich kann kein gutes Englisch schreiben</h2>
-<div class="outline-text-2" id="text-2">
-<p>
-Wenn ich hier diesen Satzen schreibe, merke ich, dass ich komplexe Satze auf Englisch nicht mehr schreiben kann.
-</p>
-
-<p>
-This is interesting, I am still in the starting phase, I cannot speak fluently at all and I have grammar mistakes everywhere.
-However, now when I try to type something in english, the german translation pops up in my mind first.
-If I don&rsquo;t know the german, I have a problem writing it down in english.
-As a result, my written english falls back to almost the same level as german.
-</p>
-</div>
-</div>
-<div id="outline-container-org1dc231d" class="outline-2">
-<h2 id="org1dc231d"><span class="section-number-2">3.</span> Ich kann nicht mich vorstellen</h2>
-<div class="outline-text-2" id="text-3">
-<p>
-All my classmates come from diverse backgrounds.
-At least 5 are Ukriainian, and at least 2 from some countries that I have never heard before.
-English is no longer a universal language, but with my broken german I can barely chat.
-</p>
-
-<p>
-Even with english, I have struggled a lot introducing myself.
-In the past decade, I never had this issue since everyone around me shared the similar experience.
-I can easily position myself; which education I had, which university I went, what work I am doing, what issue I have, etc.
-But this coordinate system works no more in this class.
-I am only confusing others if I mention I am a PhD student.
-So you are a student, they ask, why would they pay a student?
-</p>
-
-<p>
-Once I asked classmate what she does on weekend.
-She paused, and said: because you are working, so the weekend is different for you, but I don&rsquo;t work, so there is no difference for me.
-And before this I have never thought of such a bias in my question.
-</p>
-
-<p>
-More and more often recently, I realize how limited my perspective is.
-I did not know what the life with a social worker is like.
-I did not know that Afghan can often speak Turkish.
-I did not know what my lecturer thinks when he works as a security guard at night.
-I have been too much caught up in my own world, such that I am unable to ask a meaningful question of people I don&rsquo;t understand.
-I want to know more about the difference of this world, but I don&rsquo;t know how.
-</p>
-</div>
-</div>
-<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-personal.html">personal</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-german.html">german</a> </div><div id="archive">
-<a href="https://chenyo-17.github.io/org-static-blog/archive.html">Other posts</a>
-</div>
-</div>
-<div id="postamble" class="status"><footer>
-      <p>© 2024 chenyo. Some rights reserved.</p>
-      </footer></div>
-</body>
+          <ul class="org-ul">
+            <li>
+              State synchronization requires high data compression given limited
+              network bandwidth.
+            </li>
+            <li>
+              Updating the hash root requires intensive disk I/O operation,
+              which cannot be well speedup with optimized smart-contract
+              compilers.
+            </li>
+            <li>
+              Cannot easily raise block gas limit without properly repricing
+              opcodes that do not benefit from optimized compilation.
+            </li>
+            <li>Parallelism is low for long dependency chains.</li>
+            <li>
+              The actual user experience highly depend on the infrastructure,
+              e.g., RPC nodes, indexers.
+            </li>
+            <li>
+              Support transaction priorities, e.g., critical transactions should
+              be processed without queuing delays.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="taglist">
+        <a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a
+        >:
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-evm.html"
+          >evm</a
+        >
+        <a
+          href="https://chenyo-17.github.io/org-static-blog/tag-parallel-evm.html"
+          >parallel-evm</a
+        >
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-megaeth.html"
+          >megaeth</a
+        >
+      </div>
+      <div id="archive">
+        <a href="https://chenyo-17.github.io/org-static-blog/archive.html"
+          >Other posts</a
+        >
+      </div>
+    </div>
+    <div id="postamble" class="status">
+      <footer>
+        <p>© 2024 chenyo. Some rights reserved.</p>
+      </footer>
+    </div>
+  </body>
 </html>

@@ -4,6 +4,11 @@
 #+filetags: tool linux i3 arch
 
 * i3
-** move specific workspaces between different monitors [[https://i3wm.org/docs/user-contributed/swapping-workspaces.html][(ref)]]
-1. adjust the monitor relative positions
-2. use src_bash[:exports code]{i3-msg -- move workspace to output right} to move the **current** workspace to the monitor on the right
+** Move specific workspaces between different monitors [[https://i3wm.org/docs/user-contributed/swapping-workspaces.html][(ref)]]
+1. Adjust the monitor relative positions.
+2. Use src_bash[:exports code]{i3-msg -- move workspace to output right} to move the **current** workspace to the monitor on the right
+
+* Org
+** Format code blocks
+- Use the shortcut ~< s <TAB>~ to create a code block.
+- Use ~C-c '~ to enter the code environment to use the language major mode.

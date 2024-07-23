@@ -4,7 +4,301 @@
 <title><![CDATA[org-static-blog]]></title>
 <description><![CDATA[org-static-blog]]></description>
 <link>https://chenyo-17.github.io/org-static-blog</link>
-<lastBuildDate>Sat, 20 Jul 2024 21:28:22 +0200</lastBuildDate>
+<lastBuildDate>Tue, 23 Jul 2024 22:57:55 +0200</lastBuildDate>
+<item>
+  <title><![CDATA[CMU 15-445 notes: Modern SQL]]></title>
+  <description><![CDATA[
+<nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgbf8fcd5">1. Terminology</a>
+<ul>
+<li><a href="#org248e702">1.1. SQL and relational algebra</a></li>
+<li><a href="#org159d833">1.2. SQL commands</a></li>
+</ul>
+</li>
+<li><a href="#org0147dad">2. SQL syntax</a>
+<ul>
+<li><a href="#orgbd38431">2.1. Join</a></li>
+<li><a href="#orga173fb3">2.2. Aggregation function</a></li>
+<li><a href="#org3810076">2.3. String operation</a></li>
+<li><a href="#orgf01c19f">2.4. Date and time</a></li>
+<li><a href="#orgcd7cf97">2.5. Output redirection</a></li>
+<li><a href="#org5a5bb90">2.6. Output control</a></li>
+<li><a href="#orgcfc545f">2.7. Nested queries</a></li>
+<li><a href="#org6295067">2.8. Window functions</a></li>
+<li><a href="#orgca6458d">2.9. Common Table Expressions (CTE)</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+<p>
+This is a personal note for the <a href="https://15445.courses.cs.cmu.edu/fall2022/notes/02-modernsql.pdf">CMU 15-445 L2 notes</a>, along with some SQL command explained by <a href="https://claude.ai/chat/a2f07962-eb31-4f76-9a31-5e408722894b">Claude.ai</a>.
+</p>
+<div id="outline-container-orgbf8fcd5" class="outline-2">
+<h2 id="orgbf8fcd5"><span class="section-number-2">1.</span> Terminology</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org248e702" class="outline-3">
+<h3 id="org248e702"><span class="section-number-3">1.1.</span> SQL and relational algebra</h3>
+<div class="outline-text-3" id="text-1-1">
+<ul class="org-ul">
+<li>Relational algebra is based on sets (unordered, no duplicates); SQL is based on bags (unordered, allows duplicates).</li>
+<li>SQL is a declarative query language; users use SQL to specify the desired result, each DBMS determines the most efficient strategy to produce the answer.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org159d833" class="outline-3">
+<h3 id="org159d833"><span class="section-number-3">1.2.</span> SQL commands</h3>
+<div class="outline-text-3" id="text-1-2">
+<ul class="org-ul">
+<li>Data manipulation language (DML): <code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>.</li>
+<li><p>
+Data definition language (DDL): <code>CREATE</code>.
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #51afef;">CREATE</span> TABLR student (
+    sid <span style="color: #ECBE7B;">INT</span> <span style="color: #51afef;">PRIMARY</span> <span style="color: #51afef;">KEY</span>,
+    <span style="color: #51afef;">name</span> <span style="color: #ECBE7B;">VARCHAR</span>(<span style="color: #da8548; font-weight: bold;">16</span>),
+    login <span style="color: #ECBE7B;">VARCHAR</span>(<span style="color: #da8548; font-weight: bold;">32</span>) <span style="color: #51afef;">UNIQUE</span>,
+    age <span style="color: #ECBE7B;">SMALLINT</span>,
+    gpa <span style="color: #ECBE7B;">FLOAT</span>
+);
+</pre>
+</div></li>
+<li>Data control language (DCL): security, access control.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org0147dad" class="outline-2">
+<h2 id="org0147dad"><span class="section-number-2">2.</span> SQL syntax</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-orgbd38431" class="outline-3">
+<h3 id="orgbd38431"><span class="section-number-3">2.1.</span> Join</h3>
+<div class="outline-text-3" id="text-2-1">
+<ul class="org-ul">
+<li><p>
+Combine columns from one or more tables and produces a new table.
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #5B6268;">-- </span><span style="color: #5B6268;">All students that get an A in 15-721</span>
+<span style="color: #51afef;">SELECT</span> s.<span style="color: #51afef;">name</span>
+    <span style="color: #51afef;">FROM</span> enrolled <span style="color: #51afef;">AS</span> e, student <span style="color: #51afef;">AS</span> s
+<span style="color: #51afef;">WHERE</span> e.grade = <span style="color: #98be65;">'A'</span> <span style="color: #51afef;">AND</span> e.cid = <span style="color: #98be65;">'15-721'</span>
+    <span style="color: #51afef;">AND</span> e.sid = s.sid
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orga173fb3" class="outline-3">
+<h3 id="orga173fb3"><span class="section-number-3">2.2.</span> Aggregation function</h3>
+<div class="outline-text-3" id="text-2-2">
+<ul class="org-ul">
+<li><code>AVG(COL)</code>, <code>MIN(COL)</code>, <code>MAX(COL)</code>, <code>COUNT(COL)</code>.</li>
+<li><p>
+Take as input a bag of tuples and produce a single scalar value.
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #5B6268;">-- </span><span style="color: #5B6268;">Get number of students and their average GPA with a '@cs' login</span>
+<span style="color: #51afef;">SELECT</span> <span style="color: #c678dd;">AVG</span>(gpa), <span style="color: #c678dd;">COUNT</span>(sid) <span style="color: #51afef;">FROM</span> student <span style="color: #51afef;">WHERE</span> login <span style="color: #51afef;">LIKE</span> <span style="color: #98be65;">'@cs'</span>;
+<span style="color: #5B6268;">-- </span><span style="color: #5B6268;">Get the unique students</span>
+<span style="color: #51afef;">SELECT</span> <span style="color: #c678dd;">COUNT</span>(<span style="color: #51afef;">DISTINCT</span> login) <span style="color: #51afef;">FROM</span> student <span style="color: #51afef;">WHERE</span> login <span style="color: #51afef;">LIKE</span> <span style="color: #98be65;">'@cs'</span>;
+</pre>
+</div></li>
+<li><p>
+Non-aggregated values in <code>SELECT</code> output must appear in <code>GROUP BY</code>.
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #5B6268;">-- </span><span style="color: #5B6268;">Get the average GPA in each course</span>
+<span style="color: #51afef;">SELECT</span> <span style="color: #c678dd;">AVG</span>(s.gpa), e.cid
+    <span style="color: #51afef;">FROM</span> enrolled <span style="color: #51afef;">AS</span> e, student <span style="color: #51afef;">AS</span> s
+<span style="color: #51afef;">WHERE</span> e.sid = s.sid
+<span style="color: #51afef;">GROUP</span> <span style="color: #51afef;">BY</span> e.cid;
+</pre>
+</div></li>
+<li><p>
+<code>HAVING</code>: filter output results based on aggregation computation.
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #51afef;">SELECT</span> <span style="color: #c678dd;">AVG</span>(s.gpa), e.cid
+    <span style="color: #51afef;">FROM</span> enrolled <span style="color: #51afef;">AS</span> e, student <span style="color: #51afef;">AS</span> s
+<span style="color: #51afef;">WHERE</span> e.sid = s.sid
+<span style="color: #51afef;">GROUP</span> <span style="color: #51afef;">BY</span> e.cid
+<span style="color: #51afef;">HAVING</span> <span style="color: #c678dd;">AVG</span>(s.gpa) &gt; <span style="color: #da8548; font-weight: bold;">3.9</span>;
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org3810076" class="outline-3">
+<h3 id="org3810076"><span class="section-number-3">2.3.</span> String operation</h3>
+<div class="outline-text-3" id="text-2-3">
+<ul class="org-ul">
+<li>Strings are case sensitive and single-quotes only in the SQL standard.</li>
+<li>Use <code>LIKE</code> for string pattern matching:
+<ul class="org-ul">
+<li><code>%</code> matches any sub-string,</li>
+<li><code>_</code> matches any one character</li>
+</ul></li>
+<li>Standard string functions: <code>UPPER(S)</code>, <code>SUBSTRING(S, B, E)</code>.</li>
+<li><code>||</code>: string concatenation.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgf01c19f" class="outline-3">
+<h3 id="orgf01c19f"><span class="section-number-3">2.4.</span> Date and time</h3>
+<div class="outline-text-3" id="text-2-4">
+<ul class="org-ul">
+<li>Attributes: <code>DATE</code>, <code>TIME</code>.</li>
+<li>Different DBMS have different date/time operations.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgcd7cf97" class="outline-3">
+<h3 id="orgcd7cf97"><span class="section-number-3">2.5.</span> Output redirection</h3>
+<div class="outline-text-3" id="text-2-5">
+<ul class="org-ul">
+<li><p>
+One can store the results into another table
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #5B6268;">-- </span><span style="color: #5B6268;">output to a non-existing table</span>
+<span style="color: #51afef;">SELECT</span> <span style="color: #51afef;">DISTINCT</span> cis <span style="color: #51afef;">INTO</span> CourseIds <span style="color: #51afef;">FROM</span> enrolled;
+<span style="color: #5B6268;">-- </span><span style="color: #5B6268;">output to an existing table with the same number of columns and column type</span>
+<span style="color: #5B6268;">-- </span><span style="color: #5B6268;">but the names do not matter</span>
+<span style="color: #51afef;">INSERT</span> <span style="color: #51afef;">INTO</span> CourseIds (<span style="color: #51afef;">SELECT</span> <span style="color: #51afef;">DISTINCT</span> cid <span style="color: #51afef;">FROM</span> enrolled);
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org5a5bb90" class="outline-3">
+<h3 id="org5a5bb90"><span class="section-number-3">2.6.</span> Output control</h3>
+<div class="outline-text-3" id="text-2-6">
+<ul class="org-ul">
+<li>Use <code>ORDER</code>, <code>ASC</code> and <code>DESC</code> to sort the output tuples; otherwise the output could have different order every time.</li>
+<li><p>
+Use <code>LIMIT</code>, <code>OFFSET</code> to restrict the output number.
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #51afef;">SELECT</span> sid <span style="color: #51afef;">FROM</span> enrolled <span style="color: #51afef;">WHERE</span> cid = <span style="color: #98be65;">'15-721'</span>
+<span style="color: #51afef;">ORDER</span> <span style="color: #51afef;">BY</span> <span style="color: #c678dd;">UPPER</span>(grade) <span style="color: #51afef;">DESC</span>, sid + <span style="color: #da8548; font-weight: bold;">1</span> <span style="color: #51afef;">ASC</span>;
+    <span style="color: #51afef;">LIMIT</span> <span style="color: #da8548; font-weight: bold;">10</span> OFFSET <span style="color: #da8548; font-weight: bold;">10</span>;  <span style="color: #5B6268;">-- </span><span style="color: #5B6268;">output 10 tuples, starting from the 11th tuple</span>
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgcfc545f" class="outline-3">
+<h3 id="orgcfc545f"><span class="section-number-3">2.7.</span> Nested queries</h3>
+<div class="outline-text-3" id="text-2-7">
+<ul class="org-ul">
+<li>Nested queries are often difficult to optimize.</li>
+<li>The inner query can access attributes defined in the outer query.</li>
+<li><p>
+Inner queries can appear anywhere.
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #5B6268;">-- </span><span style="color: #5B6268;">Output a column 'one' with 1s, the number of 1s</span>
+<span style="color: #5B6268;">-- </span><span style="color: #5B6268;">equals to the number of rows in 'student'</span>
+<span style="color: #51afef;">SELECT</span> (<span style="color: #51afef;">SELECT</span> <span style="color: #da8548; font-weight: bold;">1</span>) <span style="color: #51afef;">AS</span> one <span style="color: #51afef;">FROM</span> student;
+
+<span style="color: #5B6268;">-- </span><span style="color: #5B6268;">Get the names of students that are enrolled in '15-445'</span>
+<span style="color: #51afef;">SELECT</span> <span style="color: #51afef;">name</span> <span style="color: #51afef;">FROM</span> students
+    <span style="color: #51afef;">WHERE</span> sid <span style="color: #51afef;">IN</span> (
+        <span style="color: #51afef;">SELECT</span> sid <span style="color: #51afef;">FROM</span> enrolled
+        <span style="color: #51afef;">WHERE</span> cid = <span style="color: #98be65;">'15-445'</span>
+);
+
+<span style="color: #5B6268;">-- </span><span style="color: #5B6268;">Get student record with the highest id</span>
+<span style="color: #5B6268;">-- </span><span style="color: #5B6268;">that is enrolled in at least one course.</span>
+<span style="color: #51afef;">SELECT</span> student.sid, <span style="color: #51afef;">name</span>
+    <span style="color: #51afef;">FROM</span> student
+    <span style="color: #5B6268;">-- </span><span style="color: #5B6268;">the intermediate output is aliases as max_e</span>
+    <span style="color: #51afef;">JOIN</span> (<span style="color: #51afef;">SELECT</span> <span style="color: #c678dd;">MAX</span>(sid) <span style="color: #51afef;">AS</span> sid <span style="color: #51afef;">FROM</span> enrolled) <span style="color: #51afef;">AS</span> max_e
+    <span style="color: #5B6268;">-- </span><span style="color: #5B6268;">only select student who has the max_e</span>
+    <span style="color: #51afef;">ON</span> student.sid = max_e.sid;
+
+<span style="color: #5B6268;">-- </span><span style="color: #5B6268;">the above is same as below, but `join` syntax is more preferred</span>
+<span style="color: #51afef;">SELECT</span> student.sid, <span style="color: #51afef;">name</span>
+<span style="color: #51afef;">FROM</span> student <span style="color: #51afef;">AS</span> s, (<span style="color: #51afef;">SELECT</span> <span style="color: #c678dd;">MAX</span>(sid) <span style="color: #51afef;">AS</span> sid <span style="color: #51afef;">FROM</span> enrolled) <span style="color: #51afef;">AS</span> max_e
+<span style="color: #51afef;">WHERE</span> s.sid = max_e.sid;
+</pre>
+</div></li>
+
+<li>Nested query results expression:
+<ul class="org-ul">
+<li><code>ALL</code>: must satisfy expression for all <b><b>rows</b></b> in sub-query.</li>
+<li><code>ANY</code>, <code>IN</code>: must satisfy expression for at least one row in sub-query.</li>
+<li><p>
+<code>EXISTS</code>: at least one row is returned.
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #5B6268;">-- </span><span style="color: #5B6268;">Get all courses with no students enrolled in</span>
+<span style="color: #51afef;">SELECT</span> * <span style="color: #51afef;">FROM</span> course
+    <span style="color: #51afef;">WHERE</span> <span style="color: #51afef;">NOT</span> <span style="color: #51afef;">EXISTS</span>(
+        <span style="color: #51afef;">SELECT</span> * <span style="color: #51afef;">FROM</span> enrolled
+            <span style="color: #51afef;">WHERE</span> course.cid = enrolled.cid
+)
+
+<span style="color: #5B6268;">-- </span><span style="color: #5B6268;">Get students whose gpa is larget than the highest score in '15-712'</span>
+<span style="color: #5B6268;">-- </span><span style="color: #5B6268;">and the login has a level &gt; 3</span>
+<span style="color: #51afef;">SELECT</span> student.sid, <span style="color: #51afef;">name</span>
+    <span style="color: #51afef;">FROM</span> student <span style="color: #51afef;">AS</span> S
+<span style="color: #51afef;">WHERE</span> s.gpa &gt; <span style="color: #51afef;">ALL</span> (
+    <span style="color: #51afef;">SELECT</span> course.score <span style="color: #51afef;">FROM</span> course
+        <span style="color: #51afef;">WHERE</span> course.cid = <span style="color: #98be65;">'15-712'</span>
+)
+<span style="color: #51afef;">AND</span> student.login <span style="color: #51afef;">IN</span> (
+    <span style="color: #51afef;">SELECT</span> login <span style="color: #51afef;">FROM</span> enrolled
+    <span style="color: #51afef;">WHERE</span> <span style="color: #51afef;">level</span> &gt; <span style="color: #da8548; font-weight: bold;">3</span>
+);
+</pre>
+</div></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org6295067" class="outline-3">
+<h3 id="org6295067"><span class="section-number-3">2.8.</span> Window functions</h3>
+<div class="outline-text-3" id="text-2-8">
+<ul class="org-ul">
+<li>Perform sliding calculation across a set of tuples.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgca6458d" class="outline-3">
+<h3 id="orgca6458d"><span class="section-number-3">2.9.</span> Common Table Expressions (CTE)</h3>
+<div class="outline-text-3" id="text-2-9">
+<ul class="org-ul">
+<li>An alternative to windows or nested queries when writing more complex queries.</li>
+<li><p>
+CTEs use <code>WITH</code> to bind the output of an inner query to a temporary table.
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #51afef;">WITH</span> cteName (col1, col2) <span style="color: #51afef;">AS</span> (
+    <span style="color: #51afef;">SELECT</span> <span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">2</span>
+)
+<span style="color: #51afef;">SELECT</span> col1 + col2 <span style="color: #51afef;">FROM</span> cteName;
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-study.html">study</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-database.html">database</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-cmu.html">cmu</a> </div>]]></description>
+  <category><![CDATA[study]]></category>
+  <category><![CDATA[database]]></category>
+  <category><![CDATA[cmu]]></category>
+  <link>https://chenyo-17.github.io/org-static-blog/2024-07-23-db-notes:-modern-sql.html</link>
+  <guid>https://chenyo-17.github.io/org-static-blog/2024-07-23-db-notes:-modern-sql.html</guid>
+  <pubDate>Tue, 23 Jul 2024 13:05:00 +0200</pubDate>
+</item>
 <item>
   <title><![CDATA[CMU 15-445 notes: Relational Model & Algebra]]></title>
   <description><![CDATA[
@@ -12,50 +306,50 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgdb8e5cf">1. Terminology</a>
+<li><a href="#org3e79133">1. Terminology</a>
 <ul>
-<li><a href="#orgd60887e">1.1. Database</a></li>
-<li><a href="#org1abe017">1.2. Database design consideration</a></li>
-<li><a href="#org377f2ce">1.3. Database management system (DBMS)</a></li>
-<li><a href="#org48a0e7e">1.4. Data model</a></li>
-<li><a href="#org016a124">1.5. Schema</a></li>
-<li><a href="#org6cbaa77">1.6. Entities and Tables</a></li>
-<li><a href="#orgfd654bd">1.7. Attributes and Fields</a></li>
-<li><a href="#orged26937">1.8. Logical layer</a></li>
-<li><a href="#orge6c0772">1.9. Physical layer</a></li>
-<li><a href="#org3cdf27c">1.10. Data manipulation languages (DMLs)</a></li>
-<li><a href="#orgd7d77d3">1.11. SQL (Structured Query Language) and relational model</a></li>
+<li><a href="#orgec86120">1.1. Database</a></li>
+<li><a href="#org1efce92">1.2. Database design consideration</a></li>
+<li><a href="#org987f05d">1.3. Database management system (DBMS)</a></li>
+<li><a href="#org6e59de6">1.4. Data model</a></li>
+<li><a href="#org0703938">1.5. Schema</a></li>
+<li><a href="#org149bbef">1.6. Entities and Tables</a></li>
+<li><a href="#orgeabab19">1.7. Attributes and Fields</a></li>
+<li><a href="#orgb9ccd72">1.8. Logical layer</a></li>
+<li><a href="#org3560635">1.9. Physical layer</a></li>
+<li><a href="#orgaff54f4">1.10. Data manipulation languages (DMLs)</a></li>
+<li><a href="#orgf6bba7c">1.11. SQL (Structured Query Language) and relational model</a></li>
 </ul>
 </li>
-<li><a href="#orgbc5376c">2. Relational model</a>
+<li><a href="#org97dedbe">2. Relational model</a>
 <ul>
-<li><a href="#org9f609bb">2.1. A relation</a></li>
-<li><a href="#orgeefa289">2.2. A domain</a></li>
-<li><a href="#org56db007">2.3. A tuple</a></li>
-<li><a href="#org8044bd1">2.4. Keys</a></li>
+<li><a href="#org09d63b8">2.1. A relation</a></li>
+<li><a href="#org10591b4">2.2. A domain</a></li>
+<li><a href="#orga145e38">2.3. A tuple</a></li>
+<li><a href="#orgac33859">2.4. Keys</a></li>
 </ul>
 </li>
-<li><a href="#org713859d">3. Relational Algebra</a></li>
+<li><a href="#org38e6c34">3. Relational Algebra</a></li>
 </ul>
 </div>
 </nav>
 <p>
 This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpVZS2s&amp;list=PLSE8ODhjZXjaKScG3l0nuOiDTTqpfnWFf&amp;index=2">CMU 15-445 L1 video</a> and <a href="https://15445.courses.cs.cmu.edu/fall2022/notes/01-introduction.pdf">CMU 15-445 L1 notes</a>, along with some terminology explained by <a href="https://claude.ai/chat/14f3c4ec-0ca8-495e-ac70-dd13f9eab5ea">Claude.ai</a>.
 </p>
-<div id="outline-container-orgdb8e5cf" class="outline-2">
-<h2 id="orgdb8e5cf"><span class="section-number-2">1.</span> Terminology</h2>
+<div id="outline-container-org3e79133" class="outline-2">
+<h2 id="org3e79133"><span class="section-number-2">1.</span> Terminology</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orgd60887e" class="outline-3">
-<h3 id="orgd60887e"><span class="section-number-3">1.1.</span> Database</h3>
+<div id="outline-container-orgec86120" class="outline-3">
+<h3 id="orgec86120"><span class="section-number-3">1.1.</span> Database</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>An organized collection of inter-related data that models some aspect of the real-world.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org1abe017" class="outline-3">
-<h3 id="org1abe017"><span class="section-number-3">1.2.</span> Database design consideration</h3>
+<div id="outline-container-org1efce92" class="outline-3">
+<h3 id="org1efce92"><span class="section-number-3">1.2.</span> Database design consideration</h3>
 <div class="outline-text-3" id="text-1-2">
 <ul class="org-ul">
 <li>Data integrity: protect invalid writing.</li>
@@ -64,8 +358,8 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 </ul>
 </div>
 </div>
-<div id="outline-container-org377f2ce" class="outline-3">
-<h3 id="org377f2ce"><span class="section-number-3">1.3.</span> Database management system (DBMS)</h3>
+<div id="outline-container-org987f05d" class="outline-3">
+<h3 id="org987f05d"><span class="section-number-3">1.3.</span> Database management system (DBMS)</h3>
 <div class="outline-text-3" id="text-1-3">
 <ul class="org-ul">
 <li>A software that manages a database.</li>
@@ -73,8 +367,8 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 </ul>
 </div>
 </div>
-<div id="outline-container-org48a0e7e" class="outline-3">
-<h3 id="org48a0e7e"><span class="section-number-3">1.4.</span> Data model</h3>
+<div id="outline-container-org6e59de6" class="outline-3">
+<h3 id="org6e59de6"><span class="section-number-3">1.4.</span> Data model</h3>
 <div class="outline-text-3" id="text-1-4">
 <ul class="org-ul">
 <li>A conceptual, high-level representation of how data is structured</li>
@@ -82,8 +376,8 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 </ul>
 </div>
 </div>
-<div id="outline-container-org016a124" class="outline-3">
-<h3 id="org016a124"><span class="section-number-3">1.5.</span> Schema</h3>
+<div id="outline-container-org0703938" class="outline-3">
+<h3 id="org0703938"><span class="section-number-3">1.5.</span> Schema</h3>
 <div class="outline-text-3" id="text-1-5">
 <ul class="org-ul">
 <li>A concrete implementation of a data model.</li>
@@ -92,8 +386,8 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 </ul>
 </div>
 </div>
-<div id="outline-container-org6cbaa77" class="outline-3">
-<h3 id="org6cbaa77"><span class="section-number-3">1.6.</span> Entities and Tables</h3>
+<div id="outline-container-org149bbef" class="outline-3">
+<h3 id="org149bbef"><span class="section-number-3">1.6.</span> Entities and Tables</h3>
 <div class="outline-text-3" id="text-1-6">
 <ul class="org-ul">
 <li>Entities: conceptual representations of objects in the logical data model.</li>
@@ -101,8 +395,8 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 </ul>
 </div>
 </div>
-<div id="outline-container-orgfd654bd" class="outline-3">
-<h3 id="orgfd654bd"><span class="section-number-3">1.7.</span> Attributes and Fields</h3>
+<div id="outline-container-orgeabab19" class="outline-3">
+<h3 id="orgeabab19"><span class="section-number-3">1.7.</span> Attributes and Fields</h3>
 <div class="outline-text-3" id="text-1-7">
 <ul class="org-ul">
 <li>Attributes: properties of an entity.</li>
@@ -110,24 +404,24 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 </ul>
 </div>
 </div>
-<div id="outline-container-orged26937" class="outline-3">
-<h3 id="orged26937"><span class="section-number-3">1.8.</span> Logical layer</h3>
+<div id="outline-container-orgb9ccd72" class="outline-3">
+<h3 id="orgb9ccd72"><span class="section-number-3">1.8.</span> Logical layer</h3>
 <div class="outline-text-3" id="text-1-8">
 <ul class="org-ul">
 <li>The entities and attributes the database has.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orge6c0772" class="outline-3">
-<h3 id="orge6c0772"><span class="section-number-3">1.9.</span> Physical layer</h3>
+<div id="outline-container-org3560635" class="outline-3">
+<h3 id="org3560635"><span class="section-number-3">1.9.</span> Physical layer</h3>
 <div class="outline-text-3" id="text-1-9">
 <ul class="org-ul">
 <li>How are entities and attributes stored in the database.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org3cdf27c" class="outline-3">
-<h3 id="org3cdf27c"><span class="section-number-3">1.10.</span> Data manipulation languages (DMLs)</h3>
+<div id="outline-container-orgaff54f4" class="outline-3">
+<h3 id="orgaff54f4"><span class="section-number-3">1.10.</span> Data manipulation languages (DMLs)</h3>
 <div class="outline-text-3" id="text-1-10">
 <ul class="org-ul">
 <li>Methods to store and retrieve information from a database.</li>
@@ -136,19 +430,18 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 </ul>
 </div>
 </div>
-<div id="outline-container-orgd7d77d3" class="outline-3">
-<h3 id="orgd7d77d3"><span class="section-number-3">1.11.</span> SQL (Structured Query Language) and relational model</h3>
+<div id="outline-container-orgf6bba7c" class="outline-3">
+<h3 id="orgf6bba7c"><span class="section-number-3">1.11.</span> SQL (Structured Query Language) and relational model</h3>
 <div class="outline-text-3" id="text-1-11">
 <ul class="org-ul">
 <li>SQL <b><b>implements</b></b> the relational model in DBMS and provides a standard way to create, manipulate and query relational databases.</li>
 <li>Different SQL implementation may vary and do not strictly adhere to the relational model, e.g., allow duplicate rows.</li>
-<li>SQL borrows both relational algebra and relational calculus (?).</li>
 </ul>
 </div>
 </div>
 </div>
-<div id="outline-container-orgbc5376c" class="outline-2">
-<h2 id="orgbc5376c"><span class="section-number-2">2.</span> Relational model</h2>
+<div id="outline-container-org97dedbe" class="outline-2">
+<h2 id="org97dedbe"><span class="section-number-2">2.</span> Relational model</h2>
 <div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li>A <b><b>data model</b></b> that defines a database <b><b>abstraction</b></b> to avoid maintenance overhead when changing the physical layer.</li>
@@ -157,14 +450,14 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 </ul>
 
 
-<figure id="org85d863c">
+<figure id="org79ae6b9">
 <img src="https://people.cs.pitt.edu/~chang/156/images/fig41.gif" alt="fig41.gif" align="center" width="500px">
 
 <figcaption><span class="figure-number">Figure 1: </span>Relational model concepts</figcaption>
 </figure>
 </div>
-<div id="outline-container-org9f609bb" class="outline-3">
-<h3 id="org9f609bb"><span class="section-number-3">2.1.</span> A relation</h3>
+<div id="outline-container-org09d63b8" class="outline-3">
+<h3 id="org09d63b8"><span class="section-number-3">2.1.</span> A relation</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>An unordered set that contains the relationship of attributes that represent entities.</li>
@@ -172,16 +465,16 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 </ul>
 </div>
 </div>
-<div id="outline-container-orgeefa289" class="outline-3">
-<h3 id="orgeefa289"><span class="section-number-3">2.2.</span> A domain</h3>
+<div id="outline-container-org10591b4" class="outline-3">
+<h3 id="org10591b4"><span class="section-number-3">2.2.</span> A domain</h3>
 <div class="outline-text-3" id="text-2-2">
 <ul class="org-ul">
 <li>A named set of allowable values for a specific attribute.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org56db007" class="outline-3">
-<h3 id="org56db007"><span class="section-number-3">2.3.</span> A tuple</h3>
+<div id="outline-container-orga145e38" class="outline-3">
+<h3 id="orga145e38"><span class="section-number-3">2.3.</span> A tuple</h3>
 <div class="outline-text-3" id="text-2-3">
 <ul class="org-ul">
 <li>A set of attribute values in the relation.</li>
@@ -191,8 +484,8 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 </ul>
 </div>
 </div>
-<div id="outline-container-org8044bd1" class="outline-3">
-<h3 id="org8044bd1"><span class="section-number-3">2.4.</span> Keys</h3>
+<div id="outline-container-orgac33859" class="outline-3">
+<h3 id="orgac33859"><span class="section-number-3">2.4.</span> Keys</h3>
 <div class="outline-text-3" id="text-2-4">
 <ul class="org-ul">
 <li>Primary key: uniquely identifies a single tuple.</li>
@@ -201,8 +494,8 @@ This is a personal note for the <a href="https://www.youtube.com/watch?v=uikbtpV
 </div>
 </div>
 </div>
-<div id="outline-container-org713859d" class="outline-2">
-<h2 id="org713859d"><span class="section-number-2">3.</span> Relational Algebra</h2>
+<div id="outline-container-org38e6c34" class="outline-2">
+<h2 id="org38e6c34"><span class="section-number-2">3.</span> Relational Algebra</h2>
 <div class="outline-text-2" id="text-3">
 <ul class="org-ul">
 <li>A set of fundamental operations to retrieve and manipulate tuples in a relation.</li>
@@ -1961,25 +2254,44 @@ In the end, I need to append a new rule to make the RPC work.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org7a2e42a">1. i3</a>
+<li><a href="#org4e9a284">1. i3</a>
 <ul>
-<li><a href="#orga8833a2">1.1. move specific workspaces between different monitors (ref)</a></li>
+<li><a href="#org03cf9a1">1.1. Move specific workspaces between different monitors (ref)</a></li>
+</ul>
+</li>
+<li><a href="#org7626df6">2. Org</a>
+<ul>
+<li><a href="#org7ad08f9">2.1. Format code blocks</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org7a2e42a" class="outline-2">
-<h2 id="org7a2e42a"><span class="section-number-2">1.</span> i3</h2>
+<div id="outline-container-org4e9a284" class="outline-2">
+<h2 id="org4e9a284"><span class="section-number-2">1.</span> i3</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orga8833a2" class="outline-3">
-<h3 id="orga8833a2"><span class="section-number-3">1.1.</span> move specific workspaces between different monitors <a href="https://i3wm.org/docs/user-contributed/swapping-workspaces.html">(ref)</a></h3>
+<div id="outline-container-org03cf9a1" class="outline-3">
+<h3 id="org03cf9a1"><span class="section-number-3">1.1.</span> Move specific workspaces between different monitors <a href="https://i3wm.org/docs/user-contributed/swapping-workspaces.html">(ref)</a></h3>
 <div class="outline-text-3" id="text-1-1">
 <ol class="org-ol">
-<li>adjust the monitor relative positions</li>
-<li>use <code class="src src-bash">i3-msg -- move workspace to output right</code> to move the <b><b>current</b></b> workspace to the monitor on the right</li>
+<li>Adjust the monitor relative positions.</li>
+<li>Use <code class="src src-bash">i3-msg -- move workspace to output right</code> to move the <b><b>current</b></b> workspace to the monitor on the right</li>
 </ol>
+</div>
+</div>
+</div>
+<div id="outline-container-org7626df6" class="outline-2">
+<h2 id="org7626df6"><span class="section-number-2">2.</span> Org</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org7ad08f9" class="outline-3">
+<h3 id="org7ad08f9"><span class="section-number-3">2.1.</span> Format code blocks</h3>
+<div class="outline-text-3" id="text-2-1">
+<ul class="org-ul">
+<li>Use the shortcut <code>&lt; s &lt;TAB&gt;</code> to create a code block.</li>
+<li>Use <code>C-c '</code> to enter the code environment to use the language major mode.</li>
+</ul>
 </div>
 </div>
 </div>

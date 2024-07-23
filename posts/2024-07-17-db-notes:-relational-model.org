@@ -50,7 +50,6 @@ This is a personal note for the [[https://www.youtube.com/watch?v=uikbtpVZS2s&li
 ** SQL (Structured Query Language) and relational model
 - SQL **implements** the relational model in DBMS and provides a standard way to create, manipulate and query relational databases.
 - Different SQL implementation may vary and do not strictly adhere to the relational model, e.g., allow duplicate rows.
-- SQL borrows both relational algebra and relational calculus (?).
 
 * Relational model
 - A **data model** that defines a database **abstraction** to avoid maintenance overhead when changing the physical layer.
