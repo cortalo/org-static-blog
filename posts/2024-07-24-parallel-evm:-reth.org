@@ -1,0 +1,61 @@
+#+title:  parallel-evm: Reth
+#+date: <2024-07-24 15:54>
+#+description: This is a personal note for [[https://www.paradigm.xyz/2024/04/reth-perf][Reth-performance-blog]]
+#+filetags: evm paralle-evm reth
+
+This is a personal note for [[https://www.paradigm.xyz/2024/04/reth-perf][Reth-performance-blog]] as well as some terminology explain online, e.g., [[https://github.com/paradigmxyz/reth][Reth-repo]] and [[https://claude.ai/chat/6364436f-d279-4c6b-947e-237bfea26409][Claude.ai]].
+
+* Blockchain fundamentals
+
+** [[https://github.com/ethereum/execution-apis/blob/a0d03086564ab1838b462befbc083f873dcf0c0f/src/engine/paris.md][Ethereum engine API]]
+- A collection of JSON-RPC methods that all execution clients implement.
+- Specify the interfaces between consensus and execution layers.
+
+** [[https://github.com/foundry-rs/foundry/][Foundry]]
+- A Rust-written toolkit for Ethereum application development.
+- Consists of an Ethereum testing framework Forge; a framework to interact with the chain Cast; a local Ethereum node Anvil; and a Solidity REPL (Read-Eval-Print-Loop: an interactive environment) Chisel.
+
+** [[https://github.com/bluealloy/revm/][Revm]]
+- A Rust-written EVM; responsible for executing transactions and contracts.
+
+** [[https://github.com/alloy-rs][Alloy]]
+- A library to interact with the Ethereum and other EVM-base chains.
+
+** [[https://erigon.tech/][Erigon]] & Staged sync
+- Erigon: a Go-written Ethereum client implementation (execution layer).
+- Staged sync: break the chain synchronization process into distinct stages in order to achieve better efficiency.
+
+** Storage engines
+*** ACID
+- A set of properties for database transactions: atomicity, consistency, isolation, duration.
+- Atomicity: a transaction is treated as an indivisible unit; if any part of the transaction fails, the entire transaction is rolled back.
+- Consistency: a transaction brings the database from one valid state to another.
+- Isolation: concurrent transaction execution leave the database in the same state as if transactions are executed sequentially
+- Duration: a committed transaction remains committed even when the system fails.
+
+*** MVCC (Multi-version concurrency control)
+- A concurrency control model used in DBMS.
+- MVCC keeps multiple version of data simultaneously, each transaction sees a snapshot of the database.
+
+*** Common database models
+- Relational model, e.g., SQL.
+- Document model.
+- Network model.
+- key-value, e.g., NoSQL.
+
+*** Common storage engines
+- MDBX: Ultra-fate key-value embedded database with ACID and MVCC supported.
+- LevelDB: Google-developed key-value store using log-structured merge-tree for high write throughput.
+- RocksDB: Meta's fork of LevelDB, optimized for fast storage.
+- LSM-based DBs, e.g., BadgerDB: optimized for write-heavy workloads with log-structured merge-tree.
+- BoltDB: Go-written key-value database with optimized B+ tree, ACID supported.
+- LMDB: memory-mapped key-value store with ACID and MVCC supported.
+
+** Reth
+- A Rust implementation of an Ethereum full node; allows users to interact with the Ethereum blockchain.
+- An execution layer that implements all Ethereum engine APIs.
+- Modularity: every component is built as a library.
+- Performance: uses Erigon staged-sync node architecture and other Rust libraries (e.g., Alloy, revm); tests and optimizes on Foundry.
+- Database/Storage engine: MDBX.
+
+* Reth current status (April 2024)

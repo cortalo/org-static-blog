@@ -1,229 +1,386 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="description" content="This is a personal note for [[https://www.bnbchain.org/zh-CN/blog/road-to-high-performance-parallel-evm-for-bnb-chain][BNB chain-blog]]">
-<link rel="alternate"
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content="This is a personal note for [[https://www.bnbchain.org/zh-CN/blog/road-to-high-performance-parallel-evm-for-bnb-chain][BNB chain-blog]]"
+    />
+    <link
+      rel="alternate"
       type="application/rss+xml"
       href="https://chenyo-17.github.io/org-static-blog/rss.xml"
-      title="RSS feed for https://chenyo-17.github.io/org-static-blog">
-<title>Parallel EVM: BNB chain</title>
-<script type="text/javascript"
-             src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-       </script>
-       <script type="text/x-mathjax-config">
-             MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'],['\\(','\\)']]}});
-       </script>
-       <meta name="author" content="chenyo">
-      <meta name="referrer" content="no-referrer">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="static/style.css" type="text/css"/></head>
-<body>
-<div id="preamble" class="status"><header>
-      <h1><a href="https://chenyo-17.github.io/org-static-blog">Chenyo's org-static-blog</a></h1>
-      <nav>
-      <a href="https://chenyo-17.github.io/org-static-blog">Home</a>
-      <a href="https://chenyo-17.github.io/org-static-blog/archive.html">Archive</a>
-      <a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>
+      title="RSS feed for https://chenyo-17.github.io/org-static-blog"
+    />
+    <title>Parallel EVM: BNB chain</title>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+    ></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'],['\\(','\\)']]}});
+    </script>
+    <meta name="author" content="chenyo" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+  </head>
+  <body>
+    <div id="preamble" class="status">
+      <header>
+        <h1>
+          <a href="https://chenyo-17.github.io/org-static-blog"
+            >Chenyo's org-static-blog</a
+          >
+        </h1>
+        <nav>
+          <a href="https://chenyo-17.github.io/org-static-blog">Home</a>
+          <a href="https://chenyo-17.github.io/org-static-blog/archive.html"
+            >Archive</a
+          >
+          <a href="https://chenyo-17.github.io/org-static-blog/tags.html"
+            >Tags</a
+          >
+        </nav>
+      </header>
+    </div>
+    <div id="content">
+      <div class="post-date">07 Jul 2024</div>
+      <h1 class="post-title">
+        <a
+          href="https://chenyo-17.github.io/org-static-blog/2024-07-07-parallel-evm:-bnb-chain.html"
+          >Parallel EVM: BNB chain</a
+        >
+      </h1>
+      <nav id="table-of-contents" role="doc-toc">
+        <h2>Table of Contents</h2>
+        <div id="text-table-of-contents" role="doc-toc">
+          <ul>
+            <li>
+              <a href="#org1fbd6df">1. Blockchain fundamentals</a>
+              <ul>
+                <li>
+                  <a href="#orgcba1a29">1.1. Why parallel EVM is not easy</a>
+                </li>
+                <li><a href="#org59baf87">1.2. A Parallel EVM ideas</a></li>
+                <li><a href="#orga0ab7ae">1.3. Block STM algorithm</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#org842491e">2. BNB Parallel EVM 1.0: Infrastructure</a>
+            </li>
+            <li>
+              <a href="#org558389f"
+                >3. BNB Parallel EVM 2.0: Performance enhancement</a
+              >
+            </li>
+            <li>
+              <a href="#org06d0497">4. BNB Parallel EVM 3.0: Production</a>
+              <ul>
+                <li><a href="#org84e68b1">4.1. Hint-based dispatcher</a></li>
+                <li>
+                  <a href="#org2c2033f"
+                    >4.2. Seamless BNB chain ecosystem integration</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#org4845506">5. Comparison with other solutions</a>
+            </li>
+            <li><a href="#orgaef0a1f">6. Other optimizations</a></li>
+          </ul>
+        </div>
       </nav>
-      </header></div>
-<div id="content">
-<div class="post-date">07 Jul 2024</div><h1 class="post-title"><a href="https://chenyo-17.github.io/org-static-blog/2024-07-07-parallel-evm:-bnb-chain.html">Parallel EVM: BNB chain</a></h1>
-<nav id="table-of-contents" role="doc-toc">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents" role="doc-toc">
-<ul>
-<li><a href="#org50546b9">1. Blockchain fundamentals</a>
-<ul>
-<li><a href="#orgb99e643">1.1. Why parallel EVM is not easy</a></li>
-<li><a href="#org33e7ded">1.2. A Parallel EVM ideas</a></li>
-<li><a href="#orgef305d4">1.3. Block STM algorithm</a></li>
-</ul>
-</li>
-<li><a href="#org92cb377">2. BNB Parallel EVM 1.0: Infrastructure</a></li>
-<li><a href="#org5f4229a">3. BNB Parallel EVM 2.0: Performance enhancement</a></li>
-<li><a href="#org10ca388">4. BNB Parallel EVM 3.0: Production</a>
-<ul>
-<li><a href="#org901eb7b">4.1. Hint-based dispatcher</a></li>
-<li><a href="#org9a75ab8">4.2. Seamless BNB chain ecosystem integration</a></li>
-</ul>
-</li>
-<li><a href="#org6fa8f4f">5. Comparison with other solutions</a></li>
-<li><a href="#orgdca39c6">6. Other optimizations</a></li>
-</ul>
-</div>
-</nav>
-<p>
-This is a personal note for <a href="https://www.bnbchain.org/zh-CN/blog/road-to-high-performance-parallel-evm-for-bnb-chain">BNB chain-blog</a>.
-</p>
-<div id="outline-container-org50546b9" class="outline-2">
-<h2 id="org50546b9"><span class="section-number-2">1.</span> Blockchain fundamentals</h2>
-<div class="outline-text-2" id="text-1">
-</div>
-<div id="outline-container-orgb99e643" class="outline-3">
-<h3 id="orgb99e643"><span class="section-number-3">1.1.</span> Why parallel EVM is not easy</h3>
-<div class="outline-text-3" id="text-1-1">
-<ul class="org-ul">
-<li>Lack of visibility of potential transaction conflict.</li>
-<li>Blockchains experience transaction bursts, e.g., &gt;70M transactions per day.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org33e7ded" class="outline-3">
-<h3 id="org33e7ded"><span class="section-number-3">1.2.</span> A Parallel EVM ideas</h3>
-<div class="outline-text-3" id="text-1-2">
-<ul class="org-ul">
-<li>Run multiple EVM instances concurrently on different threads.</li>
-<li>Execute transactions independently on each thread and later merge a finial state update.</li>
-<li><a href="https://lh7-us.googleusercontent.com/Dh1GAMYlMkiRI0xWQ0ByYOxq_GNtA9h1PP1OF7FP9b8O3VRxVtlh1eq991OlNa4rNX_ZXH8tVPRBeN58_0dBF1jPUVRuuJMl4JqmBchhCTZp_vF-W003l77KajIjIMCHfapjsBH--0EpMi0FT2iNPlw">Parallel EVM scheme</a></li>
-</ul>
-</div>
-</div>
-<div id="outline-container-orgef305d4" class="outline-3">
-<h3 id="orgef305d4"><span class="section-number-3">1.3.</span> Block STM algorithm</h3>
-<div class="outline-text-3" id="text-1-3">
-<ul class="org-ul">
-<li>Optimistic parallelism: assigns transactions to various threads.</li>
-<li>Software transaction memory (STM): detect conflicts when transactions try to modify the same shared state simultaneously.</li>
-<li>Conflict resolution: when conflicts are detected, the offending transactions are discarded without affecting the blockchain state and are re-executed.</li>
-</ul>
-</div>
-</div>
-</div>
-<div id="outline-container-org92cb377" class="outline-2">
-<h2 id="org92cb377"><span class="section-number-2">2.</span> BNB Parallel EVM 1.0: Infrastructure</h2>
-<div class="outline-text-2" id="text-2">
-<ul class="org-ul">
-<li>Proposal: <a href="https://github.com/bnb-chain/BEPs/pull/130?ref=bnbchain.ghost.io">BEP-130 (2022)</a></li>
-<li>Dispatcher: distributes transactions across threads to optimize throughput.</li>
-<li>Parallel execution engine: execute transactions independently on each thread.</li>
-<li>Local stateDB: each thread maintains a local stateDB to record state access.</li>
-<li>Conflict detection: detect conflicts and re-execute conflicting transactions.</li>
-<li>State commit: the finalized results are committed to the global state DB.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org5f4229a" class="outline-2">
-<h2 id="org5f4229a"><span class="section-number-2">3.</span> BNB Parallel EVM 2.0: Performance enhancement</h2>
-<div class="outline-text-2" id="text-3">
-<ul class="org-ul">
-<li>Dispatcher: combine both static and dynamic dispatch strategies.</li>
-<li>Execution engine: streaming pipeline to enable smooth transaction processing.</li>
-<li>Conflict detection: ensure data integrity while minimizing unnecessary re-execution.</li>
-<li>Memory: shared memory pools and light copying techniques to reduce memory footprint.</li>
-<li>The overall performance ranges from 20% to 50%.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org10ca388" class="outline-2">
-<h2 id="org10ca388"><span class="section-number-2">4.</span> BNB Parallel EVM 3.0: Production</h2>
-<div class="outline-text-2" id="text-4">
-</div>
-<div id="outline-container-org901eb7b" class="outline-3">
-<h3 id="org901eb7b"><span class="section-number-3">4.1.</span> Hint-based dispatcher</h3>
-<div class="outline-text-3" id="text-4-1">
-<ul class="org-ul">
-<li>leverages external hint providers to analyze transactions and generate predictions about potential state access conflicts.</li>
-<li>Simple hints include read/write state sets; advanced hints incorporate weak/strong ordering for optimal parallelism.</li>
-<li>Conflicting transactions are assigned to the same slot.</li>
-<li>Transactions with no conflicts are distributed across different slots.</li>
-<li>Conflict detector remains as a backup for handling unforeseen conflicts.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org9a75ab8" class="outline-3">
-<h3 id="org9a75ab8"><span class="section-number-3">4.2.</span> Seamless BNB chain ecosystem integration</h3>
-<div class="outline-text-3" id="text-4-2">
-<ul class="org-ul">
-<li>Modularization and reconstructing.</li>
-<li>Thorough testing and validation.</li>
-</ul>
-</div>
-</div>
-</div>
-<div id="outline-container-org6fa8f4f" class="outline-2">
-<h2 id="org6fa8f4f"><span class="section-number-2">5.</span> Comparison with other solutions</h2>
-<div class="outline-text-2" id="text-5">
-<table>
+      <p>
+        This is a personal note for
+        <a
+          href="https://www.bnbchain.org/zh-CN/blog/road-to-high-performance-parallel-evm-for-bnb-chain"
+          >BNB chain-blog</a
+        >.
+      </p>
+      <div id="outline-container-org1fbd6df" class="outline-2">
+        <h2 id="org1fbd6df">
+          <span class="section-number-2">1.</span> Blockchain fundamentals
+        </h2>
+        <div class="outline-text-2" id="text-1"></div>
+        <div id="outline-container-orgcba1a29" class="outline-3">
+          <h3 id="orgcba1a29">
+            <span class="section-number-3">1.1.</span> Why parallel EVM is not
+            easy
+          </h3>
+          <div class="outline-text-3" id="text-1-1">
+            <ul class="org-ul">
+              <li>Lack of visibility of potential transaction conflict.</li>
+              <li>
+                Blockchains experience transaction bursts, e.g., &gt;70M
+                transactions per day.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org59baf87" class="outline-3">
+          <h3 id="org59baf87">
+            <span class="section-number-3">1.2.</span> A Parallel EVM ideas
+          </h3>
+          <div class="outline-text-3" id="text-1-2">
+            <ul class="org-ul">
+              <li>
+                Run multiple EVM instances concurrently on different threads.
+              </li>
+              <li>
+                Execute transactions independently on each thread and later
+                merge a finial state update.
+              </li>
+              <li>
+                <a
+                  href="https://lh7-us.googleusercontent.com/Dh1GAMYlMkiRI0xWQ0ByYOxq_GNtA9h1PP1OF7FP9b8O3VRxVtlh1eq991OlNa4rNX_ZXH8tVPRBeN58_0dBF1jPUVRuuJMl4JqmBchhCTZp_vF-W003l77KajIjIMCHfapjsBH--0EpMi0FT2iNPlw"
+                  >Parallel EVM scheme</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-orga0ab7ae" class="outline-3">
+          <h3 id="orga0ab7ae">
+            <span class="section-number-3">1.3.</span> Block STM algorithm
+          </h3>
+          <div class="outline-text-3" id="text-1-3">
+            <ul class="org-ul">
+              <li>
+                Optimistic parallelism: assigns transactions to various threads.
+              </li>
+              <li>
+                Software transaction memory (STM): detect conflicts when
+                transactions try to modify the same shared state simultaneously.
+              </li>
+              <li>
+                Conflict resolution: when conflicts are detected, the offending
+                transactions are discarded without affecting the blockchain
+                state and are re-executed.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="outline-container-org842491e" class="outline-2">
+        <h2 id="org842491e">
+          <span class="section-number-2">2.</span> BNB Parallel EVM 1.0:
+          Infrastructure
+        </h2>
+        <div class="outline-text-2" id="text-2">
+          <ul class="org-ul">
+            <li>
+              Proposal:
+              <a
+                href="https://github.com/bnb-chain/BEPs/pull/130?ref=bnbchain.ghost.io"
+                >BEP-130 (2022)</a
+              >
+            </li>
+            <li>
+              Dispatcher: distributes transactions across threads to optimize
+              throughput.
+            </li>
+            <li>
+              Parallel execution engine: execute transactions independently on
+              each thread.
+            </li>
+            <li>
+              Local stateDB: each thread maintains a local stateDB to record
+              state access.
+            </li>
+            <li>
+              Conflict detection: detect conflicts and re-execute conflicting
+              transactions.
+            </li>
+            <li>
+              State commit: the finalized results are committed to the global
+              state DB.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div id="outline-container-org558389f" class="outline-2">
+        <h2 id="org558389f">
+          <span class="section-number-2">3.</span> BNB Parallel EVM 2.0:
+          Performance enhancement
+        </h2>
+        <div class="outline-text-2" id="text-3">
+          <ul class="org-ul">
+            <li>
+              Dispatcher: combine both static and dynamic dispatch strategies.
+            </li>
+            <li>
+              Execution engine: streaming pipeline to enable smooth transaction
+              processing.
+            </li>
+            <li>
+              Conflict detection: ensure data integrity while minimizing
+              unnecessary re-execution.
+            </li>
+            <li>
+              Memory: shared memory pools and light copying techniques to reduce
+              memory footprint.
+            </li>
+            <li>The overall performance ranges from 20% to 50%.</li>
+          </ul>
+        </div>
+      </div>
+      <div id="outline-container-org06d0497" class="outline-2">
+        <h2 id="org06d0497">
+          <span class="section-number-2">4.</span> BNB Parallel EVM 3.0:
+          Production
+        </h2>
+        <div class="outline-text-2" id="text-4"></div>
+        <div id="outline-container-org84e68b1" class="outline-3">
+          <h3 id="org84e68b1">
+            <span class="section-number-3">4.1.</span> Hint-based dispatcher
+          </h3>
+          <div class="outline-text-3" id="text-4-1">
+            <ul class="org-ul">
+              <li>
+                leverages external hint providers to analyze transactions and
+                generate predictions about potential state access conflicts.
+              </li>
+              <li>
+                Simple hints include read/write state sets; advanced hints
+                incorporate weak/strong ordering for optimal parallelism.
+              </li>
+              <li>Conflicting transactions are assigned to the same slot.</li>
+              <li>
+                Transactions with no conflicts are distributed across different
+                slots.
+              </li>
+              <li>
+                Conflict detector remains as a backup for handling unforeseen
+                conflicts.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org2c2033f" class="outline-3">
+          <h3 id="org2c2033f">
+            <span class="section-number-3">4.2.</span> Seamless BNB chain
+            ecosystem integration
+          </h3>
+          <div class="outline-text-3" id="text-4-2">
+            <ul class="org-ul">
+              <li>Modularization and reconstructing.</li>
+              <li>Thorough testing and validation.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="outline-container-org4845506" class="outline-2">
+        <h2 id="org4845506">
+          <span class="section-number-2">5.</span> Comparison with other
+          solutions
+        </h2>
+        <div class="outline-text-2" id="text-5">
+          <table>
+            <colgroup>
+              <col class="org-left" />
 
+              <col class="org-left" />
 
-<colgroup>
-<col  class="org-left">
+              <col class="org-left" />
 
-<col  class="org-left">
+              <col class="org-left" />
+            </colgroup>
+            <thead>
+              <tr>
+                <th scope="col" class="org-left">Solutions</th>
+                <th scope="col" class="org-left">TX dependency check</th>
+                <th scope="col" class="org-left">Conflict resolution</th>
+                <th scope="col" class="org-left">StateDB optimization</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="org-left">BlockSTM</td>
+                <td class="org-left">tracks at execution</td>
+                <td class="org-left">re-execution</td>
+                <td class="org-left">N/A</td>
+              </tr>
 
-<col  class="org-left">
+              <tr>
+                <td class="org-left">Polygon</td>
+                <td class="org-left">minimal metadata solution</td>
+                <td class="org-left">reduced re-execution</td>
+                <td class="org-left">N/A</td>
+              </tr>
 
-<col  class="org-left">
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-left">Solutions</th>
-<th scope="col" class="org-left">TX dependency check</th>
-<th scope="col" class="org-left">Conflict resolution</th>
-<th scope="col" class="org-left">StateDB optimization</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="org-left">BlockSTM</td>
-<td class="org-left">tracks at execution</td>
-<td class="org-left">re-execution</td>
-<td class="org-left">N/A</td>
-</tr>
+              <tr>
+                <td class="org-left">Monad</td>
+                <td class="org-left">static analysis</td>
+                <td class="org-left">reduced re-execution</td>
+                <td class="org-left">Monad DB</td>
+              </tr>
 
-<tr>
-<td class="org-left">Polygon</td>
-<td class="org-left">minimal metadata solution</td>
-<td class="org-left">reduced re-execution</td>
-<td class="org-left">N/A</td>
-</tr>
+              <tr>
+                <td class="org-left">Sei</td>
+                <td class="org-left">tracks at execution</td>
+                <td class="org-left">re-execution</td>
+                <td class="org-left">SeiDB</td>
+              </tr>
 
-<tr>
-<td class="org-left">Monad</td>
-<td class="org-left">static analysis</td>
-<td class="org-left">reduced re-execution</td>
-<td class="org-left">Monad DB</td>
-</tr>
+              <tr>
+                <td class="org-left">Neon EVM and Solana Sealevel</td>
+                <td class="org-left">contract provided</td>
+                <td class="org-left">reduced re-execution</td>
+                <td class="org-left">depends on Solana</td>
+              </tr>
 
-<tr>
-<td class="org-left">Sei</td>
-<td class="org-left">tracks at execution</td>
-<td class="org-left">re-execution</td>
-<td class="org-left">SeiDB</td>
-</tr>
-
-<tr>
-<td class="org-left">Neon EVM and Solana Sealevel</td>
-<td class="org-left">contract provided</td>
-<td class="org-left">reduced re-execution</td>
-<td class="org-left">depends on Solana</td>
-</tr>
-
-<tr>
-<td class="org-left">BNBChain</td>
-<td class="org-left">hint info</td>
-<td class="org-left">reduced or eliminated re-execution</td>
-<td class="org-left">Thread local DB</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="outline-container-orgdca39c6" class="outline-2">
-<h2 id="orgdca39c6"><span class="section-number-2">6.</span> Other optimizations</h2>
-<div class="outline-text-2" id="text-6">
-<ul class="org-ul">
-<li>Opcode-level optimization: fine-tuning individual EVM instructions for maximum efficiency.</li>
-<li>Compilation optimization: JIT/AOT compilation paradigms; instruction-level parallelism (SIMD).</li>
-<li>Database sharding: distribute data across multiple databases.</li>
-<li>Concurrent node execution.</li>
-</ul>
-</div>
-</div>
-<div class="taglist"><a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://chenyo-17.github.io/org-static-blog/tag-evm.html">evm</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-parallel-evm.html">parallel-evm</a> <a href="https://chenyo-17.github.io/org-static-blog/tag-bnb.html">bnb</a> </div></div>
-<div id="postamble" class="status"><footer>
-      <p>© 2024 chenyo. Some rights reserved.</p>
-      </footer></div>
-</body>
+              <tr>
+                <td class="org-left">BNBChain</td>
+                <td class="org-left">hint info</td>
+                <td class="org-left">reduced or eliminated re-execution</td>
+                <td class="org-left">Thread local DB</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div id="outline-container-orgaef0a1f" class="outline-2">
+        <h2 id="orgaef0a1f">
+          <span class="section-number-2">6.</span> Other optimizations
+        </h2>
+        <div class="outline-text-2" id="text-6">
+          <ul class="org-ul">
+            <li>
+              Opcode-level optimization: fine-tuning individual EVM instructions
+              for maximum efficiency.
+            </li>
+            <li>
+              Compilation optimization: JIT/AOT compilation paradigms;
+              instruction-level parallelism (SIMD).
+            </li>
+            <li>
+              Database sharding: distribute data across multiple databases.
+            </li>
+            <li>Concurrent node execution.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="taglist">
+        <a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a
+        >:
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-evm.html"
+          >evm</a
+        >
+        <a
+          href="https://chenyo-17.github.io/org-static-blog/tag-parallel-evm.html"
+          >parallel-evm</a
+        >
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-bnb.html"
+          >bnb</a
+        >
+      </div>
+    </div>
+    <div id="postamble" class="status">
+      <footer>
+        <p>© 2024 chenyo. Some rights reserved.</p>
+      </footer>
+    </div>
+  </body>
 </html>
