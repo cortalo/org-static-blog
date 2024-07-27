@@ -6,7 +6,7 @@
 This is a personal note for [[https://www.bnbchain.org/zh-CN/blog/road-to-high-performance-parallel-evm-for-bnb-chain][BNB chain-blog]].
 
 * Blockchain fundamentals
-** Why parallel EVM is not easy
+** Why is parallel EVM not easy
 - Lack of visibility of potential transaction conflict.
 - Blockchains experience transaction bursts, e.g., >70M transactions per day.
 

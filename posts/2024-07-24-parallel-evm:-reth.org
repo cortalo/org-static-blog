@@ -1,4 +1,4 @@
-#+title:  parallel-evm: Reth
+#+title:  parallel-evm: Reth scaling plan
 #+date: <2024-07-24 15:54>
 #+description: This is a personal note for [[https://www.paradigm.xyz/2024/04/reth-perf][Reth-performance-blog]]
 #+filetags: evm paralle-evm reth
@@ -58,4 +58,66 @@ This is a personal note for [[https://www.paradigm.xyz/2024/04/reth-perf][Reth-p
 - Performance: uses Erigon staged-sync node architecture and other Rust libraries (e.g., Alloy, revm); tests and optimizes on Foundry.
 - Database/Storage engine: MDBX.
 
-* Reth current status (April 2024)
+** Why gas per second as the performance metric
+- More nuanced than TPS.
+- Allows for a clear understanding for the capacity and efficiency.
+- Helps assessing the cost implications, e.g., DoS attacks.
+
+** EVM cost models
+- Determines the computational and storage costs for the execution.
+- Key aspects: gas, gas cost (for each operation), gas price (in Wei), gas limit.
+
+** TPC benchmark
+- Standardized performance tests for transaction processing and databases, e.g., how many transactions a system can process in a given period.
+- Offer benchmarks for different scenarios, e.g., TPC-C for online transaction processing.
+
+** State growth
+- State: the set of data for building and validating new Ethereum blocks.
+- State growth: the accumulation of new account and new contract storage.
+
+** JIT (Just-In-Time) and AOT (Ahead-of-Time) EVM
+- JIT: convert bytecode to native machine code just before execution to bypass the VM's interpretative process.
+- AOT: compile the highest demand contracts and store them on disk, to avoid untrusted bytecode absuing native-code compilation.
+
+** Actor model
+- A paradigm/framework for designing distributed systems.
+- Actor: each actor is an independent entity to receive, process and send messages; create new actors or modify its state.
+
+* Reth scaling plan
+- Current status (April 2024): achieves 100-200 mg/s during live sync, including sender recovery, transaction execution and block trie calculation.
+- The scaling plan does not involve solving state growth.
+
+** Vertical scaling (2024)
+- Optimize how each system handle transactions and data.
+
+*** JIT/AOT EVM
+- Reduce EVM interpreter overhead to speed up single-threaded transaction processing.
+- The processing costs \(\approx\) 50% EVM time
+- Released on [[https://www.paradigm.xyz/2024/06/revmc][June 2024]].
+
+#+CAPTION: The JIT/AOT compiler
+#+ATTR_HTML: :align center
+#+ATTR_HTML: :width 400px
+[[https://www.paradigm.xyz/static/reth-perf/3.png]]
+
+*** Parallel EVM
+- Utilize multiple cores during EVM execution.
+- <80% of historical transactions have non-conflicting dependencies.
+- Historical sync: can calculate the best parallelization schedule offine; an early attempt is [[https://github.com/paradigmxyz/reth/tree/rkrasiuk/parallel][available]].
+- Live sync: combine serial and parallel execution based on static analysis, since Block STM has poor performance during heavy state contention periods; an early attempt is [[https://github.com/risechain/pevm][available]].
+
+*** Optimized state commitment (?)
+- In Reth, the state root is computed based on a KV database updated by transaction execution, thus the database is trie-agnostic.
+- The state root computation costs >75% of end-to-end block production time.
+- Fully parallelized state root: calculate the accounts trie in parallel while computing state root (how?).
+- Pipelined state root: pre-fetch intermediate trie nodes from the disk.
+# - Reduce the overhead of committing to the state in a verifiable way.
+# - Should be compatible with fault proofs, ZK proofs, light clients.
+
+** Horizontal scaling (2025)
+- Spread the workload across multiple systems.
+
+*** Multi-Rollup
+- Reduce operational overhead of running multiple rollups.
+
+*** Cloud-Native
