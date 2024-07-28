@@ -95,9 +95,9 @@ This is a personal note for [[https://www.paradigm.xyz/2024/04/reth-perf][Reth-p
 - The processing costs \(\approx\) 50% EVM time
 - Released on [[https://www.paradigm.xyz/2024/06/revmc][June 2024]].
 
-#+CAPTION: The JIT/AOT compiler
+#+CAPTION: The JIT/AOT compiler ([[https://www.paradigm.xyz/static/reth-perf/3.png][source]])
 #+ATTR_HTML: :align center
-#+ATTR_HTML: :width 400px
+#+ATTR_HTML: :width 500px
 [[https://www.paradigm.xyz/static/reth-perf/3.png]]
 
 *** Parallel EVM

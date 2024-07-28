@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      href="https://chenyo-17.github.io/org-static-blog/rss.xml"
+      title="RSS feed for https://chenyo-17.github.io/org-static-blog"
+    />
+    <title>Ethereum Merkle Patricia Trie</title>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+    ></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'],['\\(','\\)']]}});
+    </script>
+    <meta name="author" content="chenyo" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+  </head>
+  <body>
+    <div id="preamble" class="status">
+      <header>
+        <h1>
+          <a href="https://chenyo-17.github.io/org-static-blog"
+            >Chenyo's org-static-blog</a
+          >
+        </h1>
+        <nav>
+          <a href="https://chenyo-17.github.io/org-static-blog">Home</a>
+          <a href="https://chenyo-17.github.io/org-static-blog/archive.html"
+            >Archive</a
+          >
+          <a href="https://chenyo-17.github.io/org-static-blog/tags.html"
+            >Tags</a
+          >
+        </nav>
+      </header>
+    </div>
+    <div id="content">
+      <div class="post-date">28 Jul 2024</div>
+      <h1 class="post-title">
+        <a
+          href="https://chenyo-17.github.io/org-static-blog/2024-07-28-ethereum-merkle-patricia-trie.html"
+          >Ethereum Merkle Patricia Trie</a
+        >
+      </h1>
+      <nav id="table-of-contents" role="doc-toc">
+        <h2>Table of Contents</h2>
+        <div id="text-table-of-contents" role="doc-toc">
+          <ul>
+            <li>
+              <a href="#org5876d22">1. Blockchain fundamentals</a>
+              <ul>
+                <li>
+                  <a href="#org5fcd14e">1.1. RLP (Recursive Length Prefix)</a>
+                </li>
+                <li>
+                  <a href="#org161484e">1.2. Merkle tree</a>
+                  <ul>
+                    <li>
+                      <a href="#orgb789602"
+                        >1.2.1. Complexity for \(N\) items.</a
+                      >
+                    </li>
+                  </ul>
+                </li>
+                <li><a href="#org2737368">1.3. Patricia tree</a></li>
+                <li>
+                  <a href="#orgcd85492">1.4. Merkle Patricia Tree (MPT)</a>
+                  <ul>
+                    <li><a href="#orgf1e4161">1.4.1. Prefix byte</a></li>
+                    <li>
+                      <a href="#org0a6a8d3"
+                        >1.4.2. Complexity for \(N\) items and key length
+                        \(K\)</a
+                      >
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><a href="#org2be1f6a">2. Ethereum MPT data structure</a></li>
+            <li><a href="#orgbab4c6f">3. Ethereum MPT Functionality</a></li>
+            <li><a href="#orged0dbae">4. Proof of inclusion</a></li>
+          </ul>
+        </div>
+      </nav>
+      <p>
+        This is a personal note of Ethereum Merkle Patricia Trie (MPT),
+        resources are from:
+      </p>
+      <ul class="org-ul">
+        <li>
+          <a
+            href="https://github.com/zhangchiqing/merkle-patricia-trie?tab=readme-ov-file"
+            >Simplified Go implementation of Ethereum MPT (2022)</a
+          >
+        </li>
+        <li>
+          <a href="https://www.youtube.com/watch?v=Qn6sFmo8xGo"
+            >Blockchain trees Youtube (2022)</a
+          >
+        </li>
+        <li>
+          <a href="https://claude.ai/chat/a3ee5b1f-4d83-46c1-b681-d2d7b170c7e1"
+            >Claude.ai</a
+          >
+        </li>
+      </ul>
+      <div id="outline-container-org5876d22" class="outline-2">
+        <h2 id="org5876d22">
+          <span class="section-number-2">1.</span> Blockchain fundamentals
+        </h2>
+        <div class="outline-text-2" id="text-1"></div>
+        <div id="outline-container-org5fcd14e" class="outline-3">
+          <h3 id="org5fcd14e">
+            <span class="section-number-3">1.1.</span> RLP (Recursive Length
+            Prefix)
+          </h3>
+          <div class="outline-text-3" id="text-1-1">
+            <ul class="org-ul">
+              <li>
+                A serialization method to encode arbitrarily nested arrays of
+                binary data.
+              </li>
+              <li>
+                RLP provides a simple (e.g., no type), space-efficient and
+                deterministic encoding.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org161484e" class="outline-3">
+          <h3 id="org161484e">
+            <span class="section-number-3">1.2.</span> Merkle tree
+          </h3>
+          <div class="outline-text-3" id="text-1-2">
+            <ul class="org-ul">
+              <li>
+                Used in Bitcoin to simplify proof of inclusion (PoI) of a
+                transaction.
+              </li>
+              <li>
+                If one computes the hash of an array of \(N\):
+                <ul class="org-ul">
+                  <li>Construction complexity: \(O(n)\) time and space.</li>
+                  <li>
+                    PoI complexity: \(O(n)\) time and space (needs all other
+                    items).
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div id="outline-container-orgb789602" class="outline-4">
+            <h4 id="orgb789602">
+              <span class="section-number-4">1.2.1.</span> Complexity for \(N\)
+              items.
+            </h4>
+            <div class="outline-text-4" id="text-1-2-1">
+              <ul class="org-ul">
+                <li>Construction: \(O(2n)\) time and space.</li>
+                <li>
+                  PoI complexity:
+                  <ul class="org-ul">
+                    <li>
+                      \(O(logN)\) space: PoI requires one hash from each level
+                      from the leaf to the root (the Merkle tree is binary).
+                    </li>
+                    <li>
+                      \(O(logN)\) time: \(O(logN)\) to collect all hashes, and
+                      \(O(logN)\) to generate the proof.
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+
+              <figure id="org95addea">
+                <img
+                  src="https://blockonomi.com/wp-content/uploads/2018/06/merkle-tree.jpg"
+                  alt="merkle-tree.jpg"
+                  align="center"
+                  width="500px"
+                />
+
+                <figcaption>
+                  <span class="figure-number">Figure 1: </span>Bitcoin Merkle
+                  Tree
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+        <div id="outline-container-org2737368" class="outline-3">
+          <h3 id="org2737368">
+            <span class="section-number-3">1.3.</span> Patricia tree
+          </h3>
+          <div class="outline-text-3" id="text-1-3">
+            <ul class="org-ul">
+              <li>
+                Trie: a data structure that stores key-value pair in a
+                key&rsquo;s prefix tree.
+              </li>
+              <li>
+                Patricia tree: compress trie by merging nodes on the same path.
+              </li>
+              <li>
+                The structure the Patricia tree is independent of the item
+                insertion order.
+              </li>
+              <li>
+                The time complexity for add, query and deletion is \(O(K)\),
+                where \(K\) is the key length.
+              </li>
+            </ul>
+
+            <figure id="org89d528e">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Patricia_trie.svg/525px-Patricia_trie.svg.png"
+                alt="525px-Patricia_trie.svg.png"
+                align="center"
+                width="400px"
+              />
+
+              <figcaption>
+                <span class="figure-number">Figure 2: </span>Patricia Tree
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+        <div id="outline-container-orgcd85492" class="outline-3">
+          <h3 id="orgcd85492">
+            <span class="section-number-3">1.4.</span> Merkle Patricia Tree
+            (MPT)
+          </h3>
+          <div class="outline-text-3" id="text-1-4">
+            <ul class="org-ul">
+              <li>
+                MPT is a hex-ary Merkle tree with an additional DB for hash
+                lookup.
+              </li>
+              <li>
+                There are 4 types of nodes:
+                <ul class="org-ul">
+                  <li>
+                    Empty node: the null node the root points to when first
+                    creating the tree.
+                  </li>
+                  <li>
+                    Leaf node: stores the real data, e.g., account balance.
+                  </li>
+                  <li>
+                    Branch node: stores the pointers to at most 16 other nodes,
+                    e.g., they have the common prefix (nibbles) before and
+                    differ at the current <b><b>nibble</b></b> (4 bit,0-f).
+                  </li>
+                  <li>
+                    Extension node: record the compressed common prefix for a
+                    branch node.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Each <b><b>pointer</b></b> in the tree is the
+                <b><b>hash value</b></b> of the child node; the real node data
+                is stored in a separate DB that maps from a node hash to its
+                data.
+              </li>
+              <li>
+                If the child node is small, the parent node could also directly
+                store the node data rather than the hash pointer.
+              </li>
+              <li>
+                In practical implementation, the <b><b>entire tree</b></b> is
+                typically stored in a KV DB, and each node is stored with its
+                hash as the key.
+              </li>
+            </ul>
+
+            <figure id="org45c5280">
+              <img
+                src="https://github.com/zhangchiqing/merkle-patricia-trie/raw/master/diagrams/4_add_4th_tx_kv.png"
+                alt="4_add_4th_tx_kv.png"
+                align="center"
+                width="400px"
+              />
+
+              <figcaption>
+                <span class="figure-number">Figure 3: </span>MPT DB storage
+              </figcaption>
+            </figure>
+          </div>
+          <div id="outline-container-orgf1e4161" class="outline-4">
+            <h4 id="orgf1e4161">
+              <span class="section-number-4">1.4.1.</span> Prefix byte
+            </h4>
+            <div class="outline-text-4" id="text-1-4-1">
+              <ul class="org-ul">
+                <li>
+                  Identify both the node type and the parity of the stored
+                  nibbles.
+                </li>
+                <li>
+                  Leaf node: 2 if the <code>key-end</code> has even number of
+                  nibbles, e.g., the compressed ending of an account; 3X if the
+                  number is odd (so the last 4-bit is stored as X in the
+                  prefix).
+                </li>
+                <li>
+                  Extension: 0 if the <code>shared nibbles</code> has even
+                  number; 1X if has odd number.
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div id="outline-container-org0a6a8d3" class="outline-4">
+            <h4 id="org0a6a8d3">
+              <span class="section-number-4">1.4.2.</span> Complexity for \(N\)
+              items and key length \(K\)
+            </h4>
+            <div class="outline-text-4" id="text-1-4-2">
+              <ul class="org-ul">
+                <li>
+                  Construction:
+                  <ul class="org-ul">
+                    <li>Time: worst \(O(NK)\); average: \(O(log_{16}N)\).</li>
+                    <li>Space: \(O(N)\).</li>
+                  </ul>
+                </li>
+                <li>
+                  Indexing (e.g., query an account balance):
+                  <ul class="org-ul">
+                    <li>
+                      Time: tree traversal worst \(O(K)\), average
+                      \(O(log_{16}N)\);
+                      <b><b>each traversal equals a DB query</b></b
+                      >.
+                    </li>
+                  </ul>
+                </li>
+                <li>PoI: \(O(log_{16}N)\) time and space.</li>
+              </ul>
+
+              <figure id="org52cfcb1">
+                <img
+                  src="https://i.sstatic.net/YZGxe.png"
+                  alt="YZGxe.png"
+                  align="center"
+                  width="600px"
+                />
+
+                <figcaption>
+                  <span class="figure-number">Figure 4: </span>Merkle Patricia
+                  Tree
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="outline-container-org2be1f6a" class="outline-2">
+        <h2 id="org2be1f6a">
+          <span class="section-number-2">2.</span> Ethereum MPT data structure
+        </h2>
+        <div class="outline-text-2" id="text-2">
+          <ul class="org-ul">
+            <li>
+              Essentially is a key-value mapping; it provides <code>Get</code>,
+              <code>Put</code> and <code>Del</code> functions.
+            </li>
+            <li>
+              Ethereum has 3 MPTs: transaction trie; receipt trie and state
+              trie, each trie root hash is included in the block header.
+              <ul class="org-ul">
+                <li>
+                  <code>transactionTrie</code>: all transactions included in the
+                  block.
+                  <ul class="org-ul">
+                    <li>
+                      The keys are the RLP encodings of an unsigned integer
+                      starting from 0.
+                    </li>
+                    <li>
+                      The values are the RLP encodings of the transaction.
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <code>stateTrie</code>: all account states in the network.
+                </li>
+                <li>
+                  <code>receiptTrie</code>: the outcomes of all transaction
+                  executions in the block, e.g., gas used, transaction status.
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div id="outline-container-orgbab4c6f" class="outline-2">
+        <h2 id="orgbab4c6f">
+          <span class="section-number-2">3.</span> Ethereum MPT Functionality
+        </h2>
+        <div class="outline-text-2" id="text-3">
+          <ul class="org-ul">
+            <li>
+              Allows to verify <b><b>data integrity</b></b> with the
+              <code>Hash</code> function to compute the Merkle root hash.
+            </li>
+            <li>
+              Allows to verify the <b><b>inclusion</b></b> of a key-value pair
+              without the access to the entire key-value pairs.
+              <ul class="org-ul">
+                <li>
+                  A full node provide a merkle proof <code>Proof</code> for a
+                  key-value pair (e.g., an account and its balance).
+                </li>
+                <li>
+                  A light node can verify a proof only against the root hash
+                  with <code>VerifyProf(rootHash, key, proof)</code>; if the
+                  proof does not match the hash (e.g., the balance mismatches),
+                  an error is thrown.
+                </li>
+              </ul>
+            </li>
+            <li>
+              Why would a light node trust the root hash: it trusts the
+              consensus mechanism, e.g., other benign full nodes verify the
+              hash, act honestly is more profitable.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div id="outline-container-orged0dbae" class="outline-2">
+        <h2 id="orged0dbae">
+          <span class="section-number-2">4.</span> Proof of inclusion
+        </h2>
+        <div class="outline-text-2" id="text-4">
+          <ul class="org-ul">
+            <li>Proof: the path from the root to the leaf node.</li>
+            <li>
+              Verification: start from the root, decode the node to match the
+              nibbles until find the node that matches all the remaining
+              nibbles; if not found, the proof is invalid.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="taglist">
+        <a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a
+        >:
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-evm.html"
+          >evm</a
+        >
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-trie.html"
+          >trie</a
+        >
+      </div>
+    </div>
+    <div id="postamble" class="status">
+      <footer>
+        <p>© 2024 chenyo. Some rights reserved.</p>
+      </footer>
+    </div>
+  </body>
+</html>
