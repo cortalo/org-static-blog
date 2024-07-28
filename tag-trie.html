@@ -54,39 +54,48 @@
         <div id="text-table-of-contents" role="doc-toc">
           <ul>
             <li>
-              <a href="#org5876d22">1. Blockchain fundamentals</a>
+              <a href="#org94b22b4">1. Blockchain fundamentals</a>
               <ul>
                 <li>
-                  <a href="#org5fcd14e">1.1. RLP (Recursive Length Prefix)</a>
+                  <a href="#orgebc02d5">1.1. RLP (Recursive Length Prefix)</a>
                 </li>
                 <li>
-                  <a href="#org161484e">1.2. Merkle tree</a>
+                  <a href="#org4a656ea">1.2. Merkle tree</a>
                   <ul>
                     <li>
-                      <a href="#orgb789602"
+                      <a href="#orgcc76666"
                         >1.2.1. Complexity for \(N\) items.</a
                       >
                     </li>
                   </ul>
                 </li>
-                <li><a href="#org2737368">1.3. Patricia tree</a></li>
+                <li><a href="#org363f0df">1.3. Patricia tree</a></li>
                 <li>
-                  <a href="#orgcd85492">1.4. Merkle Patricia Tree (MPT)</a>
+                  <a href="#orgf98a5c1">1.4. Merkle Patricia Tree (MPT)</a>
                   <ul>
-                    <li><a href="#orgf1e4161">1.4.1. Prefix byte</a></li>
+                    <li><a href="#org5b321ce">1.4.1. Prefix byte</a></li>
                     <li>
-                      <a href="#org0a6a8d3"
+                      <a href="#orga262065"
                         >1.4.2. Complexity for \(N\) items and key length
                         \(K\)</a
                       >
                     </li>
                   </ul>
                 </li>
+                <li><a href="#org840abe7">1.5. Rollup state tree</a></li>
+                <li>
+                  <a href="#orga404cbd"
+                    >1.6. PoI for Verkle tree (see MegaETH post for details)</a
+                  >
+                </li>
+                <li>
+                  <a href="#org6d78dc6">1.7. Polynomial/KZG commitment</a>
+                </li>
               </ul>
             </li>
-            <li><a href="#org2be1f6a">2. Ethereum MPT data structure</a></li>
-            <li><a href="#orgbab4c6f">3. Ethereum MPT Functionality</a></li>
-            <li><a href="#orged0dbae">4. Proof of inclusion</a></li>
+            <li><a href="#org333ccb6">2. Ethereum MPT data structure</a></li>
+            <li><a href="#org985338e">3. Ethereum MPT Functionality</a></li>
+            <li><a href="#orgb70a565">4. Proof of inclusion</a></li>
           </ul>
         </div>
       </nav>
@@ -112,13 +121,13 @@
           >
         </li>
       </ul>
-      <div id="outline-container-org5876d22" class="outline-2">
-        <h2 id="org5876d22">
+      <div id="outline-container-org94b22b4" class="outline-2">
+        <h2 id="org94b22b4">
           <span class="section-number-2">1.</span> Blockchain fundamentals
         </h2>
         <div class="outline-text-2" id="text-1"></div>
-        <div id="outline-container-org5fcd14e" class="outline-3">
-          <h3 id="org5fcd14e">
+        <div id="outline-container-orgebc02d5" class="outline-3">
+          <h3 id="orgebc02d5">
             <span class="section-number-3">1.1.</span> RLP (Recursive Length
             Prefix)
           </h3>
@@ -135,8 +144,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org161484e" class="outline-3">
-          <h3 id="org161484e">
+        <div id="outline-container-org4a656ea" class="outline-3">
+          <h3 id="org4a656ea">
             <span class="section-number-3">1.2.</span> Merkle tree
           </h3>
           <div class="outline-text-3" id="text-1-2">
@@ -157,8 +166,8 @@
               </li>
             </ul>
           </div>
-          <div id="outline-container-orgb789602" class="outline-4">
-            <h4 id="orgb789602">
+          <div id="outline-container-orgcc76666" class="outline-4">
+            <h4 id="orgcc76666">
               <span class="section-number-4">1.2.1.</span> Complexity for \(N\)
               items.
             </h4>
@@ -180,7 +189,7 @@
                 </li>
               </ul>
 
-              <figure id="org95addea">
+              <figure id="org77b686b">
                 <img
                   src="https://blockonomi.com/wp-content/uploads/2018/06/merkle-tree.jpg"
                   alt="merkle-tree.jpg"
@@ -190,14 +199,17 @@
 
                 <figcaption>
                   <span class="figure-number">Figure 1: </span>Bitcoin Merkle
-                  Tree
+                  Tree (<a
+                    href="https://blockonomi.com/wp-content/uploads/2018/06/merkle-tree.jpg"
+                    >source</a
+                  >)
                 </figcaption>
               </figure>
             </div>
           </div>
         </div>
-        <div id="outline-container-org2737368" class="outline-3">
-          <h3 id="org2737368">
+        <div id="outline-container-org363f0df" class="outline-3">
+          <h3 id="org363f0df">
             <span class="section-number-3">1.3.</span> Patricia tree
           </h3>
           <div class="outline-text-3" id="text-1-3">
@@ -219,7 +231,7 @@
               </li>
             </ul>
 
-            <figure id="org89d528e">
+            <figure id="org1443cb6">
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Patricia_trie.svg/525px-Patricia_trie.svg.png"
                 alt="525px-Patricia_trie.svg.png"
@@ -228,13 +240,16 @@
               />
 
               <figcaption>
-                <span class="figure-number">Figure 2: </span>Patricia Tree
+                <span class="figure-number">Figure 2: </span>Patricia Tree (<a
+                  href="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Patricia_trie.svg/525px-Patricia_trie.svg.png"
+                  >source</a
+                >)
               </figcaption>
             </figure>
           </div>
         </div>
-        <div id="outline-container-orgcd85492" class="outline-3">
-          <h3 id="orgcd85492">
+        <div id="outline-container-orgf98a5c1" class="outline-3">
+          <h3 id="orgf98a5c1">
             <span class="section-number-3">1.4.</span> Merkle Patricia Tree
             (MPT)
           </h3>
@@ -282,7 +297,7 @@
               </li>
             </ul>
 
-            <figure id="org45c5280">
+            <figure id="orga582703">
               <img
                 src="https://github.com/zhangchiqing/merkle-patricia-trie/raw/master/diagrams/4_add_4th_tx_kv.png"
                 alt="4_add_4th_tx_kv.png"
@@ -291,12 +306,15 @@
               />
 
               <figcaption>
-                <span class="figure-number">Figure 3: </span>MPT DB storage
+                <span class="figure-number">Figure 3: </span>MPT DB storage (<a
+                  href="https://github.com/zhangchiqing/merkle-patricia-trie/raw/master/diagrams/4_add_4th_tx_kv.png"
+                  >source</a
+                >)
               </figcaption>
             </figure>
           </div>
-          <div id="outline-container-orgf1e4161" class="outline-4">
-            <h4 id="orgf1e4161">
+          <div id="outline-container-org5b321ce" class="outline-4">
+            <h4 id="org5b321ce">
               <span class="section-number-4">1.4.1.</span> Prefix byte
             </h4>
             <div class="outline-text-4" id="text-1-4-1">
@@ -318,8 +336,8 @@
               </ul>
             </div>
           </div>
-          <div id="outline-container-org0a6a8d3" class="outline-4">
-            <h4 id="org0a6a8d3">
+          <div id="outline-container-orga262065" class="outline-4">
+            <h4 id="orga262065">
               <span class="section-number-4">1.4.2.</span> Complexity for \(N\)
               items and key length \(K\)
             </h4>
@@ -328,7 +346,7 @@
                 <li>
                   Construction:
                   <ul class="org-ul">
-                    <li>Time: worst \(O(NK)\); average: \(O(log_{16}N)\).</li>
+                    <li>Time: worst \(O(NK)\); average: \(O(Nlog_{16}N)\).</li>
                     <li>Space: \(O(N)\).</li>
                   </ul>
                 </li>
@@ -343,10 +361,18 @@
                     </li>
                   </ul>
                 </li>
-                <li>PoI: \(O(log_{16}N)\) time and space.</li>
+                <li>
+                  PoI: \(O(16log_{16}N)\) time and space.
+                  <ul class="org-ul">
+                    <li>
+                      Calculating the hash of a branch node requires the hash of
+                      all 16 child nodes.
+                    </li>
+                  </ul>
+                </li>
               </ul>
 
-              <figure id="org52cfcb1">
+              <figure id="orgab50fdd">
                 <img
                   src="https://i.sstatic.net/YZGxe.png"
                   alt="YZGxe.png"
@@ -356,15 +382,89 @@
 
                 <figcaption>
                   <span class="figure-number">Figure 4: </span>Merkle Patricia
-                  Tree
+                  Tree (<a href="https://i.sstatic.net/YZGxe.png">source</a>)
                 </figcaption>
               </figure>
             </div>
           </div>
         </div>
+        <div id="outline-container-org840abe7" class="outline-3">
+          <h3 id="org840abe7">
+            <span class="section-number-3">1.5.</span> Rollup state tree
+          </h3>
+          <div class="outline-text-3" id="text-1-5">
+            <ul class="org-ul">
+              <li>Rollup has a higher performance requirement for PoI.</li>
+              <li>
+                Decouple the indexing and PoI with a sorted key-value arrays and
+                a (binary) Merkle tree.
+                <ul class="org-ul">
+                  <li>MPT: <code>{Addr0: State0, Addr1: State1,...}</code>.</li>
+                  <li>
+                    Rollup: map: <code>{Addr0: Id0, Addr1: Id1,...}</code> +
+                    array: <code>[(Addr0, State0), (Addr1, State1),...]</code>.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                When a client wants to query an account, it first gets the key
+                id from the map, then get the state from the array.
+              </li>
+              <li>
+                When a node wants to generate PoI, it follows the merkle path
+                and collect hashes (more hashes than MPT).
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-orga404cbd" class="outline-3">
+          <h3 id="orga404cbd">
+            <span class="section-number-3">1.6.</span> PoI for Verkle tree (see
+            <a
+              href="https://chenyo-17.github.io/org-static-blog/2024-07-04-parallel-evm:-megaeth.html"
+              >MegaETH post</a
+            >
+            for details)
+          </h3>
+          <div class="outline-text-3" id="text-1-6">
+            <ul class="org-ul">
+              <li>
+                Stateless light nodes get a witness along with the new block,
+                the witness is a PoI for the state change in the block.
+              </li>
+              <li>
+                Light nodes download related state information, e.g., changed
+                account from other full nodes, or from the portal network.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org6d78dc6" class="outline-3">
+          <h3 id="org6d78dc6">
+            <span class="section-number-3">1.7.</span> Polynomial/KZG commitment
+          </h3>
+          <div class="outline-text-3" id="text-1-7">
+            <ul class="org-ul">
+              <li>
+                In MPT, PoI for a branch node requires the hash values of all
+                branches.
+              </li>
+              <li>
+                KZG commitment reduce the proof size by adding a polynomial
+                formula \(f(x)\) in the branch node, and each branch has a point
+                \((x, y)\) such that \(y = f(x)\).
+              </li>
+              <li>
+                In this way, the proof no longer requires hashes of other
+                branches, the proof space complexity \(O(log_{16}N)\) (no 16
+                coefficient).
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-      <div id="outline-container-org2be1f6a" class="outline-2">
-        <h2 id="org2be1f6a">
+      <div id="outline-container-org333ccb6" class="outline-2">
+        <h2 id="org333ccb6">
           <span class="section-number-2">2.</span> Ethereum MPT data structure
         </h2>
         <div class="outline-text-2" id="text-2">
@@ -402,8 +502,8 @@
           </ul>
         </div>
       </div>
-      <div id="outline-container-orgbab4c6f" class="outline-2">
-        <h2 id="orgbab4c6f">
+      <div id="outline-container-org985338e" class="outline-2">
+        <h2 id="org985338e">
           <span class="section-number-2">3.</span> Ethereum MPT Functionality
         </h2>
         <div class="outline-text-2" id="text-3">
@@ -436,8 +536,8 @@
           </ul>
         </div>
       </div>
-      <div id="outline-container-orged0dbae" class="outline-2">
-        <h2 id="orged0dbae">
+      <div id="outline-container-orgb70a565" class="outline-2">
+        <h2 id="orgb70a565">
           <span class="section-number-2">4.</span> Proof of inclusion
         </h2>
         <div class="outline-text-2" id="text-4">

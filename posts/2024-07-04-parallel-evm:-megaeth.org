@@ -63,11 +63,11 @@ In summary, this blog proposes many challenges when designing a high-performance
 - The entire history exists distributed across the network.
 
 ** [[https://ethereum.org/en/roadmap/verkle-trees/][Verkle tree]]
-- Stateless clients use a witness to the state data that arrives with the block instead of local databases.
+- Stateless clients rely on a witness that arrives with the block for PoI rather on maintaining own local trie.
 - **Witness**: the minimal set of data that prove the values of the state that are being changed by the transactions in a block.
 # - Witness: A collection of individual pieces of the state data required to execute the block transactions, and a cryptographic proof that the witness is indeed a part of the full data.
 - Merkle tree is too large to be broadcast between peers; the witness is a path connecting the data from leaved to the root, and to verify the data the hash of all sibling nodes are also required (to compute the parent hash).
-- Verkle trees reduce the witness size by shortening the distance between leaves and eliminating the need to provide sibling nodes; Using a polynomial commitment scheme(?) allows the witness to have a fixed size.
+- Verkle trees reduce the witness size by shortening the distance between leaves and eliminating the need to provide sibling nodes; Using a polynomial commitment scheme (see [[https://chenyo-17.github.io/org-static-blog/2024-07-28-ethereum-merkle-patricia-trie.html][Ethereum MPT post]] for explanation) allows the witness to have a fixed size.
 
 ** Node storage
 - High disk space is the main barrier to a full node access, due to the need to store large chunks of Ethereum state data to process new transactions.

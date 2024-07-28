@@ -25,7 +25,7 @@ This is a personal note of Ethereum Merkle Patricia Trie (MPT), resources are fr
   - \(O(logN)\) space: PoI requires one hash from each level from the leaf to the root (the Merkle tree is binary).
   - \(O(logN)\) time: \(O(logN)\) to collect all hashes, and \(O(logN)\) to generate the proof.
 
-#+CAPTION: Bitcoin Merkle Tree
+#+CAPTION: Bitcoin Merkle Tree ([[https://blockonomi.com/wp-content/uploads/2018/06/merkle-tree.jpg][source]])
 #+ATTR_HTML: :align center
 #+ATTR_HTML: :width 500px
 [[https://blockonomi.com/wp-content/uploads/2018/06/merkle-tree.jpg]]
@@ -36,7 +36,7 @@ This is a personal note of Ethereum Merkle Patricia Trie (MPT), resources are fr
 - The structure the Patricia tree is independent of the item insertion order.
 - The time complexity for add, query and deletion is \(O(K)\), where \(K\) is the key length.
 
-#+CAPTION: Patricia Tree
+#+CAPTION: Patricia Tree ([[https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Patricia_trie.svg/525px-Patricia_trie.svg.png][source]])
 #+ATTR_HTML: :align center
 #+ATTR_HTML: :width 400px
 [[https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Patricia_trie.svg/525px-Patricia_trie.svg.png]]
@@ -52,7 +52,7 @@ This is a personal note of Ethereum Merkle Patricia Trie (MPT), resources are fr
 -  If the child node is small, the parent node could also directly store the node data rather than the hash pointer.
 - In practical implementation, the **entire tree** is typically stored in a KV DB, and each node is stored with its hash as the key.
 
-#+CAPTION: MPT DB storage
+#+CAPTION: MPT DB storage ([[https://github.com/zhangchiqing/merkle-patricia-trie/raw/master/diagrams/4_add_4th_tx_kv.png][source]])
 #+ATTR_HTML: :align center
 #+ATTR_HTML: :width 400px
 [[https://github.com/zhangchiqing/merkle-patricia-trie/raw/master/diagrams/4_add_4th_tx_kv.png]]
@@ -64,16 +64,34 @@ This is a personal note of Ethereum Merkle Patricia Trie (MPT), resources are fr
 
 *** Complexity for \(N\) items and key length \(K\)
 - Construction:
-  - Time: worst \(O(NK)\); average: \(O(log_{16}N)\).
+  - Time: worst \(O(NK)\); average: \(O(Nlog_{16}N)\).
   - Space: \(O(N)\).
 - Indexing (e.g., query an account balance):
   - Time: tree traversal worst \(O(K)\), average \(O(log_{16}N)\); **each traversal equals a DB query**.
-- PoI: \(O(log_{16}N)\) time and space.
+- PoI: \(O(16log_{16}N)\) time and space.
+  - Calculating the hash of a branch node requires the hash of all 16 child nodes.
 
-#+CAPTION: Merkle Patricia Tree
+#+CAPTION: Merkle Patricia Tree ([[https://i.sstatic.net/YZGxe.png][source]])
 #+ATTR_HTML: :align center
 #+ATTR_HTML: :width 600px
 [[https://i.sstatic.net/YZGxe.png]]
+
+** Rollup state tree
+- Rollup has a higher performance requirement for PoI.
+- Decouple the indexing and PoI with a sorted key-value arrays and a (binary) Merkle tree.
+  - MPT: ~{Addr0: State0, Addr1: State1,...}~.
+  - Rollup: map: ~{Addr0: Id0, Addr1: Id1,...}~ + array: ~[(Addr0, State0), (Addr1, State1),...]~.
+- When a client wants to query an account, it first gets the key id from the map, then get the state from the array.
+- When a node wants to generate PoI, it follows the merkle path and collect hashes (more hashes than MPT).
+
+** PoI for Verkle tree (see [[https://chenyo-17.github.io/org-static-blog/2024-07-04-parallel-evm:-megaeth.html][MegaETH post]] for details)
+- Stateless light nodes get a witness along with the new block, the witness is a PoI for the state change in the block.
+- Light nodes download related state information, e.g., changed account from other full nodes, or from the portal network.
+
+** Polynomial/KZG commitment
+- In MPT, PoI for a branch node requires the hash values of all branches.
+- KZG commitment reduce the proof size by adding a polynomial formula \(f(x)\) in the branch node, and each branch has a point \((x, y)\) such that \(y = f(x)\).
+- In this way, the proof no longer requires hashes of other branches, the proof space complexity \(O(log_{16}N)\) (no 16 coefficient).
 
 * Ethereum MPT data structure
 - Essentially is a key-value mapping; it provides ~Get~, ~Put~ and ~Del~ functions.

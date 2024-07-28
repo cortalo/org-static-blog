@@ -1,47 +1,33 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link
-      rel="alternate"
+<head>
+<meta charset="UTF-8">
+<link rel="alternate"
       type="application/rss+xml"
       href="https://chenyo-17.github.io/org-static-blog/rss.xml"
-      title="RSS feed for https://chenyo-17.github.io/org-static-blog"
-    />
-    <title>org-static-blog</title>
-    <script
-      type="text/javascript"
-      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
-    ></script>
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'],['\\(','\\)']]}});
-    </script>
-    <meta name="author" content="chenyo" />
-    <meta name="referrer" content="no-referrer" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="static/style.css" type="text/css" />
-  </head>
-  <body>
-    <div id="preamble" class="status">
-      <header>
-        <h1>
-          <a href="https://chenyo-17.github.io/org-static-blog"
-            >Chenyo's org-static-blog</a
-          >
-        </h1>
-        <nav>
-          <a href="https://chenyo-17.github.io/org-static-blog">Home</a>
-          <a href="https://chenyo-17.github.io/org-static-blog/archive.html"
-            >Archive</a
-          >
-          <a href="https://chenyo-17.github.io/org-static-blog/tags.html"
-            >Tags</a
-          >
-        </nav>
-      </header>
-    </div>
-    <div id="content">
-      <h1 class="title">Posts tagged "evm":</h1>
+      title="RSS feed for https://chenyo-17.github.io/org-static-blog">
+<title>org-static-blog</title>
+<script type="text/javascript"
+             src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+       </script>
+       <script type="text/x-mathjax-config">
+             MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'],['\\(','\\)']]}});
+       </script>
+       <meta name="author" content="chenyo">
+      <meta name="referrer" content="no-referrer">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="static/style.css" type="text/css"/></head>
+<body>
+<div id="preamble" class="status"><header>
+      <h1><a href="https://chenyo-17.github.io/org-static-blog">Chenyo's org-static-blog</a></h1>
+      <nav>
+      <a href="https://chenyo-17.github.io/org-static-blog">Home</a>
+      <a href="https://chenyo-17.github.io/org-static-blog/archive.html">Archive</a>
+      <a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a>
+      </nav>
+      </header></div>
+<div id="content">
+<h1 class="title">Posts tagged "evm":</h1>
       <div class="post-date">28 Jul 2024</div>
       <h1 class="post-title">
         <a
@@ -54,39 +40,48 @@
         <div id="text-table-of-contents" role="doc-toc">
           <ul>
             <li>
-              <a href="#org5876d22">1. Blockchain fundamentals</a>
+              <a href="#org94b22b4">1. Blockchain fundamentals</a>
               <ul>
                 <li>
-                  <a href="#org5fcd14e">1.1. RLP (Recursive Length Prefix)</a>
+                  <a href="#orgebc02d5">1.1. RLP (Recursive Length Prefix)</a>
                 </li>
                 <li>
-                  <a href="#org161484e">1.2. Merkle tree</a>
+                  <a href="#org4a656ea">1.2. Merkle tree</a>
                   <ul>
                     <li>
-                      <a href="#orgb789602"
+                      <a href="#orgcc76666"
                         >1.2.1. Complexity for \(N\) items.</a
                       >
                     </li>
                   </ul>
                 </li>
-                <li><a href="#org2737368">1.3. Patricia tree</a></li>
+                <li><a href="#org363f0df">1.3. Patricia tree</a></li>
                 <li>
-                  <a href="#orgcd85492">1.4. Merkle Patricia Tree (MPT)</a>
+                  <a href="#orgf98a5c1">1.4. Merkle Patricia Tree (MPT)</a>
                   <ul>
-                    <li><a href="#orgf1e4161">1.4.1. Prefix byte</a></li>
+                    <li><a href="#org5b321ce">1.4.1. Prefix byte</a></li>
                     <li>
-                      <a href="#org0a6a8d3"
+                      <a href="#orga262065"
                         >1.4.2. Complexity for \(N\) items and key length
                         \(K\)</a
                       >
                     </li>
                   </ul>
                 </li>
+                <li><a href="#org840abe7">1.5. Rollup state tree</a></li>
+                <li>
+                  <a href="#orga404cbd"
+                    >1.6. PoI for Verkle tree (see MegaETH post for details)</a
+                  >
+                </li>
+                <li>
+                  <a href="#org6d78dc6">1.7. Polynomial/KZG commitment</a>
+                </li>
               </ul>
             </li>
-            <li><a href="#org2be1f6a">2. Ethereum MPT data structure</a></li>
-            <li><a href="#orgbab4c6f">3. Ethereum MPT Functionality</a></li>
-            <li><a href="#orged0dbae">4. Proof of inclusion</a></li>
+            <li><a href="#org333ccb6">2. Ethereum MPT data structure</a></li>
+            <li><a href="#org985338e">3. Ethereum MPT Functionality</a></li>
+            <li><a href="#orgb70a565">4. Proof of inclusion</a></li>
           </ul>
         </div>
       </nav>
@@ -112,13 +107,13 @@
           >
         </li>
       </ul>
-      <div id="outline-container-org5876d22" class="outline-2">
-        <h2 id="org5876d22">
+      <div id="outline-container-org94b22b4" class="outline-2">
+        <h2 id="org94b22b4">
           <span class="section-number-2">1.</span> Blockchain fundamentals
         </h2>
         <div class="outline-text-2" id="text-1"></div>
-        <div id="outline-container-org5fcd14e" class="outline-3">
-          <h3 id="org5fcd14e">
+        <div id="outline-container-orgebc02d5" class="outline-3">
+          <h3 id="orgebc02d5">
             <span class="section-number-3">1.1.</span> RLP (Recursive Length
             Prefix)
           </h3>
@@ -135,8 +130,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org161484e" class="outline-3">
-          <h3 id="org161484e">
+        <div id="outline-container-org4a656ea" class="outline-3">
+          <h3 id="org4a656ea">
             <span class="section-number-3">1.2.</span> Merkle tree
           </h3>
           <div class="outline-text-3" id="text-1-2">
@@ -157,8 +152,8 @@
               </li>
             </ul>
           </div>
-          <div id="outline-container-orgb789602" class="outline-4">
-            <h4 id="orgb789602">
+          <div id="outline-container-orgcc76666" class="outline-4">
+            <h4 id="orgcc76666">
               <span class="section-number-4">1.2.1.</span> Complexity for \(N\)
               items.
             </h4>
@@ -180,7 +175,7 @@
                 </li>
               </ul>
 
-              <figure id="org95addea">
+              <figure id="org77b686b">
                 <img
                   src="https://blockonomi.com/wp-content/uploads/2018/06/merkle-tree.jpg"
                   alt="merkle-tree.jpg"
@@ -190,14 +185,17 @@
 
                 <figcaption>
                   <span class="figure-number">Figure 1: </span>Bitcoin Merkle
-                  Tree
+                  Tree (<a
+                    href="https://blockonomi.com/wp-content/uploads/2018/06/merkle-tree.jpg"
+                    >source</a
+                  >)
                 </figcaption>
               </figure>
             </div>
           </div>
         </div>
-        <div id="outline-container-org2737368" class="outline-3">
-          <h3 id="org2737368">
+        <div id="outline-container-org363f0df" class="outline-3">
+          <h3 id="org363f0df">
             <span class="section-number-3">1.3.</span> Patricia tree
           </h3>
           <div class="outline-text-3" id="text-1-3">
@@ -219,7 +217,7 @@
               </li>
             </ul>
 
-            <figure id="org89d528e">
+            <figure id="org1443cb6">
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Patricia_trie.svg/525px-Patricia_trie.svg.png"
                 alt="525px-Patricia_trie.svg.png"
@@ -228,13 +226,16 @@
               />
 
               <figcaption>
-                <span class="figure-number">Figure 2: </span>Patricia Tree
+                <span class="figure-number">Figure 2: </span>Patricia Tree (<a
+                  href="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Patricia_trie.svg/525px-Patricia_trie.svg.png"
+                  >source</a
+                >)
               </figcaption>
             </figure>
           </div>
         </div>
-        <div id="outline-container-orgcd85492" class="outline-3">
-          <h3 id="orgcd85492">
+        <div id="outline-container-orgf98a5c1" class="outline-3">
+          <h3 id="orgf98a5c1">
             <span class="section-number-3">1.4.</span> Merkle Patricia Tree
             (MPT)
           </h3>
@@ -282,7 +283,7 @@
               </li>
             </ul>
 
-            <figure id="org45c5280">
+            <figure id="orga582703">
               <img
                 src="https://github.com/zhangchiqing/merkle-patricia-trie/raw/master/diagrams/4_add_4th_tx_kv.png"
                 alt="4_add_4th_tx_kv.png"
@@ -291,12 +292,15 @@
               />
 
               <figcaption>
-                <span class="figure-number">Figure 3: </span>MPT DB storage
+                <span class="figure-number">Figure 3: </span>MPT DB storage (<a
+                  href="https://github.com/zhangchiqing/merkle-patricia-trie/raw/master/diagrams/4_add_4th_tx_kv.png"
+                  >source</a
+                >)
               </figcaption>
             </figure>
           </div>
-          <div id="outline-container-orgf1e4161" class="outline-4">
-            <h4 id="orgf1e4161">
+          <div id="outline-container-org5b321ce" class="outline-4">
+            <h4 id="org5b321ce">
               <span class="section-number-4">1.4.1.</span> Prefix byte
             </h4>
             <div class="outline-text-4" id="text-1-4-1">
@@ -318,8 +322,8 @@
               </ul>
             </div>
           </div>
-          <div id="outline-container-org0a6a8d3" class="outline-4">
-            <h4 id="org0a6a8d3">
+          <div id="outline-container-orga262065" class="outline-4">
+            <h4 id="orga262065">
               <span class="section-number-4">1.4.2.</span> Complexity for \(N\)
               items and key length \(K\)
             </h4>
@@ -328,7 +332,7 @@
                 <li>
                   Construction:
                   <ul class="org-ul">
-                    <li>Time: worst \(O(NK)\); average: \(O(log_{16}N)\).</li>
+                    <li>Time: worst \(O(NK)\); average: \(O(Nlog_{16}N)\).</li>
                     <li>Space: \(O(N)\).</li>
                   </ul>
                 </li>
@@ -343,10 +347,18 @@
                     </li>
                   </ul>
                 </li>
-                <li>PoI: \(O(log_{16}N)\) time and space.</li>
+                <li>
+                  PoI: \(O(16log_{16}N)\) time and space.
+                  <ul class="org-ul">
+                    <li>
+                      Calculating the hash of a branch node requires the hash of
+                      all 16 child nodes.
+                    </li>
+                  </ul>
+                </li>
               </ul>
 
-              <figure id="org52cfcb1">
+              <figure id="orgab50fdd">
                 <img
                   src="https://i.sstatic.net/YZGxe.png"
                   alt="YZGxe.png"
@@ -356,15 +368,89 @@
 
                 <figcaption>
                   <span class="figure-number">Figure 4: </span>Merkle Patricia
-                  Tree
+                  Tree (<a href="https://i.sstatic.net/YZGxe.png">source</a>)
                 </figcaption>
               </figure>
             </div>
           </div>
         </div>
+        <div id="outline-container-org840abe7" class="outline-3">
+          <h3 id="org840abe7">
+            <span class="section-number-3">1.5.</span> Rollup state tree
+          </h3>
+          <div class="outline-text-3" id="text-1-5">
+            <ul class="org-ul">
+              <li>Rollup has a higher performance requirement for PoI.</li>
+              <li>
+                Decouple the indexing and PoI with a sorted key-value arrays and
+                a (binary) Merkle tree.
+                <ul class="org-ul">
+                  <li>MPT: <code>{Addr0: State0, Addr1: State1,...}</code>.</li>
+                  <li>
+                    Rollup: map: <code>{Addr0: Id0, Addr1: Id1,...}</code> +
+                    array: <code>[(Addr0, State0), (Addr1, State1),...]</code>.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                When a client wants to query an account, it first gets the key
+                id from the map, then get the state from the array.
+              </li>
+              <li>
+                When a node wants to generate PoI, it follows the merkle path
+                and collect hashes (more hashes than MPT).
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-orga404cbd" class="outline-3">
+          <h3 id="orga404cbd">
+            <span class="section-number-3">1.6.</span> PoI for Verkle tree (see
+            <a
+              href="https://chenyo-17.github.io/org-static-blog/2024-07-04-parallel-evm:-megaeth.html"
+              >MegaETH post</a
+            >
+            for details)
+          </h3>
+          <div class="outline-text-3" id="text-1-6">
+            <ul class="org-ul">
+              <li>
+                Stateless light nodes get a witness along with the new block,
+                the witness is a PoI for the state change in the block.
+              </li>
+              <li>
+                Light nodes download related state information, e.g., changed
+                account from other full nodes, or from the portal network.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org6d78dc6" class="outline-3">
+          <h3 id="org6d78dc6">
+            <span class="section-number-3">1.7.</span> Polynomial/KZG commitment
+          </h3>
+          <div class="outline-text-3" id="text-1-7">
+            <ul class="org-ul">
+              <li>
+                In MPT, PoI for a branch node requires the hash values of all
+                branches.
+              </li>
+              <li>
+                KZG commitment reduce the proof size by adding a polynomial
+                formula \(f(x)\) in the branch node, and each branch has a point
+                \((x, y)\) such that \(y = f(x)\).
+              </li>
+              <li>
+                In this way, the proof no longer requires hashes of other
+                branches, the proof space complexity \(O(log_{16}N)\) (no 16
+                coefficient).
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-      <div id="outline-container-org2be1f6a" class="outline-2">
-        <h2 id="org2be1f6a">
+      <div id="outline-container-org333ccb6" class="outline-2">
+        <h2 id="org333ccb6">
           <span class="section-number-2">2.</span> Ethereum MPT data structure
         </h2>
         <div class="outline-text-2" id="text-2">
@@ -402,8 +488,8 @@
           </ul>
         </div>
       </div>
-      <div id="outline-container-orgbab4c6f" class="outline-2">
-        <h2 id="orgbab4c6f">
+      <div id="outline-container-org985338e" class="outline-2">
+        <h2 id="org985338e">
           <span class="section-number-2">3.</span> Ethereum MPT Functionality
         </h2>
         <div class="outline-text-2" id="text-3">
@@ -436,8 +522,8 @@
           </ul>
         </div>
       </div>
-      <div id="outline-container-orged0dbae" class="outline-2">
-        <h2 id="orged0dbae">
+      <div id="outline-container-orgb70a565" class="outline-2">
+        <h2 id="orgb70a565">
           <span class="section-number-2">4.</span> Proof of inclusion
         </h2>
         <div class="outline-text-2" id="text-4">
@@ -466,7 +552,7 @@
       <h1 class="post-title">
         <a
           href="https://chenyo-17.github.io/org-static-blog/2024-07-24-parallel-evm:-reth.html"
-          >parallel-evm: Reth scaling plan</a
+          >Parallel EVM: Reth scaling plan</a
         >
       </h1>
       <nav id="table-of-contents" role="doc-toc">
@@ -474,67 +560,67 @@
         <div id="text-table-of-contents" role="doc-toc">
           <ul>
             <li>
-              <a href="#orgad06341">1. Blockchain fundamentals</a>
+              <a href="#orgc89c724">1. Blockchain fundamentals</a>
               <ul>
-                <li><a href="#orgc2da677">1.1. Ethereum engine API</a></li>
-                <li><a href="#org259b952">1.2. Foundry</a></li>
-                <li><a href="#orgfd2a06e">1.3. Revm</a></li>
-                <li><a href="#orgbff95a4">1.4. Alloy</a></li>
-                <li><a href="#org92760f9">1.5. Erigon &amp; Staged sync</a></li>
+                <li><a href="#org6715629">1.1. Ethereum engine API</a></li>
+                <li><a href="#orgd79eb57">1.2. Foundry</a></li>
+                <li><a href="#orgf68f78d">1.3. Revm</a></li>
+                <li><a href="#org8489eaa">1.4. Alloy</a></li>
+                <li><a href="#orga12256e">1.5. Erigon &amp; Staged sync</a></li>
                 <li>
-                  <a href="#org8221cf4">1.6. Storage engines</a>
+                  <a href="#orgd28b509">1.6. Storage engines</a>
                   <ul>
-                    <li><a href="#org982dde1">1.6.1. ACID</a></li>
+                    <li><a href="#orgf1166f4">1.6.1. ACID</a></li>
                     <li>
-                      <a href="#org1c2eeee"
+                      <a href="#orgd437e5c"
                         >1.6.2. MVCC (Multi-version concurrency control)</a
                       >
                     </li>
                     <li>
-                      <a href="#org0894c3a">1.6.3. Common database models</a>
+                      <a href="#org66ed5e2">1.6.3. Common database models</a>
                     </li>
                     <li>
-                      <a href="#orge25ee43">1.6.4. Common storage engines</a>
+                      <a href="#orgaa220ba">1.6.4. Common storage engines</a>
                     </li>
                   </ul>
                 </li>
-                <li><a href="#org089d350">1.7. Reth</a></li>
+                <li><a href="#orgfc1dafe">1.7. Reth</a></li>
                 <li>
-                  <a href="#orgdb7f104"
+                  <a href="#org5b10a03"
                     >1.8. Why gas per second as the performance metric</a
                   >
                 </li>
-                <li><a href="#orgef64042">1.9. EVM cost models</a></li>
-                <li><a href="#orgca8c788">1.10. TPC benchmark</a></li>
-                <li><a href="#org2d3c6e4">1.11. State growth</a></li>
+                <li><a href="#org1cbb08f">1.9. EVM cost models</a></li>
+                <li><a href="#orgee88ab9">1.10. TPC benchmark</a></li>
+                <li><a href="#org01f6d44">1.11. State growth</a></li>
                 <li>
-                  <a href="#org2c6094a"
+                  <a href="#org53daa21"
                     >1.12. JIT (Just-In-Time) and AOT (Ahead-of-Time) EVM</a
                   >
                 </li>
-                <li><a href="#org23fe5d8">1.13. Actor model</a></li>
+                <li><a href="#orgf12ac2a">1.13. Actor model</a></li>
               </ul>
             </li>
             <li>
-              <a href="#org63d9780">2. Reth scaling plan</a>
+              <a href="#orgf4e7d75">2. Reth scaling plan</a>
               <ul>
                 <li>
-                  <a href="#org3d66d72">2.1. Vertical scaling (2024)</a>
+                  <a href="#org7dabc41">2.1. Vertical scaling (2024)</a>
                   <ul>
-                    <li><a href="#org034e9e6">2.1.1. JIT/AOT EVM</a></li>
-                    <li><a href="#org1a919a3">2.1.2. Parallel EVM</a></li>
+                    <li><a href="#org2e26624">2.1.1. JIT/AOT EVM</a></li>
+                    <li><a href="#org3f3612a">2.1.2. Parallel EVM</a></li>
                     <li>
-                      <a href="#org708473d"
+                      <a href="#org5122783"
                         >2.1.3. Optimized state commitment (?)</a
                       >
                     </li>
                   </ul>
                 </li>
                 <li>
-                  <a href="#org3eb5f95">2.2. Horizontal scaling (2025)</a>
+                  <a href="#orgb027774">2.2. Horizontal scaling (2025)</a>
                   <ul>
-                    <li><a href="#orge27cffa">2.2.1. Multi-Rollup</a></li>
-                    <li><a href="#org20a34ee">2.2.2. Cloud-Native</a></li>
+                    <li><a href="#orgef83013">2.2.1. Multi-Rollup</a></li>
+                    <li><a href="#org3a3b9e3">2.2.2. Cloud-Native</a></li>
                   </ul>
                 </li>
               </ul>
@@ -553,13 +639,13 @@
           >Claude.ai</a
         >.
       </p>
-      <div id="outline-container-orgad06341" class="outline-2">
-        <h2 id="orgad06341">
+      <div id="outline-container-orgc89c724" class="outline-2">
+        <h2 id="orgc89c724">
           <span class="section-number-2">1.</span> Blockchain fundamentals
         </h2>
         <div class="outline-text-2" id="text-1"></div>
-        <div id="outline-container-orgc2da677" class="outline-3">
-          <h3 id="orgc2da677">
+        <div id="outline-container-org6715629" class="outline-3">
+          <h3 id="org6715629">
             <span class="section-number-3">1.1.</span>
             <a
               href="https://github.com/ethereum/execution-apis/blob/a0d03086564ab1838b462befbc083f873dcf0c0f/src/engine/paris.md"
@@ -578,8 +664,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org259b952" class="outline-3">
-          <h3 id="org259b952">
+        <div id="outline-container-orgd79eb57" class="outline-3">
+          <h3 id="orgd79eb57">
             <span class="section-number-3">1.2.</span>
             <a href="https://github.com/foundry-rs/foundry/">Foundry</a>
           </h3>
@@ -597,8 +683,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgfd2a06e" class="outline-3">
-          <h3 id="orgfd2a06e">
+        <div id="outline-container-orgf68f78d" class="outline-3">
+          <h3 id="orgf68f78d">
             <span class="section-number-3">1.3.</span>
             <a href="https://github.com/bluealloy/revm/">Revm</a>
           </h3>
@@ -611,8 +697,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgbff95a4" class="outline-3">
-          <h3 id="orgbff95a4">
+        <div id="outline-container-org8489eaa" class="outline-3">
+          <h3 id="org8489eaa">
             <span class="section-number-3">1.4.</span>
             <a href="https://github.com/alloy-rs">Alloy</a>
           </h3>
@@ -625,8 +711,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org92760f9" class="outline-3">
-          <h3 id="org92760f9">
+        <div id="outline-container-orga12256e" class="outline-3">
+          <h3 id="orga12256e">
             <span class="section-number-3">1.5.</span>
             <a href="https://erigon.tech/">Erigon</a> &amp; Staged sync
           </h3>
@@ -643,13 +729,13 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org8221cf4" class="outline-3">
-          <h3 id="org8221cf4">
+        <div id="outline-container-orgd28b509" class="outline-3">
+          <h3 id="orgd28b509">
             <span class="section-number-3">1.6.</span> Storage engines
           </h3>
           <div class="outline-text-3" id="text-1-6"></div>
-          <div id="outline-container-org982dde1" class="outline-4">
-            <h4 id="org982dde1">
+          <div id="outline-container-orgf1166f4" class="outline-4">
+            <h4 id="orgf1166f4">
               <span class="section-number-4">1.6.1.</span> ACID
             </h4>
             <div class="outline-text-4" id="text-1-6-1">
@@ -678,8 +764,8 @@
               </ul>
             </div>
           </div>
-          <div id="outline-container-org1c2eeee" class="outline-4">
-            <h4 id="org1c2eeee">
+          <div id="outline-container-orgd437e5c" class="outline-4">
+            <h4 id="orgd437e5c">
               <span class="section-number-4">1.6.2.</span> MVCC (Multi-version
               concurrency control)
             </h4>
@@ -693,8 +779,8 @@
               </ul>
             </div>
           </div>
-          <div id="outline-container-org0894c3a" class="outline-4">
-            <h4 id="org0894c3a">
+          <div id="outline-container-org66ed5e2" class="outline-4">
+            <h4 id="org66ed5e2">
               <span class="section-number-4">1.6.3.</span> Common database
               models
             </h4>
@@ -707,8 +793,8 @@
               </ul>
             </div>
           </div>
-          <div id="outline-container-orge25ee43" class="outline-4">
-            <h4 id="orge25ee43">
+          <div id="outline-container-orgaa220ba" class="outline-4">
+            <h4 id="orgaa220ba">
               <span class="section-number-4">1.6.4.</span> Common storage
               engines
             </h4>
@@ -742,8 +828,8 @@
             </div>
           </div>
         </div>
-        <div id="outline-container-org089d350" class="outline-3">
-          <h3 id="org089d350">
+        <div id="outline-container-orgfc1dafe" class="outline-3">
+          <h3 id="orgfc1dafe">
             <span class="section-number-3">1.7.</span> Reth
           </h3>
           <div class="outline-text-3" id="text-1-7">
@@ -765,8 +851,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgdb7f104" class="outline-3">
-          <h3 id="orgdb7f104">
+        <div id="outline-container-org5b10a03" class="outline-3">
+          <h3 id="org5b10a03">
             <span class="section-number-3">1.8.</span> Why gas per second as the
             performance metric
           </h3>
@@ -781,8 +867,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgef64042" class="outline-3">
-          <h3 id="orgef64042">
+        <div id="outline-container-org1cbb08f" class="outline-3">
+          <h3 id="org1cbb08f">
             <span class="section-number-3">1.9.</span> EVM cost models
           </h3>
           <div class="outline-text-3" id="text-1-9">
@@ -798,8 +884,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgca8c788" class="outline-3">
-          <h3 id="orgca8c788">
+        <div id="outline-container-orgee88ab9" class="outline-3">
+          <h3 id="orgee88ab9">
             <span class="section-number-3">1.10.</span> TPC benchmark
           </h3>
           <div class="outline-text-3" id="text-1-10">
@@ -816,8 +902,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org2d3c6e4" class="outline-3">
-          <h3 id="org2d3c6e4">
+        <div id="outline-container-org01f6d44" class="outline-3">
+          <h3 id="org01f6d44">
             <span class="section-number-3">1.11.</span> State growth
           </h3>
           <div class="outline-text-3" id="text-1-11">
@@ -833,8 +919,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org2c6094a" class="outline-3">
-          <h3 id="org2c6094a">
+        <div id="outline-container-org53daa21" class="outline-3">
+          <h3 id="org53daa21">
             <span class="section-number-3">1.12.</span> JIT (Just-In-Time) and
             AOT (Ahead-of-Time) EVM
           </h3>
@@ -852,8 +938,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org23fe5d8" class="outline-3">
-          <h3 id="org23fe5d8">
+        <div id="outline-container-orgf12ac2a" class="outline-3">
+          <h3 id="orgf12ac2a">
             <span class="section-number-3">1.13.</span> Actor model
           </h3>
           <div class="outline-text-3" id="text-1-13">
@@ -867,8 +953,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org63d9780" class="outline-2">
-        <h2 id="org63d9780">
+      <div id="outline-container-orgf4e7d75" class="outline-2">
+        <h2 id="orgf4e7d75">
           <span class="section-number-2">2.</span> Reth scaling plan
         </h2>
         <div class="outline-text-2" id="text-2">
@@ -881,8 +967,8 @@
             <li>The scaling plan does not involve solving state growth.</li>
           </ul>
         </div>
-        <div id="outline-container-org3d66d72" class="outline-3">
-          <h3 id="org3d66d72">
+        <div id="outline-container-org7dabc41" class="outline-3">
+          <h3 id="org7dabc41">
             <span class="section-number-3">2.1.</span> Vertical scaling (2024)
           </h3>
           <div class="outline-text-3" id="text-2-1">
@@ -890,8 +976,8 @@
               <li>Optimize how each system handle transactions and data.</li>
             </ul>
           </div>
-          <div id="outline-container-org034e9e6" class="outline-4">
-            <h4 id="org034e9e6">
+          <div id="outline-container-org2e26624" class="outline-4">
+            <h4 id="org2e26624">
               <span class="section-number-4">2.1.1.</span> JIT/AOT EVM
             </h4>
             <div class="outline-text-4" id="text-2-1-1">
@@ -908,7 +994,7 @@
                 </li>
               </ul>
 
-              <figure id="orgf9d03a2">
+              <figure id="orga071c5f">
                 <img
                   src="https://www.paradigm.xyz/static/reth-perf/3.png"
                   alt="3.png"
@@ -926,8 +1012,8 @@
               </figure>
             </div>
           </div>
-          <div id="outline-container-org1a919a3" class="outline-4">
-            <h4 id="org1a919a3">
+          <div id="outline-container-org3f3612a" class="outline-4">
+            <h4 id="org3f3612a">
               <span class="section-number-4">2.1.2.</span> Parallel EVM
             </h4>
             <div class="outline-text-4" id="text-2-1-2">
@@ -954,8 +1040,8 @@
               </ul>
             </div>
           </div>
-          <div id="outline-container-org708473d" class="outline-4">
-            <h4 id="org708473d">
+          <div id="outline-container-org5122783" class="outline-4">
+            <h4 id="org5122783">
               <span class="section-number-4">2.1.3.</span> Optimized state
               commitment (?)
             </h4>
@@ -982,8 +1068,8 @@
             </div>
           </div>
         </div>
-        <div id="outline-container-org3eb5f95" class="outline-3">
-          <h3 id="org3eb5f95">
+        <div id="outline-container-orgb027774" class="outline-3">
+          <h3 id="orgb027774">
             <span class="section-number-3">2.2.</span> Horizontal scaling (2025)
           </h3>
           <div class="outline-text-3" id="text-2-2">
@@ -991,8 +1077,8 @@
               <li>Spread the workload across multiple systems.</li>
             </ul>
           </div>
-          <div id="outline-container-orge27cffa" class="outline-4">
-            <h4 id="orge27cffa">
+          <div id="outline-container-orgef83013" class="outline-4">
+            <h4 id="orgef83013">
               <span class="section-number-4">2.2.1.</span> Multi-Rollup
             </h4>
             <div class="outline-text-4" id="text-2-2-1">
@@ -1003,8 +1089,8 @@
               </ul>
             </div>
           </div>
-          <div id="outline-container-org20a34ee" class="outline-4">
-            <h4 id="org20a34ee">
+          <div id="outline-container-org3a3b9e3" class="outline-4">
+            <h4 id="org3a3b9e3">
               <span class="section-number-4">2.2.2.</span> Cloud-Native
             </h4>
           </div>
@@ -1574,58 +1660,58 @@
         <div id="text-table-of-contents" role="doc-toc">
           <ul>
             <li>
-              <a href="#org7970f5a">1. Blockchain fundamentals</a>
+              <a href="#orgf5c6d54">1. Blockchain fundamentals</a>
               <ul>
-                <li><a href="#orgadeb867">1.1. Conduit chain</a></li>
-                <li><a href="#org0b2c533">1.2. Gas per second</a></li>
-                <li><a href="#org5e6f291">1.3. Target gas per block</a></li>
+                <li><a href="#org9aae7c1">1.1. Conduit chain</a></li>
+                <li><a href="#org9e7562b">1.2. Gas per second</a></li>
+                <li><a href="#orgd3af33f">1.3. Target gas per block</a></li>
                 <li>
-                  <a href="#orgf888fdb">1.4. Current blockchain scalability</a>
+                  <a href="#orgc0e3a1b">1.4. Current blockchain scalability</a>
                 </li>
                 <li>
-                  <a href="#org8b50108"
+                  <a href="#orgeeb2eb5"
                     >1.5. Blockchain node hardware requirements</a
                   >
                 </li>
-                <li><a href="#org47fc15a">1.6. L1 and L2 nodes</a></li>
-                <li><a href="#org5b767ac">1.7. Verifying a block</a></li>
+                <li><a href="#org7f3cd17">1.6. L1 and L2 nodes</a></li>
+                <li><a href="#org95a6637">1.7. Verifying a block</a></li>
                 <li>
-                  <a href="#org0767356">1.8. Maximum extractable value (MEV)</a>
+                  <a href="#org32d2381">1.8. Maximum extractable value (MEV)</a>
                 </li>
                 <li>
-                  <a href="#orgb947d89"
+                  <a href="#orgf2db0ef"
                     >1.9. Proposer-builder separation (PBS)</a
                   >
                 </li>
                 <li>
-                  <a href="#orgd75b637">1.10. Live and historical sync</a>
+                  <a href="#org1bb274c">1.10. Live and historical sync</a>
                 </li>
-                <li><a href="#orga6ea14b">1.11. Portal Network</a></li>
-                <li><a href="#orgeeae35a">1.12. Verkle tree</a></li>
+                <li><a href="#orge6dc884">1.11. Portal Network</a></li>
+                <li><a href="#org2467ff1">1.12. Verkle tree</a></li>
                 <li>
-                  <a href="#org1b459ef">1.13. Node storage</a>
+                  <a href="#org6c6150c">1.13. Node storage</a>
                   <ul>
-                    <li><a href="#org9e46eea">1.13.1. History expiry</a></li>
-                    <li><a href="#org0f41c77">1.13.2. State expiry</a></li>
-                    <li><a href="#orgea4ea1a">1.13.3. Statelessness</a></li>
+                    <li><a href="#orgf644524">1.13.1. History expiry</a></li>
+                    <li><a href="#org72c9afd">1.13.2. State expiry</a></li>
+                    <li><a href="#org7b4cecb">1.13.3. Statelessness</a></li>
                   </ul>
                 </li>
                 <li>
-                  <a href="#org59f6147"
+                  <a href="#org12b1698"
                     >1.14. Software transactional memory (STM)</a
                   >
                 </li>
-                <li><a href="#orgf93220b">1.15. Block-STM</a></li>
+                <li><a href="#orgead7d72">1.15. Block-STM</a></li>
               </ul>
             </li>
             <li>
-              <a href="#org3d73be9">2. What is MagaETH</a>
+              <a href="#org40030cc">2. What is MagaETH</a>
               <ul>
-                <li><a href="#org72810a2">2.1. Node specialization</a></li>
-                <li><a href="#orgef08d8f">2.2. Design philosophy</a></li>
+                <li><a href="#orgcb30974">2.1. Node specialization</a></li>
+                <li><a href="#orgd188986">2.2. Design philosophy</a></li>
               </ul>
             </li>
-            <li><a href="#org29cfac6">3. MegaETH challenges</a></li>
+            <li><a href="#orgfd2c341">3. MegaETH challenges</a></li>
           </ul>
         </div>
       </nav>
@@ -1641,13 +1727,13 @@
         high-performance EVM chain, but does not include any design details of
         MegaETH itself.
       </p>
-      <div id="outline-container-org7970f5a" class="outline-2">
-        <h2 id="org7970f5a">
+      <div id="outline-container-orgf5c6d54" class="outline-2">
+        <h2 id="orgf5c6d54">
           <span class="section-number-2">1.</span> Blockchain fundamentals
         </h2>
         <div class="outline-text-2" id="text-1"></div>
-        <div id="outline-container-orgadeb867" class="outline-3">
-          <h3 id="orgadeb867">
+        <div id="outline-container-org9aae7c1" class="outline-3">
+          <h3 id="org9aae7c1">
             <span class="section-number-3">1.1.</span>
             <a href="https://docs.conduit.xyz/">Conduit chain</a>
           </h3>
@@ -1660,8 +1746,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org0b2c533" class="outline-3">
-          <h3 id="org0b2c533">
+        <div id="outline-container-org9e7562b" class="outline-3">
+          <h3 id="org9e7562b">
             <span class="section-number-3">1.2.</span> Gas per second
           </h3>
           <div class="outline-text-3" id="text-1-2">
@@ -1681,8 +1767,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org5e6f291" class="outline-3">
-          <h3 id="org5e6f291">
+        <div id="outline-container-orgd3af33f" class="outline-3">
+          <h3 id="orgd3af33f">
             <span class="section-number-3">1.3.</span> Target gas per block
           </h3>
           <div class="outline-text-3" id="text-1-3">
@@ -1697,13 +1783,13 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgf888fdb" class="outline-3">
-          <h3 id="orgf888fdb">
+        <div id="outline-container-orgc0e3a1b" class="outline-3">
+          <h3 id="orgc0e3a1b">
             <span class="section-number-3">1.4.</span> Current blockchain
             scalability
           </h3>
           <div class="outline-text-3" id="text-1-4">
-            <figure id="org3eea284">
+            <figure id="org38056b5">
               <img
                 src="https://hackmd.io/_uploads/rkHVB0iHR.png"
                 alt="rkHVB0iHR.png"
@@ -1735,8 +1821,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org8b50108" class="outline-3">
-          <h3 id="org8b50108">
+        <div id="outline-container-orgeeb2eb5" class="outline-3">
+          <h3 id="orgeeb2eb5">
             <span class="section-number-3">1.5.</span> Blockchain node hardware
             requirements
           </h3>
@@ -1750,8 +1836,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org47fc15a" class="outline-3">
-          <h3 id="org47fc15a">
+        <div id="outline-container-org7f3cd17" class="outline-3">
+          <h3 id="org7f3cd17">
             <span class="section-number-3">1.6.</span> L1 and L2 nodes
           </h3>
           <div class="outline-text-3" id="text-1-6">
@@ -1769,8 +1855,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org5b767ac" class="outline-3">
-          <h3 id="org5b767ac">
+        <div id="outline-container-org95a6637" class="outline-3">
+          <h3 id="org95a6637">
             <span class="section-number-3">1.7.</span> Verifying a block
           </h3>
           <div class="outline-text-3" id="text-1-7">
@@ -1784,8 +1870,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org0767356" class="outline-3">
-          <h3 id="org0767356">
+        <div id="outline-container-org32d2381" class="outline-3">
+          <h3 id="org32d2381">
             <span class="section-number-3">1.8.</span> Maximum extractable value
             (MEV)
           </h3>
@@ -1798,8 +1884,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgb947d89" class="outline-3">
-          <h3 id="orgb947d89">
+        <div id="outline-container-orgf2db0ef" class="outline-3">
+          <h3 id="orgf2db0ef">
             <span class="section-number-3">1.9.</span> Proposer-builder
             separation (PBS)
           </h3>
@@ -1821,8 +1907,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgd75b637" class="outline-3">
-          <h3 id="orgd75b637">
+        <div id="outline-container-org1bb274c" class="outline-3">
+          <h3 id="org1bb274c">
             <span class="section-number-3">1.10.</span> Live and historical sync
           </h3>
           <div class="outline-text-3" id="text-1-10">
@@ -1842,8 +1928,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orga6ea14b" class="outline-3">
-          <h3 id="orga6ea14b">
+        <div id="outline-container-orge6dc884" class="outline-3">
+          <h3 id="orge6dc884">
             <span class="section-number-3">1.11.</span>
             <a
               href="https://ethereum.org/en/developers/docs/networking-layer/portal-network/"
@@ -1861,8 +1947,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgeeae35a" class="outline-3">
-          <h3 id="orgeeae35a">
+        <div id="outline-container-org2467ff1" class="outline-3">
+          <h3 id="org2467ff1">
             <span class="section-number-3">1.12.</span>
             <a href="https://ethereum.org/en/roadmap/verkle-trees/"
               >Verkle tree</a
@@ -1871,8 +1957,8 @@
           <div class="outline-text-3" id="text-1-12">
             <ul class="org-ul">
               <li>
-                Stateless clients use a witness to the state data that arrives
-                with the block instead of local databases.
+                Stateless clients rely on a witness that arrives with the block
+                for PoI rather on maintaining own local trie.
               </li>
               <li>
                 <b><b>Witness</b></b
@@ -1891,14 +1977,18 @@
               <li>
                 Verkle trees reduce the witness size by shortening the distance
                 between leaves and eliminating the need to provide sibling
-                nodes; Using a polynomial commitment scheme(?) allows the
-                witness to have a fixed size.
+                nodes; Using a polynomial commitment scheme (see
+                <a
+                  href="https://chenyo-17.github.io/org-static-blog/2024-07-28-ethereum-merkle-patricia-trie.html"
+                  >Ethereum MPT post</a
+                >
+                for explanation) allows the witness to have a fixed size.
               </li>
             </ul>
           </div>
         </div>
-        <div id="outline-container-org1b459ef" class="outline-3">
-          <h3 id="org1b459ef">
+        <div id="outline-container-org6c6150c" class="outline-3">
+          <h3 id="org6c6150c">
             <span class="section-number-3">1.13.</span> Node storage
           </h3>
           <div class="outline-text-3" id="text-1-13">
@@ -1918,8 +2008,8 @@
               </li>
             </ul>
           </div>
-          <div id="outline-container-org9e46eea" class="outline-4">
-            <h4 id="org9e46eea">
+          <div id="outline-container-orgf644524" class="outline-4">
+            <h4 id="orgf644524">
               <span class="section-number-4">1.13.1.</span> History expiry
             </h4>
             <div class="outline-text-4" id="text-1-13-1">
@@ -1948,8 +2038,8 @@
               </ul>
             </div>
           </div>
-          <div id="outline-container-org0f41c77" class="outline-4">
-            <h4 id="org0f41c77">
+          <div id="outline-container-org72c9afd" class="outline-4">
+            <h4 id="org72c9afd">
               <span class="section-number-4">1.13.2.</span> State expiry
             </h4>
             <div class="outline-text-4" id="text-1-13-2">
@@ -1973,8 +2063,8 @@
               </ul>
             </div>
           </div>
-          <div id="outline-container-orgea4ea1a" class="outline-4">
-            <h4 id="orgea4ea1a">
+          <div id="outline-container-org7b4cecb" class="outline-4">
+            <h4 id="org7b4cecb">
               <span class="section-number-4">1.13.3.</span> Statelessness
             </h4>
             <div class="outline-text-4" id="text-1-13-3">
@@ -2000,8 +2090,8 @@
             </div>
           </div>
         </div>
-        <div id="outline-container-org59f6147" class="outline-3">
-          <h3 id="org59f6147">
+        <div id="outline-container-org12b1698" class="outline-3">
+          <h3 id="org12b1698">
             <span class="section-number-3">1.14.</span> Software transactional
             memory (STM)
           </h3>
@@ -2026,8 +2116,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgf93220b" class="outline-3">
-          <h3 id="orgf93220b">
+        <div id="outline-container-orgead7d72" class="outline-3">
+          <h3 id="orgead7d72">
             <span class="section-number-3">1.15.</span> Block-STM
           </h3>
           <div class="outline-text-3" id="text-1-15">
@@ -2044,8 +2134,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org3d73be9" class="outline-2">
-        <h2 id="org3d73be9">
+      <div id="outline-container-org40030cc" class="outline-2">
+        <h2 id="org40030cc">
           <span class="section-number-2">2.</span> What is MagaETH
         </h2>
         <div class="outline-text-2" id="text-2">
@@ -2061,8 +2151,8 @@
             </li>
           </ul>
         </div>
-        <div id="outline-container-org72810a2" class="outline-3">
-          <h3 id="org72810a2">
+        <div id="outline-container-orgcb30974" class="outline-3">
+          <h3 id="orgcb30974">
             <span class="section-number-3">2.1.</span> Node specialization
           </h3>
           <div class="outline-text-3" id="text-2-1">
@@ -2093,8 +2183,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgef08d8f" class="outline-3">
-          <h3 id="orgef08d8f">
+        <div id="outline-container-orgd188986" class="outline-3">
+          <h3 id="orgd188986">
             <span class="section-number-3">2.2.</span> Design philosophy
           </h3>
           <div class="outline-text-3" id="text-2-2">
@@ -2120,12 +2210,12 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org29cfac6" class="outline-2">
-        <h2 id="org29cfac6">
+      <div id="outline-container-orgfd2c341" class="outline-2">
+        <h2 id="orgfd2c341">
           <span class="section-number-2">3.</span> MegaETH challenges
         </h2>
         <div class="outline-text-2" id="text-3">
-          <figure id="org09bf92c">
+          <figure id="orgdd24be9">
             <img
               src="https://hackmd.io/_uploads/BJW2EG4L0.png"
               alt="BJW2EG4L0.png"
@@ -2989,16 +3079,12 @@
           >sei</a
         >
       </div>
-      <div id="archive">
-        <a href="https://chenyo-17.github.io/org-static-blog/archive.html"
-          >Other posts</a
-        >
-      </div>
-    </div>
-    <div id="postamble" class="status">
-      <footer>
-        <p>© 2024 chenyo. Some rights reserved.</p>
-      </footer>
-    </div>
-  </body>
+    <div id="archive">
+<a href="https://chenyo-17.github.io/org-static-blog/archive.html">Other posts</a>
+</div>
+</div>
+<div id="postamble" class="status"><footer>
+      <p>© 2024 chenyo. Some rights reserved.</p>
+      </footer></div>
+</body>
 </html>
