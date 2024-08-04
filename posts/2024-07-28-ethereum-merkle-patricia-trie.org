@@ -78,7 +78,7 @@ This is a personal note of Ethereum Merkle Patricia Trie (MPT), resources are fr
 
 ** Rollup state tree
 - Rollup has a higher performance requirement for PoI.
-- Decouple the indexing and PoI with a sorted key-value arrays and a (binary) Merkle tree.
+- **Separate** the indexing and PoI with a sorted key-value arrays and a (binary) Merkle tree.
   - MPT: ~{Addr0: State0, Addr1: State1,...}~.
   - Rollup: map: ~{Addr0: Id0, Addr1: Id1,...}~ + array: ~[(Addr0, State0), (Addr1, State1),...]~.
 - When a client wants to query an account, it first gets the key id from the map, then get the state from the array.

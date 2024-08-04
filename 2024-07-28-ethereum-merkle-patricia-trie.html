@@ -53,48 +53,48 @@
         <div id="text-table-of-contents" role="doc-toc">
           <ul>
             <li>
-              <a href="#org94b22b4">1. Blockchain fundamentals</a>
+              <a href="#orgdccae13">1. Blockchain fundamentals</a>
               <ul>
                 <li>
-                  <a href="#orgebc02d5">1.1. RLP (Recursive Length Prefix)</a>
+                  <a href="#org143cadd">1.1. RLP (Recursive Length Prefix)</a>
                 </li>
                 <li>
-                  <a href="#org4a656ea">1.2. Merkle tree</a>
+                  <a href="#org55ecb8f">1.2. Merkle tree</a>
                   <ul>
                     <li>
-                      <a href="#orgcc76666"
+                      <a href="#org775c340"
                         >1.2.1. Complexity for \(N\) items.</a
                       >
                     </li>
                   </ul>
                 </li>
-                <li><a href="#org363f0df">1.3. Patricia tree</a></li>
+                <li><a href="#orgc0d49dc">1.3. Patricia tree</a></li>
                 <li>
-                  <a href="#orgf98a5c1">1.4. Merkle Patricia Tree (MPT)</a>
+                  <a href="#org89dc537">1.4. Merkle Patricia Tree (MPT)</a>
                   <ul>
-                    <li><a href="#org5b321ce">1.4.1. Prefix byte</a></li>
+                    <li><a href="#org3dee2a9">1.4.1. Prefix byte</a></li>
                     <li>
-                      <a href="#orga262065"
+                      <a href="#org43f0c31"
                         >1.4.2. Complexity for \(N\) items and key length
                         \(K\)</a
                       >
                     </li>
                   </ul>
                 </li>
-                <li><a href="#org840abe7">1.5. Rollup state tree</a></li>
+                <li><a href="#org8183acc">1.5. Rollup state tree</a></li>
                 <li>
-                  <a href="#orga404cbd"
+                  <a href="#orga408a00"
                     >1.6. PoI for Verkle tree (see MegaETH post for details)</a
                   >
                 </li>
                 <li>
-                  <a href="#org6d78dc6">1.7. Polynomial/KZG commitment</a>
+                  <a href="#org1a4f062">1.7. Polynomial/KZG commitment</a>
                 </li>
               </ul>
             </li>
-            <li><a href="#org333ccb6">2. Ethereum MPT data structure</a></li>
-            <li><a href="#org985338e">3. Ethereum MPT Functionality</a></li>
-            <li><a href="#orgb70a565">4. Proof of inclusion</a></li>
+            <li><a href="#org93d449a">2. Ethereum MPT data structure</a></li>
+            <li><a href="#orgc16e044">3. Ethereum MPT Functionality</a></li>
+            <li><a href="#orgd9b6b06">4. Proof of inclusion</a></li>
           </ul>
         </div>
       </nav>
@@ -120,13 +120,13 @@
           >
         </li>
       </ul>
-      <div id="outline-container-org94b22b4" class="outline-2">
-        <h2 id="org94b22b4">
+      <div id="outline-container-orgdccae13" class="outline-2">
+        <h2 id="orgdccae13">
           <span class="section-number-2">1.</span> Blockchain fundamentals
         </h2>
         <div class="outline-text-2" id="text-1"></div>
-        <div id="outline-container-orgebc02d5" class="outline-3">
-          <h3 id="orgebc02d5">
+        <div id="outline-container-org143cadd" class="outline-3">
+          <h3 id="org143cadd">
             <span class="section-number-3">1.1.</span> RLP (Recursive Length
             Prefix)
           </h3>
@@ -143,8 +143,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org4a656ea" class="outline-3">
-          <h3 id="org4a656ea">
+        <div id="outline-container-org55ecb8f" class="outline-3">
+          <h3 id="org55ecb8f">
             <span class="section-number-3">1.2.</span> Merkle tree
           </h3>
           <div class="outline-text-3" id="text-1-2">
@@ -165,8 +165,8 @@
               </li>
             </ul>
           </div>
-          <div id="outline-container-orgcc76666" class="outline-4">
-            <h4 id="orgcc76666">
+          <div id="outline-container-org775c340" class="outline-4">
+            <h4 id="org775c340">
               <span class="section-number-4">1.2.1.</span> Complexity for \(N\)
               items.
             </h4>
@@ -188,7 +188,7 @@
                 </li>
               </ul>
 
-              <figure id="org77b686b">
+              <figure id="org37b06f8">
                 <img
                   src="https://blockonomi.com/wp-content/uploads/2018/06/merkle-tree.jpg"
                   alt="merkle-tree.jpg"
@@ -207,8 +207,8 @@
             </div>
           </div>
         </div>
-        <div id="outline-container-org363f0df" class="outline-3">
-          <h3 id="org363f0df">
+        <div id="outline-container-orgc0d49dc" class="outline-3">
+          <h3 id="orgc0d49dc">
             <span class="section-number-3">1.3.</span> Patricia tree
           </h3>
           <div class="outline-text-3" id="text-1-3">
@@ -230,7 +230,7 @@
               </li>
             </ul>
 
-            <figure id="org1443cb6">
+            <figure id="org21eb222">
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Patricia_trie.svg/525px-Patricia_trie.svg.png"
                 alt="525px-Patricia_trie.svg.png"
@@ -247,8 +247,8 @@
             </figure>
           </div>
         </div>
-        <div id="outline-container-orgf98a5c1" class="outline-3">
-          <h3 id="orgf98a5c1">
+        <div id="outline-container-org89dc537" class="outline-3">
+          <h3 id="org89dc537">
             <span class="section-number-3">1.4.</span> Merkle Patricia Tree
             (MPT)
           </h3>
@@ -296,7 +296,7 @@
               </li>
             </ul>
 
-            <figure id="orga582703">
+            <figure id="org2c93464">
               <img
                 src="https://github.com/zhangchiqing/merkle-patricia-trie/raw/master/diagrams/4_add_4th_tx_kv.png"
                 alt="4_add_4th_tx_kv.png"
@@ -312,8 +312,8 @@
               </figcaption>
             </figure>
           </div>
-          <div id="outline-container-org5b321ce" class="outline-4">
-            <h4 id="org5b321ce">
+          <div id="outline-container-org3dee2a9" class="outline-4">
+            <h4 id="org3dee2a9">
               <span class="section-number-4">1.4.1.</span> Prefix byte
             </h4>
             <div class="outline-text-4" id="text-1-4-1">
@@ -335,8 +335,8 @@
               </ul>
             </div>
           </div>
-          <div id="outline-container-orga262065" class="outline-4">
-            <h4 id="orga262065">
+          <div id="outline-container-org43f0c31" class="outline-4">
+            <h4 id="org43f0c31">
               <span class="section-number-4">1.4.2.</span> Complexity for \(N\)
               items and key length \(K\)
             </h4>
@@ -371,7 +371,7 @@
                 </li>
               </ul>
 
-              <figure id="orgab50fdd">
+              <figure id="org079bdf2">
                 <img
                   src="https://i.sstatic.net/YZGxe.png"
                   alt="YZGxe.png"
@@ -387,16 +387,16 @@
             </div>
           </div>
         </div>
-        <div id="outline-container-org840abe7" class="outline-3">
-          <h3 id="org840abe7">
+        <div id="outline-container-org8183acc" class="outline-3">
+          <h3 id="org8183acc">
             <span class="section-number-3">1.5.</span> Rollup state tree
           </h3>
           <div class="outline-text-3" id="text-1-5">
             <ul class="org-ul">
               <li>Rollup has a higher performance requirement for PoI.</li>
               <li>
-                Decouple the indexing and PoI with a sorted key-value arrays and
-                a (binary) Merkle tree.
+                <b><b>Separate</b></b> the indexing and PoI with a sorted
+                key-value arrays and a (binary) Merkle tree.
                 <ul class="org-ul">
                   <li>MPT: <code>{Addr0: State0, Addr1: State1,...}</code>.</li>
                   <li>
@@ -416,8 +416,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orga404cbd" class="outline-3">
-          <h3 id="orga404cbd">
+        <div id="outline-container-orga408a00" class="outline-3">
+          <h3 id="orga408a00">
             <span class="section-number-3">1.6.</span> PoI for Verkle tree (see
             <a
               href="https://chenyo-17.github.io/org-static-blog/2024-07-04-parallel-evm:-megaeth.html"
@@ -438,8 +438,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org6d78dc6" class="outline-3">
-          <h3 id="org6d78dc6">
+        <div id="outline-container-org1a4f062" class="outline-3">
+          <h3 id="org1a4f062">
             <span class="section-number-3">1.7.</span> Polynomial/KZG commitment
           </h3>
           <div class="outline-text-3" id="text-1-7">
@@ -462,8 +462,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org333ccb6" class="outline-2">
-        <h2 id="org333ccb6">
+      <div id="outline-container-org93d449a" class="outline-2">
+        <h2 id="org93d449a">
           <span class="section-number-2">2.</span> Ethereum MPT data structure
         </h2>
         <div class="outline-text-2" id="text-2">
@@ -501,8 +501,8 @@
           </ul>
         </div>
       </div>
-      <div id="outline-container-org985338e" class="outline-2">
-        <h2 id="org985338e">
+      <div id="outline-container-orgc16e044" class="outline-2">
+        <h2 id="orgc16e044">
           <span class="section-number-2">3.</span> Ethereum MPT Functionality
         </h2>
         <div class="outline-text-2" id="text-3">
@@ -535,8 +535,8 @@
           </ul>
         </div>
       </div>
-      <div id="outline-container-orgb70a565" class="outline-2">
-        <h2 id="orgb70a565">
+      <div id="outline-container-orgd9b6b06" class="outline-2">
+        <h2 id="orgd9b6b06">
           <span class="section-number-2">4.</span> Proof of inclusion
         </h2>
         <div class="outline-text-2" id="text-4">
