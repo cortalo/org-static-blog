@@ -57,69 +57,74 @@
         <div id="text-table-of-contents" role="doc-toc">
           <ul>
             <li>
-              <a href="#orgc89c724">1. Blockchain fundamentals</a>
+              <a href="#org121ed29">1. Blockchain fundamentals</a>
               <ul>
-                <li><a href="#org6715629">1.1. Ethereum engine API</a></li>
-                <li><a href="#orgd79eb57">1.2. Foundry</a></li>
-                <li><a href="#orgf68f78d">1.3. Revm</a></li>
-                <li><a href="#org8489eaa">1.4. Alloy</a></li>
-                <li><a href="#orga12256e">1.5. Erigon &amp; Staged sync</a></li>
+                <li><a href="#org18f32e0">1.1. Ethereum engine API</a></li>
+                <li><a href="#org06ba2a3">1.2. Foundry</a></li>
+                <li><a href="#org7d3584f">1.3. Revm</a></li>
+                <li><a href="#org4cd5425">1.4. Alloy</a></li>
+                <li><a href="#orgaf496a7">1.5. Erigon &amp; Staged sync</a></li>
                 <li>
-                  <a href="#orgd28b509">1.6. Storage engines</a>
+                  <a href="#org9c41463">1.6. Storage engines</a>
                   <ul>
-                    <li><a href="#orgf1166f4">1.6.1. ACID</a></li>
+                    <li><a href="#orgb7d63c8">1.6.1. ACID</a></li>
                     <li>
-                      <a href="#orgd437e5c"
+                      <a href="#orgfedb1f3"
                         >1.6.2. MVCC (Multi-version concurrency control)</a
                       >
                     </li>
                     <li>
-                      <a href="#org66ed5e2">1.6.3. Common database models</a>
+                      <a href="#org051a77c">1.6.3. Common database models</a>
                     </li>
                     <li>
-                      <a href="#orgaa220ba">1.6.4. Common storage engines</a>
+                      <a href="#orga561de6">1.6.4. Common storage engines</a>
                     </li>
                   </ul>
                 </li>
-                <li><a href="#orgfc1dafe">1.7. Reth</a></li>
+                <li><a href="#org21fd9b1">1.7. Reth</a></li>
                 <li>
-                  <a href="#org5b10a03"
+                  <a href="#orge685cb0"
                     >1.8. Why gas per second as the performance metric</a
                   >
                 </li>
-                <li><a href="#org1cbb08f">1.9. EVM cost models</a></li>
-                <li><a href="#orgee88ab9">1.10. TPC benchmark</a></li>
-                <li><a href="#org01f6d44">1.11. State growth</a></li>
+                <li><a href="#org6f8cae5">1.9. EVM cost models</a></li>
+                <li><a href="#orgcdcf75a">1.10. TPC benchmark</a></li>
+                <li><a href="#org2d87eef">1.11. State growth</a></li>
                 <li>
-                  <a href="#org53daa21"
+                  <a href="#orge86de58"
                     >1.12. JIT (Just-In-Time) and AOT (Ahead-of-Time) EVM</a
                   >
                 </li>
-                <li><a href="#orgf12ac2a">1.13. Actor model</a></li>
+                <li><a href="#org2af1f4c">1.13. Actor model</a></li>
+                <li><a href="#orgf82c2e9">1.14. Storage trie</a></li>
+                <li><a href="#orga4d3036">1.15. Serverless database</a></li>
               </ul>
             </li>
             <li>
-              <a href="#orgf4e7d75">2. Reth scaling plan</a>
+              <a href="#org05dbdff">2. Reth scaling plan</a>
               <ul>
                 <li>
-                  <a href="#org7dabc41">2.1. Vertical scaling (2024)</a>
+                  <a href="#org7c54846">2.1. Vertical scaling (2024)</a>
                   <ul>
-                    <li><a href="#org2e26624">2.1.1. JIT/AOT EVM</a></li>
-                    <li><a href="#org3f3612a">2.1.2. Parallel EVM</a></li>
+                    <li><a href="#orgb51851f">2.1.1. JIT/AOT EVM</a></li>
+                    <li><a href="#org281400a">2.1.2. Parallel EVM</a></li>
                     <li>
-                      <a href="#org5122783"
-                        >2.1.3. Optimized state commitment (?)</a
+                      <a href="#org3402678"
+                        >2.1.3. Optimized state commitment</a
                       >
                     </li>
                   </ul>
                 </li>
                 <li>
-                  <a href="#orgb027774">2.2. Horizontal scaling (2025)</a>
+                  <a href="#org3911d1a">2.2. Horizontal scaling (2025)</a>
                   <ul>
-                    <li><a href="#orgef83013">2.2.1. Multi-Rollup</a></li>
-                    <li><a href="#org3a3b9e3">2.2.2. Cloud-Native</a></li>
+                    <li><a href="#orgc44579c">2.2.1. Multi-Rollup (?)</a></li>
+                    <li>
+                      <a href="#org0c3b092">2.2.2. Cloud-Native nodes.</a>
+                    </li>
                   </ul>
                 </li>
+                <li><a href="#orgc6ab20b">2.3. Open questions</a></li>
               </ul>
             </li>
           </ul>
@@ -136,13 +141,13 @@
           >Claude.ai</a
         >.
       </p>
-      <div id="outline-container-orgc89c724" class="outline-2">
-        <h2 id="orgc89c724">
+      <div id="outline-container-org121ed29" class="outline-2">
+        <h2 id="org121ed29">
           <span class="section-number-2">1.</span> Blockchain fundamentals
         </h2>
         <div class="outline-text-2" id="text-1"></div>
-        <div id="outline-container-org6715629" class="outline-3">
-          <h3 id="org6715629">
+        <div id="outline-container-org18f32e0" class="outline-3">
+          <h3 id="org18f32e0">
             <span class="section-number-3">1.1.</span>
             <a
               href="https://github.com/ethereum/execution-apis/blob/a0d03086564ab1838b462befbc083f873dcf0c0f/src/engine/paris.md"
@@ -161,8 +166,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgd79eb57" class="outline-3">
-          <h3 id="orgd79eb57">
+        <div id="outline-container-org06ba2a3" class="outline-3">
+          <h3 id="org06ba2a3">
             <span class="section-number-3">1.2.</span>
             <a href="https://github.com/foundry-rs/foundry/">Foundry</a>
           </h3>
@@ -180,8 +185,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgf68f78d" class="outline-3">
-          <h3 id="orgf68f78d">
+        <div id="outline-container-org7d3584f" class="outline-3">
+          <h3 id="org7d3584f">
             <span class="section-number-3">1.3.</span>
             <a href="https://github.com/bluealloy/revm/">Revm</a>
           </h3>
@@ -194,8 +199,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org8489eaa" class="outline-3">
-          <h3 id="org8489eaa">
+        <div id="outline-container-org4cd5425" class="outline-3">
+          <h3 id="org4cd5425">
             <span class="section-number-3">1.4.</span>
             <a href="https://github.com/alloy-rs">Alloy</a>
           </h3>
@@ -208,8 +213,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orga12256e" class="outline-3">
-          <h3 id="orga12256e">
+        <div id="outline-container-orgaf496a7" class="outline-3">
+          <h3 id="orgaf496a7">
             <span class="section-number-3">1.5.</span>
             <a href="https://erigon.tech/">Erigon</a> &amp; Staged sync
           </h3>
@@ -226,13 +231,13 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgd28b509" class="outline-3">
-          <h3 id="orgd28b509">
+        <div id="outline-container-org9c41463" class="outline-3">
+          <h3 id="org9c41463">
             <span class="section-number-3">1.6.</span> Storage engines
           </h3>
           <div class="outline-text-3" id="text-1-6"></div>
-          <div id="outline-container-orgf1166f4" class="outline-4">
-            <h4 id="orgf1166f4">
+          <div id="outline-container-orgb7d63c8" class="outline-4">
+            <h4 id="orgb7d63c8">
               <span class="section-number-4">1.6.1.</span> ACID
             </h4>
             <div class="outline-text-4" id="text-1-6-1">
@@ -261,8 +266,8 @@
               </ul>
             </div>
           </div>
-          <div id="outline-container-orgd437e5c" class="outline-4">
-            <h4 id="orgd437e5c">
+          <div id="outline-container-orgfedb1f3" class="outline-4">
+            <h4 id="orgfedb1f3">
               <span class="section-number-4">1.6.2.</span> MVCC (Multi-version
               concurrency control)
             </h4>
@@ -276,8 +281,8 @@
               </ul>
             </div>
           </div>
-          <div id="outline-container-org66ed5e2" class="outline-4">
-            <h4 id="org66ed5e2">
+          <div id="outline-container-org051a77c" class="outline-4">
+            <h4 id="org051a77c">
               <span class="section-number-4">1.6.3.</span> Common database
               models
             </h4>
@@ -290,8 +295,8 @@
               </ul>
             </div>
           </div>
-          <div id="outline-container-orgaa220ba" class="outline-4">
-            <h4 id="orgaa220ba">
+          <div id="outline-container-orga561de6" class="outline-4">
+            <h4 id="orga561de6">
               <span class="section-number-4">1.6.4.</span> Common storage
               engines
             </h4>
@@ -325,8 +330,8 @@
             </div>
           </div>
         </div>
-        <div id="outline-container-orgfc1dafe" class="outline-3">
-          <h3 id="orgfc1dafe">
+        <div id="outline-container-org21fd9b1" class="outline-3">
+          <h3 id="org21fd9b1">
             <span class="section-number-3">1.7.</span> Reth
           </h3>
           <div class="outline-text-3" id="text-1-7">
@@ -348,8 +353,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org5b10a03" class="outline-3">
-          <h3 id="org5b10a03">
+        <div id="outline-container-orge685cb0" class="outline-3">
+          <h3 id="orge685cb0">
             <span class="section-number-3">1.8.</span> Why gas per second as the
             performance metric
           </h3>
@@ -364,8 +369,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org1cbb08f" class="outline-3">
-          <h3 id="org1cbb08f">
+        <div id="outline-container-org6f8cae5" class="outline-3">
+          <h3 id="org6f8cae5">
             <span class="section-number-3">1.9.</span> EVM cost models
           </h3>
           <div class="outline-text-3" id="text-1-9">
@@ -381,8 +386,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgee88ab9" class="outline-3">
-          <h3 id="orgee88ab9">
+        <div id="outline-container-orgcdcf75a" class="outline-3">
+          <h3 id="orgcdcf75a">
             <span class="section-number-3">1.10.</span> TPC benchmark
           </h3>
           <div class="outline-text-3" id="text-1-10">
@@ -399,8 +404,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org01f6d44" class="outline-3">
-          <h3 id="org01f6d44">
+        <div id="outline-container-org2d87eef" class="outline-3">
+          <h3 id="org2d87eef">
             <span class="section-number-3">1.11.</span> State growth
           </h3>
           <div class="outline-text-3" id="text-1-11">
@@ -416,8 +421,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org53daa21" class="outline-3">
-          <h3 id="org53daa21">
+        <div id="outline-container-orge86de58" class="outline-3">
+          <h3 id="orge86de58">
             <span class="section-number-3">1.12.</span> JIT (Just-In-Time) and
             AOT (Ahead-of-Time) EVM
           </h3>
@@ -435,8 +440,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgf12ac2a" class="outline-3">
-          <h3 id="orgf12ac2a">
+        <div id="outline-container-org2af1f4c" class="outline-3">
+          <h3 id="org2af1f4c">
             <span class="section-number-3">1.13.</span> Actor model
           </h3>
           <div class="outline-text-3" id="text-1-13">
@@ -449,9 +454,37 @@
             </ul>
           </div>
         </div>
+        <div id="outline-container-orgf82c2e9" class="outline-3">
+          <h3 id="orgf82c2e9">
+            <span class="section-number-3">1.14.</span> Storage trie
+          </h3>
+          <div class="outline-text-3" id="text-1-14">
+            <ul class="org-ul">
+              <li>
+                Each contract account has its own storage trie, which is usually
+                stored in a KV database.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-orga4d3036" class="outline-3">
+          <h3 id="orga4d3036">
+            <span class="section-number-3">1.15.</span> Serverless database
+          </h3>
+          <div class="outline-text-3" id="text-1-15">
+            <ul class="org-ul">
+              <li>
+                Allow developers to focus on writing queries without managing
+                database servers.
+              </li>
+              <li>Automatically scales up or down base on the workload.</li>
+              <li>Pay-per-use pricing.</li>
+            </ul>
+          </div>
+        </div>
       </div>
-      <div id="outline-container-orgf4e7d75" class="outline-2">
-        <h2 id="orgf4e7d75">
+      <div id="outline-container-org05dbdff" class="outline-2">
+        <h2 id="org05dbdff">
           <span class="section-number-2">2.</span> Reth scaling plan
         </h2>
         <div class="outline-text-2" id="text-2">
@@ -464,8 +497,8 @@
             <li>The scaling plan does not involve solving state growth.</li>
           </ul>
         </div>
-        <div id="outline-container-org7dabc41" class="outline-3">
-          <h3 id="org7dabc41">
+        <div id="outline-container-org7c54846" class="outline-3">
+          <h3 id="org7c54846">
             <span class="section-number-3">2.1.</span> Vertical scaling (2024)
           </h3>
           <div class="outline-text-3" id="text-2-1">
@@ -473,8 +506,8 @@
               <li>Optimize how each system handle transactions and data.</li>
             </ul>
           </div>
-          <div id="outline-container-org2e26624" class="outline-4">
-            <h4 id="org2e26624">
+          <div id="outline-container-orgb51851f" class="outline-4">
+            <h4 id="orgb51851f">
               <span class="section-number-4">2.1.1.</span> JIT/AOT EVM
             </h4>
             <div class="outline-text-4" id="text-2-1-1">
@@ -491,7 +524,7 @@
                 </li>
               </ul>
 
-              <figure id="orga071c5f">
+              <figure id="orgd5dba2c">
                 <img
                   src="https://www.paradigm.xyz/static/reth-perf/3.png"
                   alt="3.png"
@@ -509,8 +542,8 @@
               </figure>
             </div>
           </div>
-          <div id="outline-container-org3f3612a" class="outline-4">
-            <h4 id="org3f3612a">
+          <div id="outline-container-org281400a" class="outline-4">
+            <h4 id="org281400a">
               <span class="section-number-4">2.1.2.</span> Parallel EVM
             </h4>
             <div class="outline-text-4" id="text-2-1-2">
@@ -522,7 +555,7 @@
                 </li>
                 <li>
                   Historical sync: can calculate the best parallelization
-                  schedule offine; an early attempt is
+                  schedule offline; an early attempt is
                   <a
                     href="https://github.com/paradigmxyz/reth/tree/rkrasiuk/parallel"
                     >available</a
@@ -537,36 +570,69 @@
               </ul>
             </div>
           </div>
-          <div id="outline-container-org5122783" class="outline-4">
-            <h4 id="org5122783">
+          <div id="outline-container-org3402678" class="outline-4">
+            <h4 id="org3402678">
               <span class="section-number-4">2.1.3.</span> Optimized state
-              commitment (?)
+              commitment
             </h4>
             <div class="outline-text-4" id="text-2-1-3">
               <ul class="org-ul">
                 <li>
-                  In Reth, the state root is computed based on a KV database
-                  updated by transaction execution, thus the database is
-                  trie-agnostic.
+                  Traditional EVM implementation <b><b>couples</b></b> the
+                  transaction execution and the state root computation: the
+                  state root is updated whenever a transaction updates a trie,
+                  since the state root computation has to be sequential from the
+                  updated node to the root, this is slow.
                 </li>
                 <li>
-                  The state root computation costs &gt;75% of end-to-end block
-                  production time.
+                  Reth <b><b>decouples</b></b> the process: raw state data is
+                  stored in KV databases, and each trie is
+                  <b><b>re-built</b></b> for each block from the databases in
+                  the end.
+                  <ul class="org-ul">
+                    <li>Pro: can use more efficient databases.</li>
+                    <li>
+                      Con: need to re-calculate the entire trie, which costs
+                      &gt;75% of end-to-end block production time.
+                    </li>
+                  </ul>
                 </li>
                 <li>
-                  Fully parallelized state root: calculate the accounts trie in
-                  parallel while computing state root (how?).
+                  Optimizations:
+                  <ul class="org-ul">
+                    <li>
+                      Now already re-calculate the storage trie for each updated
+                      contract in parallel.
+                    </li>
+                    <li>
+                      Can also calculate the account trie when the storage tries
+                      are computed.
+                    </li>
+                    <li>
+                      Pre-fetch cached trie nodes (cached by the state root
+                      computation) by tracking updated accounts and storage,
+                      e.g., a part of the trie may remain the same hash.
+                    </li>
+                  </ul>
                 </li>
                 <li>
-                  Pipelined state root: pre-fetch intermediate trie nodes from
-                  the disk.
+                  Going beyond:
+                  <ul class="org-ul">
+                    <li>Only calculate the state root every \(T\) blocks.</li>
+                    <li>
+                      <b><b>Lag</b></b> the state root computation a few blocks
+                      behind to advance executions.
+                    </li>
+                    <li>Use a cheaper encoder and hash function (Blake3).</li>
+                    <li>Use wider branch nodes.</li>
+                  </ul>
                 </li>
               </ul>
             </div>
           </div>
         </div>
-        <div id="outline-container-orgb027774" class="outline-3">
-          <h3 id="orgb027774">
+        <div id="outline-container-org3911d1a" class="outline-3">
+          <h3 id="org3911d1a">
             <span class="section-number-3">2.2.</span> Horizontal scaling (2025)
           </h3>
           <div class="outline-text-3" id="text-2-2">
@@ -574,9 +640,9 @@
               <li>Spread the workload across multiple systems.</li>
             </ul>
           </div>
-          <div id="outline-container-orgef83013" class="outline-4">
-            <h4 id="orgef83013">
-              <span class="section-number-4">2.2.1.</span> Multi-Rollup
+          <div id="outline-container-orgc44579c" class="outline-4">
+            <h4 id="orgc44579c">
+              <span class="section-number-4">2.2.1.</span> Multi-Rollup (?)
             </h4>
             <div class="outline-text-4" id="text-2-2-1">
               <ul class="org-ul">
@@ -586,10 +652,36 @@
               </ul>
             </div>
           </div>
-          <div id="outline-container-org3a3b9e3" class="outline-4">
-            <h4 id="org3a3b9e3">
-              <span class="section-number-4">2.2.2.</span> Cloud-Native
+          <div id="outline-container-org0c3b092" class="outline-4">
+            <h4 id="org0c3b092">
+              <span class="section-number-4">2.2.2.</span> Cloud-Native nodes.
             </h4>
+            <div class="outline-text-4" id="text-2-2-2">
+              <ul class="org-ul">
+                <li>
+                  Deploy the heavy node (e.g., sequencer) as a service stack
+                  that can autoscale with compute demand and use cloud storage
+                  for persistence.
+                </li>
+                <li>Similar to serverless database projects, e.g., NeonDB.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div id="outline-container-orgc6ab20b" class="outline-3">
+          <h3 id="orgc6ab20b">
+            <span class="section-number-3">2.3.</span> Open questions
+          </h3>
+          <div class="outline-text-3" id="text-2-3">
+            <ul class="org-ul">
+              <li>
+                Second order effects of above changes, e.g., on light clients.
+              </li>
+              <li>
+                What is the best, average and worst case scenarios for each
+                optimization.
+              </li>
+            </ul>
           </div>
         </div>
       </div>
