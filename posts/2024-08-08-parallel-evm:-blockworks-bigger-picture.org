@@ -1,0 +1,55 @@
+#+title: Parallel EVM: Blockworks news (Sei, Monad, Solana)
+#+date: <2024-08-08 09:19>
+#+description: This is a personal note for [[https://blockworks.co/news/parallelized-evms-gaining-popularity][Blockworks news (12.01.2024)]]
+#+filetags: evm parallel-evm blockworks
+
+This is a personal note for [[https://blockworks.co/news/parallelized-evms-gaining-popularity][Blockworks news (12.01.2024)]] as well as some terminology explained online, e.g., [[https://www.coindesk.com/learn/what-is-ethereum-sharding-a-beginners-guide/][Coindesk]] and [[https://chatgpt.com/c/824f05c9-dc75-4eb6-aeda-59d057baf83a][GPT-4o]].
+
+* Terminology
+** Ethereum sharding
+- The Ethereum mainnet is divided into smaller interconnected networks called shards.
+- Each shard processes and validates its own transactions parallel to others.
+- Pros: increase scalability and **participation**.
+- Cons: a single unit can be compromised; lead to centralization.
+
+** Blob
+- Rather than storing each transaction data directly in the blockchain, the data is aggregated into a blob (binary object).
+- Each blob performs erasure coding to dive the blob into multiple smaller pieces with redundancy.
+- Encoded pieces are stored separately, the block header contain pointers to the piece locations without storing actual data.
+- Transactions in a block may be distributed across multiple blobs.
+
+** Erasure coding
+- Allows one to encode blobs such that if at least half of the data in the blob is published, anyone in the network can reconstruct and re-publish the rest of the data.
+
+** Data availability sampling (DAS)
+- Validators randomly sample blob pieces to confirm the data can be reconstructed.g
+- If a client cannot get enough pieces to verify the blob availability, or the blob fails the integrity check, or transactions within the blob are invalid or inconsistent with the blockchain state, the blob is rejected.
+
+** Danksharding (L2 optimization)
+- A specific sharding implementation proposal.
+- Require data availability sampling and [[https://chenyo-17.github.io/org-static-blog/tag-evm.html#orgf2db0ef][proposer-builder separation]].
+- Can support hundreds of individual rollups.
+
+** Relations between L1 and L2 scaling
+- L1 scaling: optimizations directly to the Ethereum mainnet and core infrastructure, e.g., parallel EVM.
+- L2 scaling: building secondary rollup layers, e.g., optimistic rollups and ZK rollups, to offload mainnet computation and storage.
+
+** Double spending prevention
+- Bitcoin: uses UTXOs to track which inputs have been spent (no need to go through the entire chain).
+- Ethereum: uses a nounce to track the number of transactions sent from an account, the nounce is included in the transaction and is incremented by 1 for every new transaction, and all transactions must be executed in order.
+
+** Sealevel (Solana)
+- Solana's parallel smart contract runtime to process thousands of contracts in parallel.
+- Solana transactions describe all states a transaction accesses to efficiently recognize transaction dependency and to schedule parallel execution without accessing full blockchain state.
+
+* Ways to achieve parallel processing
+- Process independent transactions in parallel.
+- Sharding.
+
+* Production-ready parallelized EVM projects (Jan 2024)
+- Sei: optimistic parallel execution.
+- Monad: custom EVM implementation, optimistic parallel execution, **custom state database**.
+  - Commodity databases are not optimized for Merkle tree data read/write with SSD.
+- Neon (Solana): transactions pre-specify dependencies.
+- See [[https://chenyo-17.github.io/org-static-blog/tag-evm.html#orgcb5510d][BNB chain post]] for more solutions.
+

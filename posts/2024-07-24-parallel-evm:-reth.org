@@ -1,7 +1,7 @@
 #+title:  Parallel EVM: Reth scaling plan
 #+date: <2024-07-24 15:54>
 #+description: This is a personal note for [[https://www.paradigm.xyz/2024/04/reth-perf][Reth-performance-blog]]
-#+filetags: evm paralle-evm reth
+#+filetags: evm parallel-evm reth
 
 This is a personal note for [[https://www.paradigm.xyz/2024/04/reth-perf][Reth-performance-blog]] as well as some terminology explain online, e.g., [[https://github.com/paradigmxyz/reth][Reth-repo]] and [[https://claude.ai/chat/6364436f-d279-4c6b-947e-237bfea26409][Claude.ai]].
 
