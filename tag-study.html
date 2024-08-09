@@ -42,6 +42,560 @@
     </div>
     <div id="content">
       <h1 class="title">Posts tagged "study":</h1>
+      <div class="post-date">08 Aug 2024</div>
+      <h1 class="post-title">
+        <a
+          href="https://chenyo-17.github.io/org-static-blog/2024-08-08-db-notes:-storage-models-&-compression.html"
+          >CMU 15-445 notes: Storage Models & Compression</a
+        >
+      </h1>
+      <nav id="table-of-contents" role="doc-toc">
+        <h2>Table of Contents</h2>
+        <div id="text-table-of-contents" role="doc-toc">
+          <ul>
+            <li>
+              <a href="#orgdc064a5">1. Database workloads</a>
+              <ul>
+                <li>
+                  <a href="#org7a1da9b"
+                    >1.1. OLTP (Online Transaction Processing)</a
+                  >
+                </li>
+                <li>
+                  <a href="#org0dc0166"
+                    >1.2. OLAP (Online Analytical Processing)</a
+                  >
+                </li>
+                <li><a href="#org90d7f8a">1.3. HTAP (Hybrid)</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#org3ac5fbb">2. Storage models</a>
+              <ul>
+                <li>
+                  <a href="#orgfbc31e0">2.1. N-ary Storage Model (NSM)</a>
+                </li>
+                <li>
+                  <a href="#orgab43e8c"
+                    >2.2. Decomposition Storage Model (DSM)</a
+                  >
+                </li>
+                <li>
+                  <a href="#orgfc2f399"
+                    >2.3. Partition Attributes Across (PAX)</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#orgac7c9c0">3. Database compression</a>
+              <ul>
+                <li><a href="#org7d95080">3.1. Compression granularity</a></li>
+                <li><a href="#org94ab76c">3.2. Naive compression</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#org8773fec">4. Columnar compression</a>
+              <ul>
+                <li><a href="#org2953e3d">4.1. Dictionary encoding</a></li>
+                <li>
+                  <a href="#org745ca89">4.2. Run-Length encoding (RLE)</a>
+                </li>
+                <li><a href="#org86846bf">4.3. Bit-packing encoding</a></li>
+                <li><a href="#orgbcc1780">4.4. Mostly encoding</a></li>
+                <li>
+                  <a href="#org654e540">4.5. Bitmap (One-hot) encoding</a>
+                </li>
+                <li><a href="#org266881d">4.6. Delta encoding</a></li>
+                <li><a href="#org37331eb">4.7. Incremental encoding</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <p>
+        This is a personal note for the
+        <a
+          href="https://15445.courses.cs.cmu.edu/fall2023/notes/05-storage3.pdf"
+          >CMU 15-445 L5 notes</a
+        >.
+      </p>
+      <div id="outline-container-orgdc064a5" class="outline-2">
+        <h2 id="orgdc064a5">
+          <span class="section-number-2">1.</span> Database workloads
+        </h2>
+        <div class="outline-text-2" id="text-1"></div>
+        <div id="outline-container-org7a1da9b" class="outline-3">
+          <h3 id="org7a1da9b">
+            <span class="section-number-3">1.1.</span> OLTP (Online Transaction
+            Processing)
+          </h3>
+          <div class="outline-text-3" id="text-1-1">
+            <ul class="org-ul">
+              <li>
+                Characterized by fast, repetitive, simple queries that operator
+                on a small amount of data, e.g., a user adds an item to its
+                Amazon cart and pay.
+              </li>
+              <li>Usually more writes than read.</li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org0dc0166" class="outline-3">
+          <h3 id="org0dc0166">
+            <span class="section-number-3">1.2.</span> OLAP (Online Analytical
+            Processing)
+          </h3>
+          <div class="outline-text-3" id="text-1-2">
+            <ul class="org-ul">
+              <li>Characterized by complex read queries on large data.</li>
+              <li>E.g., compute the most popular item in a period.</li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org90d7f8a" class="outline-3">
+          <h3 id="org90d7f8a">
+            <span class="section-number-3">1.3.</span> HTAP (Hybrid)
+          </h3>
+          <div class="outline-text-3" id="text-1-3">
+            <ul class="org-ul">
+              <li>OLTP + OLAP.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="outline-container-org3ac5fbb" class="outline-2">
+        <h2 id="org3ac5fbb">
+          <span class="section-number-2">2.</span> Storage models
+        </h2>
+        <div class="outline-text-2" id="text-2">
+          <ul class="org-ul">
+            <li>Different ways to store tuples in pages.</li>
+          </ul>
+        </div>
+        <div id="outline-container-orgfbc31e0" class="outline-3">
+          <h3 id="orgfbc31e0">
+            <span class="section-number-3">2.1.</span> N-ary Storage Model (NSM)
+          </h3>
+          <div class="outline-text-3" id="text-2-1">
+            <ul class="org-ul">
+              <li>
+                Store all attributes for a single tuple contiguously in a single
+                page, e.g., slotted pages.
+              </li>
+              <li>
+                Pros: good for queries that need the entire tuple, e.g., OLTP.
+              </li>
+              <li>
+                Cons: inefficient for scanning large data with a few attributes,
+                e.g., OLAP.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-orgab43e8c" class="outline-3">
+          <h3 id="orgab43e8c">
+            <span class="section-number-3">2.2.</span> Decomposition Storage
+            Model (DSM)
+          </h3>
+          <div class="outline-text-3" id="text-2-2">
+            <ul class="org-ul">
+              <li>
+                Store each attribute for all tuples contiguously in a block of
+                data, i.e., column store.
+              </li>
+              <li>
+                Pros: save I/O; better data compression; ideal for bulk single
+                attribute queries like OLAP.
+              </li>
+              <li>
+                Cons: slow for point queries due to tuple splitting, e.g., OLTP.
+              </li>
+              <li>
+                2 common ways to put back tuples:
+                <ul class="org-ul">
+                  <li>
+                    Most common: use fixed-length offsets, e.g., the value in a
+                    given column belong to the same tuple as the value in
+                    another column at the same offset.
+                  </li>
+                  <li>
+                    Less common: use embedded tuple ids, e.g., each attribute is
+                    associated with the tuple id, and the DBMS stores a mapping
+                    to jump to any attribute with the given tuple id.
+                  </li>
+                </ul>
+              </li>
+            </ul>
+
+            <figure id="org0c7d85b">
+              <img
+                src="./static/db-dsm-storage-model.png"
+                alt="db-dsm-storage-model.png"
+                align="center"
+                width="550px"
+              />
+
+              <figcaption>
+                <span class="figure-number">Figure 1: </span>DSM storage model
+                (<a
+                  href="https://15445.courses.cs.cmu.edu/fall2023/slides/05-storage3.pdf"
+                  >Source</a
+                >)
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+        <div id="outline-container-orgfc2f399" class="outline-3">
+          <h3 id="orgfc2f399">
+            <span class="section-number-3">2.3.</span> Partition Attributes
+            Across (PAX)
+          </h3>
+          <div class="outline-text-3" id="text-2-3">
+            <ul class="org-ul">
+              <li>
+                Rows are horizontally partitioned into groups of rows; each row
+                group uses a column store.
+              </li>
+              <li>
+                A PAX file has a global header containing a directory with each
+                row group&rsquo;s offset; each row group maintains its own
+                header with content metadata.
+              </li>
+            </ul>
+
+            <figure id="org29e33b7">
+              <img
+                src="./static/db-pax-storage-model.png"
+                alt="db-pax-storage-model.png"
+                align="center"
+                width="300px"
+              />
+
+              <figcaption>
+                <span class="figure-number">Figure 2: </span>PAX storage model
+                (<a
+                  href="https://15445.courses.cs.cmu.edu/fall2023/slides/05-storage3.pdf"
+                  >Source</a
+                >)
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+      <div id="outline-container-orgac7c9c0" class="outline-2">
+        <h2 id="orgac7c9c0">
+          <span class="section-number-2">3.</span> Database compression
+        </h2>
+        <div class="outline-text-2" id="text-3">
+          <ul class="org-ul">
+            <li>
+              Disk I/O is always the main bottleneck; read-only analytical
+              workloads are popular; compression in advance allows for more I/O
+              throughput.
+            </li>
+            <li>
+              <b><b>Real-world</b></b> data sets have the following properties
+              for compression:
+              <ul class="org-ul">
+                <li>
+                  <b><b>Highly skewed</b></b> distributions for attribute
+                  values.
+                </li>
+                <li>
+                  <b><b>High correlation</b></b> between attributes of the same
+                  tuple, e.g., zip code to city.
+                </li>
+              </ul>
+            </li>
+            <li>
+              Requirements on the database compression:
+              <ul class="org-ul">
+                <li>
+                  Fixed-length values to follow word-alignment; variable length
+                  data stored in separate mappings.
+                </li>
+                <li>
+                  Postpone decompression as long as possible during query
+                  execution, i.e., <b><b>late materialization</b></b
+                  >.
+                </li>
+                <li>
+                  Lossless; any lossy compression can only be performed at the
+                  application level.
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div id="outline-container-org7d95080" class="outline-3">
+          <h3 id="org7d95080">
+            <span class="section-number-3">3.1.</span> Compression granularity
+          </h3>
+          <div class="outline-text-3" id="text-3-1">
+            <ul class="org-ul">
+              <li>Block level: compress all tuples for the same table.</li>
+              <li>Tuple level: compress each tuple (NSM only).</li>
+              <li>
+                Attribute level: compress one or multiple values within one
+                tuple.
+              </li>
+              <li>
+                Columnar level: compress one or multiple columns across multiple
+                tuples (DSM only).
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org94ab76c" class="outline-3">
+          <h3 id="org94ab76c">
+            <span class="section-number-3">3.2.</span> Naive compression
+          </h3>
+          <div class="outline-text-3" id="text-3-2">
+            <ul class="org-ul">
+              <li>
+                Engineers often use a general purpose compression algorithm with
+                lower compression ratio in exchange for faster
+                compression/decompression.
+              </li>
+              <li>
+                E.g., compress disk pages by padding them to a power of 2KBs and
+                storing them in the buffer pool.
+                <ul class="org-ul">
+                  <li>
+                    Why small chunk: must decompress before reading/writing the
+                    data every time, hence need o limit the compression scope.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Does not consider the high-level data semantics, thus cannot
+                utilize late materialization.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="outline-container-org8773fec" class="outline-2">
+        <h2 id="org8773fec">
+          <span class="section-number-2">4.</span> Columnar compression
+        </h2>
+        <div class="outline-text-2" id="text-4">
+          <ul class="org-ul">
+            <li>
+              Works best with OLAP, may need additional support for writes.
+            </li>
+          </ul>
+        </div>
+        <div id="outline-container-org2953e3d" class="outline-3">
+          <h3 id="org2953e3d">
+            <span class="section-number-3">4.1.</span> Dictionary encoding
+          </h3>
+          <div class="outline-text-3" id="text-4-1">
+            <ul class="org-ul">
+              <li>
+                The most common database compression scheme, support late
+                materialization.
+              </li>
+              <li>
+                Replace frequent value patterns with smaller codes, and use a
+                dictionary to map codes to their original values.
+              </li>
+              <li>
+                Need to support fast encoding and decoding, so hash function is
+                impossible.
+              </li>
+              <li>
+                Need to support order-preserving encodings, i.e., sorting codes
+                in the same order as original values, to support
+                <b><b>range queries</b></b
+                >.
+                <ul class="org-ul">
+                  <li>
+                    E.g., when <code>SELECT DISTINCT</code> with
+                    pattern-matching, the DBMS only needs to scan the encoding
+                    dictionary (but without <code>DISTINCT</code> it still needs
+                    to scan the whole column).
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org745ca89" class="outline-3">
+          <h3 id="org745ca89">
+            <span class="section-number-3">4.2.</span> Run-Length encoding (RLE)
+          </h3>
+          <div class="outline-text-3" id="text-4-2">
+            <ul class="org-ul">
+              <li>
+                Compress runs (consecutive instances) of the same value in a
+                column into triplets <code>(value, offset, length)</code>.
+              </li>
+              <li>
+                Need to cluster same column values to maximize the compression.
+              </li>
+            </ul>
+
+            <figure id="orgc2653a8">
+              <img
+                src="./static/db-rle-storage-model.png"
+                alt="db-rle-storage-model.png"
+                align="center"
+                width="550px"
+              />
+
+              <figcaption>
+                <span class="figure-number">Figure 3: </span>Run-length encoding
+                (<a
+                  href="https://15445.courses.cs.cmu.edu/fall2023/slides/05-storage3.pdf"
+                  >Source</a
+                >)
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+        <div id="outline-container-org86846bf" class="outline-3">
+          <h3 id="org86846bf">
+            <span class="section-number-3">4.3.</span> Bit-packing encoding
+          </h3>
+          <div class="outline-text-3" id="text-4-3">
+            <ul class="org-ul">
+              <li>Use less bits to store an attribute.</li>
+            </ul>
+
+            <figure id="org421de88">
+              <img
+                src="./static/db-bit-packing-storage-model.png"
+                alt="db-bit-packing-storage-model.png"
+                align="center"
+                width="250px"
+              />
+
+              <figcaption>
+                <span class="figure-number">Figure 4: </span>Bit-packing
+                encoding (<a
+                  href="https://15445.courses.cs.cmu.edu/fall2023/slides/05-storage3.pdf"
+                  >Source</a
+                >)
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+        <div id="outline-container-orgbcc1780" class="outline-3">
+          <h3 id="orgbcc1780">
+            <span class="section-number-3">4.4.</span> Mostly encoding
+          </h3>
+          <div class="outline-text-3" id="text-4-4">
+            <ul class="org-ul">
+              <li>
+                Use a special marker to indicate values that exceed the bit size
+                and maintains a look-up table to store them.
+              </li>
+            </ul>
+
+            <figure id="orgc3232c3">
+              <img
+                src="./static/db-mostly-encoding-storage-model.png"
+                alt="db-mostly-encoding-storage-model.png"
+                align="center"
+                width="550px"
+              />
+
+              <figcaption>
+                <span class="figure-number">Figure 5: </span>Mostly encoding (<a
+                  href="https://15445.courses.cs.cmu.edu/fall2023/slides/05-storage3.pdf"
+                  >Source</a
+                >)
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+        <div id="outline-container-org654e540" class="outline-3">
+          <h3 id="org654e540">
+            <span class="section-number-3">4.5.</span> Bitmap (One-hot) encoding
+          </h3>
+          <div class="outline-text-3" id="text-4-5">
+            <ul class="org-ul">
+              <li>Only practical if the value cardinality is low.</li>
+            </ul>
+
+            <figure id="org3d9a658">
+              <img
+                src="./static/db-bitmap-encoding-storage-model.png"
+                alt="db-bitmap-encoding-storage-model.png"
+                align="center"
+                width="400px"
+              />
+
+              <figcaption>
+                <span class="figure-number">Figure 6: </span>Bitmap encoding (<a
+                  href="https://15445.courses.cs.cmu.edu/fall2023/slides/05-storage3.pdf"
+                  >Source</a
+                >)
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+        <div id="outline-container-org266881d" class="outline-3">
+          <h3 id="org266881d">
+            <span class="section-number-3">4.6.</span> Delta encoding
+          </h3>
+          <div class="outline-text-3" id="text-4-6">
+            <ul class="org-ul">
+              <li>
+                Record the difference between values; the base value can be
+                stored in-line or in a separate look-up table.
+              </li>
+              <li>Can be combined with RLE encoding.</li>
+            </ul>
+
+            <figure id="orgb3f3f90">
+              <img
+                src="./static/db-delta-encoding-storage-model.png"
+                alt="db-delta-encoding-storage-model.png"
+                align="center"
+                width="500px"
+              />
+
+              <figcaption>
+                <span class="figure-number">Figure 7: </span>Delta encoding (<a
+                  href="https://15445.courses.cs.cmu.edu/fall2023/slides/05-storage3.pdf"
+                  >Source</a
+                >)
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+        <div id="outline-container-org37331eb" class="outline-3">
+          <h3 id="org37331eb">
+            <span class="section-number-3">4.7.</span> Incremental encoding
+          </h3>
+          <div class="outline-text-3" id="text-4-7">
+            <ul class="org-ul">
+              <li>
+                Common prefixes or suffixes and their lengths are recorded to
+                avoid duplication.
+              </li>
+              <li>Need to sort the data first.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="taglist">
+        <a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a
+        >:
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-study.html"
+          >study</a
+        >
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-database.html"
+          >database</a
+        >
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-cmu.html"
+          >cmu</a
+        >
+      </div>
+
       <div class="post-date">31 Jul 2024</div>
       <h1 class="post-title">
         <a
@@ -54,67 +608,67 @@
         <div id="text-table-of-contents" role="doc-toc">
           <ul>
             <li>
-              <a href="#org1f1e904">1. Data storage</a>
+              <a href="#org210df7a">1. Data storage</a>
               <ul>
-                <li><a href="#org78ff3b9">1.1. Volatile device</a></li>
-                <li><a href="#orgb938dd7">1.2. Non-volatile device</a></li>
-                <li><a href="#orgd45c15d">1.3. Storage hierarchy</a></li>
-                <li><a href="#orgaf6cc8c">1.4. Persistent memory</a></li>
+                <li><a href="#org91f241c">1.1. Volatile device</a></li>
+                <li><a href="#orga49aab2">1.2. Non-volatile device</a></li>
+                <li><a href="#orgb0364f0">1.3. Storage hierarchy</a></li>
+                <li><a href="#org9640bc1">1.4. Persistent memory</a></li>
                 <li>
-                  <a href="#orgfddc6a5"
+                  <a href="#org05d4c4e"
                     >1.5. NVM (non-volatile memory express)</a
                   >
                 </li>
               </ul>
             </li>
             <li>
-              <a href="#org6a72907">2. DBMS architecture</a>
+              <a href="#orgbce7e27">2. DBMS architecture</a>
               <ul>
-                <li><a href="#org808e42e">2.1. Why not OS</a></li>
+                <li><a href="#org70a4e1d">2.1. Why not OS</a></li>
               </ul>
             </li>
             <li>
-              <a href="#orgc99f20a">3. Database pages</a>
+              <a href="#org1c8928f">3. Database pages</a>
               <ul>
-                <li><a href="#org0e8d870">3.1. Hardware page</a></li>
+                <li><a href="#orgca61213">3.1. Hardware page</a></li>
               </ul>
             </li>
-            <li><a href="#org2ab9e3f">4. Database heap</a></li>
+            <li><a href="#org63ae770">4. Database heap</a></li>
             <li>
-              <a href="#orge5e95c2">5. Page layout</a>
+              <a href="#orgf79420b">5. Page layout</a>
               <ul>
-                <li><a href="#org42ee46a">5.1. Slotted-pages</a></li>
+                <li><a href="#orga1aeee0">5.1. Slotted-pages</a></li>
                 <li>
-                  <a href="#orgd7628a5">5.2. Log-structured</a>
+                  <a href="#org7c00aef">5.2. Log-structured</a>
                   <ul>
-                    <li><a href="#orgbca0d11">5.2.1. Log compaction</a></li>
+                    <li><a href="#orgaf8ee65">5.2.1. Log compaction</a></li>
                   </ul>
                 </li>
-                <li><a href="#orgfe398c1">5.3. Index-organized storage</a></li>
+                <li><a href="#org9570db1">5.3. Index-organized storage</a></li>
               </ul>
             </li>
             <li>
-              <a href="#orgc2aa5e9">6. Tuple layout</a>
+              <a href="#org87c9f93">6. Tuple layout</a>
               <ul>
-                <li><a href="#orgd83a2ec">6.1. Denormalized tuple data</a></li>
+                <li><a href="#orgceab11d">6.1. Denormalized tuple data</a></li>
               </ul>
             </li>
             <li>
-              <a href="#org1227d16">7. Data representation</a>
+              <a href="#orga6206f0">7. Data representation</a>
               <ul>
-                <li><a href="#org0d9426d">7.1. Integers</a></li>
+                <li><a href="#orgeb417e3">7.1. Integers</a></li>
                 <li>
-                  <a href="#orgf1d3a46">7.2. Variable precision numbers</a>
+                  <a href="#org9a4ab0f">7.2. Variable precision numbers</a>
                 </li>
                 <li>
-                  <a href="#orge88496c">7.3. Fixed-point precision numbers</a>
+                  <a href="#orge059545">7.3. Fixed-point precision numbers</a>
                 </li>
-                <li><a href="#org078dab6">7.4. Variable-length data</a></li>
-                <li><a href="#orgc84722e">7.5. Dates/Times</a></li>
-                <li><a href="#org01d3509">7.6. Null</a></li>
+                <li><a href="#org1213e5e">7.4. Variable-length data</a></li>
+                <li><a href="#org15033fd">7.5. Dates/Times</a></li>
+                <li><a href="#org653e4c4">7.6. Null</a></li>
               </ul>
             </li>
-            <li><a href="#org4cd237d">8. System catalogs</a></li>
+            <li><a href="#orgc05419a">8. System catalogs</a></li>
           </ul>
         </div>
       </nav>
@@ -130,13 +684,13 @@
           >CMU 15-445 L4 notes</a
         >.
       </p>
-      <div id="outline-container-org1f1e904" class="outline-2">
-        <h2 id="org1f1e904">
+      <div id="outline-container-org210df7a" class="outline-2">
+        <h2 id="org210df7a">
           <span class="section-number-2">1.</span> Data storage
         </h2>
         <div class="outline-text-2" id="text-1"></div>
-        <div id="outline-container-org78ff3b9" class="outline-3">
-          <h3 id="org78ff3b9">
+        <div id="outline-container-org91f241c" class="outline-3">
+          <h3 id="org91f241c">
             <span class="section-number-3">1.1.</span> Volatile device
           </h3>
           <div class="outline-text-3" id="text-1-1">
@@ -150,8 +704,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgb938dd7" class="outline-3">
-          <h3 id="orgb938dd7">
+        <div id="outline-container-orga49aab2" class="outline-3">
+          <h3 id="orga49aab2">
             <span class="section-number-3">1.2.</span> Non-volatile device
           </h3>
           <div class="outline-text-3" id="text-1-2">
@@ -172,8 +726,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgd45c15d" class="outline-3">
-          <h3 id="orgd45c15d">
+        <div id="outline-container-orgb0364f0" class="outline-3">
+          <h3 id="orgb0364f0">
             <span class="section-number-3">1.3.</span> Storage hierarchy
           </h3>
           <div class="outline-text-3" id="text-1-3">
@@ -182,8 +736,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgaf6cc8c" class="outline-3">
-          <h3 id="orgaf6cc8c">
+        <div id="outline-container-org9640bc1" class="outline-3">
+          <h3 id="org9640bc1">
             <span class="section-number-3">1.4.</span> Persistent memory
           </h3>
           <div class="outline-text-3" id="text-1-4">
@@ -194,8 +748,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgfddc6a5" class="outline-3">
-          <h3 id="orgfddc6a5">
+        <div id="outline-container-org05d4c4e" class="outline-3">
+          <h3 id="org05d4c4e">
             <span class="section-number-3">1.5.</span> NVM (non-volatile memory
             express)
           </h3>
@@ -209,8 +763,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org6a72907" class="outline-2">
-        <h2 id="org6a72907">
+      <div id="outline-container-orgbce7e27" class="outline-2">
+        <h2 id="orgbce7e27">
           <span class="section-number-2">2.</span> DBMS architecture
         </h2>
         <div class="outline-text-2" id="text-2">
@@ -232,8 +786,8 @@
             </li>
           </ul>
         </div>
-        <div id="outline-container-org808e42e" class="outline-3">
-          <h3 id="org808e42e">
+        <div id="outline-container-org70a4e1d" class="outline-3">
+          <h3 id="org70a4e1d">
             <span class="section-number-3">2.1.</span> Why not OS
           </h3>
           <div class="outline-text-3" id="text-2-1">
@@ -276,8 +830,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-orgc99f20a" class="outline-2">
-        <h2 id="orgc99f20a">
+      <div id="outline-container-org1c8928f" class="outline-2">
+        <h2 id="org1c8928f">
           <span class="section-number-2">3.</span> Database pages
         </h2>
         <div class="outline-text-2" id="text-3">
@@ -297,8 +851,8 @@
             </li>
           </ul>
         </div>
-        <div id="outline-container-org0e8d870" class="outline-3">
-          <h3 id="org0e8d870">
+        <div id="outline-container-orgca61213" class="outline-3">
+          <h3 id="orgca61213">
             <span class="section-number-3">3.1.</span> Hardware page
           </h3>
           <div class="outline-text-3" id="text-3-1">
@@ -316,8 +870,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org2ab9e3f" class="outline-2">
-        <h2 id="org2ab9e3f">
+      <div id="outline-container-org63ae770" class="outline-2">
+        <h2 id="org63ae770">
           <span class="section-number-2">4.</span> Database heap
         </h2>
         <div class="outline-text-2" id="text-4">
@@ -344,8 +898,8 @@
           </ul>
         </div>
       </div>
-      <div id="outline-container-orge5e95c2" class="outline-2">
-        <h2 id="orge5e95c2">
+      <div id="outline-container-orgf79420b" class="outline-2">
+        <h2 id="orgf79420b">
           <span class="section-number-2">5.</span> Page layout
         </h2>
         <div class="outline-text-2" id="text-5">
@@ -360,8 +914,8 @@
             </li>
           </ul>
         </div>
-        <div id="outline-container-org42ee46a" class="outline-3">
-          <h3 id="org42ee46a">
+        <div id="outline-container-orga1aeee0" class="outline-3">
+          <h3 id="orga1aeee0">
             <span class="section-number-3">5.1.</span> Slotted-pages
           </h3>
           <div class="outline-text-3" id="text-5-1">
@@ -389,10 +943,26 @@
                 </ul>
               </li>
             </ul>
+
+            <figure id="org4de7820">
+              <img
+                src="https://miro.medium.com/v2/resize:fit:935/1*7AuKrdEJQpfRYhavwWzwhg.png"
+                alt="1*7AuKrdEJQpfRYhavwWzwhg.png"
+                align="center"
+                width="400px"
+              />
+
+              <figcaption>
+                <span class="figure-number">Figure 1: </span>Slotted pages (<a
+                  href="https://miro.medium.com/v2/resize:fit:935/1*7AuKrdEJQpfRYhavwWzwhg.png"
+                  >Source</a
+                >)
+              </figcaption>
+            </figure>
           </div>
         </div>
-        <div id="outline-container-orgd7628a5" class="outline-3">
-          <h3 id="orgd7628a5">
+        <div id="outline-container-org7c00aef" class="outline-3">
+          <h3 id="org7c00aef">
             <span class="section-number-3">5.2.</span> Log-structured
           </h3>
           <div class="outline-text-3" id="text-5-2">
@@ -409,8 +979,8 @@
               </li>
             </ul>
           </div>
-          <div id="outline-container-orgbca0d11" class="outline-4">
-            <h4 id="orgbca0d11">
+          <div id="outline-container-orgaf8ee65" class="outline-4">
+            <h4 id="orgaf8ee65">
               <span class="section-number-4">5.2.1.</span> Log compaction
             </h4>
             <div class="outline-text-4" id="text-5-2-1">
@@ -437,8 +1007,8 @@
             </div>
           </div>
         </div>
-        <div id="outline-container-orgfe398c1" class="outline-3">
-          <h3 id="orgfe398c1">
+        <div id="outline-container-org9570db1" class="outline-3">
+          <h3 id="org9570db1">
             <span class="section-number-3">5.3.</span> Index-organized storage
           </h3>
           <div class="outline-text-3" id="text-5-3">
@@ -451,12 +1021,34 @@
                 In an index-organized storage scheme, the DBMS stores tuples as
                 the value of an index data structure.
               </li>
+              <li>
+                E.g., In a B-tree indexed DBMS, the index (i.e., primary keys)
+                are stored as the intermediate nodes, and the data is stored in
+                the leaf nodes.
+              </li>
             </ul>
+
+            <figure id="org51f86cf">
+              <img
+                src="https://docs.oracle.com/en/database/oracle/oracle-database/21/cncpt/img/cncpt272.gif"
+                alt="cncpt272.gif"
+                align="center"
+                width="400px"
+              />
+
+              <figcaption>
+                <span class="figure-number">Figure 2: </span>Index-organized
+                storage (<a
+                  href="https://docs.oracle.com/en/database/oracle/oracle-database/21/cncpt/img/cncpt272.gif"
+                  >Source</a
+                >)
+              </figcaption>
+            </figure>
           </div>
         </div>
       </div>
-      <div id="outline-container-orgc2aa5e9" class="outline-2">
-        <h2 id="orgc2aa5e9">
+      <div id="outline-container-org87c9f93" class="outline-2">
+        <h2 id="org87c9f93">
           <span class="section-number-2">6.</span> Tuple layout
         </h2>
         <div class="outline-text-2" id="text-6">
@@ -473,8 +1065,8 @@
             </li>
           </ul>
         </div>
-        <div id="outline-container-orgd83a2ec" class="outline-3">
-          <h3 id="orgd83a2ec">
+        <div id="outline-container-orgceab11d" class="outline-3">
+          <h3 id="orgceab11d">
             <span class="section-number-3">6.1.</span> Denormalized tuple data
           </h3>
           <div class="outline-text-3" id="text-6-1">
@@ -493,8 +1085,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org1227d16" class="outline-2">
-        <h2 id="org1227d16">
+      <div id="outline-container-orga6206f0" class="outline-2">
+        <h2 id="orga6206f0">
           <span class="section-number-2">7.</span> Data representation
         </h2>
         <div class="outline-text-2" id="text-7">
@@ -514,8 +1106,8 @@
             </li>
           </ul>
         </div>
-        <div id="outline-container-org0d9426d" class="outline-3">
-          <h3 id="org0d9426d">
+        <div id="outline-container-orgeb417e3" class="outline-3">
+          <h3 id="orgeb417e3">
             <span class="section-number-3">7.1.</span> Integers
           </h3>
           <div class="outline-text-3" id="text-7-1">
@@ -527,8 +1119,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgf1d3a46" class="outline-3">
-          <h3 id="orgf1d3a46">
+        <div id="outline-container-org9a4ab0f" class="outline-3">
+          <h3 id="org9a4ab0f">
             <span class="section-number-3">7.2.</span> Variable precision
             numbers
           </h3>
@@ -543,8 +1135,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orge88496c" class="outline-3">
-          <h3 id="orge88496c">
+        <div id="outline-container-orge059545" class="outline-3">
+          <h3 id="orge059545">
             <span class="section-number-3">7.3.</span> Fixed-point precision
             numbers
           </h3>
@@ -559,8 +1151,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org078dab6" class="outline-3">
-          <h3 id="org078dab6">
+        <div id="outline-container-org1213e5e" class="outline-3">
+          <h3 id="org1213e5e">
             <span class="section-number-3">7.4.</span> Variable-length data
           </h3>
           <div class="outline-text-3" id="text-7-4">
@@ -582,8 +1174,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgc84722e" class="outline-3">
-          <h3 id="orgc84722e">
+        <div id="outline-container-org15033fd" class="outline-3">
+          <h3 id="org15033fd">
             <span class="section-number-3">7.5.</span> Dates/Times
           </h3>
           <div class="outline-text-3" id="text-7-5">
@@ -595,8 +1187,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org01d3509" class="outline-3">
-          <h3 id="org01d3509">
+        <div id="outline-container-org653e4c4" class="outline-3">
+          <h3 id="org653e4c4">
             <span class="section-number-3">7.6.</span> Null
           </h3>
           <div class="outline-text-3" id="text-7-6">
@@ -619,8 +1211,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org4cd237d" class="outline-2">
-        <h2 id="org4cd237d">
+      <div id="outline-container-orgc05419a" class="outline-2">
+        <h2 id="orgc05419a">
           <span class="section-number-2">8.</span> System catalogs
         </h2>
         <div class="outline-text-2" id="text-8">
@@ -1080,30 +1672,30 @@
         <div id="text-table-of-contents" role="doc-toc">
           <ul>
             <li>
-              <a href="#org1df1c47">1. Terminology</a>
+              <a href="#org69ab8f6">1. Terminology</a>
               <ul>
-                <li><a href="#orgac49d8f">1.1. Database</a></li>
+                <li><a href="#orgc370c9a">1.1. Database</a></li>
                 <li>
-                  <a href="#orge453f89">1.2. Database design consideration</a>
+                  <a href="#org561e72d">1.2. Database design consideration</a>
                 </li>
                 <li>
-                  <a href="#org2b07a02"
+                  <a href="#org4ba65bf"
                     >1.3. Database management system (DBMS)</a
                   >
                 </li>
-                <li><a href="#org6a125b5">1.4. Data model</a></li>
-                <li><a href="#org361d138">1.5. Schema</a></li>
-                <li><a href="#org1062ed6">1.6. Entities and Tables</a></li>
-                <li><a href="#org1d70f46">1.7. Attributes and Fields</a></li>
-                <li><a href="#org7c60eab">1.8. Logical layer</a></li>
-                <li><a href="#org64c5b38">1.9. Physical layer</a></li>
+                <li><a href="#org7127580">1.4. Data model</a></li>
+                <li><a href="#org1ff3870">1.5. Schema</a></li>
+                <li><a href="#orgbab76b7">1.6. Entities and Tables</a></li>
+                <li><a href="#org41ddb51">1.7. Attributes and Fields</a></li>
+                <li><a href="#orgdf4d1c7">1.8. Logical layer</a></li>
+                <li><a href="#org2a99a7e">1.9. Physical layer</a></li>
                 <li>
-                  <a href="#org93c94dd"
+                  <a href="#org84856f4"
                     >1.10. Data manipulation languages (DMLs)</a
                   >
                 </li>
                 <li>
-                  <a href="#org13ee8a0"
+                  <a href="#org232672e"
                     >1.11. SQL (Structured Query Language) and relational
                     model</a
                   >
@@ -1111,15 +1703,15 @@
               </ul>
             </li>
             <li>
-              <a href="#orgda29202">2. Relational model</a>
+              <a href="#org79092c5">2. Relational model</a>
               <ul>
-                <li><a href="#orgc610d7c">2.1. A relation</a></li>
-                <li><a href="#org75ea1b0">2.2. A domain</a></li>
-                <li><a href="#orge3d1da2">2.3. A tuple</a></li>
-                <li><a href="#org61ccf51">2.4. Keys</a></li>
+                <li><a href="#orgfbd38f2">2.1. A relation</a></li>
+                <li><a href="#org45fdacf">2.2. A domain</a></li>
+                <li><a href="#orga8885b4">2.3. A tuple</a></li>
+                <li><a href="#org4e11236">2.4. Keys</a></li>
               </ul>
             </li>
-            <li><a href="#orge77fad4">3. Relational Algebra</a></li>
+            <li><a href="#org0b65cd5">3. Relational Algebra</a></li>
           </ul>
         </div>
       </nav>
@@ -1138,13 +1730,13 @@
           >Claude.ai</a
         >.
       </p>
-      <div id="outline-container-org1df1c47" class="outline-2">
-        <h2 id="org1df1c47">
+      <div id="outline-container-org69ab8f6" class="outline-2">
+        <h2 id="org69ab8f6">
           <span class="section-number-2">1.</span> Terminology
         </h2>
         <div class="outline-text-2" id="text-1"></div>
-        <div id="outline-container-orgac49d8f" class="outline-3">
-          <h3 id="orgac49d8f">
+        <div id="outline-container-orgc370c9a" class="outline-3">
+          <h3 id="orgc370c9a">
             <span class="section-number-3">1.1.</span> Database
           </h3>
           <div class="outline-text-3" id="text-1-1">
@@ -1156,8 +1748,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orge453f89" class="outline-3">
-          <h3 id="orge453f89">
+        <div id="outline-container-org561e72d" class="outline-3">
+          <h3 id="org561e72d">
             <span class="section-number-3">1.2.</span> Database design
             consideration
           </h3>
@@ -1169,8 +1761,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org2b07a02" class="outline-3">
-          <h3 id="org2b07a02">
+        <div id="outline-container-org4ba65bf" class="outline-3">
+          <h3 id="org4ba65bf">
             <span class="section-number-3">1.3.</span> Database management
             system (DBMS)
           </h3>
@@ -1184,8 +1776,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org6a125b5" class="outline-3">
-          <h3 id="org6a125b5">
+        <div id="outline-container-org7127580" class="outline-3">
+          <h3 id="org7127580">
             <span class="section-number-3">1.4.</span> Data model
           </h3>
           <div class="outline-text-3" id="text-1-4">
@@ -1201,8 +1793,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org361d138" class="outline-3">
-          <h3 id="org361d138">
+        <div id="outline-container-org1ff3870" class="outline-3">
+          <h3 id="org1ff3870">
             <span class="section-number-3">1.5.</span> Schema
           </h3>
           <div class="outline-text-3" id="text-1-5">
@@ -1213,8 +1805,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org1062ed6" class="outline-3">
-          <h3 id="org1062ed6">
+        <div id="outline-container-orgbab76b7" class="outline-3">
+          <h3 id="orgbab76b7">
             <span class="section-number-3">1.6.</span> Entities and Tables
           </h3>
           <div class="outline-text-3" id="text-1-6">
@@ -1229,8 +1821,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org1d70f46" class="outline-3">
-          <h3 id="org1d70f46">
+        <div id="outline-container-org41ddb51" class="outline-3">
+          <h3 id="org41ddb51">
             <span class="section-number-3">1.7.</span> Attributes and Fields
           </h3>
           <div class="outline-text-3" id="text-1-7">
@@ -1240,8 +1832,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org7c60eab" class="outline-3">
-          <h3 id="org7c60eab">
+        <div id="outline-container-orgdf4d1c7" class="outline-3">
+          <h3 id="orgdf4d1c7">
             <span class="section-number-3">1.8.</span> Logical layer
           </h3>
           <div class="outline-text-3" id="text-1-8">
@@ -1250,8 +1842,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org64c5b38" class="outline-3">
-          <h3 id="org64c5b38">
+        <div id="outline-container-org2a99a7e" class="outline-3">
+          <h3 id="org2a99a7e">
             <span class="section-number-3">1.9.</span> Physical layer
           </h3>
           <div class="outline-text-3" id="text-1-9">
@@ -1260,8 +1852,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org93c94dd" class="outline-3">
-          <h3 id="org93c94dd">
+        <div id="outline-container-org84856f4" class="outline-3">
+          <h3 id="org84856f4">
             <span class="section-number-3">1.10.</span> Data manipulation
             languages (DMLs)
           </h3>
@@ -1283,8 +1875,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org13ee8a0" class="outline-3">
-          <h3 id="org13ee8a0">
+        <div id="outline-container-org232672e" class="outline-3">
+          <h3 id="org232672e">
             <span class="section-number-3">1.11.</span> SQL (Structured Query
             Language) and relational model
           </h3>
@@ -1303,8 +1895,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-orgda29202" class="outline-2">
-        <h2 id="orgda29202">
+      <div id="outline-container-org79092c5" class="outline-2">
+        <h2 id="org79092c5">
           <span class="section-number-2">2.</span> Relational model
         </h2>
         <div class="outline-text-2" id="text-2">
@@ -1321,22 +1913,25 @@
             </li>
           </ul>
 
-          <figure id="org1817565">
+          <figure id="orgdd7e6b2">
             <img
-              src="https://people.cs.pitt.edu/~chang/156/images/fig41.gif"
-              alt="fig41.gif"
+              src="https://www.guru99.com/images/1/091318_0803_RelationalD1.png"
+              alt="091318_0803_RelationalD1.png"
               align="center"
               width="500px"
             />
 
             <figcaption>
               <span class="figure-number">Figure 1: </span>Relational model
-              concepts
+              concepts (<a
+                href="https://www.guru99.com/images/1/091318_0803_RelationalD1.png"
+                >Source</a
+              >)
             </figcaption>
           </figure>
         </div>
-        <div id="outline-container-orgc610d7c" class="outline-3">
-          <h3 id="orgc610d7c">
+        <div id="outline-container-orgfbd38f2" class="outline-3">
+          <h3 id="orgfbd38f2">
             <span class="section-number-3">2.1.</span> A relation
           </h3>
           <div class="outline-text-3" id="text-2-1">
@@ -1349,8 +1944,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org75ea1b0" class="outline-3">
-          <h3 id="org75ea1b0">
+        <div id="outline-container-org45fdacf" class="outline-3">
+          <h3 id="org45fdacf">
             <span class="section-number-3">2.2.</span> A domain
           </h3>
           <div class="outline-text-3" id="text-2-2">
@@ -1359,8 +1954,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orge3d1da2" class="outline-3">
-          <h3 id="orge3d1da2">
+        <div id="outline-container-orga8885b4" class="outline-3">
+          <h3 id="orga8885b4">
             <span class="section-number-3">2.3.</span> A tuple
           </h3>
           <div class="outline-text-3" id="text-2-3">
@@ -1375,8 +1970,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org61ccf51" class="outline-3">
-          <h3 id="org61ccf51">
+        <div id="outline-container-org4e11236" class="outline-3">
+          <h3 id="org4e11236">
             <span class="section-number-3">2.4.</span> Keys
           </h3>
           <div class="outline-text-3" id="text-2-4">
@@ -1393,8 +1988,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-orge77fad4" class="outline-2">
-        <h2 id="orge77fad4">
+      <div id="outline-container-org0b65cd5" class="outline-2">
+        <h2 id="org0b65cd5">
           <span class="section-number-2">3.</span> Relational Algebra
         </h2>
         <div class="outline-text-2" id="text-3">

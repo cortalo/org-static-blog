@@ -71,6 +71,11 @@ This is a personal note for the [[https://15445.courses.cs.cmu.edu/fall2023/note
   - Fragmentation: tuple deletions leave gaps in the pages.
   - Inefficient disk I/O: need to fetch the entire block to update a tuple; users could randomly jump to multiple different pages to update a tuple.
 
+#+CAPTION: Slotted pages ([[https://miro.medium.com/v2/resize:fit:935/1*7AuKrdEJQpfRYhavwWzwhg.png][Source]])
+#+ATTR_HTML: :align center
+#+ATTR_HTML: :width 400px
+[[https://miro.medium.com/v2/resize:fit:935/1*7AuKrdEJQpfRYhavwWzwhg.png]]
+
 ** Log-structured
 - Only allows creations of new pages and no overwrites.
 - Stores the log records of changes to the tuples; the DBMS appends new log entries to an in-memory buffer without checking previous records -> fast writes.
@@ -86,6 +91,12 @@ This is a personal note for the [[https://15445.courses.cs.cmu.edu/fall2023/note
 ** Index-organized storage
 - Both page-oriented and log-structured storage rely on additional index to find a tuple since tables are inherently unsorted.
 - In an index-organized storage scheme, the DBMS stores tuples as the value of an index data structure.
+- E.g., In a B-tree indexed DBMS, the index (i.e., primary keys) are stored as the intermediate nodes, and the data is stored in the leaf nodes.
+
+#+CAPTION: Index-organized storage ([[https://docs.oracle.com/en/database/oracle/oracle-database/21/cncpt/img/cncpt272.gif][Source]])
+#+ATTR_HTML: :align center
+#+ATTR_HTML: :width 400px
+[[https://docs.oracle.com/en/database/oracle/oracle-database/21/cncpt/img/cncpt272.gif]]
 
 * Tuple layout
 - Tuple: a sequence of bytes for a DBMS to decode.

@@ -56,10 +56,10 @@ This is a personal note for the [[https://www.youtube.com/watch?v=uikbtpVZS2s&li
 - Data is stored as relations/tables.
 - Physical layer implementation and execution strategy depends on DBMS implementation.
 
-#+CAPTION: Relational model concepts
+#+CAPTION: Relational model concepts ([[https://www.guru99.com/images/1/091318_0803_RelationalD1.png][Source]])
 #+ATTR_HTML: :align center
 #+ATTR_HTML: :width 500px
-[[https://people.cs.pitt.edu/~chang/156/images/fig41.gif]]
+[[https://www.guru99.com/images/1/091318_0803_RelationalD1.png]]
 
 ** A relation
 - An unordered set that contains the relationship of attributes that represent entities.
