@@ -1,0 +1,37 @@
+#+title: CMU 15-445 notes: Memory Management
+#+date: <2024-08-13 07:46>
+#+description: This is a personal note for the [[https://15445.courses.cs.cmu.edu/fall2023/notes/06-bufferpool.pdf][CMU 15-445 L6 notes]]
+#+filetags: study database cmu
+
+This is a personal note for the [[https://15445.courses.cs.cmu.edu/fall2023/notes/06-bufferpool.pdf][CMU 15-445 L6 notes]].
+
+* Goals
+- Manage DBMS memory and move data between the memory and the disk, such that the execution engine does no worry about the data fetching.
+- Spatial control: keep relevant pages physically together on disk.
+- Temporal control: minimize the number of stalls to read data from the disk.
+
+* Locks & Latches
+- Both used to protect internal elements.
+
+** Locks
+- A high-level logical primitive to allow for transaction atomicity.
+- Exposed to users when queries are run.
+- Need to be able to rollback changes.
+
+** Latches
+- A low-level protection primitive a DBMS uses in its internal data structures, e.g., hash tables.
+- Only held when the operation is being made, like a mutex.
+- Do not need to expose to users or used to rollback changes.
+
+* Buffer pool
+- An in-memory cache of pages read from the disk.
+- The buffer pool's region of memory is organized as an array of fixed size pages; each array entry is called a frame.
+- When the DBMS requests a page, the buffer pool first searches its cache, if not found, it copies he page from the disk into one of its frame.
+- Dirty pages (i.e., modified pages) are buffered rather than writing back immediately.
+
+** Metadata
+- Page table: An in-memory hash mapping page ids to frame locations in the buffer pool.
+- Dirty flag: set by a thread whenever it modifies a page to indicate the pages must be written back to disk.
+- Pin/Reference counter: tracks the number of threads that are currently accessing the page; the storage manager is not allowed to evict a page if its pin count is greater than 0.
+
+** Memory allocation policies

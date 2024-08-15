@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content="This is a personal note for the [[https://15445.courses.cs.cmu.edu/fall2023/notes/06-bufferpool.pdf][CMU 15-445 L6 notes]]"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      href="https://chenyo-17.github.io/org-static-blog/rss.xml"
+      title="RSS feed for https://chenyo-17.github.io/org-static-blog"
+    />
+    <title>CMU 15-445 notes: Memory Management</title>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+    ></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'],['\\(','\\)']]}});
+    </script>
+    <meta name="author" content="chenyo" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+  </head>
+  <body>
+    <div id="preamble" class="status">
+      <header>
+        <h1>
+          <a href="https://chenyo-17.github.io/org-static-blog"
+            >Chenyo's org-static-blog</a
+          >
+        </h1>
+        <nav>
+          <a href="https://chenyo-17.github.io/org-static-blog">Home</a>
+          <a href="https://chenyo-17.github.io/org-static-blog/archive.html"
+            >Archive</a
+          >
+          <a href="https://chenyo-17.github.io/org-static-blog/tags.html"
+            >Tags</a
+          >
+        </nav>
+      </header>
+    </div>
+    <div id="content">
+      <div class="post-date">13 Aug 2024</div>
+      <h1 class="post-title">
+        <a
+          href="https://chenyo-17.github.io/org-static-blog/2024-08-13-db-notes:-memory-management.html"
+          >CMU 15-445 notes: Memory Management</a
+        >
+      </h1>
+      <nav id="table-of-contents" role="doc-toc">
+        <h2>Table of Contents</h2>
+        <div id="text-table-of-contents" role="doc-toc">
+          <ul>
+            <li><a href="#org7b8f391">1. Goals</a></li>
+            <li>
+              <a href="#org8b6b5e6">2. Locks &amp; Latches</a>
+              <ul>
+                <li><a href="#org3737c2f">2.1. Locks</a></li>
+                <li><a href="#org3edc193">2.2. Latches</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#org20e5792">3. Buffer pool</a>
+              <ul>
+                <li><a href="#orgc73565a">3.1. Metadata</a></li>
+                <li>
+                  <a href="#org8a19cb1">3.2. Memory allocation policies</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <p>
+        This is a personal note for the
+        <a
+          href="https://15445.courses.cs.cmu.edu/fall2023/notes/06-bufferpool.pdf"
+          >CMU 15-445 L6 notes</a
+        >.
+      </p>
+      <div id="outline-container-org7b8f391" class="outline-2">
+        <h2 id="org7b8f391"><span class="section-number-2">1.</span> Goals</h2>
+        <div class="outline-text-2" id="text-1">
+          <ul class="org-ul">
+            <li>
+              Manage DBMS memory and move data between the memory and the disk,
+              such that the execution engine does no worry about the data
+              fetching.
+            </li>
+            <li>
+              Spatial control: keep relevant pages physically together on disk.
+            </li>
+            <li>
+              Temporal control: minimize the number of stalls to read data from
+              the disk.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div id="outline-container-org8b6b5e6" class="outline-2">
+        <h2 id="org8b6b5e6">
+          <span class="section-number-2">2.</span> Locks &amp; Latches
+        </h2>
+        <div class="outline-text-2" id="text-2">
+          <ul class="org-ul">
+            <li>Both used to protect internal elements.</li>
+          </ul>
+        </div>
+        <div id="outline-container-org3737c2f" class="outline-3">
+          <h3 id="org3737c2f">
+            <span class="section-number-3">2.1.</span> Locks
+          </h3>
+          <div class="outline-text-3" id="text-2-1">
+            <ul class="org-ul">
+              <li>
+                A high-level logical primitive to allow for transaction
+                atomicity.
+              </li>
+              <li>Exposed to users when queries are run.</li>
+              <li>Need to be able to rollback changes.</li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org3edc193" class="outline-3">
+          <h3 id="org3edc193">
+            <span class="section-number-3">2.2.</span> Latches
+          </h3>
+          <div class="outline-text-3" id="text-2-2">
+            <ul class="org-ul">
+              <li>
+                A low-level protection primitive a DBMS uses in its internal
+                data structures, e.g., hash tables.
+              </li>
+              <li>Only held when the operation is being made, like a mutex.</li>
+              <li>
+                Do not need to expose to users or used to rollback changes.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="outline-container-org20e5792" class="outline-2">
+        <h2 id="org20e5792">
+          <span class="section-number-2">3.</span> Buffer pool
+        </h2>
+        <div class="outline-text-2" id="text-3">
+          <ul class="org-ul">
+            <li>An in-memory cache of pages read from the disk.</li>
+            <li>
+              The buffer pool&rsquo;s region of memory is organized as an array
+              of fixed size pages; each array entry is called a frame.
+            </li>
+            <li>
+              When the DBMS requests a page, the buffer pool first searches its
+              cache, if not found, it copies he page from the disk into one of
+              its frame.
+            </li>
+            <li>
+              Dirty pages (i.e., modified pages) are buffered rather than
+              writing back immediately.
+            </li>
+          </ul>
+        </div>
+        <div id="outline-container-orgc73565a" class="outline-3">
+          <h3 id="orgc73565a">
+            <span class="section-number-3">3.1.</span> Metadata
+          </h3>
+          <div class="outline-text-3" id="text-3-1">
+            <ul class="org-ul">
+              <li>
+                Page table: An in-memory hash mapping page ids to frame
+                locations in the buffer pool.
+              </li>
+              <li>
+                Dirty flag: set by a thread whenever it modifies a page to
+                indicate the pages must be written back to disk.
+              </li>
+              <li>
+                Pin/Reference counter: tracks the number of threads that are
+                currently accessing the page; the storage manager is not allowed
+                to evict a page if its pin count is greater than 0.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org8a19cb1" class="outline-3">
+          <h3 id="org8a19cb1">
+            <span class="section-number-3">3.2.</span> Memory allocation
+            policies
+          </h3>
+        </div>
+      </div>
+      <div class="taglist">
+        <a href="https://chenyo-17.github.io/org-static-blog/tags.html">Tags</a
+        >:
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-study.html"
+          >study</a
+        >
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-database.html"
+          >database</a
+        >
+        <a href="https://chenyo-17.github.io/org-static-blog/tag-cmu.html"
+          >cmu</a
+        >
+      </div>
+    </div>
+    <div id="postamble" class="status">
+      <footer>
+        <p>© 2024 chenyo. Some rights reserved.</p>
+      </footer>
+    </div>
+  </body>
+</html>

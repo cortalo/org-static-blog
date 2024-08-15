@@ -44,7 +44,13 @@ a:hover {
 }
 
 /* Style for code blocks */
-pre.src {
+.org-src-container {
+    position: relative;
+    margin-bottom: 1.6em;
+}
+
+.org-src-container pre.src {
+    margin-top: 0; /* Remove top margin */
     background-color: #282c34; /* Dark background for code blocks */
     border: 1px solid #3e4451;
     border-left: 3px solid #528bff;
@@ -54,7 +60,6 @@ pre.src {
         monospace;
     font-size: 13px;
     line-height: 1.6;
-    margin-bottom: 1.6em;
     max-width: 100%;
     overflow: auto;
     padding: 1em 1.5em;
@@ -64,17 +69,68 @@ pre.src {
     border-radius: 4px;
 }
 
+/* Hide the default class content */
+.org-src-container pre.src::before {
+    content: none;
+}
+
+/* Add language label for specific languages */
+.org-src-container pre.src-go::before {
+    content: "go";
+}
+
+.org-src-container pre.src-python::before {
+    content: "python";
+}
+
+.org-src-container pre.src-js::before {
+    content: "js";
+}
+
+.org-src-container pre.src-rust::before {
+    content: "rust";
+}
+
+.org-src-container pre.src-lsp::before {
+    content: "lsp";
+}
+
+.org-src-container pre.src-org::before {
+    content: "org";
+}
+
+.org-src-container pre.src-haskell::before {
+    content: "haskell";
+}
+
+.org-src-container pre.src-solidity::before {
+    content: "solidity";
+}
+
+.org-src-container pre.src-sql::before {
+    content: "sql";
+}
+
+.org-src-container pre.src-html::before {
+    content: "html";
+}
+
+.org-src-container pre.src-css::before {
+    content: "css";
+}
+
 /* Add language label for code blocks */
-pre.src:before {
-    content: attr(data-lang);
+.org-src-container pre.src::before {
     position: absolute;
     top: 0;
     right: 0;
     background-color: #528bff;
     color: #fff;
     padding: 2px 8px;
-    font-size: 0.9em;
+    font-size: 0.85em;
+    font-weight: normal;
     border-bottom-left-radius: 4px;
+    text-transform: lowercase;
 }
 
 /* Syntax highlighting */

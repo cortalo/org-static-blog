@@ -58,7 +58,8 @@ This is a personal note for the [[https://15445.courses.cs.cmu.edu/fall2023/note
 - A heap file (e.g., a table) is an unordered collection of pages where tuples are stored in random order.
 - To locate a page in a heap file, a DBMS can use either a linked list or a page directory.
   - Linked list: the header page holds a pointer to a list of data and free pages; require a sequential scan when finding a specific page.
-  - Page directory: a DBMS uses special pages to track the location of each data page and the free space.
+  - Page directory: a DBMS uses special pages to track the location of each data page and the free space in database files.
+     - All changes to the page directory must be recorded on disk to allow the DBMS to find on restart.
 
 * Page layout
 - Each page includes a header to record the page meta-data, e.g., page size, checksum, version.
