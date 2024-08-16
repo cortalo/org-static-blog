@@ -119,6 +119,10 @@ a:hover {
     content: "css";
 }
 
+.org-src-container pre.src-bash::before {
+    content: "bash";
+}
+
 /* Add language label for code blocks */
 .org-src-container pre.src::before {
     position: absolute;

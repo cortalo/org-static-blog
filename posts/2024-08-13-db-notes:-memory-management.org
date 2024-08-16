@@ -3,7 +3,7 @@
 #+description: This is a personal note for the [[https://15445.courses.cs.cmu.edu/fall2023/notes/06-bufferpool.pdf][CMU 15-445 L6 notes]]
 #+filetags: study database cmu
 
-This is a personal note for the [[https://15445.courses.cs.cmu.edu/fall2023/notes/06-bufferpool.pdf][CMU 15-445 L6 notes]].
+This is a personal note for the [[https://15445.courses.cs.cmu.edu/fall2023/notes/06-bufferpool.pdf][CMU 15-445 L6 notes]] as well as some explanation from Claude.ai.
 
 * Goals
 - Manage DBMS memory and move data between the memory and the disk, such that the execution engine does no worry about the data fetching.
@@ -35,3 +35,76 @@ This is a personal note for the [[https://15445.courses.cs.cmu.edu/fall2023/note
 - Pin/Reference counter: tracks the number of threads that are currently accessing the page; the storage manager is not allowed to evict a page if its pin count is greater than 0.
 
 ** Memory allocation policies
+- The buffer pool decides when to allocate a frame for a page.
+- Global policies: decisions based on the overall workload, e.g., least recently used (LRU) or clock algorithm.
+- Local policies: decisions applying to specific query, e.g., priority-based page replacement.
+
+* Buffer pool optimizations
+** Multiple buffer pools
+- Each database or page can have its own buffer pool and adopts local policies to reduce latch contention.
+- To map a page to a buffer pool, the DBMS can use object IDs or page IDs as the key.
+  - Record ID: a unique identifier for a row in a table (cf. [[https://chenyo-17.github.io/org-static-blog/tag-database.html#org2317270][Tuple layout post]]).
+  - Object ID: a unique identifier for an object, used to reference a user-defined type.
+
+** Pre-fetching
+- While the first set of pages is being processed, the DBMS can pre-fetch the second set into the buffer pool based on the dependency between pages.
+  - E.g., If pages are index-organized, the sibling pages can be pre-fetched.
+
+** Scan sharing
+- Query cursors can reuse retrieved data.
+- When a query comes while a previous query is being processed by scanning the table, the new query can attach its scanning cursor to the first query's cursor.
+- The DBMS keeps track of where the second query joined to make sure it also completes the scan.
+
+** Buffer pool bypass
+- Scanned pages do not have to be stored in the buffer pool to avoid the overhead.
+- Use cases: a query needs to read a large sequence of contiguous pages; temporary pages like sorting or joins.
+
+* Buffer replacement policies
+- The DBMS decides which page to evict from the buffer pool to free up a frame.
+
+** Least recently used (LRU)
+- LRU maintains a timestamp of when each page was last accessed, and evicts the page with the oldest timestamp.
+  - The timestamp can be stored in a queue for efficient sorting.
+- Susceptible to sequential flooding, where the buffer pool is corrupted due to a sequential scan.
+  - With the LRU policy the oldest pages are evicted, but they are more likely to be scanned soon.
+# - Not optimal since in a scan sharing, the oldest page is more likely to be scanned again soon.
+
+** Clock
+- An approximation of LRU but replace the timestamp with a reference bit which is set to 1 when a page is accessed.
+- Regularly sweeping all pages, if a bit is set to 1, reset to 0; if a bit is 0, evict the page.
+
+** LRU-K
+- Tracks the last K accessed timestamps to predict the next accessed time, hence avoid the sequential flooding issue.
+
+*** MySQL approximate LRU-K
+- Use a linked list with two entry points: "old" and "young".
+- The new pages are always inserted to the head of "old".
+- If a page in the "old" is accessed again, it is then inserted to the head of "young".
+
+** Localization
+- Instead of using a global replacement policy, the DBMS make eviction decisions based on each query.
+- Pages brought in by one query are less likely to evict pages that are important for other ongoing queries.
+- The DBMS can **predicts** more accurately which pages should stay or be evicted once the query is complete, so that the buffer pool is less polluted with less useful pages.
+
+** Priority hint
+- Transactions tell the buffer pool where pages are important based on the **context** of each page.
+
+** Dirty pages
+- Two ways to handle dirty pages in the buffer pool:
+  - Fast: only drop clean pages.
+  - Slow: write back dirty pages to ensure persistent change, and then evict them (if they will not be read again.).
+- Can periodically walk through the page table and write back dirty pages in the background.
+
+* Other memory pools
+- A DBMS also maintains other pools to store:
+  - query caches,
+  - logs,
+  - temporary tables, e.g., sorting, join,
+  - dictionary caches.
+
+* OS cache bypass
+- Most DBMS use direct I/O (e.g., with ~fsync~ instead of ~fwrite~) to bypass the OS cache to avoid redundant page copy and to manage eviction policies more intelligently (cf. [[https://chenyo-17.github.io/org-static-blog/tag-database.html#org611ff38][Why not OS post]]).
+
+* I/O scheduling
+- The DBMS maintains internal **queue** to track page read/write.
+- The priority are determined by multi-facets, e.g., critical path task, SLAs.

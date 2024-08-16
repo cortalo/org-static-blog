@@ -1,7 +1,7 @@
 #+title: Web learning in practice
 #+date: <2024-08-15 19:26>
 #+description: This post records the basic web development knowledge I have learned in practice.
-#+filetags: web
+#+filetags: web app
 
 This post records the basic web development knowledge I have learned in practice.
 
