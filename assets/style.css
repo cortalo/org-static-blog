@@ -324,3 +324,30 @@ mark {
     margin-top: 5px;
     font-size: 0.85em; /* Even smaller font for snippets */
 }
+
+nav#table-of-contents {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+nav#table-of-contents h2 {
+    margin-bottom: 10px;
+}
+
+#text-table-of-contents {
+    margin-top: 0;
+}
+
+/* Ensure the search results don't affect other content */
+#search-results {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Reset any grid or flex properties for non-search content */
+#content > *:not(#search-results) {
+    display: block;
+}

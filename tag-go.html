@@ -19,15 +19,19 @@
     <meta name="author" content="chenyo" />
     <meta name="referrer" content="no-referrer" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="static/style.css" type="text/css" />
-    <script src="static/search.js"></script>
+    <link rel="stylesheet" href="assets/style.css" type="text/css" />
+    <script src="assets/search.js"></script>
   </head>
   <body>
     <div id="preamble" class="status">
       <header>
-        <h1><a href="/">Chenyo's org-static-blog</a></h1>
+        <h1>
+          <a href="https://chenyo-17.github.io/org-static-blog"
+            >Chenyo's org-static-blog</a
+          >
+        </h1>
         <nav>
-          <a href="/">Home</a>
+          <a href="https://chenyo-17.github.io/org-static-blog">Home</a>
           <a href="archive.html">Archive</a>
           <a href="tags.html">Tags</a>
           <div id="search-container">
@@ -53,23 +57,23 @@
         <h2>Table of Contents</h2>
         <div id="text-table-of-contents" role="doc-toc">
           <ul>
-            <li><a href="#orgb303784">1. Concurrency vs Parallelism</a></li>
+            <li><a href="#org282a79b">1. Concurrency vs Parallelism</a></li>
             <li>
-              <a href="#org1233238">2. Use goroutines for states</a>
+              <a href="#org2cf5488">2. Use goroutines for states</a>
               <ul>
-                <li><a href="#orgaaa7cae">2.1. Matching a regex</a></li>
+                <li><a href="#orgb7044b0">2.1. Matching a regex</a></li>
                 <li>
-                  <a href="#org29ada24"
+                  <a href="#org7b81028"
                     >2.2. When the state variable cannot be avoided</a
                   >
                 </li>
               </ul>
             </li>
             <li>
-              <a href="#orgfb27da6">3. Pattern 1: publish/subscribe server</a>
+              <a href="#org1ce5a03">3. Pattern 1: publish/subscribe server</a>
               <ul>
                 <li>
-                  <a href="#org5755a5c">3.1. Options for slow goroutines</a>
+                  <a href="#org36849b1">3.1. Options for slow goroutines</a>
                 </li>
               </ul>
             </li>
@@ -82,8 +86,8 @@
           >Russ Cox guest lecture</a
         >.
       </p>
-      <div id="outline-container-orgb303784" class="outline-2">
-        <h2 id="orgb303784">
+      <div id="outline-container-org282a79b" class="outline-2">
+        <h2 id="org282a79b">
           <span class="section-number-2">1.</span> Concurrency vs Parallelism
         </h2>
         <div class="outline-text-2" id="text-1">
@@ -101,13 +105,13 @@
           </ul>
         </div>
       </div>
-      <div id="outline-container-org1233238" class="outline-2">
-        <h2 id="org1233238">
+      <div id="outline-container-org2cf5488" class="outline-2">
+        <h2 id="org2cf5488">
           <span class="section-number-2">2.</span> Use goroutines for states
         </h2>
         <div class="outline-text-2" id="text-2"></div>
-        <div id="outline-container-orgaaa7cae" class="outline-3">
-          <h3 id="orgaaa7cae">
+        <div id="outline-container-orgb7044b0" class="outline-3">
+          <h3 id="orgb7044b0">
             <span class="section-number-3">2.1.</span> Matching a regex
           </h3>
           <div class="outline-text-3" id="text-2-1">
@@ -174,8 +178,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org29ada24" class="outline-3">
-          <h3 id="org29ada24">
+        <div id="outline-container-org7b81028" class="outline-3">
+          <h3 id="org7b81028">
             <span class="section-number-3">2.2.</span> When the state variable
             cannot be avoided
           </h3>
@@ -290,8 +294,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-orgfb27da6" class="outline-2">
-        <h2 id="orgfb27da6">
+      <div id="outline-container-org1ce5a03" class="outline-2">
+        <h2 id="org1ce5a03">
           <span class="section-number-2">3.</span> Pattern 1: publish/subscribe
           server
         </h2>
@@ -346,8 +350,8 @@
             </li>
           </ul>
         </div>
-        <div id="outline-container-org5755a5c" class="outline-3">
-          <h3 id="org5755a5c">
+        <div id="outline-container-org36849b1" class="outline-3">
+          <h3 id="org36849b1">
             <span class="section-number-3">3.1.</span> Options for slow
             goroutines
           </h3>
@@ -501,18 +505,18 @@
         <h2>Table of Contents</h2>
         <div id="text-table-of-contents" role="doc-toc">
           <ul>
-            <li><a href="#org7461e9b">1. What happended</a></li>
-            <li><a href="#org879c1c4">2. What did I do</a></li>
+            <li><a href="#org4a6df82">1. What happended</a></li>
+            <li><a href="#orge4c1f6a">2. What did I do</a></li>
             <li>
-              <a href="#orgcbccd56"
+              <a href="#orgf7a0941"
                 >3. Another issue of running RPC in docker</a
               >
             </li>
           </ul>
         </div>
       </nav>
-      <div id="outline-container-org7461e9b" class="outline-2">
-        <h2 id="org7461e9b">
+      <div id="outline-container-org4a6df82" class="outline-2">
+        <h2 id="org4a6df82">
           <span class="section-number-2">1.</span> What happended
         </h2>
         <div class="outline-text-2" id="text-1">
@@ -535,8 +539,8 @@
           </ul>
         </div>
       </div>
-      <div id="outline-container-org879c1c4" class="outline-2">
-        <h2 id="org879c1c4">
+      <div id="outline-container-orge4c1f6a" class="outline-2">
+        <h2 id="orge4c1f6a">
           <span class="section-number-2">2.</span> What did I do
         </h2>
         <div class="outline-text-2" id="text-2">
@@ -589,8 +593,8 @@
           </ol>
         </div>
       </div>
-      <div id="outline-container-orgcbccd56" class="outline-2">
-        <h2 id="orgcbccd56">
+      <div id="outline-container-orgf7a0941" class="outline-2">
+        <h2 id="orgf7a0941">
           <span class="section-number-2">3.</span> Another issue of running RPC
           in docker
         </h2>

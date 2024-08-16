@@ -19,15 +19,19 @@
     <meta name="author" content="chenyo" />
     <meta name="referrer" content="no-referrer" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="static/style.css" type="text/css" />
-    <script src="static/search.js"></script>
+    <link rel="stylesheet" href="assets/style.css" type="text/css" />
+    <script src="assets/search.js"></script>
   </head>
   <body>
     <div id="preamble" class="status">
       <header>
-        <h1><a href="/">Chenyo's org-static-blog</a></h1>
+        <h1>
+          <a href="https://chenyo-17.github.io/org-static-blog"
+            >Chenyo's org-static-blog</a
+          >
+        </h1>
         <nav>
-          <a href="/">Home</a>
+          <a href="https://chenyo-17.github.io/org-static-blog">Home</a>
           <a href="archive.html">Archive</a>
           <a href="tags.html">Tags</a>
           <div id="search-container">
@@ -54,35 +58,35 @@
         <div id="text-table-of-contents" role="doc-toc">
           <ul>
             <li>
-              <a href="#org121c433">1. Terminology</a>
+              <a href="#orgc693700">1. Terminology</a>
               <ul>
-                <li><a href="#org36c814d">1.1. Ethereum sharding</a></li>
-                <li><a href="#org49fd1c2">1.2. Blob</a></li>
-                <li><a href="#org79db517">1.3. Erasure coding</a></li>
+                <li><a href="#org309f688">1.1. Ethereum sharding</a></li>
+                <li><a href="#org513e411">1.2. Blob</a></li>
+                <li><a href="#org8b67813">1.3. Erasure coding</a></li>
                 <li>
-                  <a href="#org985ede9"
+                  <a href="#orgd490d9f"
                     >1.4. Data availability sampling (DAS)</a
                   >
                 </li>
                 <li>
-                  <a href="#org5801b5e">1.5. Danksharding (L2 optimization)</a>
+                  <a href="#orgca3dbe6">1.5. Danksharding (L2 optimization)</a>
                 </li>
                 <li>
-                  <a href="#org5e8956e"
+                  <a href="#org2da0df4"
                     >1.6. Relations between L1 and L2 scaling</a
                   >
                 </li>
                 <li>
-                  <a href="#orgcb3ebcf">1.7. Double spending prevention</a>
+                  <a href="#org68bf0dc">1.7. Double spending prevention</a>
                 </li>
-                <li><a href="#org6f85095">1.8. Sealevel (Solana)</a></li>
+                <li><a href="#orgf00a0a2">1.8. Sealevel (Solana)</a></li>
               </ul>
             </li>
             <li>
-              <a href="#orgcf7659c">2. Ways to achieve parallel processing</a>
+              <a href="#org2060a2e">2. Ways to achieve parallel processing</a>
             </li>
             <li>
-              <a href="#org2fd4672"
+              <a href="#org15af4a3"
                 >3. Production-ready parallelized EVM projects (Jan 2024)</a
               >
             </li>
@@ -105,13 +109,13 @@
           >GPT-4o</a
         >.
       </p>
-      <div id="outline-container-org121c433" class="outline-2">
-        <h2 id="org121c433">
+      <div id="outline-container-orgc693700" class="outline-2">
+        <h2 id="orgc693700">
           <span class="section-number-2">1.</span> Terminology
         </h2>
         <div class="outline-text-2" id="text-1"></div>
-        <div id="outline-container-org36c814d" class="outline-3">
-          <h3 id="org36c814d">
+        <div id="outline-container-org309f688" class="outline-3">
+          <h3 id="org309f688">
             <span class="section-number-3">1.1.</span> Ethereum sharding
           </h3>
           <div class="outline-text-3" id="text-1-1">
@@ -134,8 +138,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org49fd1c2" class="outline-3">
-          <h3 id="org49fd1c2">
+        <div id="outline-container-org513e411" class="outline-3">
+          <h3 id="org513e411">
             <span class="section-number-3">1.2.</span> Blob
           </h3>
           <div class="outline-text-3" id="text-1-2">
@@ -159,8 +163,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org79db517" class="outline-3">
-          <h3 id="org79db517">
+        <div id="outline-container-org8b67813" class="outline-3">
+          <h3 id="org8b67813">
             <span class="section-number-3">1.3.</span> Erasure coding
           </h3>
           <div class="outline-text-3" id="text-1-3">
@@ -173,8 +177,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org985ede9" class="outline-3">
-          <h3 id="org985ede9">
+        <div id="outline-container-orgd490d9f" class="outline-3">
+          <h3 id="orgd490d9f">
             <span class="section-number-3">1.4.</span> Data availability
             sampling (DAS)
           </h3>
@@ -193,8 +197,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org5801b5e" class="outline-3">
-          <h3 id="org5801b5e">
+        <div id="outline-container-orgca3dbe6" class="outline-3">
+          <h3 id="orgca3dbe6">
             <span class="section-number-3">1.5.</span> Danksharding (L2
             optimization)
           </h3>
@@ -212,8 +216,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org5e8956e" class="outline-3">
-          <h3 id="org5e8956e">
+        <div id="outline-container-org2da0df4" class="outline-3">
+          <h3 id="org2da0df4">
             <span class="section-number-3">1.6.</span> Relations between L1 and
             L2 scaling
           </h3>
@@ -231,8 +235,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgcb3ebcf" class="outline-3">
-          <h3 id="orgcb3ebcf">
+        <div id="outline-container-org68bf0dc" class="outline-3">
+          <h3 id="org68bf0dc">
             <span class="section-number-3">1.7.</span> Double spending
             prevention
           </h3>
@@ -251,8 +255,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org6f85095" class="outline-3">
-          <h3 id="org6f85095">
+        <div id="outline-container-orgf00a0a2" class="outline-3">
+          <h3 id="orgf00a0a2">
             <span class="section-number-3">1.8.</span> Sealevel (Solana)
           </h3>
           <div class="outline-text-3" id="text-1-8">
@@ -270,8 +274,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-orgcf7659c" class="outline-2">
-        <h2 id="orgcf7659c">
+      <div id="outline-container-org2060a2e" class="outline-2">
+        <h2 id="org2060a2e">
           <span class="section-number-2">2.</span> Ways to achieve parallel
           processing
         </h2>
@@ -282,8 +286,8 @@
           </ul>
         </div>
       </div>
-      <div id="outline-container-org2fd4672" class="outline-2">
-        <h2 id="org2fd4672">
+      <div id="outline-container-org15af4a3" class="outline-2">
+        <h2 id="org15af4a3">
           <span class="section-number-2">3.</span> Production-ready parallelized
           EVM projects (Jan 2024)
         </h2>

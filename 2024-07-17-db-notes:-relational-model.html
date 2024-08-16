@@ -23,15 +23,19 @@
     <meta name="author" content="chenyo" />
     <meta name="referrer" content="no-referrer" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="static/style.css" type="text/css" />
-    <script src="static/search.js"></script>
+    <link rel="stylesheet" href="assets/style.css" type="text/css" />
+    <script src="assets/search.js"></script>
   </head>
   <body>
     <div id="preamble" class="status">
       <header>
-        <h1><a href="/">Chenyo's org-static-blog</a></h1>
+        <h1>
+          <a href="https://chenyo-17.github.io/org-static-blog"
+            >Chenyo's org-static-blog</a
+          >
+        </h1>
         <nav>
-          <a href="/">Home</a>
+          <a href="https://chenyo-17.github.io/org-static-blog">Home</a>
           <a href="archive.html">Archive</a>
           <a href="tags.html">Tags</a>
           <div id="search-container">
@@ -57,30 +61,30 @@
         <div id="text-table-of-contents" role="doc-toc">
           <ul>
             <li>
-              <a href="#org9185588">1. Terminology</a>
+              <a href="#org1c8f179">1. Terminology</a>
               <ul>
-                <li><a href="#org56734da">1.1. Database</a></li>
+                <li><a href="#org3303081">1.1. Database</a></li>
                 <li>
-                  <a href="#orgb43e7ee">1.2. Database design consideration</a>
+                  <a href="#org3acc53f">1.2. Database design consideration</a>
                 </li>
                 <li>
-                  <a href="#orgb3cbaac"
+                  <a href="#orge6acd15"
                     >1.3. Database management system (DBMS)</a
                   >
                 </li>
-                <li><a href="#orge63a7f1">1.4. Data model</a></li>
-                <li><a href="#org929c0c4">1.5. Schema</a></li>
-                <li><a href="#orga7d489e">1.6. Entities and Tables</a></li>
-                <li><a href="#orgc7d14fc">1.7. Attributes and Fields</a></li>
-                <li><a href="#orgce198dd">1.8. Logical layer</a></li>
-                <li><a href="#orga22ad9c">1.9. Physical layer</a></li>
+                <li><a href="#orga7346be">1.4. Data model</a></li>
+                <li><a href="#org309751e">1.5. Schema</a></li>
+                <li><a href="#org6bbbe8d">1.6. Entities and Tables</a></li>
+                <li><a href="#orgae62671">1.7. Attributes and Fields</a></li>
+                <li><a href="#orge7157f9">1.8. Logical layer</a></li>
+                <li><a href="#org4aeb38a">1.9. Physical layer</a></li>
                 <li>
-                  <a href="#org939f723"
+                  <a href="#orgf9e4e4c"
                     >1.10. Data manipulation languages (DMLs)</a
                   >
                 </li>
                 <li>
-                  <a href="#orgd68d8ca"
+                  <a href="#org1fa9df4"
                     >1.11. SQL (Structured Query Language) and relational
                     model</a
                   >
@@ -88,15 +92,15 @@
               </ul>
             </li>
             <li>
-              <a href="#org61d05b9">2. Relational model</a>
+              <a href="#org2933dd0">2. Relational model</a>
               <ul>
-                <li><a href="#org04329ab">2.1. A relation</a></li>
-                <li><a href="#org6b4f0b8">2.2. A domain</a></li>
-                <li><a href="#orge3142dc">2.3. A tuple</a></li>
-                <li><a href="#orgb6b3c1f">2.4. Keys</a></li>
+                <li><a href="#orge60a63b">2.1. A relation</a></li>
+                <li><a href="#org4c8d7c5">2.2. A domain</a></li>
+                <li><a href="#orgbb540bf">2.3. A tuple</a></li>
+                <li><a href="#orgec2a6f8">2.4. Keys</a></li>
               </ul>
             </li>
-            <li><a href="#org6fa2956">3. Relational Algebra</a></li>
+            <li><a href="#org4f42160">3. Relational Algebra</a></li>
           </ul>
         </div>
       </nav>
@@ -115,13 +119,13 @@
           >Claude.ai</a
         >.
       </p>
-      <div id="outline-container-org9185588" class="outline-2">
-        <h2 id="org9185588">
+      <div id="outline-container-org1c8f179" class="outline-2">
+        <h2 id="org1c8f179">
           <span class="section-number-2">1.</span> Terminology
         </h2>
         <div class="outline-text-2" id="text-1"></div>
-        <div id="outline-container-org56734da" class="outline-3">
-          <h3 id="org56734da">
+        <div id="outline-container-org3303081" class="outline-3">
+          <h3 id="org3303081">
             <span class="section-number-3">1.1.</span> Database
           </h3>
           <div class="outline-text-3" id="text-1-1">
@@ -133,8 +137,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgb43e7ee" class="outline-3">
-          <h3 id="orgb43e7ee">
+        <div id="outline-container-org3acc53f" class="outline-3">
+          <h3 id="org3acc53f">
             <span class="section-number-3">1.2.</span> Database design
             consideration
           </h3>
@@ -146,8 +150,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgb3cbaac" class="outline-3">
-          <h3 id="orgb3cbaac">
+        <div id="outline-container-orge6acd15" class="outline-3">
+          <h3 id="orge6acd15">
             <span class="section-number-3">1.3.</span> Database management
             system (DBMS)
           </h3>
@@ -161,8 +165,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orge63a7f1" class="outline-3">
-          <h3 id="orge63a7f1">
+        <div id="outline-container-orga7346be" class="outline-3">
+          <h3 id="orga7346be">
             <span class="section-number-3">1.4.</span> Data model
           </h3>
           <div class="outline-text-3" id="text-1-4">
@@ -178,8 +182,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org929c0c4" class="outline-3">
-          <h3 id="org929c0c4">
+        <div id="outline-container-org309751e" class="outline-3">
+          <h3 id="org309751e">
             <span class="section-number-3">1.5.</span> Schema
           </h3>
           <div class="outline-text-3" id="text-1-5">
@@ -190,8 +194,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orga7d489e" class="outline-3">
-          <h3 id="orga7d489e">
+        <div id="outline-container-org6bbbe8d" class="outline-3">
+          <h3 id="org6bbbe8d">
             <span class="section-number-3">1.6.</span> Entities and Tables
           </h3>
           <div class="outline-text-3" id="text-1-6">
@@ -206,8 +210,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgc7d14fc" class="outline-3">
-          <h3 id="orgc7d14fc">
+        <div id="outline-container-orgae62671" class="outline-3">
+          <h3 id="orgae62671">
             <span class="section-number-3">1.7.</span> Attributes and Fields
           </h3>
           <div class="outline-text-3" id="text-1-7">
@@ -217,8 +221,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgce198dd" class="outline-3">
-          <h3 id="orgce198dd">
+        <div id="outline-container-orge7157f9" class="outline-3">
+          <h3 id="orge7157f9">
             <span class="section-number-3">1.8.</span> Logical layer
           </h3>
           <div class="outline-text-3" id="text-1-8">
@@ -227,8 +231,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orga22ad9c" class="outline-3">
-          <h3 id="orga22ad9c">
+        <div id="outline-container-org4aeb38a" class="outline-3">
+          <h3 id="org4aeb38a">
             <span class="section-number-3">1.9.</span> Physical layer
           </h3>
           <div class="outline-text-3" id="text-1-9">
@@ -237,8 +241,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org939f723" class="outline-3">
-          <h3 id="org939f723">
+        <div id="outline-container-orgf9e4e4c" class="outline-3">
+          <h3 id="orgf9e4e4c">
             <span class="section-number-3">1.10.</span> Data manipulation
             languages (DMLs)
           </h3>
@@ -260,8 +264,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgd68d8ca" class="outline-3">
-          <h3 id="orgd68d8ca">
+        <div id="outline-container-org1fa9df4" class="outline-3">
+          <h3 id="org1fa9df4">
             <span class="section-number-3">1.11.</span> SQL (Structured Query
             Language) and relational model
           </h3>
@@ -280,8 +284,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org61d05b9" class="outline-2">
-        <h2 id="org61d05b9">
+      <div id="outline-container-org2933dd0" class="outline-2">
+        <h2 id="org2933dd0">
           <span class="section-number-2">2.</span> Relational model
         </h2>
         <div class="outline-text-2" id="text-2">
@@ -298,7 +302,7 @@
             </li>
           </ul>
 
-          <figure id="org841c93d">
+          <figure id="org5e4ab34">
             <img
               src="https://www.guru99.com/images/1/091318_0803_RelationalD1.png"
               alt="091318_0803_RelationalD1.png"
@@ -315,8 +319,8 @@
             </figcaption>
           </figure>
         </div>
-        <div id="outline-container-org04329ab" class="outline-3">
-          <h3 id="org04329ab">
+        <div id="outline-container-orge60a63b" class="outline-3">
+          <h3 id="orge60a63b">
             <span class="section-number-3">2.1.</span> A relation
           </h3>
           <div class="outline-text-3" id="text-2-1">
@@ -329,8 +333,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org6b4f0b8" class="outline-3">
-          <h3 id="org6b4f0b8">
+        <div id="outline-container-org4c8d7c5" class="outline-3">
+          <h3 id="org4c8d7c5">
             <span class="section-number-3">2.2.</span> A domain
           </h3>
           <div class="outline-text-3" id="text-2-2">
@@ -339,8 +343,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orge3142dc" class="outline-3">
-          <h3 id="orge3142dc">
+        <div id="outline-container-orgbb540bf" class="outline-3">
+          <h3 id="orgbb540bf">
             <span class="section-number-3">2.3.</span> A tuple
           </h3>
           <div class="outline-text-3" id="text-2-3">
@@ -355,8 +359,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgb6b3c1f" class="outline-3">
-          <h3 id="orgb6b3c1f">
+        <div id="outline-container-orgec2a6f8" class="outline-3">
+          <h3 id="orgec2a6f8">
             <span class="section-number-3">2.4.</span> Keys
           </h3>
           <div class="outline-text-3" id="text-2-4">
@@ -373,8 +377,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org6fa2956" class="outline-2">
-        <h2 id="org6fa2956">
+      <div id="outline-container-org4f42160" class="outline-2">
+        <h2 id="org4f42160">
           <span class="section-number-2">3.</span> Relational Algebra
         </h2>
         <div class="outline-text-2" id="text-3">
