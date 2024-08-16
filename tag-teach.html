@@ -20,23 +20,23 @@
     <meta name="referrer" content="no-referrer" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <script src="static/search.js"></script>
   </head>
   <body>
     <div id="preamble" class="status">
       <header>
-        <h1>
-          <a href="https://chenyo-17.github.io/org-static-blog"
-            >Chenyo's org-static-blog</a
-          >
-        </h1>
+        <h1><a href="/">Chenyo's org-static-blog</a></h1>
         <nav>
-          <a href="https://chenyo-17.github.io/org-static-blog">Home</a>
-          <a href="https://chenyo-17.github.io/org-static-blog/archive.html"
-            >Archive</a
-          >
-          <a href="https://chenyo-17.github.io/org-static-blog/tags.html"
-            >Tags</a
-          >
+          <a href="/">Home</a>
+          <a href="archive.html">Archive</a>
+          <a href="tags.html">Tags</a>
+          <div id="search-container">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Search anywhere..."
+            />
+          </div>
         </nav>
       </header>
     </div>
@@ -53,20 +53,20 @@
         <h2>Table of Contents</h2>
         <div id="text-table-of-contents" role="doc-toc">
           <ul>
-            <li><a href="#orgcc3737d">1. What is it about?</a></li>
-            <li><a href="#org69e733e">2. My first exam</a></li>
-            <li><a href="#org784ea69">3. My second exam</a></li>
-            <li><a href="#orgcdd0aa4">4. My third exam</a></li>
-            <li><a href="#org01da31a">5. My fourth exam</a></li>
-            <li><a href="#org317cf1e">6. My feeling</a></li>
+            <li><a href="#org6dddcf9">1. What is it about?</a></li>
+            <li><a href="#org5dfaea5">2. My first exam</a></li>
+            <li><a href="#orgb544b1f">3. My second exam</a></li>
+            <li><a href="#orgc07fe87">4. My third exam</a></li>
+            <li><a href="#org0be130b">5. My fourth exam</a></li>
+            <li><a href="#orgab1db59">6. My feeling</a></li>
           </ul>
         </div>
       </nav>
       <p>
         This post was co-authored with the assistance of Cursor and Claude AI.
       </p>
-      <div id="outline-container-orgcc3737d" class="outline-2">
-        <h2 id="orgcc3737d">
+      <div id="outline-container-org6dddcf9" class="outline-2">
+        <h2 id="org6dddcf9">
           <span class="section-number-2">1.</span> What is it about?
         </h2>
         <div class="outline-text-2" id="text-1">
@@ -78,8 +78,8 @@
           </p>
         </div>
       </div>
-      <div id="outline-container-org69e733e" class="outline-2">
-        <h2 id="org69e733e">
+      <div id="outline-container-org5dfaea5" class="outline-2">
+        <h2 id="org5dfaea5">
           <span class="section-number-2">2.</span> My first exam
         </h2>
         <div class="outline-text-2" id="text-2">
@@ -92,8 +92,8 @@
           </p>
         </div>
       </div>
-      <div id="outline-container-org784ea69" class="outline-2">
-        <h2 id="org784ea69">
+      <div id="outline-container-orgb544b1f" class="outline-2">
+        <h2 id="orgb544b1f">
           <span class="section-number-2">3.</span> My second exam
         </h2>
         <div class="outline-text-2" id="text-3">
@@ -131,8 +131,8 @@
           </p>
         </div>
       </div>
-      <div id="outline-container-orgcdd0aa4" class="outline-2">
-        <h2 id="orgcdd0aa4">
+      <div id="outline-container-orgc07fe87" class="outline-2">
+        <h2 id="orgc07fe87">
           <span class="section-number-2">4.</span> My third exam
         </h2>
         <div class="outline-text-2" id="text-4">
@@ -155,8 +155,8 @@
           </p>
         </div>
       </div>
-      <div id="outline-container-org01da31a" class="outline-2">
-        <h2 id="org01da31a">
+      <div id="outline-container-org0be130b" class="outline-2">
+        <h2 id="org0be130b">
           <span class="section-number-2">5.</span> My fourth exam
         </h2>
         <div class="outline-text-2" id="text-5">
@@ -188,8 +188,8 @@
           </p>
         </div>
       </div>
-      <div id="outline-container-org317cf1e" class="outline-2">
-        <h2 id="org317cf1e">
+      <div id="outline-container-orgab1db59" class="outline-2">
+        <h2 id="orgab1db59">
           <span class="section-number-2">6.</span> My feeling
         </h2>
         <div class="outline-text-2" id="text-6">
@@ -230,6 +230,7 @@
       </div>
     </div>
     <div id="postamble" class="status">
+      <div id="search-results"></div>
       <footer>
         <p>© 2024 chenyo. Some rights reserved.</p>
       </footer>

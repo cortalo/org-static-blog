@@ -20,23 +20,23 @@
     <meta name="referrer" content="no-referrer" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <script src="static/search.js"></script>
   </head>
   <body>
     <div id="preamble" class="status">
       <header>
-        <h1>
-          <a href="https://chenyo-17.github.io/org-static-blog"
-            >Chenyo's org-static-blog</a
-          >
-        </h1>
+        <h1><a href="/">Chenyo's org-static-blog</a></h1>
         <nav>
-          <a href="https://chenyo-17.github.io/org-static-blog">Home</a>
-          <a href="https://chenyo-17.github.io/org-static-blog/archive.html"
-            >Archive</a
-          >
-          <a href="https://chenyo-17.github.io/org-static-blog/tags.html"
-            >Tags</a
-          >
+          <a href="/">Home</a>
+          <a href="archive.html">Archive</a>
+          <a href="tags.html">Tags</a>
+          <div id="search-container">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Search anywhere..."
+            />
+          </div>
         </nav>
       </header>
     </div>
@@ -556,6 +556,7 @@
       </h2>
     </div>
     <div id="postamble" class="status">
+      <div id="search-results"></div>
       <footer>
         <p>© 2024 chenyo. Some rights reserved.</p>
       </footer>

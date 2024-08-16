@@ -24,23 +24,23 @@
     <meta name="referrer" content="no-referrer" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <script src="static/search.js"></script>
   </head>
   <body>
     <div id="preamble" class="status">
       <header>
-        <h1>
-          <a href="https://chenyo-17.github.io/org-static-blog"
-            >Chenyo's org-static-blog</a
-          >
-        </h1>
+        <h1><a href="/">Chenyo's org-static-blog</a></h1>
         <nav>
-          <a href="https://chenyo-17.github.io/org-static-blog">Home</a>
-          <a href="https://chenyo-17.github.io/org-static-blog/archive.html"
-            >Archive</a
-          >
-          <a href="https://chenyo-17.github.io/org-static-blog/tags.html"
-            >Tags</a
-          >
+          <a href="/">Home</a>
+          <a href="archive.html">Archive</a>
+          <a href="tags.html">Tags</a>
+          <div id="search-container">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Search anywhere..."
+            />
+          </div>
         </nav>
       </header>
     </div>
@@ -57,38 +57,38 @@
         <div id="text-table-of-contents" role="doc-toc">
           <ul>
             <li>
-              <a href="#orgf3ecc2c">1. Blockchain fundamentals</a>
+              <a href="#org5822790">1. Blockchain fundamentals</a>
               <ul>
                 <li>
-                  <a href="#org6b0e40a">1.1. Why is parallel EVM not easy</a>
+                  <a href="#org35b53ea">1.1. Why is parallel EVM not easy</a>
                 </li>
-                <li><a href="#orga8f5816">1.2. A Parallel EVM ideas</a></li>
-                <li><a href="#org46acc97">1.3. Block STM algorithm</a></li>
+                <li><a href="#org42e75d6">1.2. A Parallel EVM ideas</a></li>
+                <li><a href="#orgd8f0351">1.3. Block STM algorithm</a></li>
               </ul>
             </li>
             <li>
-              <a href="#org79457bc">2. BNB Parallel EVM 1.0: Infrastructure</a>
+              <a href="#orgd724ea6">2. BNB Parallel EVM 1.0: Infrastructure</a>
             </li>
             <li>
-              <a href="#org037754d"
+              <a href="#org5019bda"
                 >3. BNB Parallel EVM 2.0: Performance enhancement</a
               >
             </li>
             <li>
-              <a href="#orgfab19b7">4. BNB Parallel EVM 3.0: Production</a>
+              <a href="#orgcaff35b">4. BNB Parallel EVM 3.0: Production</a>
               <ul>
-                <li><a href="#org6d8b4c2">4.1. Hint-based dispatcher</a></li>
+                <li><a href="#org87d0491">4.1. Hint-based dispatcher</a></li>
                 <li>
-                  <a href="#orga6eb207"
+                  <a href="#org3a5553e"
                     >4.2. Seamless BNB chain ecosystem integration</a
                   >
                 </li>
               </ul>
             </li>
             <li>
-              <a href="#orga00d189">5. Comparison with other solutions</a>
+              <a href="#orge1c9e66">5. Comparison with other solutions</a>
             </li>
-            <li><a href="#orgdc33b8d">6. Other optimizations</a></li>
+            <li><a href="#orge0cb98e">6. Other optimizations</a></li>
           </ul>
         </div>
       </nav>
@@ -99,13 +99,13 @@
           >BNB chain-blog</a
         >.
       </p>
-      <div id="outline-container-orgf3ecc2c" class="outline-2">
-        <h2 id="orgf3ecc2c">
+      <div id="outline-container-org5822790" class="outline-2">
+        <h2 id="org5822790">
           <span class="section-number-2">1.</span> Blockchain fundamentals
         </h2>
         <div class="outline-text-2" id="text-1"></div>
-        <div id="outline-container-org6b0e40a" class="outline-3">
-          <h3 id="org6b0e40a">
+        <div id="outline-container-org35b53ea" class="outline-3">
+          <h3 id="org35b53ea">
             <span class="section-number-3">1.1.</span> Why is parallel EVM not
             easy
           </h3>
@@ -119,8 +119,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orga8f5816" class="outline-3">
-          <h3 id="orga8f5816">
+        <div id="outline-container-org42e75d6" class="outline-3">
+          <h3 id="org42e75d6">
             <span class="section-number-3">1.2.</span> A Parallel EVM ideas
           </h3>
           <div class="outline-text-3" id="text-1-2">
@@ -141,8 +141,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org46acc97" class="outline-3">
-          <h3 id="org46acc97">
+        <div id="outline-container-orgd8f0351" class="outline-3">
+          <h3 id="orgd8f0351">
             <span class="section-number-3">1.3.</span> Block STM algorithm
           </h3>
           <div class="outline-text-3" id="text-1-3">
@@ -163,8 +163,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org79457bc" class="outline-2">
-        <h2 id="org79457bc">
+      <div id="outline-container-orgd724ea6" class="outline-2">
+        <h2 id="orgd724ea6">
           <span class="section-number-2">2.</span> BNB Parallel EVM 1.0:
           Infrastructure
         </h2>
@@ -200,8 +200,8 @@
           </ul>
         </div>
       </div>
-      <div id="outline-container-org037754d" class="outline-2">
-        <h2 id="org037754d">
+      <div id="outline-container-org5019bda" class="outline-2">
+        <h2 id="org5019bda">
           <span class="section-number-2">3.</span> BNB Parallel EVM 2.0:
           Performance enhancement
         </h2>
@@ -226,14 +226,14 @@
           </ul>
         </div>
       </div>
-      <div id="outline-container-orgfab19b7" class="outline-2">
-        <h2 id="orgfab19b7">
+      <div id="outline-container-orgcaff35b" class="outline-2">
+        <h2 id="orgcaff35b">
           <span class="section-number-2">4.</span> BNB Parallel EVM 3.0:
           Production
         </h2>
         <div class="outline-text-2" id="text-4"></div>
-        <div id="outline-container-org6d8b4c2" class="outline-3">
-          <h3 id="org6d8b4c2">
+        <div id="outline-container-org87d0491" class="outline-3">
+          <h3 id="org87d0491">
             <span class="section-number-3">4.1.</span> Hint-based dispatcher
           </h3>
           <div class="outline-text-3" id="text-4-1">
@@ -258,8 +258,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orga6eb207" class="outline-3">
-          <h3 id="orga6eb207">
+        <div id="outline-container-org3a5553e" class="outline-3">
+          <h3 id="org3a5553e">
             <span class="section-number-3">4.2.</span> Seamless BNB chain
             ecosystem integration
           </h3>
@@ -271,8 +271,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-orga00d189" class="outline-2">
-        <h2 id="orga00d189">
+      <div id="outline-container-orge1c9e66" class="outline-2">
+        <h2 id="orge1c9e66">
           <span class="section-number-2">5.</span> Comparison with other
           solutions
         </h2>
@@ -341,8 +341,8 @@
           </table>
         </div>
       </div>
-      <div id="outline-container-orgdc33b8d" class="outline-2">
-        <h2 id="orgdc33b8d">
+      <div id="outline-container-orge0cb98e" class="outline-2">
+        <h2 id="orge0cb98e">
           <span class="section-number-2">6.</span> Other optimizations
         </h2>
         <div class="outline-text-2" id="text-6">
@@ -378,6 +378,7 @@
       </div>
     </div>
     <div id="postamble" class="status">
+      <div id="search-results"></div>
       <footer>
         <p>© 2024 chenyo. Some rights reserved.</p>
       </footer>

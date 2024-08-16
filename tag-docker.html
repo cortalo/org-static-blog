@@ -20,23 +20,23 @@
     <meta name="referrer" content="no-referrer" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <script src="static/search.js"></script>
   </head>
   <body>
     <div id="preamble" class="status">
       <header>
-        <h1>
-          <a href="https://chenyo-17.github.io/org-static-blog"
-            >Chenyo's org-static-blog</a
-          >
-        </h1>
+        <h1><a href="/">Chenyo's org-static-blog</a></h1>
         <nav>
-          <a href="https://chenyo-17.github.io/org-static-blog">Home</a>
-          <a href="https://chenyo-17.github.io/org-static-blog/archive.html"
-            >Archive</a
-          >
-          <a href="https://chenyo-17.github.io/org-static-blog/tags.html"
-            >Tags</a
-          >
+          <a href="/">Home</a>
+          <a href="archive.html">Archive</a>
+          <a href="tags.html">Tags</a>
+          <div id="search-container">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Search anywhere..."
+            />
+          </div>
         </nav>
       </header>
     </div>
@@ -53,18 +53,18 @@
         <h2>Table of Contents</h2>
         <div id="text-table-of-contents" role="doc-toc">
           <ul>
-            <li><a href="#orga77c5e9">1. What happended</a></li>
-            <li><a href="#org1deb2ea">2. What did I do</a></li>
+            <li><a href="#org7461e9b">1. What happended</a></li>
+            <li><a href="#org879c1c4">2. What did I do</a></li>
             <li>
-              <a href="#org0b380f6"
+              <a href="#orgcbccd56"
                 >3. Another issue of running RPC in docker</a
               >
             </li>
           </ul>
         </div>
       </nav>
-      <div id="outline-container-orga77c5e9" class="outline-2">
-        <h2 id="orga77c5e9">
+      <div id="outline-container-org7461e9b" class="outline-2">
+        <h2 id="org7461e9b">
           <span class="section-number-2">1.</span> What happended
         </h2>
         <div class="outline-text-2" id="text-1">
@@ -87,8 +87,8 @@
           </ul>
         </div>
       </div>
-      <div id="outline-container-org1deb2ea" class="outline-2">
-        <h2 id="org1deb2ea">
+      <div id="outline-container-org879c1c4" class="outline-2">
+        <h2 id="org879c1c4">
           <span class="section-number-2">2.</span> What did I do
         </h2>
         <div class="outline-text-2" id="text-2">
@@ -141,8 +141,8 @@
           </ol>
         </div>
       </div>
-      <div id="outline-container-org0b380f6" class="outline-2">
-        <h2 id="org0b380f6">
+      <div id="outline-container-orgcbccd56" class="outline-2">
+        <h2 id="orgcbccd56">
           <span class="section-number-2">3.</span> Another issue of running RPC
           in docker
         </h2>
@@ -220,6 +220,7 @@
       </div>
     </div>
     <div id="postamble" class="status">
+      <div id="search-results"></div>
       <footer>
         <p>© 2024 chenyo. Some rights reserved.</p>
       </footer>

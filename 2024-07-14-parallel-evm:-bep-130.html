@@ -24,23 +24,23 @@
     <meta name="referrer" content="no-referrer" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <script src="static/search.js"></script>
   </head>
   <body>
     <div id="preamble" class="status">
       <header>
-        <h1>
-          <a href="https://chenyo-17.github.io/org-static-blog"
-            >Chenyo's org-static-blog</a
-          >
-        </h1>
+        <h1><a href="/">Chenyo's org-static-blog</a></h1>
         <nav>
-          <a href="https://chenyo-17.github.io/org-static-blog">Home</a>
-          <a href="https://chenyo-17.github.io/org-static-blog/archive.html"
-            >Archive</a
-          >
-          <a href="https://chenyo-17.github.io/org-static-blog/tags.html"
-            >Tags</a
-          >
+          <a href="/">Home</a>
+          <a href="archive.html">Archive</a>
+          <a href="tags.html">Tags</a>
+          <div id="search-container">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Search anywhere..."
+            />
+          </div>
         </nav>
       </header>
     </div>
@@ -57,21 +57,21 @@
         <div id="text-table-of-contents" role="doc-toc">
           <ul>
             <li>
-              <a href="#org15012cc">1. Blockchain fundamentals</a>
+              <a href="#orgff537b4">1. Blockchain fundamentals</a>
               <ul>
-                <li><a href="#org3d58ca2">1.1. System contract</a></li>
+                <li><a href="#orgb4e7af0">1.1. System contract</a></li>
                 <li>
-                  <a href="#org5c8940c">1.2. Transaction execution phases</a>
+                  <a href="#org8a78dd2">1.2. Transaction execution phases</a>
                 </li>
               </ul>
             </li>
-            <li><a href="#orga8e28c8">2. Design principle</a></li>
+            <li><a href="#orgcd2e18c">2. Design principle</a></li>
             <li>
-              <a href="#org3d4e31b">3. Workflow</a>
+              <a href="#orgf2297ab">3. Workflow</a>
               <ul>
-                <li><a href="#org3b10241">3.1. Dispatch factors</a></li>
-                <li><a href="#org8e9cc9f">3.2. Slot execution stages</a></li>
-                <li><a href="#org5a0c693">3.3. Conflict detection</a></li>
+                <li><a href="#orgd60984e">3.1. Dispatch factors</a></li>
+                <li><a href="#org6ee2b9b">3.2. Slot execution stages</a></li>
+                <li><a href="#org8030a39">3.3. Conflict detection</a></li>
               </ul>
             </li>
           </ul>
@@ -84,13 +84,13 @@
         >. BEP-130 is a proposal that introduces a parallel transaction
         execution mechanism on the BNB Smart Chain (BSC).
       </p>
-      <div id="outline-container-org15012cc" class="outline-2">
-        <h2 id="org15012cc">
+      <div id="outline-container-orgff537b4" class="outline-2">
+        <h2 id="orgff537b4">
           <span class="section-number-2">1.</span> Blockchain fundamentals
         </h2>
         <div class="outline-text-2" id="text-1"></div>
-        <div id="outline-container-org3d58ca2" class="outline-3">
-          <h3 id="org3d58ca2">
+        <div id="outline-container-orgb4e7af0" class="outline-3">
+          <h3 id="orgb4e7af0">
             <span class="section-number-3">1.1.</span> System contract
           </h3>
           <div class="outline-text-3" id="text-1-1">
@@ -107,8 +107,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org5c8940c" class="outline-3">
-          <h3 id="org5c8940c">
+        <div id="outline-container-org8a78dd2" class="outline-3">
+          <h3 id="org8a78dd2">
             <span class="section-number-3">1.2.</span> Transaction execution
             phases
           </h3>
@@ -123,8 +123,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-orga8e28c8" class="outline-2">
-        <h2 id="orga8e28c8">
+      <div id="outline-container-orgcd2e18c" class="outline-2">
+        <h2 id="orgcd2e18c">
           <span class="section-number-2">2.</span> Design principle
         </h2>
         <div class="outline-text-2" id="text-2">
@@ -142,13 +142,13 @@
           </ul>
         </div>
       </div>
-      <div id="outline-container-org3d4e31b" class="outline-2">
-        <h2 id="org3d4e31b">
+      <div id="outline-container-orgf2297ab" class="outline-2">
+        <h2 id="orgf2297ab">
           <span class="section-number-2">3.</span> Workflow
         </h2>
         <div class="outline-text-2" id="text-3"></div>
-        <div id="outline-container-org3b10241" class="outline-3">
-          <h3 id="org3b10241">
+        <div id="outline-container-orgd60984e" class="outline-3">
+          <h3 id="orgd60984e">
             <span class="section-number-3">3.1.</span> Dispatch factors
           </h3>
           <div class="outline-text-3" id="text-3-1">
@@ -173,8 +173,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org8e9cc9f" class="outline-3">
-          <h3 id="org8e9cc9f">
+        <div id="outline-container-org6ee2b9b" class="outline-3">
+          <h3 id="org6ee2b9b">
             <span class="section-number-3">3.2.</span> Slot execution stages
           </h3>
           <div class="outline-text-3" id="text-3-2">
@@ -217,8 +217,8 @@
             </ol>
           </div>
         </div>
-        <div id="outline-container-org5a0c693" class="outline-3">
-          <h3 id="org5a0c693">
+        <div id="outline-container-org8030a39" class="outline-3">
+          <h3 id="org8030a39">
             <span class="section-number-3">3.3.</span> Conflict detection
           </h3>
           <div class="outline-text-3" id="text-3-3">
@@ -251,6 +251,7 @@
       </div>
     </div>
     <div id="postamble" class="status">
+      <div id="search-results"></div>
       <footer>
         <p>© 2024 chenyo. Some rights reserved.</p>
       </footer>

@@ -24,23 +24,23 @@
     <meta name="referrer" content="no-referrer" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <script src="static/search.js"></script>
   </head>
   <body>
     <div id="preamble" class="status">
       <header>
-        <h1>
-          <a href="https://chenyo-17.github.io/org-static-blog"
-            >Chenyo's org-static-blog</a
-          >
-        </h1>
+        <h1><a href="/">Chenyo's org-static-blog</a></h1>
         <nav>
-          <a href="https://chenyo-17.github.io/org-static-blog">Home</a>
-          <a href="https://chenyo-17.github.io/org-static-blog/archive.html"
-            >Archive</a
-          >
-          <a href="https://chenyo-17.github.io/org-static-blog/tags.html"
-            >Tags</a
-          >
+          <a href="/">Home</a>
+          <a href="archive.html">Archive</a>
+          <a href="tags.html">Tags</a>
+          <div id="search-container">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Search anywhere..."
+            />
+          </div>
         </nav>
       </header>
     </div>
@@ -56,14 +56,14 @@
         <h2>Table of Contents</h2>
         <div id="text-table-of-contents" role="doc-toc">
           <ul>
-            <li><a href="#orge5a971f">1. Where did we go</a></li>
-            <li><a href="#org28527fb">2. Why did we go</a></li>
-            <li><a href="#orgcf9e3ba">3. What did we do</a></li>
+            <li><a href="#org417ac8b">1. Where did we go</a></li>
+            <li><a href="#org7a027ef">2. Why did we go</a></li>
+            <li><a href="#org5ad94b4">3. What did we do</a></li>
           </ul>
         </div>
       </nav>
-      <div id="outline-container-orge5a971f" class="outline-2">
-        <h2 id="orge5a971f">
+      <div id="outline-container-org417ac8b" class="outline-2">
+        <h2 id="org417ac8b">
           <span class="section-number-2">1.</span> Where did we go
         </h2>
         <div class="outline-text-2" id="text-1">
@@ -76,7 +76,7 @@
             </li>
           </ul>
 
-          <figure id="orgf357286">
+          <figure id="org9b120fb">
             <img
               src="./static/car.jpg"
               alt="car.jpg"
@@ -91,8 +91,8 @@
           </figure>
         </div>
       </div>
-      <div id="outline-container-org28527fb" class="outline-2">
-        <h2 id="org28527fb">
+      <div id="outline-container-org7a027ef" class="outline-2">
+        <h2 id="org7a027ef">
           <span class="section-number-2">2.</span> Why did we go
         </h2>
         <div class="outline-text-2" id="text-2">
@@ -120,7 +120,7 @@
             </li>
           </ul>
 
-          <figure id="orgf8abef5">
+          <figure id="org2a1dee8">
             <img
               src="./static/restaurant.jpg"
               alt="restaurant.jpg"
@@ -135,8 +135,8 @@
           </figure>
         </div>
       </div>
-      <div id="outline-container-orgcf9e3ba" class="outline-2">
-        <h2 id="orgcf9e3ba">
+      <div id="outline-container-org5ad94b4" class="outline-2">
+        <h2 id="org5ad94b4">
           <span class="section-number-2">3.</span> What did we do
         </h2>
         <div class="outline-text-2" id="text-3">
@@ -171,7 +171,7 @@
             </li>
           </ol>
 
-          <figure id="org98d4cd5">
+          <figure id="orgcacb261">
             <img
               src="./static/water.jpg"
               alt="water.jpg"
@@ -185,7 +185,7 @@
             </figcaption>
           </figure>
 
-          <figure id="org14246a2">
+          <figure id="org0f78b84">
             <img
               src="./static/view.jpg"
               alt="view.jpg"
@@ -215,6 +215,7 @@
       </div>
     </div>
     <div id="postamble" class="status">
+      <div id="search-results"></div>
       <footer>
         <p>© 2024 chenyo. Some rights reserved.</p>
       </footer>

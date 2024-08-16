@@ -20,23 +20,23 @@
     <meta name="referrer" content="no-referrer" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <script src="static/search.js"></script>
   </head>
   <body>
     <div id="preamble" class="status">
       <header>
-        <h1>
-          <a href="https://chenyo-17.github.io/org-static-blog"
-            >Chenyo's org-static-blog</a
-          >
-        </h1>
+        <h1><a href="/">Chenyo's org-static-blog</a></h1>
         <nav>
-          <a href="https://chenyo-17.github.io/org-static-blog">Home</a>
-          <a href="https://chenyo-17.github.io/org-static-blog/archive.html"
-            >Archive</a
-          >
-          <a href="https://chenyo-17.github.io/org-static-blog/tags.html"
-            >Tags</a
-          >
+          <a href="/">Home</a>
+          <a href="archive.html">Archive</a>
+          <a href="tags.html">Tags</a>
+          <div id="search-container">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Search anywhere..."
+            />
+          </div>
         </nav>
       </header>
     </div>
@@ -53,16 +53,16 @@
         <h2>Table of Contents</h2>
         <div id="text-table-of-contents" role="doc-toc">
           <ul>
-            <li><a href="#org525235e">1. Router</a></li>
-            <li><a href="#org1549234">2. Link</a></li>
+            <li><a href="#orgab52f1d">1. Router</a></li>
+            <li><a href="#org549ab71">2. Link</a></li>
             <li>
-              <a href="#org547c48e">3. Workshop 3</a>
+              <a href="#orge94e4a5">3. Workshop 3</a>
               <ul>
-                <li><a href="#org947018f">3.1. Structure</a></li>
-                <li><a href="#org94f18fd">3.2. States</a></li>
-                <li><a href="#org529710e">3.3. Props</a></li>
+                <li><a href="#org7528633">3.1. Structure</a></li>
+                <li><a href="#org19c11f8">3.2. States</a></li>
+                <li><a href="#org63dfe49">3.3. Props</a></li>
                 <li>
-                  <a href="#org8792913"
+                  <a href="#org9656b11"
                     >3.4. Why passing down the update function in props 1, 4,
                     6?</a
                   >
@@ -72,8 +72,8 @@
           </ul>
         </div>
       </nav>
-      <div id="outline-container-org525235e" class="outline-2">
-        <h2 id="org525235e"><span class="section-number-2">1.</span> Router</h2>
+      <div id="outline-container-orgab52f1d" class="outline-2">
+        <h2 id="orgab52f1d"><span class="section-number-2">1.</span> Router</h2>
         <div class="outline-text-2" id="text-1">
           <ul class="org-ul">
             <li>
@@ -100,8 +100,8 @@
           </ul>
         </div>
       </div>
-      <div id="outline-container-org1549234" class="outline-2">
-        <h2 id="org1549234"><span class="section-number-2">2.</span> Link</h2>
+      <div id="outline-container-org549ab71" class="outline-2">
+        <h2 id="org549ab71"><span class="section-number-2">2.</span> Link</h2>
         <div class="outline-text-2" id="text-2">
           <ul class="org-ul">
             <li>
@@ -121,17 +121,17 @@
           </ul>
         </div>
       </div>
-      <div id="outline-container-org547c48e" class="outline-2">
-        <h2 id="org547c48e">
+      <div id="outline-container-orge94e4a5" class="outline-2">
+        <h2 id="orge94e4a5">
           <span class="section-number-2">3.</span> Workshop 3
         </h2>
         <div class="outline-text-2" id="text-3"></div>
-        <div id="outline-container-org947018f" class="outline-3">
-          <h3 id="org947018f">
+        <div id="outline-container-org7528633" class="outline-3">
+          <h3 id="org7528633">
             <span class="section-number-3">3.1.</span> Structure
           </h3>
           <div class="outline-text-3" id="text-3-1">
-            <figure id="org196b0f4">
+            <figure id="orgd3b99f2">
               <img
                 src="./static/workshop-3-structure.png"
                 alt="workshop-3-structure.png"
@@ -146,8 +146,8 @@
             </figure>
           </div>
         </div>
-        <div id="outline-container-org94f18fd" class="outline-3">
-          <h3 id="org94f18fd">
+        <div id="outline-container-org19c11f8" class="outline-3">
+          <h3 id="org19c11f8">
             <span class="section-number-3">3.2.</span> States
           </h3>
           <div class="outline-text-3" id="text-3-2">
@@ -183,8 +183,8 @@
             </table>
           </div>
         </div>
-        <div id="outline-container-org529710e" class="outline-3">
-          <h3 id="org529710e">
+        <div id="outline-container-org63dfe49" class="outline-3">
+          <h3 id="org63dfe49">
             <span class="section-number-3">3.3.</span> Props
           </h3>
           <div class="outline-text-3" id="text-3-3">
@@ -245,8 +245,8 @@
             </table>
           </div>
         </div>
-        <div id="outline-container-org8792913" class="outline-3">
-          <h3 id="org8792913">
+        <div id="outline-container-org9656b11" class="outline-3">
+          <h3 id="org9656b11">
             <span class="section-number-3">3.4.</span> Why passing down the
             update function in props 1, 4, 6?
           </h3>
@@ -291,15 +291,15 @@
         <div id="text-table-of-contents" role="doc-toc">
           <ul>
             <li>
-              <a href="#orgbdea7d9">1. What is a React hook</a>
+              <a href="#org95c5e44">1. What is a React hook</a>
               <ul>
                 <li>
-                  <a href="#org614ab72"
+                  <a href="#orgaee4eb8"
                     >1.1. <code>useState</code> is not enough</a
                   >
                 </li>
                 <li>
-                  <a href="#org47a6689"
+                  <a href="#org18c3ab4"
                     >1.2. <code>useEffect</code> runs after specific variable
                     change</a
                   >
@@ -307,20 +307,20 @@
               </ul>
             </li>
             <li>
-              <a href="#orgd51fdc4">2. React hook patterns</a>
+              <a href="#org277b7e7">2. React hook patterns</a>
               <ul>
-                <li><a href="#org43d21ff">2.1. Fetch and send data</a></li>
-                <li><a href="#org236341c">2.2. Conditional rendering</a></li>
-                <li><a href="#orgc04fc36">2.3. Render an array of Data</a></li>
+                <li><a href="#orgebe2bf3">2.1. Fetch and send data</a></li>
+                <li><a href="#org49babec">2.2. Conditional rendering</a></li>
+                <li><a href="#orgd78c263">2.3. Render an array of Data</a></li>
               </ul>
             </li>
-            <li><a href="#org04180c2">3. Example: Stopwatch</a></li>
-            <li><a href="#org3275108">4. DOM and component mounting</a></li>
+            <li><a href="#orgb067ac1">3. Example: Stopwatch</a></li>
+            <li><a href="#org219ade1">4. DOM and component mounting</a></li>
           </ul>
         </div>
       </nav>
-      <div id="outline-container-orgbdea7d9" class="outline-2">
-        <h2 id="orgbdea7d9">
+      <div id="outline-container-org95c5e44" class="outline-2">
+        <h2 id="org95c5e44">
           <span class="section-number-2">1.</span> What is a React hook
         </h2>
         <div class="outline-text-2" id="text-1">
@@ -331,8 +331,8 @@
             <li>e.g., <code>useState</code></li>
           </ul>
         </div>
-        <div id="outline-container-org614ab72" class="outline-3">
-          <h3 id="org614ab72">
+        <div id="outline-container-orgaee4eb8" class="outline-3">
+          <h3 id="orgaee4eb8">
             <span class="section-number-3">1.1.</span> <code>useState</code> is
             not enough
           </h3>
@@ -364,8 +364,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org47a6689" class="outline-3">
-          <h3 id="org47a6689">
+        <div id="outline-container-org18c3ab4" class="outline-3">
+          <h3 id="org18c3ab4">
             <span class="section-number-3">1.2.</span>
             <code>useEffect</code> runs after specific variable change
           </h3>
@@ -413,13 +413,13 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-orgd51fdc4" class="outline-2">
-        <h2 id="orgd51fdc4">
+      <div id="outline-container-org277b7e7" class="outline-2">
+        <h2 id="org277b7e7">
           <span class="section-number-2">2.</span> React hook patterns
         </h2>
         <div class="outline-text-2" id="text-2"></div>
-        <div id="outline-container-org43d21ff" class="outline-3">
-          <h3 id="org43d21ff">
+        <div id="outline-container-orgebe2bf3" class="outline-3">
+          <h3 id="orgebe2bf3">
             <span class="section-number-3">2.1.</span> Fetch and send data
           </h3>
           <div class="outline-text-3" id="text-2-1">
@@ -450,8 +450,8 @@
             </div>
           </div>
         </div>
-        <div id="outline-container-org236341c" class="outline-3">
-          <h3 id="org236341c">
+        <div id="outline-container-org49babec" class="outline-3">
+          <h3 id="org49babec">
             <span class="section-number-3">2.2.</span> Conditional rendering
           </h3>
           <div class="outline-text-3" id="text-2-2">
@@ -470,8 +470,8 @@
             </div>
           </div>
         </div>
-        <div id="outline-container-orgc04fc36" class="outline-3">
-          <h3 id="orgc04fc36">
+        <div id="outline-container-orgd78c263" class="outline-3">
+          <h3 id="orgd78c263">
             <span class="section-number-3">2.3.</span> Render an array of Data
           </h3>
           <div class="outline-text-3" id="text-2-3">
@@ -497,8 +497,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org04180c2" class="outline-2">
-        <h2 id="org04180c2">
+      <div id="outline-container-orgb067ac1" class="outline-2">
+        <h2 id="orgb067ac1">
           <span class="section-number-2">3.</span> Example: Stopwatch
         </h2>
         <div class="outline-text-2" id="text-3">
@@ -523,8 +523,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org3275108" class="outline-2">
-        <h2 id="org3275108">
+      <div id="outline-container-org219ade1" class="outline-2">
+        <h2 id="org219ade1">
           <span class="section-number-2">4.</span> DOM and component mounting
         </h2>
         <div class="outline-text-2" id="text-4">
@@ -572,6 +572,7 @@
       </div>
     </div>
     <div id="postamble" class="status">
+      <div id="search-results"></div>
       <footer>
         <p>© 2024 chenyo. Some rights reserved.</p>
       </footer>

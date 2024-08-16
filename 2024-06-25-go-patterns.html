@@ -24,23 +24,23 @@
     <meta name="referrer" content="no-referrer" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <script src="static/search.js"></script>
   </head>
   <body>
     <div id="preamble" class="status">
       <header>
-        <h1>
-          <a href="https://chenyo-17.github.io/org-static-blog"
-            >Chenyo's org-static-blog</a
-          >
-        </h1>
+        <h1><a href="/">Chenyo's org-static-blog</a></h1>
         <nav>
-          <a href="https://chenyo-17.github.io/org-static-blog">Home</a>
-          <a href="https://chenyo-17.github.io/org-static-blog/archive.html"
-            >Archive</a
-          >
-          <a href="https://chenyo-17.github.io/org-static-blog/tags.html"
-            >Tags</a
-          >
+          <a href="/">Home</a>
+          <a href="archive.html">Archive</a>
+          <a href="tags.html">Tags</a>
+          <div id="search-container">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Search anywhere..."
+            />
+          </div>
         </nav>
       </header>
     </div>
@@ -56,23 +56,23 @@
         <h2>Table of Contents</h2>
         <div id="text-table-of-contents" role="doc-toc">
           <ul>
-            <li><a href="#org4336322">1. Concurrency vs Parallelism</a></li>
+            <li><a href="#orgb303784">1. Concurrency vs Parallelism</a></li>
             <li>
-              <a href="#org5a6dc0a">2. Use goroutines for states</a>
+              <a href="#org1233238">2. Use goroutines for states</a>
               <ul>
-                <li><a href="#org74bed40">2.1. Matching a regex</a></li>
+                <li><a href="#orgaaa7cae">2.1. Matching a regex</a></li>
                 <li>
-                  <a href="#orgbd8fca1"
+                  <a href="#org29ada24"
                     >2.2. When the state variable cannot be avoided</a
                   >
                 </li>
               </ul>
             </li>
             <li>
-              <a href="#org144d513">3. Pattern 1: publish/subscribe server</a>
+              <a href="#orgfb27da6">3. Pattern 1: publish/subscribe server</a>
               <ul>
                 <li>
-                  <a href="#orge4f6a75">3.1. Options for slow goroutines</a>
+                  <a href="#org5755a5c">3.1. Options for slow goroutines</a>
                 </li>
               </ul>
             </li>
@@ -85,8 +85,8 @@
           >Russ Cox guest lecture</a
         >.
       </p>
-      <div id="outline-container-org4336322" class="outline-2">
-        <h2 id="org4336322">
+      <div id="outline-container-orgb303784" class="outline-2">
+        <h2 id="orgb303784">
           <span class="section-number-2">1.</span> Concurrency vs Parallelism
         </h2>
         <div class="outline-text-2" id="text-1">
@@ -104,13 +104,13 @@
           </ul>
         </div>
       </div>
-      <div id="outline-container-org5a6dc0a" class="outline-2">
-        <h2 id="org5a6dc0a">
+      <div id="outline-container-org1233238" class="outline-2">
+        <h2 id="org1233238">
           <span class="section-number-2">2.</span> Use goroutines for states
         </h2>
         <div class="outline-text-2" id="text-2"></div>
-        <div id="outline-container-org74bed40" class="outline-3">
-          <h3 id="org74bed40">
+        <div id="outline-container-orgaaa7cae" class="outline-3">
+          <h3 id="orgaaa7cae">
             <span class="section-number-3">2.1.</span> Matching a regex
           </h3>
           <div class="outline-text-3" id="text-2-1">
@@ -177,8 +177,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgbd8fca1" class="outline-3">
-          <h3 id="orgbd8fca1">
+        <div id="outline-container-org29ada24" class="outline-3">
+          <h3 id="org29ada24">
             <span class="section-number-3">2.2.</span> When the state variable
             cannot be avoided
           </h3>
@@ -293,8 +293,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org144d513" class="outline-2">
-        <h2 id="org144d513">
+      <div id="outline-container-orgfb27da6" class="outline-2">
+        <h2 id="orgfb27da6">
           <span class="section-number-2">3.</span> Pattern 1: publish/subscribe
           server
         </h2>
@@ -349,8 +349,8 @@
             </li>
           </ul>
         </div>
-        <div id="outline-container-orge4f6a75" class="outline-3">
-          <h3 id="orge4f6a75">
+        <div id="outline-container-org5755a5c" class="outline-3">
+          <h3 id="org5755a5c">
             <span class="section-number-3">3.1.</span> Options for slow
             goroutines
           </h3>
@@ -494,6 +494,7 @@
       </div>
     </div>
     <div id="postamble" class="status">
+      <div id="search-results"></div>
       <footer>
         <p>© 2024 chenyo. Some rights reserved.</p>
       </footer>

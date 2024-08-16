@@ -24,23 +24,23 @@
     <meta name="referrer" content="no-referrer" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <script src="static/search.js"></script>
   </head>
   <body>
     <div id="preamble" class="status">
       <header>
-        <h1>
-          <a href="https://chenyo-17.github.io/org-static-blog"
-            >Chenyo's org-static-blog</a
-          >
-        </h1>
+        <h1><a href="/">Chenyo's org-static-blog</a></h1>
         <nav>
-          <a href="https://chenyo-17.github.io/org-static-blog">Home</a>
-          <a href="https://chenyo-17.github.io/org-static-blog/archive.html"
-            >Archive</a
-          >
-          <a href="https://chenyo-17.github.io/org-static-blog/tags.html"
-            >Tags</a
-          >
+          <a href="/">Home</a>
+          <a href="archive.html">Archive</a>
+          <a href="tags.html">Tags</a>
+          <div id="search-container">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Search anywhere..."
+            />
+          </div>
         </nav>
       </header>
     </div>
@@ -56,18 +56,18 @@
         <h2>Table of Contents</h2>
         <div id="text-table-of-contents" role="doc-toc">
           <ul>
-            <li><a href="#orgc001559">1. Was ist passiert</a></li>
+            <li><a href="#org30259bb">1. Was ist passiert</a></li>
             <li>
-              <a href="#org9757ecf"
+              <a href="#org809826d"
                 >2. Ich kann kein gutes Englisch schreiben</a
               >
             </li>
-            <li><a href="#org4cd3da2">3. Ich kann nicht mich vorstellen</a></li>
+            <li><a href="#orgd4e6763">3. Ich kann nicht mich vorstellen</a></li>
           </ul>
         </div>
       </nav>
-      <div id="outline-container-orgc001559" class="outline-2">
-        <h2 id="orgc001559">
+      <div id="outline-container-org30259bb" class="outline-2">
+        <h2 id="org30259bb">
           <span class="section-number-2">1.</span> Was ist passiert
         </h2>
         <div class="outline-text-2" id="text-1">
@@ -82,8 +82,8 @@
           </p>
         </div>
       </div>
-      <div id="outline-container-org9757ecf" class="outline-2">
-        <h2 id="org9757ecf">
+      <div id="outline-container-org809826d" class="outline-2">
+        <h2 id="org809826d">
           <span class="section-number-2">2.</span> Ich kann kein gutes Englisch
           schreiben
         </h2>
@@ -103,8 +103,8 @@
           </p>
         </div>
       </div>
-      <div id="outline-container-org4cd3da2" class="outline-2">
-        <h2 id="org4cd3da2">
+      <div id="outline-container-orgd4e6763" class="outline-2">
+        <h2 id="orgd4e6763">
           <span class="section-number-2">3.</span> Ich kann nicht mich
           vorstellen
         </h2>
@@ -157,6 +157,7 @@
       </div>
     </div>
     <div id="postamble" class="status">
+      <div id="search-results"></div>
       <footer>
         <p>© 2024 chenyo. Some rights reserved.</p>
       </footer>

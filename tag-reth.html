@@ -20,23 +20,23 @@
     <meta name="referrer" content="no-referrer" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <script src="static/search.js"></script>
   </head>
   <body>
     <div id="preamble" class="status">
       <header>
-        <h1>
-          <a href="https://chenyo-17.github.io/org-static-blog"
-            >Chenyo's org-static-blog</a
-          >
-        </h1>
+        <h1><a href="/">Chenyo's org-static-blog</a></h1>
         <nav>
-          <a href="https://chenyo-17.github.io/org-static-blog">Home</a>
-          <a href="https://chenyo-17.github.io/org-static-blog/archive.html"
-            >Archive</a
-          >
-          <a href="https://chenyo-17.github.io/org-static-blog/tags.html"
-            >Tags</a
-          >
+          <a href="/">Home</a>
+          <a href="archive.html">Archive</a>
+          <a href="tags.html">Tags</a>
+          <div id="search-container">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Search anywhere..."
+            />
+          </div>
         </nav>
       </header>
     </div>
@@ -54,74 +54,74 @@
         <div id="text-table-of-contents" role="doc-toc">
           <ul>
             <li>
-              <a href="#orgf02dc3a">1. Blockchain fundamentals</a>
+              <a href="#orge4a2ba5">1. Blockchain fundamentals</a>
               <ul>
-                <li><a href="#orgdf4660b">1.1. Ethereum engine API</a></li>
-                <li><a href="#org274d363">1.2. Foundry</a></li>
-                <li><a href="#orga8fa57a">1.3. Revm</a></li>
-                <li><a href="#org429086b">1.4. Alloy</a></li>
-                <li><a href="#org1c2369c">1.5. Erigon &amp; Staged sync</a></li>
+                <li><a href="#org5d29c1d">1.1. Ethereum engine API</a></li>
+                <li><a href="#org5e03d2c">1.2. Foundry</a></li>
+                <li><a href="#org7ca27d2">1.3. Revm</a></li>
+                <li><a href="#orgcbc5ce6">1.4. Alloy</a></li>
+                <li><a href="#orgc2c2eea">1.5. Erigon &amp; Staged sync</a></li>
                 <li>
-                  <a href="#org9b036c1">1.6. Storage engines</a>
+                  <a href="#org8585297">1.6. Storage engines</a>
                   <ul>
-                    <li><a href="#org56ba2af">1.6.1. ACID</a></li>
+                    <li><a href="#org17defa6">1.6.1. ACID</a></li>
                     <li>
-                      <a href="#orgb74f793"
+                      <a href="#org0fdb25c"
                         >1.6.2. MVCC (Multi-version concurrency control)</a
                       >
                     </li>
                     <li>
-                      <a href="#orgbc74abe">1.6.3. Common database models</a>
+                      <a href="#org37bc60e">1.6.3. Common database models</a>
                     </li>
                     <li>
-                      <a href="#org1573ae4">1.6.4. Common storage engines</a>
+                      <a href="#org8eef262">1.6.4. Common storage engines</a>
                     </li>
                   </ul>
                 </li>
-                <li><a href="#orga441275">1.7. Reth</a></li>
+                <li><a href="#org56082be">1.7. Reth</a></li>
                 <li>
-                  <a href="#org3dbfc3b"
+                  <a href="#org52cc9b4"
                     >1.8. Why gas per second as the performance metric</a
                   >
                 </li>
-                <li><a href="#org1a90912">1.9. EVM cost models</a></li>
-                <li><a href="#org993a76c">1.10. TPC benchmark</a></li>
-                <li><a href="#org852148f">1.11. State growth</a></li>
+                <li><a href="#org308a00e">1.9. EVM cost models</a></li>
+                <li><a href="#org22c7347">1.10. TPC benchmark</a></li>
+                <li><a href="#org815882a">1.11. State growth</a></li>
                 <li>
-                  <a href="#org09af07c"
+                  <a href="#orgbe8a139"
                     >1.12. JIT (Just-In-Time) and AOT (Ahead-of-Time) EVM</a
                   >
                 </li>
-                <li><a href="#org0a922db">1.13. Actor model</a></li>
-                <li><a href="#org3a58464">1.14. Storage trie</a></li>
-                <li><a href="#org2bc837b">1.15. Serverless database</a></li>
+                <li><a href="#orga0e9a12">1.13. Actor model</a></li>
+                <li><a href="#orgaf52237">1.14. Storage trie</a></li>
+                <li><a href="#org96ee250">1.15. Serverless database</a></li>
               </ul>
             </li>
             <li>
-              <a href="#orgd985418">2. Reth scaling plan</a>
+              <a href="#orgd78a67e">2. Reth scaling plan</a>
               <ul>
                 <li>
-                  <a href="#org623d9fe">2.1. Vertical scaling (2024)</a>
+                  <a href="#org04aedb9">2.1. Vertical scaling (2024)</a>
                   <ul>
-                    <li><a href="#org6e08289">2.1.1. JIT/AOT EVM</a></li>
-                    <li><a href="#org10409a8">2.1.2. Parallel EVM</a></li>
+                    <li><a href="#org6aff674">2.1.1. JIT/AOT EVM</a></li>
+                    <li><a href="#org053d696">2.1.2. Parallel EVM</a></li>
                     <li>
-                      <a href="#orgd5352aa"
+                      <a href="#org8a1907a"
                         >2.1.3. Optimized state commitment</a
                       >
                     </li>
                   </ul>
                 </li>
                 <li>
-                  <a href="#orgbd4f65e">2.2. Horizontal scaling (2025)</a>
+                  <a href="#org392c804">2.2. Horizontal scaling (2025)</a>
                   <ul>
-                    <li><a href="#org729d62f">2.2.1. Multi-Rollup (?)</a></li>
+                    <li><a href="#orgd4536c8">2.2.1. Multi-Rollup (?)</a></li>
                     <li>
-                      <a href="#orgd36dc78">2.2.2. Cloud-Native nodes.</a>
+                      <a href="#orgf458238">2.2.2. Cloud-Native nodes.</a>
                     </li>
                   </ul>
                 </li>
-                <li><a href="#org235285c">2.3. Open questions</a></li>
+                <li><a href="#orgb2ae78a">2.3. Open questions</a></li>
               </ul>
             </li>
           </ul>
@@ -138,13 +138,13 @@
           >Claude.ai</a
         >.
       </p>
-      <div id="outline-container-orgf02dc3a" class="outline-2">
-        <h2 id="orgf02dc3a">
+      <div id="outline-container-orge4a2ba5" class="outline-2">
+        <h2 id="orge4a2ba5">
           <span class="section-number-2">1.</span> Blockchain fundamentals
         </h2>
         <div class="outline-text-2" id="text-1"></div>
-        <div id="outline-container-orgdf4660b" class="outline-3">
-          <h3 id="orgdf4660b">
+        <div id="outline-container-org5d29c1d" class="outline-3">
+          <h3 id="org5d29c1d">
             <span class="section-number-3">1.1.</span>
             <a
               href="https://github.com/ethereum/execution-apis/blob/a0d03086564ab1838b462befbc083f873dcf0c0f/src/engine/paris.md"
@@ -163,8 +163,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org274d363" class="outline-3">
-          <h3 id="org274d363">
+        <div id="outline-container-org5e03d2c" class="outline-3">
+          <h3 id="org5e03d2c">
             <span class="section-number-3">1.2.</span>
             <a href="https://github.com/foundry-rs/foundry/">Foundry</a>
           </h3>
@@ -182,8 +182,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orga8fa57a" class="outline-3">
-          <h3 id="orga8fa57a">
+        <div id="outline-container-org7ca27d2" class="outline-3">
+          <h3 id="org7ca27d2">
             <span class="section-number-3">1.3.</span>
             <a href="https://github.com/bluealloy/revm/">Revm</a>
           </h3>
@@ -196,8 +196,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org429086b" class="outline-3">
-          <h3 id="org429086b">
+        <div id="outline-container-orgcbc5ce6" class="outline-3">
+          <h3 id="orgcbc5ce6">
             <span class="section-number-3">1.4.</span>
             <a href="https://github.com/alloy-rs">Alloy</a>
           </h3>
@@ -210,8 +210,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org1c2369c" class="outline-3">
-          <h3 id="org1c2369c">
+        <div id="outline-container-orgc2c2eea" class="outline-3">
+          <h3 id="orgc2c2eea">
             <span class="section-number-3">1.5.</span>
             <a href="https://erigon.tech/">Erigon</a> &amp; Staged sync
           </h3>
@@ -228,13 +228,13 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org9b036c1" class="outline-3">
-          <h3 id="org9b036c1">
+        <div id="outline-container-org8585297" class="outline-3">
+          <h3 id="org8585297">
             <span class="section-number-3">1.6.</span> Storage engines
           </h3>
           <div class="outline-text-3" id="text-1-6"></div>
-          <div id="outline-container-org56ba2af" class="outline-4">
-            <h4 id="org56ba2af">
+          <div id="outline-container-org17defa6" class="outline-4">
+            <h4 id="org17defa6">
               <span class="section-number-4">1.6.1.</span> ACID
             </h4>
             <div class="outline-text-4" id="text-1-6-1">
@@ -263,8 +263,8 @@
               </ul>
             </div>
           </div>
-          <div id="outline-container-orgb74f793" class="outline-4">
-            <h4 id="orgb74f793">
+          <div id="outline-container-org0fdb25c" class="outline-4">
+            <h4 id="org0fdb25c">
               <span class="section-number-4">1.6.2.</span> MVCC (Multi-version
               concurrency control)
             </h4>
@@ -278,8 +278,8 @@
               </ul>
             </div>
           </div>
-          <div id="outline-container-orgbc74abe" class="outline-4">
-            <h4 id="orgbc74abe">
+          <div id="outline-container-org37bc60e" class="outline-4">
+            <h4 id="org37bc60e">
               <span class="section-number-4">1.6.3.</span> Common database
               models
             </h4>
@@ -292,8 +292,8 @@
               </ul>
             </div>
           </div>
-          <div id="outline-container-org1573ae4" class="outline-4">
-            <h4 id="org1573ae4">
+          <div id="outline-container-org8eef262" class="outline-4">
+            <h4 id="org8eef262">
               <span class="section-number-4">1.6.4.</span> Common storage
               engines
             </h4>
@@ -327,8 +327,8 @@
             </div>
           </div>
         </div>
-        <div id="outline-container-orga441275" class="outline-3">
-          <h3 id="orga441275">
+        <div id="outline-container-org56082be" class="outline-3">
+          <h3 id="org56082be">
             <span class="section-number-3">1.7.</span> Reth
           </h3>
           <div class="outline-text-3" id="text-1-7">
@@ -350,8 +350,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org3dbfc3b" class="outline-3">
-          <h3 id="org3dbfc3b">
+        <div id="outline-container-org52cc9b4" class="outline-3">
+          <h3 id="org52cc9b4">
             <span class="section-number-3">1.8.</span> Why gas per second as the
             performance metric
           </h3>
@@ -366,8 +366,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org1a90912" class="outline-3">
-          <h3 id="org1a90912">
+        <div id="outline-container-org308a00e" class="outline-3">
+          <h3 id="org308a00e">
             <span class="section-number-3">1.9.</span> EVM cost models
           </h3>
           <div class="outline-text-3" id="text-1-9">
@@ -383,8 +383,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org993a76c" class="outline-3">
-          <h3 id="org993a76c">
+        <div id="outline-container-org22c7347" class="outline-3">
+          <h3 id="org22c7347">
             <span class="section-number-3">1.10.</span> TPC benchmark
           </h3>
           <div class="outline-text-3" id="text-1-10">
@@ -401,8 +401,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org852148f" class="outline-3">
-          <h3 id="org852148f">
+        <div id="outline-container-org815882a" class="outline-3">
+          <h3 id="org815882a">
             <span class="section-number-3">1.11.</span> State growth
           </h3>
           <div class="outline-text-3" id="text-1-11">
@@ -418,8 +418,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org09af07c" class="outline-3">
-          <h3 id="org09af07c">
+        <div id="outline-container-orgbe8a139" class="outline-3">
+          <h3 id="orgbe8a139">
             <span class="section-number-3">1.12.</span> JIT (Just-In-Time) and
             AOT (Ahead-of-Time) EVM
           </h3>
@@ -437,8 +437,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org0a922db" class="outline-3">
-          <h3 id="org0a922db">
+        <div id="outline-container-orga0e9a12" class="outline-3">
+          <h3 id="orga0e9a12">
             <span class="section-number-3">1.13.</span> Actor model
           </h3>
           <div class="outline-text-3" id="text-1-13">
@@ -451,8 +451,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org3a58464" class="outline-3">
-          <h3 id="org3a58464">
+        <div id="outline-container-orgaf52237" class="outline-3">
+          <h3 id="orgaf52237">
             <span class="section-number-3">1.14.</span> Storage trie
           </h3>
           <div class="outline-text-3" id="text-1-14">
@@ -464,8 +464,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org2bc837b" class="outline-3">
-          <h3 id="org2bc837b">
+        <div id="outline-container-org96ee250" class="outline-3">
+          <h3 id="org96ee250">
             <span class="section-number-3">1.15.</span> Serverless database
           </h3>
           <div class="outline-text-3" id="text-1-15">
@@ -480,8 +480,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-orgd985418" class="outline-2">
-        <h2 id="orgd985418">
+      <div id="outline-container-orgd78a67e" class="outline-2">
+        <h2 id="orgd78a67e">
           <span class="section-number-2">2.</span> Reth scaling plan
         </h2>
         <div class="outline-text-2" id="text-2">
@@ -494,8 +494,8 @@
             <li>The scaling plan does not involve solving state growth.</li>
           </ul>
         </div>
-        <div id="outline-container-org623d9fe" class="outline-3">
-          <h3 id="org623d9fe">
+        <div id="outline-container-org04aedb9" class="outline-3">
+          <h3 id="org04aedb9">
             <span class="section-number-3">2.1.</span> Vertical scaling (2024)
           </h3>
           <div class="outline-text-3" id="text-2-1">
@@ -503,8 +503,8 @@
               <li>Optimize how each system handle transactions and data.</li>
             </ul>
           </div>
-          <div id="outline-container-org6e08289" class="outline-4">
-            <h4 id="org6e08289">
+          <div id="outline-container-org6aff674" class="outline-4">
+            <h4 id="org6aff674">
               <span class="section-number-4">2.1.1.</span> JIT/AOT EVM
             </h4>
             <div class="outline-text-4" id="text-2-1-1">
@@ -521,7 +521,7 @@
                 </li>
               </ul>
 
-              <figure id="org0ffe6ec">
+              <figure id="org376b852">
                 <img
                   src="https://www.paradigm.xyz/static/reth-perf/3.png"
                   alt="3.png"
@@ -539,8 +539,8 @@
               </figure>
             </div>
           </div>
-          <div id="outline-container-org10409a8" class="outline-4">
-            <h4 id="org10409a8">
+          <div id="outline-container-org053d696" class="outline-4">
+            <h4 id="org053d696">
               <span class="section-number-4">2.1.2.</span> Parallel EVM
             </h4>
             <div class="outline-text-4" id="text-2-1-2">
@@ -567,8 +567,8 @@
               </ul>
             </div>
           </div>
-          <div id="outline-container-orgd5352aa" class="outline-4">
-            <h4 id="orgd5352aa">
+          <div id="outline-container-org8a1907a" class="outline-4">
+            <h4 id="org8a1907a">
               <span class="section-number-4">2.1.3.</span> Optimized state
               commitment
             </h4>
@@ -628,8 +628,8 @@
             </div>
           </div>
         </div>
-        <div id="outline-container-orgbd4f65e" class="outline-3">
-          <h3 id="orgbd4f65e">
+        <div id="outline-container-org392c804" class="outline-3">
+          <h3 id="org392c804">
             <span class="section-number-3">2.2.</span> Horizontal scaling (2025)
           </h3>
           <div class="outline-text-3" id="text-2-2">
@@ -637,8 +637,8 @@
               <li>Spread the workload across multiple systems.</li>
             </ul>
           </div>
-          <div id="outline-container-org729d62f" class="outline-4">
-            <h4 id="org729d62f">
+          <div id="outline-container-orgd4536c8" class="outline-4">
+            <h4 id="orgd4536c8">
               <span class="section-number-4">2.2.1.</span> Multi-Rollup (?)
             </h4>
             <div class="outline-text-4" id="text-2-2-1">
@@ -649,8 +649,8 @@
               </ul>
             </div>
           </div>
-          <div id="outline-container-orgd36dc78" class="outline-4">
-            <h4 id="orgd36dc78">
+          <div id="outline-container-orgf458238" class="outline-4">
+            <h4 id="orgf458238">
               <span class="section-number-4">2.2.2.</span> Cloud-Native nodes.
             </h4>
             <div class="outline-text-4" id="text-2-2-2">
@@ -665,8 +665,8 @@
             </div>
           </div>
         </div>
-        <div id="outline-container-org235285c" class="outline-3">
-          <h3 id="org235285c">
+        <div id="outline-container-orgb2ae78a" class="outline-3">
+          <h3 id="orgb2ae78a">
             <span class="section-number-3">2.3.</span> Open questions
           </h3>
           <div class="outline-text-3" id="text-2-3">
@@ -703,6 +703,7 @@
       </div>
     </div>
     <div id="postamble" class="status">
+      <div id="search-results"></div>
       <footer>
         <p>© 2024 chenyo. Some rights reserved.</p>
       </footer>

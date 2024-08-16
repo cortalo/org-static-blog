@@ -24,23 +24,23 @@
     <meta name="referrer" content="no-referrer" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <script src="static/search.js"></script>
   </head>
   <body>
     <div id="preamble" class="status">
       <header>
-        <h1>
-          <a href="https://chenyo-17.github.io/org-static-blog"
-            >Chenyo's org-static-blog</a
-          >
-        </h1>
+        <h1><a href="/">Chenyo's org-static-blog</a></h1>
         <nav>
-          <a href="https://chenyo-17.github.io/org-static-blog">Home</a>
-          <a href="https://chenyo-17.github.io/org-static-blog/archive.html"
-            >Archive</a
-          >
-          <a href="https://chenyo-17.github.io/org-static-blog/tags.html"
-            >Tags</a
-          >
+          <a href="/">Home</a>
+          <a href="archive.html">Archive</a>
+          <a href="tags.html">Tags</a>
+          <div id="search-container">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Search anywhere..."
+            />
+          </div>
         </nav>
       </header>
     </div>
@@ -57,67 +57,67 @@
         <div id="text-table-of-contents" role="doc-toc">
           <ul>
             <li>
-              <a href="#org073d546">1. Data storage</a>
+              <a href="#org6bc3a4e">1. Data storage</a>
               <ul>
-                <li><a href="#orgddc7296">1.1. Volatile device</a></li>
-                <li><a href="#org17e0f22">1.2. Non-volatile device</a></li>
-                <li><a href="#org0544800">1.3. Storage hierarchy</a></li>
-                <li><a href="#org998de85">1.4. Persistent memory</a></li>
+                <li><a href="#org7a7693e">1.1. Volatile device</a></li>
+                <li><a href="#org6364ce6">1.2. Non-volatile device</a></li>
+                <li><a href="#org2db2100">1.3. Storage hierarchy</a></li>
+                <li><a href="#orge28cebc">1.4. Persistent memory</a></li>
                 <li>
-                  <a href="#orgf47c3bd"
+                  <a href="#orgde7fc86"
                     >1.5. NVM (non-volatile memory express)</a
                   >
                 </li>
               </ul>
             </li>
             <li>
-              <a href="#org0625a26">2. DBMS architecture</a>
+              <a href="#orgd21f897">2. DBMS architecture</a>
               <ul>
-                <li><a href="#org611ff38">2.1. Why not OS</a></li>
+                <li><a href="#org6f6afe1">2.1. Why not OS</a></li>
               </ul>
             </li>
             <li>
-              <a href="#org39e17b2">3. Database pages</a>
+              <a href="#orgd18a939">3. Database pages</a>
               <ul>
-                <li><a href="#org9183aad">3.1. Hardware page</a></li>
+                <li><a href="#org804cdc6">3.1. Hardware page</a></li>
               </ul>
             </li>
-            <li><a href="#org9c7a42b">4. Database heap</a></li>
+            <li><a href="#org47efb13">4. Database heap</a></li>
             <li>
-              <a href="#orge0c6066">5. Page layout</a>
+              <a href="#org8d17ecb">5. Page layout</a>
               <ul>
-                <li><a href="#orgf376bf9">5.1. Slotted-pages</a></li>
+                <li><a href="#org92fc3b1">5.1. Slotted-pages</a></li>
                 <li>
-                  <a href="#orgb6692b2">5.2. Log-structured</a>
+                  <a href="#orgd87fbaf">5.2. Log-structured</a>
                   <ul>
-                    <li><a href="#orgf9d612a">5.2.1. Log compaction</a></li>
+                    <li><a href="#org59e219f">5.2.1. Log compaction</a></li>
                   </ul>
                 </li>
-                <li><a href="#org16b38cf">5.3. Index-organized storage</a></li>
+                <li><a href="#orgac375b9">5.3. Index-organized storage</a></li>
               </ul>
             </li>
             <li>
-              <a href="#org2317270">6. Tuple layout</a>
+              <a href="#orgc9be9d6">6. Tuple layout</a>
               <ul>
-                <li><a href="#org43e147b">6.1. Denormalized tuple data</a></li>
+                <li><a href="#org9be90ba">6.1. Denormalized tuple data</a></li>
               </ul>
             </li>
             <li>
-              <a href="#org6192db3">7. Data representation</a>
+              <a href="#org523d14c">7. Data representation</a>
               <ul>
-                <li><a href="#org31bdc7c">7.1. Integers</a></li>
+                <li><a href="#orgb336e76">7.1. Integers</a></li>
                 <li>
-                  <a href="#org571d6ce">7.2. Variable precision numbers</a>
+                  <a href="#orgb7caded">7.2. Variable precision numbers</a>
                 </li>
                 <li>
-                  <a href="#org9c1d926">7.3. Fixed-point precision numbers</a>
+                  <a href="#orgd5ef03b">7.3. Fixed-point precision numbers</a>
                 </li>
-                <li><a href="#orge12a85e">7.4. Variable-length data</a></li>
-                <li><a href="#org656d4e0">7.5. Dates/Times</a></li>
-                <li><a href="#orgd88dca8">7.6. Null</a></li>
+                <li><a href="#org71fc0e7">7.4. Variable-length data</a></li>
+                <li><a href="#org0b28475">7.5. Dates/Times</a></li>
+                <li><a href="#org8b86659">7.6. Null</a></li>
               </ul>
             </li>
-            <li><a href="#org8b89e84">8. System catalogs</a></li>
+            <li><a href="#org560f040">8. System catalogs</a></li>
           </ul>
         </div>
       </nav>
@@ -133,13 +133,13 @@
           >CMU 15-445 L4 notes</a
         >.
       </p>
-      <div id="outline-container-org073d546" class="outline-2">
-        <h2 id="org073d546">
+      <div id="outline-container-org6bc3a4e" class="outline-2">
+        <h2 id="org6bc3a4e">
           <span class="section-number-2">1.</span> Data storage
         </h2>
         <div class="outline-text-2" id="text-1"></div>
-        <div id="outline-container-orgddc7296" class="outline-3">
-          <h3 id="orgddc7296">
+        <div id="outline-container-org7a7693e" class="outline-3">
+          <h3 id="org7a7693e">
             <span class="section-number-3">1.1.</span> Volatile device
           </h3>
           <div class="outline-text-3" id="text-1-1">
@@ -153,8 +153,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org17e0f22" class="outline-3">
-          <h3 id="org17e0f22">
+        <div id="outline-container-org6364ce6" class="outline-3">
+          <h3 id="org6364ce6">
             <span class="section-number-3">1.2.</span> Non-volatile device
           </h3>
           <div class="outline-text-3" id="text-1-2">
@@ -175,8 +175,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org0544800" class="outline-3">
-          <h3 id="org0544800">
+        <div id="outline-container-org2db2100" class="outline-3">
+          <h3 id="org2db2100">
             <span class="section-number-3">1.3.</span> Storage hierarchy
           </h3>
           <div class="outline-text-3" id="text-1-3">
@@ -185,8 +185,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org998de85" class="outline-3">
-          <h3 id="org998de85">
+        <div id="outline-container-orge28cebc" class="outline-3">
+          <h3 id="orge28cebc">
             <span class="section-number-3">1.4.</span> Persistent memory
           </h3>
           <div class="outline-text-3" id="text-1-4">
@@ -197,8 +197,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgf47c3bd" class="outline-3">
-          <h3 id="orgf47c3bd">
+        <div id="outline-container-orgde7fc86" class="outline-3">
+          <h3 id="orgde7fc86">
             <span class="section-number-3">1.5.</span> NVM (non-volatile memory
             express)
           </h3>
@@ -212,8 +212,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org0625a26" class="outline-2">
-        <h2 id="org0625a26">
+      <div id="outline-container-orgd21f897" class="outline-2">
+        <h2 id="orgd21f897">
           <span class="section-number-2">2.</span> DBMS architecture
         </h2>
         <div class="outline-text-2" id="text-2">
@@ -235,8 +235,8 @@
             </li>
           </ul>
         </div>
-        <div id="outline-container-org611ff38" class="outline-3">
-          <h3 id="org611ff38">
+        <div id="outline-container-org6f6afe1" class="outline-3">
+          <h3 id="org6f6afe1">
             <span class="section-number-3">2.1.</span> Why not OS
           </h3>
           <div class="outline-text-3" id="text-2-1">
@@ -279,8 +279,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org39e17b2" class="outline-2">
-        <h2 id="org39e17b2">
+      <div id="outline-container-orgd18a939" class="outline-2">
+        <h2 id="orgd18a939">
           <span class="section-number-2">3.</span> Database pages
         </h2>
         <div class="outline-text-2" id="text-3">
@@ -300,8 +300,8 @@
             </li>
           </ul>
         </div>
-        <div id="outline-container-org9183aad" class="outline-3">
-          <h3 id="org9183aad">
+        <div id="outline-container-org804cdc6" class="outline-3">
+          <h3 id="org804cdc6">
             <span class="section-number-3">3.1.</span> Hardware page
           </h3>
           <div class="outline-text-3" id="text-3-1">
@@ -319,8 +319,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org9c7a42b" class="outline-2">
-        <h2 id="org9c7a42b">
+      <div id="outline-container-org47efb13" class="outline-2">
+        <h2 id="org47efb13">
           <span class="section-number-2">4.</span> Database heap
         </h2>
         <div class="outline-text-2" id="text-4">
@@ -354,8 +354,8 @@
           </ul>
         </div>
       </div>
-      <div id="outline-container-orge0c6066" class="outline-2">
-        <h2 id="orge0c6066">
+      <div id="outline-container-org8d17ecb" class="outline-2">
+        <h2 id="org8d17ecb">
           <span class="section-number-2">5.</span> Page layout
         </h2>
         <div class="outline-text-2" id="text-5">
@@ -370,8 +370,8 @@
             </li>
           </ul>
         </div>
-        <div id="outline-container-orgf376bf9" class="outline-3">
-          <h3 id="orgf376bf9">
+        <div id="outline-container-org92fc3b1" class="outline-3">
+          <h3 id="org92fc3b1">
             <span class="section-number-3">5.1.</span> Slotted-pages
           </h3>
           <div class="outline-text-3" id="text-5-1">
@@ -400,7 +400,7 @@
               </li>
             </ul>
 
-            <figure id="org1d3cf48">
+            <figure id="org45e2b02">
               <img
                 src="https://miro.medium.com/v2/resize:fit:935/1*7AuKrdEJQpfRYhavwWzwhg.png"
                 alt="1*7AuKrdEJQpfRYhavwWzwhg.png"
@@ -417,8 +417,8 @@
             </figure>
           </div>
         </div>
-        <div id="outline-container-orgb6692b2" class="outline-3">
-          <h3 id="orgb6692b2">
+        <div id="outline-container-orgd87fbaf" class="outline-3">
+          <h3 id="orgd87fbaf">
             <span class="section-number-3">5.2.</span> Log-structured
           </h3>
           <div class="outline-text-3" id="text-5-2">
@@ -435,8 +435,8 @@
               </li>
             </ul>
           </div>
-          <div id="outline-container-orgf9d612a" class="outline-4">
-            <h4 id="orgf9d612a">
+          <div id="outline-container-org59e219f" class="outline-4">
+            <h4 id="org59e219f">
               <span class="section-number-4">5.2.1.</span> Log compaction
             </h4>
             <div class="outline-text-4" id="text-5-2-1">
@@ -463,8 +463,8 @@
             </div>
           </div>
         </div>
-        <div id="outline-container-org16b38cf" class="outline-3">
-          <h3 id="org16b38cf">
+        <div id="outline-container-orgac375b9" class="outline-3">
+          <h3 id="orgac375b9">
             <span class="section-number-3">5.3.</span> Index-organized storage
           </h3>
           <div class="outline-text-3" id="text-5-3">
@@ -484,7 +484,7 @@
               </li>
             </ul>
 
-            <figure id="org1417bc4">
+            <figure id="orge2d58b3">
               <img
                 src="https://docs.oracle.com/en/database/oracle/oracle-database/21/cncpt/img/cncpt272.gif"
                 alt="cncpt272.gif"
@@ -503,8 +503,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org2317270" class="outline-2">
-        <h2 id="org2317270">
+      <div id="outline-container-orgc9be9d6" class="outline-2">
+        <h2 id="orgc9be9d6">
           <span class="section-number-2">6.</span> Tuple layout
         </h2>
         <div class="outline-text-2" id="text-6">
@@ -521,8 +521,8 @@
             </li>
           </ul>
         </div>
-        <div id="outline-container-org43e147b" class="outline-3">
-          <h3 id="org43e147b">
+        <div id="outline-container-org9be90ba" class="outline-3">
+          <h3 id="org9be90ba">
             <span class="section-number-3">6.1.</span> Denormalized tuple data
           </h3>
           <div class="outline-text-3" id="text-6-1">
@@ -541,8 +541,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org6192db3" class="outline-2">
-        <h2 id="org6192db3">
+      <div id="outline-container-org523d14c" class="outline-2">
+        <h2 id="org523d14c">
           <span class="section-number-2">7.</span> Data representation
         </h2>
         <div class="outline-text-2" id="text-7">
@@ -562,8 +562,8 @@
             </li>
           </ul>
         </div>
-        <div id="outline-container-org31bdc7c" class="outline-3">
-          <h3 id="org31bdc7c">
+        <div id="outline-container-orgb336e76" class="outline-3">
+          <h3 id="orgb336e76">
             <span class="section-number-3">7.1.</span> Integers
           </h3>
           <div class="outline-text-3" id="text-7-1">
@@ -575,8 +575,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org571d6ce" class="outline-3">
-          <h3 id="org571d6ce">
+        <div id="outline-container-orgb7caded" class="outline-3">
+          <h3 id="orgb7caded">
             <span class="section-number-3">7.2.</span> Variable precision
             numbers
           </h3>
@@ -591,8 +591,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org9c1d926" class="outline-3">
-          <h3 id="org9c1d926">
+        <div id="outline-container-orgd5ef03b" class="outline-3">
+          <h3 id="orgd5ef03b">
             <span class="section-number-3">7.3.</span> Fixed-point precision
             numbers
           </h3>
@@ -607,8 +607,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orge12a85e" class="outline-3">
-          <h3 id="orge12a85e">
+        <div id="outline-container-org71fc0e7" class="outline-3">
+          <h3 id="org71fc0e7">
             <span class="section-number-3">7.4.</span> Variable-length data
           </h3>
           <div class="outline-text-3" id="text-7-4">
@@ -630,8 +630,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org656d4e0" class="outline-3">
-          <h3 id="org656d4e0">
+        <div id="outline-container-org0b28475" class="outline-3">
+          <h3 id="org0b28475">
             <span class="section-number-3">7.5.</span> Dates/Times
           </h3>
           <div class="outline-text-3" id="text-7-5">
@@ -643,8 +643,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgd88dca8" class="outline-3">
-          <h3 id="orgd88dca8">
+        <div id="outline-container-org8b86659" class="outline-3">
+          <h3 id="org8b86659">
             <span class="section-number-3">7.6.</span> Null
           </h3>
           <div class="outline-text-3" id="text-7-6">
@@ -667,8 +667,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org8b89e84" class="outline-2">
-        <h2 id="org8b89e84">
+      <div id="outline-container-org560f040" class="outline-2">
+        <h2 id="org560f040">
           <span class="section-number-2">8.</span> System catalogs
         </h2>
         <div class="outline-text-2" id="text-8">
@@ -697,6 +697,7 @@
       </div>
     </div>
     <div id="postamble" class="status">
+      <div id="search-results"></div>
       <footer>
         <p>© 2024 chenyo. Some rights reserved.</p>
       </footer>
