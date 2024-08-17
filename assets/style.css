@@ -271,12 +271,12 @@ footer {
 }
 
 #search-container {
-  margin-top: 10px;
+    margin-top: 10px;
 }
 
 #search-input {
-  width: 100%;
-  padding: 5px;
+    width: 100%;
+    padding: 5px;
 }
 
 #search-result {
@@ -312,7 +312,7 @@ mark {
     border: 1px solid #eee8d5; /* Solarized Light base2 */
     border-radius: 8px;
     padding: 15px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     font-size: 0.9em; /* Slightly smaller font size */
 }
 
@@ -329,6 +329,7 @@ mark {
     border: 1px solid #93a1a1; /* Solarized Light base1 */
     border-radius: 4px;
     padding: 5px;
+    padding-bottom: 0px; /* reduce the bottom blank space in each snippet */
     margin-top: 5px;
     font-size: 0.85em; /* Even smaller font for snippets */
 }
@@ -336,7 +337,8 @@ mark {
 nav#table-of-contents {
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
+    margin-top: -20px; /* reduces the gap between h1 and toc */
 }
 
 nav#table-of-contents h2 {
@@ -359,3 +361,18 @@ nav#table-of-contents h2 {
 #content > *:not(#search-results) {
     display: block;
 }
+
+/* .clickable-snippet { */
+/*   color: #0000EE; /\* Default link color *\/ */
+/*   text-decoration: underline; */
+/*   cursor: pointer; */
+/*   display: inline; /\* Ensures the span doesn't expand to full width *\/ */
+/* } */
+
+/* .clickable-snippet:hover { */
+/*   color: #551A8B; /\* Default visited link color *\/ */
+/* } */
+
+/* .search-result-snippet { */
+/*   margin-bottom: 10px; /\* Example: adds space between snippets *\/ */
+/* } */
