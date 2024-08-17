@@ -9,18 +9,24 @@ document.addEventListener('DOMContentLoaded', function() {
   }).catch(error => console.error('Error loading posts:', error));
 
   searchInput.addEventListener('input', function() {
-    const query = this.value.toLowerCase();
+    const query = this.value;
     if (query.length < 2) {
       showOriginalContent();
       return;
     }
     const results = allPosts.filter(post => 
-      post.title.toLowerCase().includes(query) || 
-      post.content.toLowerCase().includes(query)
+      postContainsQuery(post.title, query) || 
+      postContainsQuery(post.content, query)
     );
 
     displayResults(results, query);
   });
+
+  function postContainsQuery(text, query) {
+    const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(escapedQuery, 'i'); // case-insensitive
+    return regex.test(text);
+  }
 
   function displayResults(results, query) {
     searchResults.innerHTML = '';
@@ -33,22 +39,33 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const title = document.createElement('a');
         title.href = result.url;
-        title.textContent = result.title;
+        title.innerHTML = highlightText(result.title, query);
         resultItem.appendChild(title);
 
         const snippets = getAllSnippets(result.content, query);
-        snippets.forEach(snippet => {
-          const snippetDiv = document.createElement('div');
-          snippetDiv.classList.add('search-result-snippet');
-          snippetDiv.innerHTML = snippet;
-          resultItem.appendChild(snippetDiv);
-        });
+        if (snippets.length > 0) {
+          snippets.forEach(snippet => {
+            const snippetDiv = document.createElement('div');
+            snippetDiv.classList.add('search-result-snippet');
+            snippetDiv.innerHTML = snippet;
+            resultItem.appendChild(snippetDiv);
+          });
+        } else if (!title.innerHTML.includes('<mark>')) {
+          // If no snippets and title doesn't contain highlight, don't display this result
+          return;
+        }
 
         searchResults.appendChild(resultItem);
       });
     }
     content.style.display = 'none';
     searchResults.style.display = 'block';
+  }
+
+  function highlightText(text, query) {
+    const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(escapedQuery, 'gi');
+    return text.replace(regex, match => `<mark>${match}</mark>`);
   }
 
   function showOriginalContent() {
@@ -58,26 +75,37 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function getAllSnippets(content, query) {
     const snippets = [];
-    const lowerContent = content.toLowerCase();
+    const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(escapedQuery, 'gi');
     const contextSize = 50; // Characters of context on each side
     let lastIndex = 0;
 
-    while (true) {
-      const index = lowerContent.indexOf(query, lastIndex);
-      if (index === -1) break;
+    let match;
+    while ((match = regex.exec(content)) !== null) {
+      const index = match.index;
+      let start = Math.max(0, index - contextSize);
+      let end = Math.min(content.length, index + query.length + contextSize);
 
-      const start = Math.max(0, index - contextSize);
-      const end = Math.min(content.length, index + query.length + contextSize);
-      let snippet = content.slice(start, end);
+      // Adjust start and end to nearest word boundaries
+      while (start > 0 && /\S/.test(content[start])) start--;
+      while (end < content.length && /\S/.test(content[end])) end++;
+
+      let snippet = content.slice(start, end).replace(/\s+/g, ' ').trim();
 
       // Highlight the query in the snippet
       const highlightedSnippet = snippet.replace(
-        new RegExp(query, 'gi'),
+        new RegExp(escapedQuery, 'gi'),
         match => `<mark>${match}</mark>`
       );
 
-      snippets.push('...' + highlightedSnippet + '...');
-      lastIndex = index + query.length;
+      if (highlightedSnippet.includes('<mark>')) {
+        snippets.push(
+          (start > 0 ? '...' : '') + 
+          highlightedSnippet + 
+          (end < content.length ? '...' : '')
+        );
+      }
+      regex.lastIndex = index + query.length;
     }
 
     return snippets;
