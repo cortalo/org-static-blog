@@ -47,6 +47,14 @@ nav a {
     font-size: 0.9em; /* Matching the smaller font size */
     background-color: #fdf6e3; /* Solarized Light base3 */
     color: #586e75; /* Solarized Light base01 */
+    &::selection {
+        background-color: #b58900; /* Solarized Light yellow */
+        color: #fdf6e3; /* Solarized Light base3 for text color */
+    }
+    &::-moz-selection {
+        background-color: #b58900; /* Solarized Light yellow */
+        color: #fdf6e3; /* Solarized Light base3 for text color */
+    }
 }
 
 a {
