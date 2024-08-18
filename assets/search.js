@@ -173,9 +173,7 @@ document.addEventListener("DOMContentLoaded", function () {
   async function fetchAllPosts() {
     try {
       // Fetch the post-list.json file
-      const response = await fetch(
-        "https://chenyo-17.github.io/org-static-blog/assets/post-list.json",
-      );
+      const response = await fetch("assets/post-list.json");
       const postUrls = await response.json();
 
       // Fetch content for each blog post
