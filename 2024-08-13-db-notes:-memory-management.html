@@ -24,7 +24,7 @@
     <meta name="referrer" content="no-referrer" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="assets/style.css" type="text/css" />
-    <link rel="favicon" type="image/x-icon" href="assets/favicon.ico" />
+    <link rel="favicon" type="image/x-icon" href="favicon.ico" />
     <script src="assets/search.js"></script>
   </head>
   <body>
@@ -61,55 +61,55 @@
         <h2>Table of Contents</h2>
         <div id="text-table-of-contents" role="doc-toc">
           <ul>
-            <li><a href="#org878eac8">1. Goals</a></li>
+            <li><a href="#org991118a">1. Goals</a></li>
             <li>
-              <a href="#orgae344d8">2. Locks &amp; Latches</a>
+              <a href="#org54c0080">2. Locks &amp; Latches</a>
               <ul>
-                <li><a href="#orgb42efab">2.1. Locks</a></li>
-                <li><a href="#orgd9fd27c">2.2. Latches</a></li>
+                <li><a href="#org7563405">2.1. Locks</a></li>
+                <li><a href="#orgbbb576e">2.2. Latches</a></li>
               </ul>
             </li>
             <li>
-              <a href="#org298a910">3. Buffer pool</a>
+              <a href="#org44fc9a5">3. Buffer pool</a>
               <ul>
-                <li><a href="#org2d90453">3.1. Metadata</a></li>
+                <li><a href="#orga068ea0">3.1. Metadata</a></li>
                 <li>
-                  <a href="#orgb63f3f7">3.2. Memory allocation policies</a>
+                  <a href="#org97e52f7">3.2. Memory allocation policies</a>
                 </li>
               </ul>
             </li>
             <li>
-              <a href="#org3805579">4. Buffer pool optimizations</a>
+              <a href="#org305387c">4. Buffer pool optimizations</a>
               <ul>
-                <li><a href="#org9b43666">4.1. Multiple buffer pools</a></li>
-                <li><a href="#org13e62f9">4.2. Pre-fetching</a></li>
-                <li><a href="#orgdf3f7fb">4.3. Scan sharing</a></li>
-                <li><a href="#org8a553b9">4.4. Buffer pool bypass</a></li>
+                <li><a href="#org4de54c6">4.1. Multiple buffer pools</a></li>
+                <li><a href="#org82997ef">4.2. Pre-fetching</a></li>
+                <li><a href="#orgc1a09a0">4.3. Scan sharing</a></li>
+                <li><a href="#orgad2852f">4.4. Buffer pool bypass</a></li>
               </ul>
             </li>
             <li>
-              <a href="#org3bb9063">5. Buffer replacement policies</a>
+              <a href="#org0bee83d">5. Buffer replacement policies</a>
               <ul>
                 <li>
-                  <a href="#org5442e67">5.1. Least recently used (LRU)</a>
+                  <a href="#orgdc344f6">5.1. Least recently used (LRU)</a>
                 </li>
-                <li><a href="#org2d21f4d">5.2. Clock</a></li>
+                <li><a href="#orgbecc603">5.2. Clock</a></li>
                 <li>
-                  <a href="#org8589567">5.3. LRU-K</a>
+                  <a href="#org466d3f5">5.3. LRU-K</a>
                   <ul>
                     <li>
-                      <a href="#org60fb0f6">5.3.1. MySQL approximate LRU-K</a>
+                      <a href="#orga891945">5.3.1. MySQL approximate LRU-K</a>
                     </li>
                   </ul>
                 </li>
-                <li><a href="#org8442957">5.4. Localization</a></li>
-                <li><a href="#orgeb7a1fd">5.5. Priority hint</a></li>
-                <li><a href="#org50e6724">5.6. Dirty pages</a></li>
+                <li><a href="#org9f326e3">5.4. Localization</a></li>
+                <li><a href="#org2bfd426">5.5. Priority hint</a></li>
+                <li><a href="#orgcc2c38f">5.6. Dirty pages</a></li>
               </ul>
             </li>
-            <li><a href="#org44ca5e9">6. Other memory pools</a></li>
-            <li><a href="#org21effca">7. OS cache bypass</a></li>
-            <li><a href="#org3b99925">8. I/O scheduling</a></li>
+            <li><a href="#org1309ed9">6. Other memory pools</a></li>
+            <li><a href="#orgf3a9542">7. OS cache bypass</a></li>
+            <li><a href="#orgbbb5d1e">8. I/O scheduling</a></li>
           </ul>
         </div>
       </nav>
@@ -121,8 +121,8 @@
         >
         as well as some explanation from Claude.ai.
       </p>
-      <div id="outline-container-org878eac8" class="outline-2">
-        <h2 id="org878eac8"><span class="section-number-2">1.</span> Goals</h2>
+      <div id="outline-container-org991118a" class="outline-2">
+        <h2 id="org991118a"><span class="section-number-2">1.</span> Goals</h2>
         <div class="outline-text-2" id="text-1">
           <ul class="org-ul">
             <li>
@@ -140,8 +140,8 @@
           </ul>
         </div>
       </div>
-      <div id="outline-container-orgae344d8" class="outline-2">
-        <h2 id="orgae344d8">
+      <div id="outline-container-org54c0080" class="outline-2">
+        <h2 id="org54c0080">
           <span class="section-number-2">2.</span> Locks &amp; Latches
         </h2>
         <div class="outline-text-2" id="text-2">
@@ -149,8 +149,8 @@
             <li>Both used to protect internal elements.</li>
           </ul>
         </div>
-        <div id="outline-container-orgb42efab" class="outline-3">
-          <h3 id="orgb42efab">
+        <div id="outline-container-org7563405" class="outline-3">
+          <h3 id="org7563405">
             <span class="section-number-3">2.1.</span> Locks
           </h3>
           <div class="outline-text-3" id="text-2-1">
@@ -164,8 +164,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgd9fd27c" class="outline-3">
-          <h3 id="orgd9fd27c">
+        <div id="outline-container-orgbbb576e" class="outline-3">
+          <h3 id="orgbbb576e">
             <span class="section-number-3">2.2.</span> Latches
           </h3>
           <div class="outline-text-3" id="text-2-2">
@@ -182,8 +182,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org298a910" class="outline-2">
-        <h2 id="org298a910">
+      <div id="outline-container-org44fc9a5" class="outline-2">
+        <h2 id="org44fc9a5">
           <span class="section-number-2">3.</span> Buffer pool
         </h2>
         <div class="outline-text-2" id="text-3">
@@ -204,8 +204,8 @@
             </li>
           </ul>
         </div>
-        <div id="outline-container-org2d90453" class="outline-3">
-          <h3 id="org2d90453">
+        <div id="outline-container-orga068ea0" class="outline-3">
+          <h3 id="orga068ea0">
             <span class="section-number-3">3.1.</span> Metadata
           </h3>
           <div class="outline-text-3" id="text-3-1">
@@ -226,8 +226,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgb63f3f7" class="outline-3">
-          <h3 id="orgb63f3f7">
+        <div id="outline-container-org97e52f7" class="outline-3">
+          <h3 id="org97e52f7">
             <span class="section-number-3">3.2.</span> Memory allocation
             policies
           </h3>
@@ -248,13 +248,13 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org3805579" class="outline-2">
-        <h2 id="org3805579">
+      <div id="outline-container-org305387c" class="outline-2">
+        <h2 id="org305387c">
           <span class="section-number-2">4.</span> Buffer pool optimizations
         </h2>
         <div class="outline-text-2" id="text-4"></div>
-        <div id="outline-container-org9b43666" class="outline-3">
-          <h3 id="org9b43666">
+        <div id="outline-container-org4de54c6" class="outline-3">
+          <h3 id="org4de54c6">
             <span class="section-number-3">4.1.</span> Multiple buffer pools
           </h3>
           <div class="outline-text-3" id="text-4-1">
@@ -283,8 +283,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org13e62f9" class="outline-3">
-          <h3 id="org13e62f9">
+        <div id="outline-container-org82997ef" class="outline-3">
+          <h3 id="org82997ef">
             <span class="section-number-3">4.2.</span> Pre-fetching
           </h3>
           <div class="outline-text-3" id="text-4-2">
@@ -303,8 +303,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgdf3f7fb" class="outline-3">
-          <h3 id="orgdf3f7fb">
+        <div id="outline-container-orgc1a09a0" class="outline-3">
+          <h3 id="orgc1a09a0">
             <span class="section-number-3">4.3.</span> Scan sharing
           </h3>
           <div class="outline-text-3" id="text-4-3">
@@ -322,8 +322,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org8a553b9" class="outline-3">
-          <h3 id="org8a553b9">
+        <div id="outline-container-orgad2852f" class="outline-3">
+          <h3 id="orgad2852f">
             <span class="section-number-3">4.4.</span> Buffer pool bypass
           </h3>
           <div class="outline-text-3" id="text-4-4">
@@ -340,8 +340,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org3bb9063" class="outline-2">
-        <h2 id="org3bb9063">
+      <div id="outline-container-org0bee83d" class="outline-2">
+        <h2 id="org0bee83d">
           <span class="section-number-2">5.</span> Buffer replacement policies
         </h2>
         <div class="outline-text-2" id="text-5">
@@ -352,8 +352,8 @@
             </li>
           </ul>
         </div>
-        <div id="outline-container-org5442e67" class="outline-3">
-          <h3 id="org5442e67">
+        <div id="outline-container-orgdc344f6" class="outline-3">
+          <h3 id="orgdc344f6">
             <span class="section-number-3">5.1.</span> Least recently used (LRU)
           </h3>
           <div class="outline-text-3" id="text-5-1">
@@ -381,8 +381,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org2d21f4d" class="outline-3">
-          <h3 id="org2d21f4d">
+        <div id="outline-container-orgbecc603" class="outline-3">
+          <h3 id="orgbecc603">
             <span class="section-number-3">5.2.</span> Clock
           </h3>
           <div class="outline-text-3" id="text-5-2">
@@ -398,8 +398,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org8589567" class="outline-3">
-          <h3 id="org8589567">
+        <div id="outline-container-org466d3f5" class="outline-3">
+          <h3 id="org466d3f5">
             <span class="section-number-3">5.3.</span> LRU-K
           </h3>
           <div class="outline-text-3" id="text-5-3">
@@ -410,8 +410,8 @@
               </li>
             </ul>
           </div>
-          <div id="outline-container-org60fb0f6" class="outline-4">
-            <h4 id="org60fb0f6">
+          <div id="outline-container-orga891945" class="outline-4">
+            <h4 id="orga891945">
               <span class="section-number-4">5.3.1.</span> MySQL approximate
               LRU-K
             </h4>
@@ -433,8 +433,8 @@
             </div>
           </div>
         </div>
-        <div id="outline-container-org8442957" class="outline-3">
-          <h3 id="org8442957">
+        <div id="outline-container-org9f326e3" class="outline-3">
+          <h3 id="org9f326e3">
             <span class="section-number-3">5.4.</span> Localization
           </h3>
           <div class="outline-text-3" id="text-5-4">
@@ -455,8 +455,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgeb7a1fd" class="outline-3">
-          <h3 id="orgeb7a1fd">
+        <div id="outline-container-org2bfd426" class="outline-3">
+          <h3 id="org2bfd426">
             <span class="section-number-3">5.5.</span> Priority hint
           </h3>
           <div class="outline-text-3" id="text-5-5">
@@ -468,8 +468,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org50e6724" class="outline-3">
-          <h3 id="org50e6724">
+        <div id="outline-container-orgcc2c38f" class="outline-3">
+          <h3 id="orgcc2c38f">
             <span class="section-number-3">5.6.</span> Dirty pages
           </h3>
           <div class="outline-text-3" id="text-5-6">
@@ -492,8 +492,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org44ca5e9" class="outline-2">
-        <h2 id="org44ca5e9">
+      <div id="outline-container-org1309ed9" class="outline-2">
+        <h2 id="org1309ed9">
           <span class="section-number-2">6.</span> Other memory pools
         </h2>
         <div class="outline-text-2" id="text-6">
@@ -510,8 +510,8 @@
           </ul>
         </div>
       </div>
-      <div id="outline-container-org21effca" class="outline-2">
-        <h2 id="org21effca">
+      <div id="outline-container-orgf3a9542" class="outline-2">
+        <h2 id="orgf3a9542">
           <span class="section-number-2">7.</span> OS cache bypass
         </h2>
         <div class="outline-text-2" id="text-7">
@@ -528,8 +528,8 @@
           </ul>
         </div>
       </div>
-      <div id="outline-container-org3b99925" class="outline-2">
-        <h2 id="org3b99925">
+      <div id="outline-container-orgbbb5d1e" class="outline-2">
+        <h2 id="orgbbb5d1e">
           <span class="section-number-2">8.</span> I/O scheduling
         </h2>
         <div class="outline-text-2" id="text-8">
@@ -563,6 +563,32 @@
       <div id="search-results"></div>
       <footer>
         <p>© 2024 chenyo. Some rights reserved.</p>
+        <div class="social-links">
+          <a
+            href="https://t.me/feihuadawangjiushiwo"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="assets/telegram-icon.svg"
+              alt="Telegram"
+              width="24"
+              height="24"
+            />
+          </a>
+          <a
+            href="https://github.com/chenyo-17"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="assets/github-icon.svg"
+              alt="GitHub"
+              width="24"
+              height="24"
+            />
+          </a>
+        </div>
       </footer>
     </div>
   </body>
