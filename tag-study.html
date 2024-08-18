@@ -20,6 +20,7 @@
     <meta name="referrer" content="no-referrer" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="assets/style.css" type="text/css" />
+    <link rel="favicon" type="image/x-icon" href="assets/favicon.ico" />
     <script src="assets/search.js"></script>
   </head>
   <body>
@@ -57,55 +58,55 @@
         <h2>Table of Contents</h2>
         <div id="text-table-of-contents" role="doc-toc">
           <ul>
-            <li><a href="#org72118b4">1. Goals</a></li>
+            <li><a href="#org878eac8">1. Goals</a></li>
             <li>
-              <a href="#orgd31989c">2. Locks &amp; Latches</a>
+              <a href="#orgae344d8">2. Locks &amp; Latches</a>
               <ul>
-                <li><a href="#orga395f3e">2.1. Locks</a></li>
-                <li><a href="#org5ecaa28">2.2. Latches</a></li>
+                <li><a href="#orgb42efab">2.1. Locks</a></li>
+                <li><a href="#orgd9fd27c">2.2. Latches</a></li>
               </ul>
             </li>
             <li>
-              <a href="#orgb81dc7d">3. Buffer pool</a>
+              <a href="#org298a910">3. Buffer pool</a>
               <ul>
-                <li><a href="#orga6a393a">3.1. Metadata</a></li>
+                <li><a href="#org2d90453">3.1. Metadata</a></li>
                 <li>
-                  <a href="#orga0922a7">3.2. Memory allocation policies</a>
+                  <a href="#orgb63f3f7">3.2. Memory allocation policies</a>
                 </li>
               </ul>
             </li>
             <li>
-              <a href="#org79030b4">4. Buffer pool optimizations</a>
+              <a href="#org3805579">4. Buffer pool optimizations</a>
               <ul>
-                <li><a href="#org30673c7">4.1. Multiple buffer pools</a></li>
-                <li><a href="#org58b509c">4.2. Pre-fetching</a></li>
-                <li><a href="#orgdfea110">4.3. Scan sharing</a></li>
-                <li><a href="#org203031e">4.4. Buffer pool bypass</a></li>
+                <li><a href="#org9b43666">4.1. Multiple buffer pools</a></li>
+                <li><a href="#org13e62f9">4.2. Pre-fetching</a></li>
+                <li><a href="#orgdf3f7fb">4.3. Scan sharing</a></li>
+                <li><a href="#org8a553b9">4.4. Buffer pool bypass</a></li>
               </ul>
             </li>
             <li>
-              <a href="#org8afa5a4">5. Buffer replacement policies</a>
+              <a href="#org3bb9063">5. Buffer replacement policies</a>
               <ul>
                 <li>
-                  <a href="#org5b97fbd">5.1. Least recently used (LRU)</a>
+                  <a href="#org5442e67">5.1. Least recently used (LRU)</a>
                 </li>
-                <li><a href="#orga83b0ff">5.2. Clock</a></li>
+                <li><a href="#org2d21f4d">5.2. Clock</a></li>
                 <li>
-                  <a href="#orgb95df55">5.3. LRU-K</a>
+                  <a href="#org8589567">5.3. LRU-K</a>
                   <ul>
                     <li>
-                      <a href="#orgbb20e7a">5.3.1. MySQL approximate LRU-K</a>
+                      <a href="#org60fb0f6">5.3.1. MySQL approximate LRU-K</a>
                     </li>
                   </ul>
                 </li>
-                <li><a href="#orgf798d74">5.4. Localization</a></li>
-                <li><a href="#org919fd86">5.5. Priority hint</a></li>
-                <li><a href="#org94f9561">5.6. Dirty pages</a></li>
+                <li><a href="#org8442957">5.4. Localization</a></li>
+                <li><a href="#orgeb7a1fd">5.5. Priority hint</a></li>
+                <li><a href="#org50e6724">5.6. Dirty pages</a></li>
               </ul>
             </li>
-            <li><a href="#orgcab202c">6. Other memory pools</a></li>
-            <li><a href="#orga4473db">7. OS cache bypass</a></li>
-            <li><a href="#org963fbf1">8. I/O scheduling</a></li>
+            <li><a href="#org44ca5e9">6. Other memory pools</a></li>
+            <li><a href="#org21effca">7. OS cache bypass</a></li>
+            <li><a href="#org3b99925">8. I/O scheduling</a></li>
           </ul>
         </div>
       </nav>
@@ -117,8 +118,8 @@
         >
         as well as some explanation from Claude.ai.
       </p>
-      <div id="outline-container-org72118b4" class="outline-2">
-        <h2 id="org72118b4"><span class="section-number-2">1.</span> Goals</h2>
+      <div id="outline-container-org878eac8" class="outline-2">
+        <h2 id="org878eac8"><span class="section-number-2">1.</span> Goals</h2>
         <div class="outline-text-2" id="text-1">
           <ul class="org-ul">
             <li>
@@ -136,8 +137,8 @@
           </ul>
         </div>
       </div>
-      <div id="outline-container-orgd31989c" class="outline-2">
-        <h2 id="orgd31989c">
+      <div id="outline-container-orgae344d8" class="outline-2">
+        <h2 id="orgae344d8">
           <span class="section-number-2">2.</span> Locks &amp; Latches
         </h2>
         <div class="outline-text-2" id="text-2">
@@ -145,8 +146,8 @@
             <li>Both used to protect internal elements.</li>
           </ul>
         </div>
-        <div id="outline-container-orga395f3e" class="outline-3">
-          <h3 id="orga395f3e">
+        <div id="outline-container-orgb42efab" class="outline-3">
+          <h3 id="orgb42efab">
             <span class="section-number-3">2.1.</span> Locks
           </h3>
           <div class="outline-text-3" id="text-2-1">
@@ -160,8 +161,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org5ecaa28" class="outline-3">
-          <h3 id="org5ecaa28">
+        <div id="outline-container-orgd9fd27c" class="outline-3">
+          <h3 id="orgd9fd27c">
             <span class="section-number-3">2.2.</span> Latches
           </h3>
           <div class="outline-text-3" id="text-2-2">
@@ -178,8 +179,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-orgb81dc7d" class="outline-2">
-        <h2 id="orgb81dc7d">
+      <div id="outline-container-org298a910" class="outline-2">
+        <h2 id="org298a910">
           <span class="section-number-2">3.</span> Buffer pool
         </h2>
         <div class="outline-text-2" id="text-3">
@@ -200,8 +201,8 @@
             </li>
           </ul>
         </div>
-        <div id="outline-container-orga6a393a" class="outline-3">
-          <h3 id="orga6a393a">
+        <div id="outline-container-org2d90453" class="outline-3">
+          <h3 id="org2d90453">
             <span class="section-number-3">3.1.</span> Metadata
           </h3>
           <div class="outline-text-3" id="text-3-1">
@@ -222,8 +223,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orga0922a7" class="outline-3">
-          <h3 id="orga0922a7">
+        <div id="outline-container-orgb63f3f7" class="outline-3">
+          <h3 id="orgb63f3f7">
             <span class="section-number-3">3.2.</span> Memory allocation
             policies
           </h3>
@@ -244,13 +245,13 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org79030b4" class="outline-2">
-        <h2 id="org79030b4">
+      <div id="outline-container-org3805579" class="outline-2">
+        <h2 id="org3805579">
           <span class="section-number-2">4.</span> Buffer pool optimizations
         </h2>
         <div class="outline-text-2" id="text-4"></div>
-        <div id="outline-container-org30673c7" class="outline-3">
-          <h3 id="org30673c7">
+        <div id="outline-container-org9b43666" class="outline-3">
+          <h3 id="org9b43666">
             <span class="section-number-3">4.1.</span> Multiple buffer pools
           </h3>
           <div class="outline-text-3" id="text-4-1">
@@ -279,8 +280,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org58b509c" class="outline-3">
-          <h3 id="org58b509c">
+        <div id="outline-container-org13e62f9" class="outline-3">
+          <h3 id="org13e62f9">
             <span class="section-number-3">4.2.</span> Pre-fetching
           </h3>
           <div class="outline-text-3" id="text-4-2">
@@ -299,8 +300,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgdfea110" class="outline-3">
-          <h3 id="orgdfea110">
+        <div id="outline-container-orgdf3f7fb" class="outline-3">
+          <h3 id="orgdf3f7fb">
             <span class="section-number-3">4.3.</span> Scan sharing
           </h3>
           <div class="outline-text-3" id="text-4-3">
@@ -318,8 +319,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org203031e" class="outline-3">
-          <h3 id="org203031e">
+        <div id="outline-container-org8a553b9" class="outline-3">
+          <h3 id="org8a553b9">
             <span class="section-number-3">4.4.</span> Buffer pool bypass
           </h3>
           <div class="outline-text-3" id="text-4-4">
@@ -336,8 +337,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org8afa5a4" class="outline-2">
-        <h2 id="org8afa5a4">
+      <div id="outline-container-org3bb9063" class="outline-2">
+        <h2 id="org3bb9063">
           <span class="section-number-2">5.</span> Buffer replacement policies
         </h2>
         <div class="outline-text-2" id="text-5">
@@ -348,8 +349,8 @@
             </li>
           </ul>
         </div>
-        <div id="outline-container-org5b97fbd" class="outline-3">
-          <h3 id="org5b97fbd">
+        <div id="outline-container-org5442e67" class="outline-3">
+          <h3 id="org5442e67">
             <span class="section-number-3">5.1.</span> Least recently used (LRU)
           </h3>
           <div class="outline-text-3" id="text-5-1">
@@ -377,8 +378,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orga83b0ff" class="outline-3">
-          <h3 id="orga83b0ff">
+        <div id="outline-container-org2d21f4d" class="outline-3">
+          <h3 id="org2d21f4d">
             <span class="section-number-3">5.2.</span> Clock
           </h3>
           <div class="outline-text-3" id="text-5-2">
@@ -394,8 +395,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgb95df55" class="outline-3">
-          <h3 id="orgb95df55">
+        <div id="outline-container-org8589567" class="outline-3">
+          <h3 id="org8589567">
             <span class="section-number-3">5.3.</span> LRU-K
           </h3>
           <div class="outline-text-3" id="text-5-3">
@@ -406,8 +407,8 @@
               </li>
             </ul>
           </div>
-          <div id="outline-container-orgbb20e7a" class="outline-4">
-            <h4 id="orgbb20e7a">
+          <div id="outline-container-org60fb0f6" class="outline-4">
+            <h4 id="org60fb0f6">
               <span class="section-number-4">5.3.1.</span> MySQL approximate
               LRU-K
             </h4>
@@ -429,8 +430,8 @@
             </div>
           </div>
         </div>
-        <div id="outline-container-orgf798d74" class="outline-3">
-          <h3 id="orgf798d74">
+        <div id="outline-container-org8442957" class="outline-3">
+          <h3 id="org8442957">
             <span class="section-number-3">5.4.</span> Localization
           </h3>
           <div class="outline-text-3" id="text-5-4">
@@ -451,8 +452,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org919fd86" class="outline-3">
-          <h3 id="org919fd86">
+        <div id="outline-container-orgeb7a1fd" class="outline-3">
+          <h3 id="orgeb7a1fd">
             <span class="section-number-3">5.5.</span> Priority hint
           </h3>
           <div class="outline-text-3" id="text-5-5">
@@ -464,8 +465,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org94f9561" class="outline-3">
-          <h3 id="org94f9561">
+        <div id="outline-container-org50e6724" class="outline-3">
+          <h3 id="org50e6724">
             <span class="section-number-3">5.6.</span> Dirty pages
           </h3>
           <div class="outline-text-3" id="text-5-6">
@@ -488,8 +489,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-orgcab202c" class="outline-2">
-        <h2 id="orgcab202c">
+      <div id="outline-container-org44ca5e9" class="outline-2">
+        <h2 id="org44ca5e9">
           <span class="section-number-2">6.</span> Other memory pools
         </h2>
         <div class="outline-text-2" id="text-6">
@@ -506,8 +507,8 @@
           </ul>
         </div>
       </div>
-      <div id="outline-container-orga4473db" class="outline-2">
-        <h2 id="orga4473db">
+      <div id="outline-container-org21effca" class="outline-2">
+        <h2 id="org21effca">
           <span class="section-number-2">7.</span> OS cache bypass
         </h2>
         <div class="outline-text-2" id="text-7">
@@ -524,8 +525,8 @@
           </ul>
         </div>
       </div>
-      <div id="outline-container-org963fbf1" class="outline-2">
-        <h2 id="org963fbf1">
+      <div id="outline-container-org3b99925" class="outline-2">
+        <h2 id="org3b99925">
           <span class="section-number-2">8.</span> I/O scheduling
         </h2>
         <div class="outline-text-2" id="text-8">
@@ -567,60 +568,60 @@
         <div id="text-table-of-contents" role="doc-toc">
           <ul>
             <li>
-              <a href="#orgb325179">1. Database workloads</a>
+              <a href="#org85a1c9b">1. Database workloads</a>
               <ul>
                 <li>
-                  <a href="#org4994171"
+                  <a href="#org4b1d669"
                     >1.1. OLTP (Online Transaction Processing)</a
                   >
                 </li>
                 <li>
-                  <a href="#org0119116"
+                  <a href="#org6bce54a"
                     >1.2. OLAP (Online Analytical Processing)</a
                   >
                 </li>
-                <li><a href="#org122a435">1.3. HTAP (Hybrid)</a></li>
+                <li><a href="#orgc0961e0">1.3. HTAP (Hybrid)</a></li>
               </ul>
             </li>
             <li>
-              <a href="#org3d8d248">2. Storage models</a>
+              <a href="#org4813278">2. Storage models</a>
               <ul>
                 <li>
-                  <a href="#orgd70844c">2.1. N-ary Storage Model (NSM)</a>
+                  <a href="#org6a897a6">2.1. N-ary Storage Model (NSM)</a>
                 </li>
                 <li>
-                  <a href="#org5b5ce5e"
+                  <a href="#orgba64f33"
                     >2.2. Decomposition Storage Model (DSM)</a
                   >
                 </li>
                 <li>
-                  <a href="#org9501db6"
+                  <a href="#org56babf1"
                     >2.3. Partition Attributes Across (PAX)</a
                   >
                 </li>
               </ul>
             </li>
             <li>
-              <a href="#orge03292b">3. Database compression</a>
+              <a href="#orgac94013">3. Database compression</a>
               <ul>
-                <li><a href="#org5e9ad51">3.1. Compression granularity</a></li>
-                <li><a href="#orgcb7090a">3.2. Naive compression</a></li>
+                <li><a href="#org9f06ac0">3.1. Compression granularity</a></li>
+                <li><a href="#org49dfe33">3.2. Naive compression</a></li>
               </ul>
             </li>
             <li>
-              <a href="#org03f0730">4. Columnar compression</a>
+              <a href="#orgd8cef0f">4. Columnar compression</a>
               <ul>
-                <li><a href="#org8cec90e">4.1. Dictionary encoding</a></li>
+                <li><a href="#orgeb97923">4.1. Dictionary encoding</a></li>
                 <li>
-                  <a href="#org052d7b1">4.2. Run-Length encoding (RLE)</a>
+                  <a href="#org8cc690b">4.2. Run-Length encoding (RLE)</a>
                 </li>
-                <li><a href="#org2756065">4.3. Bit-packing encoding</a></li>
-                <li><a href="#org4f30a73">4.4. Mostly encoding</a></li>
+                <li><a href="#org99c27c8">4.3. Bit-packing encoding</a></li>
+                <li><a href="#org16ea5e2">4.4. Mostly encoding</a></li>
                 <li>
-                  <a href="#org04bc519">4.5. Bitmap (One-hot) encoding</a>
+                  <a href="#orgdca6d3c">4.5. Bitmap (One-hot) encoding</a>
                 </li>
-                <li><a href="#orgd9518a6">4.6. Delta encoding</a></li>
-                <li><a href="#orgd9183ab">4.7. Incremental encoding</a></li>
+                <li><a href="#org6283a50">4.6. Delta encoding</a></li>
+                <li><a href="#org3992a89">4.7. Incremental encoding</a></li>
               </ul>
             </li>
           </ul>
@@ -633,13 +634,13 @@
           >CMU 15-445 L5 notes</a
         >.
       </p>
-      <div id="outline-container-orgb325179" class="outline-2">
-        <h2 id="orgb325179">
+      <div id="outline-container-org85a1c9b" class="outline-2">
+        <h2 id="org85a1c9b">
           <span class="section-number-2">1.</span> Database workloads
         </h2>
         <div class="outline-text-2" id="text-1"></div>
-        <div id="outline-container-org4994171" class="outline-3">
-          <h3 id="org4994171">
+        <div id="outline-container-org4b1d669" class="outline-3">
+          <h3 id="org4b1d669">
             <span class="section-number-3">1.1.</span> OLTP (Online Transaction
             Processing)
           </h3>
@@ -654,8 +655,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org0119116" class="outline-3">
-          <h3 id="org0119116">
+        <div id="outline-container-org6bce54a" class="outline-3">
+          <h3 id="org6bce54a">
             <span class="section-number-3">1.2.</span> OLAP (Online Analytical
             Processing)
           </h3>
@@ -666,8 +667,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org122a435" class="outline-3">
-          <h3 id="org122a435">
+        <div id="outline-container-orgc0961e0" class="outline-3">
+          <h3 id="orgc0961e0">
             <span class="section-number-3">1.3.</span> HTAP (Hybrid)
           </h3>
           <div class="outline-text-3" id="text-1-3">
@@ -677,8 +678,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org3d8d248" class="outline-2">
-        <h2 id="org3d8d248">
+      <div id="outline-container-org4813278" class="outline-2">
+        <h2 id="org4813278">
           <span class="section-number-2">2.</span> Storage models
         </h2>
         <div class="outline-text-2" id="text-2">
@@ -686,8 +687,8 @@
             <li>Different ways to store tuples in pages.</li>
           </ul>
         </div>
-        <div id="outline-container-orgd70844c" class="outline-3">
-          <h3 id="orgd70844c">
+        <div id="outline-container-org6a897a6" class="outline-3">
+          <h3 id="org6a897a6">
             <span class="section-number-3">2.1.</span> N-ary Storage Model (NSM)
           </h3>
           <div class="outline-text-3" id="text-2-1">
@@ -706,8 +707,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org5b5ce5e" class="outline-3">
-          <h3 id="org5b5ce5e">
+        <div id="outline-container-orgba64f33" class="outline-3">
+          <h3 id="orgba64f33">
             <span class="section-number-3">2.2.</span> Decomposition Storage
             Model (DSM)
           </h3>
@@ -741,7 +742,7 @@
               </li>
             </ul>
 
-            <figure id="org786e448">
+            <figure id="orgc775856">
               <img
                 src="./static/db-dsm-storage-model.png"
                 alt="db-dsm-storage-model.png"
@@ -759,8 +760,8 @@
             </figure>
           </div>
         </div>
-        <div id="outline-container-org9501db6" class="outline-3">
-          <h3 id="org9501db6">
+        <div id="outline-container-org56babf1" class="outline-3">
+          <h3 id="org56babf1">
             <span class="section-number-3">2.3.</span> Partition Attributes
             Across (PAX)
           </h3>
@@ -777,7 +778,7 @@
               </li>
             </ul>
 
-            <figure id="org5d98e0f">
+            <figure id="org8caf991">
               <img
                 src="./static/db-pax-storage-model.png"
                 alt="db-pax-storage-model.png"
@@ -796,8 +797,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-orge03292b" class="outline-2">
-        <h2 id="orge03292b">
+      <div id="outline-container-orgac94013" class="outline-2">
+        <h2 id="orgac94013">
           <span class="section-number-2">3.</span> Database compression
         </h2>
         <div class="outline-text-2" id="text-3">
@@ -841,8 +842,8 @@
             </li>
           </ul>
         </div>
-        <div id="outline-container-org5e9ad51" class="outline-3">
-          <h3 id="org5e9ad51">
+        <div id="outline-container-org9f06ac0" class="outline-3">
+          <h3 id="org9f06ac0">
             <span class="section-number-3">3.1.</span> Compression granularity
           </h3>
           <div class="outline-text-3" id="text-3-1">
@@ -860,8 +861,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgcb7090a" class="outline-3">
-          <h3 id="orgcb7090a">
+        <div id="outline-container-org49dfe33" class="outline-3">
+          <h3 id="org49dfe33">
             <span class="section-number-3">3.2.</span> Naive compression
           </h3>
           <div class="outline-text-3" id="text-3-2">
@@ -889,8 +890,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org03f0730" class="outline-2">
-        <h2 id="org03f0730">
+      <div id="outline-container-orgd8cef0f" class="outline-2">
+        <h2 id="orgd8cef0f">
           <span class="section-number-2">4.</span> Columnar compression
         </h2>
         <div class="outline-text-2" id="text-4">
@@ -900,8 +901,8 @@
             </li>
           </ul>
         </div>
-        <div id="outline-container-org8cec90e" class="outline-3">
-          <h3 id="org8cec90e">
+        <div id="outline-container-orgeb97923" class="outline-3">
+          <h3 id="orgeb97923">
             <span class="section-number-3">4.1.</span> Dictionary encoding
           </h3>
           <div class="outline-text-3" id="text-4-1">
@@ -935,8 +936,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org052d7b1" class="outline-3">
-          <h3 id="org052d7b1">
+        <div id="outline-container-org8cc690b" class="outline-3">
+          <h3 id="org8cc690b">
             <span class="section-number-3">4.2.</span> Run-Length encoding (RLE)
           </h3>
           <div class="outline-text-3" id="text-4-2">
@@ -950,7 +951,7 @@
               </li>
             </ul>
 
-            <figure id="org100073e">
+            <figure id="org6382298">
               <img
                 src="./static/db-rle-storage-model.png"
                 alt="db-rle-storage-model.png"
@@ -968,8 +969,8 @@
             </figure>
           </div>
         </div>
-        <div id="outline-container-org2756065" class="outline-3">
-          <h3 id="org2756065">
+        <div id="outline-container-org99c27c8" class="outline-3">
+          <h3 id="org99c27c8">
             <span class="section-number-3">4.3.</span> Bit-packing encoding
           </h3>
           <div class="outline-text-3" id="text-4-3">
@@ -977,7 +978,7 @@
               <li>Use less bits to store an attribute.</li>
             </ul>
 
-            <figure id="orgc16a23c">
+            <figure id="orgf423227">
               <img
                 src="./static/db-bit-packing-storage-model.png"
                 alt="db-bit-packing-storage-model.png"
@@ -995,8 +996,8 @@
             </figure>
           </div>
         </div>
-        <div id="outline-container-org4f30a73" class="outline-3">
-          <h3 id="org4f30a73">
+        <div id="outline-container-org16ea5e2" class="outline-3">
+          <h3 id="org16ea5e2">
             <span class="section-number-3">4.4.</span> Mostly encoding
           </h3>
           <div class="outline-text-3" id="text-4-4">
@@ -1007,7 +1008,7 @@
               </li>
             </ul>
 
-            <figure id="org302b85b">
+            <figure id="orgd9086f0">
               <img
                 src="./static/db-mostly-encoding-storage-model.png"
                 alt="db-mostly-encoding-storage-model.png"
@@ -1024,8 +1025,8 @@
             </figure>
           </div>
         </div>
-        <div id="outline-container-org04bc519" class="outline-3">
-          <h3 id="org04bc519">
+        <div id="outline-container-orgdca6d3c" class="outline-3">
+          <h3 id="orgdca6d3c">
             <span class="section-number-3">4.5.</span> Bitmap (One-hot) encoding
           </h3>
           <div class="outline-text-3" id="text-4-5">
@@ -1033,7 +1034,7 @@
               <li>Only practical if the value cardinality is low.</li>
             </ul>
 
-            <figure id="org78886ea">
+            <figure id="org128413a">
               <img
                 src="./static/db-bitmap-encoding-storage-model.png"
                 alt="db-bitmap-encoding-storage-model.png"
@@ -1050,8 +1051,8 @@
             </figure>
           </div>
         </div>
-        <div id="outline-container-orgd9518a6" class="outline-3">
-          <h3 id="orgd9518a6">
+        <div id="outline-container-org6283a50" class="outline-3">
+          <h3 id="org6283a50">
             <span class="section-number-3">4.6.</span> Delta encoding
           </h3>
           <div class="outline-text-3" id="text-4-6">
@@ -1063,7 +1064,7 @@
               <li>Can be combined with RLE encoding.</li>
             </ul>
 
-            <figure id="org0a607d7">
+            <figure id="orgad0e884">
               <img
                 src="./static/db-delta-encoding-storage-model.png"
                 alt="db-delta-encoding-storage-model.png"
@@ -1080,8 +1081,8 @@
             </figure>
           </div>
         </div>
-        <div id="outline-container-orgd9183ab" class="outline-3">
-          <h3 id="orgd9183ab">
+        <div id="outline-container-org3992a89" class="outline-3">
+          <h3 id="org3992a89">
             <span class="section-number-3">4.7.</span> Incremental encoding
           </h3>
           <div class="outline-text-3" id="text-4-7">
@@ -1121,67 +1122,67 @@
         <div id="text-table-of-contents" role="doc-toc">
           <ul>
             <li>
-              <a href="#org2fd98a2">1. Data storage</a>
+              <a href="#org319373f">1. Data storage</a>
               <ul>
-                <li><a href="#orgd887be5">1.1. Volatile device</a></li>
-                <li><a href="#orgeb7ba88">1.2. Non-volatile device</a></li>
-                <li><a href="#org0095837">1.3. Storage hierarchy</a></li>
-                <li><a href="#orga897215">1.4. Persistent memory</a></li>
+                <li><a href="#org25b5d83">1.1. Volatile device</a></li>
+                <li><a href="#orgbd2989a">1.2. Non-volatile device</a></li>
+                <li><a href="#org2549b27">1.3. Storage hierarchy</a></li>
+                <li><a href="#org0a06bab">1.4. Persistent memory</a></li>
                 <li>
-                  <a href="#org58c7292"
+                  <a href="#org6a7701a"
                     >1.5. NVM (non-volatile memory express)</a
                   >
                 </li>
               </ul>
             </li>
             <li>
-              <a href="#org2e45ea2">2. DBMS architecture</a>
+              <a href="#orgcf1d613">2. DBMS architecture</a>
               <ul>
-                <li><a href="#orgebf9233">2.1. Why not OS</a></li>
+                <li><a href="#orgf2107fc">2.1. Why not OS</a></li>
               </ul>
             </li>
             <li>
-              <a href="#orgb2db9b6">3. Database pages</a>
+              <a href="#org16bffda">3. Database pages</a>
               <ul>
-                <li><a href="#org5292778">3.1. Hardware page</a></li>
+                <li><a href="#org73ef5c7">3.1. Hardware page</a></li>
               </ul>
             </li>
-            <li><a href="#orgf3dc9a4">4. Database heap</a></li>
+            <li><a href="#org94011df">4. Database heap</a></li>
             <li>
-              <a href="#org16079b5">5. Page layout</a>
+              <a href="#org75e5706">5. Page layout</a>
               <ul>
-                <li><a href="#org75c5c6e">5.1. Slotted-pages</a></li>
+                <li><a href="#org8991551">5.1. Slotted-pages</a></li>
                 <li>
-                  <a href="#org3a41c81">5.2. Log-structured</a>
+                  <a href="#orgc6dd4aa">5.2. Log-structured</a>
                   <ul>
-                    <li><a href="#org6a03df7">5.2.1. Log compaction</a></li>
+                    <li><a href="#org84bc193">5.2.1. Log compaction</a></li>
                   </ul>
                 </li>
-                <li><a href="#org0107693">5.3. Index-organized storage</a></li>
+                <li><a href="#orgb763158">5.3. Index-organized storage</a></li>
               </ul>
             </li>
             <li>
-              <a href="#org146db20">6. Tuple layout</a>
+              <a href="#org5e4dc12">6. Tuple layout</a>
               <ul>
-                <li><a href="#orge365f16">6.1. Denormalized tuple data</a></li>
+                <li><a href="#org06b0ba1">6.1. Denormalized tuple data</a></li>
               </ul>
             </li>
             <li>
-              <a href="#orgef40500">7. Data representation</a>
+              <a href="#org2564126">7. Data representation</a>
               <ul>
-                <li><a href="#org4c0522a">7.1. Integers</a></li>
+                <li><a href="#org7326ecb">7.1. Integers</a></li>
                 <li>
-                  <a href="#org7bf2776">7.2. Variable precision numbers</a>
+                  <a href="#orgd4abbd1">7.2. Variable precision numbers</a>
                 </li>
                 <li>
-                  <a href="#org36171d2">7.3. Fixed-point precision numbers</a>
+                  <a href="#orgea044a1">7.3. Fixed-point precision numbers</a>
                 </li>
-                <li><a href="#orga072bc1">7.4. Variable-length data</a></li>
-                <li><a href="#org48240d9">7.5. Dates/Times</a></li>
-                <li><a href="#org4e8332a">7.6. Null</a></li>
+                <li><a href="#org5e76a22">7.4. Variable-length data</a></li>
+                <li><a href="#orgb5204b9">7.5. Dates/Times</a></li>
+                <li><a href="#org39e2a57">7.6. Null</a></li>
               </ul>
             </li>
-            <li><a href="#org47e319a">8. System catalogs</a></li>
+            <li><a href="#orgabac144">8. System catalogs</a></li>
           </ul>
         </div>
       </nav>
@@ -1197,13 +1198,13 @@
           >CMU 15-445 L4 notes</a
         >.
       </p>
-      <div id="outline-container-org2fd98a2" class="outline-2">
-        <h2 id="org2fd98a2">
+      <div id="outline-container-org319373f" class="outline-2">
+        <h2 id="org319373f">
           <span class="section-number-2">1.</span> Data storage
         </h2>
         <div class="outline-text-2" id="text-1"></div>
-        <div id="outline-container-orgd887be5" class="outline-3">
-          <h3 id="orgd887be5">
+        <div id="outline-container-org25b5d83" class="outline-3">
+          <h3 id="org25b5d83">
             <span class="section-number-3">1.1.</span> Volatile device
           </h3>
           <div class="outline-text-3" id="text-1-1">
@@ -1217,8 +1218,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgeb7ba88" class="outline-3">
-          <h3 id="orgeb7ba88">
+        <div id="outline-container-orgbd2989a" class="outline-3">
+          <h3 id="orgbd2989a">
             <span class="section-number-3">1.2.</span> Non-volatile device
           </h3>
           <div class="outline-text-3" id="text-1-2">
@@ -1239,8 +1240,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org0095837" class="outline-3">
-          <h3 id="org0095837">
+        <div id="outline-container-org2549b27" class="outline-3">
+          <h3 id="org2549b27">
             <span class="section-number-3">1.3.</span> Storage hierarchy
           </h3>
           <div class="outline-text-3" id="text-1-3">
@@ -1249,8 +1250,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orga897215" class="outline-3">
-          <h3 id="orga897215">
+        <div id="outline-container-org0a06bab" class="outline-3">
+          <h3 id="org0a06bab">
             <span class="section-number-3">1.4.</span> Persistent memory
           </h3>
           <div class="outline-text-3" id="text-1-4">
@@ -1261,8 +1262,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org58c7292" class="outline-3">
-          <h3 id="org58c7292">
+        <div id="outline-container-org6a7701a" class="outline-3">
+          <h3 id="org6a7701a">
             <span class="section-number-3">1.5.</span> NVM (non-volatile memory
             express)
           </h3>
@@ -1276,8 +1277,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org2e45ea2" class="outline-2">
-        <h2 id="org2e45ea2">
+      <div id="outline-container-orgcf1d613" class="outline-2">
+        <h2 id="orgcf1d613">
           <span class="section-number-2">2.</span> DBMS architecture
         </h2>
         <div class="outline-text-2" id="text-2">
@@ -1299,8 +1300,8 @@
             </li>
           </ul>
         </div>
-        <div id="outline-container-orgebf9233" class="outline-3">
-          <h3 id="orgebf9233">
+        <div id="outline-container-orgf2107fc" class="outline-3">
+          <h3 id="orgf2107fc">
             <span class="section-number-3">2.1.</span> Why not OS
           </h3>
           <div class="outline-text-3" id="text-2-1">
@@ -1343,8 +1344,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-orgb2db9b6" class="outline-2">
-        <h2 id="orgb2db9b6">
+      <div id="outline-container-org16bffda" class="outline-2">
+        <h2 id="org16bffda">
           <span class="section-number-2">3.</span> Database pages
         </h2>
         <div class="outline-text-2" id="text-3">
@@ -1364,8 +1365,8 @@
             </li>
           </ul>
         </div>
-        <div id="outline-container-org5292778" class="outline-3">
-          <h3 id="org5292778">
+        <div id="outline-container-org73ef5c7" class="outline-3">
+          <h3 id="org73ef5c7">
             <span class="section-number-3">3.1.</span> Hardware page
           </h3>
           <div class="outline-text-3" id="text-3-1">
@@ -1383,8 +1384,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-orgf3dc9a4" class="outline-2">
-        <h2 id="orgf3dc9a4">
+      <div id="outline-container-org94011df" class="outline-2">
+        <h2 id="org94011df">
           <span class="section-number-2">4.</span> Database heap
         </h2>
         <div class="outline-text-2" id="text-4">
@@ -1418,8 +1419,8 @@
           </ul>
         </div>
       </div>
-      <div id="outline-container-org16079b5" class="outline-2">
-        <h2 id="org16079b5">
+      <div id="outline-container-org75e5706" class="outline-2">
+        <h2 id="org75e5706">
           <span class="section-number-2">5.</span> Page layout
         </h2>
         <div class="outline-text-2" id="text-5">
@@ -1434,8 +1435,8 @@
             </li>
           </ul>
         </div>
-        <div id="outline-container-org75c5c6e" class="outline-3">
-          <h3 id="org75c5c6e">
+        <div id="outline-container-org8991551" class="outline-3">
+          <h3 id="org8991551">
             <span class="section-number-3">5.1.</span> Slotted-pages
           </h3>
           <div class="outline-text-3" id="text-5-1">
@@ -1464,7 +1465,7 @@
               </li>
             </ul>
 
-            <figure id="org1c270eb">
+            <figure id="orgf96faf5">
               <img
                 src="https://miro.medium.com/v2/resize:fit:935/1*7AuKrdEJQpfRYhavwWzwhg.png"
                 alt="1*7AuKrdEJQpfRYhavwWzwhg.png"
@@ -1481,8 +1482,8 @@
             </figure>
           </div>
         </div>
-        <div id="outline-container-org3a41c81" class="outline-3">
-          <h3 id="org3a41c81">
+        <div id="outline-container-orgc6dd4aa" class="outline-3">
+          <h3 id="orgc6dd4aa">
             <span class="section-number-3">5.2.</span> Log-structured
           </h3>
           <div class="outline-text-3" id="text-5-2">
@@ -1499,8 +1500,8 @@
               </li>
             </ul>
           </div>
-          <div id="outline-container-org6a03df7" class="outline-4">
-            <h4 id="org6a03df7">
+          <div id="outline-container-org84bc193" class="outline-4">
+            <h4 id="org84bc193">
               <span class="section-number-4">5.2.1.</span> Log compaction
             </h4>
             <div class="outline-text-4" id="text-5-2-1">
@@ -1527,8 +1528,8 @@
             </div>
           </div>
         </div>
-        <div id="outline-container-org0107693" class="outline-3">
-          <h3 id="org0107693">
+        <div id="outline-container-orgb763158" class="outline-3">
+          <h3 id="orgb763158">
             <span class="section-number-3">5.3.</span> Index-organized storage
           </h3>
           <div class="outline-text-3" id="text-5-3">
@@ -1548,7 +1549,7 @@
               </li>
             </ul>
 
-            <figure id="orgad2becf">
+            <figure id="orgfd07c3b">
               <img
                 src="https://docs.oracle.com/en/database/oracle/oracle-database/21/cncpt/img/cncpt272.gif"
                 alt="cncpt272.gif"
@@ -1567,8 +1568,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org146db20" class="outline-2">
-        <h2 id="org146db20">
+      <div id="outline-container-org5e4dc12" class="outline-2">
+        <h2 id="org5e4dc12">
           <span class="section-number-2">6.</span> Tuple layout
         </h2>
         <div class="outline-text-2" id="text-6">
@@ -1585,8 +1586,8 @@
             </li>
           </ul>
         </div>
-        <div id="outline-container-orge365f16" class="outline-3">
-          <h3 id="orge365f16">
+        <div id="outline-container-org06b0ba1" class="outline-3">
+          <h3 id="org06b0ba1">
             <span class="section-number-3">6.1.</span> Denormalized tuple data
           </h3>
           <div class="outline-text-3" id="text-6-1">
@@ -1605,8 +1606,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-orgef40500" class="outline-2">
-        <h2 id="orgef40500">
+      <div id="outline-container-org2564126" class="outline-2">
+        <h2 id="org2564126">
           <span class="section-number-2">7.</span> Data representation
         </h2>
         <div class="outline-text-2" id="text-7">
@@ -1626,8 +1627,8 @@
             </li>
           </ul>
         </div>
-        <div id="outline-container-org4c0522a" class="outline-3">
-          <h3 id="org4c0522a">
+        <div id="outline-container-org7326ecb" class="outline-3">
+          <h3 id="org7326ecb">
             <span class="section-number-3">7.1.</span> Integers
           </h3>
           <div class="outline-text-3" id="text-7-1">
@@ -1639,8 +1640,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org7bf2776" class="outline-3">
-          <h3 id="org7bf2776">
+        <div id="outline-container-orgd4abbd1" class="outline-3">
+          <h3 id="orgd4abbd1">
             <span class="section-number-3">7.2.</span> Variable precision
             numbers
           </h3>
@@ -1655,8 +1656,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org36171d2" class="outline-3">
-          <h3 id="org36171d2">
+        <div id="outline-container-orgea044a1" class="outline-3">
+          <h3 id="orgea044a1">
             <span class="section-number-3">7.3.</span> Fixed-point precision
             numbers
           </h3>
@@ -1671,8 +1672,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orga072bc1" class="outline-3">
-          <h3 id="orga072bc1">
+        <div id="outline-container-org5e76a22" class="outline-3">
+          <h3 id="org5e76a22">
             <span class="section-number-3">7.4.</span> Variable-length data
           </h3>
           <div class="outline-text-3" id="text-7-4">
@@ -1694,8 +1695,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org48240d9" class="outline-3">
-          <h3 id="org48240d9">
+        <div id="outline-container-orgb5204b9" class="outline-3">
+          <h3 id="orgb5204b9">
             <span class="section-number-3">7.5.</span> Dates/Times
           </h3>
           <div class="outline-text-3" id="text-7-5">
@@ -1703,12 +1704,12 @@
               <li>
                 Usually represented as unit time, e.g., micro/milli-seconds.
               </li>
-              <li>E.g., TIMESTAMP~.</li>
+              <li>E.g., <code>TIMESTAMP</code>.</li>
             </ul>
           </div>
         </div>
-        <div id="outline-container-org4e8332a" class="outline-3">
-          <h3 id="org4e8332a">
+        <div id="outline-container-org39e2a57" class="outline-3">
+          <h3 id="org39e2a57">
             <span class="section-number-3">7.6.</span> Null
           </h3>
           <div class="outline-text-3" id="text-7-6">
@@ -1731,8 +1732,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org47e319a" class="outline-2">
-        <h2 id="org47e319a">
+      <div id="outline-container-orgabac144" class="outline-2">
+        <h2 id="orgabac144">
           <span class="section-number-2">8.</span> System catalogs
         </h2>
         <div class="outline-text-2" id="text-8">
@@ -1772,27 +1773,27 @@
         <div id="text-table-of-contents" role="doc-toc">
           <ul>
             <li>
-              <a href="#org071ad22">1. Terminology</a>
+              <a href="#orgf722d34">1. Terminology</a>
               <ul>
                 <li>
-                  <a href="#orgee84718">1.1. SQL and relational algebra</a>
+                  <a href="#orgb16502e">1.1. SQL and relational algebra</a>
                 </li>
-                <li><a href="#orgc88e3a6">1.2. SQL commands</a></li>
+                <li><a href="#org7894974">1.2. SQL commands</a></li>
               </ul>
             </li>
             <li>
-              <a href="#org815dae0">2. SQL syntax</a>
+              <a href="#orgb5bfeb2">2. SQL syntax</a>
               <ul>
-                <li><a href="#org9af268a">2.1. Join</a></li>
-                <li><a href="#orge3093fd">2.2. Aggregation function</a></li>
-                <li><a href="#org11ab1ab">2.3. String operation</a></li>
-                <li><a href="#org4546a69">2.4. Date and time</a></li>
-                <li><a href="#org31b8628">2.5. Output redirection</a></li>
-                <li><a href="#orgf54395a">2.6. Output control</a></li>
-                <li><a href="#org2066b18">2.7. Nested queries</a></li>
-                <li><a href="#org23f04f1">2.8. Window functions</a></li>
+                <li><a href="#orgcde9ce0">2.1. Join</a></li>
+                <li><a href="#orgb2910a7">2.2. Aggregation function</a></li>
+                <li><a href="#org6793947">2.3. String operation</a></li>
+                <li><a href="#org1ae8457">2.4. Date and time</a></li>
+                <li><a href="#orgbf5b8e0">2.5. Output redirection</a></li>
+                <li><a href="#org763e3e1">2.6. Output control</a></li>
+                <li><a href="#orgda9e7b8">2.7. Nested queries</a></li>
+                <li><a href="#org704520c">2.8. Window functions</a></li>
                 <li>
-                  <a href="#org7c4a228">2.9. Common Table Expressions (CTE)</a>
+                  <a href="#org065738a">2.9. Common Table Expressions (CTE)</a>
                 </li>
               </ul>
             </li>
@@ -1809,13 +1810,13 @@
           >Claude.ai</a
         >.
       </p>
-      <div id="outline-container-org071ad22" class="outline-2">
-        <h2 id="org071ad22">
+      <div id="outline-container-orgf722d34" class="outline-2">
+        <h2 id="orgf722d34">
           <span class="section-number-2">1.</span> Terminology
         </h2>
         <div class="outline-text-2" id="text-1"></div>
-        <div id="outline-container-orgee84718" class="outline-3">
-          <h3 id="orgee84718">
+        <div id="outline-container-orgb16502e" class="outline-3">
+          <h3 id="orgb16502e">
             <span class="section-number-3">1.1.</span> SQL and relational
             algebra
           </h3>
@@ -1833,8 +1834,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgc88e3a6" class="outline-3">
-          <h3 id="orgc88e3a6">
+        <div id="outline-container-org7894974" class="outline-3">
+          <h3 id="org7894974">
             <span class="section-number-3">1.2.</span> SQL commands
           </h3>
           <div class="outline-text-3" id="text-1-2">
@@ -1863,13 +1864,13 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org815dae0" class="outline-2">
-        <h2 id="org815dae0">
+      <div id="outline-container-orgb5bfeb2" class="outline-2">
+        <h2 id="orgb5bfeb2">
           <span class="section-number-2">2.</span> SQL syntax
         </h2>
         <div class="outline-text-2" id="text-2"></div>
-        <div id="outline-container-org9af268a" class="outline-3">
-          <h3 id="org9af268a">
+        <div id="outline-container-orgcde9ce0" class="outline-3">
+          <h3 id="orgcde9ce0">
             <span class="section-number-3">2.1.</span> Join
           </h3>
           <div class="outline-text-3" id="text-2-1">
@@ -1893,8 +1894,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orge3093fd" class="outline-3">
-          <h3 id="orge3093fd">
+        <div id="outline-container-orgb2910a7" class="outline-3">
+          <h3 id="orgb2910a7">
             <span class="section-number-3">2.2.</span> Aggregation function
           </h3>
           <div class="outline-text-3" id="text-2-2">
@@ -1953,8 +1954,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org11ab1ab" class="outline-3">
-          <h3 id="org11ab1ab">
+        <div id="outline-container-org6793947" class="outline-3">
+          <h3 id="org6793947">
             <span class="section-number-3">2.3.</span> String operation
           </h3>
           <div class="outline-text-3" id="text-2-3">
@@ -1978,8 +1979,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org4546a69" class="outline-3">
-          <h3 id="org4546a69">
+        <div id="outline-container-org1ae8457" class="outline-3">
+          <h3 id="org1ae8457">
             <span class="section-number-3">2.4.</span> Date and time
           </h3>
           <div class="outline-text-3" id="text-2-4">
@@ -1989,8 +1990,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org31b8628" class="outline-3">
-          <h3 id="org31b8628">
+        <div id="outline-container-orgbf5b8e0" class="outline-3">
+          <h3 id="orgbf5b8e0">
             <span class="section-number-3">2.5.</span> Output redirection
           </h3>
           <div class="outline-text-3" id="text-2-5">
@@ -2011,8 +2012,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgf54395a" class="outline-3">
-          <h3 id="orgf54395a">
+        <div id="outline-container-org763e3e1" class="outline-3">
+          <h3 id="org763e3e1">
             <span class="section-number-3">2.6.</span> Output control
           </h3>
           <div class="outline-text-3" id="text-2-6">
@@ -2039,8 +2040,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org2066b18" class="outline-3">
-          <h3 id="org2066b18">
+        <div id="outline-container-orgda9e7b8" class="outline-3">
+          <h3 id="orgda9e7b8">
             <span class="section-number-3">2.7.</span> Nested queries
           </h3>
           <div class="outline-text-3" id="text-2-7">
@@ -2126,8 +2127,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org23f04f1" class="outline-3">
-          <h3 id="org23f04f1">
+        <div id="outline-container-org704520c" class="outline-3">
+          <h3 id="org704520c">
             <span class="section-number-3">2.8.</span> Window functions
           </h3>
           <div class="outline-text-3" id="text-2-8">
@@ -2136,8 +2137,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org7c4a228" class="outline-3">
-          <h3 id="org7c4a228">
+        <div id="outline-container-org065738a" class="outline-3">
+          <h3 id="org065738a">
             <span class="section-number-3">2.9.</span> Common Table Expressions
             (CTE)
           </h3>
@@ -2192,30 +2193,30 @@
         <div id="text-table-of-contents" role="doc-toc">
           <ul>
             <li>
-              <a href="#org1c8f179">1. Terminology</a>
+              <a href="#orgf810877">1. Terminology</a>
               <ul>
-                <li><a href="#org3303081">1.1. Database</a></li>
+                <li><a href="#org3ac888e">1.1. Database</a></li>
                 <li>
-                  <a href="#org3acc53f">1.2. Database design consideration</a>
+                  <a href="#org7e7bb2c">1.2. Database design consideration</a>
                 </li>
                 <li>
-                  <a href="#orge6acd15"
+                  <a href="#orgec71f6f"
                     >1.3. Database management system (DBMS)</a
                   >
                 </li>
-                <li><a href="#orga7346be">1.4. Data model</a></li>
-                <li><a href="#org309751e">1.5. Schema</a></li>
-                <li><a href="#org6bbbe8d">1.6. Entities and Tables</a></li>
-                <li><a href="#orgae62671">1.7. Attributes and Fields</a></li>
-                <li><a href="#orge7157f9">1.8. Logical layer</a></li>
-                <li><a href="#org4aeb38a">1.9. Physical layer</a></li>
+                <li><a href="#orga35f109">1.4. Data model</a></li>
+                <li><a href="#org3410861">1.5. Schema</a></li>
+                <li><a href="#org43212ec">1.6. Entities and Tables</a></li>
+                <li><a href="#orgc5f751d">1.7. Attributes and Fields</a></li>
+                <li><a href="#orgd785b59">1.8. Logical layer</a></li>
+                <li><a href="#org8797eff">1.9. Physical layer</a></li>
                 <li>
-                  <a href="#orgf9e4e4c"
+                  <a href="#org10d492a"
                     >1.10. Data manipulation languages (DMLs)</a
                   >
                 </li>
                 <li>
-                  <a href="#org1fa9df4"
+                  <a href="#orgaa47a03"
                     >1.11. SQL (Structured Query Language) and relational
                     model</a
                   >
@@ -2223,15 +2224,15 @@
               </ul>
             </li>
             <li>
-              <a href="#org2933dd0">2. Relational model</a>
+              <a href="#org69e6c39">2. Relational model</a>
               <ul>
-                <li><a href="#orge60a63b">2.1. A relation</a></li>
-                <li><a href="#org4c8d7c5">2.2. A domain</a></li>
-                <li><a href="#orgbb540bf">2.3. A tuple</a></li>
-                <li><a href="#orgec2a6f8">2.4. Keys</a></li>
+                <li><a href="#org5611a8a">2.1. A relation</a></li>
+                <li><a href="#orga56e189">2.2. A domain</a></li>
+                <li><a href="#org12961ea">2.3. A tuple</a></li>
+                <li><a href="#org1fa950f">2.4. Keys</a></li>
               </ul>
             </li>
-            <li><a href="#org4f42160">3. Relational Algebra</a></li>
+            <li><a href="#org1769975">3. Relational Algebra</a></li>
           </ul>
         </div>
       </nav>
@@ -2250,13 +2251,13 @@
           >Claude.ai</a
         >.
       </p>
-      <div id="outline-container-org1c8f179" class="outline-2">
-        <h2 id="org1c8f179">
+      <div id="outline-container-orgf810877" class="outline-2">
+        <h2 id="orgf810877">
           <span class="section-number-2">1.</span> Terminology
         </h2>
         <div class="outline-text-2" id="text-1"></div>
-        <div id="outline-container-org3303081" class="outline-3">
-          <h3 id="org3303081">
+        <div id="outline-container-org3ac888e" class="outline-3">
+          <h3 id="org3ac888e">
             <span class="section-number-3">1.1.</span> Database
           </h3>
           <div class="outline-text-3" id="text-1-1">
@@ -2268,8 +2269,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org3acc53f" class="outline-3">
-          <h3 id="org3acc53f">
+        <div id="outline-container-org7e7bb2c" class="outline-3">
+          <h3 id="org7e7bb2c">
             <span class="section-number-3">1.2.</span> Database design
             consideration
           </h3>
@@ -2281,8 +2282,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orge6acd15" class="outline-3">
-          <h3 id="orge6acd15">
+        <div id="outline-container-orgec71f6f" class="outline-3">
+          <h3 id="orgec71f6f">
             <span class="section-number-3">1.3.</span> Database management
             system (DBMS)
           </h3>
@@ -2296,8 +2297,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orga7346be" class="outline-3">
-          <h3 id="orga7346be">
+        <div id="outline-container-orga35f109" class="outline-3">
+          <h3 id="orga35f109">
             <span class="section-number-3">1.4.</span> Data model
           </h3>
           <div class="outline-text-3" id="text-1-4">
@@ -2313,8 +2314,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org309751e" class="outline-3">
-          <h3 id="org309751e">
+        <div id="outline-container-org3410861" class="outline-3">
+          <h3 id="org3410861">
             <span class="section-number-3">1.5.</span> Schema
           </h3>
           <div class="outline-text-3" id="text-1-5">
@@ -2325,8 +2326,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org6bbbe8d" class="outline-3">
-          <h3 id="org6bbbe8d">
+        <div id="outline-container-org43212ec" class="outline-3">
+          <h3 id="org43212ec">
             <span class="section-number-3">1.6.</span> Entities and Tables
           </h3>
           <div class="outline-text-3" id="text-1-6">
@@ -2341,8 +2342,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgae62671" class="outline-3">
-          <h3 id="orgae62671">
+        <div id="outline-container-orgc5f751d" class="outline-3">
+          <h3 id="orgc5f751d">
             <span class="section-number-3">1.7.</span> Attributes and Fields
           </h3>
           <div class="outline-text-3" id="text-1-7">
@@ -2352,8 +2353,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orge7157f9" class="outline-3">
-          <h3 id="orge7157f9">
+        <div id="outline-container-orgd785b59" class="outline-3">
+          <h3 id="orgd785b59">
             <span class="section-number-3">1.8.</span> Logical layer
           </h3>
           <div class="outline-text-3" id="text-1-8">
@@ -2362,8 +2363,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org4aeb38a" class="outline-3">
-          <h3 id="org4aeb38a">
+        <div id="outline-container-org8797eff" class="outline-3">
+          <h3 id="org8797eff">
             <span class="section-number-3">1.9.</span> Physical layer
           </h3>
           <div class="outline-text-3" id="text-1-9">
@@ -2372,8 +2373,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgf9e4e4c" class="outline-3">
-          <h3 id="orgf9e4e4c">
+        <div id="outline-container-org10d492a" class="outline-3">
+          <h3 id="org10d492a">
             <span class="section-number-3">1.10.</span> Data manipulation
             languages (DMLs)
           </h3>
@@ -2395,8 +2396,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org1fa9df4" class="outline-3">
-          <h3 id="org1fa9df4">
+        <div id="outline-container-orgaa47a03" class="outline-3">
+          <h3 id="orgaa47a03">
             <span class="section-number-3">1.11.</span> SQL (Structured Query
             Language) and relational model
           </h3>
@@ -2415,8 +2416,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org2933dd0" class="outline-2">
-        <h2 id="org2933dd0">
+      <div id="outline-container-org69e6c39" class="outline-2">
+        <h2 id="org69e6c39">
           <span class="section-number-2">2.</span> Relational model
         </h2>
         <div class="outline-text-2" id="text-2">
@@ -2433,7 +2434,7 @@
             </li>
           </ul>
 
-          <figure id="org5e4ab34">
+          <figure id="orgf7a4cde">
             <img
               src="https://www.guru99.com/images/1/091318_0803_RelationalD1.png"
               alt="091318_0803_RelationalD1.png"
@@ -2450,8 +2451,8 @@
             </figcaption>
           </figure>
         </div>
-        <div id="outline-container-orge60a63b" class="outline-3">
-          <h3 id="orge60a63b">
+        <div id="outline-container-org5611a8a" class="outline-3">
+          <h3 id="org5611a8a">
             <span class="section-number-3">2.1.</span> A relation
           </h3>
           <div class="outline-text-3" id="text-2-1">
@@ -2464,8 +2465,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org4c8d7c5" class="outline-3">
-          <h3 id="org4c8d7c5">
+        <div id="outline-container-orga56e189" class="outline-3">
+          <h3 id="orga56e189">
             <span class="section-number-3">2.2.</span> A domain
           </h3>
           <div class="outline-text-3" id="text-2-2">
@@ -2474,8 +2475,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgbb540bf" class="outline-3">
-          <h3 id="orgbb540bf">
+        <div id="outline-container-org12961ea" class="outline-3">
+          <h3 id="org12961ea">
             <span class="section-number-3">2.3.</span> A tuple
           </h3>
           <div class="outline-text-3" id="text-2-3">
@@ -2490,8 +2491,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgec2a6f8" class="outline-3">
-          <h3 id="orgec2a6f8">
+        <div id="outline-container-org1fa950f" class="outline-3">
+          <h3 id="org1fa950f">
             <span class="section-number-3">2.4.</span> Keys
           </h3>
           <div class="outline-text-3" id="text-2-4">
@@ -2508,8 +2509,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org4f42160" class="outline-2">
-        <h2 id="org4f42160">
+      <div id="outline-container-org1769975" class="outline-2">
+        <h2 id="org1769975">
           <span class="section-number-2">3.</span> Relational Algebra
         </h2>
         <div class="outline-text-2" id="text-3">
@@ -2562,23 +2563,23 @@
         <h2>Table of Contents</h2>
         <div id="text-table-of-contents" role="doc-toc">
           <ul>
-            <li><a href="#org282a79b">1. Concurrency vs Parallelism</a></li>
+            <li><a href="#orgf3853a8">1. Concurrency vs Parallelism</a></li>
             <li>
-              <a href="#org2cf5488">2. Use goroutines for states</a>
+              <a href="#org8ef48a9">2. Use goroutines for states</a>
               <ul>
-                <li><a href="#orgb7044b0">2.1. Matching a regex</a></li>
+                <li><a href="#org1156ec2">2.1. Matching a regex</a></li>
                 <li>
-                  <a href="#org7b81028"
+                  <a href="#org43eddd5"
                     >2.2. When the state variable cannot be avoided</a
                   >
                 </li>
               </ul>
             </li>
             <li>
-              <a href="#org1ce5a03">3. Pattern 1: publish/subscribe server</a>
+              <a href="#org8d9ca86">3. Pattern 1: publish/subscribe server</a>
               <ul>
                 <li>
-                  <a href="#org36849b1">3.1. Options for slow goroutines</a>
+                  <a href="#org9cdd1ac">3.1. Options for slow goroutines</a>
                 </li>
               </ul>
             </li>
@@ -2591,8 +2592,8 @@
           >Russ Cox guest lecture</a
         >.
       </p>
-      <div id="outline-container-org282a79b" class="outline-2">
-        <h2 id="org282a79b">
+      <div id="outline-container-orgf3853a8" class="outline-2">
+        <h2 id="orgf3853a8">
           <span class="section-number-2">1.</span> Concurrency vs Parallelism
         </h2>
         <div class="outline-text-2" id="text-1">
@@ -2610,13 +2611,13 @@
           </ul>
         </div>
       </div>
-      <div id="outline-container-org2cf5488" class="outline-2">
-        <h2 id="org2cf5488">
+      <div id="outline-container-org8ef48a9" class="outline-2">
+        <h2 id="org8ef48a9">
           <span class="section-number-2">2.</span> Use goroutines for states
         </h2>
         <div class="outline-text-2" id="text-2"></div>
-        <div id="outline-container-orgb7044b0" class="outline-3">
-          <h3 id="orgb7044b0">
+        <div id="outline-container-org1156ec2" class="outline-3">
+          <h3 id="org1156ec2">
             <span class="section-number-3">2.1.</span> Matching a regex
           </h3>
           <div class="outline-text-3" id="text-2-1">
@@ -2683,8 +2684,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org7b81028" class="outline-3">
-          <h3 id="org7b81028">
+        <div id="outline-container-org43eddd5" class="outline-3">
+          <h3 id="org43eddd5">
             <span class="section-number-3">2.2.</span> When the state variable
             cannot be avoided
           </h3>
@@ -2799,8 +2800,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org1ce5a03" class="outline-2">
-        <h2 id="org1ce5a03">
+      <div id="outline-container-org8d9ca86" class="outline-2">
+        <h2 id="org8d9ca86">
           <span class="section-number-2">3.</span> Pattern 1: publish/subscribe
           server
         </h2>
@@ -2855,8 +2856,8 @@
             </li>
           </ul>
         </div>
-        <div id="outline-container-org36849b1" class="outline-3">
-          <h3 id="org36849b1">
+        <div id="outline-container-org9cdd1ac" class="outline-3">
+          <h3 id="org9cdd1ac">
             <span class="section-number-3">3.1.</span> Options for slow
             goroutines
           </h3>
@@ -3010,16 +3011,16 @@
         <h2>Table of Contents</h2>
         <div id="text-table-of-contents" role="doc-toc">
           <ul>
-            <li><a href="#org7f3a219">1. Router</a></li>
-            <li><a href="#orgb1770d4">2. Link</a></li>
+            <li><a href="#org032e5d2">1. Router</a></li>
+            <li><a href="#orgbc1e437">2. Link</a></li>
             <li>
-              <a href="#org4fd4af9">3. Workshop 3</a>
+              <a href="#org36d86a4">3. Workshop 3</a>
               <ul>
-                <li><a href="#org327f115">3.1. Structure</a></li>
-                <li><a href="#org1cb00cb">3.2. States</a></li>
-                <li><a href="#org54413eb">3.3. Props</a></li>
+                <li><a href="#org3b9116e">3.1. Structure</a></li>
+                <li><a href="#orgb07ee88">3.2. States</a></li>
+                <li><a href="#orgd7bb6a7">3.3. Props</a></li>
                 <li>
-                  <a href="#org1d4378d"
+                  <a href="#org21edeeb"
                     >3.4. Why passing down the update function in props 1, 4,
                     6?</a
                   >
@@ -3029,8 +3030,8 @@
           </ul>
         </div>
       </nav>
-      <div id="outline-container-org7f3a219" class="outline-2">
-        <h2 id="org7f3a219"><span class="section-number-2">1.</span> Router</h2>
+      <div id="outline-container-org032e5d2" class="outline-2">
+        <h2 id="org032e5d2"><span class="section-number-2">1.</span> Router</h2>
         <div class="outline-text-2" id="text-1">
           <ul class="org-ul">
             <li>
@@ -3057,8 +3058,8 @@
           </ul>
         </div>
       </div>
-      <div id="outline-container-orgb1770d4" class="outline-2">
-        <h2 id="orgb1770d4"><span class="section-number-2">2.</span> Link</h2>
+      <div id="outline-container-orgbc1e437" class="outline-2">
+        <h2 id="orgbc1e437"><span class="section-number-2">2.</span> Link</h2>
         <div class="outline-text-2" id="text-2">
           <ul class="org-ul">
             <li>
@@ -3078,17 +3079,17 @@
           </ul>
         </div>
       </div>
-      <div id="outline-container-org4fd4af9" class="outline-2">
-        <h2 id="org4fd4af9">
+      <div id="outline-container-org36d86a4" class="outline-2">
+        <h2 id="org36d86a4">
           <span class="section-number-2">3.</span> Workshop 3
         </h2>
         <div class="outline-text-2" id="text-3"></div>
-        <div id="outline-container-org327f115" class="outline-3">
-          <h3 id="org327f115">
+        <div id="outline-container-org3b9116e" class="outline-3">
+          <h3 id="org3b9116e">
             <span class="section-number-3">3.1.</span> Structure
           </h3>
           <div class="outline-text-3" id="text-3-1">
-            <figure id="org854203a">
+            <figure id="orgbd7508d">
               <img
                 src="./static/workshop-3-structure.png"
                 alt="workshop-3-structure.png"
@@ -3103,8 +3104,8 @@
             </figure>
           </div>
         </div>
-        <div id="outline-container-org1cb00cb" class="outline-3">
-          <h3 id="org1cb00cb">
+        <div id="outline-container-orgb07ee88" class="outline-3">
+          <h3 id="orgb07ee88">
             <span class="section-number-3">3.2.</span> States
           </h3>
           <div class="outline-text-3" id="text-3-2">
@@ -3140,8 +3141,8 @@
             </table>
           </div>
         </div>
-        <div id="outline-container-org54413eb" class="outline-3">
-          <h3 id="org54413eb">
+        <div id="outline-container-orgd7bb6a7" class="outline-3">
+          <h3 id="orgd7bb6a7">
             <span class="section-number-3">3.3.</span> Props
           </h3>
           <div class="outline-text-3" id="text-3-3">
@@ -3202,8 +3203,8 @@
             </table>
           </div>
         </div>
-        <div id="outline-container-org1d4378d" class="outline-3">
-          <h3 id="org1d4378d">
+        <div id="outline-container-org21edeeb" class="outline-3">
+          <h3 id="org21edeeb">
             <span class="section-number-3">3.4.</span> Why passing down the
             update function in props 1, 4, 6?
           </h3>
@@ -3248,15 +3249,15 @@
         <div id="text-table-of-contents" role="doc-toc">
           <ul>
             <li>
-              <a href="#org5351d22">1. What is a React hook</a>
+              <a href="#org61185e5">1. What is a React hook</a>
               <ul>
                 <li>
-                  <a href="#orgbb80839"
+                  <a href="#org346138b"
                     >1.1. <code>useState</code> is not enough</a
                   >
                 </li>
                 <li>
-                  <a href="#org9f7d010"
+                  <a href="#org063c869"
                     >1.2. <code>useEffect</code> runs after specific variable
                     change</a
                   >
@@ -3264,20 +3265,20 @@
               </ul>
             </li>
             <li>
-              <a href="#orgda65b48">2. React hook patterns</a>
+              <a href="#org76b0333">2. React hook patterns</a>
               <ul>
-                <li><a href="#orgfaa684d">2.1. Fetch and send data</a></li>
-                <li><a href="#orgf39dd73">2.2. Conditional rendering</a></li>
-                <li><a href="#orgc38ec13">2.3. Render an array of Data</a></li>
+                <li><a href="#org274b414">2.1. Fetch and send data</a></li>
+                <li><a href="#org3e7ef87">2.2. Conditional rendering</a></li>
+                <li><a href="#org28b29e0">2.3. Render an array of Data</a></li>
               </ul>
             </li>
-            <li><a href="#org9d238ec">3. Example: Stopwatch</a></li>
-            <li><a href="#org9f942c1">4. DOM and component mounting</a></li>
+            <li><a href="#org6c40374">3. Example: Stopwatch</a></li>
+            <li><a href="#org8ac8ae3">4. DOM and component mounting</a></li>
           </ul>
         </div>
       </nav>
-      <div id="outline-container-org5351d22" class="outline-2">
-        <h2 id="org5351d22">
+      <div id="outline-container-org61185e5" class="outline-2">
+        <h2 id="org61185e5">
           <span class="section-number-2">1.</span> What is a React hook
         </h2>
         <div class="outline-text-2" id="text-1">
@@ -3288,8 +3289,8 @@
             <li>e.g., <code>useState</code></li>
           </ul>
         </div>
-        <div id="outline-container-orgbb80839" class="outline-3">
-          <h3 id="orgbb80839">
+        <div id="outline-container-org346138b" class="outline-3">
+          <h3 id="org346138b">
             <span class="section-number-3">1.1.</span> <code>useState</code> is
             not enough
           </h3>
@@ -3321,8 +3322,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org9f7d010" class="outline-3">
-          <h3 id="org9f7d010">
+        <div id="outline-container-org063c869" class="outline-3">
+          <h3 id="org063c869">
             <span class="section-number-3">1.2.</span>
             <code>useEffect</code> runs after specific variable change
           </h3>
@@ -3370,13 +3371,13 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-orgda65b48" class="outline-2">
-        <h2 id="orgda65b48">
+      <div id="outline-container-org76b0333" class="outline-2">
+        <h2 id="org76b0333">
           <span class="section-number-2">2.</span> React hook patterns
         </h2>
         <div class="outline-text-2" id="text-2"></div>
-        <div id="outline-container-orgfaa684d" class="outline-3">
-          <h3 id="orgfaa684d">
+        <div id="outline-container-org274b414" class="outline-3">
+          <h3 id="org274b414">
             <span class="section-number-3">2.1.</span> Fetch and send data
           </h3>
           <div class="outline-text-3" id="text-2-1">
@@ -3407,8 +3408,8 @@
             </div>
           </div>
         </div>
-        <div id="outline-container-orgf39dd73" class="outline-3">
-          <h3 id="orgf39dd73">
+        <div id="outline-container-org3e7ef87" class="outline-3">
+          <h3 id="org3e7ef87">
             <span class="section-number-3">2.2.</span> Conditional rendering
           </h3>
           <div class="outline-text-3" id="text-2-2">
@@ -3427,8 +3428,8 @@
             </div>
           </div>
         </div>
-        <div id="outline-container-orgc38ec13" class="outline-3">
-          <h3 id="orgc38ec13">
+        <div id="outline-container-org28b29e0" class="outline-3">
+          <h3 id="org28b29e0">
             <span class="section-number-3">2.3.</span> Render an array of Data
           </h3>
           <div class="outline-text-3" id="text-2-3">
@@ -3454,8 +3455,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org9d238ec" class="outline-2">
-        <h2 id="org9d238ec">
+      <div id="outline-container-org6c40374" class="outline-2">
+        <h2 id="org6c40374">
           <span class="section-number-2">3.</span> Example: Stopwatch
         </h2>
         <div class="outline-text-2" id="text-3">
@@ -3480,8 +3481,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org9f942c1" class="outline-2">
-        <h2 id="org9f942c1">
+      <div id="outline-container-org8ac8ae3" class="outline-2">
+        <h2 id="org8ac8ae3">
           <span class="section-number-2">4.</span> DOM and component mounting
         </h2>
         <div class="outline-text-2" id="text-4">

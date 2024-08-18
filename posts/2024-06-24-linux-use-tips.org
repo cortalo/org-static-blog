@@ -20,3 +20,7 @@
 * Vim
 ** Delete a word backwards
 - ~diw~ or ~daw~
+
+* Firefox
+** Cache bypass refresh
+- ~Ctrl+Shift+R~

@@ -24,6 +24,7 @@
     <meta name="referrer" content="no-referrer" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="assets/style.css" type="text/css" />
+    <link rel="favicon" type="image/x-icon" href="assets/favicon.ico" />
     <script src="assets/search.js"></script>
   </head>
   <body>
@@ -61,60 +62,60 @@
         <div id="text-table-of-contents" role="doc-toc">
           <ul>
             <li>
-              <a href="#orgb325179">1. Database workloads</a>
+              <a href="#org85a1c9b">1. Database workloads</a>
               <ul>
                 <li>
-                  <a href="#org4994171"
+                  <a href="#org4b1d669"
                     >1.1. OLTP (Online Transaction Processing)</a
                   >
                 </li>
                 <li>
-                  <a href="#org0119116"
+                  <a href="#org6bce54a"
                     >1.2. OLAP (Online Analytical Processing)</a
                   >
                 </li>
-                <li><a href="#org122a435">1.3. HTAP (Hybrid)</a></li>
+                <li><a href="#orgc0961e0">1.3. HTAP (Hybrid)</a></li>
               </ul>
             </li>
             <li>
-              <a href="#org3d8d248">2. Storage models</a>
+              <a href="#org4813278">2. Storage models</a>
               <ul>
                 <li>
-                  <a href="#orgd70844c">2.1. N-ary Storage Model (NSM)</a>
+                  <a href="#org6a897a6">2.1. N-ary Storage Model (NSM)</a>
                 </li>
                 <li>
-                  <a href="#org5b5ce5e"
+                  <a href="#orgba64f33"
                     >2.2. Decomposition Storage Model (DSM)</a
                   >
                 </li>
                 <li>
-                  <a href="#org9501db6"
+                  <a href="#org56babf1"
                     >2.3. Partition Attributes Across (PAX)</a
                   >
                 </li>
               </ul>
             </li>
             <li>
-              <a href="#orge03292b">3. Database compression</a>
+              <a href="#orgac94013">3. Database compression</a>
               <ul>
-                <li><a href="#org5e9ad51">3.1. Compression granularity</a></li>
-                <li><a href="#orgcb7090a">3.2. Naive compression</a></li>
+                <li><a href="#org9f06ac0">3.1. Compression granularity</a></li>
+                <li><a href="#org49dfe33">3.2. Naive compression</a></li>
               </ul>
             </li>
             <li>
-              <a href="#org03f0730">4. Columnar compression</a>
+              <a href="#orgd8cef0f">4. Columnar compression</a>
               <ul>
-                <li><a href="#org8cec90e">4.1. Dictionary encoding</a></li>
+                <li><a href="#orgeb97923">4.1. Dictionary encoding</a></li>
                 <li>
-                  <a href="#org052d7b1">4.2. Run-Length encoding (RLE)</a>
+                  <a href="#org8cc690b">4.2. Run-Length encoding (RLE)</a>
                 </li>
-                <li><a href="#org2756065">4.3. Bit-packing encoding</a></li>
-                <li><a href="#org4f30a73">4.4. Mostly encoding</a></li>
+                <li><a href="#org99c27c8">4.3. Bit-packing encoding</a></li>
+                <li><a href="#org16ea5e2">4.4. Mostly encoding</a></li>
                 <li>
-                  <a href="#org04bc519">4.5. Bitmap (One-hot) encoding</a>
+                  <a href="#orgdca6d3c">4.5. Bitmap (One-hot) encoding</a>
                 </li>
-                <li><a href="#orgd9518a6">4.6. Delta encoding</a></li>
-                <li><a href="#orgd9183ab">4.7. Incremental encoding</a></li>
+                <li><a href="#org6283a50">4.6. Delta encoding</a></li>
+                <li><a href="#org3992a89">4.7. Incremental encoding</a></li>
               </ul>
             </li>
           </ul>
@@ -127,13 +128,13 @@
           >CMU 15-445 L5 notes</a
         >.
       </p>
-      <div id="outline-container-orgb325179" class="outline-2">
-        <h2 id="orgb325179">
+      <div id="outline-container-org85a1c9b" class="outline-2">
+        <h2 id="org85a1c9b">
           <span class="section-number-2">1.</span> Database workloads
         </h2>
         <div class="outline-text-2" id="text-1"></div>
-        <div id="outline-container-org4994171" class="outline-3">
-          <h3 id="org4994171">
+        <div id="outline-container-org4b1d669" class="outline-3">
+          <h3 id="org4b1d669">
             <span class="section-number-3">1.1.</span> OLTP (Online Transaction
             Processing)
           </h3>
@@ -148,8 +149,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org0119116" class="outline-3">
-          <h3 id="org0119116">
+        <div id="outline-container-org6bce54a" class="outline-3">
+          <h3 id="org6bce54a">
             <span class="section-number-3">1.2.</span> OLAP (Online Analytical
             Processing)
           </h3>
@@ -160,8 +161,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org122a435" class="outline-3">
-          <h3 id="org122a435">
+        <div id="outline-container-orgc0961e0" class="outline-3">
+          <h3 id="orgc0961e0">
             <span class="section-number-3">1.3.</span> HTAP (Hybrid)
           </h3>
           <div class="outline-text-3" id="text-1-3">
@@ -171,8 +172,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org3d8d248" class="outline-2">
-        <h2 id="org3d8d248">
+      <div id="outline-container-org4813278" class="outline-2">
+        <h2 id="org4813278">
           <span class="section-number-2">2.</span> Storage models
         </h2>
         <div class="outline-text-2" id="text-2">
@@ -180,8 +181,8 @@
             <li>Different ways to store tuples in pages.</li>
           </ul>
         </div>
-        <div id="outline-container-orgd70844c" class="outline-3">
-          <h3 id="orgd70844c">
+        <div id="outline-container-org6a897a6" class="outline-3">
+          <h3 id="org6a897a6">
             <span class="section-number-3">2.1.</span> N-ary Storage Model (NSM)
           </h3>
           <div class="outline-text-3" id="text-2-1">
@@ -200,8 +201,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org5b5ce5e" class="outline-3">
-          <h3 id="org5b5ce5e">
+        <div id="outline-container-orgba64f33" class="outline-3">
+          <h3 id="orgba64f33">
             <span class="section-number-3">2.2.</span> Decomposition Storage
             Model (DSM)
           </h3>
@@ -235,7 +236,7 @@
               </li>
             </ul>
 
-            <figure id="org786e448">
+            <figure id="orgc775856">
               <img
                 src="./static/db-dsm-storage-model.png"
                 alt="db-dsm-storage-model.png"
@@ -253,8 +254,8 @@
             </figure>
           </div>
         </div>
-        <div id="outline-container-org9501db6" class="outline-3">
-          <h3 id="org9501db6">
+        <div id="outline-container-org56babf1" class="outline-3">
+          <h3 id="org56babf1">
             <span class="section-number-3">2.3.</span> Partition Attributes
             Across (PAX)
           </h3>
@@ -271,7 +272,7 @@
               </li>
             </ul>
 
-            <figure id="org5d98e0f">
+            <figure id="org8caf991">
               <img
                 src="./static/db-pax-storage-model.png"
                 alt="db-pax-storage-model.png"
@@ -290,8 +291,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-orge03292b" class="outline-2">
-        <h2 id="orge03292b">
+      <div id="outline-container-orgac94013" class="outline-2">
+        <h2 id="orgac94013">
           <span class="section-number-2">3.</span> Database compression
         </h2>
         <div class="outline-text-2" id="text-3">
@@ -335,8 +336,8 @@
             </li>
           </ul>
         </div>
-        <div id="outline-container-org5e9ad51" class="outline-3">
-          <h3 id="org5e9ad51">
+        <div id="outline-container-org9f06ac0" class="outline-3">
+          <h3 id="org9f06ac0">
             <span class="section-number-3">3.1.</span> Compression granularity
           </h3>
           <div class="outline-text-3" id="text-3-1">
@@ -354,8 +355,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-orgcb7090a" class="outline-3">
-          <h3 id="orgcb7090a">
+        <div id="outline-container-org49dfe33" class="outline-3">
+          <h3 id="org49dfe33">
             <span class="section-number-3">3.2.</span> Naive compression
           </h3>
           <div class="outline-text-3" id="text-3-2">
@@ -383,8 +384,8 @@
           </div>
         </div>
       </div>
-      <div id="outline-container-org03f0730" class="outline-2">
-        <h2 id="org03f0730">
+      <div id="outline-container-orgd8cef0f" class="outline-2">
+        <h2 id="orgd8cef0f">
           <span class="section-number-2">4.</span> Columnar compression
         </h2>
         <div class="outline-text-2" id="text-4">
@@ -394,8 +395,8 @@
             </li>
           </ul>
         </div>
-        <div id="outline-container-org8cec90e" class="outline-3">
-          <h3 id="org8cec90e">
+        <div id="outline-container-orgeb97923" class="outline-3">
+          <h3 id="orgeb97923">
             <span class="section-number-3">4.1.</span> Dictionary encoding
           </h3>
           <div class="outline-text-3" id="text-4-1">
@@ -429,8 +430,8 @@
             </ul>
           </div>
         </div>
-        <div id="outline-container-org052d7b1" class="outline-3">
-          <h3 id="org052d7b1">
+        <div id="outline-container-org8cc690b" class="outline-3">
+          <h3 id="org8cc690b">
             <span class="section-number-3">4.2.</span> Run-Length encoding (RLE)
           </h3>
           <div class="outline-text-3" id="text-4-2">
@@ -444,7 +445,7 @@
               </li>
             </ul>
 
-            <figure id="org100073e">
+            <figure id="org6382298">
               <img
                 src="./static/db-rle-storage-model.png"
                 alt="db-rle-storage-model.png"
@@ -462,8 +463,8 @@
             </figure>
           </div>
         </div>
-        <div id="outline-container-org2756065" class="outline-3">
-          <h3 id="org2756065">
+        <div id="outline-container-org99c27c8" class="outline-3">
+          <h3 id="org99c27c8">
             <span class="section-number-3">4.3.</span> Bit-packing encoding
           </h3>
           <div class="outline-text-3" id="text-4-3">
@@ -471,7 +472,7 @@
               <li>Use less bits to store an attribute.</li>
             </ul>
 
-            <figure id="orgc16a23c">
+            <figure id="orgf423227">
               <img
                 src="./static/db-bit-packing-storage-model.png"
                 alt="db-bit-packing-storage-model.png"
@@ -489,8 +490,8 @@
             </figure>
           </div>
         </div>
-        <div id="outline-container-org4f30a73" class="outline-3">
-          <h3 id="org4f30a73">
+        <div id="outline-container-org16ea5e2" class="outline-3">
+          <h3 id="org16ea5e2">
             <span class="section-number-3">4.4.</span> Mostly encoding
           </h3>
           <div class="outline-text-3" id="text-4-4">
@@ -501,7 +502,7 @@
               </li>
             </ul>
 
-            <figure id="org302b85b">
+            <figure id="orgd9086f0">
               <img
                 src="./static/db-mostly-encoding-storage-model.png"
                 alt="db-mostly-encoding-storage-model.png"
@@ -518,8 +519,8 @@
             </figure>
           </div>
         </div>
-        <div id="outline-container-org04bc519" class="outline-3">
-          <h3 id="org04bc519">
+        <div id="outline-container-orgdca6d3c" class="outline-3">
+          <h3 id="orgdca6d3c">
             <span class="section-number-3">4.5.</span> Bitmap (One-hot) encoding
           </h3>
           <div class="outline-text-3" id="text-4-5">
@@ -527,7 +528,7 @@
               <li>Only practical if the value cardinality is low.</li>
             </ul>
 
-            <figure id="org78886ea">
+            <figure id="org128413a">
               <img
                 src="./static/db-bitmap-encoding-storage-model.png"
                 alt="db-bitmap-encoding-storage-model.png"
@@ -544,8 +545,8 @@
             </figure>
           </div>
         </div>
-        <div id="outline-container-orgd9518a6" class="outline-3">
-          <h3 id="orgd9518a6">
+        <div id="outline-container-org6283a50" class="outline-3">
+          <h3 id="org6283a50">
             <span class="section-number-3">4.6.</span> Delta encoding
           </h3>
           <div class="outline-text-3" id="text-4-6">
@@ -557,7 +558,7 @@
               <li>Can be combined with RLE encoding.</li>
             </ul>
 
-            <figure id="org0a607d7">
+            <figure id="orgad0e884">
               <img
                 src="./static/db-delta-encoding-storage-model.png"
                 alt="db-delta-encoding-storage-model.png"
@@ -574,8 +575,8 @@
             </figure>
           </div>
         </div>
-        <div id="outline-container-orgd9183ab" class="outline-3">
-          <h3 id="orgd9183ab">
+        <div id="outline-container-org3992a89" class="outline-3">
+          <h3 id="org3992a89">
             <span class="section-number-3">4.7.</span> Incremental encoding
           </h3>
           <div class="outline-text-3" id="text-4-7">

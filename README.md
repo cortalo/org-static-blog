@@ -2,14 +2,11 @@ This blog uses the [org-static-mode](https://github.com/bastibe/org-static-blog)
 
 This blog also contains a customized styling, a [MathJax rendering](https://github.com/bastibe/org-static-blog/issues/72#issuecomment-1304825110) and a global search feature.
 
-Here is the Emacs configuration this blog uses, one should at least change `org-static-blog-publish-url` `author`, `org-static-blog-page-postamble` and `org-static-blog-index-front-matter` for their own blog.
-
-This blog is hosted on the Github pages.
+Here is the Emacs configuration this blog uses, one should at least change `org-static-blog-publish-title`, `org-static-blog-publish-url`, `author`, `favicon`, `org-static-blog-page-postamble` and `org-static-blog-index-front-matter` for their own blog.
 
     
 ```emacs-lisp
-;; org-static-blog config
-(setq org-static-blog-publish-title "org-static-blog")
+(setq org-static-blog-publish-title "Chenyo's Blog")
 (setq org-static-blog-publish-url "https://chenyo-17.github.io/org-static-blog")
 (setq org-static-blog-publish-directory "~/org-static-blog/")
 (setq org-static-blog-posts-directory "~/org-static-blog/posts/")
@@ -29,6 +26,7 @@ This blog is hosted on the Github pages.
       <meta name=\"referrer\" content=\"no-referrer\">
       <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
       <link rel=\"stylesheet\" href=\"assets/style.css\" type=\"text/css\"/>
+      <link rel=\"favicon\" type=\"image/x-icon\" href=\"favicon.ico\">
       <script src=\"assets/search.js\"></script>")
 
 ;; Postamble for every page (e.g., footer)

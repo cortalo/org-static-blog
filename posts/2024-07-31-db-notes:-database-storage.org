@@ -135,7 +135,7 @@ This is a personal note for the [[https://15445.courses.cs.cmu.edu/fall2023/note
 
 ** Dates/Times
 - Usually represented as unit time, e.g., micro/milli-seconds.
-- E.g., TIMESTAMP~.
+- E.g., ~TIMESTAMP~.
 
 ** Null
 - 3 common approaches to represent nulls:
