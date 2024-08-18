@@ -1,0 +1,21 @@
+#+title: papers
+#+date: <2024-08-18 16:19>
+#+description: 
+#+filetags: papers
+
+* Papers
+
+hello
+
+hello again
+
+#+begin_latex
+\begin{aligned}
+  \int_{0}^{\infty} f(x)dx
+\end{aligned}
+#+end_latex
+
+#+begin_src python
+  import math
+  pi = math.pi
+#+end_src
