@@ -2,7 +2,7 @@ This blog uses the [org-static-mode](https://github.com/bastibe/org-static-blog)
 
 This blog also contains a customized styling, a [MathJax rendering](https://github.com/bastibe/org-static-blog/issues/72#issuecomment-1304825110) and a global search feature.
 
-Here is the Emacs configuration this blog uses, one should at least change `org-static-blog-publish-title`, `org-static-blog-publish-url`, `author`, `favicon`, `org-static-blog-page-postamble` and `org-static-blog-index-front-matter` for their own blog.
+Here is the Emacs configuration this blog uses, one should at least change `org-static-blog-publish-title`, `org-static-blog-publish-url`, `author`, any social link, `org-static-blog-page-postamble` and `org-static-blog-index-front-matter` for their own blog.
 
     
 ```emacs-lisp
