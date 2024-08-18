@@ -2,10 +2,10 @@ This blog uses the [org-static-mode](https://github.com/bastibe/org-static-blog)
 
 This blog also contains a customized styling, a [MathJax rendering](https://github.com/bastibe/org-static-blog/issues/72#issuecomment-1304825110) and a global search feature.
 
-Here is the Emacs configuration this blog uses, one should at least change `org-static-blog-publish-title`, `org-static-blog-publish-url`, `author`, any social link, `org-static-blog-page-postamble` and `org-static-blog-index-front-matter` for their own blog.
+Here is the Doom Emacs configuration this blog uses, one should at least change `org-static-blog-publish-title`, `org-static-blog-publish-url`, `author`, any social link, `org-static-blog-page-postamble` and `org-static-blog-index-front-matter` for their own blog. Note that for other Emacs the syntax is different (e.g., ~after!~ is invalid in Spacemacs)!
 
-    
-```emacs-lisp
+``` emacs-lisp
+;; org-static-blog config
 (setq org-static-blog-publish-title "Chenyo's Blog")
 (setq org-static-blog-publish-url "https://chenyo-17.github.io/org-static-blog")
 (setq org-static-blog-publish-directory "~/org-static-blog/")
@@ -33,23 +33,31 @@ Here is the Emacs configuration this blog uses, one should at least change `org-
 (setq org-static-blog-page-postamble
       "<div id=\"search-results\"></div>
       <footer>
-      <p>© 2024 chenyo. Some rights reserved.</p>
+        <p>© 2024 chenyo. Some rights reserved.</p>
+        <div class=\"social-links\">
+          <a href=\"https://t.me/feihuadawangjiushiwo\" target=\"_blank\" rel=\"noopener noreferrer\">
+            <img src=\"assets/telegram-icon.svg\" alt=\"Telegram\" width=\"24\" height=\"24\">
+          </a>
+          <a href=\"https://github.com/chenyo-17\" target=\"_blank\" rel=\"noopener noreferrer\">
+            <img src=\"assets/github-icon.svg\" alt=\"GitHub\" width=\"24\" height=\"24\">
+      </a>
+      </div>
       </footer>")
 
 ;; Preamble for every page (e.g., navigation)
 (setq org-static-blog-page-preamble
       (format "
-<header>
-  <h1><a href=\"%s\">Chenyo's org-static-blog</a></h1>
-  <nav>
-    <a href=\"%s\">Home</a>
-    <a href=\"archive.html\">Archive</a>
-    <a href=\"tags.html\">Tags</a>
-    <div id=\"search-container\">
+      <header>
+      <h1><a href=\"%s\">Chenyo's org-static-blog</a></h1>
+      <nav>
+      <a href=\"%s\">Home</a>
+      <a href=\"archive.html\">Archive</a>
+      <a href=\"tags.html\">Tags</a>
+      <div id=\"search-container\">
       <input type=\"text\" id=\"search-input\" placeholder=\"Search anywhere...\">
-    </div>
-  </nav>
-</header>"
+      </div>
+      </nav>
+      </header>"
               org-static-blog-publish-url
               org-static-blog-publish-url))
 
