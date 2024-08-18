@@ -1,0 +1,12 @@
+#+title: My new blog!
+#+date: <2024-08-18 15:57>
+#+description: 
+#+filetags: personal
+
+* My new blog
+
+** Made by org-static-blog
+
+** With global search
+
+   1. Why is there no indentation?
