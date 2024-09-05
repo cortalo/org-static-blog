@@ -1,4 +1,4 @@
-This blog uses the [org-static-mode](https://github.com/bastibe/org-static-blog) to generate static HTML pages from Org files.
+This blog uses the [org-static-blog](https://github.com/bastibe/org-static-blog) to generate static HTML pages from Org files.
 
 This blog also contains a customized styling, a [MathJax rendering](https://github.com/bastibe/org-static-blog/issues/72#issuecomment-1304825110) and a global search feature.
 
@@ -7,7 +7,7 @@ Here is the Doom Emacs configuration this blog uses, one should at least change 
 ``` emacs-lisp
 ;; org-static-blog config
 (setq org-static-blog-publish-title "Chenyo's Blog")
-(setq org-static-blog-publish-url "https://chenyo-17.github.io/org-static-blog")
+(setq org-static-blog-publish-url "https://chenyo.me")
 (setq org-static-blog-publish-directory "~/org-static-blog/")
 (setq org-static-blog-posts-directory "~/org-static-blog/posts/")
 (setq org-static-blog-drafts-directory "~/org-static-blog/drafts/")
@@ -26,6 +26,7 @@ Here is the Doom Emacs configuration this blog uses, one should at least change 
       <meta name=\"referrer\" content=\"no-referrer\">
       <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
       <link rel=\"stylesheet\" href=\"assets/style.css\" type=\"text/css\"/>
+      <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\"/>
       <link rel=\"favicon\" type=\"image/x-icon\" href=\"favicon.ico\">
       <script src=\"assets/search.js\"></script>")
 
@@ -36,10 +37,10 @@ Here is the Doom Emacs configuration this blog uses, one should at least change 
         <p>© 2024 chenyo. Some rights reserved.</p>
         <div class=\"social-links\">
           <a href=\"https://t.me/feihuadawangjiushiwo\" target=\"_blank\" rel=\"noopener noreferrer\">
-            <img src=\"assets/telegram-icon.svg\" alt=\"Telegram\" width=\"24\" height=\"24\">
+          <i class=\"fab fa-telegram\"></i>
           </a>
           <a href=\"https://github.com/chenyo-17\" target=\"_blank\" rel=\"noopener noreferrer\">
-            <img src=\"assets/github-icon.svg\" alt=\"GitHub\" width=\"24\" height=\"24\">
+            <i class=\"fab fa-github\"></i>
       </a>
       </div>
       </footer>")
@@ -54,7 +55,8 @@ Here is the Doom Emacs configuration this blog uses, one should at least change 
       <a href=\"archive.html\">Archive</a>
       <a href=\"tags.html\">Tags</a>
       <div id=\"search-container\">
-      <input type=\"text\" id=\"search-input\" placeholder=\"Search anywhere...\">
+        <input type=\"text\" id=\"search-input\" placeholder=\"Search anywhere...\">
+        <i class=\"fas fa-search search-icon\"></i>
       </div>
       </nav>
       </header>"

@@ -3,14 +3,17 @@
 #+description: 
 #+filetags: papers
 
-* Papers
 
-hello
+- [[https://ieeexplore.ieee.org/document/6882880][The Cross-Coupled Pair Part I]]
+  - next paper
+    - next paper
+      - again
+        - again
+          - again
 
-hello again
 
 #+begin_latex
-\begin{aligned}
+\begin{}
   \int_{0}^{\infty} f(x)dx
 \end{aligned}
 #+end_latex
@@ -19,3 +22,4 @@ hello again
   import math
   pi = math.pi
 #+end_src
+
