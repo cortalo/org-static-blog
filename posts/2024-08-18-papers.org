@@ -5,15 +5,15 @@
 
 
 - [[https://ieeexplore.ieee.org/document/6882880][The Cross-Coupled Pair Part I]]
-  - next paper
-    - next paper
-      - again
+  - [[https://ieeexplore.ieee.org/document/5723773][A 300-GHz Fundamental Oscillator in 65-nm CMOS Technology]]
+    - [[https://ieeexplore.ieee.org/document/331530][Impact of distributed gate resistance on the performance of MOS devices]]
+      - [[https://archive.org/details/theoryoflinearac0000kuhe/page/n7/mode/2up][Theory of linear active networks]]
         - again
-          - again
+          - new paper
 
 
 #+begin_latex
-\begin{}
+\begin{aligned}
   \int_{0}^{\infty} f(x)dx
 \end{aligned}
 #+end_latex
