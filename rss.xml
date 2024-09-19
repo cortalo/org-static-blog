@@ -4,7 +4,35 @@
 <title><![CDATA[Cortalo's Blog]]></title>
 <description><![CDATA[Cortalo's Blog]]></description>
 <link>https://cortalo.github.io/org-static-blog</link>
-<lastBuildDate>Thu, 05 Sep 2024 22:26:47 +0200</lastBuildDate>
+<lastBuildDate>Thu, 19 Sep 2024 17:22:31 +0200</lastBuildDate>
+<item>
+  <title><![CDATA[equations]]></title>
+  <description><![CDATA[
+<div class="latex" id="org60a3a65">
+\begin{aligned}
+\int u dv = uv - \int v du
+\end{aligned}
+
+\begin{aligned}
+\int_{-\infty}^{\infty} g(x)\delta'(x-x') dx
+\end{aligned}
+
+\begin{aligned}
+u = g(x) \quad & v = \delta(x-x')\\
+du = g'(x)dx \quad & dv = \delta'(x-x')dx
+\end{aligned}
+
+\begin{aligned}
+& \int_{-\infty}^{\infty} g(x) \delta'(x-x')dx\\
+=& g(x)\delta(x-x') \vert_{-\infty}^{\infty} - \int_{-\infty}^{\infty} \delta(x-x') g'(x) dx = -g'(x')
+\end{aligned}
+
+</div>
+<div class="taglist"></div>]]></description>
+  <link>https://cortalo.github.io/org-static-blog/2024-09-19-equations.html</link>
+  <guid>https://cortalo.github.io/org-static-blog/2024-09-19-equations.html</guid>
+  <pubDate>Thu, 19 Sep 2024 16:51:00 +0200</pubDate>
+</item>
 <item>
   <title><![CDATA[papers]]></title>
   <description><![CDATA[
@@ -28,7 +56,7 @@
 </ul>
 
 
-<div class="latex" id="org2430619">
+<div class="latex" id="org38ae884">
 \begin{aligned}
   \int_{0}^{\infty} f(x)dx
 \end{aligned}
@@ -36,8 +64,8 @@
 </div>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">import</span> math
-<span style="color: #7590db;">pi</span> = math.pi
+<pre class="src src-python">  <span style="color: #51afef;">import</span> math
+  <span style="color: #dcaeea;">pi</span> = math.pi
 </pre>
 </div>
 <div class="taglist"><a href="https://cortalo.github.io/org-static-blog/tags.html">Tags</a>: <a href="https://cortalo.github.io/org-static-blog/tag-papers.html">papers</a> </div>]]></description>
@@ -53,26 +81,25 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org1715b50">1. My new blog</a>
+<li><a href="#orgdcb435e">1. My new blog</a>
 <ul>
-<li><a href="#org9e90891">1.1. Made by org-static-blog</a></li>
-<li><a href="#org7ec87e4">1.2. With global search</a></li>
+<li><a href="#org18938f6">1.1. Made by org-static-blog</a></li>
+<li><a href="#orgb1e8ddf">1.2. With global search</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-
-<div id="outline-container-org1715b50" class="outline-2">
-<h2 id="org1715b50"><span class="section-number-2">1.</span> My new blog</h2>
+<div id="outline-container-orgdcb435e" class="outline-2">
+<h2 id="orgdcb435e"><span class="section-number-2">1.</span> My new blog</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org9e90891" class="outline-3">
-<h3 id="org9e90891"><span class="section-number-3">1.1.</span> Made by org-static-blog</h3>
+<div id="outline-container-org18938f6" class="outline-3">
+<h3 id="org18938f6"><span class="section-number-3">1.1.</span> Made by org-static-blog</h3>
 </div>
 
-<div id="outline-container-org7ec87e4" class="outline-3">
-<h3 id="org7ec87e4"><span class="section-number-3">1.2.</span> With global search</h3>
+<div id="outline-container-orgb1e8ddf" class="outline-3">
+<h3 id="orgb1e8ddf"><span class="section-number-3">1.2.</span> With global search</h3>
 <div class="outline-text-3" id="text-1-2">
 <ol class="org-ol">
 <li>Why is there no indentation?</li>

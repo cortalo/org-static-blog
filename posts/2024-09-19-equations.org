@@ -1,0 +1,25 @@
+#+title: equations
+#+date: <2024-09-19 16:51>
+#+description:
+#+filetags:
+
+
+#+begin_latex
+\begin{aligned}
+\int u dv = uv - \int v du
+\end{aligned}
+
+\begin{aligned}
+\int_{-\infty}^{\infty} g(x)\delta'(x-x') dx
+\end{aligned}
+
+\begin{aligned}
+u = g(x) \quad & v = \delta(x-x')\\
+du = g'(x)dx \quad & dv = \delta'(x-x')dx
+\end{aligned}
+
+\begin{aligned}
+& \int_{-\infty}^{\infty} g(x) \delta'(x-x')dx\\
+=& g(x)\delta(x-x') \vert_{-\infty}^{\infty} - \int_{-\infty}^{\infty} \delta(x-x') g'(x) dx = -g'(x')
+\end{aligned}
+#+end_latex
