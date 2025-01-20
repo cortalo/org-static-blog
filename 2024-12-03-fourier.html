@@ -36,7 +36,7 @@
       </header></div>
 <div id="content">
 <div class="post-date">03 Dec 2024</div><h1 class="post-title"><a href="https://cortalo.github.io/org-static-blog/2024-12-03-fourier.html">fourier</a></h1>
-<div class="latex" id="org738fee2">
+<div class="latex" id="org88891ef">
 \begin{aligned}
 \int_a^b f(g(x)) \cdot g'(x) dx = \int_{g(a)}^{g(b)} f(u) du
 \end{aligned}
@@ -47,7 +47,7 @@
 For LTI system
 </p>
 
-<div class="latex" id="orga95a40e">
+<div class="latex" id="org3d6f485">
 \begin{aligned}
 y(t) = \int_{-\infty}^{\infty} h(t-\tau) x(\tau) d\tau
 \end{aligned}
@@ -58,7 +58,7 @@ y(t) = \int_{-\infty}^{\infty} h(t-\tau) x(\tau) d\tau
 if \(x(\tau) =\exp(j\omega \tau)\), let \(z = t-\tau, \tau = t-z\)
 </p>
 
-<div class="latex" id="org87c2a83">
+<div class="latex" id="orgf39fff4">
 \begin{aligned}
 y(t) &= \int_{-\infty}^{\infty} h(t-\tau) \exp(j\omega \tau) (-1)(-1) d\tau\\
 &= \int_{\infty}^{-\infty} h(z)\exp(j\omega t)\exp(-j\omega z)(-1)dz\\
@@ -72,7 +72,7 @@ y(t) &= \int_{-\infty}^{\infty} h(t-\tau) \exp(j\omega \tau) (-1)(-1) d\tau\\
 For LPTV system
 </p>
 
-<div class="latex" id="orgb18544b">
+<div class="latex" id="org229ebdb">
 \begin{aligned}
 y(t) = \int_{-\infty}^{\infty} h(t,\tau) x(\tau) d\tau
 \end{aligned}
@@ -84,7 +84,7 @@ where \(h(t+T,\tau+T) = h(t,\tau)\), let \(z=t-\tau, g(t,z) = h(t,t-z)\), thus \
 </p>
 
 
-<div class="latex" id="org13c0f64">
+<div class="latex" id="org031d257">
 \begin{aligned}
 y(t) &= \int_{-\infty}^{\infty} g(t,z)\exp(j\omega t)\exp(-j\omega z) dz\\
 &= \exp(j\omega t) \int_{-\infty}^{\infty} g(t,z)\exp(-j\omega z) dz\\
@@ -98,6 +98,7 @@ y(t) &= \int_{-\infty}^{\infty} g(t,z)\exp(j\omega t)\exp(-j\omega z) dz\\
 <div id="postamble" class="status"><div id="search-results"></div>
       <footer>
         <p>© 2024 Cortalo. Some rights reserved.</p>
+      <script src="assets/toggle.js"></script>
       </footer></div>
 </body>
 </html>

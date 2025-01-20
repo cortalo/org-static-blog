@@ -5,7 +5,7 @@ body {
     line-height: 1.6;
     color: #586e75; /* Solarized Light base01 */
     background-color: #fdf6e3; /* Solarized Light base3 */
-    max-width: 800px;
+    max-width: 1500px;
     margin: 0 auto;
     padding: 20px;
 }
@@ -20,6 +20,13 @@ header h1 {
     margin: 0;
 }
 
+h3,
+h4,
+h5,
+h6 {
+    cursor: pointer;
+}
+
 a {
     color: #073642;
     text-decoration: none;
@@ -31,15 +38,90 @@ a:hover {
     text-decoration: none;
 }
 
-footer {
-    margin-top: 30px;
-    border-top: 1px solid #eee;
-    padding-top: 10px;
+blockquote {
+    background-color: #eee8d5; /* Solarized Light base2 */
+    border-left: 4px solid #93a1a1; /* Solarized Light base1 */
+    margin: 1.5em 0;
+    padding: 1em 1.5em;
+    font-style: italic;
+    color: #657b83; /* Solarized Light base00 */
+    position: relative;
+    border-radius: 0 4px 4px 0;
+}
+
+blockquote::before {
+    content: "";
+    font-size: 3em;
+    position: absolute;
+    left: 10px;
+    top: -10px;
+    color: #93a1a1; /* Solarized Light base1 */
+    opacity: 0.5;
+}
+
+blockquote p {
+    margin: 0;
+}
+
+blockquote p + p {
+    margin-top: 1em;
+}
+
+code {
+    font-family: "JetBrains Mono", "Menlo", "Monaco", "Consolas", "Courier New",
+        monospace;
     font-size: 0.9em;
-    color: #666;
+    background-color: #eee8d5; /* Solarized Light base2 */
+    color: #073642; /* Solarized Light base02 */
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
+.fold-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1em;
+}
+
+.fold-button:hover {
+    color: #268bd2;
+}
+
+/* .fold-button::selection { */
+/*     background-color: #b58900; /\* Solarized Light yellow *\/ */
+/*     color: #fdf6e3; /\* Solarized Light base3 *\/ */
+/* } */
+
+footer {
+    text-align: center;
+}
+
+footer .footer-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+footer .footer-left {
+    display: flex;
+    align-items: center;
+}
+
+footer p {
+    margin: 0;
+    margin-right: 10px; /* Adds some space between the text and the CC icon */
+}
+
+footer .social-links {
+    display: flex;
+    gap: 10px;
+}
+
+footer img {
+    height: 26px; /* Increased height for a slightly bigger image */
+    width: auto;
 }
 
 mark {
@@ -240,7 +322,7 @@ tr:nth-child(even) {
     page-break-inside: avoid;
     font-family: "JetBrains Mono", "Menlo", "Monaco", "Consolas", "Courier New",
         monospace;
-    font-size: 13px;
+    font-size: 15px;
     line-height: 1.6;
     max-width: 100%;
     overflow: auto;
@@ -257,6 +339,10 @@ tr:nth-child(even) {
 
 .org-src-container pre.src-bash::before {
     content: "bash";
+}
+
+.org-src-container pre.src-cpp::before {
+    content: "cpp";
 }
 
 .org-src-container pre.src-css::before {
