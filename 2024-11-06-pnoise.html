@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="alternate"
+      type="application/rss+xml"
+      href="https://cortalo.github.io/org-static-blog/rss.xml"
+      title="RSS feed for https://cortalo.github.io/org-static-blog">
+<title>pnoise</title>
+<script type="text/javascript"
+             src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+       </script>
+       <script type="text/x-mathjax-config">
+             MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'],['\\(','\\)']]}});
+       </script>
+       <meta name="author" content="Cortalo">
+      <meta name="referrer" content="no-referrer">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="assets/style.css" type="text/css"/>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+      <link rel="favicon" type="image/x-icon" href="favicon.ico">
+      <script src="assets/search.js"></script></head>
+<body>
+<div id="preamble" class="status">
+      <header>
+      <h1><a href="https://cortalo.github.io/org-static-blog">Cortalo's org-static-blog</a></h1>
+      <nav>
+      <a href="https://cortalo.github.io/org-static-blog">Home</a>
+      <a href="archive.html">Archive</a>
+      <a href="tags.html">Tags</a>
+      <div id="search-container">
+        <input type="text" id="search-input" placeholder="Search anywhere...">
+        <i class="fas fa-search search-icon"></i>
+      </div>
+      </nav>
+      </header></div>
+<div id="content">
+<div class="post-date">06 Nov 2024</div><h1 class="post-title"><a href="https://cortalo.github.io/org-static-blog/2024-11-06-pnoise.html">pnoise</a></h1>
+<p>
+For a simple testbench that a voltage noise source \(S_v(f)\) (one-sided spectrum) is added on top of a sin wave, when using the timeaverage pnoise with pm mode, assuming beat frequency \(f_0\), relative harmonic is 1, then the SSB output noise spectrum is \(S(f) = (S_v(f_0 + f) + S_v(f_0 - f))/2/2\), where the first divided by 2 is to average the \(S_v(f_0+f)\) and \(S_v(f_0-f)\), and the second divided by 2 is because for such a simple testbench, half of the power is for pm and another half is for am.
+And the DSM noise output will be simply twice of the SSB.
+The phase noise is the ratio between SSB noise output and carrier power.
+</p>
+
+<p>
+However, if using sampled(jitter) mode, depends on pnoise maximum sidebands, aliasing will affect the simulation result.
+To properly address aliasing, let&rsquo;s consider the two-sided spectrum of the voltage noise source \(S_v(f)/2\).
+Assuming the maximum sidebands is \(N\), then the band corresponding to 0 sideband is \([-f_0/2, f_0/2]\), corresponding to 1 sideband is \([f_0 - f_0/2, f_0 + f_0/2]\) and \([-f_0 - f_0/2, -f_0 + f_0/2]\),&#x2026;,corresponding to \(N\) sideband is \([N*f_0 - f_0/2, N*f_0 + f_0/2]\) and \([-N*f_0 - f_0/2, -N*f_0 + f_0/2]\), add all of them together gives you the two-sided voltage noise spectrum, where the divided by 2 is because we are considering the \(S_v(f)/2\).
+</p>
+
+
+<div class="latex" id="org756fb1d">
+\begin{aligned}
+\sum_{i=-N}^{N} \dfrac{S_v(i*f_0 + f)}{2}
+\end{aligned}
+
+</div>
+
+<p>
+and one-sided voltage noise spectrum
+</p>
+
+
+<div class="latex" id="org37fdfdf">
+\begin{aligned}
+S(f) = \sum_{i=-N}^{N} \dfrac{S_v(i*f_0 + f)}{2} + \sum_{i=-N}^{N} \dfrac{S_v(i*f_0 - f)}{2}
+\end{aligned}
+
+</div>
+
+<p>
+then the phase noise is
+</p>
+
+<div class="latex" id="org065b688">
+\begin{aligned}
+L(f) = \dfrac{1}{2} \dfrac{S_v(f)}{\alpha^2} \left(\dfrac{2\pi}{T}\right)^2
+\end{aligned}
+
+</div>
+
+<p>
+where the first divide by two is because converting the spectrum of phase to phase noise spectrum.
+</p>
+<div class="taglist"></div></div>
+<div id="postamble" class="status"><div id="search-results"></div>
+      <footer>
+        <p>© 2024 Cortalo. Some rights reserved.</p>
+      </footer></div>
+</body>
+</html>

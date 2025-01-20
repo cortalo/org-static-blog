@@ -6,7 +6,7 @@
       type="application/rss+xml"
       href="https://cortalo.github.io/org-static-blog/rss.xml"
       title="RSS feed for https://cortalo.github.io/org-static-blog">
-<title>equations</title>
+<title>fourier</title>
 <script type="text/javascript"
              src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
        </script>
@@ -35,41 +35,62 @@
       </nav>
       </header></div>
 <div id="content">
-<div class="post-date">19 Sep 2024</div><h1 class="post-title"><a href="https://cortalo.github.io/org-static-blog/2024-09-19-equations.html">equations</a></h1>
-<div class="latex" id="org9bf8759">
+<div class="post-date">03 Dec 2024</div><h1 class="post-title"><a href="https://cortalo.github.io/org-static-blog/2024-12-03-fourier.html">fourier</a></h1>
+<div class="latex" id="org738fee2">
 \begin{aligned}
-f(x)*\delta(x+a) = f(x+a)
+\int_a^b f(g(x)) \cdot g'(x) dx = \int_{g(a)}^{g(b)} f(u) du
 \end{aligned}
 
 </div>
 
-<div class="latex" id="orga9e9852">
+<p>
+For LTI system
+</p>
+
+<div class="latex" id="orga95a40e">
 \begin{aligned}
-F(\omega) &= \int_{-\infty}^{\infty} f(t)\exp(-j\omega t) dt\\
-f(t) &= \dfrac{1}{2\pi} \int_{-\infty}^{\infty}F(\omega)\exp(j\omega t) d\omega
+y(t) = \int_{-\infty}^{\infty} h(t-\tau) x(\tau) d\tau
 \end{aligned}
 
+</div>
+
+<p>
+if \(x(\tau) =\exp(j\omega \tau)\), let \(z = t-\tau, \tau = t-z\)
+</p>
+
+<div class="latex" id="org87c2a83">
 \begin{aligned}
-\cos(\omega_c t) &\to \pi [\delta(\omega + \omega_c) + \delta(\omega-\omega_c)]\\
-\sin(\omega_c t) &\to j\pi [\delta(\omega + \omega_c) - \delta(\omega - \omega_c)]
+y(t) &= \int_{-\infty}^{\infty} h(t-\tau) \exp(j\omega \tau) (-1)(-1) d\tau\\
+&= \int_{\infty}^{-\infty} h(z)\exp(j\omega t)\exp(-j\omega z)(-1)dz\\
+&= \exp(j\omega t) \int_{-\infty}^{\infty}h(z)\exp(-j\omega z) dz\\
+&= \exp(j\omega t) H(\omega)
 \end{aligned}
 
+</div>
+
+<p>
+For LPTV system
+</p>
+
+<div class="latex" id="orgb18544b">
 \begin{aligned}
-\int u dv = uv - \int v du
+y(t) = \int_{-\infty}^{\infty} h(t,\tau) x(\tau) d\tau
 \end{aligned}
 
-\begin{aligned}
-\int_{-\infty}^{\infty} g(x)\delta'(x-x') dx
-\end{aligned}
+</div>
 
-\begin{aligned}
-u = g(x) \quad & v = \delta(x-x')\\
-du = g'(x)dx \quad & dv = \delta'(x-x')dx
-\end{aligned}
+<p>
+where \(h(t+T,\tau+T) = h(t,\tau)\), let \(z=t-\tau, g(t,z) = h(t,t-z)\), thus \(g(t,z)\) is period in \(t\), e.g., \(g(t+T,z) = g(t,z)\).
+</p>
 
+
+<div class="latex" id="org13c0f64">
 \begin{aligned}
-& \int_{-\infty}^{\infty} g(x) \delta'(x-x')dx\\
-=& g(x)\delta(x-x') \vert_{-\infty}^{\infty} - \int_{-\infty}^{\infty} \delta(x-x') g'(x) dx = -g'(x')
+y(t) &= \int_{-\infty}^{\infty} g(t,z)\exp(j\omega t)\exp(-j\omega z) dz\\
+&= \exp(j\omega t) \int_{-\infty}^{\infty} g(t,z)\exp(-j\omega z) dz\\
+&= \exp(j\omega t) \int_{-\infty}^{\infty} \sum_{n=-\infty}^{\infty} g_n(z)\exp(-jn\omega_0 t) \exp(-j\omega z) dz\\
+&= \sum_{n=-\infty}^{\infty} \exp(j\omega t)\exp(-jn\omega_0 t) \int_{-\infty}^{\infty} g_n(z) \exp(-j\omega z) dz\\
+&= \sum_{n=-\infty}^{\infty} \exp(j\omega t) \exp(-jn\omega_0 t) G_n(\omega)
 \end{aligned}
 
 </div>

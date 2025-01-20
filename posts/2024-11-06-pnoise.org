@@ -1,0 +1,38 @@
+#+title: pnoise
+#+date: <2024-11-06 11:40>
+#+description:
+#+filetags:
+
+For a simple testbench that a voltage noise source $S_v(f)$ (one-sided spectrum) is added on top of a sin wave, when using the timeaverage pnoise with pm mode, assuming beat frequency $f_0$, relative harmonic is 1, then the SSB output noise spectrum is $S(f) = (S_v(f_0 + f) + S_v(f_0 - f))/2/2$, where the first divided by 2 is to average the $S_v(f_0+f)$ and $S_v(f_0-f)$, and the second divided by 2 is because for such a simple testbench, half of the power is for pm and another half is for am.
+And the DSM noise output will be simply twice of the SSB.
+The phase noise is the ratio between SSB noise output and carrier power.
+
+However, if using sampled(jitter) mode, depends on pnoise maximum sidebands, aliasing will affect the simulation result.
+To properly address aliasing, let's consider the two-sided spectrum of the voltage noise source $S_v(f)/2$.
+Assuming the maximum sidebands is $N$, then the band corresponding to 0 sideband is $[-f_0/2, f_0/2]$, corresponding to 1 sideband is $[f_0 - f_0/2, f_0 + f_0/2]$ and $[-f_0 - f_0/2, -f_0 + f_0/2]$,...,corresponding to $N$ sideband is $[N*f_0 - f_0/2, N*f_0 + f_0/2]$ and $[-N*f_0 - f_0/2, -N*f_0 + f_0/2]$, add all of them together gives you the two-sided voltage noise spectrum, where the divided by 2 is because we are considering the $S_v(f)/2$.
+
+
+#+begin_latex
+\begin{aligned}
+\sum_{i=-N}^{N} \dfrac{S_v(i*f_0 + f)}{2}
+\end{aligned}
+#+end_latex
+
+and one-sided voltage noise spectrum
+
+
+#+begin_latex
+\begin{aligned}
+S(f) = \sum_{i=-N}^{N} \dfrac{S_v(i*f_0 + f)}{2} + \sum_{i=-N}^{N} \dfrac{S_v(i*f_0 - f)}{2}
+\end{aligned}
+#+end_latex
+
+then the phase noise is
+
+#+begin_latex
+\begin{aligned}
+L(f) = \dfrac{1}{2} \dfrac{S_v(f)}{\alpha^2} \left(\dfrac{2\pi}{T}\right)^2
+\end{aligned}
+#+end_latex
+
+where the first divide by two is because converting the spectrum of phase to phase noise spectrum.

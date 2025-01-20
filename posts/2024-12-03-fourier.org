@@ -1,0 +1,51 @@
+#+title: fourier
+#+date: <2024-12-03 21:58>
+#+description:
+#+filetags:
+
+
+#+begin_latex
+\begin{aligned}
+\int_a^b f(g(x)) \cdot g'(x) dx = \int_{g(a)}^{g(b)} f(u) du
+\end{aligned}
+#+end_latex
+
+For LTI system
+
+#+begin_latex
+\begin{aligned}
+y(t) = \int_{-\infty}^{\infty} h(t-\tau) x(\tau) d\tau
+\end{aligned}
+#+end_latex
+
+if $x(\tau) =\exp(j\omega \tau)$, let $z = t-\tau, \tau = t-z$
+
+#+begin_latex
+\begin{aligned}
+y(t) &= \int_{-\infty}^{\infty} h(t-\tau) \exp(j\omega \tau) (-1)(-1) d\tau\\
+&= \int_{\infty}^{-\infty} h(z)\exp(j\omega t)\exp(-j\omega z)(-1)dz\\
+&= \exp(j\omega t) \int_{-\infty}^{\infty}h(z)\exp(-j\omega z) dz\\
+&= \exp(j\omega t) H(\omega)
+\end{aligned}
+#+end_latex
+
+For LPTV system
+
+#+begin_latex
+\begin{aligned}
+y(t) = \int_{-\infty}^{\infty} h(t,\tau) x(\tau) d\tau
+\end{aligned}
+#+end_latex
+
+where $h(t+T,\tau+T) = h(t,\tau)$, let $z=t-\tau, g(t,z) = h(t,t-z)$, thus $g(t,z)$ is period in $t$, e.g., $g(t+T,z) = g(t,z)$.
+
+
+#+begin_latex
+\begin{aligned}
+y(t) &= \int_{-\infty}^{\infty} g(t,z)\exp(j\omega t)\exp(-j\omega z) dz\\
+&= \exp(j\omega t) \int_{-\infty}^{\infty} g(t,z)\exp(-j\omega z) dz\\
+&= \exp(j\omega t) \int_{-\infty}^{\infty} \sum_{n=-\infty}^{\infty} g_n(z)\exp(-jn\omega_0 t) \exp(-j\omega z) dz\\
+&= \sum_{n=-\infty}^{\infty} \exp(j\omega t)\exp(-jn\omega_0 t) \int_{-\infty}^{\infty} g_n(z) \exp(-j\omega z) dz\\
+&= \sum_{n=-\infty}^{\infty} \exp(j\omega t) \exp(-jn\omega_0 t) G_n(\omega)
+\end{aligned}
+#+end_latex

@@ -6,6 +6,22 @@
 
 #+begin_latex
 \begin{aligned}
+f(x)*\delta(x+a) = f(x+a)
+\end{aligned}
+#+end_latex
+
+#+begin_latex
+\begin{aligned}
+F(\omega) &= \int_{-\infty}^{\infty} f(t)\exp(-j\omega t) dt\\
+f(t) &= \dfrac{1}{2\pi} \int_{-\infty}^{\infty}F(\omega)\exp(j\omega t) d\omega
+\end{aligned}
+
+\begin{aligned}
+\cos(\omega_c t) &\to \pi [\delta(\omega + \omega_c) + \delta(\omega-\omega_c)]\\
+\sin(\omega_c t) &\to j\pi [\delta(\omega + \omega_c) - \delta(\omega - \omega_c)]
+\end{aligned}
+
+\begin{aligned}
 \int u dv = uv - \int v du
 \end{aligned}
 
