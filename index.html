@@ -38,7 +38,7 @@
 <h2>Welcome!</h2>
       <p>Take a look if you are bored.</p>
 <div class="post-date">03 Dec 2024</div><h1 class="post-title"><a href="https://cortalo.github.io/org-static-blog/2024-12-03-fourier.html">fourier</a></h1>
-<div class="latex" id="org738fee2">
+<div class="latex" id="org31f00b2">
 \begin{aligned}
 \int_a^b f(g(x)) \cdot g'(x) dx = \int_{g(a)}^{g(b)} f(u) du
 \end{aligned}
@@ -49,7 +49,7 @@
 For LTI system
 </p>
 
-<div class="latex" id="orga95a40e">
+<div class="latex" id="org9aa42cd">
 \begin{aligned}
 y(t) = \int_{-\infty}^{\infty} h(t-\tau) x(\tau) d\tau
 \end{aligned}
@@ -60,7 +60,7 @@ y(t) = \int_{-\infty}^{\infty} h(t-\tau) x(\tau) d\tau
 if \(x(\tau) =\exp(j\omega \tau)\), let \(z = t-\tau, \tau = t-z\)
 </p>
 
-<div class="latex" id="org87c2a83">
+<div class="latex" id="org959b011">
 \begin{aligned}
 y(t) &= \int_{-\infty}^{\infty} h(t-\tau) \exp(j\omega \tau) (-1)(-1) d\tau\\
 &= \int_{\infty}^{-\infty} h(z)\exp(j\omega t)\exp(-j\omega z)(-1)dz\\
@@ -74,7 +74,7 @@ y(t) &= \int_{-\infty}^{\infty} h(t-\tau) \exp(j\omega \tau) (-1)(-1) d\tau\\
 For LPTV system
 </p>
 
-<div class="latex" id="orgb18544b">
+<div class="latex" id="org6c64f0f">
 \begin{aligned}
 y(t) = \int_{-\infty}^{\infty} h(t,\tau) x(\tau) d\tau
 \end{aligned}
@@ -86,7 +86,7 @@ where \(h(t+T,\tau+T) = h(t,\tau)\), let \(z=t-\tau, g(t,z) = h(t,t-z)\), thus \
 </p>
 
 
-<div class="latex" id="org13c0f64">
+<div class="latex" id="org4d3d808">
 \begin{aligned}
 y(t) &= \int_{-\infty}^{\infty} g(t,z)\exp(j\omega t)\exp(-j\omega z) dz\\
 &= \exp(j\omega t) \int_{-\infty}^{\infty} g(t,z)\exp(-j\omega z) dz\\
@@ -111,7 +111,7 @@ Assuming the maximum sidebands is \(N\), then the band corresponding to 0 sideba
 </p>
 
 
-<div class="latex" id="org756fb1d">
+<div class="latex" id="orgb784604">
 \begin{aligned}
 \sum_{i=-N}^{N} \dfrac{S_v(i*f_0 + f)}{2}
 \end{aligned}
@@ -123,7 +123,7 @@ and one-sided voltage noise spectrum
 </p>
 
 
-<div class="latex" id="org37fdfdf">
+<div class="latex" id="org166fd97">
 \begin{aligned}
 S(f) = \sum_{i=-N}^{N} \dfrac{S_v(i*f_0 + f)}{2} + \sum_{i=-N}^{N} \dfrac{S_v(i*f_0 - f)}{2}
 \end{aligned}
@@ -134,7 +134,7 @@ S(f) = \sum_{i=-N}^{N} \dfrac{S_v(i*f_0 + f)}{2} + \sum_{i=-N}^{N} \dfrac{S_v(i*
 then the phase noise is
 </p>
 
-<div class="latex" id="org065b688">
+<div class="latex" id="org4c1cf02">
 \begin{aligned}
 L(f) = \dfrac{1}{2} \dfrac{S_v(f)}{\alpha^2} \left(\dfrac{2\pi}{T}\right)^2
 \end{aligned}
@@ -146,14 +146,14 @@ where the first divide by two is because converting the spectrum of phase to pha
 </p>
 <div class="taglist"></div>
 <div class="post-date">19 Sep 2024</div><h1 class="post-title"><a href="https://cortalo.github.io/org-static-blog/2024-09-19-equations.html">equations</a></h1>
-<div class="latex" id="org9bf8759">
+<div class="latex" id="org2bcb17e">
 \begin{aligned}
 f(x)*\delta(x+a) = f(x+a)
 \end{aligned}
 
 </div>
 
-<div class="latex" id="orga9e9852">
+<div class="latex" id="org75a1092">
 \begin{aligned}
 F(\omega) &= \int_{-\infty}^{\infty} f(t)\exp(-j\omega t) dt\\
 f(t) &= \dfrac{1}{2\pi} \int_{-\infty}^{\infty}F(\omega)\exp(j\omega t) d\omega
@@ -224,7 +224,7 @@ du = g'(x)dx \quad & dv = \delta'(x-x')dx
 </ul>
 
 
-<div class="latex" id="org2c0fef2">
+<div class="latex" id="orgc2118b8">
 \begin{aligned}
   \int_{0}^{\infty} f(x)dx
 \end{aligned}
@@ -242,25 +242,25 @@ du = g'(x)dx \quad & dv = \delta'(x-x')dx
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgdcb435e">1. My new blog</a>
+<li><a href="#org51e0088">1. My new blog</a>
 <ul>
-<li><a href="#org18938f6">1.1. Made by org-static-blog</a></li>
-<li><a href="#orgb1e8ddf">1.2. With global search</a></li>
+<li><a href="#org70e5aeb">1.1. Made by org-static-blog</a></li>
+<li><a href="#org854a7d8">1.2. With global search</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-orgdcb435e" class="outline-2">
-<h2 id="orgdcb435e"><span class="section-number-2">1.</span> My new blog</h2>
+<div id="outline-container-org51e0088" class="outline-2">
+<h2 id="org51e0088"><span class="section-number-2">1.</span> My new blog</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org18938f6" class="outline-3">
-<h3 id="org18938f6"><span class="section-number-3">1.1.</span> Made by org-static-blog</h3>
+<div id="outline-container-org70e5aeb" class="outline-3">
+<h3 id="org70e5aeb"><span class="section-number-3">1.1.</span> Made by org-static-blog</h3>
 </div>
 
-<div id="outline-container-orgb1e8ddf" class="outline-3">
-<h3 id="orgb1e8ddf"><span class="section-number-3">1.2.</span> With global search</h3>
+<div id="outline-container-org854a7d8" class="outline-3">
+<h3 id="org854a7d8"><span class="section-number-3">1.2.</span> With global search</h3>
 <div class="outline-text-3" id="text-1-2">
 <ol class="org-ol">
 <li>Why is there no indentation?</li>
@@ -275,6 +275,7 @@ du = g'(x)dx \quad & dv = \delta'(x-x')dx
 <div id="postamble" class="status"><div id="search-results"></div>
       <footer>
         <p>© 2024 Cortalo. Some rights reserved.</p>
+      <script src="assets/toggle.js"></script>
       </footer></div>
 </body>
 </html>
