@@ -4,7 +4,7 @@
 <title><![CDATA[Cortalo's Blog]]></title>
 <description><![CDATA[Cortalo's Blog]]></description>
 <link>https://cortalo.github.io/org-static-blog</link>
-<lastBuildDate>Mon, 20 Jan 2025 20:34:25 +0100</lastBuildDate>
+<lastBuildDate>Mon, 20 Jan 2025 20:56:14 +0100</lastBuildDate>
 <item>
   <title><![CDATA[fourier]]></title>
   <description><![CDATA[
@@ -128,14 +128,24 @@ where the first divide by two is because converting the spectrum of phase to pha
 <item>
   <title><![CDATA[equations]]></title>
   <description><![CDATA[
-<div class="latex" id="org2bcb17e">
+<div class="hide" id="org7f877d9">
+<div class="latex" id="orgac2d6d8">
+\begin{aligned}
+f(x)
+\end{aligned}
+
+</div>
+
+</div>
+
+<div class="latex" id="org4992a51">
 \begin{aligned}
 f(x)*\delta(x+a) = f(x+a)
 \end{aligned}
 
 </div>
 
-<div class="latex" id="org75a1092">
+<div class="latex" id="org040f074">
 \begin{aligned}
 F(\omega) &= \int_{-\infty}^{\infty} f(t)\exp(-j\omega t) dt\\
 f(t) &= \dfrac{1}{2\pi} \int_{-\infty}^{\infty}F(\omega)\exp(j\omega t) d\omega

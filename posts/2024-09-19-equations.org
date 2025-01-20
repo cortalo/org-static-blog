@@ -4,6 +4,14 @@
 #+filetags:
 
 
+#+begin_hide
+#+begin_latex
+\begin{aligned}
+f(x)
+\end{aligned}
+#+end_latex
+#+end_hide
+
 #+begin_latex
 \begin{aligned}
 f(x)*\delta(x+a) = f(x+a)

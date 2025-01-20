@@ -13,9 +13,9 @@ document.querySelectorAll(".org-src-container").forEach((codeSection) => {
   codeSection.style.display = "none";
 });
 
-document.querySelectorAll(".latex").forEach((latex) => {
+document.querySelectorAll(".hide").forEach((latex) => {
   const button = document.createElement("button");
-  button.textContent = "▶ Show latex";
+  button.textContent = "▶ Show hidden";
   button.className = "fold-button";
   button.onclick = () => toggleLatex(button);
   latex.parentNode.insertBefore(button, latex);
@@ -39,5 +39,5 @@ function toggleLatex(button) {
   const latex = button.nextElementSibling;
   const isVisible = latex.style.display !== "none";
   latex.style.display = isVisible ? "none" : "block";
-  button.textContent = isVisible ? "▶ Show latex" : "▼ Hide latex";
+  button.textContent = isVisible ? "▶ Show hidden" : "▼ Hide";
 }
