@@ -4,11 +4,19 @@
 #+filetags:
 
 
+
+#+begin_latex
+\begin{aligned}
+x^2+y^2=0
+\end{aligned}
+#+end_latex
 #+begin_hide
+we define f(x)
 #+begin_latex
 \begin{aligned}
 f(x)
 \end{aligned}
+Yes!
 #+end_latex
 #+end_hide
 
@@ -45,5 +53,18 @@ du = g'(x)dx \quad & dv = \delta'(x-x')dx
 \begin{aligned}
 & \int_{-\infty}^{\infty} g(x) \delta'(x-x')dx\\
 =& g(x)\delta(x-x') \vert_{-\infty}^{\infty} - \int_{-\infty}^{\infty} \delta(x-x') g'(x) dx = -g'(x')
+\end{aligned}
+#+end_latex
+
+when $z$ is moving from $-\infty$ to $\infty$
+#+begin_latex
+\begin{aligned}
+w = \lambda + \dfrac{\mu}{\alpha z + \beta}
+\end{aligned}
+#+end_latex
+the $w$ is moving around a circle, with center at
+#+begin_latex
+\begin{aligned}
+\dfrac{-2\mu\alpha^* j}{|\beta + \alpha j|^2 - |\beta - \alpha j|^2} + \lambda
 \end{aligned}
 #+end_latex
