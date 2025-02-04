@@ -146,17 +146,17 @@ where the first divide by two is because converting the spectrum of phase to pha
 </p>
 <div class="taglist"></div>
 <div class="post-date">19 Sep 2024</div><h1 class="post-title"><a href="https://cortalo.github.io/org-static-blog/2024-09-19-equations.html">equations</a></h1>
-<div class="latex" id="org594de81">
+<div class="latex" id="orgf9510ab">
 \begin{aligned}
 x^2+y^2=0
 \end{aligned}
 
 </div>
-<div class="hide" id="org6b78371">
+<div class="hide" id="org40c407f">
 <p>
 we define f(x)
 </p>
-<div class="latex" id="org6852a24">
+<div class="latex" id="orgbffc096">
 \begin{aligned}
 f(x)
 \end{aligned}
@@ -168,14 +168,14 @@ Yes!
 
 </div>
 
-<div class="latex" id="org5db789c">
+<div class="latex" id="org868159c">
 \begin{aligned}
 f(x)*\delta(x+a) = f(x+a)
 \end{aligned}
 
 </div>
 
-<div class="latex" id="orgb53bdff">
+<div class="latex" id="orgfd7069a">
 \begin{aligned}
 F(\omega) &= \int_{-\infty}^{\infty} f(t)\exp(-j\omega t) dt\\
 f(t) &= \dfrac{1}{2\pi} \int_{-\infty}^{\infty}F(\omega)\exp(j\omega t) d\omega
@@ -206,22 +206,70 @@ du = g'(x)dx \quad & dv = \delta'(x-x')dx
 
 </div>
 
-<p>
-when \(z\) is moving from \(-\infty\) to \(\infty\)
-</p>
-<div class="latex" id="orgbea296d">
+<div class="latex" id="orge2e4e92">
 \begin{aligned}
 w = \lambda + \dfrac{\mu}{\alpha z + \beta}
 \end{aligned}
 
 </div>
 <p>
-the \(w\) is moving around a circle, with center at
+when \(z\) is moving from \(-\infty\) to \(\infty\), the \(w\) is moving around a circle, with center at
 </p>
-<div class="latex" id="org90d0269">
+<div class="latex" id="org48b1aec">
 \begin{aligned}
 \dfrac{-2\mu\alpha^* j}{|\beta + \alpha j|^2 - |\beta - \alpha j|^2} + \lambda
 \end{aligned}
+
+</div>
+<div class="hide" id="orgdb51024">
+<p>
+For a straight line \(|z-a_1| = |z-a_2|\), we want to find the center of the circle \(|\frac{1}{w}-a_1|=|\frac{1}{w}-a_2|\), we use
+</p>
+<div class="latex" id="orga161a59">
+\begin{aligned}
+w=u+jv, \quad a_1 = p+jq, \quad a_2 = r+js
+\end{aligned}
+\begin{aligned}
+\left(\dfrac{u}{u^2+v^2}-p\right)^2 + \left(\dfrac{v}{u^2+v^2}+q\right)^2=\left(\dfrac{u}{u^2+v^2}-r\right)^2+\left(\dfrac{v}{u^2+v^2}+s\right)^2
+\end{aligned}
+\begin{aligned}
+-\dfrac{2up}{u^2+v^2}+p^2+\dfrac{2vq}{u^2+v^2}+q^2=-\dfrac{2ur}{u^2+v^2} + r^2 + \dfrac{2vs}{u^2+v^2}+s^2
+\end{aligned}
+\begin{aligned}
+(u^2+v^2)(p^2+q^2-r^2-s^2)+2u(r-p)+2v(q-s)=0
+\end{aligned}
+\begin{aligned}
+u^2 + \dfrac{2(r-p)}{p^2+q^2-r^2-s^2}u + v^2 + \dfrac{2(q-s)}{p^2+q^2-r^2-s^2}v = 0
+\end{aligned}
+
+</div>
+<p>
+The center of the circle locates
+</p>
+<div class="latex" id="org87984ac">
+\begin{aligned}
+\dfrac{p-r}{p^2+q^2-r^2-s^2} -j \dfrac{q-s}{p^2+q^2-r^2-s^2}=\dfrac{(a_1-a_2)^*}{|a_1|^2-|a_2|^2}
+\end{aligned}
+
+</div>
+<p>
+now for \(\frac{1}{\alpha z + \beta}\), the line \(\alpha z + \beta\) we can choose \(a_1 = j\alpha + \beta, a_2 = -j\alpha + \beta\), the center for \(\frac{1}{\alpha z + \beta}\) is
+</p>
+<div class="latex" id="org016cf6f">
+\begin{aligned}
+\dfrac{-2j\alpha^*}{|\beta+\alpha j|^2 - |\beta-\alpha j|^2}
+\end{aligned}
+
+</div>
+<p>
+then the center for \(w = \lambda + \dfrac{\mu}{\alpha z + \beta}\) is
+</p>
+<div class="latex" id="org16064c0">
+\begin{aligned}
+\dfrac{-2\mu\alpha^*j}{|\beta+\alpha j|^2 - |\beta-\alpha j|^2} + \lambda
+\end{aligned}
+
+</div>
 
 </div>
 <div class="taglist"></div>
