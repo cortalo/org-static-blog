@@ -61,7 +61,8 @@ du = g'(x)dx \quad & dv = \delta'(x-x')dx
 w = \lambda + \dfrac{\mu}{\alpha z + \beta}
 \end{aligned}
 #+end_latex
-when $z$ is moving from $-\infty$ to $\infty$, the $w$ is moving around a circle, with center at
+when $z$ is moving from $-\infty$ to $\infty$, the $w$ is moving around a circle, with center at [[https://www.maplesoft.com/books/details.aspx?id=406][ref. page 270.]]
+# Advanced Modern Engineering Mathematics: Fourth Edition, Glyn James
 #+begin_latex
 \begin{aligned}
 \dfrac{-2\mu\alpha^* j}{|\beta + \alpha j|^2 - |\beta - \alpha j|^2} + \lambda
@@ -104,4 +105,79 @@ then the center for $w = \lambda + \dfrac{\mu}{\alpha z + \beta}$ is
 \dfrac{-2\mu\alpha^*j}{|\beta+\alpha j|^2 - |\beta-\alpha j|^2} + \lambda
 \end{aligned}
 #+end_latex
+#+end_hide
+body effect $g_{mb} = (n-1)g_m$, it can also be included in $i_d = g_m(V_g - n V_s)$
+#+begin_hide
+#+begin_latex
+\begin{align}
+g_m(V_g - V_s) + g_{mb}(0-V_s)
+\end{align}
+\begin{align}
+g_m(V_g - V_s) + (n-1)g_m(0-V_s)
+\end{align}
+\begin{align}
+g_m(V_g - V_s - (n-1)V_s)
+\end{align}
+\begin{align}
+g_m(V_g - nV_s)
+\end{align}
+#+end_latex
+#+end_hide
+
+#+ATTR_HTML: :align center
+#+ATTR_HTML: :width 300px
+[[./static/2024-09-19-equations/001.png]]
+
+the impedance is $Z_{in} = -\dfrac{2}{g_m} - Z_1$. [[https://ieeexplore.ieee.org/document/6882880][ref.]]
+#+begin_hide
+#+begin_latex
+\begin{align}
+I_x = g_m(-V_x-I_x \cdot \dfrac{Z_1}{2})
+\end{align}
+\begin{align}
+I_x (1 + \dfrac{1}{2} g_m Z_1) = - g_m V_x
+\end{align}
+\begin{align}
+Z_{in} = \dfrac{2V_x}{I_x} = -\dfrac{2}{g_m} - Z_1
+\end{align}
+#+end_latex
+#+end_hide
+if including body effect, the impedance is $Z_{in} = -\dfrac{2}{g_m} - nZ_1$.
+#+begin_hide
+#+begin_latex
+\begin{align}
+I_x = g_m(-V_x- n I_x \cdot \dfrac{Z_1}{2})
+\end{align}
+\begin{align}
+Z_1 \to n Z_1
+\end{align}
+#+end_latex
+#+end_hide
+
+#+ATTR_HTML: :align center
+#+ATTR_HTML: :width 150px
+[[./static/2024-09-19-equations/002.png]]
+
+The circuit may oscillate with $C_L$ if $C_s > n C_L$. [[https://ieeexplore.ieee.org/document/1471472][ref1.]] [[https://link.springer.com/book/10.1007/978-90-481-9395-0][ref2. page 139 eq 6.6]]
+#+begin_hide
+#+begin_latex
+\begin{align}
+Z_c = -\dfrac{2}{g_m} - \dfrac{n}{j\omega C_s}
+\end{align}
+\begin{align}
+Y &= 1/Z_c = \dfrac{1}{-\dfrac{2}{g_m} - \dfrac{n}{j\omega C_s}}\\
+&= -\dfrac{g_m j \omega C_s}{n g_m + 2j\omega C_s}\\
+&= -\dfrac{2g_m\omega^2 C_s^2}{n^2g_m^2 + 4\omega^2 C_s^2} - j \dfrac{ng_m^2\omega C_s}{n^2 g_m^2 + 4\omega^2 C_s^2}
+\end{align}
+#+end_latex
+The $Y$ may oscillate with $C_L$ if
+#+begin_latex
+\begin{align}
+j\omega C_L - j \dfrac{ng_m^2\omega C_s}{n^2 g_m^2 + 4\omega^2 C_s^2} = 0
+\end{align}
+\begin{align}
+\omega = \dfrac{ng_m}{2C_s}\sqrt{\dfrac{C_s}{nC_L}-1}
+\end{align}
+#+end_latex
+it may happen if $C_s > n C_L$.
 #+end_hide

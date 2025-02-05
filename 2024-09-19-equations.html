@@ -36,17 +36,17 @@
       </header></div>
 <div id="content">
 <div class="post-date">19 Sep 2024</div><h1 class="post-title"><a href="https://cortalo.github.io/org-static-blog/2024-09-19-equations.html">equations</a></h1>
-<div class="latex" id="orgf9510ab">
+<div class="latex" id="org447eb08">
 \begin{aligned}
 x^2+y^2=0
 \end{aligned}
 
 </div>
-<div class="hide" id="org40c407f">
+<div class="hide" id="org2dd58be">
 <p>
 we define f(x)
 </p>
-<div class="latex" id="orgbffc096">
+<div class="latex" id="org9d4837b">
 \begin{aligned}
 f(x)
 \end{aligned}
@@ -58,14 +58,14 @@ Yes!
 
 </div>
 
-<div class="latex" id="org868159c">
+<div class="latex" id="org939d949">
 \begin{aligned}
 f(x)*\delta(x+a) = f(x+a)
 \end{aligned}
 
 </div>
 
-<div class="latex" id="orgfd7069a">
+<div class="latex" id="org38d56c7">
 \begin{aligned}
 F(\omega) &= \int_{-\infty}^{\infty} f(t)\exp(-j\omega t) dt\\
 f(t) &= \dfrac{1}{2\pi} \int_{-\infty}^{\infty}F(\omega)\exp(j\omega t) d\omega
@@ -96,26 +96,27 @@ du = g'(x)dx \quad & dv = \delta'(x-x')dx
 
 </div>
 
-<div class="latex" id="orge2e4e92">
+<div class="latex" id="org3c7bdcd">
 \begin{aligned}
 w = \lambda + \dfrac{\mu}{\alpha z + \beta}
 \end{aligned}
 
 </div>
 <p>
-when \(z\) is moving from \(-\infty\) to \(\infty\), the \(w\) is moving around a circle, with center at
+when \(z\) is moving from \(-\infty\) to \(\infty\), the \(w\) is moving around a circle, with center at <a href="https://www.maplesoft.com/books/details.aspx?id=406">ref. page 270.</a>
 </p>
-<div class="latex" id="org48b1aec">
+
+<div class="latex" id="orgb8beb47">
 \begin{aligned}
 \dfrac{-2\mu\alpha^* j}{|\beta + \alpha j|^2 - |\beta - \alpha j|^2} + \lambda
 \end{aligned}
 
 </div>
-<div class="hide" id="orgdb51024">
+<div class="hide" id="org5537b81">
 <p>
 For a straight line \(|z-a_1| = |z-a_2|\), we want to find the center of the circle \(|\frac{1}{w}-a_1|=|\frac{1}{w}-a_2|\), we use
 </p>
-<div class="latex" id="orga161a59">
+<div class="latex" id="org1fef513">
 \begin{aligned}
 w=u+jv, \quad a_1 = p+jq, \quad a_2 = r+js
 \end{aligned}
@@ -136,7 +137,7 @@ u^2 + \dfrac{2(r-p)}{p^2+q^2-r^2-s^2}u + v^2 + \dfrac{2(q-s)}{p^2+q^2-r^2-s^2}v 
 <p>
 The center of the circle locates
 </p>
-<div class="latex" id="org87984ac">
+<div class="latex" id="org2ce13e5">
 \begin{aligned}
 \dfrac{p-r}{p^2+q^2-r^2-s^2} -j \dfrac{q-s}{p^2+q^2-r^2-s^2}=\dfrac{(a_1-a_2)^*}{|a_1|^2-|a_2|^2}
 \end{aligned}
@@ -145,7 +146,7 @@ The center of the circle locates
 <p>
 now for \(\frac{1}{\alpha z + \beta}\), the line \(\alpha z + \beta\) we can choose \(a_1 = j\alpha + \beta, a_2 = -j\alpha + \beta\), the center for \(\frac{1}{\alpha z + \beta}\) is
 </p>
-<div class="latex" id="org016cf6f">
+<div class="latex" id="org0358621">
 \begin{aligned}
 \dfrac{-2j\alpha^*}{|\beta+\alpha j|^2 - |\beta-\alpha j|^2}
 \end{aligned}
@@ -154,12 +155,112 @@ now for \(\frac{1}{\alpha z + \beta}\), the line \(\alpha z + \beta\) we can cho
 <p>
 then the center for \(w = \lambda + \dfrac{\mu}{\alpha z + \beta}\) is
 </p>
-<div class="latex" id="org16064c0">
+<div class="latex" id="org870e255">
 \begin{aligned}
 \dfrac{-2\mu\alpha^*j}{|\beta+\alpha j|^2 - |\beta-\alpha j|^2} + \lambda
 \end{aligned}
 
 </div>
+
+</div>
+<p>
+body effect \(g_{mb} = (n-1)g_m\), it can also be included in \(i_d = g_m(V_g - n V_s)\)
+</p>
+<div class="hide" id="org6b8b0a6">
+<div class="latex" id="org2548843">
+\begin{align}
+g_m(V_g - V_s) + g_{mb}(0-V_s)
+\end{align}
+\begin{align}
+g_m(V_g - V_s) + (n-1)g_m(0-V_s)
+\end{align}
+\begin{align}
+g_m(V_g - V_s - (n-1)V_s)
+\end{align}
+\begin{align}
+g_m(V_g - nV_s)
+\end{align}
+
+</div>
+
+</div>
+
+
+<figure id="org9cca45c">
+<img src="./static/2024-09-19-equations/001.png" alt="001.png" align="center" width="300px">
+
+</figure>
+
+<p>
+the impedance is \(Z_{in} = -\dfrac{2}{g_m} - Z_1\). <a href="https://ieeexplore.ieee.org/document/6882880">ref.</a>
+</p>
+<div class="hide" id="org2d8afea">
+<div class="latex" id="org8947d6e">
+\begin{align}
+I_x = g_m(-V_x-I_x \cdot \dfrac{Z_1}{2})
+\end{align}
+\begin{align}
+I_x (1 + \dfrac{1}{2} g_m Z_1) = - g_m V_x
+\end{align}
+\begin{align}
+Z_{in} = \dfrac{2V_x}{I_x} = -\dfrac{2}{g_m} - Z_1
+\end{align}
+
+</div>
+
+</div>
+<p>
+if including body effect, the impedance is \(Z_{in} = -\dfrac{2}{g_m} - nZ_1\).
+</p>
+<div class="hide" id="orgdd667ba">
+<div class="latex" id="org28f6547">
+\begin{align}
+I_x = g_m(-V_x- n I_x \cdot \dfrac{Z_1}{2})
+\end{align}
+\begin{align}
+Z_1 \to n Z_1
+\end{align}
+
+</div>
+
+</div>
+
+
+<figure id="org6af7cc4">
+<img src="./static/2024-09-19-equations/002.png" alt="002.png" align="center" width="150px">
+
+</figure>
+
+<p>
+The circuit may oscillate with \(C_L\) if \(C_s > n C_L\). <a href="https://ieeexplore.ieee.org/document/1471472">ref1.</a> <a href="https://link.springer.com/book/10.1007/978-90-481-9395-0">ref2. page 139 eq 6.6</a>
+</p>
+<div class="hide" id="orgcd524dc">
+<div class="latex" id="org8ea5be1">
+\begin{align}
+Z_c = -\dfrac{2}{g_m} - \dfrac{n}{j\omega C_s}
+\end{align}
+\begin{align}
+Y &= 1/Z_c = \dfrac{1}{-\dfrac{2}{g_m} - \dfrac{n}{j\omega C_s}}\\
+&= -\dfrac{g_m j \omega C_s}{n g_m + 2j\omega C_s}\\
+&= -\dfrac{2g_m\omega^2 C_s^2}{n^2g_m^2 + 4\omega^2 C_s^2} - j \dfrac{ng_m^2\omega C_s}{n^2 g_m^2 + 4\omega^2 C_s^2}
+\end{align}
+
+</div>
+<p>
+The \(Y\) may oscillate with \(C_L\) if
+</p>
+<div class="latex" id="org5ccb27a">
+\begin{align}
+j\omega C_L - j \dfrac{ng_m^2\omega C_s}{n^2 g_m^2 + 4\omega^2 C_s^2} = 0
+\end{align}
+\begin{align}
+\omega = \dfrac{ng_m}{2C_s}\sqrt{\dfrac{C_s}{nC_L}-1}
+\end{align}
+
+</div>
+<p>
+it may happen if \(C_s > n C_L\).
+</p>
 
 </div>
 <div class="taglist"></div></div>
