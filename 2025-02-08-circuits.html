@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="alternate"
+      type="application/rss+xml"
+      href="https://cortalo.github.io/org-static-blog/rss.xml"
+      title="RSS feed for https://cortalo.github.io/org-static-blog">
+<title>circuits</title>
+<script type="text/javascript"
+             src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+       </script>
+       <script type="text/x-mathjax-config">
+             MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'],['\\(','\\)']]}});
+       </script>
+       <meta name="author" content="Cortalo">
+      <meta name="referrer" content="no-referrer">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="assets/style.css" type="text/css"/>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+      <link rel="favicon" type="image/x-icon" href="favicon.ico">
+      <script src="assets/search.js"></script></head>
+<body>
+<div id="preamble" class="status">
+      <header>
+      <h1><a href="https://cortalo.github.io/org-static-blog">Cortalo's org-static-blog</a></h1>
+      <nav>
+      <a href="https://cortalo.github.io/org-static-blog">Home</a>
+      <a href="archive.html">Archive</a>
+      <a href="tags.html">Tags</a>
+      <div id="search-container">
+        <input type="text" id="search-input" placeholder="Search anywhere...">
+        <i class="fas fa-search search-icon"></i>
+      </div>
+      </nav>
+      </header></div>
+<div id="content">
+<div class="post-date">08 Feb 2025</div><h1 class="post-title"><a href="https://cortalo.github.io/org-static-blog/2025-02-08-circuits.html">circuits</a></h1>
+
+<figure id="orgde10b19">
+<img src="./static/2025-02-08-circuits/001.png" alt="001.png" align="center" width="600px">
+
+</figure>
+
+<div class="latex" id="org008ddde">
+\begin{aligned}
+I_d &= I_F - I_R\\
+I_{F} &= I_{spec} \left[ \ln\left(1+\exp\dfrac{V_g - V_{T0} - nV_{s}}{2nU_T}\right) \right]^2\\
+I_{R} &= I_{spec} \left[ \ln\left(1+\exp\dfrac{V_g - V_{T0} - nV_{d}}{2nU_T}\right) \right]^2\\
+I_{spec} &= 2n\mu C_{ox} \dfrac{W}{L}U_T^2\\
+\delta I_d &= - G_{ms} \delta V_s + G_{md} \delta V_{d} + G_m \delta V_g
+\end{aligned}
+
+</div>
+
+
+<div class="latex" id="org2e9d65f">
+\begin{aligned}
+G_{ms} &= \dfrac{\sqrt{I_F I_{spec}}}{U_T} \left(1-e^{-\sqrt{I_{F}/I_{spec}}}\right)\\
+&=\begin{cases}
+    \beta (V_g - V_{T0}-nV_{s}) = \dfrac{I_F I_{spec}}{U_T}, \quad \text{ for strong inversion}\\
+I_F/U_T, \quad \text{ for weak inversion}
+    \end{cases}
+\end{aligned}
+
+</div>
+
+<div class="hide" id="org68a0e2d">
+<div class="latex" id="org283340d">
+\begin{aligned}
+G_{ms} &= - \dfrac{d I_d}{d V_s} = -\dfrac{d I_F}{d V_s}
+\end{aligned}
+\begin{aligned}
+- 2 I_{spec} \left[ \ln\left(1+\exp\dfrac{V_g - V_{T0} - nV_{s}}{2nU_T}\right) \right] \cdot \dfrac{1}{1+\exp\dfrac{V_g-V_{T0}-nV_s}{2nU_T}} \cdot \dfrac{-n}{2nU_T} \exp\dfrac{V_g-V_{T0}-nV_s}{2nU_T}
+\end{aligned}
+\begin{aligned}
+\exp\dfrac{V_g-V_{T0}-nV_s}{2nU_T} = \exp\left[\ln\left(1+\exp\dfrac{V_g-V_{T0}-nV_s}{2nU_T}\right)\right]-1 =e^{\sqrt{I_F/I_{spec}}}-1
+\end{aligned}
+\begin{aligned}
+ I_{spec} \left[ \ln\left(1+\exp\dfrac{V_g - V_{T0} - nV_{s}}{2nU_T}\right) \right] \cdot \dfrac{e^{\sqrt{I_F/I_{spec}}}-1}{e^{\sqrt{I_F/I_{spec}}}} \cdot \dfrac{1}{U_T}
+\end{aligned}
+\begin{aligned}
+G_{ms} &= \dfrac{\sqrt{I_F I_{spec}}}{U_T} \left(1-e^{-\sqrt{I_{F}/I_{spec}}}\right)
+\end{aligned}
+
+</div>
+
+</div>
+
+<div class="latex" id="org2558b05">
+\begin{aligned}
+G_{md} &= \dfrac{\sqrt{I_R I_{spec}}}{U_T} \left(1-e^{-\sqrt{I_{R}/I_{spec}}}\right)
+\end{aligned}
+
+</div>
+
+<div class="latex" id="orgb73ce6e">
+\begin{aligned}
+G_{m} &= \dfrac{d I_d}{d V_g} = \dfrac{G_{ms}-G_{md}}{n}\\
+&= \begin{cases}
+, \quad \text{ for strong inversion}\\
+\dfrac{I_d}{n U_T}, \quad \text{ for weak inversion}
+    \end{cases}
+\end{aligned}
+
+</div>
+<div class="taglist"></div></div>
+<div id="postamble" class="status"><div id="search-results"></div>
+      <footer>
+        <p>© 2024 Cortalo. Some rights reserved.</p>
+      <script src="assets/toggle.js"></script>
+      </footer></div>
+</body>
+</html>

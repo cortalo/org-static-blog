@@ -4,7 +4,83 @@
 <title><![CDATA[Cortalo's Blog]]></title>
 <description><![CDATA[Cortalo's Blog]]></description>
 <link>https://cortalo.github.io/org-static-blog</link>
-<lastBuildDate>Wed, 05 Feb 2025 13:48:56 +0100</lastBuildDate>
+<lastBuildDate>Mon, 10 Feb 2025 17:13:04 +0100</lastBuildDate>
+<item>
+  <title><![CDATA[circuits]]></title>
+  <description><![CDATA[
+
+<figure id="orgde10b19">
+<img src="./static/2025-02-08-circuits/001.png" alt="001.png" align="center" width="600px">
+
+</figure>
+
+<div class="latex" id="org008ddde">
+\begin{aligned}
+I_d &= I_F - I_R\\
+I_{F} &= I_{spec} \left[ \ln\left(1+\exp\dfrac{V_g - V_{T0} - nV_{s}}{2nU_T}\right) \right]^2\\
+I_{R} &= I_{spec} \left[ \ln\left(1+\exp\dfrac{V_g - V_{T0} - nV_{d}}{2nU_T}\right) \right]^2\\
+I_{spec} &= 2n\mu C_{ox} \dfrac{W}{L}U_T^2\\
+\delta I_d &= - G_{ms} \delta V_s + G_{md} \delta V_{d} + G_m \delta V_g
+\end{aligned}
+
+</div>
+
+
+<div class="latex" id="org2e9d65f">
+\begin{aligned}
+G_{ms} &= \dfrac{\sqrt{I_F I_{spec}}}{U_T} \left(1-e^{-\sqrt{I_{F}/I_{spec}}}\right)\\
+&=\begin{cases}
+    \beta (V_g - V_{T0}-nV_{s}) = \dfrac{I_F I_{spec}}{U_T}, \quad \text{ for strong inversion}\\
+I_F/U_T, \quad \text{ for weak inversion}
+    \end{cases}
+\end{aligned}
+
+</div>
+
+<div class="hide" id="org68a0e2d">
+<div class="latex" id="org283340d">
+\begin{aligned}
+G_{ms} &= - \dfrac{d I_d}{d V_s} = -\dfrac{d I_F}{d V_s}
+\end{aligned}
+\begin{aligned}
+- 2 I_{spec} \left[ \ln\left(1+\exp\dfrac{V_g - V_{T0} - nV_{s}}{2nU_T}\right) \right] \cdot \dfrac{1}{1+\exp\dfrac{V_g-V_{T0}-nV_s}{2nU_T}} \cdot \dfrac{-n}{2nU_T} \exp\dfrac{V_g-V_{T0}-nV_s}{2nU_T}
+\end{aligned}
+\begin{aligned}
+\exp\dfrac{V_g-V_{T0}-nV_s}{2nU_T} = \exp\left[\ln\left(1+\exp\dfrac{V_g-V_{T0}-nV_s}{2nU_T}\right)\right]-1 =e^{\sqrt{I_F/I_{spec}}}-1
+\end{aligned}
+\begin{aligned}
+ I_{spec} \left[ \ln\left(1+\exp\dfrac{V_g - V_{T0} - nV_{s}}{2nU_T}\right) \right] \cdot \dfrac{e^{\sqrt{I_F/I_{spec}}}-1}{e^{\sqrt{I_F/I_{spec}}}} \cdot \dfrac{1}{U_T}
+\end{aligned}
+\begin{aligned}
+G_{ms} &= \dfrac{\sqrt{I_F I_{spec}}}{U_T} \left(1-e^{-\sqrt{I_{F}/I_{spec}}}\right)
+\end{aligned}
+
+</div>
+
+</div>
+
+<div class="latex" id="org2558b05">
+\begin{aligned}
+G_{md} &= \dfrac{\sqrt{I_R I_{spec}}}{U_T} \left(1-e^{-\sqrt{I_{R}/I_{spec}}}\right)
+\end{aligned}
+
+</div>
+
+<div class="latex" id="orgb73ce6e">
+\begin{aligned}
+G_{m} &= \dfrac{d I_d}{d V_g} = \dfrac{G_{ms}-G_{md}}{n}\\
+&= \begin{cases}
+, \quad \text{ for strong inversion}\\
+\dfrac{I_d}{n U_T}, \quad \text{ for weak inversion}
+    \end{cases}
+\end{aligned}
+
+</div>
+<div class="taglist"></div>]]></description>
+  <link>https://cortalo.github.io/org-static-blog/2025-02-08-circuits.html</link>
+  <guid>https://cortalo.github.io/org-static-blog/2025-02-08-circuits.html</guid>
+  <pubDate>Sat, 08 Feb 2025 12:53:00 +0100</pubDate>
+</item>
 <item>
   <title><![CDATA[fourier]]></title>
   <description><![CDATA[
@@ -128,36 +204,21 @@ where the first divide by two is because converting the spectrum of phase to pha
 <item>
   <title><![CDATA[equations]]></title>
   <description><![CDATA[
-<div class="latex" id="org447eb08">
+<div class="latex" id="orgbb82e3f">
 \begin{aligned}
 x^2+y^2=0
 \end{aligned}
 
 </div>
-<div class="hide" id="org2dd58be">
-<p>
-we define f(x)
-</p>
-<div class="latex" id="org9d4837b">
-\begin{aligned}
-f(x)
-\end{aligned}
-<p>
-Yes!
-</p>
 
-</div>
-
-</div>
-
-<div class="latex" id="org939d949">
+<div class="latex" id="org66bbd2d">
 \begin{aligned}
 f(x)*\delta(x+a) = f(x+a)
 \end{aligned}
 
 </div>
 
-<div class="latex" id="org38d56c7">
+<div class="latex" id="org7261fff">
 \begin{aligned}
 F(\omega) &= \int_{-\infty}^{\infty} f(t)\exp(-j\omega t) dt\\
 f(t) &= \dfrac{1}{2\pi} \int_{-\infty}^{\infty}F(\omega)\exp(j\omega t) d\omega
@@ -188,7 +249,7 @@ du = g'(x)dx \quad & dv = \delta'(x-x')dx
 
 </div>
 
-<div class="latex" id="org3c7bdcd">
+<div class="latex" id="org8b46bc7">
 \begin{aligned}
 w = \lambda + \dfrac{\mu}{\alpha z + \beta}
 \end{aligned}
@@ -198,17 +259,17 @@ w = \lambda + \dfrac{\mu}{\alpha z + \beta}
 when \(z\) is moving from \(-\infty\) to \(\infty\), the \(w\) is moving around a circle, with center at <a href="https://www.maplesoft.com/books/details.aspx?id=406">ref. page 270.</a>
 </p>
 
-<div class="latex" id="orgb8beb47">
+<div class="latex" id="org3f5293e">
 \begin{aligned}
 \dfrac{-2\mu\alpha^* j}{|\beta + \alpha j|^2 - |\beta - \alpha j|^2} + \lambda
 \end{aligned}
 
 </div>
-<div class="hide" id="org5537b81">
+<div class="hide" id="org20f8397">
 <p>
 For a straight line \(|z-a_1| = |z-a_2|\), we want to find the center of the circle \(|\frac{1}{w}-a_1|=|\frac{1}{w}-a_2|\), we use
 </p>
-<div class="latex" id="org1fef513">
+<div class="latex" id="orge0bb1d2">
 \begin{aligned}
 w=u+jv, \quad a_1 = p+jq, \quad a_2 = r+js
 \end{aligned}
@@ -229,7 +290,7 @@ u^2 + \dfrac{2(r-p)}{p^2+q^2-r^2-s^2}u + v^2 + \dfrac{2(q-s)}{p^2+q^2-r^2-s^2}v 
 <p>
 The center of the circle locates
 </p>
-<div class="latex" id="org2ce13e5">
+<div class="latex" id="orgfb4c5c5">
 \begin{aligned}
 \dfrac{p-r}{p^2+q^2-r^2-s^2} -j \dfrac{q-s}{p^2+q^2-r^2-s^2}=\dfrac{(a_1-a_2)^*}{|a_1|^2-|a_2|^2}
 \end{aligned}
@@ -238,7 +299,7 @@ The center of the circle locates
 <p>
 now for \(\frac{1}{\alpha z + \beta}\), the line \(\alpha z + \beta\) we can choose \(a_1 = j\alpha + \beta, a_2 = -j\alpha + \beta\), the center for \(\frac{1}{\alpha z + \beta}\) is
 </p>
-<div class="latex" id="org0358621">
+<div class="latex" id="org34e6d36">
 \begin{aligned}
 \dfrac{-2j\alpha^*}{|\beta+\alpha j|^2 - |\beta-\alpha j|^2}
 \end{aligned}
@@ -247,7 +308,7 @@ now for \(\frac{1}{\alpha z + \beta}\), the line \(\alpha z + \beta\) we can cho
 <p>
 then the center for \(w = \lambda + \dfrac{\mu}{\alpha z + \beta}\) is
 </p>
-<div class="latex" id="org870e255">
+<div class="latex" id="org0a81d7d">
 \begin{aligned}
 \dfrac{-2\mu\alpha^*j}{|\beta+\alpha j|^2 - |\beta-\alpha j|^2} + \lambda
 \end{aligned}
@@ -258,8 +319,8 @@ then the center for \(w = \lambda + \dfrac{\mu}{\alpha z + \beta}\) is
 <p>
 body effect \(g_{mb} = (n-1)g_m\), it can also be included in \(i_d = g_m(V_g - n V_s)\)
 </p>
-<div class="hide" id="org6b8b0a6">
-<div class="latex" id="org2548843">
+<div class="hide" id="org74d2530">
+<div class="latex" id="org779c96d">
 \begin{align}
 g_m(V_g - V_s) + g_{mb}(0-V_s)
 \end{align}
@@ -278,7 +339,7 @@ g_m(V_g - nV_s)
 </div>
 
 
-<figure id="org9cca45c">
+<figure id="org0368e65">
 <img src="./static/2024-09-19-equations/001.png" alt="001.png" align="center" width="300px">
 
 </figure>
@@ -286,8 +347,8 @@ g_m(V_g - nV_s)
 <p>
 the impedance is \(Z_{in} = -\dfrac{2}{g_m} - Z_1\). <a href="https://ieeexplore.ieee.org/document/6882880">ref.</a>
 </p>
-<div class="hide" id="org2d8afea">
-<div class="latex" id="org8947d6e">
+<div class="hide" id="orgb391383">
+<div class="latex" id="orgcba26ca">
 \begin{align}
 I_x = g_m(-V_x-I_x \cdot \dfrac{Z_1}{2})
 \end{align}
@@ -304,8 +365,8 @@ Z_{in} = \dfrac{2V_x}{I_x} = -\dfrac{2}{g_m} - Z_1
 <p>
 if including body effect, the impedance is \(Z_{in} = -\dfrac{2}{g_m} - nZ_1\).
 </p>
-<div class="hide" id="orgdd667ba">
-<div class="latex" id="org28f6547">
+<div class="hide" id="orge28f2ca">
+<div class="latex" id="orgab768d4">
 \begin{align}
 I_x = g_m(-V_x- n I_x \cdot \dfrac{Z_1}{2})
 \end{align}
@@ -318,7 +379,7 @@ Z_1 \to n Z_1
 </div>
 
 
-<figure id="org6af7cc4">
+<figure id="orga1adc52">
 <img src="./static/2024-09-19-equations/002.png" alt="002.png" align="center" width="150px">
 
 </figure>
@@ -326,8 +387,8 @@ Z_1 \to n Z_1
 <p>
 The circuit may oscillate with \(C_L\) if \(C_s > n C_L\). <a href="https://ieeexplore.ieee.org/document/1471472">ref1.</a> <a href="https://link.springer.com/book/10.1007/978-90-481-9395-0">ref2. page 139 eq 6.6</a>
 </p>
-<div class="hide" id="orgcd524dc">
-<div class="latex" id="org8ea5be1">
+<div class="hide" id="orgd1a218d">
+<div class="latex" id="org3d6952b">
 \begin{align}
 Z_c = -\dfrac{2}{g_m} - \dfrac{n}{j\omega C_s}
 \end{align}
@@ -341,7 +402,7 @@ Y &= 1/Z_c = \dfrac{1}{-\dfrac{2}{g_m} - \dfrac{n}{j\omega C_s}}\\
 <p>
 The \(Y\) may oscillate with \(C_L\) if
 </p>
-<div class="latex" id="org5ccb27a">
+<div class="latex" id="orgb2af629">
 \begin{align}
 j\omega C_L - j \dfrac{ng_m^2\omega C_s}{n^2 g_m^2 + 4\omega^2 C_s^2} = 0
 \end{align}

@@ -10,15 +10,6 @@
 x^2+y^2=0
 \end{aligned}
 #+end_latex
-#+begin_hide
-we define f(x)
-#+begin_latex
-\begin{aligned}
-f(x)
-\end{aligned}
-Yes!
-#+end_latex
-#+end_hide
 
 #+begin_latex
 \begin{aligned}
