@@ -4,17 +4,17 @@
 <title><![CDATA[Cortalo's Blog]]></title>
 <description><![CDATA[Cortalo's Blog]]></description>
 <link>https://cortalo.github.io/org-static-blog</link>
-<lastBuildDate>Mon, 10 Feb 2025 17:13:04 +0100</lastBuildDate>
+<lastBuildDate>Wed, 12 Feb 2025 21:32:51 +0100</lastBuildDate>
 <item>
   <title><![CDATA[circuits]]></title>
   <description><![CDATA[
 
-<figure id="orgde10b19">
+<figure id="org5ec9498">
 <img src="./static/2025-02-08-circuits/001.png" alt="001.png" align="center" width="600px">
 
 </figure>
 
-<div class="latex" id="org008ddde">
+<div class="latex" id="org4e2b95b">
 \begin{aligned}
 I_d &= I_F - I_R\\
 I_{F} &= I_{spec} \left[ \ln\left(1+\exp\dfrac{V_g - V_{T0} - nV_{s}}{2nU_T}\right) \right]^2\\
@@ -26,7 +26,7 @@ I_{spec} &= 2n\mu C_{ox} \dfrac{W}{L}U_T^2\\
 </div>
 
 
-<div class="latex" id="org2e9d65f">
+<div class="latex" id="orgb172825">
 \begin{aligned}
 G_{ms} &= \dfrac{\sqrt{I_F I_{spec}}}{U_T} \left(1-e^{-\sqrt{I_{F}/I_{spec}}}\right)\\
 &=\begin{cases}
@@ -37,8 +37,8 @@ I_F/U_T, \quad \text{ for weak inversion}
 
 </div>
 
-<div class="hide" id="org68a0e2d">
-<div class="latex" id="org283340d">
+<div class="hide" id="org80c5887">
+<div class="latex" id="org5fe5849">
 \begin{aligned}
 G_{ms} &= - \dfrac{d I_d}{d V_s} = -\dfrac{d I_F}{d V_s}
 \end{aligned}
@@ -59,14 +59,14 @@ G_{ms} &= \dfrac{\sqrt{I_F I_{spec}}}{U_T} \left(1-e^{-\sqrt{I_{F}/I_{spec}}}\ri
 
 </div>
 
-<div class="latex" id="org2558b05">
+<div class="latex" id="org8048c61">
 \begin{aligned}
 G_{md} &= \dfrac{\sqrt{I_R I_{spec}}}{U_T} \left(1-e^{-\sqrt{I_{R}/I_{spec}}}\right)
 \end{aligned}
 
 </div>
 
-<div class="latex" id="orgb73ce6e">
+<div class="latex" id="org52a5a6d">
 \begin{aligned}
 G_{m} &= \dfrac{d I_d}{d V_g} = \dfrac{G_{ms}-G_{md}}{n}\\
 &= \begin{cases}
@@ -76,6 +76,14 @@ G_{m} &= \dfrac{d I_d}{d V_g} = \dfrac{G_{ms}-G_{md}}{n}\\
 \end{aligned}
 
 </div>
+
+<p>
+to extract \(n\), simulate \(n = \dfrac{1}{(G_m/I_d)U_T}\) in weak inversion.
+</p>
+
+<p>
+using `trap` or `traponly` to simulate oscillator, and `traponly` is better.
+</p>
 <div class="taglist"></div>]]></description>
   <link>https://cortalo.github.io/org-static-blog/2025-02-08-circuits.html</link>
   <guid>https://cortalo.github.io/org-static-blog/2025-02-08-circuits.html</guid>
@@ -84,7 +92,7 @@ G_{m} &= \dfrac{d I_d}{d V_g} = \dfrac{G_{ms}-G_{md}}{n}\\
 <item>
   <title><![CDATA[fourier]]></title>
   <description><![CDATA[
-<div class="latex" id="org31f00b2">
+<div class="latex" id="orgbdb3b2b">
 \begin{aligned}
 \int_a^b f(g(x)) \cdot g'(x) dx = \int_{g(a)}^{g(b)} f(u) du
 \end{aligned}
@@ -95,7 +103,7 @@ G_{m} &= \dfrac{d I_d}{d V_g} = \dfrac{G_{ms}-G_{md}}{n}\\
 For LTI system
 </p>
 
-<div class="latex" id="org9aa42cd">
+<div class="latex" id="org8a3659b">
 \begin{aligned}
 y(t) = \int_{-\infty}^{\infty} h(t-\tau) x(\tau) d\tau
 \end{aligned}
@@ -106,7 +114,7 @@ y(t) = \int_{-\infty}^{\infty} h(t-\tau) x(\tau) d\tau
 if \(x(\tau) =\exp(j\omega \tau)\), let \(z = t-\tau, \tau = t-z\)
 </p>
 
-<div class="latex" id="org959b011">
+<div class="latex" id="org0aa749b">
 \begin{aligned}
 y(t) &= \int_{-\infty}^{\infty} h(t-\tau) \exp(j\omega \tau) (-1)(-1) d\tau\\
 &= \int_{\infty}^{-\infty} h(z)\exp(j\omega t)\exp(-j\omega z)(-1)dz\\
@@ -120,7 +128,7 @@ y(t) &= \int_{-\infty}^{\infty} h(t-\tau) \exp(j\omega \tau) (-1)(-1) d\tau\\
 For LPTV system
 </p>
 
-<div class="latex" id="org6c64f0f">
+<div class="latex" id="orgf018090">
 \begin{aligned}
 y(t) = \int_{-\infty}^{\infty} h(t,\tau) x(\tau) d\tau
 \end{aligned}
@@ -132,7 +140,7 @@ where \(h(t+T,\tau+T) = h(t,\tau)\), let \(z=t-\tau, g(t,z) = h(t,t-z)\), thus \
 </p>
 
 
-<div class="latex" id="org4d3d808">
+<div class="latex" id="orgdc13208">
 \begin{aligned}
 y(t) &= \int_{-\infty}^{\infty} g(t,z)\exp(j\omega t)\exp(-j\omega z) dz\\
 &= \exp(j\omega t) \int_{-\infty}^{\infty} g(t,z)\exp(-j\omega z) dz\\
@@ -163,7 +171,7 @@ Assuming the maximum sidebands is \(N\), then the band corresponding to 0 sideba
 </p>
 
 
-<div class="latex" id="orgb784604">
+<div class="latex" id="org00e1340">
 \begin{aligned}
 \sum_{i=-N}^{N} \dfrac{S_v(i*f_0 + f)}{2}
 \end{aligned}
@@ -175,7 +183,7 @@ and one-sided voltage noise spectrum
 </p>
 
 
-<div class="latex" id="org166fd97">
+<div class="latex" id="org5bbfa53">
 \begin{aligned}
 S(f) = \sum_{i=-N}^{N} \dfrac{S_v(i*f_0 + f)}{2} + \sum_{i=-N}^{N} \dfrac{S_v(i*f_0 - f)}{2}
 \end{aligned}
@@ -186,7 +194,7 @@ S(f) = \sum_{i=-N}^{N} \dfrac{S_v(i*f_0 + f)}{2} + \sum_{i=-N}^{N} \dfrac{S_v(i*
 then the phase noise is
 </p>
 
-<div class="latex" id="org4c1cf02">
+<div class="latex" id="org02504d5">
 \begin{aligned}
 L(f) = \dfrac{1}{2} \dfrac{S_v(f)}{\alpha^2} \left(\dfrac{2\pi}{T}\right)^2
 \end{aligned}
@@ -204,21 +212,21 @@ where the first divide by two is because converting the spectrum of phase to pha
 <item>
   <title><![CDATA[equations]]></title>
   <description><![CDATA[
-<div class="latex" id="orgbb82e3f">
+<div class="latex" id="org66ebfe8">
 \begin{aligned}
 x^2+y^2=0
 \end{aligned}
 
 </div>
 
-<div class="latex" id="org66bbd2d">
+<div class="latex" id="org157b645">
 \begin{aligned}
 f(x)*\delta(x+a) = f(x+a)
 \end{aligned}
 
 </div>
 
-<div class="latex" id="org7261fff">
+<div class="latex" id="orgc99b647">
 \begin{aligned}
 F(\omega) &= \int_{-\infty}^{\infty} f(t)\exp(-j\omega t) dt\\
 f(t) &= \dfrac{1}{2\pi} \int_{-\infty}^{\infty}F(\omega)\exp(j\omega t) d\omega
@@ -249,7 +257,7 @@ du = g'(x)dx \quad & dv = \delta'(x-x')dx
 
 </div>
 
-<div class="latex" id="org8b46bc7">
+<div class="latex" id="org3e61011">
 \begin{aligned}
 w = \lambda + \dfrac{\mu}{\alpha z + \beta}
 \end{aligned}
@@ -259,17 +267,17 @@ w = \lambda + \dfrac{\mu}{\alpha z + \beta}
 when \(z\) is moving from \(-\infty\) to \(\infty\), the \(w\) is moving around a circle, with center at <a href="https://www.maplesoft.com/books/details.aspx?id=406">ref. page 270.</a>
 </p>
 
-<div class="latex" id="org3f5293e">
+<div class="latex" id="orgc0bf3e0">
 \begin{aligned}
 \dfrac{-2\mu\alpha^* j}{|\beta + \alpha j|^2 - |\beta - \alpha j|^2} + \lambda
 \end{aligned}
 
 </div>
-<div class="hide" id="org20f8397">
+<div class="hide" id="org36c7dfb">
 <p>
 For a straight line \(|z-a_1| = |z-a_2|\), we want to find the center of the circle \(|\frac{1}{w}-a_1|=|\frac{1}{w}-a_2|\), we use
 </p>
-<div class="latex" id="orge0bb1d2">
+<div class="latex" id="org8929b5a">
 \begin{aligned}
 w=u+jv, \quad a_1 = p+jq, \quad a_2 = r+js
 \end{aligned}
@@ -290,7 +298,7 @@ u^2 + \dfrac{2(r-p)}{p^2+q^2-r^2-s^2}u + v^2 + \dfrac{2(q-s)}{p^2+q^2-r^2-s^2}v 
 <p>
 The center of the circle locates
 </p>
-<div class="latex" id="orgfb4c5c5">
+<div class="latex" id="orge954b58">
 \begin{aligned}
 \dfrac{p-r}{p^2+q^2-r^2-s^2} -j \dfrac{q-s}{p^2+q^2-r^2-s^2}=\dfrac{(a_1-a_2)^*}{|a_1|^2-|a_2|^2}
 \end{aligned}
@@ -299,7 +307,7 @@ The center of the circle locates
 <p>
 now for \(\frac{1}{\alpha z + \beta}\), the line \(\alpha z + \beta\) we can choose \(a_1 = j\alpha + \beta, a_2 = -j\alpha + \beta\), the center for \(\frac{1}{\alpha z + \beta}\) is
 </p>
-<div class="latex" id="org34e6d36">
+<div class="latex" id="org4cf0faa">
 \begin{aligned}
 \dfrac{-2j\alpha^*}{|\beta+\alpha j|^2 - |\beta-\alpha j|^2}
 \end{aligned}
@@ -308,7 +316,7 @@ now for \(\frac{1}{\alpha z + \beta}\), the line \(\alpha z + \beta\) we can cho
 <p>
 then the center for \(w = \lambda + \dfrac{\mu}{\alpha z + \beta}\) is
 </p>
-<div class="latex" id="org0a81d7d">
+<div class="latex" id="org7b4c4a4">
 \begin{aligned}
 \dfrac{-2\mu\alpha^*j}{|\beta+\alpha j|^2 - |\beta-\alpha j|^2} + \lambda
 \end{aligned}
@@ -319,8 +327,8 @@ then the center for \(w = \lambda + \dfrac{\mu}{\alpha z + \beta}\) is
 <p>
 body effect \(g_{mb} = (n-1)g_m\), it can also be included in \(i_d = g_m(V_g - n V_s)\)
 </p>
-<div class="hide" id="org74d2530">
-<div class="latex" id="org779c96d">
+<div class="hide" id="org7757c18">
+<div class="latex" id="org13b7b82">
 \begin{align}
 g_m(V_g - V_s) + g_{mb}(0-V_s)
 \end{align}
@@ -339,7 +347,7 @@ g_m(V_g - nV_s)
 </div>
 
 
-<figure id="org0368e65">
+<figure id="org141ed67">
 <img src="./static/2024-09-19-equations/001.png" alt="001.png" align="center" width="300px">
 
 </figure>
@@ -347,8 +355,8 @@ g_m(V_g - nV_s)
 <p>
 the impedance is \(Z_{in} = -\dfrac{2}{g_m} - Z_1\). <a href="https://ieeexplore.ieee.org/document/6882880">ref.</a>
 </p>
-<div class="hide" id="orgb391383">
-<div class="latex" id="orgcba26ca">
+<div class="hide" id="org0eff05a">
+<div class="latex" id="orgb6d46bf">
 \begin{align}
 I_x = g_m(-V_x-I_x \cdot \dfrac{Z_1}{2})
 \end{align}
@@ -365,8 +373,8 @@ Z_{in} = \dfrac{2V_x}{I_x} = -\dfrac{2}{g_m} - Z_1
 <p>
 if including body effect, the impedance is \(Z_{in} = -\dfrac{2}{g_m} - nZ_1\).
 </p>
-<div class="hide" id="orge28f2ca">
-<div class="latex" id="orgab768d4">
+<div class="hide" id="orgdf073ed">
+<div class="latex" id="org693d4c5">
 \begin{align}
 I_x = g_m(-V_x- n I_x \cdot \dfrac{Z_1}{2})
 \end{align}
@@ -379,7 +387,7 @@ Z_1 \to n Z_1
 </div>
 
 
-<figure id="orga1adc52">
+<figure id="org63d374f">
 <img src="./static/2024-09-19-equations/002.png" alt="002.png" align="center" width="150px">
 
 </figure>
@@ -387,8 +395,8 @@ Z_1 \to n Z_1
 <p>
 The circuit may oscillate with \(C_L\) if \(C_s > n C_L\). <a href="https://ieeexplore.ieee.org/document/1471472">ref1.</a> <a href="https://link.springer.com/book/10.1007/978-90-481-9395-0">ref2. page 139 eq 6.6</a>
 </p>
-<div class="hide" id="orgd1a218d">
-<div class="latex" id="org3d6952b">
+<div class="hide" id="org9021acd">
+<div class="latex" id="org2b26e40">
 \begin{align}
 Z_c = -\dfrac{2}{g_m} - \dfrac{n}{j\omega C_s}
 \end{align}
@@ -402,7 +410,7 @@ Y &= 1/Z_c = \dfrac{1}{-\dfrac{2}{g_m} - \dfrac{n}{j\omega C_s}}\\
 <p>
 The \(Y\) may oscillate with \(C_L\) if
 </p>
-<div class="latex" id="orgb2af629">
+<div class="latex" id="org5c98701">
 \begin{align}
 j\omega C_L - j \dfrac{ng_m^2\omega C_s}{n^2 g_m^2 + 4\omega^2 C_s^2} = 0
 \end{align}
@@ -463,7 +471,7 @@ it may happen if \(C_s > n C_L\).
 </ul>
 
 
-<div class="latex" id="orgc2118b8">
+<div class="latex" id="org670981b">
 \begin{aligned}
   \int_{0}^{\infty} f(x)dx
 \end{aligned}
@@ -488,25 +496,25 @@ it may happen if \(C_s > n C_L\).
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org51e0088">1. My new blog</a>
+<li><a href="#orga464d31">1. My new blog</a>
 <ul>
-<li><a href="#org70e5aeb">1.1. Made by org-static-blog</a></li>
-<li><a href="#org854a7d8">1.2. With global search</a></li>
+<li><a href="#orgdac2605">1.1. Made by org-static-blog</a></li>
+<li><a href="#org4a78697">1.2. With global search</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org51e0088" class="outline-2">
-<h2 id="org51e0088"><span class="section-number-2">1.</span> My new blog</h2>
+<div id="outline-container-orga464d31" class="outline-2">
+<h2 id="orga464d31"><span class="section-number-2">1.</span> My new blog</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org70e5aeb" class="outline-3">
-<h3 id="org70e5aeb"><span class="section-number-3">1.1.</span> Made by org-static-blog</h3>
+<div id="outline-container-orgdac2605" class="outline-3">
+<h3 id="orgdac2605"><span class="section-number-3">1.1.</span> Made by org-static-blog</h3>
 </div>
 
-<div id="outline-container-org854a7d8" class="outline-3">
-<h3 id="org854a7d8"><span class="section-number-3">1.2.</span> With global search</h3>
+<div id="outline-container-org4a78697" class="outline-3">
+<h3 id="org4a78697"><span class="section-number-3">1.2.</span> With global search</h3>
 <div class="outline-text-3" id="text-1-2">
 <ol class="org-ol">
 <li>Why is there no indentation?</li>

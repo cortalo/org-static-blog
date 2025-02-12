@@ -37,12 +37,12 @@
 <div id="content">
 <div class="post-date">08 Feb 2025</div><h1 class="post-title"><a href="https://cortalo.github.io/org-static-blog/2025-02-08-circuits.html">circuits</a></h1>
 
-<figure id="orgde10b19">
+<figure id="org5ec9498">
 <img src="./static/2025-02-08-circuits/001.png" alt="001.png" align="center" width="600px">
 
 </figure>
 
-<div class="latex" id="org008ddde">
+<div class="latex" id="org4e2b95b">
 \begin{aligned}
 I_d &= I_F - I_R\\
 I_{F} &= I_{spec} \left[ \ln\left(1+\exp\dfrac{V_g - V_{T0} - nV_{s}}{2nU_T}\right) \right]^2\\
@@ -54,7 +54,7 @@ I_{spec} &= 2n\mu C_{ox} \dfrac{W}{L}U_T^2\\
 </div>
 
 
-<div class="latex" id="org2e9d65f">
+<div class="latex" id="orgb172825">
 \begin{aligned}
 G_{ms} &= \dfrac{\sqrt{I_F I_{spec}}}{U_T} \left(1-e^{-\sqrt{I_{F}/I_{spec}}}\right)\\
 &=\begin{cases}
@@ -65,8 +65,8 @@ I_F/U_T, \quad \text{ for weak inversion}
 
 </div>
 
-<div class="hide" id="org68a0e2d">
-<div class="latex" id="org283340d">
+<div class="hide" id="org80c5887">
+<div class="latex" id="org5fe5849">
 \begin{aligned}
 G_{ms} &= - \dfrac{d I_d}{d V_s} = -\dfrac{d I_F}{d V_s}
 \end{aligned}
@@ -87,14 +87,14 @@ G_{ms} &= \dfrac{\sqrt{I_F I_{spec}}}{U_T} \left(1-e^{-\sqrt{I_{F}/I_{spec}}}\ri
 
 </div>
 
-<div class="latex" id="org2558b05">
+<div class="latex" id="org8048c61">
 \begin{aligned}
 G_{md} &= \dfrac{\sqrt{I_R I_{spec}}}{U_T} \left(1-e^{-\sqrt{I_{R}/I_{spec}}}\right)
 \end{aligned}
 
 </div>
 
-<div class="latex" id="orgb73ce6e">
+<div class="latex" id="org52a5a6d">
 \begin{aligned}
 G_{m} &= \dfrac{d I_d}{d V_g} = \dfrac{G_{ms}-G_{md}}{n}\\
 &= \begin{cases}
@@ -104,6 +104,14 @@ G_{m} &= \dfrac{d I_d}{d V_g} = \dfrac{G_{ms}-G_{md}}{n}\\
 \end{aligned}
 
 </div>
+
+<p>
+to extract \(n\), simulate \(n = \dfrac{1}{(G_m/I_d)U_T}\) in weak inversion.
+</p>
+
+<p>
+using `trap` or `traponly` to simulate oscillator, and `traponly` is better.
+</p>
 <div class="taglist"></div></div>
 <div id="postamble" class="status"><div id="search-results"></div>
       <footer>
