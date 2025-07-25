@@ -35,3 +35,297 @@
   pi = math.pi
 #+end_src
 
+
+
+- Type with copy trait does not use move for assignment; It will directly copy to the stack. Such data type includes: i32, boolean, reference etc.
+- Type without copy trait use move for assignment; After assignment the new variable takes the ownership.
+- For function call input, it is equivalent as assignment; Variable will be either moved or copied (for data type with copy trait).
+- For function call return, its ownership is moved out.
+- Reference's scope starts from where it is introduced and continues through the last time that reference is used.
+- When using struct name to call method, use `::`, e.g., `Vec::new()`. When using instance to call method, use `.`, e.g., `v.len()`.
+- `Rc` has `Deref` trait so it can automatically access internal structs. `RefCell` doesn't have `Deref` trait, so you need to use `borrow()` method to return `Ref`, which has `Deref` trait.
+- When rust doesn't allow you to move out of dereference, e.g., `if let Some(left) = node.left` is not allowed because `node` is `Ref` type, and `left` is own type (Rc<RefCell<TreeNode>>). when such thing happens you can always try to bind clone, e.g., `if let Some(left) = node.left.clone()`. In this case it is cheap, because `Rc` only increase reference count in stead of actually clone it.
+
+
+
+#+begin_src rust
+    let s = String::from("hello");
+    // iterate a string
+    for c in s.chars() {
+        println!("{}", c);
+    }
+    // convert a string to a vector
+    let s_vec: Vec<char> = s.chars().collect();
+
+    let mut counters = [0; 26];
+    s.chars().for_each(|c| counters[c as usize - 97]);
+    counters.into_iter().all(|x| x >= 0);
+
+    nums = vec![0;26];
+    for num in nums.into_iter() {
+        println!("{}", num);
+    }
+#+end_src
+
+
+#+begin_src rust
+// A enum
+    enum IpAddr {
+        V4(u8, u8, u8, u8),
+        V6(String),
+    }
+
+    let home = IpAddr::V4(127, 0, 0, 1);
+
+    let loopback = IpAddr::V6(String::from("::1"));
+#+end_src
+
+
+#+begin_src rust
+// A struct
+struct User {
+    active: bool,
+    username: String,
+    email: String,
+    sign_in_count: u64,
+}
+
+fn main() {
+    let user1 = User {
+        active: true,
+        username: String::from("someusername123"),
+        email: String::from("someone@example.com"),
+        sign_in_count: 1,
+    };
+}
+#+end_src
+
+
+#+begin_src rust
+// A tuple struct
+struct Color(i32, i32, i32);
+struct Point(i32, i32, i32);
+
+fn main() {
+    let black = Color(0, 0, 0);
+    let origin = Point(0, 0, 0);
+}
+#+end_src
+
+
+#+begin_src rust
+use std::rc::Rc;
+use std::cell::RefCell;
+use std::cmp;
+
+impl Solution {
+    pub fn max_depth(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
+        match root {
+            // node is type Rc<RefCell<TreeNode>>>
+            Some(node) => {
+                cmp::max(
+                    // node.borrow(): since Rc implements deref trait, this got automatically convert to
+                    //                (*node).borrow(), thus it return
+                    //                an immutable reference of RefCell<TreeNode>
+                    //
+                    // node.borrow().left:
+                    // still due to deref trait, it return Option<Rc<RefCell<TreeNode>>>
+                    //
+                    // node.borrow().left.clone():
+                    // Option implements clone trait, which will return Option<T.clone()>.
+                    // here clone is used because we want to pass Rc smart pointer.
+                    Solution::max_depth(node.borrow().left.clone()),
+                    Solution::max_depth(node.borrow().right.clone()),
+                ) + 1
+            }
+            None => 0,
+        }
+
+    }
+}
+#+end_src
+
+
+#+begin_src rust
+// very often when dealing with Option types, we want to get some value based on the contents in Some(), or get the default value if it is None.
+// It is convinent that Option type has map_or method.
+let option_v = Some(Box::new(User {
+num: 13,
+}));
+let t = option_v.map_or(0, |x| x.num + 1);
+
+// however, map_or take the own type of self and consume the ownership, thus option_v will not be avaliable after map_or.
+// to keep option_v ownership
+let t = option_v.as_ref().map_or(0, |x| x.num + 1);
+// as_ref() take &self thus does not consume ownership, and it return Option<&T>.
+// Since in this case T is smart pointer, it automatically deref twice thus the content in map_or does not need to be changed.
+#+end_src
+
+
+#+begin_src rust
+// create a linked list
+#[derive(PartialEq, Eq, Clone, Debug)]
+pub struct ListNode {
+  pub val: i32,
+  pub next: Option<Box<ListNode>>
+}
+
+impl ListNode {
+  #[inline]
+  fn new(val: i32) -> Self {
+    ListNode {
+      next: None,
+      val
+    }
+  }
+}
+
+fn main() {
+    let mut head: Option<Box<ListNode>> = None;
+    let mut curr = &mut head;
+    curr = &mut curr.insert(Box::new(ListNode::new(1))).next;
+    curr = &mut curr.insert(Box::new(ListNode::new(2))).next;
+    curr = &mut curr.insert(Box::new(ListNode::new(3))).next;
+    println!("The created link list is {:?}", head);
+
+    // iterate the linked list
+    let mut curr = &head;
+    while curr.is_some() {
+      if let Some(node) = curr {
+        println!("{}", node.val);
+        curr = &node.next;
+      }
+    }
+}
+#+end_src
+
+
+#+begin_src rust
+// Leetcode 199
+// Following code doesn't compile
+
+// Definition for a binary tree node.
+// #[derive(Debug, PartialEq, Eq)]
+// pub struct TreeNode {
+//   pub val: i32,
+//   pub left: Option<Rc<RefCell<TreeNode>>>,
+//   pub right: Option<Rc<RefCell<TreeNode>>>,
+// }
+//
+// impl TreeNode {
+//   #[inline]
+//   pub fn new(val: i32) -> Self {
+//     TreeNode {
+//       val,
+//       left: None,
+//       right: None
+//     }
+//   }
+// }
+use std::rc::Rc;
+use std::cell::RefCell;
+impl Solution {
+    pub fn right_side_view(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
+        let mut vec = vec![];
+
+        // This cannot compile because
+        let mut curr = &root;
+        while let Some(node) = curr {
+            let node = node.borrow();
+            vec.push(node.val);
+            curr = &node.right;
+            //      ---- node is borrowed only in this scope
+            // curr also doesn't own the data, it only borrow the data
+            // curr will not be valid after the scope
+        }
+
+        // Instead of using &, we can use clone()
+        let mut curr = root.clone();
+        while let Some(node) = curr {
+            let node = node.borrow();
+            vec.push(node.val);
+            curr = node.right.clone();
+            //      ---- node is borrowed only in this scope
+            // but curr own its own data, thus even if node is dropped
+            // curr's own data will still be valid
+        }
+
+        vec
+    }
+}
+#+end_src
+
+
+#+begin_src rust
+// Leetcode 2
+// Following code doesn't compile
+
+// Definition for singly-linked list.
+// #[derive(PartialEq, Eq, Clone, Debug)]
+// pub struct ListNode {
+//   pub val: i32,
+//   pub next: Option<Box<ListNode>>
+// }
+//
+// impl ListNode {
+//   #[inline]
+//   fn new(val: i32) -> Self {
+//     ListNode {
+//       next: None,
+//       val
+//     }
+//   }
+// }
+impl Solution {
+    pub fn add_two_numbers(l1: Option<Box<ListNode>>, l2: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+        let (mut l1, mut l2) = (l1, l2);
+        let mut head: Option<Box<ListNode>> = None;
+        let mut curr = &mut head;
+        let mut carry = 0;
+
+        while l1.is_some() || l2.is_some() || carry != 0 {
+            let sum = l1.as_ref().map_or(0, |node| node.val) +
+                l2.as_ref().map_or(0, |node| node.val) + carry;
+
+            carry = sum / 10;
+            curr = &mut curr.insert(Box::new(ListNode::new(sum % 10))).next;
+            if let Some(node) = &l1 { l1 = node.next; }
+            // This is not allowed
+            // because it is just automatic dererence, it is equivalent to
+            // l1 = (*node).next
+            if let Some(node) = &l2 { l2 = node.next; }
+        }
+
+        head
+    }
+}
+
+// In fact it is simple, Rust does not allow moving out from reference.
+fn main() {
+    let x = "".to_string();
+    let y = &x;
+    // let z = *y; This is not allowed!
+    let z = &(*y); // This is allowed!
+    // In short, you cannot use & reference data type to bind own type values.
+}
+// Compiler error output is:
+// cannot move out of *y which is behind a shared reference
+// move occurs because *y has type String, which does not implement the Copy trait
+// I'm not very clear what's happening here and looking for an explanation.
+// I was expecting z taking ownership of the String and x and y becoming unusable.
+#+end_src
+
+
+#+begin_src rust
+// rust nice functions
+
+// position
+let a = [1, 2, 3];
+assert_eq!(a.iter().position(|&x| x == 2), Some(1));
+
+// clone a vector
+let nums_clone: Vec<i32> = nums.iter().cloned().collect();
+
+// Option methods
+let val = l1.as_ref().map_or(0, |node| node.val);
+#+end_src
